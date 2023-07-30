@@ -1,0 +1,1 @@
+type Dictionary<Element> = { [key: string]: Element }

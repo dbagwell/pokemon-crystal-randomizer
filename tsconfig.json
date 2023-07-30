@@ -1,0 +1,23 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "skipLibCheck": false,
+    "strict": true,
+    "outDir": "build/js" // Not used because of vite but needs to be specified
+  },
+  "include": [
+    "./.eslintrc.cjs",
+    "./*.js",
+    "./*.cjs",
+    "./*.mjs",
+    "./*.ts",
+    "./*.json",
+    "./*.html",
+    "./*.svelte"
+  ]
+}

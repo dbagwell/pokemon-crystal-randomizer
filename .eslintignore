@@ -1,0 +1,27 @@
+# ignore everthing
+*
+
+# except these file types at the root level
+!.eslitrc.cjs
+!*.json
+!*.js
+!*.cjs
+!*.mjs
+!*.ts
+!*.svelte
+!*.html
+!*.css
+!*.scss
+
+# and anywhere inside this directory
+!/src
+!src/*/
+!src/**/
+
+# unless they are generated files
+*-lock.json
+src/renderer/css/*
+src/main/lib/grammars/*
+
+# or tsconfig files
+**tsconfig.json

@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@shared/*": ["../shared/*"],
+      "@utils": ["../shared/utils/index.ts"],
+      "@lib/*": ["./lib/*"],
+      "@rendererAPI": ["../renderer/scripts/ipc/rendererAPI.ts"]
+    },
+    "types": [
+      "vite/client"
+    ]
+  },
+  "include": [
+    "./**/*",
+    "../shared/**/*.d.ts"
+  ]
+}

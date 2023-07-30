@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@shared/*": ["../shared/*"],
+      "@utils": ["../shared/utils/index.ts"],
+      "@scripts/*": ["./scripts/*"],
+      "@components/*": ["./components/*"],
+      "@mainAPI": ["../main/lib/ipc/mainAPI.ts"]
+    }
+  },
+  "include": [
+    "./**/*",
+    "../shared/**/*.d.ts"
+  ]
+}

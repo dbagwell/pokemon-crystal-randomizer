@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@shared/*": ["./*"],
+      "@utils": ["./utils/index.ts"]
+    }
+  },
+  "include": [
+    "./**/*"
+  ]
+}
