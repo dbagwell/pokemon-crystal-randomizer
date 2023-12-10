@@ -51,6 +51,58 @@ A set of shared utility code used by all other segments.
 
 Because the *main* and *renderer* process are completely separate they need to use Inter-Process Communication to share information at runtime. To do this in a type safe manor the app uses [electron-affinity](https://github.com/jtlapp/electron-affinity). Each process defines it's own API and calls a function to expose it to the other processes using IPC. The other processes can then import the type of that API and create a binding to access it.
 
+### Patch Specs
+
+The app uses a custom specification for defining data patches with dynamic content that can be applied to a ROM while reducing the risk of conflicts with patches to other portions of the ROM. These are defined using Yaml files with the following structure: 
+
+- `description`: **String (optional)** - A human readable description of what the patch does.
+- `extends`: **String (optional)** - A path to another Patch Spec that this spec extends. This spec recursively inherits all the properties of the extended spec. If the specs share a property with the same key, the value from this spec is used instead of the value from the extended spec. The path must be relative to the root of the Patch Spec directory.
+- `includes`: **[String: String] (optional)** - A dictionary of paths to other Patch Specs that can be referenced in the Data Formats included in this spec. The paths must be relative to the root of the Patch Spec directory.
+- `values`: **[String: [DataFormat](#DataFormat)] (optional)** - A dictionary of Data Formats that can be referenced by other Data Fromats in this spec.
+- `changes`: **[[Change](#Change)] (optional)** - A list of changes to be applied to the ROM.
+
+#### DataFormat
+
+This is a string made up of whitespace separated tokens that describe sequences of bytes that can be applied as a data patch. The following is a list of allowed tokens:
+
+- **Byte**: A two character hexadecimal number describing a literal byte of data. ex: `C9`
+- **Value Reference**: A chain of period separated reference path components that resolve to another value defined in the spec or one of its includes. For example, `#parent.#options.first.$data`. Each path component is a reference to a property belonging to the Patch Spec that is referenced by the reference path the precedes it (or the containing Patch Spec if it is the first component in the path). The following is the list of path components, each value reference must have exactly on `$value` or `index` component.
+  - `$value`: Where `value` is the key of the value in its respective values dictionary. Must always be the last compontent in the reference.
+  - `#include`: Where `include` is the key of an included patch spec (or array of included patch specs). If this is a reference to an array of patch specs, and is not followed by `first` or `last` path components, it will resolve the value reference for all the patch specs in the array and concatinate the results.
+  - `first`: References the first spec in an array of includes. Must follow an include path component that references an array of includes.
+  - `last`: References the last spec in an array of includes. Must follow an include path component that references an array of includes.
+  - `index`: References the array index of the currently referenced patch spec. Must always be the last compontent in the reference.
+  - `#parent`: References the patch spec that included the currently referenced patch spec.
+- **Address Reference**: A Value Reference prefixed by `@`. Resolves to the two byte (little endian) ROM Bank address of the first appearance of the referenced value in the entire patch.
+- **Sum**: A function that takes two arguments. The first argument is a Value Reference that must resolve to an array of single numerical values, these will be added together and encoded to little endian bytes. The second argument is a number of bytes to which to truncate the resulting value. ex: `sum(#options.$value, 2)`
+- **Split**: A function that takes two arguments. The first argument is a Value Reference that must resolve to an array of values. The second argument is a data format that will be inserted between each resolved value of the array before concatinating everything. ex: `split(#options.$data, A1 B2 $someValue)`
+- **Expression**: Describes an expression that resolves to a number that is then encoded to little endian bytes. The number is truncated to the set number of bytes indicated in the square brackets preceding the expression. Expressions follow basic math principles and can include binary (prefixed with `0b`), decimal and hexadecimal (prefixed with `0x`) values as well as Value References that will resolve to a single numerical value. ex: `[2]{(64 + 5 - 0x2F) * 0b00000010 / $value >> 1 << 1}`. Supported operations are as follows:
+  - `+`: Add two numbers.
+  - `-`: Subtract the right number from the left number.
+  - `*`: Multiply two numbers.
+  - `/`: Divide the left number by the right number.
+  - `<<`: Bit shift the left number to the left by the right number.
+  - `>>`: Bit difht the left number to the right by the right number.
+
+Certain Patch Specs may need extra information that can only be provided by the generator at runtime. These can be in the form of extra includes (which can also include arrays of includes) or values. Data Formats may reference these includes/values even though they are not defined in their spec, but must be confident that the generator will provide them.
+
+#### Change
+
+- `description`: **String (optional)** - A human readable description of what the change does.
+- `locations`: **[Location]** - A list of locations in the ROM where the change should be applied.
+- `value`: **DataFormat** - The Data Format of the change to be applied to the ROM.
+
+#### Location
+
+- `bank`: **Number** - The numerical identifiery of the ROM Bank where the change should be applied.
+- `address`: **Number (optional)** - The starting address within the ROM Bank where the should be applied. If the address is omitted, the generator will try to fit the change into a hunk of free space in the specified ROM Bank.
+- `maxSize`: **Number (optional)** - The maximum size the resolved change can be if it were to be applied at the specified bank and address. If the size of the resolved change exceeds this value, the location of the changed will be moved to some other free space in the ROM and a farcall will be added that points to the new location. Any space within the space alloted by the starting location and the max size that is not used will be updated as free space that can be used by other patches. Ignored if `address` is not specified.
+- `farcall`: **[bank: Number, address: Number] (optional)** - The location of a farcall that is already used to access this the data at the starting location of this change. If specified, instead of adding a farcall to the original location of this change, an additional change will be applied that changes the pointer of that farcall to point to the new location of this change if it is moved because its size exceeds `maxSize`. Ignored if `maxSize` is not specified.
+
+### Nearley
+
+[Nearley](https://nearley.js.org/) is used to parse the Data Formats included in the Patch Specs. The parsing rules are defined in `src/nearley/data.ne` this is then compiled to a CommonJS javascript module that is included in the application code using `npm run gen:grammars`.
+
 ### ESLint
 
 [ESLint](https://eslint.org/) is used to maintain a consistent codes style in html, svelte, js, cjs, mjs, ts, and json files throughout the project and help prevent potential runtime issues. Run `npm run lint` to find any issues and automatically fix certain style violations. 

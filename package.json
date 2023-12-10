@@ -11,6 +11,7 @@
     "gen:styles:dark": "smui-theme compile src/renderer/css/smui-dark.css -i src/sass/dark",
     "gen:styles:global": "sass src/sass/global.scss src/renderer/css/global.css",
     "gen:styles": "npm run gen:styles:light && npm run gen:styles:dark && npm run gen:styles:global",
+    "gen:grammars": "nearleyc src/nearley/data.ne -o src/main/lib/grammars/dataGrammar.cjs",
     "gen": "npm run gen:styles",
     "lint": "eslint --fix .",
     "dev": "electron-forge start",
@@ -38,10 +39,12 @@
     "eslint": "^8.54.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-svelte": "^2.35.1",
+    "nearley": "^2.20.1",
     "sass": "^1.69.5",
     "smui-theme": "^7.0.0-beta.15",
     "svelte": "^4.2.7",
-    "vite-tsconfig-paths": "^4.2.1"
+    "vite-tsconfig-paths": "^4.2.1",
+    "yaml": "^2.3.4"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0"
