@@ -134,6 +134,27 @@ export class ROMInfo {
     ])
   }
   
+  static readonly displayCharacterBytesFrom = (string: string): number[] => {
+    return [...string].map((character: string) => {
+      const number = parseInt(character)
+      if (!isNaN(number)) {
+        console.log("")
+        return 0xF6 + number
+      } else if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(character)) {
+        console.log("")
+        return 0x80 + character.charCodeAt(0) - 65
+      } else if ("abcdefghijklmnopqrstuvwxyz".includes(character)) {
+        console.log("")
+        return 0x80 + character.charCodeAt(0) - 97
+      } else if (character === ".") {
+        console.log("")
+        return 0xE8
+      } else {
+        return 0x7F // Treat unmapped characters as spaces.
+      }
+    })
+  }
+  
   static readonly returnInstruction = () => {
     return new DataFormat([0xC9])
   }

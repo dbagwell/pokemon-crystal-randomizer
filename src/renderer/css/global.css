@@ -1,3 +1,9 @@
+input[type=file]::file-selector-button {
+  display: none;
+}
 
+:not(.mdc-text-field--label-floating) input[type=file] {
+  color: transparent;
+}
 
 /*# sourceMappingURL=global.css.map */
