@@ -1,0 +1,6 @@
+description: Code for handling the stereo sound option in the options menu.
+extends: options/binaryOption.yml
+values:
+  title: "92 93 84 91 84 8E 7F 92 8E 94 8D 83 9C"
+  wramAddress: "CC CF"
+  bitIndex: "[1]{5}"

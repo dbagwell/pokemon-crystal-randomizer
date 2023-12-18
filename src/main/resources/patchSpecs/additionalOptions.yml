@@ -1,0 +1,33 @@
+description: Makes changes to the options menu so that it can accomodate additional options. Only the sepecified options will be shown in the menu.
+values:
+  menu: "21 AA FF 7E F5 36 01 CD F3 31 21 A0 C4 06 10 0E 12 CD E8 0F 3E 01 E0 D4 CD F6 31 06 08 CD 40 33 CD F9 32 21 CA C4 11 @#options.first.$title CD 78 10 11 #options.last.index 00 D5 CD @$jumpToOption D1 1D 20 F8 3E 00 EA 63 CF CD 57 0A F0 A7 E6 0A 20 0D CD @$changeOption CD @$update 0E 03 CD 68 04 18 EA 11 22 00 CD 23 3C CD 55 3C F1 E0 AA C9"
+  changeOption: "F0 A9 FE 80 28 0C FE 40 28 18 FA 63 CF 5F CD @$jumpToOption C9 FA 63 CF FE #options.last.index 28 03 3C 18 02 3E 00 EA 63 CF C9 FA 63 CF FE 00 28 03 3D 18 02 3E #options.last.index EA 63 CF C9"
+  update: "21 B5 C4 11 14 00 3E 10 36 7F 19 3D 20 FA 21 C9 C4 01 14 00 FA 63 CF CD FE 30 36 ED C9"
+  jumpToOption: "21 @$jumpTable 19 19 2A 66 6F E9"
+  onText: "7F 8E 8D 50"
+  offText: "8E 85 85 50"
+  binaryOptionHandler: "F5 F0 A7 E6 30 28 0D F1 FE 01 28 05 F5 78 12 18 03 F5 79 12 F1 FE 01 20 05 11 @$onText 18 03 11 @$offText CD 78 10 C9"
+  primaryDefault: "sum(#options.$primaryDefault, 1)"
+  secondaryDefault: "sum(#options.$secondaryDefault, 1)"
+  jumpTable: "@#options.$data"
+changes:
+  - description: Changes the options menu to accomodate additional the additional options.
+    locations:
+      - bank: 57
+        address: 0x41D0
+        maxSize: 937
+        farcall:
+          bank: 1
+          address: 0x5B64
+    value: "$menu $changeOption $update $jumpToOption $onText $offText $binaryOptionHandler split(#options.$title, 22) 50 #options.$data $jumpTable"
+  - description: Sets the primary options default values for each of the provided options.
+    locations:
+      - bank: 5
+        address: 0x4F7C
+    value: "$primaryDefault"
+  - description: Sets the secondary options default values for each of the provided options.
+    locations:
+      - bank: 5
+        address: 0x4F81
+    value: "$secondaryDefault"
+        

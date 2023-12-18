@@ -1,0 +1,9 @@
+description: Code for handling an on/off option in the options menu.
+extends: options/option.yml
+values:
+  valueTextLength: "[1]{4}"
+  shiftedBitIndex: "[1]{$bitIndex << 3}"
+  setB: "[1]{0b11000000 + $shiftedBitIndex}"
+  resC: "[1]{0b10000001 + $shiftedBitIndex}"
+  bitA: "[1]{0b01000111 + $shiftedBitIndex}"
+  data: "21 $coord 11 $wramAddress FA $wramAddress 47 CB $setB 4F CB $resC CB $bitA 3E 00 28 02 3E 01 CD @parent.$binaryOptionHandler C9"
