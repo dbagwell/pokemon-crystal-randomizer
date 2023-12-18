@@ -132,6 +132,7 @@ export class PatchInfo {
               romInfo.freeSpace(new ROMOffset(location.offset.absoluteOffset + farcall.size()), location.maxSize - farcall.size())
             }
           } else {
+            romOffsets.push(location.offset)
             romInfo.freeSpace(new ROMOffset(location.offset.absoluteOffset + dataFormat.size()), location.maxSize - dataFormat.size())
           }
         } else {
