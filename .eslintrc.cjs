@@ -82,7 +82,7 @@ module.exports = {
     "svelte/first-attribute-linebreak": "error",
     "svelte/html-closing-bracket-spacing": ["error", { selfClosingTag: "never" }],
     "svelte/html-quotes": ["error", { prefer: "double" }],
-    "svelte/indent": ["error", { indent: 2 }],
+    "svelte/indent": ["error", { indent: 2, switchCase: 0 }],
     "svelte/max-attributes-per-line": "error",
     "svelte/mustache-spacing": "error",
     "svelte/no-extra-reactive-curlies": "error",
