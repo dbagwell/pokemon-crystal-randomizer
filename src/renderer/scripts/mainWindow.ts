@@ -5,13 +5,16 @@ import type { MainAPI } from "@mainAPI" // Only the type is allowed to be import
 import { RendererAPI } from "@scripts/ipc/rendererAPI"
 import { bindMainApi, exposeWindowApi } from "electron-affinity/window"
 
-const bindMainAPI = async () => {
+const init = async () => {
+  exposeWindowApi(new RendererAPI())
   window.mainAPI = await bindMainApi<MainAPI>("MainAPI")
+  
+  new MainWindow({
+    target: document.getElementById("mainWindow")!,
+    props: {
+      generatorSettingsSpecs: (await window.mainAPI.getGeneratorSettingsInfo()).result,
+    },
+  })
 }
 
-exposeWindowApi(new RendererAPI())
-bindMainAPI()
-
-new MainWindow({
-  target: document.getElementById("mainWindow")!,
-})
+init()
