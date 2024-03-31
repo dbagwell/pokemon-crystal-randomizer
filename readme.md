@@ -95,9 +95,9 @@ Certain Patch Specs may need extra information that can only be provided by the 
 #### Location
 
 - `bank`: **Number** - The numerical identifiery of the ROM Bank where the change should be applied.
-- `address`: **Number (optional)** - The starting address within the ROM Bank where the should be applied. If the address is omitted, the generator will try to fit the change into a hunk of free space in the specified ROM Bank.
+- `address`: **Number (optional)** - The starting address within the ROM Bank where the change should be applied. If the address is omitted, the generator will try to fit the change into a hunk of free space in the specified ROM Bank.
 - `maxSize`: **Number (optional)** - The maximum size the resolved change can be if it were to be applied at the specified bank and address. If the size of the resolved change exceeds this value, the location of the changed will be moved to some other free space in the ROM and a farcall will be added that points to the new location. Any space within the space alloted by the starting location and the max size that is not used will be updated as free space that can be used by other patches. Ignored if `address` is not specified.
-- `farcall`: **[bank: Number, address: Number] (optional)** - The location of a farcall that is already used to access this the data at the starting location of this change. If specified, instead of adding a farcall to the original location of this change, an additional change will be applied that changes the pointer of that farcall to point to the new location of this change if it is moved because its size exceeds `maxSize`. Ignored if `maxSize` is not specified.
+- `farcall`: **[bank: Number, address: Number] (optional)** - The location of a farcall that is already used to access the data at the starting location of this change. If specified, instead of adding a farcall to the original location of this change, an additional change will be applied that changes the pointer of that farcall to point to the new location of this change if it is moved because its size exceeds `maxSize`. Ignored if `maxSize` is not specified.
 
 ### Nearley
 

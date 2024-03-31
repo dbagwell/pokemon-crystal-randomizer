@@ -16,12 +16,17 @@ import {
 } from "@lib/generator/dataTokens"
 import { DataHunk } from "@lib/generator/patch"
 import { getYAML } from "@lib/utils/yamlUtils"
-import { bytesFrom, compact, isNotNullish, isNullish, isNumber, numberFrom, reduceDictionaryInto } from "@utils"
+import { bytesFrom, compact, isNotNullish, isNullish, isNumber, isString, numberFrom, reduceDictionaryInto } from "@utils"
 import path from "path"
+
+export type ExtraInclude = {
+  path: string
+  extraValues: Dictionary<string>
+} | string
 
 export class PatchInfo {
   
-  static readonly maxIncludesPerKey = 16
+  static readonly maxIncludesPerKey = 255
   
   readonly parent?: PatchInfo
   readonly includePath: string
@@ -32,7 +37,7 @@ export class PatchInfo {
   
   constructor(
     filePath: string,
-    extraIncludes: Dictionary<string | string[]> = {},
+    extraIncludes: Dictionary<ExtraInclude | ExtraInclude[]> = {},
     extraValues: Dictionary<string> = {},
     parent?: PatchInfo,
     name?: string,
@@ -68,11 +73,17 @@ export class PatchInfo {
           throw new Error(`Cannont have more than ${PatchInfo.maxIncludesPerKey} includes for key '${key}' of patch '${filePath}'.`)
         }
         
-        this.includes[key] = value.map((filePath: string, index: number) => {
-          return new PatchInfo(filePath, {}, {}, this, key, index)
+        this.includes[key] = value.map((include: ExtraInclude, index: number) => {
+          if (isString(include)) {
+            return new PatchInfo(include, {}, {}, this, key, index)
+          } else {
+            return new PatchInfo(include.path, {}, include.extraValues, this, key, index)
+          }
         })
+      } else if (isString(value)) {
+        return new PatchInfo(value, {}, {}, this, key, index)
       } else {
-        this.includes[key] = new PatchInfo(value, {}, {}, this, key)
+        return new PatchInfo(value.path, {}, value.extraValues, this, key, index)
       }
     })
     
@@ -368,9 +379,9 @@ export class DataFormat {
   values: (number | string)[]
   referenceOffsets: Dictionary<number>
   
-  constructor(values: (number | string)[] = [], referenecOffsets: Dictionary<number> = {}) {
+  constructor(values: (number | string)[] = [], referenceOffsets: Dictionary<number> = {}) {
     this.values = values
-    this.referenceOffsets = referenecOffsets
+    this.referenceOffsets = referenceOffsets
   }
   
   readonly add = (dataFormat: DataFormat) => {

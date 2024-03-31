@@ -7,6 +7,7 @@ export const getAllGeneratorSettings = (): GeneratorSettingSpec[] => {
   const dirPath = path.resolve(__dirname, "generatorSettings")
   
   const settingsSpecFileNames = [
+    "startingItems.yml",
     "additionalOptions.yml",
   ]
   

@@ -1,9 +1,12 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
+import { getYAML } from "@lib/utils/yamlUtils"
 import type { GeneratorSetting } from "@shared/types/generatorSettings"
+import { validateGeneratorSettingSpec } from "@shared/typeValidators/generatorSettings.validator"
 import { compact, hexStringFrom } from "@utils"
 import { app } from "electron"
 import hash from "object-hash"
+import path from "path"
 
 export const generateROM = (data: Buffer, settings: GeneratorSetting[]): {
   seed: string,
@@ -37,6 +40,33 @@ export const generateROM = (data: Buffer, settings: GeneratorSetting[]): {
       )
       
       hunks = [...hunks, ...additionalOptionsPatch.hunks]
+      
+      break
+    }
+    case "startingItems": {
+      const dirPath = path.resolve(__dirname, "generatorSettings")
+      const yaml = getYAML([path.resolve(dirPath, "startingItems.yml")])
+      const itemsInfo = validateGeneratorSettingSpec(yaml)
+      const values = setting.value as Dictionary<any>[]
+      const startingItemsPatch = Patch.fromYAML(
+        romInfo,
+        "startingItems.yml",
+        {
+          items: compact(values.map((value) => {
+            return {
+              path: "giveItem.yml",
+              extraValues: {
+                itemId: itemsInfo.values.find((element: any) => {
+                  return element.id === (value?.id ?? value)
+                }).value,
+                itemAmount: `[2]{${value?.value?.value ?? 1}}`,
+              },
+            }
+          })),
+        },
+      )
+  
+      hunks = [...hunks, ...startingItemsPatch.hunks]
       
       break
     }

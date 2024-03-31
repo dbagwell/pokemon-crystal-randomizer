@@ -25,18 +25,29 @@ export const SCHEMA = {
                 "type": {
                     "$ref": "#/definitions/GeneratorSettingType"
                 },
+                "max": {
+                    "type": "number"
+                },
+                "min": {
+                    "type": "number"
+                },
                 "values": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/GeneratorSettingValueSpec"
                     }
-                }
+                },
+                "valueTypes": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/GeneratorSettingValueType"
+                    }
+                },
+                "defaultValue": {}
             },
             "required": [
                 "id",
                 "title",
-                "description",
-                "category",
                 "type"
             ],
             "additionalProperties": false
@@ -61,13 +72,30 @@ export const SCHEMA = {
                 },
                 "description": {
                     "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
                 }
             },
             "required": [
                 "id",
-                "name",
-                "description"
+                "name"
             ],
+            "additionalProperties": false
+        },
+        "GeneratorSettingValueType": {
+            "type": "object",
+            "properties": {
+                "max": {
+                    "type": "number"
+                },
+                "input": {
+                    "$ref": "#/definitions/GeneratorSettingSpec"
+                }
+            },
             "additionalProperties": false
         },
         "GeneratorSetting": {
@@ -144,6 +172,27 @@ export function validateGeneratorSettingValueSpec(payload: unknown): apiTypes.Ge
 export function isGeneratorSettingValueSpec(payload: unknown): payload is apiTypes.GeneratorSettingValueSpec {
   try {
     validateGeneratorSettingValueSpec(payload);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+export function validateGeneratorSettingValueType(payload: unknown): apiTypes.GeneratorSettingValueType {
+  /** Schema is defined in {@link SCHEMA.definitions.GeneratorSettingValueType } **/
+  const validator = ajv.getSchema("SCHEMA#/definitions/GeneratorSettingValueType");
+  const valid = validator(payload);
+  if (!valid) {
+    const error = new Error('Invalid GeneratorSettingValueType: ' + ajv.errorsText(validator.errors, {dataVar: "GeneratorSettingValueType"}));
+    error.name = "ValidationError";
+    throw error;
+  }
+  return payload;
+}
+
+export function isGeneratorSettingValueType(payload: unknown): payload is apiTypes.GeneratorSettingValueType {
+  try {
+    validateGeneratorSettingValueType(payload);
     return true;
   } catch (error) {
     return false;

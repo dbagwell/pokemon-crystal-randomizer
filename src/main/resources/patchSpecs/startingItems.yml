@@ -1,0 +1,14 @@
+description: "Adds items to the player's inventory when they start a new game"
+values:
+  giveItems: "#items.$data 3E 24 21 72 46 CF C9"
+changes:
+- description: "Adds items to the player's inventory before starting the new game sequence for setting the clock."
+  locations:
+  - bank: 47
+  value: "$giveItems"
+- description: "Call the code to give the player their starting items instead of starting the new game sequence for setting the clock."
+  locations:
+  - bank: 1
+    address: 0x5F99
+  value: "3E 2F 21 @$giveItems CF"
+        
