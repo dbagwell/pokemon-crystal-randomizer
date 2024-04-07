@@ -1,0 +1,3 @@
+description: Adds the provided number of the provided item to the player's inventory.
+values:
+  data: 3E $itemId EA 06 D1 3E $itemAmount EA 0C D1 21 92 D8 CD 66 2F

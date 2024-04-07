@@ -2,14 +2,13 @@
   <Title>Pokémon Crystal Randomizer</Title>
   <Subtitle>Generate and apply patches to Pokémon Crystal Version.</Subtitle>
   <Content>
-    {#each generatorSettingsSpecs as generatorSettingsSpec, index}
-      <GeneratorSettingInput
-        bind:this={generatorSettingsInputs[index]}
-        spec={generatorSettingsSpec}
+    {#each categories as category}
+      <SettingsContainer
+        bind:this={settingsContainers[category.id]}
+        category={category}
       />
       <br>
     {/each}
-    <br>
     <Button
       variant="raised"
       on:click={generateROMButtonClicked}
@@ -25,24 +24,95 @@
 
 <script lang="ts">
   import DialogContainer, { showErrorDialog, showSuccessDialog } from "@components/dialogs/DialogContainer.svelte"
-  import GeneratorSettingInput from "@components/GeneratorSettingInput.svelte"
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/ProgressIndicator.svelte"
-  import type { GeneratorSettingSpec } from "@shared/types/generatorSettings"
-  import { compact } from "@shared/utils"
+  import SettingsContainer from "@components/SettingsContainer.svelte"
+  import { AdditionalOptions } from "@shared/gameData/additionalOptions"
+  import { itemTypes } from "@shared/gameData/itemData"
+  import { reduceDictionaryInto } from "@shared/utils"
   import Button, { Label } from "@smui/button"
   import Paper, { Content, Subtitle, Title } from "@smui/paper"
   
-  export let generatorSettingsSpecs: GeneratorSettingSpec[]
+  const categories: Category[] = [
+    {
+      id: "items",
+      title: "Items",
+      subcategories: [
+        {
+          id: "startingInventory",
+          title: "Starting Inventory",
+          description: "Items to start the game with.",
+          layout: "row",
+          settings: itemTypes.map((itemType) => {
+            return {
+              type: "selection",
+              id: itemType.id,
+              title: itemType.name,
+              maxSelections: itemType.maxSlots,
+              values: itemType.items.map((item) => {
+                return {
+                  id: item.id,
+                  name: item.name,
+                  setting: itemType.slotSize < 2 ? undefined : {
+                    type: "integer",
+                    id: "amount",
+                    title: "Amount",
+                    min: 0,
+                    max: itemType.slotSize,
+                    default: 1,
+                  },
+                }
+              }),
+            }
+          }),
+        },
+      ],
+    },
+    {
+      id: "other",
+      title: "Other",
+      settings: [
+        {
+          type: "selection",
+          id: "additionalOptions",
+          title: "Additional Options",
+          description: "Extra settings that are added to the in game options menu.",
+          values: [
+            {
+              id: AdditionalOptions.instantText,
+              name: "Instant Text",
+              description: "A new option for the text speed setting that makes all the text in a single text box appear immediately.",
+            },
+            {
+              id: AdditionalOptions.holdToMash,
+              name: "Hold To Mash",
+              description: "A toggle that allows holding down the A or B buttons to mash through text when enabled.",
+            },
+            {
+              id: AdditionalOptions.nicknames,
+              name: "Nicknames",
+              description: "A toggle that controls whether the game prompts to nickname newly captured/recieved Pokémon.",
+            },
+            {
+              id: AdditionalOptions.rideMusic,
+              name: "Ride Music",
+              description: "An option that controls whether the surf and/or bike music will play.",
+            },
+          ],
+        },
+      ],
+    },
+  ]
   
-  const generatorSettingsInputs: GeneratorSettingInput[] = []
+  const settingsContainers: Dictionary<SettingsContainer> = {}
   
   const generateROMButtonClicked = async () => {
-    const settings = compact(generatorSettingsInputs.map((value) => {
-      return value.getSetting()
-    }))
+    const settings = reduceDictionaryInto(settingsContainers, {}, (object, key, value) => {
+      object[key] = value.getValues()
+    })
     
     try {
       showProgressIndicator()
+      console.log(settings)
       const response = await window.mainAPI.generateROM(settings)
       showSuccessDialog(response.message)
     } catch (error) {

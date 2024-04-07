@@ -1,94 +1,183 @@
 <div
   style:display="flex"
   style:flex-wrap="wrap"
-  style:align-items="center"
+  style:flex-direction="column"
+  style:align-items="left"
   style:gap="10px"
 >
-  {#if spec.type === "item" || spec.type === "array"}
-    <Autocomplete
-      getOptionLabel={getValueName}
-      label={spec.title}
-      options={availableValues}
-      bind:value={autocompleteValue}
-      on:SMUIAutocomplete:selected={handleAutocompleteSelection}
-    />
-    
-    <Set
-      style="display: inline-block;"
-      bind:chips={selectedValues}
-      let:chip>
-      <Chip chip={chip}>
-        <Text tabindex={0}>{chip.name}</Text>
-        <TrailingAction icon$class="material-icons">cancel</TrailingAction>
-      </Chip>
-    </Set>
-  {/if}
-  
-  <Wrapper
-    style="height:24px"
-    rich={true}
+  <div
+    style:display="flex"
+    style:flex-wrap="wrap"
+    style:flex-direction="row"
+    style:align-items="center"
+    style:gap="10px"
   >
-    <Icon
-      style="cursor:pointer;"
-      class="material-icons"
-    >
-      info
-    </Icon>
+    {#if setting.type === "integer"}
+      <Textfield
+        style="min-width: 50px;"
+        input$max={setting.max}
+        input$min={setting.min}
+        label={setting.title}
+        type="number"
+        bind:value={integerValue}
+      >
+      </Textfield>
+    {/if}
   
-    <!-- TODO Tooltip doesn't properly adjust for the position in the view port (even though the documentation says it should). -->
-    <Tooltip
-      style="width:500px;"
-      interactive={true}
-      persistent={true}
-      xPos="start"
-      yPos="below"
+    {#if setting.type === "selection"}
+      <Autocomplete
+        bind:this={autocompleteTextField}
+        getOptionLabel={getValueName}
+        label={setting.title}
+        options={availableValues}
+        selectOnExactMatch={false}
+        bind:value={autocompleteValue}
+        on:SMUIAutocomplete:selected={handleAutocompleteSelection}
+      />
+    {/if}
+  
+    {#if isNotNullish(setting.description) || setting.type === "selection" && isNotNullish(setting.values) && setting.values.find((value) => { return isNotNullish(value.description) })}
+      <Wrapper
+        style="height:24px"
+        rich={true}
+      >
+        <Icon
+          style="cursor:pointer;"
+          class="material-icons"
+        >
+          info
+        </Icon>
+  
+        <!-- TODO Tooltip doesn't properly adjust for the position in the view port (even though the documentation says it should). -->
+        <Tooltip
+          style="width:500px;"
+          interactive={true}
+          persistent={true}
+          xPos="start"
+          yPos="below"
+        >
+          {#if isNotNullish(setting.description)}
+            <Content>
+              {setting.description}
+            </Content>
+          {/if}
+          {#if setting.type === "selection" && isNotNullish(setting.values)}
+            {#each setting.values as value}
+              {#if isNotNullish(value.description)}
+                <Title>
+                  {value.name}
+                </Title>
+                <Content>
+                  {value.description}
+                </Content>
+              {/if}
+            {/each}
+          {/if}
+        </Tooltip>
+      </Wrapper>
+    {/if}
+  </div>
+  
+  {#if selectedValues.length > 0}
+    <div
+      style:display="flex"
+      style:flex-direction="row"
     >
-      <Content>
-        {spec.description}
-      </Content>
-      {#if isNotNullish(spec.values)}
-        {#each spec.values as value}
-          <Title>
-            {value.name}
-          </Title>
-          <Content>
-            {value.description}
-          </Content>
+      <div
+        style:display="flex"
+        style:flex-wrap="wrap"
+        style:flex-direction="column"
+        style:flex-shrink="0"
+        style:align-items="left"
+        style:gap="5px"
+      >
+        {#each selectedValues as value, index (value.id)}
+          <div
+            style:display="flex"
+            style:align-items="center"
+            style:justify-content="justify"
+            style:gap="5px"
+          >
+            <Icon
+              style="cursor:pointer;"
+              class="material-icons"
+              on:click={() => { removeSelectedValue(index) }}
+            >
+              cancel
+            </Icon>
+            <div
+              style:text-wrap="nowrap"
+              style:flex-grow="1"
+            >
+              {value.name}
+            </div>
+            {#if isNotNullish(value.description)}
+              <Wrapper
+                style="height:24px"
+                rich={true}
+              >
+                <Icon
+                  style="cursor:pointer;"
+                  class="material-icons"
+                >
+                  info
+                </Icon>
+        
+                <!-- TODO Tooltip doesn't properly adjust for the position in the view port (even though the documentation says it should). -->
+                <Tooltip
+                  style="width:500px;"
+                  interactive={true}
+                  persistent={true}
+                  xPos="start"
+                  yPos="below"
+                >
+                  {#if isNotNullish(value.description)}
+                    <Content>
+                      {value.description}
+                    </Content>
+                  {/if}
+                </Tooltip>
+              </Wrapper>
+            {/if}
+            {#if isNotNullish(value.setting)}
+              <svelte:self
+                bind:this={selectedValuesInputs[value.id]}
+                setting={value.setting}
+              />
+            {/if}
+          </div>
         {/each}
-      {/if}
-    </Tooltip>
-  </Wrapper>
+      </div>
+      <div style:flex-grow="1"></div>
+    </div>
+  {/if}
 </div>
 
 <script lang="ts">
-  import type { GeneratorSetting, GeneratorSettingSpec, GeneratorSettingValueSpec } from "@shared/types/generatorSettings"
-  import Chip, { Set, Text, TrailingAction } from "@smui/chips"
   import { Icon } from "@smui/common"
+  import Textfield from "@smui/textfield"
   import Tooltip, { Content, Title, Wrapper } from "@smui/tooltip"
   import Autocomplete from "@smui-extra/autocomplete"
   import { isNotNullish } from "@utils"
-
-  export let spec: GeneratorSettingSpec
   
-  export const getSetting = (): GeneratorSetting | null => {
-    switch (spec.type) {
-    case "boolean": {
-      return null
-    }
+  export let setting: Setting
+  
+  export const getValue = (): any => {
+    switch (setting.type) {
     case "integer": {
-      return null
+      return integerValue
     }
-    case "item": {
-      return null
-    }
-    case "array": {
+    case "selection": {
       if (selectedValues.length > 0) {
-        return {
-          id: spec.id,
-          value: selectedValues.map((valueSpec) => {
-            return valueSpec.id
-          }),
-        }
+        return selectedValues.map((value) => {
+          if (isNotNullish(value.setting)) {
+            return {
+              [value.id]: selectedValuesInputs[value.id].getValue(),
+            }
+          } else {
+            return value.id
+          }
+        })
       } else {
         return null
       }
@@ -96,20 +185,26 @@
     }
   }
   
-  // Autocomplete
+  let autocompleteTextField: Autocomplete
+  const selectedValuesInputs: Dictionary<any> = {} // Unfortunately I think this needs to be any because we can't reference our own type
   
-  let autocompleteValue: GeneratorSettingValueSpec | undefined = undefined // Not really used but required to prevent errors
-  let availableValues = spec.values
-  let selectedValues: GeneratorSettingValueSpec[] = []
+  let autocompleteValue: SelectionSettingValue | undefined = undefined // Not really used but required to prevent errors
+  let availableValues = setting.type === "selection" ? setting.values : []
+  let selectedValues: SelectionSettingValue[] = []
+  let integerValue = setting.type === "integer" ? setting.default : 0
   
-  const handleAutocompleteSelection = (event: CustomEvent<GeneratorSettingValueSpec>) => {
+  const handleAutocompleteSelection = (event: CustomEvent<SelectionSettingValue>) => {
     event.preventDefault()
-    if (spec.type === "array") {
+    autocompleteTextField.text = ""
+    if (setting.type !== "selection") { return }
+    if (isNotNullish(setting.maxSelections) && selectedValues.length >= setting.maxSelections) {
+    // Show Error Message
+    } else {
       selectedValues.push(event.detail)
       selectedValues = selectedValues
       
-      if (isNotNullish(spec.values)) {
-        availableValues = spec.values!.filter((value) => {
+      if (isNotNullish(setting.values)) {
+        availableValues = setting.values!.filter((value) => {
           return !selectedValues.find((selectedValue) => {
             return selectedValue.id === value.id
           })
@@ -118,11 +213,29 @@
     }
   }
   
-  const getValueName = (value: GeneratorSettingValueSpec) => {
+  const removeSelectedValue = (index: number) => {
+    availableValues.push(selectedValues[index])
+    availableValues = availableValues.sort((a, b) => { return a.name > b.name ? 1 : -1 })
+    selectedValues.splice(index, 1); selectedValues = selectedValues
+  }
+  
+  const getValueName = (value: SelectionSettingValue) => {
     if (isNotNullish(value)) {
       return value.name
     } else {
       return ""
+    }
+  }
+  
+  $: integerValue, integerValueListener()
+  const integerValueListener = () => {
+    if (setting.type !== "integer") { return }
+    if (isNotNullish(setting.max) && integerValue > setting.max) {
+      integerValue = setting.max
+    } else if (isNotNullish(setting.min) && integerValue < setting.min) {
+      integerValue = setting.min
+    } else {
+      integerValue = Math.floor(integerValue)
     }
   }
   

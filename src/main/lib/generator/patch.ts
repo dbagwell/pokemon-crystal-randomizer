@@ -1,5 +1,5 @@
 import type { ROMInfo, ROMOffset } from "@lib/gameData/romInfo"
-import { type DataFormat, PatchInfo } from "@lib/generator/patchInfo"
+import { type DataFormat, type ExtraInclude, PatchInfo } from "@lib/generator/patchInfo"
 import { bytesFrom, isNumber } from "@utils"
 
 export class Patch {
@@ -10,7 +10,7 @@ export class Patch {
     this.hunks = hunks
   }
   
-  static readonly fromYAML = (romInfo: ROMInfo, filePath: string, extraIncludes: Dictionary<string | string[]> = {}, extraValues: Dictionary<string> = {}): Patch => {
+  static readonly fromYAML = (romInfo: ROMInfo, filePath: string, extraIncludes: Dictionary<ExtraInclude | ExtraInclude[]> = {}, extraValues: Dictionary<string> = {}): Patch => {
     const patchInfo = new PatchInfo(filePath, extraIncludes, extraValues)
     return new Patch(patchInfo.hunks(romInfo))
   }

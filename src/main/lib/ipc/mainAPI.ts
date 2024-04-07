@@ -1,8 +1,6 @@
 import { generateROM } from "@lib/generator/generator"
-import { getAllGeneratorSettings } from "@lib/generator/generatorSetting"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
-import type { GeneratorSetting, GeneratorSettingSpec } from "@shared/types/generatorSettings"
 import { isNullish } from "@shared/utils"
 import { dialog } from "electron"
 import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
@@ -10,13 +8,7 @@ import fs from "fs"
 
 export class MainAPI implements ElectronMainApi<MainAPI> {
   
-  readonly getGeneratorSettingsInfo = async (): Promise<Response<GeneratorSettingSpec[]>> => {
-    return {
-      result: getAllGeneratorSettings(),
-    }
-  }
-  
-  readonly generateROM = async (settings: GeneratorSetting[]): Promise<Response<void>> => {
+  readonly generateROM = async (settings: any): Promise<Response<void>> => {
     try {
       const vanillaData = await getVanillaROM()
         
