@@ -27,7 +27,7 @@
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/ProgressIndicator.svelte"
   import SettingsContainer from "@components/SettingsContainer.svelte"
   import { AdditionalOptions } from "@shared/gameData/additionalOptions"
-  import { itemTypes } from "@shared/gameData/itemData"
+  import { itemCategories } from "@shared/gameData/itemData"
   import { reduceDictionaryInto } from "@shared/utils"
   import Button, { Label } from "@smui/button"
   import Paper, { Content, Subtitle, Title } from "@smui/paper"
@@ -42,7 +42,7 @@
           title: "Starting Inventory",
           description: "Items to start the game with.",
           layout: "row",
-          settings: itemTypes.map((itemType) => {
+          settings: itemCategories.map((itemType) => {
             return {
               type: "selection",
               id: itemType.id,
