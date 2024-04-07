@@ -1,14 +1,12 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
-import { getYAML } from "@lib/utils/yamlUtils"
-import type { GeneratorSetting } from "@shared/types/generatorSettings"
-import { validateGeneratorSettingSpec } from "@shared/typeValidators/generatorSettings.validator"
-import { compact, hexStringFrom } from "@utils"
+import { AdditionalOptions } from "@shared/gameData/additionalOptions"
+import { itemTypes } from "@shared/gameData/itemData"
+import { compact, hexStringFrom, isNotNullish, isNumber, isString } from "@utils"
 import { app } from "electron"
 import hash from "object-hash"
-import path from "path"
 
-export const generateROM = (data: Buffer, settings: GeneratorSetting[]): {
+export const generateROM = (data: Buffer, settings: any): {
   seed: string,
   data: Buffer,
 } => {
@@ -16,22 +14,31 @@ export const generateROM = (data: Buffer, settings: GeneratorSetting[]): {
   
   let hunks: DataHunk[] = []
   
-  settings.forEach((setting) => {
-    switch (setting.id) {
-    case "additionalOptions": {
-      const values = setting.value as string[]
+  if (isNotNullish(settings.other)) {
+    const other = settings.other
+    
+    if (isNotNullish(other.additionalOptions)) {
+      const additionalOptions = other.additionalOptions
+      
+      if (!Array.isArray(additionalOptions)) {
+        throw new Error("'other.additionalOptions' must be an array.")
+      }
+      
+      // TODO: Record warnings if array contains values that don't match expected values.
+      // TODO: Pull additional options values from shared to ensure the ui sends the same values.
+      
       const additionalOptionsPatch = Patch.fromYAML(
         romInfo,
         "additionalOptions.yml",
         {
           options: compact([
-            values.includes("instantText") ? "options/textSpeedWithInstantText.yml" : "options/textSpeed.yml",
-            values.includes("holdToMash") ? "options/holdToMash.yml" : null,
+            additionalOptions.includes(AdditionalOptions.instantText) ? "options/textSpeedWithInstantText.yml" : "options/textSpeed.yml",
+            additionalOptions.includes(AdditionalOptions.holdToMash) ? "options/holdToMash.yml" : null,
             "options/battleScene.yml",
             "options/battleShift.yml",
-            values.includes("nicknames") ? "options/nicknames.yml" : null,
+            additionalOptions.includes(AdditionalOptions.nicknames) ? "options/nicknames.yml" : null,
             "options/stereoSound.yml",
-            values.includes("rideMusic") ? "options/rideMusic.yml" : null,
+            additionalOptions.includes(AdditionalOptions.rideMusic) ? "options/rideMusic.yml" : null,
             "options/menuAccount.yml",
             "options/printTone.yml",
             "options/frameType.yml",
@@ -40,41 +47,74 @@ export const generateROM = (data: Buffer, settings: GeneratorSetting[]): {
       )
       
       hunks = [...hunks, ...additionalOptionsPatch.hunks]
-      
-      break
     }
-    case "startingItems": {
-      const dirPath = path.resolve(__dirname, "generatorSettings")
-      const yaml = getYAML([path.resolve(dirPath, "startingItems.yml")])
-      const itemsInfo = validateGeneratorSettingSpec(yaml)
-      const values = setting.value as Dictionary<any>[]
+  }
+  
+  if (isNotNullish(settings.items)) {
+    const items = settings.items
+    if (isNotNullish(items.startingInventory)) {
+      const startingInventory = items.startingInventory
+      
+      const itemInfo: {itemId: string, itemAmount: string}[] = []
+      
+      itemTypes.forEach((itemType) => {
+        if (isNotNullish(startingInventory[itemType.id])) {
+          const selectedItems = startingInventory[itemType.id]
+          
+          if (!Array.isArray(selectedItems)) {
+            throw new Error(`'items.startingInventory.${itemType.id} must be an array.`)
+          } else if (selectedItems.length > itemType.maxSlots) {
+            throw new Error(`'items.startingInventory.${itemType.id}' cannot have more than ${itemType.maxSlots} entries.`)
+          }
+          
+          const mappedItems = selectedItems.reduce((items, selectedItemInfo) => {
+            if (isString(selectedItemInfo)) {
+              return {
+                ...items,
+                [selectedItemInfo]: 1,
+              }
+            } else {
+              return {
+                ...items,
+                ...selectedItemInfo,
+              }
+            }
+          }, {})
+          
+          Object.entries(mappedItems).forEach(([itemId, amount]) => {
+            const item = itemType.items.find((item) => { return item.id === itemId })
+            if (isNotNullish(item)) {
+              if (!isNumber(amount) || !Number.isInteger(amount) || amount > itemType.slotSize) {
+                throw new Error(`Item amounts in 'items.startingInventory.${itemType.id}' cannot exceed ${itemType.slotSize}.`)
+              }
+              
+              itemInfo.push({
+                itemId: item.hexId,
+                itemAmount: `[2]{${amount}}`,
+              })
+            } else {
+              // TODO: Record warning.
+            }
+          })
+        }
+      })
+      
       const startingItemsPatch = Patch.fromYAML(
         romInfo,
         "startingItems.yml",
         {
-          items: compact(values.map((value) => {
+          items: itemInfo.map((value) => {
             return {
               path: "giveItem.yml",
-              extraValues: {
-                itemId: itemsInfo.values.find((element: any) => {
-                  return element.id === (value?.id ?? value)
-                }).value,
-                itemAmount: `[2]{${value?.value?.value ?? 1}}`,
-              },
+              extraValues: value,
             }
-          })),
+          }),
         },
       )
   
       hunks = [...hunks, ...startingItemsPatch.hunks]
-      
-      break
     }
-    default: {
-      break
-    }
-    }
-  })
+  }
   
   const checkValue = hunks.length > 0 ? hash(hunks).slice(0, 8).toUpperCase() : "00000000"
   

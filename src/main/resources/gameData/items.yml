@@ -1,9 +1,20 @@
-id: "startingItems"
-title: "Starting Items"
-description: "Items to start the game with."
-category: "Items"
-type: "array"
-values:
+itemTypes:
+  item:
+    maxSlots: 20
+    maxSlotSize: 99
+  ball:
+    maxSlots: 12
+    maxSlotSize: 99
+  tm:
+    maxSlots: 50
+    maxSlotSize: 99
+  hm:
+    maxSlots: 7
+    maxSlotSize: 1
+  key:
+    maxSlots: 25
+    maxSlotSize: 1
+items:
 - id: "MASTER_BALL"
   value: "01"
   name: "Master Ball"
@@ -1000,35 +1011,3 @@ values:
   value: "F9"
   name: "HM07 (Waterfall)"
   type: "hm"
-valueTypes:
-  item:
-    max: 20
-    input:
-      id: "amount"
-      title: "Amount"
-      type: "integer"
-      min: 0
-      max: 99
-      defaultValue: 1
-  ball:
-    max: 12
-    input:
-      id: "amount"
-      title: "Amount"
-      type: "integer"
-      min: 0
-      max: 99
-      defaultValue: 1
-  tm:
-    max: 50
-    input:
-      id: "amount"
-      title: "Amount"
-      type: "integer"
-      min: 0
-      max: 99
-      defaultValue: 1
-  hm:
-    max: 7
-  key:
-    max: 25

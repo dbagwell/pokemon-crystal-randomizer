@@ -11,9 +11,6 @@ const init = async () => {
   
   new MainWindow({
     target: document.getElementById("mainWindow")!,
-    props: {
-      generatorSettingsSpecs: (await window.mainAPI.getGeneratorSettingsInfo()).result,
-    },
   })
 }
 

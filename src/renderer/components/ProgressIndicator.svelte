@@ -1,6 +1,6 @@
 <div
   style:display={display}
-  style:position="absolute"
+  style:position="fixed"
   style:inset="0"
   style:width="100%"
   style:height="100%"
