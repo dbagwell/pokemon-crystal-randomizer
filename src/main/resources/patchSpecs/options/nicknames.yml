@@ -1,0 +1,44 @@
+description: "Code for handling the nicknames option in the options menu."
+extends: "options/binaryOption.yml"
+values:
+  primaryDefault: "[1]{0b00000000}"
+  title: "8D 88 82 8A 8D 80 8C 84 92 7F 7F 7F 9C"
+  wramAddress: "D1 CF"
+  bitIndex: "[1]{1}"
+  giftNicknameCheck: "FA D1 CF E6 02 28 09 21 44 5B CD 57 10 C3 CF 1D 37 C9"
+  catchNicknameCheck: "FA D1 CF E6 02 28 0A 21 F5 6D CD 57 10 CD CF 1D C9 37 C9"
+  hatchNicknameCheck: "FA D1 CF E6 02 28 0A 21 BA 70 CD 57 10 CD CF 1D C9 37 C9"
+changes:
+  - description: "Adds a function to check the nickname option before prompting to nickname a gift Pokémon."
+    locations:
+      - bank: 19
+    value: "$giftNicknameCheck"
+  - description: "Adds a function to check the nickname option before prompting to nickname a caught Pokémon."
+    locations:
+      - bank: 3
+    value: "$catchNicknameCheck"
+  - description: "Adds a function to check the nickname option before prompting to nickname a hatched Pokémon."
+    locations:
+      - bank: 5
+    value: "$hatchNicknameCheck"
+  - description: "Calls the function to ched the nickname option before prompting to nickname a gift Pokémon"
+    locations:
+      - bank: 19
+        address: 0x5B3B
+        maxSize: 9
+    value: "C3 @$giftNicknameCheck"
+  - description: "Calls the function to check the nickname option before prompting to nickname a caught Pokémon"
+    locations:
+      - bank: 3
+        address: 0x6AF8
+    value: "CD @$catchNicknameCheck DA E2 6B 00 00 00 00 00 00 FA 08 D1 EA 65 D2 CD 3B 34"
+  - description: "Calls the function to check the nickname option before prompting to nickname a caught Pokémon"
+    locations:
+      - bank: 3
+        address: 0x6B6A
+    value: "CD @$catchNicknameCheck 38 40 00 00 00 00 00 00 FA 08 D1 EA 65 D2 CD 3B 34"
+  - description: "Calls the function to check the nickname option before prompting to nickname a hatched Pokémon"
+    locations:
+      - bank: 5
+        address: 0x704D
+    value: "CD @$hatchNicknameCheck"

@@ -1,0 +1,11 @@
+description: Code for handling the print tone option in the options menu.
+extends: options/option.yml
+values:
+  title: "8F 91 88 8D 93 7F 93 8E 8D 84 7F 7F 9C"
+  down25Text: "EE F8 FB 50"
+  down10Text: "EE F7 F6 50"
+  midText: "8C 88 83 50"
+  up10Text: "61 F7 F6 50"
+  up25Text: "61 F8 FB 50"
+  valueTextLength: "[1]{4}"
+  data: "F0 A7 CB 6F 20 47 CB 67 20 31 21 $coord FA D0 CF FE 7F 28 20 FE 60 28 17 FE 40 28 0E FE 20 28 05 11 @$up25Text 18 12 11 @$up10Text 18 0D 11 @$midText 18 08 11 @$down10Text 18 03 11 @$down25Text CD 78 10 C9 FA D0 CF FE 60 20 01 3D C6 20 FE 9F 20 14 3E 00 18 10 FA D0 CF FE 7F 20 01 3C D6 20 FE E0 20 02 3E 7F EA D0 CF 18 A8 $down25Text $down10Text $midText $up10Text $up25Text"

@@ -1,0 +1,6 @@
+description: Code for handling the frame type option in the options menu.
+extends: options/option.yml
+values:
+  title: "85 91 80 8C 84 7F 93 98 8F 84 7F 7F 9C"
+  valueTextLength: "[1]{2}"
+  data: "F0 A7 CB 6F 20 12 CB 67 20 14 FA CE CF 21 $coord C6 F7 77 CD 5F 0E A7 C9 FA CE CF 3D 18 04 FA CE CF 3C E6 07 EA CE CF 18 E1"

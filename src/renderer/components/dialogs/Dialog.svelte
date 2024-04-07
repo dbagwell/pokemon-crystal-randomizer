@@ -38,7 +38,7 @@
 </Dialog>
 
 <script lang="ts">
-  
+  import type { DialogInputInfo } from "@shared/types/dialog"
   import Button, { Label } from "@smui/button"
   import Dialog, { Actions, Content, Title } from "@smui/dialog"
   import Textfield from "@smui/textfield"

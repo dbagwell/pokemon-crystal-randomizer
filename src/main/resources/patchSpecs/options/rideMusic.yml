@@ -1,0 +1,53 @@
+description: "Code for handling the ride music option in the options menu."
+extends: "options/option.yml"
+values:
+  secondaryDefault: "[1]{0b00000000}"
+  title: "91 88 83 84 7F 8C 94 92 88 82 7F 7F 9C"
+  noneText: "8D 8E 8D 84 50"
+  surfText: "92 94 91 85 50"
+  bikeText: "81 88 8A 84 50"
+  bothText: "81 8E 93 87 50"
+  valueTextLength: "[1]{5}"
+  data: "F0 A7 CB 6F 20 2C CB 67 20 30 21 $coord FA D1 CF E6 0C 28 17 FE 04 28 0E FE 08 28 05 11 @$bothText 18 0D 11 @$bikeText 18 08 11 @$surfText 18 03 11 @$noneText CD 78 10 C9 FA D1 CF E6 0C 3D 18 06 FA D1 CF F6 03 3C E6 0C 47 FA D1 CF E6 F3 B0 EA D1 CF 18 BC $bothText $bikeText $surfText $noneText"
+changes:
+  - description: "Skips playing bike music when getting on the bike of the option is not enabled."
+    locations: 
+      - bank: 3
+        address: 0x50DA
+        maxSize: 29
+    value: "FA D1 CF E6 08 28 13 11 13 00 7B EA C0 C2 CD 97 3B 3E 01 C9"
+  - description: "Adds code to check the ride music options before playing ride music."
+    locations: 
+      - bank: 0
+        address: 0x3D03
+        maxSize: 44
+    value: "FA D1 CF E6 08 28 04 11 13 00 37 C9 FA D1 CF E6 04 28 04 11 21 00 37 C9"
+  - description: "Call the code to check the ride music flags before playing ride music."
+    locations:
+      - bank: 0
+        address: 0x3D68
+    value: "A6 FE 08 28 A2 FE 01 28 92 FA 4D D8 CB 57 20 08 A7 C9 00 00 00 00 00 00"
+  - description: "Update a relative jump due to other changes."
+    locations:
+      - bank: 0
+        address: 0x3D86
+    value: "F1"
+  - description: "Update a relative jump due to other changes."
+    locations:
+      - bank: 0
+        address: 0x3D91
+    value: "E6"
+  - description: "Change code that did special logic for bike music to just call the regular function that plays map music."
+    locations:
+      - bank: 5
+        address: 0x53A3
+      - bank: 5
+        address: 0x5402
+      - bank: 5
+        address: 0x5415
+    value: "03"
+  - description: "Change code that did special logic for bike music to just call the regular function that plays map music."
+    locations:
+      - bank: 36
+        address: 0x549c
+    value: "DF C3"

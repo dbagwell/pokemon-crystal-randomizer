@@ -1,0 +1,18 @@
+description: Code for handling the battle shift option in the options menu.
+extends: options/binaryOption.yml
+values:
+  primaryDefault: "[1]{0b01000000}"
+  title: "81 80 93 93 8B 84 7F 92 87 88 85 93 9C"
+  wramAddress: "CC CF"
+  bitIndex: "[1]{6}"
+changes:
+  - description: Changes the battle shift option check so that 1 is treated as on.
+    locations:
+      - bank: 15
+        address: 0x572E
+    value: "28"
+  - description: Inverts the force set of the battle shift option in the battle tower.
+    locations:
+      - bank: 92
+        address: 0x4255
+    value: "B6"

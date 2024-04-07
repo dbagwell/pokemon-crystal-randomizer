@@ -22,6 +22,7 @@
 *-lock.json
 src/renderer/css/*
 src/main/lib/grammars/*
+src/shared/typeValidators/*
 
 # or tsconfig files
 **tsconfig.json

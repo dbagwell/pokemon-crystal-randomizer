@@ -48,6 +48,17 @@
   context="module"
   lang="ts"
 >
+  import type { DialogInputInfo } from "@shared/types/dialog"
+
+  type ShowDialogParams = {
+    title?: string,
+    message?: string,
+    inputInfo?: DialogInputInfo,
+    submitButtonLabel?: string,
+    hasCancelButton?: boolean,
+    onCancel?: () => void,
+    onSubmit?: (inputValue: any) => void,
+  }
   
   export let showDialog: (params: ShowDialogParams) => void
   

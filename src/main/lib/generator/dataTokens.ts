@@ -5,6 +5,9 @@ import nearley from "nearley"
 export const parseTokens = (value: string): Token[] => {
   const parser = new nearley.Parser(nearley.Grammar.fromCompiled(dataFormatGrammar))
   parser.feed(value)
+  if (parser.results[0] === undefined) {
+    console.log("hi")
+  }
   return tokensFrom(parser.results[0])
 }
 
