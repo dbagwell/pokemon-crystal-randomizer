@@ -7,10 +7,10 @@ import crypto from "crypto"
 import fs from "fs"
 import path from "path"
 
-const romsPath = path.resolve(userDataPath, "", "roms")
+const romsPath = path.resolve(userDataPath, "roms")
 const vanilla11ROMPath = path.resolve(romsPath, "vanilla11.gbc")
 
-const vanillaROM = (): Buffer | undefined => {
+const storedVanillaROM = (): Buffer | undefined => {
   try {
     return fs.readFileSync(vanilla11ROMPath)
   } catch {
@@ -24,7 +24,7 @@ export const setVanillaROM = async (data: Buffer) => {
 }
 
 export const getVanillaROM = async (): Promise<Buffer | nullish> => {
-  const existingVanillaROM = vanillaROM()
+  const existingVanillaROM = storedVanillaROM()
   
   if (isNotNullish(existingVanillaROM)) {
     return existingVanillaROM

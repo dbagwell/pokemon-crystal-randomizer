@@ -1,5 +1,6 @@
 import { generateROM } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
+import { getPreviousSettings, setPreviousSettings } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import { isNullish } from "@shared/utils"
 import { dialog } from "electron"
@@ -7,6 +8,10 @@ import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
 import fs from "fs"
 
 export class MainAPI implements ElectronMainApi<MainAPI> {
+  
+  readonly getPreviousSettings = async (): Promise<Response<any | undefined>> => {
+    return getPreviousSettings()
+  }
   
   readonly generateROM = async (settings: any): Promise<Response<void>> => {
     try {
@@ -40,6 +45,8 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
       }
       
       fs.writeFileSync(filePath, generatorResult.data)
+      
+      setPreviousSettings(settings)
       
       return {
         message: "ROM Generated!",

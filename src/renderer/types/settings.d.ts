@@ -22,6 +22,7 @@ type IntegerSetting = {
   min: number,
   max: number,
   default: number,
+  preset?: number,
 }
 
 type SelectionSetting = {

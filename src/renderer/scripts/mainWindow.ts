@@ -11,6 +11,9 @@ const init = async () => {
   
   new MainWindow({
     target: document.getElementById("mainWindow")!,
+    props: {
+      initialSettings: await window.mainAPI.getPreviousSettings(),
+    },
   })
 }
 
