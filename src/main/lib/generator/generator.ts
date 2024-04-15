@@ -1,7 +1,7 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { AdditionalOptions } from "@shared/gameData/additionalOptions"
-import { itemCategories, ItemType } from "@shared/gameData/itemData"
+import { itemCategories } from "@shared/gameData/itemData"
 import { compact, hexStringFrom, isNotNullish, isNumber, isString } from "@utils"
 import { app } from "electron"
 import hash from "object-hash"
@@ -92,19 +92,30 @@ export const generateROM = (data: Buffer, settings: any): {
                 throw new Error(`Item amounts in 'items.startingInventory.${itemType.id}' cannot exceed ${itemType.slotSize}.`)
               }
               
-              if (item.type === ItemType.pokedexPart) {
+              switch (item.type) {
+              case "POKEDEX_PART": {
                 pokedexPartsValue |= parseInt(item.hexId, 16)
-              } else if (item.type === ItemType.pokegearPart) {
+                break
+              }
+              case "POKEGEAR_PART": {
                 pokegearPartsValue |= parseInt(item.hexId, 16)
-              } else if (item.type === ItemType.johtoBadge) {
+                break
+              }
+              case "JOHTO_BADGE": {
                 johtoBadgesValue |= parseInt(item.hexId, 16)
-              } else if (item.type === ItemType.kantoBadge) {
+                break
+              }
+              case "KANTO_BADGE": {
                 kantoBadgesValue |= parseInt(item.hexId, 16)
-              } else {
+                break
+              }
+              case "BAG_ITEM": {
                 itemValues.push({
                   itemId: item.hexId,
                   itemAmount: `[2]{${amount}}`,
                 })
+                break
+              }
               }
             } else {
               // TODO: Record warning.
