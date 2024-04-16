@@ -2,9 +2,12 @@ import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { AdditionalOptions } from "@shared/gameData/additionalOptions"
 import { itemCategories } from "@shared/gameData/itemData"
-import { compact, hexStringFrom, isNotNullish, isNumber, isString } from "@utils"
+import { pokemon } from "@shared/gameData/pokemonData"
+import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isNumber, isString } from "@utils"
+import crypto from "crypto"
 import { app } from "electron"
 import hash from "object-hash"
+import seedrandom from "seedrandom"
 
 export const generateROM = (data: Buffer, settings: any): {
   seed: string,
@@ -13,7 +16,13 @@ export const generateROM = (data: Buffer, settings: any): {
   const romInfo = ROMInfo.vanilla()
   
   let hunks: DataHunk[] = []
+  const seed = isString(settings.seed) ? settings.seed : crypto.randomUUID()
+  const rng = seedrandom(seed)
+  const randomInt = (max: number): number => {
+    return Math.floor(rng() * max)
+  }
   
+  // TODO: Iterator over object entries instead and switch over known keys
   if (isNotNullish(settings.other)) {
     const other = settings.other
     
@@ -47,6 +56,43 @@ export const generateROM = (data: Buffer, settings: any): {
       )
       
       hunks = [...hunks, ...additionalOptionsPatch.hunks]
+    }
+  }
+  
+  if (isNotNullish(settings.pokemon)) {
+    if (isNotNullish(settings.pokemon.starters)) {
+      Object.entries(settings.pokemon.starters).forEach(([starterId, value]) => {
+        // TODO: Warn about unknown starter id.
+        // TODO: Get VANILLA and RANDOM value ids from some shared type.
+        if (value === "VANILLA") {
+          return
+        }
+        
+        let pokemonId = value
+        
+        if (value === "RANDOM") {
+          const index = randomInt(pokemon.length - 1)
+          pokemonId = pokemon[index].id
+        }
+        
+        const pokemonInfo = pokemon.find((pokemon) => { return pokemon.id === pokemonId })
+        
+        if (isNullish(pokemonInfo)) {
+          throw new Error(`Unknown value '${value}' for 'pokemon.starters.${starterId}' setting.`)
+        }
+        
+        hunks = [
+          ...hunks,
+          ...Patch.fromYAML(
+            romInfo,
+            `starters/${starterId}.yml`,
+            {},
+            {
+              pokemonId: hexStringFrom(bytesFrom(pokemonInfo.numericId, 1)),
+            },
+          ).hunks,
+        ]
+      })
     }
   }
   

@@ -1,0 +1,14 @@
+description: "Changes the right starter."
+changes:
+- description: "Changes the right starter."
+  locations:
+  - bank: 30
+    address: 0x4CFD
+  - bank: 30
+    address: 0x4CFF
+  - bank: 30
+    address: 0x4D16
+  - bank: 30
+    address: 0x4D21
+  value: "$pokemonId"
+        
