@@ -24,19 +24,19 @@
       </Textfield>
     {/if}
   
-    {#if setting.type === "selection"}
+    {#if isAutocomplete(setting)}
       <Autocomplete
         bind:this={autocompleteTextField}
         getOptionLabel={getValueName}
         label={setting.title}
         options={availableValues}
-        selectOnExactMatch={false}
+        selectOnExactMatch={setting.type === "selection"}
         bind:value={autocompleteValue}
         on:SMUIAutocomplete:selected={handleAutocompleteSelection}
       />
     {/if}
   
-    {#if isNotNullish(setting.description) || setting.type === "selection" && isNotNullish(setting.values) && setting.values.find((value) => { return isNotNullish(value.description) })}
+    {#if isNotNullish(setting.description) || isAutocomplete(setting) && isNotNullish(setting.values) && setting.values.find((value) => { return isNotNullish(value.description) })}
       <Wrapper
         style="height:24px"
         rich={true}
@@ -61,7 +61,7 @@
               {setting.description}
             </Content>
           {/if}
-          {#if setting.type === "selection" && isNotNullish(setting.values)}
+          {#if isAutocomplete(setting) && isNotNullish(setting.values)}
             {#each setting.values as value}
               {#if isNotNullish(value.description)}
                 <Title>
@@ -171,6 +171,18 @@
       break
     }
     case "selection": {
+      autocompleteValue = availableValues.find((availableValue) => {
+        if (isString(value)) {
+          return availableValue.id === value
+        } else if (Object.keys(value).length > 0) {
+          return availableValue.id === Object.keys(value)[0]
+        } else {
+          return false
+        }
+      })
+      break
+    }
+    case "multiselect": {
       if (Array.isArray(value)) {
         value.forEach((value) => {
           const selectedValue = availableValues.find((availableValue) => {
@@ -192,7 +204,7 @@
               }
             }
             
-            selectValue(selectedValue)
+            addSelectedValue(selectedValue)
           }
         })
       }
@@ -208,6 +220,15 @@
       return integerValue
     }
     case "selection": {
+      if (isNotNullish(autocompleteValue?.setting)) {
+        return {
+          [autocompleteValue.id]: selectedValuesInputs[autocompleteValue.id].getValue(),
+        }
+      } else {
+        return autocompleteValue?.id
+      }
+    }
+    case "multiselect": {
       if (selectedValues.length > 0) {
         return selectedValues.map((value) => {
           if (isNotNullish(value.setting)) {
@@ -219,28 +240,38 @@
           }
         })
       } else {
-        return null
+        return undefined
       }
     }
     }
   }
   
+  const isAutocomplete = (setting: Setting): setting is (BaseSetting & SelectionSetting) | (BaseSetting & MultiselectSetting) => {
+    return setting.type === "multiselect" || setting.type === "selection"
+  }
+  
   let autocompleteTextField: Autocomplete
   const selectedValuesInputs: Dictionary<any> = {} // Unfortunately I think this needs to be any because we can't reference our own type
   
-  let autocompleteValue: SelectionSettingValue | undefined = undefined // Not really used but required to prevent errors
-  let availableValues = setting.type === "selection" ? setting.values : []
+  let autocompleteValue: SelectionSettingValue | undefined = undefined
+  let availableValues = isAutocomplete(setting) ? setting.values : []
   let selectedValues: SelectionSettingValue[] = []
   let integerValue = setting.type === "integer" ? setting.preset ?? setting.default : 0
   
   const handleAutocompleteSelection = (event: CustomEvent<SelectionSettingValue>) => {
-    event.preventDefault()
-    autocompleteTextField.text = ""
-    selectValue(event.detail)
+    if (setting.type === "selection") {
+      console.log("handle")
+      console.log(event.detail.name)
+      autocompleteValue = event.detail
+    } else if (setting.type !== "multiselect") {
+      event.preventDefault()
+      autocompleteTextField.text = ""
+      addSelectedValue(event.detail)
+    }
   }
   
-  const selectValue = (value: SelectionSettingValue) => {
-    if (setting.type !== "selection") { return }
+  const addSelectedValue = (value: SelectionSettingValue) => {
+    if (setting.type !== "multiselect") { return }
     if (isNotNullish(setting.maxSelections) && selectedValues.length >= setting.maxSelections) {
     // Show Error Message
     } else {

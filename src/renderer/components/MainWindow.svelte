@@ -57,7 +57,7 @@
           layout: "row",
           settings: itemCategories.map((itemType) => {
             return {
-              type: "selection",
+              type: "multiselect",
               id: itemType.id,
               title: itemType.name,
               maxSelections: itemType.maxSlots,
@@ -85,7 +85,7 @@
       title: "Other",
       settings: [
         {
-          type: "selection",
+          type: "multiselect",
           id: "additionalOptions",
           title: "Additional Options",
           description: "Extra settings that are added to the in game options menu.",
