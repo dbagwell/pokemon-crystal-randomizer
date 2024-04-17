@@ -6,11 +6,12 @@
     message={dialog.params.message}
     onCancel={() => {
       dialog.params.onCancel?.()
+    }}
+    onDismiss={() => {
       removeDialog(dialog.id)
     }}
     onSubmit={(inputValue) => {
       dialog.params.onSubmit?.(inputValue)
-      removeDialog(dialog.id)
     }}
     submitButtonLabel={dialog.params.submitButtonLabel}
     title={dialog.params.title}
@@ -19,7 +20,6 @@
 {/each}
 
 <script lang="ts">
-  
   import Dialog from "@components/dialogs/Dialog.svelte"
   
   let dialogs: { id: string, params: ShowDialogParams }[] = []

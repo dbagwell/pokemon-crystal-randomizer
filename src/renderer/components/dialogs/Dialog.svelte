@@ -50,14 +50,16 @@
   export let inputInfo: DialogInputInfo | undefined
   export let hasCancelButton = false
   export let submitButtonLabel = "Submit"
-  export let onCancel: () => void | undefined
-  export let onSubmit: ((inputValue: any) => void) | undefined
+  export let onCancel: () => void
+  export let onSubmit: ((inputValue: any) => void)
+  export let onDismiss: () => void
   
   let textfield: Textfield
   let submitButton: Button
   
   let textfieldValue = "" // Workaround for https://github.com/hperrin/svelte-material-ui/issues/628
   let files: FileList | undefined
+  let submitted = false
   
   const selectedFile = (): File | undefined => {
     if (isNotNullish(files) && files.length !== 0) {
@@ -87,6 +89,7 @@
     const value = await inputValue()
     
     if (isNotNullish(value)) {
+      submitted = true
       onSubmit?.(value)
     }
   }
@@ -101,7 +104,11 @@
   $: open, openListener()
   const openListener = () => {
     if (!open) {
-      onCancel()
+      if (!submitted) {
+        onCancel()
+      }
+      
+      onDismiss()
     }
   }
   

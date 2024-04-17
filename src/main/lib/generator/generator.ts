@@ -1,7 +1,7 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { AdditionalOptions } from "@shared/gameData/additionalOptions"
-import { itemTypes } from "@shared/gameData/itemData"
+import { itemCategories, ItemType } from "@shared/gameData/itemData"
 import { compact, hexStringFrom, isNotNullish, isNumber, isString } from "@utils"
 import { app } from "electron"
 import hash from "object-hash"
@@ -55,9 +55,13 @@ export const generateROM = (data: Buffer, settings: any): {
     if (isNotNullish(items.startingInventory)) {
       const startingInventory = items.startingInventory
       
-      const itemInfo: {itemId: string, itemAmount: string}[] = []
+      let pokedexPartsValue = 0
+      let pokegearPartsValue = 0
+      let johtoBadgesValue = 0
+      let kantoBadgesValue = 0
+      const itemValues: {itemId: string, itemAmount: string}[] = []
       
-      itemTypes.forEach((itemType) => {
+      itemCategories.forEach((itemType) => {
         if (isNotNullish(startingInventory[itemType.id])) {
           const selectedItems = startingInventory[itemType.id]
           
@@ -88,10 +92,20 @@ export const generateROM = (data: Buffer, settings: any): {
                 throw new Error(`Item amounts in 'items.startingInventory.${itemType.id}' cannot exceed ${itemType.slotSize}.`)
               }
               
-              itemInfo.push({
-                itemId: item.hexId,
-                itemAmount: `[2]{${amount}}`,
-              })
+              if (item.type === ItemType.pokedexPart) {
+                pokedexPartsValue |= parseInt(item.hexId, 16)
+              } else if (item.type === ItemType.pokegearPart) {
+                pokegearPartsValue |= parseInt(item.hexId, 16)
+              } else if (item.type === ItemType.johtoBadge) {
+                johtoBadgesValue |= parseInt(item.hexId, 16)
+              } else if (item.type === ItemType.kantoBadge) {
+                kantoBadgesValue |= parseInt(item.hexId, 16)
+              } else {
+                itemValues.push({
+                  itemId: item.hexId,
+                  itemAmount: `[2]{${amount}}`,
+                })
+              }
             } else {
               // TODO: Record warning.
             }
@@ -103,13 +117,19 @@ export const generateROM = (data: Buffer, settings: any): {
         romInfo,
         "startingItems.yml",
         {
-          items: itemInfo.map((value) => {
+          items: itemValues.map((value) => {
             return {
               path: "giveItem.yml",
               extraValues: value,
             }
           }),
         },
+        {
+          pokedexParts: hexStringFrom([pokedexPartsValue]),
+          pokegearParts: hexStringFrom([pokegearPartsValue]),
+          johtoBadges: hexStringFrom([johtoBadgesValue]),
+          kantoBadges: hexStringFrom([kantoBadgesValue]),
+        }
       )
   
       hunks = [...hunks, ...startingItemsPatch.hunks]

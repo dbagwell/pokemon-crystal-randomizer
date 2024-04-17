@@ -1,14 +1,20 @@
-description: "Adds items to the player's inventory when they start a new game"
+description: "Adds items to the player's inventory when they start a new game."
 values:
-  giveItems: "#items.$data 3E 24 21 72 46 CF C9"
+  givePokedexParts: "3E $pokedexParts EA 4C D8"
+  givePokegearParts: "3E $pokegearParts EA 57 D9"
+  giveJohtoBadges: "3E $johtoBadges EA 57 D8"
+  giveKantoBadges: "3E $kantoBadges EA 58 D8"
+  giveItems: "#items.$data"
+  initClock: "3E 24 21 72 46 CF C9"
+  data: "$givePokedexParts $givePokegearParts $giveJohtoBadges $giveKantoBadges $giveItems $initClock"
 changes:
 - description: "Adds items to the player's inventory before starting the new game sequence for setting the clock."
   locations:
   - bank: 47
-  value: "$giveItems"
+  value: "$data"
 - description: "Call the code to give the player their starting items instead of starting the new game sequence for setting the clock."
   locations:
   - bank: 1
     address: 0x5F99
-  value: "3E 2F 21 @$giveItems CF"
+  value: "3E 2F 21 @$data CF"
         
