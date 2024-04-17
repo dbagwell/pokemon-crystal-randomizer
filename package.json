@@ -30,7 +30,6 @@
     "@html-eslint/eslint-plugin": "^0.21.0",
     "@html-eslint/parser": "^0.21.0",
     "@material/dom": "^14.0.0",
-    "@smui-extra/autocomplete": "^7.0.0-beta.16",
     "@smui/button": "^7.0.0-beta.15",
     "@smui/chips": "^7.0.0-beta.16",
     "@smui/circular-progress": "^7.0.0-beta.15",

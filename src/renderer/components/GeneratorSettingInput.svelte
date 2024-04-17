@@ -25,14 +25,21 @@
     {/if}
   
     {#if isAutocomplete(setting)}
-      <Autocomplete
+      <AutocompleteTextField
         bind:this={autocompleteTextField}
-        getOptionLabel={getValueName}
+        clearOnFocus={true}
+        clearOnSelect={setting.type === "multiselect"}
         label={setting.title}
-        options={availableValues}
-        selectOnExactMatch={setting.type === "selection"}
-        bind:value={autocompleteValue}
-        on:SMUIAutocomplete:selected={handleAutocompleteSelection}
+        options={availableValues.map((value) => {
+          return {
+            id: value.id,
+            name: value.name,
+            keywords: value.name,
+            value: value,
+          }
+        })}
+        restoreOnBlur={setting.type === "selection"}
+        on:select={handleAutocompleteSelection}
       />
     {/if}
   
@@ -154,10 +161,10 @@
 </div>
 
 <script lang="ts">
+  import AutocompleteTextField from "@components/AutocompleteTextField.svelte"
   import { Icon } from "@smui/common"
   import Textfield from "@smui/textfield"
   import Tooltip, { Content, Title, Wrapper } from "@smui/tooltip"
-  import Autocomplete from "@smui-extra/autocomplete"
   import { isNotNullish, isNumber, isString } from "@utils"
   
   export let setting: Setting
@@ -171,7 +178,7 @@
       break
     }
     case "selection": {
-      autocompleteValue = availableValues.find((availableValue) => {
+      selectedValue = availableValues.find((availableValue) => {
         if (isString(value)) {
           return availableValue.id === value
         } else if (Object.keys(value).length > 0) {
@@ -180,6 +187,8 @@
           return false
         }
       })
+      
+      autocompleteTextField.filter = selectedValue?.name ?? ""
       break
     }
     case "multiselect": {
@@ -220,12 +229,12 @@
       return integerValue
     }
     case "selection": {
-      if (isNotNullish(autocompleteValue?.setting)) {
+      if (isNotNullish(selectedValue?.setting)) {
         return {
-          [autocompleteValue.id]: selectedValuesInputs[autocompleteValue.id].getValue(),
+          [selectedValue.id]: selectedValuesInputs[selectedValue.id].getValue(),
         }
       } else {
-        return autocompleteValue?.id
+        return selectedValue?.id
       }
     }
     case "multiselect": {
@@ -250,23 +259,22 @@
     return setting.type === "multiselect" || setting.type === "selection"
   }
   
-  let autocompleteTextField: Autocomplete
+  let autocompleteTextField: AutocompleteTextField
   const selectedValuesInputs: Dictionary<any> = {} // Unfortunately I think this needs to be any because we can't reference our own type
   
-  let autocompleteValue: SelectionSettingValue | undefined = undefined
   let availableValues = isAutocomplete(setting) ? setting.values : []
+  let selectedValue: SelectionSettingValue | undefined = undefined
   let selectedValues: SelectionSettingValue[] = []
   let integerValue = setting.type === "integer" ? setting.preset ?? setting.default : 0
   
-  const handleAutocompleteSelection = (event: CustomEvent<SelectionSettingValue>) => {
+  const handleAutocompleteSelection = (event: CustomEvent<string>) => {
     if (setting.type === "selection") {
-      console.log("handle")
-      console.log(event.detail.name)
-      autocompleteValue = event.detail
-    } else if (setting.type !== "multiselect") {
-      event.preventDefault()
-      autocompleteTextField.text = ""
-      addSelectedValue(event.detail)
+      selectedValue = availableValues.find((value) => { return value.id === event.detail })
+    } else if (setting.type === "multiselect") {
+      const value = availableValues.find((value) => { return value.id === event.detail })
+      if (isNotNullish(value)) {
+        addSelectedValue(value)
+      }
     }
   }
   
@@ -298,14 +306,6 @@
     availableValues.push(selectedValue)
     availableValues = availableValues.sort((a, b) => { return a.name > b.name ? 1 : -1 })
     selectedValues.splice(index, 1); selectedValues = selectedValues
-  }
-  
-  const getValueName = (value: SelectionSettingValue) => {
-    if (isNotNullish(value)) {
-      return value.name
-    } else {
-      return ""
-    }
   }
   
   $: integerValue, integerValueListener()
