@@ -1,4 +1,4 @@
-export const pokemon: Pokemon[] = [
+export const allPokemon: Pokemon[] = [
   {
     id: "BULBASAUR",
     numericId: 1,

@@ -28,7 +28,7 @@
   import SettingsContainer from "@components/SettingsContainer.svelte"
   import { AdditionalOptions } from "@shared/gameData/additionalOptions"
   import { itemCategories } from "@shared/gameData/itemData"
-  import { pokemon } from "@shared/gameData/pokemonData"
+  import { allPokemon } from "@shared/gameData/pokemonData"
   import { isNotNullish, reduceDictionaryInto } from "@shared/utils"
   import Button, { Label } from "@smui/button"
   import Paper, { Content, Subtitle, Title } from "@smui/paper"
@@ -70,31 +70,83 @@
           id: "starters",
           title: "Starters",
           layout: "row",
-          settings: starters.map((starter) => {
-            return {
-              type: "selection",
-              id: starter.id,
-              title: starter.title,
-              maxSelections: 1, // TODO: Need to change how the input renders a single selection when there can only be 1
-              values: [ // TODO: We need to set a default of VANILLA.
+          settings: [
+            {
+              type: "boolean",
+              id: "random",
+              title: "Random",
+              settings: [
                 {
-                  id: "VANILLA", // TODO: Ignore this when sending the settings?
-                  name: "Vanilla",
+                  type: "boolean",
+                  id: "preventDuplicates",
+                  title: "Prevent Duplicates",
                 },
                 {
-                  id: "RANDOM",
-                  name: "Random",
-                // TODO: need more than one sub setting for all the options: same stage, same type, similar stats, evolves twice
+                  type: "boolean",
+                  id: "matchType",
+                  title: "Match Type",
                 },
-                ...pokemon.map((pokemon) => {
-                  return {
-                    id: pokemon.id,
-                    name: pokemon.name,
-                  }
-                }),
+                {
+                  type: "boolean",
+                  id: "matchStage",
+                  title: "Match Stage",
+                },
+                {
+                  type: "boolean",
+                  id: "matchEvolutions",
+                  title: "Match Evolutions",
+                },
+                {
+                  type: "boolean",
+                  id: "matchStatsThreshold",
+                  title: "Match Stats",
+                  settings: [
+                    {
+                      type: "integer",
+                      id: "threshold",
+                      title: "Threshold",
+                      min: 0,
+                      max: 371,
+                      default: 50,
+                    },
+                  ],
+                },
+                {
+                  type: "multiselect",
+                  id: "ban",
+                  title: "Ban",
+                  values: allPokemon.map((pokemon) => {
+                    return {
+                      id: pokemon.id,
+                      name: pokemon.name,
+                    }
+                  }),
+                },
               ],
-            }
-          }),
+            },
+          ],
+          subcategories: [
+            {
+              id: "custom",
+              title: "Custom Overrides",
+              layout: "row",
+              settings: starters.map((starter) => {
+                return {
+                  type: "selection",
+                  id: starter.id,
+                  title: starter.title,
+                  values: [
+                    ...allPokemon.map((pokemon) => {
+                      return {
+                        id: pokemon.id,
+                        name: pokemon.name,
+                      }
+                    }),
+                  ],
+                }
+              }),
+            },
+          ],
         },
       ],
     },

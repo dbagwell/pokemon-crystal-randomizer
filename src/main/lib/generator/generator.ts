@@ -2,7 +2,8 @@ import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { AdditionalOptions } from "@shared/gameData/additionalOptions"
 import { itemCategories } from "@shared/gameData/itemData"
-import { pokemon } from "@shared/gameData/pokemonData"
+import { allPokemon } from "@shared/gameData/pokemonData"
+import { baseStatTotal, maxNumberOfEvolutionStages, pokemonMap } from "@shared/gameData/pokemonDataHelpers"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isNumber, isString } from "@utils"
 import crypto from "crypto"
 import { app } from "electron"
@@ -61,34 +62,100 @@ export const generateROM = (data: Buffer, settings: any): {
   
   if (isNotNullish(settings.pokemon)) {
     if (isNotNullish(settings.pokemon.starters)) {
-      Object.entries(settings.pokemon.starters).forEach(([starterId, value]) => {
-        // TODO: Warn about unknown starter id.
-        // TODO: Get VANILLA and RANDOM value ids from some shared type.
-        if (value === "VANILLA") {
+      const starterLocations = [
+        "left",
+        "middle",
+        "right",
+      ] as const
+      
+      type StarterLocation = typeof starterLocations[number]
+      
+      const vanillaStarters: Record<StarterLocation, Pokemon> = {
+        left: pokemonMap.CYNDAQUIL,
+        middle: pokemonMap.TOTODILE,
+        right: pokemonMap.CHIKORITA,
+      }
+      
+      const assignedStarters: Partial<Record<StarterLocation, Pokemon>> = {}
+      
+      if (isNotNullish(settings.pokemon.starters.custom)) {
+        starterLocations.forEach((location) => {
+          const pokemonId = settings.pokemon.starters.custom[location]
+          if (isNotNullish(pokemonId)) {
+            if (isString(pokemonId) && Object.keys(pokemonMap).includes(pokemonId)) {
+              assignedStarters[location] = pokemonMap[pokemonId as PokemonId]
+            } else {
+              throw new Error(`Unexpected value for settings.pokemon.starters.custom.${location}`)
+            }
+          }
+        })
+      }
+      
+      if (isNotNullish(settings.pokemon.starters.random)) {
+        const options = settings.pokemon.starters.random
+        
+        const isBanned = (pokemon: Pokemon) => {
+          return Array.isArray(options.ban) && options.ban.includes(pokemon.id)
+        }
+        
+        const isAssigned = (pokemon: Pokemon) => {
+          return isNotNullish(Object.values(assignedStarters).find((assignedStarter) => {
+            return isNotNullish(assignedStarter) && assignedStarter.id === pokemon.id
+          }))
+        }
+          
+        const matchesStage = (pokemon: Pokemon) => {
+          return !allPokemon.flatMap((pokemon) => {
+            return pokemon.evolutions?.map((evolution) => {
+              return evolution.pokemonId
+            }) ?? []
+          }).includes(pokemon.id)
+        }
+        
+        starterLocations.filter((location) => {
+          return !(Object.keys(assignedStarters) as [StarterLocation]).includes(location)
+        }).forEach((starterLocation) => {
+          const vanillaStarter = vanillaStarters[starterLocation]
+        
+          const matchesType = (pokemon: Pokemon) => {
+            return pokemon.types.includes(vanillaStarter.types[0]) // Vanilla starters only have 1 type each
+          }
+          
+          const matchesEvoltions = (pokemon: Pokemon) => {
+            return maxNumberOfEvolutionStages(pokemon) === maxNumberOfEvolutionStages(vanillaStarter)
+          }
+          
+          const baseStatDifference = (pokemon: Pokemon) => {
+            return Math.abs(baseStatTotal(pokemon) - baseStatTotal(vanillaStarter))
+          }
+          
+          const choices = allPokemon.filter((pokemon) => {
+            return !isBanned(pokemon)
+              && (!options.preventDuplicates || !isAssigned(pokemon))
+              && (!options.matchType || matchesType(pokemon))
+              && (!options.matchStage || matchesStage(pokemon))
+              && (!options.matchEvolutions || matchesEvoltions(pokemon))
+              && (isNullish(options.matchStatsThreshold) || baseStatDifference(pokemon) <= options.matchStatsThreshold)
+          })
+          
+          const index = randomInt(choices.length - 1)
+          assignedStarters[starterLocation] = choices[index]
+        })
+      }
+      
+      Object.entries(assignedStarters).forEach(([location, starter]) => {
+        if (isNullish(starter)) {
           return
-        }
-        
-        let pokemonId = value
-        
-        if (value === "RANDOM") {
-          const index = randomInt(pokemon.length - 1)
-          pokemonId = pokemon[index].id
-        }
-        
-        const pokemonInfo = pokemon.find((pokemon) => { return pokemon.id === pokemonId })
-        
-        if (isNullish(pokemonInfo)) {
-          throw new Error(`Unknown value '${value}' for 'pokemon.starters.${starterId}' setting.`)
         }
         
         hunks = [
           ...hunks,
           ...Patch.fromYAML(
             romInfo,
-            `starters/${starterId}.yml`,
+            `starters/${location}.yml`,
             {},
             {
-              pokemonId: hexStringFrom(bytesFrom(pokemonInfo.numericId, 1)),
+              pokemonId: hexStringFrom(bytesFrom(starter.numericId, 1)),
             },
           ).hunks,
         ]
