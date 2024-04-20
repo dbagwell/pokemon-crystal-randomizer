@@ -9,7 +9,7 @@ type Category = {
   layout?: CategoryLayout,
 }
 
-type Setting = BaseSetting & (IntegerSetting | SelectionSetting)
+type Setting = BaseSetting & (IntegerSetting | SelectionSetting | MultiselectSetting)
 
 type BaseSetting = {
   id: string,
@@ -27,6 +27,11 @@ type IntegerSetting = {
 
 type SelectionSetting = {
   type: "selection"
+  values: SelectionSettingValue[],
+}
+
+type MultiselectSetting = {
+  type: "multiselect"
   maxSelections?: number,
   values: SelectionSettingValue[],
 }

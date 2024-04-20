@@ -1,0 +1,13 @@
+description: "Changes the middle starter."
+changes:
+- description: "Changes the middle starter."
+  locations:
+  - bank: 30
+    address: 0x4CC1
+  - bank: 30
+    address: 0x4CC3
+  - bank: 30
+    address: 0x4CDA
+  - bank: 30
+    address: 0x4CE5
+  value: "$pokemonId"

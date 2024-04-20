@@ -24,19 +24,26 @@
       </Textfield>
     {/if}
   
-    {#if setting.type === "selection"}
-      <Autocomplete
+    {#if isAutocomplete(setting)}
+      <AutocompleteTextField
         bind:this={autocompleteTextField}
-        getOptionLabel={getValueName}
+        clearOnFocus={true}
+        clearOnSelect={setting.type === "multiselect"}
         label={setting.title}
-        options={availableValues}
-        selectOnExactMatch={false}
-        bind:value={autocompleteValue}
-        on:SMUIAutocomplete:selected={handleAutocompleteSelection}
+        options={availableValues.map((value) => {
+          return {
+            id: value.id,
+            name: value.name,
+            keywords: value.name,
+            value: value,
+          }
+        })}
+        restoreOnBlur={setting.type === "selection"}
+        on:select={handleAutocompleteSelection}
       />
     {/if}
   
-    {#if isNotNullish(setting.description) || setting.type === "selection" && isNotNullish(setting.values) && setting.values.find((value) => { return isNotNullish(value.description) })}
+    {#if isNotNullish(setting.description) || isAutocomplete(setting) && isNotNullish(setting.values) && setting.values.find((value) => { return isNotNullish(value.description) })}
       <Wrapper
         style="height:24px"
         rich={true}
@@ -61,7 +68,7 @@
               {setting.description}
             </Content>
           {/if}
-          {#if setting.type === "selection" && isNotNullish(setting.values)}
+          {#if isAutocomplete(setting) && isNotNullish(setting.values)}
             {#each setting.values as value}
               {#if isNotNullish(value.description)}
                 <Title>
@@ -154,10 +161,10 @@
 </div>
 
 <script lang="ts">
+  import AutocompleteTextField from "@components/AutocompleteTextField.svelte"
   import { Icon } from "@smui/common"
   import Textfield from "@smui/textfield"
   import Tooltip, { Content, Title, Wrapper } from "@smui/tooltip"
-  import Autocomplete from "@smui-extra/autocomplete"
   import { isNotNullish, isNumber, isString } from "@utils"
   
   export let setting: Setting
@@ -171,6 +178,20 @@
       break
     }
     case "selection": {
+      selectedValue = availableValues.find((availableValue) => {
+        if (isString(value)) {
+          return availableValue.id === value
+        } else if (Object.keys(value).length > 0) {
+          return availableValue.id === Object.keys(value)[0]
+        } else {
+          return false
+        }
+      })
+      
+      autocompleteTextField.filter = selectedValue?.name ?? ""
+      break
+    }
+    case "multiselect": {
       if (Array.isArray(value)) {
         value.forEach((value) => {
           const selectedValue = availableValues.find((availableValue) => {
@@ -192,7 +213,7 @@
               }
             }
             
-            selectValue(selectedValue)
+            addSelectedValue(selectedValue)
           }
         })
       }
@@ -208,6 +229,15 @@
       return integerValue
     }
     case "selection": {
+      if (isNotNullish(selectedValue?.setting)) {
+        return {
+          [selectedValue.id]: selectedValuesInputs[selectedValue.id].getValue(),
+        }
+      } else {
+        return selectedValue?.id
+      }
+    }
+    case "multiselect": {
       if (selectedValues.length > 0) {
         return selectedValues.map((value) => {
           if (isNotNullish(value.setting)) {
@@ -219,28 +249,37 @@
           }
         })
       } else {
-        return null
+        return undefined
       }
     }
     }
   }
   
-  let autocompleteTextField: Autocomplete
+  const isAutocomplete = (setting: Setting): setting is (BaseSetting & SelectionSetting) | (BaseSetting & MultiselectSetting) => {
+    return setting.type === "multiselect" || setting.type === "selection"
+  }
+  
+  let autocompleteTextField: AutocompleteTextField
   const selectedValuesInputs: Dictionary<any> = {} // Unfortunately I think this needs to be any because we can't reference our own type
   
-  let autocompleteValue: SelectionSettingValue | undefined = undefined // Not really used but required to prevent errors
-  let availableValues = setting.type === "selection" ? setting.values : []
+  let availableValues = isAutocomplete(setting) ? setting.values : []
+  let selectedValue: SelectionSettingValue | undefined = undefined
   let selectedValues: SelectionSettingValue[] = []
   let integerValue = setting.type === "integer" ? setting.preset ?? setting.default : 0
   
-  const handleAutocompleteSelection = (event: CustomEvent<SelectionSettingValue>) => {
-    event.preventDefault()
-    autocompleteTextField.text = ""
-    selectValue(event.detail)
+  const handleAutocompleteSelection = (event: CustomEvent<string>) => {
+    if (setting.type === "selection") {
+      selectedValue = availableValues.find((value) => { return value.id === event.detail })
+    } else if (setting.type === "multiselect") {
+      const value = availableValues.find((value) => { return value.id === event.detail })
+      if (isNotNullish(value)) {
+        addSelectedValue(value)
+      }
+    }
   }
   
-  const selectValue = (value: SelectionSettingValue) => {
-    if (setting.type !== "selection") { return }
+  const addSelectedValue = (value: SelectionSettingValue) => {
+    if (setting.type !== "multiselect") { return }
     if (isNotNullish(setting.maxSelections) && selectedValues.length >= setting.maxSelections) {
     // Show Error Message
     } else {
@@ -267,14 +306,6 @@
     availableValues.push(selectedValue)
     availableValues = availableValues.sort((a, b) => { return a.name > b.name ? 1 : -1 })
     selectedValues.splice(index, 1); selectedValues = selectedValues
-  }
-  
-  const getValueName = (value: SelectionSettingValue) => {
-    if (isNotNullish(value)) {
-      return value.name
-    } else {
-      return ""
-    }
   }
   
   $: integerValue, integerValueListener()

@@ -28,6 +28,7 @@
   import SettingsContainer from "@components/SettingsContainer.svelte"
   import { AdditionalOptions } from "@shared/gameData/additionalOptions"
   import { itemCategories } from "@shared/gameData/itemData"
+  import { pokemon } from "@shared/gameData/pokemonData"
   import { isNotNullish, reduceDictionaryInto } from "@shared/utils"
   import Button, { Label } from "@smui/button"
   import Paper, { Content, Subtitle, Title } from "@smui/paper"
@@ -45,7 +46,58 @@
     })
   })
   
+  const starters = [
+    {
+      id: "left",
+      title: "Left (Cyndaquil)",
+    },
+    {
+      id: "middle",
+      title: "Middle (Totodile)",
+    },
+    {
+      id: "right",
+      title: "Right (Chikorita)",
+    },
+  ]
+  
   const categories: Category[] = [
+    {
+      id: "pokemon",
+      title: "Pokémon",
+      subcategories: [
+        {
+          id: "starters",
+          title: "Starters",
+          layout: "row",
+          settings: starters.map((starter) => {
+            return {
+              type: "selection",
+              id: starter.id,
+              title: starter.title,
+              maxSelections: 1, // TODO: Need to change how the input renders a single selection when there can only be 1
+              values: [ // TODO: We need to set a default of VANILLA.
+                {
+                  id: "VANILLA", // TODO: Ignore this when sending the settings?
+                  name: "Vanilla",
+                },
+                {
+                  id: "RANDOM",
+                  name: "Random",
+                // TODO: need more than one sub setting for all the options: same stage, same type, similar stats, evolves twice
+                },
+                ...pokemon.map((pokemon) => {
+                  return {
+                    id: pokemon.id,
+                    name: pokemon.name,
+                  }
+                }),
+              ],
+            }
+          }),
+        },
+      ],
+    },
     {
       id: "items",
       title: "Items",
@@ -57,7 +109,7 @@
           layout: "row",
           settings: itemCategories.map((itemType) => {
             return {
-              type: "selection",
+              type: "multiselect",
               id: itemType.id,
               title: itemType.name,
               maxSelections: itemType.maxSlots,
@@ -85,7 +137,7 @@
       title: "Other",
       settings: [
         {
-          type: "selection",
+          type: "multiselect",
           id: "additionalOptions",
           title: "Additional Options",
           description: "Extra settings that are added to the in game options menu.",
