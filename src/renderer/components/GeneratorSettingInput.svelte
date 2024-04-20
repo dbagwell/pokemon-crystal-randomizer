@@ -158,9 +158,49 @@
   import Textfield from "@smui/textfield"
   import Tooltip, { Content, Title, Wrapper } from "@smui/tooltip"
   import Autocomplete from "@smui-extra/autocomplete"
-  import { isNotNullish } from "@utils"
+  import { isNotNullish, isNumber, isString } from "@utils"
   
   export let setting: Setting
+  
+  export const setValue = (value: any) => {
+    switch (setting.type) {
+    case "integer": {
+      if (isNumber(value) && Number.isInteger(value)) {
+        integerValue = value
+      }
+      break
+    }
+    case "selection": {
+      if (Array.isArray(value)) {
+        value.forEach((value) => {
+          const selectedValue = availableValues.find((availableValue) => {
+            if (isString(value)) {
+              return availableValue.id === value
+            } else if (Object.keys(value).length > 0) {
+              return availableValue.id === Object.keys(value)[0]
+            } else {
+              return false
+            }
+          })
+          
+          if (isNotNullish(selectedValue)) {
+            if (Object.keys(value).length > 0) {
+              const presetValue = Object.values(value)[0]
+                
+              if (isNotNullish(selectedValue.setting) && selectedValue.setting.type === "integer" && isNumber(presetValue) && Number.isInteger(presetValue)) {
+                selectedValue.setting.preset = presetValue
+              }
+            }
+            
+            selectValue(selectedValue)
+          }
+        })
+      }
+      
+      break
+    }
+    }
+  }
   
   export const getValue = (): any => {
     switch (setting.type) {
@@ -191,16 +231,20 @@
   let autocompleteValue: SelectionSettingValue | undefined = undefined // Not really used but required to prevent errors
   let availableValues = setting.type === "selection" ? setting.values : []
   let selectedValues: SelectionSettingValue[] = []
-  let integerValue = setting.type === "integer" ? setting.default : 0
+  let integerValue = setting.type === "integer" ? setting.preset ?? setting.default : 0
   
   const handleAutocompleteSelection = (event: CustomEvent<SelectionSettingValue>) => {
     event.preventDefault()
     autocompleteTextField.text = ""
+    selectValue(event.detail)
+  }
+  
+  const selectValue = (value: SelectionSettingValue) => {
     if (setting.type !== "selection") { return }
     if (isNotNullish(setting.maxSelections) && selectedValues.length >= setting.maxSelections) {
     // Show Error Message
     } else {
-      selectedValues.push(event.detail)
+      selectedValues.push(value)
       selectedValues = selectedValues
       
       if (isNotNullish(setting.values)) {
@@ -214,7 +258,13 @@
   }
   
   const removeSelectedValue = (index: number) => {
-    availableValues.push(selectedValues[index])
+    const selectedValue = selectedValues[index]
+    
+    if (isNotNullish(selectedValue.setting) && selectedValue.setting.type === "integer") {
+      selectedValue.setting.preset = undefined
+    }
+    
+    availableValues.push(selectedValue)
     availableValues = availableValues.sort((a, b) => { return a.name > b.name ? 1 : -1 })
     selectedValues.splice(index, 1); selectedValues = selectedValues
   }

@@ -26,12 +26,30 @@
 
 <script lang="ts">
   import GeneratorSettingInput from "@components/GeneratorSettingInput.svelte"
-  import { reduceDictionaryInto } from "@shared/utils"
+  import { isNotNullish, reduceDictionaryInto } from "@shared/utils"
   import Paper, { Content, Subtitle } from "@smui/paper"
   
   export let category: Category
   const inputs: Dictionary<GeneratorSettingInput> = {}
   const subcategoryContainers: Dictionary<any> = {}
+  
+  export const setSettings = (settings: any) => {
+    Object.entries(inputs).forEach(([settingId, input]) => {
+      const setting = settings[settingId]
+      
+      if (isNotNullish(setting)) {
+        input.setValue(setting)
+      }
+    })
+    
+    Object.entries(subcategoryContainers).forEach(([categoryId, container]) => {
+      const subSettings = settings[categoryId]
+      
+      if (isNotNullish(subSettings)) {
+        container.setSettings(subSettings)
+      }
+    })
+  }
   
   export const getValues = () => {
     const settings = reduceDictionaryInto(inputs, {}, (object, key, value) => {

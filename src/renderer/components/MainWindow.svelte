@@ -28,9 +28,22 @@
   import SettingsContainer from "@components/SettingsContainer.svelte"
   import { AdditionalOptions } from "@shared/gameData/additionalOptions"
   import { itemCategories } from "@shared/gameData/itemData"
-  import { reduceDictionaryInto } from "@shared/utils"
+  import { isNotNullish, reduceDictionaryInto } from "@shared/utils"
   import Button, { Label } from "@smui/button"
   import Paper, { Content, Subtitle, Title } from "@smui/paper"
+  import { onMount } from "svelte"
+  
+  export let initialSettings: any | undefined
+  
+  onMount(() => {
+    Object.entries(settingsContainers).forEach(([categoryId, container]) => {
+      const settings = initialSettings[categoryId]
+      
+      if (isNotNullish(settings)) {
+        container.setSettings(settings)
+      }
+    })
+  })
   
   const categories: Category[] = [
     {
@@ -54,7 +67,7 @@
                   name: item.name,
                   setting: itemType.slotSize < 2 ? undefined : {
                     type: "integer",
-                    id: "amount",
+                    id: item.id,
                     title: "Amount",
                     min: 0,
                     max: itemType.slotSize,
