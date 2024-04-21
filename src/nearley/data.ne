@@ -1,3 +1,5 @@
+@preprocessor esmodule
+
 @{%
 const expressionProcessor = (items) => {
   return { 

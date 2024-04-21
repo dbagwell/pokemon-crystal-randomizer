@@ -1,6 +1,5 @@
 // Generated automatically by nearley, version 2.20.1
 // http://github.com/Hardmath123/nearley
-(function () {
 function id(x) { return x[0]; }
 
 const expressionProcessor = (items) => {
@@ -17,9 +16,8 @@ const combineComponents = (items) => {
     ...[items[2]].flat(),
   ]
 }
-var grammar = {
-    Lexer: undefined,
-    ParserRules: [
+let Lexer = undefined;
+let ParserRules = [
     {"name": "tokens$ebnf$1", "symbols": []},
     {"name": "tokens$ebnf$1$subexpression$1", "symbols": ["__", "token"]},
     {"name": "tokens$ebnf$1", "symbols": ["tokens$ebnf$1", "tokens$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
@@ -164,12 +162,6 @@ var grammar = {
     {"name": "__$ebnf$1", "symbols": [{"literal":" "}]},
     {"name": "__$ebnf$1", "symbols": ["__$ebnf$1", {"literal":" "}], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "__", "symbols": ["__$ebnf$1"], "postprocess": (items) => { return null }}
-]
-  , ParserStart: "tokens"
-}
-if (typeof module !== 'undefined'&& typeof module.exports !== 'undefined') {
-   module.exports = grammar;
-} else {
-   window.grammar = grammar;
-}
-})();
+];
+let ParserStart = "tokens";
+export default { Lexer, ParserRules, ParserStart };
