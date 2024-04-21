@@ -1,9 +1,11 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
-import { AdditionalOptions } from "@shared/gameData/additionalOptions"
 import { itemCategories } from "@shared/gameData/itemData"
 import { allPokemon } from "@shared/gameData/pokemonData"
 import { baseStatTotal, maxNumberOfEvolutionStages, pokemonMap } from "@shared/gameData/pokemonDataHelpers"
+import { additionalOptionsMap } from "@shared/types/additionalOptions"
+import type { Pokemon } from "@shared/types/gameData"
+import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isNumber, isString } from "@utils"
 import crypto from "crypto"
 import { app } from "electron"
@@ -42,13 +44,13 @@ export const generateROM = (data: Buffer, settings: any): {
         "additionalOptions.yml",
         {
           options: compact([
-            additionalOptions.includes(AdditionalOptions.instantText) ? "options/textSpeedWithInstantText.yml" : "options/textSpeed.yml",
-            additionalOptions.includes(AdditionalOptions.holdToMash) ? "options/holdToMash.yml" : null,
+            additionalOptions.includes(additionalOptionsMap.INSTANT_TEXT.id) ? "options/textSpeedWithInstantText.yml" : "options/textSpeed.yml",
+            additionalOptions.includes(additionalOptionsMap.HOLD_TO_MASH.id) ? "options/holdToMash.yml" : null,
             "options/battleScene.yml",
             "options/battleShift.yml",
-            additionalOptions.includes(AdditionalOptions.nicknames) ? "options/nicknames.yml" : null,
+            additionalOptions.includes(additionalOptionsMap.NICKNAMES.id) ? "options/nicknames.yml" : null,
             "options/stereoSound.yml",
-            additionalOptions.includes(AdditionalOptions.rideMusic) ? "options/rideMusic.yml" : null,
+            additionalOptions.includes(additionalOptionsMap.RIDE_MUSIC.id) ? "options/rideMusic.yml" : null,
             "options/menuAccount.yml",
             "options/printTone.yml",
             "options/frameType.yml",

@@ -1,4 +1,6 @@
 import { allPokemon } from "@shared/gameData/pokemonData"
+import type { Pokemon } from "@shared/types/gameData"
+import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import { isNotNullish } from "@shared/utils"
 
 export const pokemonMap = allPokemon.reduce((map: Partial<Record<PokemonId, Pokemon>>, pokemon) => {

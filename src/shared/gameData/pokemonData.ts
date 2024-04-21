@@ -1,3 +1,5 @@
+import type { Pokemon } from "@shared/types/gameData"
+
 export const allPokemon: Pokemon[] = [
   {
     id: "BULBASAUR",

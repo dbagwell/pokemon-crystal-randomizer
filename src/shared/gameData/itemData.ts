@@ -1,3 +1,5 @@
+import type { ItemCategory } from "@shared/types/gameData"
+
 export const itemCategories: ItemCategory[] = [
   {
     id: "menuItems",

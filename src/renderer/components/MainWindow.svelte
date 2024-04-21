@@ -26,9 +26,9 @@
   import DialogContainer, { showErrorDialog, showSuccessDialog } from "@components/dialogs/DialogContainer.svelte"
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/ProgressIndicator.svelte"
   import SettingsContainer from "@components/SettingsContainer.svelte"
-  import { AdditionalOptions } from "@shared/gameData/additionalOptions"
   import { itemCategories } from "@shared/gameData/itemData"
   import { allPokemon } from "@shared/gameData/pokemonData"
+  import { additionalOptions } from "@shared/types/additionalOptions"
   import { isNotNullish, reduceDictionaryInto } from "@shared/utils"
   import Button, { Label } from "@smui/button"
   import Paper, { Content, Subtitle, Title } from "@smui/paper"
@@ -193,28 +193,7 @@
           id: "additionalOptions",
           title: "Additional Options",
           description: "Extra settings that are added to the in game options menu.",
-          values: [
-            {
-              id: AdditionalOptions.instantText,
-              name: "Instant Text",
-              description: "A new option for the text speed setting that makes all the text in a single text box appear immediately.",
-            },
-            {
-              id: AdditionalOptions.holdToMash,
-              name: "Hold To Mash",
-              description: "A toggle that allows holding down the A or B buttons to mash through text when enabled.",
-            },
-            {
-              id: AdditionalOptions.nicknames,
-              name: "Nicknames",
-              description: "A toggle that controls whether the game prompts to nickname newly captured/recieved Pokémon.",
-            },
-            {
-              id: AdditionalOptions.rideMusic,
-              name: "Ride Music",
-              description: "An option that controls whether the surf and/or bike music will play.",
-            },
-          ],
+          values: additionalOptions,
         },
       ],
     },
