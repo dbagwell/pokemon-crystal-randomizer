@@ -5,9 +5,11 @@ import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { baseStatTotal, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
+import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
 import type { ItemId } from "@shared/types/gameDataIds/items"
-import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
+import { type PokemonId } from "@shared/types/gameDataIds/pokemon"
+import { type StarterLocationId, starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isNumber, isString } from "@utils"
 import crypto from "crypto"
 import { app } from "electron"
@@ -66,32 +68,11 @@ export const generateROM = (data: Buffer, settings: any): {
   
   if (isNotNullish(settings.pokemon)) {
     if (isNotNullish(settings.pokemon.starters)) {
-      const starterLocations = [
-        "left",
-        "middle",
-        "right",
-      ] as const
-      
-      type StarterLocation = typeof starterLocations[number]
-      
-      const vanillaStarters: Record<StarterLocation, Pokemon> = {
-        left: pokemonMap.CYNDAQUIL,
-        middle: pokemonMap.TOTODILE,
-        right: pokemonMap.CHIKORITA,
-      }
-      
-      const assignedStarters: Partial<Record<StarterLocation, Pokemon>> = {}
+      const assignedStarters: Partial<Record<StarterLocationId, PokemonId>> = {}
       
       if (isNotNullish(settings.pokemon.starters.custom)) {
-        starterLocations.forEach((location) => {
-          const pokemonId = settings.pokemon.starters.custom[location]
-          if (isNotNullish(pokemonId)) {
-            if (isString(pokemonId) && Object.keys(pokemonMap).includes(pokemonId)) {
-              assignedStarters[location] = pokemonMap[pokemonId as PokemonId]
-            } else {
-              throw new Error(`Unexpected value for settings.pokemon.starters.custom.${location}`)
-            }
-          }
+        starterLocationIds.forEach((locationId) => {
+          assignedStarters[locationId] = settings.pokemon.starters.custom[locationId] // TODO: We'll validate this as part of an initial all settings validation step.
         })
       }
       
@@ -103,8 +84,8 @@ export const generateROM = (data: Buffer, settings: any): {
         }
         
         const isAssigned = (pokemon: Pokemon) => {
-          return isNotNullish(Object.values(assignedStarters).find((assignedStarter) => {
-            return isNotNullish(assignedStarter) && assignedStarter.id === pokemon.id
+          return isNotNullish(Object.values(assignedStarters).find((assignedStarterId) => {
+            return assignedStarterId === pokemon.id
           }))
         }
           
@@ -116,10 +97,12 @@ export const generateROM = (data: Buffer, settings: any): {
           }).includes(pokemon.id)
         }
         
-        starterLocations.filter((location) => {
-          return !(Object.keys(assignedStarters) as [StarterLocation]).includes(location)
-        }).forEach((starterLocation) => {
-          const vanillaStarter = vanillaStarters[starterLocation]
+        starterLocationIds.forEach((locationId) => {
+          if (isNotNullish(assignedStarters[locationId])) {
+            return
+          }
+          
+          const vanillaStarter = pokemonMap[starterLocationsMap[locationId].pokemonId]
         
           const matchesType = (pokemon: Pokemon) => {
             return pokemon.types.includes(vanillaStarter.types[0]) // Vanilla starters only have 1 type each
@@ -143,12 +126,12 @@ export const generateROM = (data: Buffer, settings: any): {
           })
           
           const index = randomInt(choices.length - 1)
-          assignedStarters[starterLocation] = choices[index]
+          assignedStarters[locationId] = choices[index].id
         })
       }
       
-      Object.entries(assignedStarters).forEach(([location, starter]) => {
-        if (isNullish(starter)) {
+      Object.entries(assignedStarters).forEach(([locationId, pokemonId]) => {
+        if (isNullish(pokemonId)) {
           return
         }
         
@@ -156,10 +139,10 @@ export const generateROM = (data: Buffer, settings: any): {
           ...hunks,
           ...Patch.fromYAML(
             romInfo,
-            `starters/${location}.yml`,
+            `starters/${locationId.toLowerCase()}.yml`,
             {},
             {
-              pokemonId: hexStringFrom(bytesFrom(starter.numericId, 1)),
+              pokemonId: hexStringFrom(bytesFrom(pokemonMap[pokemonId].numericId, 1)),
             },
           ).hunks,
         ]

@@ -30,6 +30,7 @@
   import { itemCategoriesMap } from "@shared/gameData/itemCategories"
   import { itemsGroupedByCategory } from "@shared/gameData/itemHeplers"
   import { pokemonMap } from "@shared/gameData/pokemon"
+  import { starterLocationsMap } from "@shared/gameData/starterLocations"
   import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
   import { isNotNullish, reduceDictionaryInto } from "@shared/utils"
   import Button, { Label } from "@smui/button"
@@ -47,21 +48,6 @@
       }
     })
   })
-  
-  const starters = [
-    {
-      id: "left",
-      title: "Left (Cyndaquil)",
-    },
-    {
-      id: "middle",
-      title: "Middle (Totodile)",
-    },
-    {
-      id: "right",
-      title: "Right (Chikorita)",
-    },
-  ]
   
   const categories: Category[] = [
     {
@@ -132,11 +118,11 @@
               id: "custom",
               title: "Custom Overrides",
               layout: "row",
-              settings: starters.map((starter) => {
+              settings: Object.values(starterLocationsMap).map((location) => {
                 return {
                   type: "selection",
-                  id: starter.id,
-                  title: starter.title,
+                  id: location.id,
+                  title: location.name,
                   values: [
                     ...Object.values(pokemonMap).map((pokemon) => {
                       return {
