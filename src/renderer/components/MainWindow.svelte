@@ -27,8 +27,10 @@
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/ProgressIndicator.svelte"
   import SettingsContainer from "@components/SettingsContainer.svelte"
   import { additionalOptionsMap } from "@shared/gameData/additionalOptions"
-  import { itemCategories } from "@shared/gameData/items"
+  import { itemCategoriesMap } from "@shared/gameData/itemCategories"
+  import { itemsGroupedByCategory } from "@shared/gameData/itemHeplers"
   import { pokemonMap } from "@shared/gameData/pokemon"
+  import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
   import { isNotNullish, reduceDictionaryInto } from "@shared/utils"
   import Button, { Label } from "@smui/button"
   import Paper, { Content, Subtitle, Title } from "@smui/paper"
@@ -159,22 +161,23 @@
           title: "Starting Inventory",
           description: "Items to start the game with.",
           layout: "row",
-          settings: itemCategories.map((itemType) => {
+          settings: Object.entries(itemsGroupedByCategory).map(([categoryId, items]) => {
+            const category = itemCategoriesMap[categoryId as ItemCategoryId]
             return {
               type: "multiselect",
-              id: itemType.id,
-              title: itemType.name,
-              maxSelections: itemType.maxSlots,
-              values: itemType.items.map((item) => {
+              id: categoryId,
+              title: category.name,
+              maxSelections: category.maxSlots,
+              values: items.map((item) => {
                 return {
                   id: item.id,
                   name: item.name,
-                  setting: itemType.slotSize < 2 ? undefined : {
+                  setting: category.slotSize < 2 ? undefined : {
                     type: "integer",
                     id: item.id,
                     title: "Amount",
                     min: 0,
-                    max: itemType.slotSize,
+                    max: category.slotSize,
                     default: 1,
                   },
                 }

@@ -1,17 +1,11 @@
+import type { ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
 import type { ItemId } from "@shared/types/gameDataIds/items"
 import type { ItemType } from "@shared/types/gameDataIds/itemTypes"
 
 export type Item = {
   id: ItemId,
   type: ItemType,
-  hexId: string, // TODO: Change This to a numeric id
+  category: ItemCategoryId,
+  numericId: number,
   name: string,
-}
-
-export type ItemCategory = {
-  id: string,
-  name: string,
-  slotSize: number,
-  maxSlots: number,
-  items: Item[],
 }

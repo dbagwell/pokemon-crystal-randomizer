@@ -1,10 +1,12 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { additionalOptionsMap } from "@shared/gameData/additionalOptions"
-import { itemCategories } from "@shared/gameData/items"
+import { itemCategoriesMap } from "@shared/gameData/itemCategories"
+import { itemsMap } from "@shared/gameData/items"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { baseStatTotal, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
+import type { ItemId } from "@shared/types/gameDataIds/items"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isNumber, isString } from "@utils"
 import crypto from "crypto"
@@ -176,14 +178,14 @@ export const generateROM = (data: Buffer, settings: any): {
       let kantoBadgesValue = 0
       const itemValues: {itemId: string, itemAmount: string}[] = []
       
-      itemCategories.forEach((itemType) => {
-        if (isNotNullish(startingInventory[itemType.id])) {
-          const selectedItems = startingInventory[itemType.id]
+      Object.values(itemCategoriesMap).forEach((category) => {
+        if (isNotNullish(startingInventory[category.id])) {
+          const selectedItems = startingInventory[category.id]
           
           if (!Array.isArray(selectedItems)) {
-            throw new Error(`'items.startingInventory.${itemType.id} must be an array.`)
-          } else if (selectedItems.length > itemType.maxSlots) {
-            throw new Error(`'items.startingInventory.${itemType.id}' cannot have more than ${itemType.maxSlots} entries.`)
+            throw new Error(`'items.startingInventory.${category.id} must be an array.`)
+          } else if (selectedItems.length > category.maxSlots) {
+            throw new Error(`'items.startingInventory.${category.id}' cannot have more than ${category.maxSlots} entries.`)
           }
           
           const mappedItems = selectedItems.reduce((items, selectedItemInfo) => {
@@ -201,39 +203,35 @@ export const generateROM = (data: Buffer, settings: any): {
           }, {})
           
           Object.entries(mappedItems).forEach(([itemId, amount]) => {
-            const item = itemType.items.find((item) => { return item.id === itemId })
-            if (isNotNullish(item)) {
-              if (!isNumber(amount) || !Number.isInteger(amount) || amount > itemType.slotSize) {
-                throw new Error(`Item amounts in 'items.startingInventory.${itemType.id}' cannot exceed ${itemType.slotSize}.`)
-              }
+            const item = itemsMap[itemId as ItemId]
+            if (!isNumber(amount) || !Number.isInteger(amount) || amount > category.slotSize) {
+              throw new Error(`Item amounts in 'items.startingInventory.${category.id}' cannot exceed ${category.slotSize}.`)
+            }
               
-              switch (item.type) {
-              case "POKEDEX_PART": {
-                pokedexPartsValue |= parseInt(item.hexId, 16)
-                break
-              }
-              case "POKEGEAR_PART": {
-                pokegearPartsValue |= parseInt(item.hexId, 16)
-                break
-              }
-              case "JOHTO_BADGE": {
-                johtoBadgesValue |= parseInt(item.hexId, 16)
-                break
-              }
-              case "KANTO_BADGE": {
-                kantoBadgesValue |= parseInt(item.hexId, 16)
-                break
-              }
-              case "BAG_ITEM": {
-                itemValues.push({
-                  itemId: item.hexId,
-                  itemAmount: `[2]{${amount}}`,
-                })
-                break
-              }
-              }
-            } else {
-              // TODO: Record warning.
+            switch (item.type) {
+            case "POKEDEX_PART": {
+              pokedexPartsValue |= item.numericId
+              break
+            }
+            case "POKEGEAR_PART": {
+              pokegearPartsValue |= item.numericId
+              break
+            }
+            case "JOHTO_BADGE": {
+              johtoBadgesValue |= item.numericId
+              break
+            }
+            case "KANTO_BADGE": {
+              kantoBadgesValue |= item.numericId
+              break
+            }
+            case "BAG_ITEM": {
+              itemValues.push({
+                itemId: hexStringFrom(bytesFrom(item.numericId, 1)),
+                itemAmount: `[2]{${amount}}`,
+              })
+              break
+            }
             }
           })
         }
