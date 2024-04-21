@@ -1,4 +1,4 @@
-import type { ItemCategory } from "@shared/types/gameData"
+import type { ItemCategory } from "@shared/types/gameData/item"
 
 export const itemCategories: ItemCategory[] = [
   {

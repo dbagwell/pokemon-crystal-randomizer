@@ -1,12 +1,7 @@
+import type { AdditionalOption } from "@shared/types/gameData/additionalOption"
 import type { AdditionalOptionId } from "@shared/types/gameDataIds/additionalOptions"
-
-export type AdditionalOption = {
-  id: AdditionalOptionId,
-  name: string,
-  description: string,
-}
     
-export const additionalOptionsMap: KeyMap<AdditionalOptionId, AdditionalOption> = {
+export const additionalOptionsMap: IdMap<AdditionalOptionId, AdditionalOption> = {
   INSTANT_TEXT: {
     id: "INSTANT_TEXT",
     name: "Instant Text",
@@ -28,5 +23,3 @@ export const additionalOptionsMap: KeyMap<AdditionalOptionId, AdditionalOption> 
     description: "An option that controls whether the surf and/or bike music will play.",
   },
 }
-
-export const additionalOptions = Object.values(additionalOptionsMap)

@@ -1,10 +1,10 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
-import { itemCategories } from "@shared/gameData/itemData"
-import { allPokemon } from "@shared/gameData/pokemonData"
-import { baseStatTotal, maxNumberOfEvolutionStages, pokemonMap } from "@shared/gameData/pokemonDataHelpers"
-import { additionalOptionsMap } from "@shared/types/additionalOptions"
-import type { Pokemon } from "@shared/types/gameData"
+import { additionalOptionsMap } from "@shared/gameData/additionalOptions"
+import { itemCategories } from "@shared/gameData/items"
+import { pokemonMap } from "@shared/gameData/pokemon"
+import { baseStatTotal, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
+import type { Pokemon } from "@shared/types/gameData/pokemon"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isNumber, isString } from "@utils"
 import crypto from "crypto"
@@ -107,7 +107,7 @@ export const generateROM = (data: Buffer, settings: any): {
         }
           
         const matchesStage = (pokemon: Pokemon) => {
-          return !allPokemon.flatMap((pokemon) => {
+          return !Object.values(pokemonMap).flatMap((pokemon) => {
             return pokemon.evolutions?.map((evolution) => {
               return evolution.pokemonId
             }) ?? []
@@ -131,7 +131,7 @@ export const generateROM = (data: Buffer, settings: any): {
             return Math.abs(baseStatTotal(pokemon) - baseStatTotal(vanillaStarter))
           }
           
-          const choices = allPokemon.filter((pokemon) => {
+          const choices = Object.values(pokemonMap).filter((pokemon) => {
             return !isBanned(pokemon)
               && (!options.preventDuplicates || !isAssigned(pokemon))
               && (!options.matchType || matchesType(pokemon))

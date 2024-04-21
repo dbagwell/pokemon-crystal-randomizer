@@ -1,7 +1,8 @@
-import type { Pokemon } from "@shared/types/gameData"
+import type { Pokemon } from "@shared/types/gameData/pokemon"
+import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 
-export const allPokemon: Pokemon[] = [
-  {
+export const pokemonMap: IdMap<PokemonId, Pokemon> = {
+  BULBASAUR: {
     id: "BULBASAUR",
     numericId: 1,
     name: "Bulbasaur",
@@ -116,7 +117,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  IVYSAUR: {
     id: "IVYSAUR",
     numericId: 2,
     name: "Ivysaur",
@@ -232,7 +233,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  VENUSAUR: {
     id: "VENUSAUR",
     numericId: 3,
     name: "Venusaur",
@@ -345,7 +346,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CHARMANDER: {
     id: "CHARMANDER",
     numericId: 4,
     name: "Charmander",
@@ -461,7 +462,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CHARMELEON: {
     id: "CHARMELEON",
     numericId: 5,
     name: "Charmeleon",
@@ -573,7 +574,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CHARIZARD: {
     id: "CHARIZARD",
     numericId: 6,
     name: "Charizard",
@@ -691,7 +692,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SQUIRTLE: {
     id: "SQUIRTLE",
     numericId: 7,
     name: "Squirtle",
@@ -812,7 +813,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  WARTORTLE: {
     id: "WARTORTLE",
     numericId: 8,
     name: "Wartortle",
@@ -933,7 +934,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  BLASTOISE: {
     id: "BLASTOISE",
     numericId: 9,
     name: "Blastoise",
@@ -1052,7 +1053,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CATERPIE: {
     id: "CATERPIE",
     numericId: 10,
     name: "Caterpie",
@@ -1097,7 +1098,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  METAPOD: {
     id: "METAPOD",
     numericId: 11,
     name: "Metapod",
@@ -1142,7 +1143,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  BUTTERFREE: {
     id: "BUTTERFREE",
     numericId: 12,
     name: "Butterfree",
@@ -1237,7 +1238,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  WEEDLE: {
     id: "WEEDLE",
     numericId: 13,
     name: "Weedle",
@@ -1283,7 +1284,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  KAKUNA: {
     id: "KAKUNA",
     numericId: 14,
     name: "Kakuna",
@@ -1329,7 +1330,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  BEEDRILL: {
     id: "BEEDRILL",
     numericId: 15,
     name: "Beedrill",
@@ -1415,7 +1416,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PIDGEY: {
     id: "PIDGEY",
     numericId: 16,
     name: "Pidgey",
@@ -1512,7 +1513,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PIDGEOTTO: {
     id: "PIDGEOTTO",
     numericId: 17,
     name: "Pidgeotto",
@@ -1612,7 +1613,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PIDGEOT: {
     id: "PIDGEOT",
     numericId: 18,
     name: "Pidgeot",
@@ -1708,7 +1709,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  RATTATA: {
     id: "RATTATA",
     numericId: 19,
     name: "Rattata",
@@ -1808,7 +1809,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  RATICATE: {
     id: "RATICATE",
     numericId: 20,
     name: "Raticate",
@@ -1900,7 +1901,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SPEAROW: {
     id: "SPEAROW",
     numericId: 21,
     name: "Spearow",
@@ -1999,7 +2000,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  FEAROW: {
     id: "FEAROW",
     numericId: 22,
     name: "Fearow",
@@ -2093,7 +2094,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  EKANS: {
     id: "EKANS",
     numericId: 23,
     name: "Ekans",
@@ -2193,7 +2194,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ARBOK: {
     id: "ARBOK",
     numericId: 24,
     name: "Arbok",
@@ -2286,7 +2287,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PIKACHU: {
     id: "PIKACHU",
     numericId: 25,
     name: "Pikachu",
@@ -2399,7 +2400,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  RAICHU: {
     id: "RAICHU",
     numericId: 26,
     name: "Raichu",
@@ -2477,7 +2478,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SANDSHREW: {
     id: "SANDSHREW",
     numericId: 27,
     name: "Sandshrew",
@@ -2585,7 +2586,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SANDSLASH: {
     id: "SANDSLASH",
     numericId: 28,
     name: "Sandslash",
@@ -2686,7 +2687,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  NIDORAN_F: {
     id: "NIDORAN_F",
     numericId: 29,
     name: "Nidoran♀︎",
@@ -2789,7 +2790,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  NIDORINA: {
     id: "NIDORINA",
     numericId: 30,
     name: "Nidorina",
@@ -2883,7 +2884,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  NIDOQUEEN: {
     id: "NIDOQUEEN",
     numericId: 31,
     name: "Nidoqueen",
@@ -2971,7 +2972,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  NIDORAN_M: {
     id: "NIDORAN_M",
     numericId: 32,
     name: "Nidoran♂︎",
@@ -3074,7 +3075,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  NIDORINO: {
     id: "NIDORINO",
     numericId: 33,
     name: "Nidorino",
@@ -3171,7 +3172,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  NIDOKING: {
     id: "NIDOKING",
     numericId: 34,
     name: "Nidoking",
@@ -3262,7 +3263,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CLEFAIRY: {
     id: "CLEFAIRY",
     numericId: 35,
     name: "Clefairy",
@@ -3381,7 +3382,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CLEFABLE: {
     id: "CLEFABLE",
     numericId: 36,
     name: "Clefable",
@@ -3468,7 +3469,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  VULPIX: {
     id: "VULPIX",
     numericId: 37,
     name: "Vulpix",
@@ -3566,7 +3567,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  NINETALES: {
     id: "NINETALES",
     numericId: 38,
     name: "Ninetales",
@@ -3638,7 +3639,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  JIGGLYPUFF: {
     id: "JIGGLYPUFF",
     numericId: 39,
     name: "Jigglypuff",
@@ -3749,7 +3750,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  WIGGLYTUFF: {
     id: "WIGGLYTUFF",
     numericId: 40,
     name: "Wigglytuff",
@@ -3832,7 +3833,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ZUBAT: {
     id: "ZUBAT",
     numericId: 41,
     name: "Zubat",
@@ -3925,7 +3926,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GOLBAT: {
     id: "GOLBAT",
     numericId: 42,
     name: "Golbat",
@@ -4019,7 +4020,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ODDISH: {
     id: "ODDISH",
     numericId: 43,
     name: "Oddish",
@@ -4117,7 +4118,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GLOOM: {
     id: "GLOOM",
     numericId: 44,
     name: "Gloom",
@@ -4224,7 +4225,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  VILEPLUME: {
     id: "VILEPLUME",
     numericId: 45,
     name: "Vileplume",
@@ -4292,7 +4293,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PARAS: {
     id: "PARAS",
     numericId: 46,
     name: "Paras",
@@ -4401,7 +4402,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PARASECT: {
     id: "PARASECT",
     numericId: 47,
     name: "Parasect",
@@ -4501,7 +4502,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  VENONAT: {
     id: "VENONAT",
     numericId: 48,
     name: "Venonat",
@@ -4610,7 +4611,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  VENOMOTH: {
     id: "VENOMOTH",
     numericId: 49,
     name: "Venomoth",
@@ -4716,7 +4717,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  DIGLETT: {
     id: "DIGLETT",
     numericId: 50,
     name: "Diglett",
@@ -4815,7 +4816,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  DUGTRIO: {
     id: "DUGTRIO",
     numericId: 51,
     name: "Dugtrio",
@@ -4911,7 +4912,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MEOWTH: {
     id: "MEOWTH",
     numericId: 52,
     name: "Meowth",
@@ -5015,7 +5016,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PERSIAN: {
     id: "PERSIAN",
     numericId: 53,
     name: "Persian",
@@ -5110,7 +5111,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PSYDUCK: {
     id: "PSYDUCK",
     numericId: 54,
     name: "Psyduck",
@@ -5222,7 +5223,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GOLDUCK: {
     id: "GOLDUCK",
     numericId: 55,
     name: "Golduck",
@@ -5330,7 +5331,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MANKEY: {
     id: "MANKEY",
     numericId: 56,
     name: "Mankey",
@@ -5447,7 +5448,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PRIMEAPE: {
     id: "PRIMEAPE",
     numericId: 57,
     name: "Primeape",
@@ -5560,7 +5561,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GROWLITHE: {
     id: "GROWLITHE",
     numericId: 58,
     name: "Growlithe",
@@ -5661,7 +5662,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ARCANINE: {
     id: "ARCANINE",
     numericId: 59,
     name: "Arcanine",
@@ -5735,7 +5736,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  POLIWAG: {
     id: "POLIWAG",
     numericId: 60,
     name: "Poliwag",
@@ -5836,7 +5837,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  POLIWHIRL: {
     id: "POLIWHIRL",
     numericId: 61,
     name: "Poliwhirl",
@@ -5953,7 +5954,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  POLIWRATH: {
     id: "POLIWRATH",
     numericId: 62,
     name: "Poliwrath",
@@ -6041,7 +6042,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ABRA: {
     id: "ABRA",
     numericId: 63,
     name: "Abra",
@@ -6118,7 +6119,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  KADABRA: {
     id: "KADABRA",
     numericId: 64,
     name: "Kadabra",
@@ -6226,7 +6227,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ALAKAZAM: {
     id: "ALAKAZAM",
     numericId: 65,
     name: "Alakazam",
@@ -6327,7 +6328,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MACHOP: {
     id: "MACHOP",
     numericId: 66,
     name: "Machop",
@@ -6440,7 +6441,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MACHOKE: {
     id: "MACHOKE",
     numericId: 67,
     name: "Machoke",
@@ -6550,7 +6551,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MACHAMP: {
     id: "MACHAMP",
     numericId: 68,
     name: "Machamp",
@@ -6653,7 +6654,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  BELLSPROUT: {
     id: "BELLSPROUT",
     numericId: 69,
     name: "Bellsprout",
@@ -6760,7 +6761,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  WEEPINBELL: {
     id: "WEEPINBELL",
     numericId: 70,
     name: "Weepinbell",
@@ -6868,7 +6869,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  VICTREEBEL: {
     id: "VICTREEBEL",
     numericId: 71,
     name: "Victreebel",
@@ -6936,7 +6937,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  TENTACOOL: {
     id: "TENTACOOL",
     numericId: 72,
     name: "Tentacool",
@@ -7040,7 +7041,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  TENTACRUEL: {
     id: "TENTACRUEL",
     numericId: 73,
     name: "Tentacruel",
@@ -7137,7 +7138,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GEODUDE: {
     id: "GEODUDE",
     numericId: 74,
     name: "Geodude",
@@ -7245,7 +7246,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GRAVELER: {
     id: "GRAVELER",
     numericId: 75,
     name: "Graveler",
@@ -7356,7 +7357,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GOLEM: {
     id: "GOLEM",
     numericId: 76,
     name: "Golem",
@@ -7467,7 +7468,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PONYTA: {
     id: "PONYTA",
     numericId: 77,
     name: "Ponyta",
@@ -7567,7 +7568,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  RAPIDASH: {
     id: "RAPIDASH",
     numericId: 78,
     name: "Rapidash",
@@ -7667,7 +7668,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SLOWPOKE: {
     id: "SLOWPOKE",
     numericId: 79,
     name: "Slowpoke",
@@ -7792,7 +7793,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SLOWBRO: {
     id: "SLOWBRO",
     numericId: 80,
     name: "Slowbro",
@@ -7913,7 +7914,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MAGNEMITE: {
     id: "MAGNEMITE",
     numericId: 81,
     name: "Magnemite",
@@ -8009,7 +8010,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MAGNETON: {
     id: "MAGNETON",
     numericId: 82,
     name: "Magneton",
@@ -8109,7 +8110,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  FARFETCH_D: {
     id: "FARFETCH_D",
     numericId: 83,
     name: "Farfetch'd",
@@ -8206,7 +8207,7 @@ export const allPokemon: Pokemon[] = [
       "FLAIL",
     ],
   },
-  {
+  DODUO: {
     id: "DODUO",
     numericId: 84,
     name: "Doduo",
@@ -8304,7 +8305,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  DODRIO: {
     id: "DODRIO",
     numericId: 85,
     name: "Dodrio",
@@ -8397,7 +8398,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SEEL: {
     id: "SEEL",
     numericId: 86,
     name: "Seel",
@@ -8493,7 +8494,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  DEWGONG: {
     id: "DEWGONG",
     numericId: 87,
     name: "Dewgong",
@@ -8582,7 +8583,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GRIMER: {
     id: "GRIMER",
     numericId: 88,
     name: "Grimer",
@@ -8688,7 +8689,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MUK: {
     id: "MUK",
     numericId: 89,
     name: "Muk",
@@ -8785,7 +8786,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SHELLDER: {
     id: "SHELLDER",
     numericId: 90,
     name: "Shellder",
@@ -8885,7 +8886,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CLOYSTER: {
     id: "CLOYSTER",
     numericId: 91,
     name: "Cloyster",
@@ -8963,7 +8964,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GASTLY: {
     id: "GASTLY",
     numericId: 92,
     name: "Gastly",
@@ -9067,7 +9068,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  HAUNTER: {
     id: "HAUNTER",
     numericId: 93,
     name: "Haunter",
@@ -9169,7 +9170,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GENGAR: {
     id: "GENGAR",
     numericId: 94,
     name: "Gengar",
@@ -9272,7 +9273,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ONIX: {
     id: "ONIX",
     numericId: 95,
     name: "Onix",
@@ -9371,7 +9372,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  DROWZEE: {
     id: "DROWZEE",
     numericId: 96,
     name: "Drowzee",
@@ -9482,7 +9483,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  HYPNO: {
     id: "HYPNO",
     numericId: 97,
     name: "Hypno",
@@ -9589,7 +9590,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  KRABBY: {
     id: "KRABBY",
     numericId: 98,
     name: "Krabby",
@@ -9691,7 +9692,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  KINGLER: {
     id: "KINGLER",
     numericId: 99,
     name: "Kingler",
@@ -9786,7 +9787,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  VOLTORB: {
     id: "VOLTORB",
     numericId: 100,
     name: "Voltorb",
@@ -9880,7 +9881,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ELECTRODE: {
     id: "ELECTRODE",
     numericId: 101,
     name: "Electrode",
@@ -9978,7 +9979,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  EXEGGCUTE: {
     id: "EXEGGCUTE",
     numericId: 102,
     name: "Exeggcute",
@@ -10086,7 +10087,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  EXEGGUTOR: {
     id: "EXEGGUTOR",
     numericId: 103,
     name: "Exeggutor",
@@ -10164,7 +10165,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CUBONE: {
     id: "CUBONE",
     numericId: 104,
     name: "Cubone",
@@ -10289,7 +10290,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MAROWAK: {
     id: "MAROWAK",
     numericId: 105,
     name: "Marowak",
@@ -10409,7 +10410,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  HITMONLEE: {
     id: "HITMONLEE",
     numericId: 106,
     name: "Hitmonlee",
@@ -10505,7 +10506,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  HITMONCHAN: {
     id: "HITMONCHAN",
     numericId: 107,
     name: "Hitmonchan",
@@ -10601,7 +10602,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  LICKITUNG: {
     id: "LICKITUNG",
     numericId: 108,
     name: "Lickitung",
@@ -10708,7 +10709,7 @@ export const allPokemon: Pokemon[] = [
       "BODY_SLAM",
     ],
   },
-  {
+  KOFFING: {
     id: "KOFFING",
     numericId: 109,
     name: "Koffing",
@@ -10809,7 +10810,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  WEEZING: {
     id: "WEEZING",
     numericId: 110,
     name: "Weezing",
@@ -10903,7 +10904,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  RHYHORN: {
     id: "RHYHORN",
     numericId: 111,
     name: "Rhyhorn",
@@ -11014,7 +11015,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  RHYDON: {
     id: "RHYDON",
     numericId: 112,
     name: "Rhydon",
@@ -11122,7 +11123,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CHANSEY: {
     id: "CHANSEY",
     numericId: 113,
     name: "Chansey",
@@ -11247,7 +11248,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  TANGELA: {
     id: "TANGELA",
     numericId: 114,
     name: "Tangela",
@@ -11348,7 +11349,7 @@ export const allPokemon: Pokemon[] = [
       "AMNESIA",
     ],
   },
-  {
+  KANGASKHAN: {
     id: "KANGASKHAN",
     numericId: 115,
     name: "Kangaskhan",
@@ -11458,7 +11459,7 @@ export const allPokemon: Pokemon[] = [
       "DISABLE",
     ],
   },
-  {
+  HORSEA: {
     id: "HORSEA",
     numericId: 116,
     name: "Horsea",
@@ -11558,7 +11559,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SEADRA: {
     id: "SEADRA",
     numericId: 117,
     name: "Seadra",
@@ -11663,7 +11664,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GOLDEEN: {
     id: "GOLDEEN",
     numericId: 118,
     name: "Goldeen",
@@ -11762,7 +11763,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SEAKING: {
     id: "SEAKING",
     numericId: 119,
     name: "Seaking",
@@ -11852,7 +11853,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  STARYU: {
     id: "STARYU",
     numericId: 120,
     name: "Staryu",
@@ -11959,7 +11960,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  STARMIE: {
     id: "STARMIE",
     numericId: 121,
     name: "Starmie",
@@ -12041,7 +12042,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MR_MIME: {
     id: "MR_MIME",
     numericId: 122,
     name: "Mr. Mime",
@@ -12153,7 +12154,7 @@ export const allPokemon: Pokemon[] = [
       "MIMIC",
     ],
   },
-  {
+  SCYTHER: {
     id: "SCYTHER",
     numericId: 123,
     name: "Scyther",
@@ -12264,7 +12265,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  JYNX: {
     id: "JYNX",
     numericId: 124,
     name: "Jynx",
@@ -12372,7 +12373,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ELECTABUZZ: {
     id: "ELECTABUZZ",
     numericId: 125,
     name: "Electabuzz",
@@ -12469,7 +12470,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MAGMAR: {
     id: "MAGMAR",
     numericId: 126,
     name: "Magmar",
@@ -12577,7 +12578,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PINSIR: {
     id: "PINSIR",
     numericId: 127,
     name: "Pinsir",
@@ -12664,7 +12665,7 @@ export const allPokemon: Pokemon[] = [
       "FLAIL",
     ],
   },
-  {
+  TAUROS: {
     id: "TAUROS",
     numericId: 128,
     name: "Tauros",
@@ -12756,7 +12757,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MAGIKARP: {
     id: "MAGIKARP",
     numericId: 129,
     name: "Magikarp",
@@ -12806,7 +12807,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GYARADOS: {
     id: "GYARADOS",
     numericId: 130,
     name: "Gyarados",
@@ -12899,7 +12900,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  LAPRAS: {
     id: "LAPRAS",
     numericId: 131,
     name: "Lapras",
@@ -13008,7 +13009,7 @@ export const allPokemon: Pokemon[] = [
       "FORESIGHT",
     ],
   },
-  {
+  DITTO: {
     id: "DITTO",
     numericId: 132,
     name: "Ditto",
@@ -13040,7 +13041,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  EEVEE: {
     id: "EEVEE",
     numericId: 133,
     name: "Eevee",
@@ -13161,7 +13162,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  VAPOREON: {
     id: "VAPOREON",
     numericId: 134,
     name: "Vaporeon",
@@ -13259,7 +13260,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  JOLTEON: {
     id: "JOLTEON",
     numericId: 135,
     name: "Jolteon",
@@ -13355,7 +13356,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  FLAREON: {
     id: "FLAREON",
     numericId: 136,
     name: "Flareon",
@@ -13449,7 +13450,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PORYGON: {
     id: "PORYGON",
     numericId: 137,
     name: "Porygon",
@@ -13555,7 +13556,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  OMANYTE: {
     id: "OMANYTE",
     numericId: 138,
     name: "Omanyte",
@@ -13658,7 +13659,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  OMASTAR: {
     id: "OMASTAR",
     numericId: 139,
     name: "Omastar",
@@ -13754,7 +13755,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  KABUTO: {
     id: "KABUTO",
     numericId: 140,
     name: "Kabuto",
@@ -13854,7 +13855,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  KABUTOPS: {
     id: "KABUTOPS",
     numericId: 141,
     name: "Kabutops",
@@ -13953,7 +13954,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  AERODACTYL: {
     id: "AERODACTYL",
     numericId: 142,
     name: "Aerodactyl",
@@ -14048,7 +14049,7 @@ export const allPokemon: Pokemon[] = [
       "FORESIGHT",
     ],
   },
-  {
+  SNORLAX: {
     id: "SNORLAX",
     numericId: 143,
     name: "Snorlax",
@@ -14161,7 +14162,7 @@ export const allPokemon: Pokemon[] = [
       "LICK",
     ],
   },
-  {
+  ARTICUNO: {
     id: "ARTICUNO",
     numericId: 144,
     name: "Articuno",
@@ -14247,7 +14248,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ZAPDOS: {
     id: "ZAPDOS",
     numericId: 145,
     name: "Zapdos",
@@ -14334,7 +14335,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MOLTRES: {
     id: "MOLTRES",
     numericId: 146,
     name: "Moltres",
@@ -14419,7 +14420,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  DRATINI: {
     id: "DRATINI",
     numericId: 147,
     name: "Dratini",
@@ -14533,7 +14534,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  DRAGONAIR: {
     id: "DRAGONAIR",
     numericId: 148,
     name: "Dragonair",
@@ -14649,7 +14650,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  DRAGONITE: {
     id: "DRAGONITE",
     numericId: 149,
     name: "Dragonite",
@@ -14775,7 +14776,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MEWTWO: {
     id: "MEWTWO",
     numericId: 150,
     name: "Mewtwo",
@@ -14887,7 +14888,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MEW: {
     id: "MEW",
     numericId: 151,
     name: "Mew",
@@ -14998,7 +14999,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CHIKORITA: {
     id: "CHIKORITA",
     numericId: 152,
     name: "Chikorita",
@@ -15109,7 +15110,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  BAYLEEF: {
     id: "BAYLEEF",
     numericId: 153,
     name: "Bayleef",
@@ -15223,7 +15224,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MEGANIUM: {
     id: "MEGANIUM",
     numericId: 154,
     name: "Meganium",
@@ -15330,7 +15331,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CYNDAQUIL: {
     id: "CYNDAQUIL",
     numericId: 155,
     name: "Cyndaquil",
@@ -15433,7 +15434,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  QUILAVA: {
     id: "QUILAVA",
     numericId: 156,
     name: "Quilava",
@@ -15536,7 +15537,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  TYPHLOSION: {
     id: "TYPHLOSION",
     numericId: 157,
     name: "Typhlosion",
@@ -15640,7 +15641,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  TOTODILE: {
     id: "TOTODILE",
     numericId: 158,
     name: "Totodile",
@@ -15750,7 +15751,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CROCONAW: {
     id: "CROCONAW",
     numericId: 159,
     name: "Croconaw",
@@ -15860,7 +15861,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  FERALIGATR: {
     id: "FERALIGATR",
     numericId: 160,
     name: "Feraligatr",
@@ -15967,7 +15968,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SENTRET: {
     id: "SENTRET",
     numericId: 161,
     name: "Sentret",
@@ -16075,7 +16076,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  FURRET: {
     id: "FURRET",
     numericId: 162,
     name: "Furret",
@@ -16178,7 +16179,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  HOOTHOOT: {
     id: "HOOTHOOT",
     numericId: 163,
     name: "Hoothoot",
@@ -16285,7 +16286,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  NOCTOWL: {
     id: "NOCTOWL",
     numericId: 164,
     name: "Noctowl",
@@ -16384,7 +16385,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  LEDYBA: {
     id: "LEDYBA",
     numericId: 165,
     name: "Ledyba",
@@ -16496,7 +16497,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  LEDIAN: {
     id: "LEDIAN",
     numericId: 166,
     name: "Ledian",
@@ -16599,7 +16600,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SPINARAK: {
     id: "SPINARAK",
     numericId: 167,
     name: "Spinarak",
@@ -16707,7 +16708,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ARIADOS: {
     id: "ARIADOS",
     numericId: 168,
     name: "Ariados",
@@ -16808,7 +16809,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CROBAT: {
     id: "CROBAT",
     numericId: 169,
     name: "Crobat",
@@ -16896,7 +16897,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CHINCHOU: {
     id: "CHINCHOU",
     numericId: 170,
     name: "Chinchou",
@@ -16997,7 +16998,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  LANTURN: {
     id: "LANTURN",
     numericId: 171,
     name: "Lanturn",
@@ -17089,7 +17090,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PICHU: {
     id: "PICHU",
     numericId: 172,
     name: "Pichu",
@@ -17178,7 +17179,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CLEFFA: {
     id: "CLEFFA",
     numericId: 173,
     name: "Cleffa",
@@ -17276,7 +17277,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  IGGLYBUFF: {
     id: "IGGLYBUFF",
     numericId: 174,
     name: "Igglybuff",
@@ -17367,7 +17368,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  TOGEPI: {
     id: "TOGEPI",
     numericId: 175,
     name: "Togepi",
@@ -17468,7 +17469,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  TOGETIC: {
     id: "TOGETIC",
     numericId: 176,
     name: "Togetic",
@@ -17561,7 +17562,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  NATU: {
     id: "NATU",
     numericId: 177,
     name: "Natu",
@@ -17660,7 +17661,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  XATU: {
     id: "XATU",
     numericId: 178,
     name: "Xatu",
@@ -17749,7 +17750,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MAREEP: {
     id: "MAREEP",
     numericId: 179,
     name: "Mareep",
@@ -17846,7 +17847,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  FLAAFFY: {
     id: "FLAAFFY",
     numericId: 180,
     name: "Flaaffy",
@@ -17944,7 +17945,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  AMPHAROS: {
     id: "AMPHAROS",
     numericId: 181,
     name: "Ampharos",
@@ -18042,7 +18043,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  BELLOSSOM: {
     id: "BELLOSSOM",
     numericId: 182,
     name: "Bellossom",
@@ -18112,7 +18113,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MARILL: {
     id: "MARILL",
     numericId: 183,
     name: "Marill",
@@ -18221,7 +18222,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  AZUMARILL: {
     id: "AZUMARILL",
     numericId: 184,
     name: "Azumarill",
@@ -18326,7 +18327,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SUDOWOODO: {
     id: "SUDOWOODO",
     numericId: 185,
     name: "Sudowoodo",
@@ -18417,7 +18418,7 @@ export const allPokemon: Pokemon[] = [
       "SELFDESTRUCT",
     ],
   },
-  {
+  POLITOED: {
     id: "POLITOED",
     numericId: 186,
     name: "Politoed",
@@ -18504,7 +18505,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  HOPPIP: {
     id: "HOPPIP",
     numericId: 187,
     name: "Hoppip",
@@ -18614,7 +18615,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SKIPLOOM: {
     id: "SKIPLOOM",
     numericId: 188,
     name: "Skiploom",
@@ -18727,7 +18728,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  JUMPLUFF: {
     id: "JUMPLUFF",
     numericId: 189,
     name: "Jumpluff",
@@ -18832,7 +18833,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  AIPOM: {
     id: "AIPOM",
     numericId: 190,
     name: "Aipom",
@@ -18938,7 +18939,7 @@ export const allPokemon: Pokemon[] = [
       "BEAT_UP",
     ],
   },
-  {
+  SUNKERN: {
     id: "SUNKERN",
     numericId: 191,
     name: "Sunkern",
@@ -19021,7 +19022,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SUNFLORA: {
     id: "SUNFLORA",
     numericId: 192,
     name: "Sunflora",
@@ -19100,7 +19101,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  YANMA: {
     id: "YANMA",
     numericId: 193,
     name: "Yanma",
@@ -19193,7 +19194,7 @@ export const allPokemon: Pokemon[] = [
       "LEECH_LIFE",
     ],
   },
-  {
+  WOOPER: {
     id: "WOOPER",
     numericId: 194,
     name: "Wooper",
@@ -19300,7 +19301,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  QUAGSIRE: {
     id: "QUAGSIRE",
     numericId: 195,
     name: "Quagsire",
@@ -19395,7 +19396,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ESPEON: {
     id: "ESPEON",
     numericId: 196,
     name: "Espeon",
@@ -19494,7 +19495,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  UMBREON: {
     id: "UMBREON",
     numericId: 197,
     name: "Umbreon",
@@ -19593,7 +19594,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MURKROW: {
     id: "MURKROW",
     numericId: 198,
     name: "Murkrow",
@@ -19681,7 +19682,7 @@ export const allPokemon: Pokemon[] = [
       "SKY_ATTACK",
     ],
   },
-  {
+  SLOWKING: {
     id: "SLOWKING",
     numericId: 199,
     name: "Slowking",
@@ -19791,7 +19792,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MISDREAVUS: {
     id: "MISDREAVUS",
     numericId: 200,
     name: "Misdreavus",
@@ -19886,7 +19887,7 @@ export const allPokemon: Pokemon[] = [
       "DESTINY_BOND",
     ],
   },
-  {
+  UNOWN: {
     id: "UNOWN",
     numericId: 201,
     name: "Unown",
@@ -19916,7 +19917,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  WOBBUFFET: {
     id: "WOBBUFFET",
     numericId: 202,
     name: "Wobbuffet",
@@ -19960,7 +19961,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GIRAFARIG: {
     id: "GIRAFARIG",
     numericId: 203,
     name: "Girafarig",
@@ -20067,7 +20068,7 @@ export const allPokemon: Pokemon[] = [
       "BEAT_UP",
     ],
   },
-  {
+  PINECO: {
     id: "PINECO",
     numericId: 204,
     name: "Pineco",
@@ -20170,7 +20171,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  FORRETRESS: {
     id: "FORRETRESS",
     numericId: 205,
     name: "Forretress",
@@ -20265,7 +20266,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  DUNSPARCE: {
     id: "DUNSPARCE",
     numericId: 206,
     name: "Dunsparce",
@@ -20360,7 +20361,7 @@ export const allPokemon: Pokemon[] = [
       "RAGE",
     ],
   },
-  {
+  GLIGAR: {
     id: "GLIGAR",
     numericId: 207,
     name: "Gligar",
@@ -20454,7 +20455,7 @@ export const allPokemon: Pokemon[] = [
       "COUNTER",
     ],
   },
-  {
+  STEELIX: {
     id: "STEELIX",
     numericId: 208,
     name: "Steelix",
@@ -20551,7 +20552,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SNUBBULL: {
     id: "SNUBBULL",
     numericId: 209,
     name: "Snubbull",
@@ -20668,7 +20669,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  GRANBULL: {
     id: "GRANBULL",
     numericId: 210,
     name: "Granbull",
@@ -20767,7 +20768,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  QWILFISH: {
     id: "QWILFISH",
     numericId: 211,
     name: "Qwilfish",
@@ -20864,7 +20865,7 @@ export const allPokemon: Pokemon[] = [
       "SUPERSONIC",
     ],
   },
-  {
+  SCIZOR: {
     id: "SCIZOR",
     numericId: 212,
     name: "Scizor",
@@ -20960,7 +20961,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SHUCKLE: {
     id: "SHUCKLE",
     numericId: 213,
     name: "Shuckle",
@@ -21049,7 +21050,7 @@ export const allPokemon: Pokemon[] = [
       "SWEET_SCENT",
     ],
   },
-  {
+  HERACROSS: {
     id: "HERACROSS",
     numericId: 214,
     name: "Heracross",
@@ -21143,7 +21144,7 @@ export const allPokemon: Pokemon[] = [
       "FLAIL",
     ],
   },
-  {
+  SNEASEL: {
     id: "SNEASEL",
     numericId: 215,
     name: "Sneasel",
@@ -21258,7 +21259,7 @@ export const allPokemon: Pokemon[] = [
       "BITE",
     ],
   },
-  {
+  TEDDIURSA: {
     id: "TEDDIURSA",
     numericId: 216,
     name: "Teddiursa",
@@ -21374,7 +21375,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  URSARING: {
     id: "URSARING",
     numericId: 217,
     name: "Ursaring",
@@ -21482,7 +21483,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SLUGMA: {
     id: "SLUGMA",
     numericId: 218,
     name: "Slugma",
@@ -21574,7 +21575,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MAGCARGO: {
     id: "MAGCARGO",
     numericId: 219,
     name: "Magcargo",
@@ -21667,7 +21668,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SWINUB: {
     id: "SWINUB",
     numericId: 220,
     name: "Swinub",
@@ -21766,7 +21767,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PILOSWINE: {
     id: "PILOSWINE",
     numericId: 221,
     name: "Piloswine",
@@ -21862,7 +21863,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CORSOLA: {
     id: "CORSOLA",
     numericId: 222,
     name: "Corsola",
@@ -21959,7 +21960,7 @@ export const allPokemon: Pokemon[] = [
       "AMNESIA",
     ],
   },
-  {
+  REMORAID: {
     id: "REMORAID",
     numericId: 223,
     name: "Remoraid",
@@ -22059,7 +22060,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  OCTILLERY: {
     id: "OCTILLERY",
     numericId: 224,
     name: "Octillery",
@@ -22147,7 +22148,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  DELIBIRD: {
     id: "DELIBIRD",
     numericId: 225,
     name: "Delibird",
@@ -22212,7 +22213,7 @@ export const allPokemon: Pokemon[] = [
       "RAPID_SPIN",
     ],
   },
-  {
+  MANTINE: {
     id: "MANTINE",
     numericId: 226,
     name: "Mantine",
@@ -22303,7 +22304,7 @@ export const allPokemon: Pokemon[] = [
       "SLAM",
     ],
   },
-  {
+  SKARMORY: {
     id: "SKARMORY",
     numericId: 227,
     name: "Skarmory",
@@ -22390,7 +22391,7 @@ export const allPokemon: Pokemon[] = [
       "SKY_ATTACK",
     ],
   },
-  {
+  HOUNDOUR: {
     id: "HOUNDOUR",
     numericId: 228,
     name: "Houndour",
@@ -22498,7 +22499,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  HOUNDOOM: {
     id: "HOUNDOOM",
     numericId: 229,
     name: "Houndoom",
@@ -22591,7 +22592,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  KINGDRA: {
     id: "KINGDRA",
     numericId: 230,
     name: "Kingdra",
@@ -22688,7 +22689,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PHANPY: {
     id: "PHANPY",
     numericId: 231,
     name: "Phanpy",
@@ -22788,7 +22789,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  DONPHAN: {
     id: "DONPHAN",
     numericId: 232,
     name: "Donphan",
@@ -22874,7 +22875,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PORYGON2: {
     id: "PORYGON2",
     numericId: 233,
     name: "Porygon2",
@@ -22972,7 +22973,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  STANTLER: {
     id: "STANTLER",
     numericId: 234,
     name: "Stantler",
@@ -23064,7 +23065,7 @@ export const allPokemon: Pokemon[] = [
       "BITE",
     ],
   },
-  {
+  SMEARGLE: {
     id: "SMEARGLE",
     numericId: 235,
     name: "Smeargle",
@@ -23132,7 +23133,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  TYROGUE: {
     id: "TYROGUE",
     numericId: 236,
     name: "Tyrogue",
@@ -23217,7 +23218,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  HITMONTOP: {
     id: "HITMONTOP",
     numericId: 237,
     name: "Hitmontop",
@@ -23305,7 +23306,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SMOOCHUM: {
     id: "SMOOCHUM",
     numericId: 238,
     name: "Smoochum",
@@ -23413,7 +23414,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ELEKID: {
     id: "ELEKID",
     numericId: 239,
     name: "Elekid",
@@ -23516,7 +23517,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MAGBY: {
     id: "MAGBY",
     numericId: 240,
     name: "Magby",
@@ -23622,7 +23623,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  MILTANK: {
     id: "MILTANK",
     numericId: 241,
     name: "Miltank",
@@ -23732,7 +23733,7 @@ export const allPokemon: Pokemon[] = [
       "SEISMIC_TOSS",
     ],
   },
-  {
+  BLISSEY: {
     id: "BLISSEY",
     numericId: 242,
     name: "Blissey",
@@ -23842,7 +23843,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  RAIKOU: {
     id: "RAIKOU",
     numericId: 243,
     name: "Raikou",
@@ -23936,7 +23937,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  ENTEI: {
     id: "ENTEI",
     numericId: 244,
     name: "Entei",
@@ -24030,7 +24031,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  SUICUNE: {
     id: "SUICUNE",
     numericId: 245,
     name: "Suicune",
@@ -24125,7 +24126,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  LARVITAR: {
     id: "LARVITAR",
     numericId: 246,
     name: "Larvitar",
@@ -24233,7 +24234,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  PUPITAR: {
     id: "PUPITAR",
     numericId: 247,
     name: "Pupitar",
@@ -24342,7 +24343,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  TYRANITAR: {
     id: "TYRANITAR",
     numericId: 248,
     name: "Tyranitar",
@@ -24456,7 +24457,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  LUGIA: {
     id: "LUGIA",
     numericId: 249,
     name: "Lugia",
@@ -24566,7 +24567,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  HO_OH: {
     id: "HO_OH",
     numericId: 250,
     name: "Ho-Oh",
@@ -24674,7 +24675,7 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-  {
+  CELEBI: {
     id: "CELEBI",
     numericId: 251,
     name: "Celebi",
@@ -24770,4 +24771,4 @@ export const allPokemon: Pokemon[] = [
       },
     ],
   },
-]
+}

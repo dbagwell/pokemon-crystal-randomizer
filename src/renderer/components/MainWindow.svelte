@@ -26,9 +26,9 @@
   import DialogContainer, { showErrorDialog, showSuccessDialog } from "@components/dialogs/DialogContainer.svelte"
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/ProgressIndicator.svelte"
   import SettingsContainer from "@components/SettingsContainer.svelte"
-  import { itemCategories } from "@shared/gameData/itemData"
-  import { allPokemon } from "@shared/gameData/pokemonData"
-  import { additionalOptions } from "@shared/types/additionalOptions"
+  import { additionalOptionsMap } from "@shared/gameData/additionalOptions"
+  import { itemCategories } from "@shared/gameData/items"
+  import { pokemonMap } from "@shared/gameData/pokemon"
   import { isNotNullish, reduceDictionaryInto } from "@shared/utils"
   import Button, { Label } from "@smui/button"
   import Paper, { Content, Subtitle, Title } from "@smui/paper"
@@ -115,7 +115,7 @@
                   type: "multiselect",
                   id: "ban",
                   title: "Ban",
-                  values: allPokemon.map((pokemon) => {
+                  values: Object.values(pokemonMap).map((pokemon) => {
                     return {
                       id: pokemon.id,
                       name: pokemon.name,
@@ -136,7 +136,7 @@
                   id: starter.id,
                   title: starter.title,
                   values: [
-                    ...allPokemon.map((pokemon) => {
+                    ...Object.values(pokemonMap).map((pokemon) => {
                       return {
                         id: pokemon.id,
                         name: pokemon.name,
@@ -193,7 +193,7 @@
           id: "additionalOptions",
           title: "Additional Options",
           description: "Extra settings that are added to the in game options menu.",
-          values: additionalOptions,
+          values: Object.values(additionalOptionsMap),
         },
       ],
     },
