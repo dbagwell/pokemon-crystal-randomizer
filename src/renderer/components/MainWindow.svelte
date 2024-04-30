@@ -2,13 +2,11 @@
   <Title>Pokémon Crystal Randomizer</Title>
   <Subtitle>Generate and apply patches to Pokémon Crystal Version.</Subtitle>
   <Content>
-    {#each categories as category}
-      <SettingsContainer
-        bind:this={settingsContainers[category.id]}
-        category={category}
-      />
-      <br>
-    {/each}
+    <Textfield
+      label="Seed"
+      bind:value={seed}
+    />
+    <FormSection config={config}/>
     <Button
       variant="raised"
       on:click={generateROMButtonClicked}
@@ -24,181 +22,30 @@
 
 <script lang="ts">
   import DialogContainer, { showErrorDialog, showSuccessDialog } from "@components/dialogs/DialogContainer.svelte"
+  import FormSection from "@components/formElements/FormSection.svelte"
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/ProgressIndicator.svelte"
-  import SettingsContainer from "@components/SettingsContainer.svelte"
-  import { additionalOptionsMap } from "@shared/gameData/additionalOptions"
-  import { itemCategoriesMap } from "@shared/gameData/itemCategories"
-  import { itemsGroupedByCategory } from "@shared/gameData/itemHeplers"
-  import { pokemonMap } from "@shared/gameData/pokemon"
-  import { starterLocationsMap } from "@shared/gameData/starterLocations"
-  import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
-  import { isNotNullish, reduceDictionaryInto } from "@shared/utils"
+  import { setConfigValuesFromSettings } from "@shared/appData/configHelpers"
+  import { defaultConfig } from "@shared/appData/defaultConfig"
   import Button, { Label } from "@smui/button"
   import Paper, { Content, Subtitle, Title } from "@smui/paper"
+  import Textfield from "@smui/textfield"
   import { onMount } from "svelte"
   
   export let initialSettings: any | undefined
   
+  let seed = ""
+  let config = defaultConfig()
+  
   onMount(() => {
-    Object.entries(settingsContainers).forEach(([categoryId, container]) => {
-      const settings = initialSettings[categoryId]
-      
-      if (isNotNullish(settings)) {
-        container.setSettings(settings)
-      }
-    })
+    // TODO: Catch errors and show warning dialog
+    setConfigValuesFromSettings("", config, initialSettings)
+    config = config
   })
   
-  const categories: Category[] = [
-    {
-      id: "pokemon",
-      title: "Pokémon",
-      subcategories: [
-        {
-          id: "starters",
-          title: "Starters",
-          layout: "row",
-          settings: [
-            {
-              type: "boolean",
-              id: "random",
-              title: "Random",
-              settings: [
-                {
-                  type: "boolean",
-                  id: "preventDuplicates",
-                  title: "Prevent Duplicates",
-                },
-                {
-                  type: "boolean",
-                  id: "matchType",
-                  title: "Match Type",
-                },
-                {
-                  type: "boolean",
-                  id: "matchStage",
-                  title: "Match Stage",
-                },
-                {
-                  type: "boolean",
-                  id: "matchEvolutions",
-                  title: "Match Evolutions",
-                },
-                {
-                  type: "boolean",
-                  id: "matchStatsThreshold",
-                  title: "Match Stats",
-                  settings: [
-                    {
-                      type: "integer",
-                      id: "threshold",
-                      title: "Threshold",
-                      min: 0,
-                      max: 371,
-                      default: 50,
-                    },
-                  ],
-                },
-                {
-                  type: "multiselect",
-                  id: "ban",
-                  title: "Ban",
-                  values: Object.values(pokemonMap).map((pokemon) => {
-                    return {
-                      id: pokemon.id,
-                      name: pokemon.name,
-                    }
-                  }),
-                },
-              ],
-            },
-          ],
-          subcategories: [
-            {
-              id: "custom",
-              title: "Custom Overrides",
-              layout: "row",
-              settings: Object.values(starterLocationsMap).map((location) => {
-                return {
-                  type: "selection",
-                  id: location.id,
-                  title: location.name,
-                  values: [
-                    ...Object.values(pokemonMap).map((pokemon) => {
-                      return {
-                        id: pokemon.id,
-                        name: pokemon.name,
-                      }
-                    }),
-                  ],
-                }
-              }),
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: "items",
-      title: "Items",
-      subcategories: [
-        {
-          id: "startingInventory",
-          title: "Starting Inventory",
-          description: "Items to start the game with.",
-          layout: "row",
-          settings: Object.entries(itemsGroupedByCategory).map(([categoryId, items]) => {
-            const category = itemCategoriesMap[categoryId as ItemCategoryId]
-            return {
-              type: "multiselect",
-              id: categoryId,
-              title: category.name,
-              maxSelections: category.maxSlots,
-              values: items.map((item) => {
-                return {
-                  id: item.id,
-                  name: item.name,
-                  setting: category.slotSize < 2 ? undefined : {
-                    type: "integer",
-                    id: item.id,
-                    title: "Amount",
-                    min: 0,
-                    max: category.slotSize,
-                    default: 1,
-                  },
-                }
-              }),
-            }
-          }),
-        },
-      ],
-    },
-    {
-      id: "other",
-      title: "Other",
-      settings: [
-        {
-          type: "multiselect",
-          id: "additionalOptions",
-          title: "Additional Options",
-          description: "Extra settings that are added to the in game options menu.",
-          values: Object.values(additionalOptionsMap),
-        },
-      ],
-    },
-  ]
-  
-  const settingsContainers: Dictionary<SettingsContainer> = {}
-  
   const generateROMButtonClicked = async () => {
-    const settings = reduceDictionaryInto(settingsContainers, {}, (object, key, value) => {
-      object[key] = value.getValues()
-    })
-    
     try {
       showProgressIndicator()
-      console.log(settings)
-      const response = await window.mainAPI.generateROM(settings)
+      const response = await window.mainAPI.generateROM(seed, config)
       showSuccessDialog(response.message)
     } catch (error) {
       showErrorDialog(error)

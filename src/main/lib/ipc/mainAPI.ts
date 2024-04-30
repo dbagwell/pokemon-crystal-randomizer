@@ -2,6 +2,8 @@ import { generateROM } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
 import { getPreviousSettings, setPreviousSettings } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
+import { getSettingsFromConfigs } from "@shared/appData/configHelpers"
+import type { Config } from "@shared/appData/defaultConfig"
 import { isNullish } from "@shared/utils"
 import { dialog } from "electron"
 import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
@@ -13,7 +15,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     return getPreviousSettings()
   }
   
-  readonly generateROM = async (settings: any): Promise<Response<void>> => {
+  readonly generateROM = async (seed: string | undefined, config: Config): Promise<Response<void>> => {
     try {
       const vanillaData = await getVanillaROM()
         
@@ -21,7 +23,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
         throw new Error("A Pokémon Crystal Version 1.1 ROM is required.")
       }
       
-      const generatorResult = generateROM(vanillaData, settings)
+      const generatorResult = generateROM(vanillaData, seed, config)
       
       const filePath = dialog.showSaveDialogSync({
         title: "Save Generated ROM to:",
@@ -46,7 +48,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
       
       fs.writeFileSync(filePath, generatorResult.data)
       
-      setPreviousSettings(settings)
+      setPreviousSettings(getSettingsFromConfigs(config.subElementConfigs))
       
       return {
         message: "ROM Generated!",

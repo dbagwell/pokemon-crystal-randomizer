@@ -30,6 +30,7 @@
   export let distribution: keyof typeof distributionMap
   export let minSpacing: number = 0
   export let padding: number | [number, number] | [number, number, number, number] = 0
+  export let wrap = false
   
   let container: HTMLDivElement
   
@@ -39,7 +40,7 @@
     container.style.alignItems = alignmentMap[alignment]
     container.style.justifyContent = distributionMap[distribution]
     container.style.gap = `${minSpacing}px`
-    container.style.flexWrap = "nowrap"
+    container.style.flexWrap = wrap ? "wrap" : "nowrap"
     container.style.padding = (isNumber(padding) ? [padding] : padding).map((value) => {
       return `${value}px`
     }).join(" ")
