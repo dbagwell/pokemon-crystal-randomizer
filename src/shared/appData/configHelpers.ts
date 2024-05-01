@@ -163,6 +163,10 @@ export const setConfigValuesFromSettings = (superConfigPath: string, configId: s
   case "IntegerInput": {
     if (!isNumber(settings[configId]) || !Number.isInteger(settings[configId])) {
       throwConfigTypeError(configPath, "integer", settings[configId])
+    } else if (isNotNullish(config.min) && settings[configId] < config.min) {
+      throw new Error(`Invalid value for '${configPath}. Value must be greater than ${config.min}.`)
+    } else if (isNotNullish(config.max) && settings[configId] > config.max) {
+      throw new Error(`Invalid value for '${configPath}. Value must be greater than ${config.max}.`)
     }
     
     config.value = settings[configId]
@@ -170,6 +174,7 @@ export const setConfigValuesFromSettings = (superConfigPath: string, configId: s
   }
   case "SelectorInput": {
     let settingsArray: any[] = []
+    let numberOfSelections = 0
     
     if (config.multiselect) {
       if (!Array.isArray(settings[configId])) {
@@ -200,6 +205,8 @@ export const setConfigValuesFromSettings = (superConfigPath: string, configId: s
         } else {
           config.value = option.id
         }
+        
+        numberOfSelections += 1
       } else {
         const entries = Object.entries(setting)
         
@@ -230,7 +237,13 @@ export const setConfigValuesFromSettings = (superConfigPath: string, configId: s
               setConfigValuesFromSettings(configPath, id, subConfig, selectedOptionSettings)
             })
           }
+          
+          numberOfSelections += 1
         })
+      }
+      
+      if (config.multiselect && isNotNullish(config.maxSelections) && config.maxSelections < numberOfSelections) {
+        throw new Error(`Too many values for '${configPath}. Must be less than or equal to ${config.maxSelections}.`)
       }
     })
     break

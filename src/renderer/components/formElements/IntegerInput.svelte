@@ -5,29 +5,35 @@
   type="number"
   bind:value={value}
   on:blur={textFieldBlurHandler}
+  on:focus={textFieldFocusHandler}
 />  <!-- TODO: Description -->
 <script lang="ts">
-  import { isNullish } from "@shared/utils"
+  import { showErrorDialog } from "@components/dialogs/DialogContainer.svelte"
+  import { isNotNullish } from "@shared/utils"
   import Textfield from "@smui/textfield"
   import { onMount } from "svelte"
   
   export let config: IntegerInputConfig
   
-  let value: string = ""
+  let oldValue: number = Number.NaN
+  let value: number = Number.NaN
   let hasMounted = false
+  let error: string | null = null
   
   onMount(() => {
-    value = `${config.value}`
+    value = config.value ?? Number.NaN
     hasMounted = true
   })
   
+  const textFieldFocusHandler = () => {
+    oldValue = value
+    error = null
+  }
+  
   const textFieldBlurHandler = () => {
-    if (isNullish(config.value)) {
-      if (value !== "") {
-      // TODO: Show error "Invalid value."
-      } else if (config.required) {
-      // TODO: Show error "Label is required."
-      }
+    if (isNotNullish(error)) {
+      value = oldValue
+      showErrorDialog(error)
     }
   }
   
@@ -37,23 +43,23 @@
       return
     }
     
-    if (!config.required && value === "") {
+    if (config.required && Number.isNaN(value)) {
+      error = `${config.label} is required.`
+    } else if (Number.isNaN(value)) {
       config.value = undefined
-    }
-    
-    const numberValue = parseInt(value)
-    
-    if (
-      Number.isInteger(numberValue)
-        && (isNullish(config.min) || numberValue >= config.min)
-        && (isNullish(config.max) || numberValue <= config.max)
-    ) {
-      config.value = numberValue
+    } else if (!Number.isInteger(value)) {
+      error = `${config.label} must be an integer.`
+    } else if (isNotNullish(config.min) && value < config.min) {
+      error = `${config.label} must be greater than or equal to ${config.min}.`
+    } else if (isNotNullish(config.max) && value > config.max) {
+      error = `${config.label} must be less than or equal to ${config.max}.`
+    } else {
+      config.value = value
     }
   }
   
   $: config.value, configValueListener()
   const configValueListener = () => {
-    value = `${config.value ?? ""}`
+    value = config.value ?? Number.NaN
   }
 </script>
