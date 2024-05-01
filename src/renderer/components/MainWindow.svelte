@@ -37,9 +37,13 @@
   let config = defaultConfig()
   
   onMount(() => {
-    // TODO: Catch errors and show warning dialog
-    setConfigValuesFromSettings("", config, initialSettings)
-    config = config
+    try {
+      const newConfig = defaultConfig()
+      setConfigValuesFromSettings("", "", newConfig, initialSettings)
+      config = newConfig
+    } catch (error) {
+      showErrorDialog(error)
+    }
   })
   
   const generateROMButtonClicked = async () => {

@@ -1,4 +1,5 @@
 export * from "@shared/utils/arrayUtils"
+export * from "@shared/utils/booleanUtils"
 export * from "@shared/utils/commonUtils"
 export * from "@shared/utils/dictionaryUtils"
 export * from "@shared/utils/numberUtils"

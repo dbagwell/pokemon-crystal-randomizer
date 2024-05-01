@@ -1,4 +1,4 @@
-import { isNotNullish, isNullish, isNumber, isString } from "@shared/utils"
+import { compact, isBoolean, isNotNullish, isNullish, isNumber, isString } from "@shared/utils"
 
 type Setting = { [key: string]: Setting } | (string | { [key: string]: Setting })[] | boolean | string | number | undefined
 
@@ -72,62 +72,113 @@ const getSettingsFromConfig = (configId: string, config: FormElementConfig): { [
   }
 }
 
-// TODO: Do more validation here
-export const setConfigValuesFromSettings = (configId: string, config: FormElementConfig, settings: any) => {
+const throwConfigTypeError = (path: string, expectedType: string, value: any) => {
+  throw new Error(`Invalid value for '${path}'. Expected ${expectedType} value but found ${typeof value} value '${value}'.`)
+}
+
+const knownKeysForConfig = (config: FormSectionConfig): string[] => {
+  return [
+    ...Object.keys(config.subElementConfigs),
+    ...Object.entries(config.subElementConfigs).reduce((result: string[], [key, subConfig]) => {
+      return compact([
+        ...result,
+        ...subConfig.type === "FormSection" && isNullish(subConfig.label) ? knownKeysForConfig(subConfig) : [],
+        subConfig.type === "FormSection" && subConfig.hasToggle ? `${key}_CONFIG` : undefined,
+      ])
+    }, []),
+  ]
+}
+
+export const setConfigValuesFromSettings = (superConfigPath: string, configId: string, config: FormElementConfig, settings: any) => {
+  if (isNullish(settings) || config.type !== "FormSection" && isNullish(settings[configId])) {
+    return
+  }
+  
+  let configPath = superConfigPath
+  
+  if (config.type !== "FormSection" || isNotNullish(config.label)) {
+    configPath = configPath === "" ? configId : `${configPath}.${configId}`
+  }
+  
   switch (config.type) {
   case "FormSection": {
+    const knownKeys = knownKeysForConfig(config)
+    
+    let unknownKey: string | undefined
+    
+    if (configId === "") {
+      unknownKey = Object.keys(settings).find((key) => {
+        return !knownKeys.includes(key)
+      })
+    } else if (isNotNullish(settings[configId])) {
+      unknownKey = Object.keys(settings[configId]).find((key) => {
+        return !knownKeys.includes(key)
+      })
+    }
+    
+    if (unknownKey) {
+      throw new Error(`Unknown value ${unknownKey}${configPath === "" ? "" : ` for ${configPath}`}.`)
+    }
+    
     let subConfigSettings = settings
-    if (isNotNullish(settings) && isNotNullish(config.label)) {
+    
+    if (isNotNullish(config.label)) {
       if (config.hasToggle) {
-        config.toggleValue = settings[configId]
+        if (isNotNullish(settings[configId])) {
+          if (!isBoolean(settings[configId])) {
+            throwConfigTypeError(configPath, "boolean", settings[configId])
+          }
+          
+          config.toggleValue = settings[configId]
+        }
+        
         subConfigSettings = settings[`${configId}_CONFIG`]
+        configPath += "_CONFIG"
       } else {
         subConfigSettings = settings[configId]
       }
     }
     
     Object.entries(config.subElementConfigs).forEach(([id, subConfig]) => {
-      setConfigValuesFromSettings(id, subConfig, subConfigSettings)
+      setConfigValuesFromSettings(configPath, id, subConfig, subConfigSettings)
     })
     break
   }
   case "ToggleInput": {
-    if (isNotNullish(settings) && settings[configId] === true) {
-      config.value = settings[configId]
-    } else {
-      config.value = undefined
+    if (!isBoolean(settings[configId])) {
+      throwConfigTypeError(configPath, "boolean", settings[configId])
     }
+    
+    config.value = settings[configId]
     break
   }
   case "TextInput": {
-    if (isNotNullish(settings) && isString(settings[configId])) {
-      config.value = settings[configId]
-    } else {
-      config.value = undefined
+    if (!isString(settings[configId])) {
+      throwConfigTypeError(configPath, "string", settings[configId])
     }
+    
+    config.value = settings[configId]
     break
   }
   case "IntegerInput": {
-    if (isNotNullish(settings) && isNumber(settings[configId]) && Number.isInteger(settings[configId])) {
-      config.value = settings[configId]
-    } else if (!config.required) {
-      config.value = undefined
+    if (!isNumber(settings[configId]) || !Number.isInteger(settings[configId])) {
+      throwConfigTypeError(configPath, "integer", settings[configId])
     }
+    
+    config.value = settings[configId]
     break
   }
   case "SelectorInput": {
     let settingsArray: any[] = []
-    const selectedOptionIds: string[] = []
-    const optionSettings: Record<string, any> = {}
     
-    if (isNotNullish(settings)) {
-      if (config.multiselect) {
-        if (Array.isArray(settings[configId])) {
-          settingsArray = settings[configId]
-        }
-      } else {
-        settingsArray = [settings[configId]]
+    if (config.multiselect) {
+      if (!Array.isArray(settings[configId])) {
+        throwConfigTypeError(configPath, "array", settings[configId])
       }
+      
+      settingsArray = settings[configId]
+    } else {
+      settingsArray = [settings[configId]]
     }
       
     settingsArray.forEach((setting: any) => {
@@ -136,35 +187,49 @@ export const setConfigValuesFromSettings = (configId: string, config: FormElemen
       }
       
       if (isString(setting)) {
-        selectedOptionIds.push(setting)
-      } else {
-        const entries = Object.entries(setting)
-        if (entries.length > 0) {
-          const settingTuple = entries[0]
-          selectedOptionIds.push(settingTuple[0])
-          optionSettings[settingTuple[0]] = settingTuple[1]
+        const option = config.options.find((option) => {
+          return option.id === setting
+        })
+        
+        if (isNullish(option)) {
+          throw new Error(`Unknown value '${setting}' for '${configPath}'.`)
         }
-      }
-    })
-    
-    if (config.multiselect) {
-      config.selectedOptionIds = []
-    } else {
-      config.value = undefined
-    }
-    
-    config.options.forEach((option) => {
-      if (selectedOptionIds.includes(option.id)) {
+        
         if (config.multiselect) {
           config.selectedOptionIds.push(option.id)
         } else {
           config.value = option.id
         }
-      }
-      
-      if (isNotNullish(option.subElementConfigs)) {
-        Object.entries(option.subElementConfigs).forEach(([id, subConfig]) => {
-          setConfigValuesFromSettings(id, subConfig, optionSettings[option.id] ?? {})
+      } else {
+        const entries = Object.entries(setting)
+        
+        if (!config.multiselect && entries.length > 1) {
+          throw new Error(`Only one selection is allowed for '${configPath}', found mulitple.`)
+        }
+        
+        entries.forEach((entry) => {
+          const selectedOptionId = entry[0]
+          const selectedOptionSettings = entry[1]
+          
+          const option = config.options.find((option) => {
+            return option.id === selectedOptionId
+          })
+          
+          if (isNullish(option)) {
+            throw new Error(`Unknown value '${selectedOptionId}' for '${configPath}'.`)
+          }
+        
+          if (config.multiselect) {
+            config.selectedOptionIds.push(option.id)
+          } else {
+            config.value = option.id
+          }
+          
+          if (isNotNullish(option.subElementConfigs)) {
+            Object.entries(option.subElementConfigs).forEach(([id, subConfig]) => {
+              setConfigValuesFromSettings(configPath, id, subConfig, selectedOptionSettings)
+            })
+          }
         })
       }
     })
