@@ -12,6 +12,43 @@
     style:align-items="center"
     style:gap="10px"
   >
+    {#if setting.type === "boolean"}
+      <Stack
+        alignment="start"
+        direction="vertical"
+        distribution="fill"
+      >
+        <div style:cursor="pointer">
+          <input
+            id={setting.id}
+            style:cursor="pointer"
+            type="checkbox"
+            bind:checked={booleanValue}
+          />
+          <label
+            style:cursor="pointer"
+            for={setting.id}
+          >
+            {setting.title}
+          </label>
+        </div>
+        {#if isNotNullish(setting.settings) && booleanValue}
+          <Stack
+            alignment="start"
+            direction="vertical"
+            distribution="fill"
+            padding={[0, 0, 0, 20]}
+          >
+            {#each setting.settings as subSetting (subSetting.id)}
+              <svelte:self
+                bind:this={subsettingInputs[subSetting.id]}
+                setting={subSetting}
+              />
+            {/each}
+          </Stack>
+        {/if}
+      </Stack>
+    {/if}
     {#if setting.type === "integer"}
       <Textfield
         style="min-width: 50px;"
@@ -38,7 +75,7 @@
             value: value,
           }
         })}
-        restoreOnBlur={setting.type === "selection"}
+        restoreOnBlur={false}
         on:select={handleAutocompleteSelection}
       />
     {/if}
@@ -162,15 +199,31 @@
 
 <script lang="ts">
   import AutocompleteTextField from "@components/AutocompleteTextField.svelte"
+  import Stack from "@components/Stack.svelte"
   import { Icon } from "@smui/common"
   import Textfield from "@smui/textfield"
   import Tooltip, { Content, Title, Wrapper } from "@smui/tooltip"
-  import { isNotNullish, isNumber, isString } from "@utils"
+  import { isNotNullish, isNumber, isString, reduceDictionaryInto } from "@utils"
+  import { onMount } from "svelte"
   
   export let setting: Setting
   
   export const setValue = (value: any) => {
     switch (setting.type) {
+    case "boolean": {
+      if (typeof value === "boolean") {
+        booleanValue = value
+      } else if (isNotNullish(value)) {
+        booleanValue = true
+        
+        if (isNotNullish(setting.settings)) {
+          setting.settings.forEach((setting) => {
+            setting.preset = value[setting.id]
+          })
+        }
+      }
+      break
+    }
     case "integer": {
       if (isNumber(value) && Number.isInteger(value)) {
         integerValue = value
@@ -225,6 +278,23 @@
   
   export const getValue = (): any => {
     switch (setting.type) {
+    case "boolean": {
+      if (isNotNullish(setting.settings) && setting.settings.length > 0) {
+        if (booleanValue) {
+          if (setting.settings.length > 1) {
+            return reduceDictionaryInto(subsettingInputs, {}, (result, key, value) => {
+              result[key] = value.getValue()
+            })
+          } else {
+            return subsettingInputs[setting.settings[0].id].getValue()
+          }
+        } else {
+          return undefined
+        }
+      } else {
+        return booleanValue
+      }
+    }
     case "integer": {
       return integerValue
     }
@@ -255,17 +325,25 @@
     }
   }
   
+  onMount(() => {
+    if (isNotNullish(setting.preset)) {
+      setValue(setting.preset)
+    }
+  })
+  
   const isAutocomplete = (setting: Setting): setting is (BaseSetting & SelectionSetting) | (BaseSetting & MultiselectSetting) => {
     return setting.type === "multiselect" || setting.type === "selection"
   }
   
   let autocompleteTextField: AutocompleteTextField
+  const subsettingInputs: Dictionary<any> = {} // Unfortunately I think this needs to be any because we can't reference our own type
   const selectedValuesInputs: Dictionary<any> = {} // Unfortunately I think this needs to be any because we can't reference our own type
   
   let availableValues = isAutocomplete(setting) ? setting.values : []
   let selectedValue: SelectionSettingValue | undefined = undefined
   let selectedValues: SelectionSettingValue[] = []
-  let integerValue = setting.type === "integer" ? setting.preset ?? setting.default : 0
+  let booleanValue = false
+  let integerValue = setting.type === "integer" ? setting.default : 0
   
   const handleAutocompleteSelection = (event: CustomEvent<string>) => {
     if (setting.type === "selection") {

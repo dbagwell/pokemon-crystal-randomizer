@@ -9,28 +9,33 @@ type Category = {
   layout?: CategoryLayout,
 }
 
-type Setting = BaseSetting & (IntegerSetting | SelectionSetting | MultiselectSetting)
+type Setting = BooleanSetting | IntegerSetting | SelectionSetting | MultiselectSetting
 
 type BaseSetting = {
   id: string,
   title: string,
   description?: string,
+  preset?: any,
 }
 
-type IntegerSetting = {
+type BooleanSetting = BaseSetting & {
+  type: "boolean",
+  settings?: Setting[],
+}
+
+type IntegerSetting = BaseSetting & {
   type: "integer",
   min: number,
   max: number,
   default: number,
-  preset?: number,
 }
 
-type SelectionSetting = {
+type SelectionSetting = BaseSetting & {
   type: "selection"
   values: SelectionSettingValue[],
 }
 
-type MultiselectSetting = {
+type MultiselectSetting = BaseSetting & {
   type: "multiselect"
   maxSelections?: number,
   values: SelectionSettingValue[],

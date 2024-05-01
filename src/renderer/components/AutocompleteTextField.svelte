@@ -97,17 +97,17 @@
     optionsContainer.style.display = "none"
   }
   
-  const selectOption = (option: Option) => {
+  const selectOption = (option: Option | undefined) => {
     optionsContainer.style.display = "none"
     if (clearOnSelect) {
       filter = ""
     } else {
-      filter = option.name
+      filter = option?.name ?? ""
     }
     
     previousSelection = option
     
-    dispath("select", option.id)
+    dispath("select", option?.id)
   }
   
   const updateOptionsLayout = async () => {
@@ -144,6 +144,8 @@
       
       if (restoreOnBlur && isNotNullish(previousSelection)) {
         selectOption(previousSelection)
+      } else {
+        selectOption(options.find((option) => { return option.keywords.toLowerCase() === filter.toLowerCase() }))
       }
     } else if (event.type === "keydown" && event instanceof KeyboardEvent) {
       if (event.key === "ArrowDown") {
@@ -205,12 +207,6 @@
     highlightedOptionIndex = 0
   }
   
-</script>
-
-<script
-  context="module"
-  lang="ts"
->
 </script>
 
 <style>
