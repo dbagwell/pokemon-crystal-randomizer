@@ -8,16 +8,7 @@ import { itemCategoryIds } from "@shared/types/gameDataIds/itemCategories"
 import type { ItemId } from "@shared/types/gameDataIds/items"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
-
-// TODO: Move this somewhere else.
-const mapToRecord = <Key extends string, Value>(keys: readonly Key[], valueForKey: (key: Key) => Value): Record<Key, Value> => {
-  return keys.reduce((result: Partial<Record<Key, Value>>, key) => {
-    return {
-      ...result,
-      [key]: valueForKey(key),
-    }
-  }, {}) as Record<Key, Value>
-}
+import { mapToRecord } from "@shared/utils"
 
 const pokemonOptions = Object.values(pokemonMap).map((pokemon) => {
   return {
