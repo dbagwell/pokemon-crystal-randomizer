@@ -165,8 +165,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, config
       case "BAG_ITEM": {
         bagItemValues.push({
           itemId: hexStringFrom(bytesFrom(item.numericId, 1)),
-          // TODO: Look into if we can reorganize item categories to avoid this unnecessary coalescing.
-          itemAmount: `[2]{${option.subElementConfigs?.AMOUNT.value ?? 0}}`, // If everything is correct, subElementConfigs should never be nullish here
+          itemAmount: `[2]{${option.subElementConfigs?.AMOUNT.value ?? 1}}`,
         })
         break
       }
@@ -187,10 +186,10 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, config
         }),
       },
       {
-        pokedexParts: hexStringFrom([pokedexPartsValue]),
-        pokegearParts: hexStringFrom([pokegearPartsValue]),
-        johtoBadges: hexStringFrom([johtoBadgesValue]),
-        kantoBadges: hexStringFrom([kantoBadgesValue]),
+        pokedexParts: hexStringFrom(bytesFrom(pokedexPartsValue, 1)),
+        pokegearParts: hexStringFrom(bytesFrom(pokegearPartsValue, 1)),
+        johtoBadges: hexStringFrom(bytesFrom(johtoBadgesValue, 1)),
+        kantoBadges: hexStringFrom(bytesFrom(kantoBadgesValue, 1)),
       }
     )
   
