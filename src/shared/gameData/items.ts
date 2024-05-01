@@ -27,14 +27,14 @@ export const itemsMap: IdMap<ItemId, Item> = {
     id: "MAP_CARD",
     type: "POKEGEAR_PART",
     category: "MENU_ITEMS",
-    numericId: 0x02,
+    numericId: 0x01,
     name: "Map Card",
   },
   RADIO_CARD: {
     id: "RADIO_CARD",
     type: "POKEGEAR_PART",
     category: "MENU_ITEMS",
-    numericId: 0x01,
+    numericId: 0x02,
     name: "Radio Card",
   },
   EXPN_CARD: {
