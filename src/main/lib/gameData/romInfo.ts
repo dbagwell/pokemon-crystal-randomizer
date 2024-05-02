@@ -143,8 +143,36 @@ export class ROMInfo {
         return 0x80 + character.charCodeAt(0) - 65
       } else if ("abcdefghijklmnopqrstuvwxyz".includes(character)) {
         return 0x80 + character.charCodeAt(0) - 97
+      } else if (character === "(") {
+        return 0x9A
+      } else if (character === ")") {
+        return 0x9B
+      } else if (character === ":") {
+        return 0x9C
+      } else if (character === ";") {
+        return 0x9D
+      } else if (character === "[") {
+        return 0x9E
+      } else if (character === "]") {
+        return 0x9F
+      } else if (character === "<") { // PK
+        return 0xE1
+      } else if (character === ">") { // MN
+        return 0xE2
+      } else if (character === "-") {
+        return 0xE3
+      } else if (character === "?") {
+        return 0xE6
+      } else if (character === "!") {
+        return 0xE7
       } else if (character === ".") {
         return 0xE8
+      } else if (character === "×") {
+        return 0xF1
+      } else if (character === "/") {
+        return 0xF3
+      } else if (character === ",") {
+        return 0xF4
       } else {
         return 0x7F // Treat unmapped characters as spaces.
       }
