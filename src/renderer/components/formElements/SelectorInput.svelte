@@ -17,7 +17,7 @@
         value: option.id,
       }
     })}
-    restoreOnBlur={false}
+    restoreOnBlur={!config.multiselect && isNotNullish(config.required) && config.required}
     on:select={handleAutocompleteSelection}
   />
   <!-- TODO: Description -->
@@ -74,6 +74,7 @@
   import Stack from "@components/layout/Stack.svelte"
   import { isNotNullish, isNullish } from "@shared/utils"
   import { Icon } from "@smui/common"
+  import { onMount } from "svelte"
   
   export let config: SelectorInputConfig
   
@@ -81,6 +82,10 @@
   let selectedOptions: SelectorInputOption[] = []
   
   let autocompleteTextField: AutocompleteTextField
+  
+  onMount(() => {
+    config = config
+  })
   
   const handleAutocompleteSelection = (event: CustomEvent) => {
     if (config.multiselect) {
@@ -129,10 +134,13 @@
       return
     }
     
+    const configValue = config.value
+    
     const option = config.options.find((option) => {
-      return option.id === config.value
+      return option.id === configValue
     })
     
     autocompleteTextField.filter = option?.label ?? ""
+    autocompleteTextField.previousSelection = option
   }
 </script>
