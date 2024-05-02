@@ -148,9 +148,9 @@ export const setConfigValuesFromSettings = (superConfigPath: string, configId: s
     if (!isNumber(settings[configId]) || !Number.isInteger(settings[configId])) {
       throwConfigTypeError(configPath, "integer", settings[configId])
     } else if (isNotNullish(config.min) && settings[configId] < config.min) {
-      throw new Error(`Invalid value for '${configPath}. Value must be greater than ${config.min}.`)
+      throw new Error(`Invalid value for '${configPath}. Value must be greater than or equal to ${config.min}.`)
     } else if (isNotNullish(config.max) && settings[configId] > config.max) {
-      throw new Error(`Invalid value for '${configPath}. Value must be greater than ${config.max}.`)
+      throw new Error(`Invalid value for '${configPath}. Value must be greater than or equal to ${config.max}.`)
     }
     
     config.value = settings[configId]
