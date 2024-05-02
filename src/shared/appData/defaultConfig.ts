@@ -1,11 +1,13 @@
 import { additionalOptionsMap } from "@shared/gameData/additionalOptions"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsGroupedByCategory } from "@shared/gameData/itemHeplers"
+import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import type { AdditionalOptionId } from "@shared/types/gameDataIds/additionalOptions"
 import { itemCategoryIds } from "@shared/types/gameDataIds/itemCategories"
 import type { ItemId } from "@shared/types/gameDataIds/items"
+import { type PlayerSpriteId, playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import { mapToRecord } from "@shared/utils"
@@ -156,6 +158,30 @@ export const defaultConfig = () => {
         type: "FormSection" as const,
         layout: "vertical" as const,
         subElementConfigs: {
+          SKIP_GENDER: {
+            label: "Skip Gender Selection",
+            description: "Skips the gender selection dialog when stating a new game.",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            hasToggle: true as const,
+            toggleValue: false,
+            subElementConfigs: {
+              PLAYER_SPRITE: {
+                label: "Player Sprite",
+                description: "Sets the player sprite to the selected value when starting a new game.",
+                type: "SelectorInput" as const,
+                options: playerSpriteIds.map((id) => {
+                  return {
+                    id: id,
+                    label: playerSpriteMap[id].label,
+                  }
+                }),
+                multiselect: false as const,
+                required: true as const,
+                value: playerSpriteMap.GIRL.id as PlayerSpriteId,
+              },
+            },
+          },
           ADDITIONAL_OPTIONS: {
             label: "Additional Options",
             description: "Extra settings that are added to the in game options menu.",
