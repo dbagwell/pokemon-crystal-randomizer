@@ -24,7 +24,13 @@ type TextInputConfig = {
   label: string,
   description?: string,
   value?: string,
-}
+  maxCharacters?: number,
+} & ({
+  required?: false,
+} | {
+  required: true,
+  value: string,
+})
 
 type IntegerInputConfig = {
   type: "IntegerInput"

@@ -8,7 +8,7 @@ type MappedConfig<T> = T extends { type: "FormSection", subElementConfigs: infer
   : T extends { type: "ToggleInput" }
     ? boolean
     : T extends { type: "TextInput" }
-      ? string | undefined
+      ? string | (T extends { required: true } ? never : undefined)
       : T extends { type: "IntegerInput" }
         ? number | (T extends { required: true } ? never : undefined)
         : T extends { type: "SelectorInput", options: (infer Option)[] }
@@ -135,6 +135,10 @@ export const setConfigValuesFromSettings = (superConfigPath: string, configId: s
   case "TextInput": {
     if (!isString(settings[configId])) {
       throwConfigTypeError(configPath, "string", settings[configId])
+    }
+    
+    if (isNotNullish(config.maxCharacters) && settings[configId].length > config.maxCharacters) {
+      throw new Error(`Invalid value for '${configPath}. Value must be less than or equal to ${config.maxCharacters} characters long.`)
     }
     
     config.value = settings[configId]
