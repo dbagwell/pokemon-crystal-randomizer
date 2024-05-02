@@ -236,6 +236,22 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     hunks = [...hunks, ...skipGenderPatch.hunks]
   }
   
+  // Skip Name
+  
+  if (otherSettings.SKIP_NAME) {
+    const nameBytes = ROMInfo.displayCharacterBytesFrom(otherSettings.SKIP_NAME.PLAYER_NAME)
+    const skipNamePatch = Patch.fromYAML(
+      romInfo,
+      "skipName.yml",
+      {},
+      {
+        name: hexStringFrom(nameBytes),
+      }
+    )
+  
+    hunks = [...hunks, ...skipNamePatch.hunks]
+  }
+  
   // Additional Options
   
   const selectedAdditionalOptionIds = otherSettings.ADDITIONAL_OPTIONS

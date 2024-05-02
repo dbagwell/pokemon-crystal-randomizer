@@ -1,0 +1,12 @@
+description: "Skips the name selection step when starting a new game and sets the player name to the provided value."
+changes:
+- description: "Skips the name question and jumps to setting the player name."
+  locations:
+  - bank: 1
+    address: 0x6035
+  value: "21 7D D4 36 50 CD CC 60 00"
+- description: "Changes the defualt player name."
+  locations:
+  - bank: 1
+    address: 0x60DE
+  value: "$name 50"
