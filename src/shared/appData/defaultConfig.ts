@@ -12,13 +12,14 @@ import { mapToRecord } from "@shared/utils"
 
 const pokemonOptions = Object.values(pokemonMap).map((pokemon) => {
   return {
-    id: pokemon.id,
+    id: pokemon.id as PokemonId,
     label: pokemon.name,
   }
 })
 
 export const defaultConfig = () => {
   return {
+    label: "Settings",
     type: "FormSection" as const,
     layout: "vertical" as const,
     subElementConfigs: {
@@ -43,7 +44,7 @@ export const defaultConfig = () => {
                     type: "SelectorInput" as const,
                     options: pokemonOptions,
                     multiselect: false as const,
-                    value: undefined,
+                    value: undefined as PokemonId | undefined,
                   }
                 }),
               },
@@ -174,5 +175,3 @@ export const defaultConfig = () => {
     },
   }
 }
-
-export type Config = ReturnType<typeof defaultConfig>

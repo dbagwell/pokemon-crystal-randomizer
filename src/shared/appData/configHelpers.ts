@@ -1,71 +1,79 @@
-import { compact, isBoolean, isNotNullish, isNullish, isNumber, isString } from "@shared/utils"
+import type { defaultConfig } from "@shared/appData/defaultConfig"
+import { isBoolean, isNotNullish, isNullish, isNumber, isString } from "@shared/utils"
 
-type Setting = { [key: string]: Setting } | (string | { [key: string]: Setting })[] | boolean | string | number | undefined
+export type Config = ReturnType<typeof defaultConfig>
 
-export const getSettingsFromConfigs = (configs: Dictionary<FormElementConfig>): { [key: string]: Setting } => {
-  return Object.entries(configs).reduce((result, [id, config]) => {
-    return {
-      ...result,
-      ...getSettingsFromConfig(id, config),
-    }
-  }, {})
+type MappedConfig<T> = T extends { type: "FormSection", subElementConfigs: infer SubConfigs }
+  ? { [K in keyof SubConfigs]: MappedConfig<SubConfigs[K]> } | (T extends { hasToggle: true } ? undefined : never)
+  : T extends { type: "ToggleInput" }
+    ? boolean
+    : T extends { type: "TextInput" }
+      ? string | undefined
+      : T extends { type: "IntegerInput" }
+        ? number | (T extends { required: true } ? never : undefined)
+        : T extends { type: "SelectorInput", options: (infer Option)[] }
+          ? T extends { multiselect: true, selectedOptionIds: (infer OptionId extends string)[] }
+            ? Option extends { id: OptionId, subElementConfigs?: infer OptionSubConfig }
+              ? ({ [I in OptionId]?: { [K in keyof OptionSubConfig]: MappedConfig<OptionSubConfig[K]> } } | OptionId)[]
+              : never
+            : T extends { value?: infer OptionId extends string }
+              ? Option extends { id: OptionId, subElementConfigs: infer OptionSubConfig }
+                ? { value: OptionId, config: { [K in keyof OptionSubConfig]: MappedConfig<OptionSubConfig[K]> } } | undefined
+                : OptionId | undefined
+              : never
+          : never
+
+export type Settings = MappedConfig<Config>
+
+export const getSettingsFromConfig = (config: Config): Settings => {
+  return mappedConfig(config)
 }
 
-const getSettingsFromConfig = (configId: string, config: FormElementConfig): { [key: string]: Setting } => {
+const mappedSubConfigs = <T extends Record<Key, FormElementConfig>, Key extends string>(configs: T): { [K in Key]: MappedConfig<T[K]> } => {
+  return (Object.keys(configs) as Key[]).reduce((result: { [K in Key]?: MappedConfig<T[K]> }, key) => {
+    const stuff = {
+      ...result,
+      [key]: mappedConfig(configs[key]),
+    }
+    return stuff
+  }, {}) as { [K in Key]: MappedConfig<T[K]> }
+}
+
+const mappedConfig = <T extends FormElementConfig>(config: T): MappedConfig<T> => {
   switch (config.type) {
   case "FormSection": {
-    if (isNotNullish(config.label)) {
-      if (config.hasToggle) {
-        return {
-          [configId]: config.toggleValue,
-          [`${configId}_CONFIG`]: config.toggleValue ? getSettingsFromConfigs(config.subElementConfigs) : undefined,
-        }
-      } else {
-        return {
-          [configId]: getSettingsFromConfigs(config.subElementConfigs),
-        }
-      }
-    } else {
-      return getSettingsFromConfigs(config.subElementConfigs)
-    }
+    return !config.hasToggle || config.toggleValue ? mappedSubConfigs(config.subElementConfigs) as MappedConfig<T> : undefined as MappedConfig<T>
   }
   case "ToggleInput":
   case "TextInput":
   case "IntegerInput": {
-    return {
-      [configId]: config.value,
-    }
+    return config.value as MappedConfig<T>
   }
   case "SelectorInput": {
     if (config.multiselect) {
-      const selectedValues = config.options.filter((option) => {
+      return config.options.filter((option) => {
         return config.selectedOptionIds.includes(option.id)
       }).map((option) => {
         if (isNotNullish(option.subElementConfigs)) {
           return {
-            [option.id]: getSettingsFromConfigs(option.subElementConfigs),
+            [option.id]: mappedSubConfigs(option.subElementConfigs),
           }
         } else {
           return option.id
         }
-      })
-      
-      return {
-        [configId]: selectedValues,
-      }
+      }, {}) as MappedConfig<T>
     } else {
       const selectedOption = config.options.find((option) => {
         return option.id === config.value
       })
-      
+        
       if (isNotNullish(selectedOption?.subElementConfigs)) {
         return {
-          [configId]: getSettingsFromConfigs(selectedOption.subElementConfigs),
-        }
+          value: selectedOption.id,
+          config: mappedSubConfigs(selectedOption.subElementConfigs),
+        } as unknown as MappedConfig<T>
       } else {
-        return {
-          [configId]: config.value,
-        }
+        return config.value as MappedConfig<T>
       }
     }
   }
@@ -74,19 +82,6 @@ const getSettingsFromConfig = (configId: string, config: FormElementConfig): { [
 
 const throwConfigTypeError = (path: string, expectedType: string, value: any) => {
   throw new Error(`Invalid value for '${path}'. Expected ${expectedType} value but found ${typeof value} value '${value}'.`)
-}
-
-const knownKeysForConfig = (config: FormSectionConfig): string[] => {
-  return [
-    ...Object.keys(config.subElementConfigs),
-    ...Object.entries(config.subElementConfigs).reduce((result: string[], [key, subConfig]) => {
-      return compact([
-        ...result,
-        ...subConfig.type === "FormSection" && isNullish(subConfig.label) ? knownKeysForConfig(subConfig) : [],
-        subConfig.type === "FormSection" && subConfig.hasToggle ? `${key}_CONFIG` : undefined,
-      ])
-    }, []),
-  ]
 }
 
 export const setConfigValuesFromSettings = (superConfigPath: string, configId: string, config: FormElementConfig, settings: any) => {
@@ -102,7 +97,7 @@ export const setConfigValuesFromSettings = (superConfigPath: string, configId: s
   
   switch (config.type) {
   case "FormSection": {
-    const knownKeys = knownKeysForConfig(config)
+    const knownKeys = Object.keys(config.subElementConfigs)
     
     let unknownKey: string | undefined
     
@@ -120,27 +115,12 @@ export const setConfigValuesFromSettings = (superConfigPath: string, configId: s
       throw new Error(`Unknown value ${unknownKey}${configPath === "" ? "" : ` for ${configPath}`}.`)
     }
     
-    let subConfigSettings = settings
-    
-    if (isNotNullish(config.label)) {
-      if (config.hasToggle) {
-        if (isNotNullish(settings[configId])) {
-          if (!isBoolean(settings[configId])) {
-            throwConfigTypeError(configPath, "boolean", settings[configId])
-          }
-          
-          config.toggleValue = settings[configId]
-        }
-        
-        subConfigSettings = settings[`${configId}_CONFIG`]
-        configPath += "_CONFIG"
-      } else {
-        subConfigSettings = settings[configId]
-      }
+    if (config.hasToggle) {
+      config.toggleValue = isNotNullish(settings[configId])
     }
     
     Object.entries(config.subElementConfigs).forEach(([id, subConfig]) => {
-      setConfigValuesFromSettings(configPath, id, subConfig, subConfigSettings)
+      setConfigValuesFromSettings(configPath, id, subConfig, settings[configId] ?? settings)
     })
     break
   }

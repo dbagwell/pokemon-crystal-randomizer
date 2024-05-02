@@ -1,6 +1,6 @@
 type FormSectionConfig = {
   type: "FormSection",
-  label?: string,
+  label: string,
   description?: string,
   layout: "vertical" | "horizontal",
   subElementConfigs: Dictionary<FormElementConfig>,
@@ -16,7 +16,7 @@ type ToggleInputConfig = {
   type: "ToggleInput",
   label: string,
   description?: string,
-  value?: boolean,
+  value: boolean,
 }
 
 type TextInputConfig = {

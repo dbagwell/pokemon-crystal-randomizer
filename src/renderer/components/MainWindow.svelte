@@ -24,7 +24,7 @@
   import DialogContainer, { showErrorDialog, showSuccessDialog } from "@components/dialogs/DialogContainer.svelte"
   import FormSection from "@components/formElements/FormSection.svelte"
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/ProgressIndicator.svelte"
-  import { setConfigValuesFromSettings } from "@shared/appData/configHelpers"
+  import { getSettingsFromConfig, setConfigValuesFromSettings } from "@shared/appData/configHelpers"
   import { defaultConfig } from "@shared/appData/defaultConfig"
   import Button, { Label } from "@smui/button"
   import Paper, { Content, Subtitle, Title } from "@smui/paper"
@@ -49,7 +49,7 @@
   const generateROMButtonClicked = async () => {
     try {
       showProgressIndicator()
-      const response = await window.mainAPI.generateROM(seed, config)
+      const response = await window.mainAPI.generateROM(seed, getSettingsFromConfig(config))
       showSuccessDialog(response.message)
     } catch (error) {
       showErrorDialog(error)

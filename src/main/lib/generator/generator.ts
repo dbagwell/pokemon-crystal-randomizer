@@ -1,21 +1,22 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
-import { type Config } from "@shared/appData/defaultConfig"
+import { type Settings } from "@shared/appData/configHelpers"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { baseStatTotal, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
+import type { ItemId } from "@shared/types/gameDataIds/items"
 import { type PokemonId } from "@shared/types/gameDataIds/pokemon"
 import { type StarterLocationId, starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
-import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish } from "@utils"
+import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isString } from "@utils"
 import crypto from "crypto"
 import { app } from "electron"
 import hash from "object-hash"
 import seedrandom from "seedrandom"
 
-export const generateROM = (data: Buffer, customSeed: string | undefined, config: Config): {
+export const generateROM = (data: Buffer, customSeed: string | undefined, settings: Settings): {
   seed: string,
   data: Buffer,
 } => {
@@ -30,27 +31,27 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, config
   
   // Pokemon
   
-  const pokemonConfigs = config.subElementConfigs.POKEMON.subElementConfigs
+  const pokemonSettings = settings.POKEMON
   
   // Starter Pokemon
   
-  const startersConfigs = pokemonConfigs.STARTERS.subElementConfigs
+  const startersSettings = pokemonSettings.STARTERS
   
   // Custom Starter Pokemon
   
-  const customStartersConfigs = startersConfigs.CUSTOM.subElementConfigs
+  const customStartersSettings = startersSettings.CUSTOM
   const assignedStarters: Partial<Record<StarterLocationId, PokemonId>> = {}
       
   starterLocationIds.forEach((locationId) => {
-    assignedStarters[locationId] = customStartersConfigs[locationId].value
+    assignedStarters[locationId] = customStartersSettings[locationId]
   })
   
   // Random Starter Pokemon
       
-  if (startersConfigs.RANDOM.toggleValue) {
-    const randomStartersConfigs = startersConfigs.RANDOM.subElementConfigs
+  if (startersSettings.RANDOM) {
+    const randomStartersSettings = startersSettings.RANDOM
     const isBanned = (pokemon: Pokemon) => {
-      return randomStartersConfigs.BAN.selectedOptionIds.includes(pokemon.id)
+      return randomStartersSettings.BAN.includes(pokemon.id)
     }
     
     const isAssigned = (pokemon: Pokemon) => {
@@ -88,11 +89,11 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, config
       
       const choices = Object.values(pokemonMap).filter((pokemon) => {
         return !isBanned(pokemon)
-          && (!randomStartersConfigs.UNIQUE.value || !isAssigned(pokemon))
-          && (!randomStartersConfigs.MATCH_TYPE.value || matchesType(pokemon))
-          && (!randomStartersConfigs.MATCH_STAGE.value || matchesStage(pokemon))
-          && (!randomStartersConfigs.MATCH_EVOLUTIONS.value || matchesEvoltions(pokemon))
-          && (!randomStartersConfigs.MATCH_SIMILAR_BST.toggleValue || baseStatDifference(pokemon) <= randomStartersConfigs.MATCH_SIMILAR_BST.subElementConfigs.THRESHOLD.value)
+          && (!randomStartersSettings.UNIQUE || !isAssigned(pokemon))
+          && (!randomStartersSettings.MATCH_TYPE || matchesType(pokemon))
+          && (!randomStartersSettings.MATCH_STAGE || matchesStage(pokemon))
+          && (!randomStartersSettings.MATCH_EVOLUTIONS || matchesEvoltions(pokemon))
+          && (!randomStartersSettings.MATCH_SIMILAR_BST || baseStatDifference(pokemon) <= randomStartersSettings.MATCH_SIMILAR_BST.THRESHOLD)
       })
       
       const index = randomInt(choices.length - 1)
@@ -120,12 +121,12 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, config
   
   // Items
   
-  const itemsConfigs = config.subElementConfigs.ITEMS.subElementConfigs
+  const itemsSettings = settings.ITEMS
   
   // Starting Inventory
   
-  const startingInventoryConfigs = itemsConfigs.STARTING_INVENTORY.subElementConfigs
-    
+  const startingInventorySettings = itemsSettings.STARTING_INVENTORY
+  
   let hasStartingInventory = false
   let pokedexPartsValue = 0
   let pokegearPartsValue = 0
@@ -134,16 +135,34 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, config
   const bagItemValues: {itemId: string, itemAmount: string}[] = []
     
   Object.values(itemCategoriesMap).forEach((category) => {
-    const categoryConfig = startingInventoryConfigs[category.id]
+    const itemCategorySettings = startingInventorySettings[category.id]
+    
+    const itemAmountMap = itemCategorySettings.reduce((result: Partial<Record<ItemId, number>>, setting) => {
+      let mappedSetting: Partial<Record<ItemId, number>>
       
-    categoryConfig.options.forEach((option) => {
-      if (!categoryConfig.selectedOptionIds.includes(option.id)) {
-        return
+      if (isString(setting)) {
+        mappedSetting = {
+          [setting]: 1,
+        }
+      } else {
+        mappedSetting = Object.entries(setting).reduce((result, [itemId, settings]) => {
+          return {
+            ...result,
+            [itemId]: settings.AMOUNT,
+          }
+        }, {})
       }
-        
+      
+      return {
+        ...result,
+        ...mappedSetting,
+      }
+    }, {})
+    
+    Object.entries(itemAmountMap).forEach(([itemId, amount]) => {
       hasStartingInventory = true
-        
-      const item = itemsMap[option.id]
+      
+      const item = itemsMap[itemId as ItemId]
           
       switch (item.type) {
       case "POKEDEX_PART": {
@@ -165,7 +184,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, config
       case "BAG_ITEM": {
         bagItemValues.push({
           itemId: hexStringFrom(bytesFrom(item.numericId, 1)),
-          itemAmount: `[2]{${option.subElementConfigs?.AMOUNT.value ?? 1}}`,
+          itemAmount: `[2]{${amount}}`,
         })
         break
       }
@@ -198,11 +217,11 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, config
   
   // Other
   
-  const otherConfigs = config.subElementConfigs.OTHER.subElementConfigs
+  const otherSettings = settings.OTHER
   
   // Additional Options
   
-  const selectedAdditionalOptionIds = otherConfigs.ADDITIONAL_OPTIONS.selectedOptionIds
+  const selectedAdditionalOptionIds = otherSettings.ADDITIONAL_OPTIONS
   
   if (selectedAdditionalOptionIds.length > 0) {
     const additionalOptionsPatch = Patch.fromYAML(
