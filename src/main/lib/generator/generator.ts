@@ -272,8 +272,8 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     "randomizerBase.yml",
     {},
     {
-      versionNumber: hexStringFrom(ROMInfo.displayCharacterBytesFrom(app.getVersion()), " "),
-      checkValue: hexStringFrom(ROMInfo.displayCharacterBytesFrom(checkValue), " "),
+      versionNumber: hexStringFrom(ROMInfo.displayCharacterBytesFrom(app.getVersion())),
+      checkValue: hexStringFrom(ROMInfo.displayCharacterBytesFrom(checkValue)),
     },
   )
       

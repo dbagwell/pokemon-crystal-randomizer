@@ -22,6 +22,6 @@ export const bytesFrom = (number: number, numberOfBytes: number, bigEndian: bool
   return Array.from(new Uint8Array(dataView.buffer.slice(offset, offset + numberOfBytes)))
 }
 
-export const hexStringFrom = (bytes: number[], separator: string = ""): string => {
+export const hexStringFrom = (bytes: number[], separator: string = " "): string => {
   return bytes.map((byte) => { return byte.toString(16).toUpperCase().padStart(2, "0") }).join(separator)
 }
