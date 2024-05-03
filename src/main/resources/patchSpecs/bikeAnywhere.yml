@@ -1,0 +1,12 @@
+description: "Allows the player to bike anywhere."
+changes:
+- description: "Skips the check to see if the player is allowed to get on the bike."
+  locations:
+  - bank: 3
+    address: 0x50BC
+  value: "00 00 00 00 00"
+- description: "Skips the check to see if the player is allowed to get on the bike."
+  locations:
+  - bank: 5
+    address: 0x553E
+  value: "C3 4C 55"
