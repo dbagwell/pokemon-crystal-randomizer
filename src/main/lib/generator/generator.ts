@@ -3,6 +3,7 @@ import { DataHunk, Patch } from "@lib/generator/patch"
 import { type Settings } from "@shared/appData/configHelpers"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
+import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { baseStatTotal, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
@@ -218,6 +219,22 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   // Other
   
   const otherSettings = settings.OTHER
+  
+  // Skip Gender
+  
+  if (otherSettings.SKIP_GENDER) {
+    const genderId = playerSpriteMap[otherSettings.SKIP_GENDER.PLAYER_SPRITE].numericId
+    const skipGenderPatch = Patch.fromYAML(
+      romInfo,
+      "skipGender.yml",
+      {},
+      {
+        genderId: hexStringFrom(bytesFrom(genderId, 1)),
+      }
+    )
+  
+    hunks = [...hunks, ...skipGenderPatch.hunks]
+  }
   
   // Additional Options
   

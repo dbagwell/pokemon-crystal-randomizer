@@ -75,6 +75,7 @@
   export let clearOnSelect: boolean
   export let restoreOnBlur: boolean
   export let filter = ""
+  export let previousSelection: Option | undefined = undefined
   
   let textField: Textfield
   let optionsContainer: HTMLElement
@@ -84,7 +85,6 @@
   
   let filteredOptions: Option[]
   let highlightedOptionIndex: number = 0
-  let previousSelection: Option | undefined
   
   const showOptions = () => {
     updateOptionsLayout()

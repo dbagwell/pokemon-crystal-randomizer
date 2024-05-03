@@ -19,7 +19,7 @@ type MappedConfig<T> = T extends { type: "FormSection", subElementConfigs: infer
             : T extends { value?: infer OptionId extends string }
               ? Option extends { id: OptionId, subElementConfigs: infer OptionSubConfig }
                 ? { value: OptionId, config: { [K in keyof OptionSubConfig]: MappedConfig<OptionSubConfig[K]> } } | undefined
-                : OptionId | undefined
+                : OptionId | (T extends { required: true } ? never : undefined)
               : never
           : never
 

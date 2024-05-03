@@ -52,10 +52,15 @@ type SelectorInputConfig = {
   label: string,
   description?: string,
   options: SelectorInputOption[],
-} & ({
+} & (({
   multiselect: false,
   value?: string,
-} | ({
+} & ({
+  required?: false,
+} | {
+  required: true,
+  value: string,
+})) | ({
   multiselect: true,
   maxSelections?: number,
   selectedOptionIds: string[],
