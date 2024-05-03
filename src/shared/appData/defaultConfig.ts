@@ -194,8 +194,8 @@ export const defaultConfig = () => {
                 label: "Player Name",
                 description: "Sets the player name to the provided value when starting a new game. Max of 7 characters. Supported special characters include ():;[]<>-?!.×/, where < and > map to PK and MN respectively.",
                 type: "TextInput" as const,
-                required: true as const, // TODO: We need to support this
-                maxCharacters: 7, // TODO: We need to support this
+                required: true as const,
+                maxCharacters: 7,
                 value: "KRIS",
               },
             },
