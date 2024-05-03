@@ -8,7 +8,7 @@ type MappedConfig<T> = T extends { type: "FormSection", subElementConfigs: infer
   : T extends { type: "ToggleInput" }
     ? boolean
     : T extends { type: "TextInput" }
-      ? string | undefined
+      ? string | (T extends { required: true } ? never : undefined)
       : T extends { type: "IntegerInput" }
         ? number | (T extends { required: true } ? never : undefined)
         : T extends { type: "SelectorInput", options: (infer Option)[] }
@@ -137,6 +137,10 @@ export const setConfigValuesFromSettings = (superConfigPath: string, configId: s
       throwConfigTypeError(configPath, "string", settings[configId])
     }
     
+    if (isNotNullish(config.maxCharacters) && settings[configId].length > config.maxCharacters) {
+      throw new Error(`Invalid value for '${configPath}. Value must be less than or equal to ${config.maxCharacters} characters long.`)
+    }
+    
     config.value = settings[configId]
     break
   }
@@ -144,9 +148,9 @@ export const setConfigValuesFromSettings = (superConfigPath: string, configId: s
     if (!isNumber(settings[configId]) || !Number.isInteger(settings[configId])) {
       throwConfigTypeError(configPath, "integer", settings[configId])
     } else if (isNotNullish(config.min) && settings[configId] < config.min) {
-      throw new Error(`Invalid value for '${configPath}. Value must be greater than ${config.min}.`)
+      throw new Error(`Invalid value for '${configPath}. Value must be greater than or equal to ${config.min}.`)
     } else if (isNotNullish(config.max) && settings[configId] > config.max) {
-      throw new Error(`Invalid value for '${configPath}. Value must be greater than ${config.max}.`)
+      throw new Error(`Invalid value for '${configPath}. Value must be greater than or equal to ${config.max}.`)
     }
     
     config.value = settings[configId]
