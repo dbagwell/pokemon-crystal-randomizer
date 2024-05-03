@@ -1,3 +1,7 @@
+import type { MoveEffectId } from "@shared/types/gameDataIds/moveEffects"
+import type { MoveId } from "@shared/types/gameDataIds/moves"
+import type { PokemonTypeId } from "@shared/types/gameDataIds/pokemonTypes"
+
 export type Move = {
   id: MoveId,
   hexId: string,

@@ -1,264 +1,252 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
-import { AdditionalOptions } from "@shared/gameData/additionalOptions"
-import { itemCategories } from "@shared/gameData/itemData"
-import { allPokemon } from "@shared/gameData/pokemonData"
-import { baseStatTotal, maxNumberOfEvolutionStages, pokemonMap } from "@shared/gameData/pokemonDataHelpers"
-import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isNumber, isString } from "@utils"
+import { type Settings } from "@shared/appData/configHelpers"
+import { itemCategoriesMap } from "@shared/gameData/itemCategories"
+import { itemsMap } from "@shared/gameData/items"
+import { pokemonMap } from "@shared/gameData/pokemon"
+import { baseStatTotal, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
+import { starterLocationsMap } from "@shared/gameData/starterLocations"
+import type { Pokemon } from "@shared/types/gameData/pokemon"
+import type { ItemId } from "@shared/types/gameDataIds/items"
+import { type PokemonId } from "@shared/types/gameDataIds/pokemon"
+import { type StarterLocationId, starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
+import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isString } from "@utils"
 import crypto from "crypto"
 import { app } from "electron"
 import hash from "object-hash"
 import seedrandom from "seedrandom"
 
-export const generateROM = (data: Buffer, settings: any): {
+export const generateROM = (data: Buffer, customSeed: string | undefined, settings: Settings): {
   seed: string,
   data: Buffer,
 } => {
   const romInfo = ROMInfo.vanilla()
   
   let hunks: DataHunk[] = []
-  const seed = isString(settings.seed) ? settings.seed : crypto.randomUUID()
+  const seed = customSeed ?? crypto.randomUUID()
   const rng = seedrandom(seed)
   const randomInt = (max: number): number => {
     return Math.floor(rng() * max)
   }
   
-  // TODO: Iterator over object entries instead and switch over known keys
-  if (isNotNullish(settings.other)) {
-    const other = settings.other
+  // Pokemon
+  
+  const pokemonSettings = settings.POKEMON
+  
+  // Starter Pokemon
+  
+  const startersSettings = pokemonSettings.STARTERS
+  
+  // Custom Starter Pokemon
+  
+  const customStartersSettings = startersSettings.CUSTOM
+  const assignedStarters: Partial<Record<StarterLocationId, PokemonId>> = {}
+      
+  starterLocationIds.forEach((locationId) => {
+    assignedStarters[locationId] = customStartersSettings[locationId]
+  })
+  
+  // Random Starter Pokemon
+      
+  if (startersSettings.RANDOM) {
+    const randomStartersSettings = startersSettings.RANDOM
+    const isBanned = (pokemon: Pokemon) => {
+      return randomStartersSettings.BAN.includes(pokemon.id)
+    }
     
-    if (isNotNullish(other.additionalOptions)) {
-      const additionalOptions = other.additionalOptions
-      
-      if (!Array.isArray(additionalOptions)) {
-        throw new Error("'other.additionalOptions' must be an array.")
-      }
-      
-      // TODO: Record warnings if array contains values that don't match expected values.
-      // TODO: Pull additional options values from shared to ensure the ui sends the same values.
-      
-      const additionalOptionsPatch = Patch.fromYAML(
-        romInfo,
-        "additionalOptions.yml",
-        {
-          options: compact([
-            additionalOptions.includes(AdditionalOptions.instantText) ? "options/textSpeedWithInstantText.yml" : "options/textSpeed.yml",
-            additionalOptions.includes(AdditionalOptions.holdToMash) ? "options/holdToMash.yml" : null,
-            "options/battleScene.yml",
-            "options/battleShift.yml",
-            additionalOptions.includes(AdditionalOptions.nicknames) ? "options/nicknames.yml" : null,
-            "options/stereoSound.yml",
-            additionalOptions.includes(AdditionalOptions.rideMusic) ? "options/rideMusic.yml" : null,
-            "options/menuAccount.yml",
-            "options/printTone.yml",
-            "options/frameType.yml",
-          ]),
-        },
-      )
-      
-      hunks = [...hunks, ...additionalOptionsPatch.hunks]
+    const isAssigned = (pokemon: Pokemon) => {
+      return isNotNullish(Object.values(assignedStarters).find((assignedStarterId) => {
+        return assignedStarterId === pokemon.id
+      }))
     }
-  }
-  
-  if (isNotNullish(settings.pokemon)) {
-    if (isNotNullish(settings.pokemon.starters)) {
-      const starterLocations = [
-        "left",
-        "middle",
-        "right",
-      ] as const
       
-      type StarterLocation = typeof starterLocations[number]
-      
-      const vanillaStarters: Record<StarterLocation, Pokemon> = {
-        left: pokemonMap.CYNDAQUIL,
-        middle: pokemonMap.TOTODILE,
-        right: pokemonMap.CHIKORITA,
-      }
-      
-      const assignedStarters: Partial<Record<StarterLocation, Pokemon>> = {}
-      
-      if (isNotNullish(settings.pokemon.starters.custom)) {
-        starterLocations.forEach((location) => {
-          const pokemonId = settings.pokemon.starters.custom[location]
-          if (isNotNullish(pokemonId)) {
-            if (isString(pokemonId) && Object.keys(pokemonMap).includes(pokemonId)) {
-              assignedStarters[location] = pokemonMap[pokemonId as PokemonId]
-            } else {
-              throw new Error(`Unexpected value for settings.pokemon.starters.custom.${location}`)
-            }
-          }
-        })
-      }
-      
-      if (isNotNullish(settings.pokemon.starters.random)) {
-        const options = settings.pokemon.starters.random
-        
-        const isBanned = (pokemon: Pokemon) => {
-          return Array.isArray(options.ban) && options.ban.includes(pokemon.id)
-        }
-        
-        const isAssigned = (pokemon: Pokemon) => {
-          return isNotNullish(Object.values(assignedStarters).find((assignedStarter) => {
-            return isNotNullish(assignedStarter) && assignedStarter.id === pokemon.id
-          }))
-        }
-          
-        const matchesStage = (pokemon: Pokemon) => {
-          return !allPokemon.flatMap((pokemon) => {
-            return pokemon.evolutions?.map((evolution) => {
-              return evolution.pokemonId
-            }) ?? []
-          }).includes(pokemon.id)
-        }
-        
-        starterLocations.filter((location) => {
-          return !(Object.keys(assignedStarters) as [StarterLocation]).includes(location)
-        }).forEach((starterLocation) => {
-          const vanillaStarter = vanillaStarters[starterLocation]
-        
-          const matchesType = (pokemon: Pokemon) => {
-            return pokemon.types.includes(vanillaStarter.types[0]) // Vanilla starters only have 1 type each
-          }
-          
-          const matchesEvoltions = (pokemon: Pokemon) => {
-            return maxNumberOfEvolutionStages(pokemon) === maxNumberOfEvolutionStages(vanillaStarter)
-          }
-          
-          const baseStatDifference = (pokemon: Pokemon) => {
-            return Math.abs(baseStatTotal(pokemon) - baseStatTotal(vanillaStarter))
-          }
-          
-          const choices = allPokemon.filter((pokemon) => {
-            return !isBanned(pokemon)
-              && (!options.preventDuplicates || !isAssigned(pokemon))
-              && (!options.matchType || matchesType(pokemon))
-              && (!options.matchStage || matchesStage(pokemon))
-              && (!options.matchEvolutions || matchesEvoltions(pokemon))
-              && (isNullish(options.matchStatsThreshold) || baseStatDifference(pokemon) <= options.matchStatsThreshold)
-          })
-          
-          const index = randomInt(choices.length - 1)
-          assignedStarters[starterLocation] = choices[index]
-        })
-      }
-      
-      Object.entries(assignedStarters).forEach(([location, starter]) => {
-        if (isNullish(starter)) {
-          return
-        }
-        
-        hunks = [
-          ...hunks,
-          ...Patch.fromYAML(
-            romInfo,
-            `starters/${location}.yml`,
-            {},
-            {
-              pokemonId: hexStringFrom(bytesFrom(starter.numericId, 1)),
-            },
-          ).hunks,
-        ]
-      })
+    const matchesStage = (pokemon: Pokemon) => {
+      return !Object.values(pokemonMap).flatMap((pokemon) => {
+        return pokemon.evolutions?.map((evolution) => {
+          return evolution.pokemonId
+        }) ?? []
+      }).includes(pokemon.id)
     }
-  }
-  
-  if (isNotNullish(settings.items)) {
-    const items = settings.items
-    if (isNotNullish(items.startingInventory)) {
-      const startingInventory = items.startingInventory
+    
+    starterLocationIds.forEach((locationId) => {
+      if (isNotNullish(assignedStarters[locationId])) {
+        return
+      }
       
-      let pokedexPartsValue = 0
-      let pokegearPartsValue = 0
-      let johtoBadgesValue = 0
-      let kantoBadgesValue = 0
-      const itemValues: {itemId: string, itemAmount: string}[] = []
+      const vanillaStarter = pokemonMap[starterLocationsMap[locationId].pokemonId]
+    
+      const matchesType = (pokemon: Pokemon) => {
+        return pokemon.types.includes(vanillaStarter.types[0]) // Vanilla starters only have 1 type each
+      }
       
-      itemCategories.forEach((itemType) => {
-        if (isNotNullish(startingInventory[itemType.id])) {
-          const selectedItems = startingInventory[itemType.id]
-          
-          if (!Array.isArray(selectedItems)) {
-            throw new Error(`'items.startingInventory.${itemType.id} must be an array.`)
-          } else if (selectedItems.length > itemType.maxSlots) {
-            throw new Error(`'items.startingInventory.${itemType.id}' cannot have more than ${itemType.maxSlots} entries.`)
-          }
-          
-          const mappedItems = selectedItems.reduce((items, selectedItemInfo) => {
-            if (isString(selectedItemInfo)) {
-              return {
-                ...items,
-                [selectedItemInfo]: 1,
-              }
-            } else {
-              return {
-                ...items,
-                ...selectedItemInfo,
-              }
-            }
-          }, {})
-          
-          Object.entries(mappedItems).forEach(([itemId, amount]) => {
-            const item = itemType.items.find((item) => { return item.id === itemId })
-            if (isNotNullish(item)) {
-              if (!isNumber(amount) || !Number.isInteger(amount) || amount > itemType.slotSize) {
-                throw new Error(`Item amounts in 'items.startingInventory.${itemType.id}' cannot exceed ${itemType.slotSize}.`)
-              }
-              
-              switch (item.type) {
-              case "POKEDEX_PART": {
-                pokedexPartsValue |= parseInt(item.hexId, 16)
-                break
-              }
-              case "POKEGEAR_PART": {
-                pokegearPartsValue |= parseInt(item.hexId, 16)
-                break
-              }
-              case "JOHTO_BADGE": {
-                johtoBadgesValue |= parseInt(item.hexId, 16)
-                break
-              }
-              case "KANTO_BADGE": {
-                kantoBadgesValue |= parseInt(item.hexId, 16)
-                break
-              }
-              case "BAG_ITEM": {
-                itemValues.push({
-                  itemId: item.hexId,
-                  itemAmount: `[2]{${amount}}`,
-                })
-                break
-              }
-              }
-            } else {
-              // TODO: Record warning.
-            }
-          })
-        }
+      const matchesEvoltions = (pokemon: Pokemon) => {
+        return maxNumberOfEvolutionStages(pokemon) === maxNumberOfEvolutionStages(vanillaStarter)
+      }
+      
+      const baseStatDifference = (pokemon: Pokemon) => {
+        return Math.abs(baseStatTotal(pokemon) - baseStatTotal(vanillaStarter))
+      }
+      
+      const choices = Object.values(pokemonMap).filter((pokemon) => {
+        return !isBanned(pokemon)
+          && (!randomStartersSettings.UNIQUE || !isAssigned(pokemon))
+          && (!randomStartersSettings.MATCH_TYPE || matchesType(pokemon))
+          && (!randomStartersSettings.MATCH_STAGE || matchesStage(pokemon))
+          && (!randomStartersSettings.MATCH_EVOLUTIONS || matchesEvoltions(pokemon))
+          && (!randomStartersSettings.MATCH_SIMILAR_BST || baseStatDifference(pokemon) <= randomStartersSettings.MATCH_SIMILAR_BST.THRESHOLD)
       })
       
-      const startingItemsPatch = Patch.fromYAML(
-        romInfo,
-        "startingItems.yml",
-        {
-          items: itemValues.map((value) => {
-            return {
-              path: "giveItem.yml",
-              extraValues: value,
-            }
-          }),
-        },
-        {
-          pokedexParts: hexStringFrom([pokedexPartsValue]),
-          pokegearParts: hexStringFrom([pokegearPartsValue]),
-          johtoBadges: hexStringFrom([johtoBadgesValue]),
-          kantoBadges: hexStringFrom([kantoBadgesValue]),
-        }
-      )
-  
-      hunks = [...hunks, ...startingItemsPatch.hunks]
-    }
+      const index = randomInt(choices.length - 1)
+      assignedStarters[locationId] = choices[index].id
+    })
   }
+      
+  Object.entries(assignedStarters).forEach(([locationId, pokemonId]) => {
+    if (isNullish(pokemonId)) {
+      return
+    }
+        
+    hunks = [
+      ...hunks,
+      ...Patch.fromYAML(
+        romInfo,
+        `starters/${locationId.toLowerCase()}.yml`,
+        {},
+        {
+          pokemonId: hexStringFrom(bytesFrom(pokemonMap[pokemonId].numericId, 1)),
+        },
+      ).hunks,
+    ]
+  })
+  
+  // Items
+  
+  const itemsSettings = settings.ITEMS
+  
+  // Starting Inventory
+  
+  const startingInventorySettings = itemsSettings.STARTING_INVENTORY
+  
+  let hasStartingInventory = false
+  let pokedexPartsValue = 0
+  let pokegearPartsValue = 0
+  let johtoBadgesValue = 0
+  let kantoBadgesValue = 0
+  const bagItemValues: {itemId: string, itemAmount: string}[] = []
+    
+  Object.values(itemCategoriesMap).forEach((category) => {
+    const itemCategorySettings = startingInventorySettings[category.id]
+    
+    const itemAmountMap = itemCategorySettings.reduce((result: Partial<Record<ItemId, number>>, setting) => {
+      let mappedSetting: Partial<Record<ItemId, number>>
+      
+      if (isString(setting)) {
+        mappedSetting = {
+          [setting]: 1,
+        }
+      } else {
+        mappedSetting = Object.entries(setting).reduce((result, [itemId, settings]) => {
+          return {
+            ...result,
+            [itemId]: settings.AMOUNT,
+          }
+        }, {})
+      }
+      
+      return {
+        ...result,
+        ...mappedSetting,
+      }
+    }, {})
+    
+    Object.entries(itemAmountMap).forEach(([itemId, amount]) => {
+      hasStartingInventory = true
+      
+      const item = itemsMap[itemId as ItemId]
+          
+      switch (item.type) {
+      case "POKEDEX_PART": {
+        pokedexPartsValue |= item.numericId
+        break
+      }
+      case "POKEGEAR_PART": {
+        pokegearPartsValue |= item.numericId
+        break
+      }
+      case "JOHTO_BADGE": {
+        johtoBadgesValue |= item.numericId
+        break
+      }
+      case "KANTO_BADGE": {
+        kantoBadgesValue |= item.numericId
+        break
+      }
+      case "BAG_ITEM": {
+        bagItemValues.push({
+          itemId: hexStringFrom(bytesFrom(item.numericId, 1)),
+          itemAmount: `[2]{${amount}}`,
+        })
+        break
+      }
+      }
+    })
+  })
+  
+  if (hasStartingInventory) {
+    const startingItemsPatch = Patch.fromYAML(
+      romInfo,
+      "startingItems.yml",
+      {
+        items: bagItemValues.map((value) => {
+          return {
+            path: "giveItem.yml",
+            extraValues: value,
+          }
+        }),
+      },
+      {
+        pokedexParts: hexStringFrom(bytesFrom(pokedexPartsValue, 1)),
+        pokegearParts: hexStringFrom(bytesFrom(pokegearPartsValue, 1)),
+        johtoBadges: hexStringFrom(bytesFrom(johtoBadgesValue, 1)),
+        kantoBadges: hexStringFrom(bytesFrom(kantoBadgesValue, 1)),
+      }
+    )
+  
+    hunks = [...hunks, ...startingItemsPatch.hunks]
+  }
+  
+  // Other
+  
+  const otherSettings = settings.OTHER
+  
+  // Additional Options
+  
+  const selectedAdditionalOptionIds = otherSettings.ADDITIONAL_OPTIONS
+  
+  if (selectedAdditionalOptionIds.length > 0) {
+    const additionalOptionsPatch = Patch.fromYAML(
+      romInfo,
+      "additionalOptions.yml",
+      {
+        options: compact([
+          selectedAdditionalOptionIds.includes("INSTANT_TEXT") ? "options/textSpeedWithInstantText.yml" : "options/textSpeed.yml",
+          selectedAdditionalOptionIds.includes("HOLD_TO_MASH") ? "options/holdToMash.yml" : null,
+          "options/battleScene.yml",
+          "options/battleShift.yml",
+          selectedAdditionalOptionIds.includes("NICKNAMES") ? "options/nicknames.yml" : null,
+          "options/stereoSound.yml",
+          selectedAdditionalOptionIds.includes("RIDE_MUSIC") ? "options/rideMusic.yml" : null,
+          "options/menuAccount.yml",
+          "options/printTone.yml",
+          "options/frameType.yml",
+        ]),
+      },
+    )
+    
+    hunks = [...hunks, ...additionalOptionsPatch.hunks]
+  }
+  
+  // Base Patch
   
   const checkValue = hunks.length > 0 ? hash(hunks).slice(0, 8).toUpperCase() : "00000000"
   

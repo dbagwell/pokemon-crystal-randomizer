@@ -56,7 +56,7 @@
 </div>
 
 <script lang="ts">
-  import Stack from "@components/Stack.svelte"
+  import Stack from "@components/layout/Stack.svelte"
   import { computePosition, flip, size } from "@floating-ui/dom"
   import { isNotNullish, isNullish } from "@shared/utils"
   import Textfield from "@smui/textfield"

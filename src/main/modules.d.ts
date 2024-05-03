@@ -1,5 +1,4 @@
 declare module "electron-squirrel-startup"
 declare module "nearley"
-declare module "@lib/grammars/dataGrammar.cjs"
 declare module "object-hash"
 declare module "seedrandom"

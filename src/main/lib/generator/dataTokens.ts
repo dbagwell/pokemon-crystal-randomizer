@@ -1,13 +1,10 @@
-import dataFormatGrammar from "@lib/grammars/dataGrammar.cjs"
+import dataFormatGrammar from "@lib/grammars/dataGrammar.mjs"
 import { isNullish, isNumber } from "@utils"
 import nearley from "nearley"
 
 export const parseTokens = (value: string): Token[] => {
   const parser = new nearley.Parser(nearley.Grammar.fromCompiled(dataFormatGrammar))
   parser.feed(value)
-  if (parser.results[0] === undefined) {
-    console.log("hi")
-  }
   return tokensFrom(parser.results[0])
 }
 
