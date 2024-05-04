@@ -106,6 +106,8 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     if (isNullish(pokemonId)) {
       return
     }
+    
+    const pokemon = pokemonMap[pokemonId]
         
     hunks = [
       ...hunks,
@@ -114,7 +116,8 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         `starters/${locationId.toLowerCase()}.yml`,
         {},
         {
-          pokemonId: hexStringFrom(bytesFrom(pokemonMap[pokemonId].numericId, 1)),
+          pokemonId: hexStringFrom(bytesFrom(pokemon.numericId, 1)),
+          pokemonName: hexStringFrom(ROMInfo.displayCharacterBytesFrom(pokemon.name)),
         },
       ).hunks,
     ]
