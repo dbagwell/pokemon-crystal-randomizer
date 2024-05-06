@@ -1,21 +1,23 @@
 import { additionalOptionsMap } from "@shared/gameData/additionalOptions"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsGroupedByCategory } from "@shared/gameData/itemHeplers"
+import { movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import type { AdditionalOptionId } from "@shared/types/gameDataIds/additionalOptions"
 import { itemCategoryIds } from "@shared/types/gameDataIds/itemCategories"
 import type { ItemId } from "@shared/types/gameDataIds/items"
+import { type MoveId, moveIds } from "@shared/types/gameDataIds/moves"
 import { type PlayerSpriteId, playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
-import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
+import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import { mapToRecord } from "@shared/utils"
 
-const pokemonOptions = Object.values(pokemonMap).map((pokemon) => {
+const pokemonOptions = pokemonIds.map((pokemonId) => {
   return {
-    id: pokemon.id as PokemonId,
-    label: pokemon.name,
+    id: pokemonId,
+    label: pokemonMap[pokemonId].name,
   }
 })
 
@@ -109,6 +111,82 @@ export const defaultConfig = () => {
                     selectedOptionIds: [] as PokemonId[],
                   },
                 },
+              },
+            },
+          },
+          RANDOMIZE_LEVEL_UP_MOVES: {
+            label: "Randomize Level Up Moves",
+            description: "Change moves Pokémon can learn by level up to random ones.",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            hasToggle: true as const,
+            toggleValue: false,
+            subElementConfigs: {
+              UNIQUE: {
+                label: "Unique",
+                description: "Make sure that Pokémon can't learn the same move by level up more than once.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              PREFER_SAME_TYPE: {
+                label: "Prefer Same Type",
+                description: "Limit the randomization options to moves of the same type.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              PROGRESSIVE: {
+                label: "Reorder Damaging Moves",
+                description: "Reorders the moves after randomization so that damaging moves with more power are learned after damaging moves with less power.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              GOOD_DAMAGING_MOVES: {
+                label: "Guarantee Percentage of Good Damaging Moves",
+                description: "Guarantees that the specified percentage of each Pokémon's moveset are damaging moves of at least the specified power, unless doing so would confilct with other settings. If there is a conflict, as many good moves as possible will be selected.",
+                type: "FormSection" as const,
+                layout: "vertical" as const,
+                hasToggle: true as const,
+                toggleValue: false,
+                subElementConfigs: {
+                  PERCENTAGE: {
+                    label: "Percentage",
+                    type: "IntegerInput" as const,
+                    required: true as const,
+                    min: 0,
+                    max: 100,
+                    value: 0,
+                  },
+                  POWER: {
+                    label: "Power",
+                    type: "IntegerInput" as const,
+                    required: true as const,
+                    min: 0,
+                    max: 150,
+                    value: 0,
+                  },
+                },
+              },
+              LEVEL_ONE_MOVES: {
+                label: "Guaranteed Number of Level 1 Moves",
+                description: "Adds level 1 moves to a Pokémon's level up moves if they normally have less than the specified number.",
+                type: "IntegerInput" as const,
+                required: true as const,
+                min: 1,
+                max: 4,
+                value: 1,
+              },
+              BAN: {
+                label: "Ban",
+                description: "Prevent these moves from being selected by the randomizer.",
+                type: "SelectorInput" as const,
+                options: moveIds.map((moveId) => {
+                  return {
+                    id: moveId,
+                    label: movesMap[moveId].name,
+                  }
+                }),
+                multiselect: true as const,
+                selectedOptionIds: [] as MoveId[],
               },
             },
           },
