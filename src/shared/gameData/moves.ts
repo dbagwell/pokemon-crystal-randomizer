@@ -4,7 +4,7 @@ import type { PokemonTypeId } from "@shared/types/gameDataIds/pokemonTypes"
 
 export type Move = {
   id: MoveId,
-  hexId: string,
+  numericId: number,
   name: string,
   type: PokemonTypeId,
   power: number,
@@ -14,10 +14,10 @@ export type Move = {
   secondaryEffectChance: number,
 }
 
-export const movesList: Move[] = [
-  {
+export const movesMap: IdMap<MoveId, Move> = {
+  POUND: {
     id: "POUND",
-    hexId: "01",
+    numericId: 0x01,
     name: "Pound",
     type: "NORMAL",
     power: 40,
@@ -26,10 +26,10 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  KARATE_CHOP: {
     id: "KARATE_CHOP",
-    hexId: "02",
-    name: "Karate_chop",
+    numericId: 0x02,
+    name: "Karate Chop",
     type: "FIGHTING",
     power: 50,
     accuracy: 100,
@@ -37,9 +37,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  DOUBLESLAP: {
     id: "DOUBLESLAP",
-    hexId: "03",
+    numericId: 0x03,
     name: "Doubleslap",
     type: "NORMAL",
     power: 15,
@@ -48,10 +48,10 @@ export const movesList: Move[] = [
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  COMET_PUNCH: {
     id: "COMET_PUNCH",
-    hexId: "04",
-    name: "Comet_punch",
+    numericId: 0x04,
+    name: "Comet Punch",
     type: "NORMAL",
     power: 18,
     accuracy: 85,
@@ -59,10 +59,10 @@ export const movesList: Move[] = [
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  MEGA_PUNCH: {
     id: "MEGA_PUNCH",
-    hexId: "05",
-    name: "Mega_punch",
+    numericId: 0x05,
+    name: "Mega Punch",
     type: "NORMAL",
     power: 80,
     accuracy: 85,
@@ -70,10 +70,10 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  PAY_DAY: {
     id: "PAY_DAY",
-    hexId: "06",
-    name: "Pay_day",
+    numericId: 0x06,
+    name: "Pay Day",
     type: "NORMAL",
     power: 40,
     accuracy: 100,
@@ -81,10 +81,10 @@ export const movesList: Move[] = [
     effect: "PAY_DAY",
     secondaryEffectChance: 0,
   },
-  {
+  FIRE_PUNCH: {
     id: "FIRE_PUNCH",
-    hexId: "07",
-    name: "Fire_punch",
+    numericId: 0x07,
+    name: "Fire Punch",
     type: "FIRE",
     power: 75,
     accuracy: 100,
@@ -92,10 +92,10 @@ export const movesList: Move[] = [
     effect: "BURN_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  ICE_PUNCH: {
     id: "ICE_PUNCH",
-    hexId: "08",
-    name: "Ice_punch",
+    numericId: 0x08,
+    name: "Ice Punch",
     type: "ICE",
     power: 75,
     accuracy: 100,
@@ -103,9 +103,9 @@ export const movesList: Move[] = [
     effect: "FREEZE_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  THUNDERPUNCH: {
     id: "THUNDERPUNCH",
-    hexId: "09",
+    numericId: 0x09,
     name: "Thunderpunch",
     type: "ELECTRIC",
     power: 75,
@@ -114,9 +114,9 @@ export const movesList: Move[] = [
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  SCRATCH: {
     id: "SCRATCH",
-    hexId: "0a",
+    numericId: 0x0A,
     name: "Scratch",
     type: "NORMAL",
     power: 40,
@@ -125,9 +125,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  VICEGRIP: {
     id: "VICEGRIP",
-    hexId: "0b",
+    numericId: 0x0B,
     name: "Vicegrip",
     type: "NORMAL",
     power: 55,
@@ -136,9 +136,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  GUILLOTINE: {
     id: "GUILLOTINE",
-    hexId: "0c",
+    numericId: 0x0C,
     name: "Guillotine",
     type: "NORMAL",
     power: 0,
@@ -147,10 +147,10 @@ export const movesList: Move[] = [
     effect: "OHKO",
     secondaryEffectChance: 0,
   },
-  {
+  RAZOR_WIND: {
     id: "RAZOR_WIND",
-    hexId: "0d",
-    name: "Razor_wind",
+    numericId: 0x0D,
+    name: "Razor Wind",
     type: "NORMAL",
     power: 80,
     accuracy: 75,
@@ -158,10 +158,10 @@ export const movesList: Move[] = [
     effect: "RAZOR_WIND",
     secondaryEffectChance: 0,
   },
-  {
+  SWORDS_DANCE: {
     id: "SWORDS_DANCE",
-    hexId: "0e",
-    name: "Swords_dance",
+    numericId: 0x0E,
+    name: "Swords Dance",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -169,9 +169,9 @@ export const movesList: Move[] = [
     effect: "ATTACK_UP_2",
     secondaryEffectChance: 0,
   },
-  {
+  CUT: {
     id: "CUT",
-    hexId: "0f",
+    numericId: 0x0F,
     name: "Cut",
     type: "NORMAL",
     power: 50,
@@ -180,9 +180,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  GUST: {
     id: "GUST",
-    hexId: "10",
+    numericId: 0x10,
     name: "Gust",
     type: "FLYING",
     power: 40,
@@ -191,10 +191,10 @@ export const movesList: Move[] = [
     effect: "GUST",
     secondaryEffectChance: 0,
   },
-  {
+  WING_ATTACK: {
     id: "WING_ATTACK",
-    hexId: "11",
-    name: "Wing_attack",
+    numericId: 0x11,
+    name: "Wing Attack",
     type: "FLYING",
     power: 60,
     accuracy: 100,
@@ -202,9 +202,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  WHIRLWIND: {
     id: "WHIRLWIND",
-    hexId: "12",
+    numericId: 0x12,
     name: "Whirlwind",
     type: "NORMAL",
     power: 0,
@@ -213,9 +213,9 @@ export const movesList: Move[] = [
     effect: "FORCE_SWITCH",
     secondaryEffectChance: 0,
   },
-  {
+  FLY: {
     id: "FLY",
-    hexId: "13",
+    numericId: 0x13,
     name: "Fly",
     type: "FLYING",
     power: 70,
@@ -224,9 +224,9 @@ export const movesList: Move[] = [
     effect: "FLY",
     secondaryEffectChance: 0,
   },
-  {
+  BIND: {
     id: "BIND",
-    hexId: "14",
+    numericId: 0x14,
     name: "Bind",
     type: "NORMAL",
     power: 15,
@@ -235,9 +235,9 @@ export const movesList: Move[] = [
     effect: "TRAP_TARGET",
     secondaryEffectChance: 0,
   },
-  {
+  SLAM: {
     id: "SLAM",
-    hexId: "15",
+    numericId: 0x15,
     name: "Slam",
     type: "NORMAL",
     power: 80,
@@ -246,10 +246,10 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  VINE_WHIP: {
     id: "VINE_WHIP",
-    hexId: "16",
-    name: "Vine_whip",
+    numericId: 0x16,
+    name: "Vine Whip",
     type: "GRASS",
     power: 35,
     accuracy: 100,
@@ -257,9 +257,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  STOMP: {
     id: "STOMP",
-    hexId: "17",
+    numericId: 0x17,
     name: "Stomp",
     type: "NORMAL",
     power: 65,
@@ -268,10 +268,10 @@ export const movesList: Move[] = [
     effect: "STOMP",
     secondaryEffectChance: 30,
   },
-  {
+  DOUBLE_KICK: {
     id: "DOUBLE_KICK",
-    hexId: "18",
-    name: "Double_kick",
+    numericId: 0x18,
+    name: "Double Kick",
     type: "FIGHTING",
     power: 30,
     accuracy: 100,
@@ -279,10 +279,10 @@ export const movesList: Move[] = [
     effect: "DOUBLE_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  MEGA_KICK: {
     id: "MEGA_KICK",
-    hexId: "19",
-    name: "Mega_kick",
+    numericId: 0x19,
+    name: "Mega Kick",
     type: "NORMAL",
     power: 120,
     accuracy: 75,
@@ -290,10 +290,10 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  JUMP_KICK: {
     id: "JUMP_KICK",
-    hexId: "1a",
-    name: "Jump_kick",
+    numericId: 0x1A,
+    name: "Jump Kick",
     type: "FIGHTING",
     power: 70,
     accuracy: 95,
@@ -301,10 +301,10 @@ export const movesList: Move[] = [
     effect: "JUMP_KICK",
     secondaryEffectChance: 0,
   },
-  {
+  ROLLING_KICK: {
     id: "ROLLING_KICK",
-    hexId: "1b",
-    name: "Rolling_kick",
+    numericId: 0x1B,
+    name: "Rolling Kick",
     type: "FIGHTING",
     power: 60,
     accuracy: 85,
@@ -312,10 +312,10 @@ export const movesList: Move[] = [
     effect: "FLINCH_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  SAND_ATTACK: {
     id: "SAND_ATTACK",
-    hexId: "1c",
-    name: "Sand_attack",
+    numericId: 0x1C,
+    name: "Sand Attack",
     type: "GROUND",
     power: 0,
     accuracy: 100,
@@ -323,9 +323,9 @@ export const movesList: Move[] = [
     effect: "ACCURACY_DOWN",
     secondaryEffectChance: 0,
   },
-  {
+  HEADBUTT: {
     id: "HEADBUTT",
-    hexId: "1d",
+    numericId: 0x1D,
     name: "Headbutt",
     type: "NORMAL",
     power: 70,
@@ -334,10 +334,10 @@ export const movesList: Move[] = [
     effect: "FLINCH_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  HORN_ATTACK: {
     id: "HORN_ATTACK",
-    hexId: "1e",
-    name: "Horn_attack",
+    numericId: 0x1E,
+    name: "Horn Attack",
     type: "NORMAL",
     power: 65,
     accuracy: 100,
@@ -345,10 +345,10 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  FURY_ATTACK: {
     id: "FURY_ATTACK",
-    hexId: "1f",
-    name: "Fury_attack",
+    numericId: 0x1F,
+    name: "Fury Attack",
     type: "NORMAL",
     power: 15,
     accuracy: 85,
@@ -356,10 +356,10 @@ export const movesList: Move[] = [
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  HORN_DRILL: {
     id: "HORN_DRILL",
-    hexId: "20",
-    name: "Horn_drill",
+    numericId: 0x20,
+    name: "Horn Drill",
     type: "NORMAL",
     power: 1,
     accuracy: 30,
@@ -367,9 +367,9 @@ export const movesList: Move[] = [
     effect: "OHKO",
     secondaryEffectChance: 0,
   },
-  {
+  TACKLE: {
     id: "TACKLE",
-    hexId: "21",
+    numericId: 0x21,
     name: "Tackle",
     type: "NORMAL",
     power: 35,
@@ -378,10 +378,10 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  BODY_SLAM: {
     id: "BODY_SLAM",
-    hexId: "22",
-    name: "Body_slam",
+    numericId: 0x22,
+    name: "Body Slam",
     type: "NORMAL",
     power: 85,
     accuracy: 100,
@@ -389,9 +389,9 @@ export const movesList: Move[] = [
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  WRAP: {
     id: "WRAP",
-    hexId: "23",
+    numericId: 0x23,
     name: "Wrap",
     type: "NORMAL",
     power: 15,
@@ -400,10 +400,10 @@ export const movesList: Move[] = [
     effect: "TRAP_TARGET",
     secondaryEffectChance: 0,
   },
-  {
+  TAKE_DOWN: {
     id: "TAKE_DOWN",
-    hexId: "24",
-    name: "Take_down",
+    numericId: 0x24,
+    name: "Take Down",
     type: "NORMAL",
     power: 90,
     accuracy: 85,
@@ -411,9 +411,9 @@ export const movesList: Move[] = [
     effect: "RECOIL_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  THRASH: {
     id: "THRASH",
-    hexId: "25",
+    numericId: 0x25,
     name: "Thrash",
     type: "NORMAL",
     power: 90,
@@ -422,10 +422,10 @@ export const movesList: Move[] = [
     effect: "RAMPAGE",
     secondaryEffectChance: 0,
   },
-  {
+  DOUBLE_EDGE: {
     id: "DOUBLE_EDGE",
-    hexId: "26",
-    name: "Double_edge",
+    numericId: 0x26,
+    name: "Double Edge",
     type: "NORMAL",
     power: 120,
     accuracy: 100,
@@ -433,10 +433,10 @@ export const movesList: Move[] = [
     effect: "RECOIL_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  TAIL_WHIP: {
     id: "TAIL_WHIP",
-    hexId: "27",
-    name: "Tail_whip",
+    numericId: 0x27,
+    name: "Tail Whip",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -444,10 +444,10 @@ export const movesList: Move[] = [
     effect: "DEFENSE_DOWN",
     secondaryEffectChance: 0,
   },
-  {
+  POISON_STING: {
     id: "POISON_STING",
-    hexId: "28",
-    name: "Poison_sting",
+    numericId: 0x28,
+    name: "Poison Sting",
     type: "POISON",
     power: 15,
     accuracy: 100,
@@ -455,9 +455,9 @@ export const movesList: Move[] = [
     effect: "POISON_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  TWINEEDLE: {
     id: "TWINEEDLE",
-    hexId: "29",
+    numericId: 0x29,
     name: "Twineedle",
     type: "BUG",
     power: 25,
@@ -466,10 +466,10 @@ export const movesList: Move[] = [
     effect: "POISON_MULTI_HIT",
     secondaryEffectChance: 20,
   },
-  {
+  PIN_MISSILE: {
     id: "PIN_MISSILE",
-    hexId: "2a",
-    name: "Pin_missile",
+    numericId: 0x2A,
+    name: "Pin Missile",
     type: "BUG",
     power: 14,
     accuracy: 85,
@@ -477,9 +477,9 @@ export const movesList: Move[] = [
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  LEER: {
     id: "LEER",
-    hexId: "2b",
+    numericId: 0x2B,
     name: "Leer",
     type: "NORMAL",
     power: 0,
@@ -488,9 +488,9 @@ export const movesList: Move[] = [
     effect: "DEFENSE_DOWN",
     secondaryEffectChance: 0,
   },
-  {
+  BITE: {
     id: "BITE",
-    hexId: "2c",
+    numericId: 0x2C,
     name: "Bite",
     type: "DARK",
     power: 60,
@@ -499,9 +499,9 @@ export const movesList: Move[] = [
     effect: "FLINCH_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  GROWL: {
     id: "GROWL",
-    hexId: "2d",
+    numericId: 0x2D,
     name: "Growl",
     type: "NORMAL",
     power: 0,
@@ -510,9 +510,9 @@ export const movesList: Move[] = [
     effect: "ATTACK_DOWN",
     secondaryEffectChance: 0,
   },
-  {
+  ROAR: {
     id: "ROAR",
-    hexId: "2e",
+    numericId: 0x2E,
     name: "Roar",
     type: "NORMAL",
     power: 0,
@@ -521,9 +521,9 @@ export const movesList: Move[] = [
     effect: "FORCE_SWITCH",
     secondaryEffectChance: 0,
   },
-  {
+  SING: {
     id: "SING",
-    hexId: "2f",
+    numericId: 0x2F,
     name: "Sing",
     type: "NORMAL",
     power: 0,
@@ -532,9 +532,9 @@ export const movesList: Move[] = [
     effect: "SLEEP",
     secondaryEffectChance: 0,
   },
-  {
+  SUPERSONIC: {
     id: "SUPERSONIC",
-    hexId: "30",
+    numericId: 0x30,
     name: "Supersonic",
     type: "NORMAL",
     power: 0,
@@ -543,9 +543,9 @@ export const movesList: Move[] = [
     effect: "CONFUSE",
     secondaryEffectChance: 0,
   },
-  {
+  SONICBOOM: {
     id: "SONICBOOM",
-    hexId: "31",
+    numericId: 0x31,
     name: "Sonicboom",
     type: "NORMAL",
     power: 20,
@@ -554,9 +554,9 @@ export const movesList: Move[] = [
     effect: "STATIC_DAMAGE",
     secondaryEffectChance: 0,
   },
-  {
+  DISABLE: {
     id: "DISABLE",
-    hexId: "32",
+    numericId: 0x32,
     name: "Disable",
     type: "NORMAL",
     power: 0,
@@ -565,9 +565,9 @@ export const movesList: Move[] = [
     effect: "DISABLE",
     secondaryEffectChance: 0,
   },
-  {
+  ACID: {
     id: "ACID",
-    hexId: "33",
+    numericId: 0x33,
     name: "Acid",
     type: "POISON",
     power: 40,
@@ -576,9 +576,9 @@ export const movesList: Move[] = [
     effect: "DEFENSE_DOWN_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  EMBER: {
     id: "EMBER",
-    hexId: "34",
+    numericId: 0x34,
     name: "Ember",
     type: "FIRE",
     power: 40,
@@ -587,9 +587,9 @@ export const movesList: Move[] = [
     effect: "BURN_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  FLAMETHROWER: {
     id: "FLAMETHROWER",
-    hexId: "35",
+    numericId: 0x35,
     name: "Flamethrower",
     type: "FIRE",
     power: 95,
@@ -598,9 +598,9 @@ export const movesList: Move[] = [
     effect: "BURN_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  MIST: {
     id: "MIST",
-    hexId: "36",
+    numericId: 0x36,
     name: "Mist",
     type: "ICE",
     power: 0,
@@ -609,10 +609,10 @@ export const movesList: Move[] = [
     effect: "MIST",
     secondaryEffectChance: 0,
   },
-  {
+  WATER_GUN: {
     id: "WATER_GUN",
-    hexId: "37",
-    name: "Water_gun",
+    numericId: 0x37,
+    name: "Water Gun",
     type: "WATER",
     power: 40,
     accuracy: 100,
@@ -620,10 +620,10 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  HYDRO_PUMP: {
     id: "HYDRO_PUMP",
-    hexId: "38",
-    name: "Hydro_pump",
+    numericId: 0x38,
+    name: "Hydro Pump",
     type: "WATER",
     power: 120,
     accuracy: 80,
@@ -631,9 +631,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  SURF: {
     id: "SURF",
-    hexId: "39",
+    numericId: 0x39,
     name: "Surf",
     type: "WATER",
     power: 95,
@@ -642,10 +642,10 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  ICE_BEAM: {
     id: "ICE_BEAM",
-    hexId: "3a",
-    name: "Ice_beam",
+    numericId: 0x3A,
+    name: "Ice Beam",
     type: "ICE",
     power: 95,
     accuracy: 100,
@@ -653,9 +653,9 @@ export const movesList: Move[] = [
     effect: "FREEZE_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  BLIZZARD: {
     id: "BLIZZARD",
-    hexId: "3b",
+    numericId: 0x3B,
     name: "Blizzard",
     type: "ICE",
     power: 120,
@@ -664,9 +664,9 @@ export const movesList: Move[] = [
     effect: "FREEZE_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  PSYBEAM: {
     id: "PSYBEAM",
-    hexId: "3c",
+    numericId: 0x3C,
     name: "Psybeam",
     type: "PSYCHIC",
     power: 65,
@@ -675,9 +675,9 @@ export const movesList: Move[] = [
     effect: "CONFUSE_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  BUBBLEBEAM: {
     id: "BUBBLEBEAM",
-    hexId: "3d",
+    numericId: 0x3D,
     name: "Bubblebeam",
     type: "WATER",
     power: 65,
@@ -686,10 +686,10 @@ export const movesList: Move[] = [
     effect: "SPEED_DOWN_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  AURORA_BEAM: {
     id: "AURORA_BEAM",
-    hexId: "3e",
-    name: "Aurora_beam",
+    numericId: 0x3E,
+    name: "Aurora Beam",
     type: "ICE",
     power: 65,
     accuracy: 100,
@@ -697,10 +697,10 @@ export const movesList: Move[] = [
     effect: "ATTACK_DOWN_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  HYPER_BEAM: {
     id: "HYPER_BEAM",
-    hexId: "3f",
-    name: "Hyper_beam",
+    numericId: 0x3F,
+    name: "Hyper Beam",
     type: "NORMAL",
     power: 150,
     accuracy: 90,
@@ -708,9 +708,9 @@ export const movesList: Move[] = [
     effect: "HYPER_BEAM",
     secondaryEffectChance: 0,
   },
-  {
+  PECK: {
     id: "PECK",
-    hexId: "40",
+    numericId: 0x40,
     name: "Peck",
     type: "FLYING",
     power: 35,
@@ -719,10 +719,10 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  DRILL_PECK: {
     id: "DRILL_PECK",
-    hexId: "41",
-    name: "Drill_peck",
+    numericId: 0x41,
+    name: "Drill Peck",
     type: "FLYING",
     power: 80,
     accuracy: 100,
@@ -730,9 +730,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  SUBMISSION: {
     id: "SUBMISSION",
-    hexId: "42",
+    numericId: 0x42,
     name: "Submission",
     type: "FIGHTING",
     power: 80,
@@ -741,10 +741,10 @@ export const movesList: Move[] = [
     effect: "RECOIL_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  LOW_KICK: {
     id: "LOW_KICK",
-    hexId: "43",
-    name: "Low_kick",
+    numericId: 0x43,
+    name: "Low Kick",
     type: "FIGHTING",
     power: 50,
     accuracy: 90,
@@ -752,9 +752,9 @@ export const movesList: Move[] = [
     effect: "FLINCH_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  COUNTER: {
     id: "COUNTER",
-    hexId: "44",
+    numericId: 0x44,
     name: "Counter",
     type: "FIGHTING",
     power: 1,
@@ -763,10 +763,10 @@ export const movesList: Move[] = [
     effect: "COUNTER",
     secondaryEffectChance: 0,
   },
-  {
+  SEISMIC_TOSS: {
     id: "SEISMIC_TOSS",
-    hexId: "45",
-    name: "Seismic_toss",
+    numericId: 0x45,
+    name: "Seismic Toss",
     type: "FIGHTING",
     power: 1,
     accuracy: 100,
@@ -774,9 +774,9 @@ export const movesList: Move[] = [
     effect: "LEVEL_DAMAGE",
     secondaryEffectChance: 0,
   },
-  {
+  STRENGTH: {
     id: "STRENGTH",
-    hexId: "46",
+    numericId: 0x46,
     name: "Strength",
     type: "NORMAL",
     power: 80,
@@ -785,9 +785,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  ABSORB: {
     id: "ABSORB",
-    hexId: "47",
+    numericId: 0x47,
     name: "Absorb",
     type: "GRASS",
     power: 20,
@@ -796,10 +796,10 @@ export const movesList: Move[] = [
     effect: "LEECH_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  MEGA_DRAIN: {
     id: "MEGA_DRAIN",
-    hexId: "48",
-    name: "Mega_drain",
+    numericId: 0x48,
+    name: "Mega Drain",
     type: "GRASS",
     power: 40,
     accuracy: 100,
@@ -807,10 +807,10 @@ export const movesList: Move[] = [
     effect: "LEECH_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  LEECH_SEED: {
     id: "LEECH_SEED",
-    hexId: "49",
-    name: "Leech_seed",
+    numericId: 0x49,
+    name: "Leech Seed",
     type: "GRASS",
     power: 0,
     accuracy: 90,
@@ -818,9 +818,9 @@ export const movesList: Move[] = [
     effect: "LEECH_SEED",
     secondaryEffectChance: 0,
   },
-  {
+  GROWTH: {
     id: "GROWTH",
-    hexId: "4a",
+    numericId: 0x4A,
     name: "Growth",
     type: "NORMAL",
     power: 0,
@@ -829,10 +829,10 @@ export const movesList: Move[] = [
     effect: "SP_ATK_UP",
     secondaryEffectChance: 0,
   },
-  {
+  RAZOR_LEAF: {
     id: "RAZOR_LEAF",
-    hexId: "4b",
-    name: "Razor_leaf",
+    numericId: 0x4B,
+    name: "Razor Leaf",
     type: "GRASS",
     power: 55,
     accuracy: 95,
@@ -840,9 +840,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  SOLARBEAM: {
     id: "SOLARBEAM",
-    hexId: "4c",
+    numericId: 0x4C,
     name: "Solarbeam",
     type: "GRASS",
     power: 120,
@@ -851,9 +851,9 @@ export const movesList: Move[] = [
     effect: "SOLARBEAM",
     secondaryEffectChance: 0,
   },
-  {
+  POISONPOWDER: {
     id: "POISONPOWDER",
-    hexId: "4d",
+    numericId: 0x4D,
     name: "Poisonpowder",
     type: "POISON",
     power: 0,
@@ -862,10 +862,10 @@ export const movesList: Move[] = [
     effect: "POISON",
     secondaryEffectChance: 0,
   },
-  {
+  STUN_SPORE: {
     id: "STUN_SPORE",
-    hexId: "4e",
-    name: "Stun_spore",
+    numericId: 0x4E,
+    name: "Stun Spore",
     type: "GRASS",
     power: 0,
     accuracy: 75,
@@ -873,10 +873,10 @@ export const movesList: Move[] = [
     effect: "PARALYZE",
     secondaryEffectChance: 0,
   },
-  {
+  SLEEP_POWDER: {
     id: "SLEEP_POWDER",
-    hexId: "4f",
-    name: "Sleep_powder",
+    numericId: 0x4F,
+    name: "Sleep Powder",
     type: "GRASS",
     power: 0,
     accuracy: 75,
@@ -884,10 +884,10 @@ export const movesList: Move[] = [
     effect: "SLEEP",
     secondaryEffectChance: 0,
   },
-  {
+  PETAL_DANCE: {
     id: "PETAL_DANCE",
-    hexId: "50",
-    name: "Petal_dance",
+    numericId: 0x50,
+    name: "Petal Dance",
     type: "GRASS",
     power: 70,
     accuracy: 100,
@@ -895,10 +895,10 @@ export const movesList: Move[] = [
     effect: "RAMPAGE",
     secondaryEffectChance: 0,
   },
-  {
+  STRING_SHOT: {
     id: "STRING_SHOT",
-    hexId: "51",
-    name: "String_shot",
+    numericId: 0x51,
+    name: "String Shot",
     type: "BUG",
     power: 0,
     accuracy: 95,
@@ -906,10 +906,10 @@ export const movesList: Move[] = [
     effect: "SPEED_DOWN",
     secondaryEffectChance: 0,
   },
-  {
+  DRAGON_RAGE: {
     id: "DRAGON_RAGE",
-    hexId: "52",
-    name: "Dragon_rage",
+    numericId: 0x52,
+    name: "Dragon Rage",
     type: "DRAGON",
     power: 40,
     accuracy: 100,
@@ -917,10 +917,10 @@ export const movesList: Move[] = [
     effect: "STATIC_DAMAGE",
     secondaryEffectChance: 0,
   },
-  {
+  FIRE_SPIN: {
     id: "FIRE_SPIN",
-    hexId: "53",
-    name: "Fire_spin",
+    numericId: 0x53,
+    name: "Fire Spin",
     type: "FIRE",
     power: 15,
     accuracy: 70,
@@ -928,9 +928,9 @@ export const movesList: Move[] = [
     effect: "TRAP_TARGET",
     secondaryEffectChance: 0,
   },
-  {
+  THUNDERSHOCK: {
     id: "THUNDERSHOCK",
-    hexId: "54",
+    numericId: 0x54,
     name: "Thundershock",
     type: "ELECTRIC",
     power: 40,
@@ -939,9 +939,9 @@ export const movesList: Move[] = [
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  THUNDERBOLT: {
     id: "THUNDERBOLT",
-    hexId: "55",
+    numericId: 0x55,
     name: "Thunderbolt",
     type: "ELECTRIC",
     power: 95,
@@ -950,10 +950,10 @@ export const movesList: Move[] = [
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  THUNDER_WAVE: {
     id: "THUNDER_WAVE",
-    hexId: "56",
-    name: "Thunder_wave",
+    numericId: 0x56,
+    name: "Thunder Wave",
     type: "ELECTRIC",
     power: 0,
     accuracy: 100,
@@ -961,9 +961,9 @@ export const movesList: Move[] = [
     effect: "PARALYZE",
     secondaryEffectChance: 0,
   },
-  {
+  THUNDER: {
     id: "THUNDER",
-    hexId: "57",
+    numericId: 0x57,
     name: "Thunder",
     type: "ELECTRIC",
     power: 120,
@@ -972,10 +972,10 @@ export const movesList: Move[] = [
     effect: "THUNDER",
     secondaryEffectChance: 30,
   },
-  {
+  ROCK_THROW: {
     id: "ROCK_THROW",
-    hexId: "58",
-    name: "Rock_throw",
+    numericId: 0x58,
+    name: "Rock Throw",
     type: "ROCK",
     power: 50,
     accuracy: 90,
@@ -983,9 +983,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  EARTHQUAKE: {
     id: "EARTHQUAKE",
-    hexId: "59",
+    numericId: 0x59,
     name: "Earthquake",
     type: "GROUND",
     power: 100,
@@ -994,9 +994,9 @@ export const movesList: Move[] = [
     effect: "EARTHQUAKE",
     secondaryEffectChance: 0,
   },
-  {
+  FISSURE: {
     id: "FISSURE",
-    hexId: "5a",
+    numericId: 0x5A,
     name: "Fissure",
     type: "GROUND",
     power: 1,
@@ -1005,9 +1005,9 @@ export const movesList: Move[] = [
     effect: "OHKO",
     secondaryEffectChance: 0,
   },
-  {
+  DIG: {
     id: "DIG",
-    hexId: "5b",
+    numericId: 0x5B,
     name: "Dig",
     type: "GROUND",
     power: 60,
@@ -1016,9 +1016,9 @@ export const movesList: Move[] = [
     effect: "FLY",
     secondaryEffectChance: 0,
   },
-  {
+  TOXIC: {
     id: "TOXIC",
-    hexId: "5c",
+    numericId: 0x5C,
     name: "Toxic",
     type: "POISON",
     power: 0,
@@ -1027,9 +1027,9 @@ export const movesList: Move[] = [
     effect: "TOXIC",
     secondaryEffectChance: 0,
   },
-  {
+  CONFUSION: {
     id: "CONFUSION",
-    hexId: "5d",
+    numericId: 0x5D,
     name: "Confusion",
     type: "PSYCHIC",
     power: 50,
@@ -1038,9 +1038,9 @@ export const movesList: Move[] = [
     effect: "CONFUSE_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  PSYCHIC: {
     id: "PSYCHIC",
-    hexId: "5e",
+    numericId: 0x5E,
     name: "Psychic",
     type: "PSYCHIC",
     power: 90,
@@ -1049,9 +1049,9 @@ export const movesList: Move[] = [
     effect: "SP_DEF_DOWN_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  HYPNOSIS: {
     id: "HYPNOSIS",
-    hexId: "5f",
+    numericId: 0x5F,
     name: "Hypnosis",
     type: "PSYCHIC",
     power: 0,
@@ -1060,9 +1060,9 @@ export const movesList: Move[] = [
     effect: "SLEEP",
     secondaryEffectChance: 0,
   },
-  {
+  MEDITATE: {
     id: "MEDITATE",
-    hexId: "60",
+    numericId: 0x60,
     name: "Meditate",
     type: "PSYCHIC",
     power: 0,
@@ -1071,9 +1071,9 @@ export const movesList: Move[] = [
     effect: "ATTACK_UP",
     secondaryEffectChance: 0,
   },
-  {
+  AGILITY: {
     id: "AGILITY",
-    hexId: "61",
+    numericId: 0x61,
     name: "Agility",
     type: "PSYCHIC",
     power: 0,
@@ -1082,10 +1082,10 @@ export const movesList: Move[] = [
     effect: "SPEED_UP_2",
     secondaryEffectChance: 0,
   },
-  {
+  QUICK_ATTACK: {
     id: "QUICK_ATTACK",
-    hexId: "62",
-    name: "Quick_attack",
+    numericId: 0x62,
+    name: "Quick Attack",
     type: "NORMAL",
     power: 40,
     accuracy: 100,
@@ -1093,9 +1093,9 @@ export const movesList: Move[] = [
     effect: "PRIORITY_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  RAGE: {
     id: "RAGE",
-    hexId: "63",
+    numericId: 0x63,
     name: "Rage",
     type: "NORMAL",
     power: 20,
@@ -1104,9 +1104,9 @@ export const movesList: Move[] = [
     effect: "RAGE",
     secondaryEffectChance: 0,
   },
-  {
+  TELEPORT: {
     id: "TELEPORT",
-    hexId: "64",
+    numericId: 0x64,
     name: "Teleport",
     type: "PSYCHIC",
     power: 0,
@@ -1115,10 +1115,10 @@ export const movesList: Move[] = [
     effect: "TELEPORT",
     secondaryEffectChance: 0,
   },
-  {
+  NIGHT_SHADE: {
     id: "NIGHT_SHADE",
-    hexId: "65",
-    name: "Night_shade",
+    numericId: 0x65,
+    name: "Night Shade",
     type: "GHOST",
     power: 1,
     accuracy: 100,
@@ -1126,9 +1126,9 @@ export const movesList: Move[] = [
     effect: "LEVEL_DAMAGE",
     secondaryEffectChance: 0,
   },
-  {
+  MIMIC: {
     id: "MIMIC",
-    hexId: "66",
+    numericId: 0x66,
     name: "Mimic",
     type: "NORMAL",
     power: 0,
@@ -1137,9 +1137,9 @@ export const movesList: Move[] = [
     effect: "MIMIC",
     secondaryEffectChance: 0,
   },
-  {
+  SCREECH: {
     id: "SCREECH",
-    hexId: "67",
+    numericId: 0x67,
     name: "Screech",
     type: "NORMAL",
     power: 0,
@@ -1148,10 +1148,10 @@ export const movesList: Move[] = [
     effect: "DEFENSE_DOWN_2",
     secondaryEffectChance: 0,
   },
-  {
+  DOUBLE_TEAM: {
     id: "DOUBLE_TEAM",
-    hexId: "68",
-    name: "Double_team",
+    numericId: 0x68,
+    name: "Double Team",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -1159,9 +1159,9 @@ export const movesList: Move[] = [
     effect: "EVASION_UP",
     secondaryEffectChance: 0,
   },
-  {
+  RECOVER: {
     id: "RECOVER",
-    hexId: "69",
+    numericId: 0x69,
     name: "Recover",
     type: "NORMAL",
     power: 0,
@@ -1170,9 +1170,9 @@ export const movesList: Move[] = [
     effect: "HEAL",
     secondaryEffectChance: 0,
   },
-  {
+  HARDEN: {
     id: "HARDEN",
-    hexId: "6a",
+    numericId: 0x6A,
     name: "Harden",
     type: "NORMAL",
     power: 0,
@@ -1181,9 +1181,9 @@ export const movesList: Move[] = [
     effect: "DEFENSE_UP",
     secondaryEffectChance: 0,
   },
-  {
+  MINIMIZE: {
     id: "MINIMIZE",
-    hexId: "6b",
+    numericId: 0x6B,
     name: "Minimize",
     type: "NORMAL",
     power: 0,
@@ -1192,9 +1192,9 @@ export const movesList: Move[] = [
     effect: "EVASION_UP",
     secondaryEffectChance: 0,
   },
-  {
+  SMOKESCREEN: {
     id: "SMOKESCREEN",
-    hexId: "6c",
+    numericId: 0x6C,
     name: "Smokescreen",
     type: "NORMAL",
     power: 0,
@@ -1203,10 +1203,10 @@ export const movesList: Move[] = [
     effect: "ACCURACY_DOWN",
     secondaryEffectChance: 0,
   },
-  {
+  CONFUSE_RAY: {
     id: "CONFUSE_RAY",
-    hexId: "6d",
-    name: "Confuse_ray",
+    numericId: 0x6D,
+    name: "Confuse Ray",
     type: "GHOST",
     power: 0,
     accuracy: 100,
@@ -1214,9 +1214,9 @@ export const movesList: Move[] = [
     effect: "CONFUSE",
     secondaryEffectChance: 0,
   },
-  {
+  WITHDRAW: {
     id: "WITHDRAW",
-    hexId: "6e",
+    numericId: 0x6E,
     name: "Withdraw",
     type: "WATER",
     power: 0,
@@ -1225,10 +1225,10 @@ export const movesList: Move[] = [
     effect: "DEFENSE_UP",
     secondaryEffectChance: 0,
   },
-  {
+  DEFENSE_CURL: {
     id: "DEFENSE_CURL",
-    hexId: "6f",
-    name: "Defense_curl",
+    numericId: 0x6F,
+    name: "Defense Curl",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -1236,9 +1236,9 @@ export const movesList: Move[] = [
     effect: "DEFENSE_CURL",
     secondaryEffectChance: 0,
   },
-  {
+  BARRIER: {
     id: "BARRIER",
-    hexId: "70",
+    numericId: 0x70,
     name: "Barrier",
     type: "PSYCHIC",
     power: 0,
@@ -1247,10 +1247,10 @@ export const movesList: Move[] = [
     effect: "DEFENSE_UP_2",
     secondaryEffectChance: 0,
   },
-  {
+  LIGHT_SCREEN: {
     id: "LIGHT_SCREEN",
-    hexId: "71",
-    name: "Light_screen",
+    numericId: 0x71,
+    name: "Light Screen",
     type: "PSYCHIC",
     power: 0,
     accuracy: 100,
@@ -1258,9 +1258,9 @@ export const movesList: Move[] = [
     effect: "LIGHT_SCREEN",
     secondaryEffectChance: 0,
   },
-  {
+  HAZE: {
     id: "HAZE",
-    hexId: "72",
+    numericId: 0x72,
     name: "Haze",
     type: "ICE",
     power: 0,
@@ -1269,9 +1269,9 @@ export const movesList: Move[] = [
     effect: "RESET_STATS",
     secondaryEffectChance: 0,
   },
-  {
+  REFLECT: {
     id: "REFLECT",
-    hexId: "73",
+    numericId: 0x73,
     name: "Reflect",
     type: "PSYCHIC",
     power: 0,
@@ -1280,10 +1280,10 @@ export const movesList: Move[] = [
     effect: "REFLECT",
     secondaryEffectChance: 0,
   },
-  {
+  FOCUS_ENERGY: {
     id: "FOCUS_ENERGY",
-    hexId: "74",
-    name: "Focus_energy",
+    numericId: 0x74,
+    name: "Focus Energy",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -1291,9 +1291,9 @@ export const movesList: Move[] = [
     effect: "FOCUS_ENERGY",
     secondaryEffectChance: 0,
   },
-  {
+  BIDE: {
     id: "BIDE",
-    hexId: "75",
+    numericId: 0x75,
     name: "Bide",
     type: "NORMAL",
     power: 0,
@@ -1302,9 +1302,9 @@ export const movesList: Move[] = [
     effect: "BIDE",
     secondaryEffectChance: 0,
   },
-  {
+  METRONOME: {
     id: "METRONOME",
-    hexId: "76",
+    numericId: 0x76,
     name: "Metronome",
     type: "NORMAL",
     power: 0,
@@ -1313,10 +1313,10 @@ export const movesList: Move[] = [
     effect: "METRONOME",
     secondaryEffectChance: 0,
   },
-  {
+  MIRROR_MOVE: {
     id: "MIRROR_MOVE",
-    hexId: "77",
-    name: "Mirror_move",
+    numericId: 0x77,
+    name: "Mirror Move",
     type: "FLYING",
     power: 0,
     accuracy: 100,
@@ -1324,9 +1324,9 @@ export const movesList: Move[] = [
     effect: "MIRROR_MOVE",
     secondaryEffectChance: 0,
   },
-  {
+  SELFDESTRUCT: {
     id: "SELFDESTRUCT",
-    hexId: "78",
+    numericId: 0x78,
     name: "Selfdestruct",
     type: "NORMAL",
     power: 200,
@@ -1335,10 +1335,10 @@ export const movesList: Move[] = [
     effect: "SELFDESTRUCT",
     secondaryEffectChance: 0,
   },
-  {
+  EGG_BOMB: {
     id: "EGG_BOMB",
-    hexId: "79",
-    name: "Egg_bomb",
+    numericId: 0x79,
+    name: "Egg Bomb",
     type: "NORMAL",
     power: 100,
     accuracy: 75,
@@ -1346,9 +1346,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  LICK: {
     id: "LICK",
-    hexId: "7a",
+    numericId: 0x7A,
     name: "Lick",
     type: "GHOST",
     power: 20,
@@ -1357,9 +1357,9 @@ export const movesList: Move[] = [
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  SMOG: {
     id: "SMOG",
-    hexId: "7b",
+    numericId: 0x7B,
     name: "Smog",
     type: "POISON",
     power: 20,
@@ -1368,9 +1368,9 @@ export const movesList: Move[] = [
     effect: "POISON_HIT",
     secondaryEffectChance: 40,
   },
-  {
+  SLUDGE: {
     id: "SLUDGE",
-    hexId: "7c",
+    numericId: 0x7C,
     name: "Sludge",
     type: "POISON",
     power: 65,
@@ -1379,10 +1379,10 @@ export const movesList: Move[] = [
     effect: "POISON_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  BONE_CLUB: {
     id: "BONE_CLUB",
-    hexId: "7d",
-    name: "Bone_club",
+    numericId: 0x7D,
+    name: "Bone Club",
     type: "GROUND",
     power: 65,
     accuracy: 85,
@@ -1390,10 +1390,10 @@ export const movesList: Move[] = [
     effect: "FLINCH_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  FIRE_BLAST: {
     id: "FIRE_BLAST",
-    hexId: "7e",
-    name: "Fire_blast",
+    numericId: 0x7E,
+    name: "Fire Blast",
     type: "FIRE",
     power: 120,
     accuracy: 85,
@@ -1401,9 +1401,9 @@ export const movesList: Move[] = [
     effect: "BURN_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  WATERFALL: {
     id: "WATERFALL",
-    hexId: "7f",
+    numericId: 0x7F,
     name: "Waterfall",
     type: "WATER",
     power: 80,
@@ -1412,9 +1412,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  CLAMP: {
     id: "CLAMP",
-    hexId: "80",
+    numericId: 0x80,
     name: "Clamp",
     type: "WATER",
     power: 35,
@@ -1423,9 +1423,9 @@ export const movesList: Move[] = [
     effect: "TRAP_TARGET",
     secondaryEffectChance: 0,
   },
-  {
+  SWIFT: {
     id: "SWIFT",
-    hexId: "81",
+    numericId: 0x81,
     name: "Swift",
     type: "NORMAL",
     power: 60,
@@ -1434,10 +1434,10 @@ export const movesList: Move[] = [
     effect: "ALWAYS_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  SKULL_BASH: {
     id: "SKULL_BASH",
-    hexId: "82",
-    name: "Skull_bash",
+    numericId: 0x82,
+    name: "Skull Bash",
     type: "NORMAL",
     power: 100,
     accuracy: 100,
@@ -1445,10 +1445,10 @@ export const movesList: Move[] = [
     effect: "SKULL_BASH",
     secondaryEffectChance: 0,
   },
-  {
+  SPIKE_CANNON: {
     id: "SPIKE_CANNON",
-    hexId: "83",
-    name: "Spike_cannon",
+    numericId: 0x83,
+    name: "Spike Cannon",
     type: "NORMAL",
     power: 20,
     accuracy: 100,
@@ -1456,9 +1456,9 @@ export const movesList: Move[] = [
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  CONSTRICT: {
     id: "CONSTRICT",
-    hexId: "84",
+    numericId: 0x84,
     name: "Constrict",
     type: "NORMAL",
     power: 10,
@@ -1467,9 +1467,9 @@ export const movesList: Move[] = [
     effect: "SPEED_DOWN_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  AMNESIA: {
     id: "AMNESIA",
-    hexId: "85",
+    numericId: 0x85,
     name: "Amnesia",
     type: "PSYCHIC",
     power: 0,
@@ -1478,9 +1478,9 @@ export const movesList: Move[] = [
     effect: "SP_DEF_UP_2",
     secondaryEffectChance: 0,
   },
-  {
+  KINESIS: {
     id: "KINESIS",
-    hexId: "86",
+    numericId: 0x86,
     name: "Kinesis",
     type: "PSYCHIC",
     power: 0,
@@ -1489,9 +1489,9 @@ export const movesList: Move[] = [
     effect: "ACCURACY_DOWN",
     secondaryEffectChance: 0,
   },
-  {
+  SOFTBOILED: {
     id: "SOFTBOILED",
-    hexId: "87",
+    numericId: 0x87,
     name: "Softboiled",
     type: "NORMAL",
     power: 0,
@@ -1500,10 +1500,10 @@ export const movesList: Move[] = [
     effect: "HEAL",
     secondaryEffectChance: 0,
   },
-  {
+  HI_JUMP_KICK: {
     id: "HI_JUMP_KICK",
-    hexId: "88",
-    name: "Hi_jump_kick",
+    numericId: 0x88,
+    name: "Hi Jump Kick",
     type: "FIGHTING",
     power: 85,
     accuracy: 90,
@@ -1511,9 +1511,9 @@ export const movesList: Move[] = [
     effect: "JUMP_KICK",
     secondaryEffectChance: 0,
   },
-  {
+  GLARE: {
     id: "GLARE",
-    hexId: "89",
+    numericId: 0x89,
     name: "Glare",
     type: "NORMAL",
     power: 0,
@@ -1522,10 +1522,10 @@ export const movesList: Move[] = [
     effect: "PARALYZE",
     secondaryEffectChance: 0,
   },
-  {
+  DREAM_EATER: {
     id: "DREAM_EATER",
-    hexId: "8a",
-    name: "Dream_eater",
+    numericId: 0x8A,
+    name: "Dream Eater",
     type: "PSYCHIC",
     power: 100,
     accuracy: 100,
@@ -1533,10 +1533,10 @@ export const movesList: Move[] = [
     effect: "DREAM_EATER",
     secondaryEffectChance: 0,
   },
-  {
+  POISON_GAS: {
     id: "POISON_GAS",
-    hexId: "8b",
-    name: "Poison_gas",
+    numericId: 0x8B,
+    name: "Poison Gas",
     type: "POISON",
     power: 0,
     accuracy: 55,
@@ -1544,9 +1544,9 @@ export const movesList: Move[] = [
     effect: "POISON",
     secondaryEffectChance: 0,
   },
-  {
+  BARRAGE: {
     id: "BARRAGE",
-    hexId: "8c",
+    numericId: 0x8C,
     name: "Barrage",
     type: "NORMAL",
     power: 15,
@@ -1555,10 +1555,10 @@ export const movesList: Move[] = [
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  LEECH_LIFE: {
     id: "LEECH_LIFE",
-    hexId: "8d",
-    name: "Leech_life",
+    numericId: 0x8D,
+    name: "Leech Life",
     type: "BUG",
     power: 20,
     accuracy: 100,
@@ -1566,10 +1566,10 @@ export const movesList: Move[] = [
     effect: "LEECH_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  LOVELY_KISS: {
     id: "LOVELY_KISS",
-    hexId: "8e",
-    name: "Lovely_kiss",
+    numericId: 0x8E,
+    name: "Lovely Kiss",
     type: "NORMAL",
     power: 0,
     accuracy: 75,
@@ -1577,10 +1577,10 @@ export const movesList: Move[] = [
     effect: "SLEEP",
     secondaryEffectChance: 0,
   },
-  {
+  SKY_ATTACK: {
     id: "SKY_ATTACK",
-    hexId: "8f",
-    name: "Sky_attack",
+    numericId: 0x8F,
+    name: "Sky Attack",
     type: "FLYING",
     power: 140,
     accuracy: 90,
@@ -1588,9 +1588,9 @@ export const movesList: Move[] = [
     effect: "SKY_ATTACK",
     secondaryEffectChance: 0,
   },
-  {
+  TRANSFORM: {
     id: "TRANSFORM",
-    hexId: "90",
+    numericId: 0x90,
     name: "Transform",
     type: "NORMAL",
     power: 0,
@@ -1599,9 +1599,9 @@ export const movesList: Move[] = [
     effect: "TRANSFORM",
     secondaryEffectChance: 0,
   },
-  {
+  BUBBLE: {
     id: "BUBBLE",
-    hexId: "91",
+    numericId: 0x91,
     name: "Bubble",
     type: "WATER",
     power: 20,
@@ -1610,10 +1610,10 @@ export const movesList: Move[] = [
     effect: "SPEED_DOWN_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  DIZZY_PUNCH: {
     id: "DIZZY_PUNCH",
-    hexId: "92",
-    name: "Dizzy_punch",
+    numericId: 0x92,
+    name: "Dizzy Punch",
     type: "NORMAL",
     power: 70,
     accuracy: 100,
@@ -1621,9 +1621,9 @@ export const movesList: Move[] = [
     effect: "CONFUSE_HIT",
     secondaryEffectChance: 20,
   },
-  {
+  SPORE: {
     id: "SPORE",
-    hexId: "93",
+    numericId: 0x93,
     name: "Spore",
     type: "GRASS",
     power: 0,
@@ -1632,9 +1632,9 @@ export const movesList: Move[] = [
     effect: "SLEEP",
     secondaryEffectChance: 0,
   },
-  {
+  FLASH: {
     id: "FLASH",
-    hexId: "94",
+    numericId: 0x94,
     name: "Flash",
     type: "NORMAL",
     power: 0,
@@ -1643,9 +1643,9 @@ export const movesList: Move[] = [
     effect: "ACCURACY_DOWN",
     secondaryEffectChance: 0,
   },
-  {
+  PSYWAVE: {
     id: "PSYWAVE",
-    hexId: "95",
+    numericId: 0x95,
     name: "Psywave",
     type: "PSYCHIC",
     power: 1,
@@ -1654,9 +1654,9 @@ export const movesList: Move[] = [
     effect: "PSYWAVE",
     secondaryEffectChance: 0,
   },
-  {
+  SPLASH: {
     id: "SPLASH",
-    hexId: "96",
+    numericId: 0x96,
     name: "Splash",
     type: "NORMAL",
     power: 0,
@@ -1665,10 +1665,10 @@ export const movesList: Move[] = [
     effect: "SPLASH",
     secondaryEffectChance: 0,
   },
-  {
+  ACID_ARMOR: {
     id: "ACID_ARMOR",
-    hexId: "97",
-    name: "Acid_armor",
+    numericId: 0x97,
+    name: "Acid Armor",
     type: "POISON",
     power: 0,
     accuracy: 100,
@@ -1676,9 +1676,9 @@ export const movesList: Move[] = [
     effect: "DEFENSE_UP_2",
     secondaryEffectChance: 0,
   },
-  {
+  CRABHAMMER: {
     id: "CRABHAMMER",
-    hexId: "98",
+    numericId: 0x98,
     name: "Crabhammer",
     type: "WATER",
     power: 90,
@@ -1687,9 +1687,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  EXPLOSION: {
     id: "EXPLOSION",
-    hexId: "99",
+    numericId: 0x99,
     name: "Explosion",
     type: "NORMAL",
     power: 250,
@@ -1698,10 +1698,10 @@ export const movesList: Move[] = [
     effect: "SELFDESTRUCT",
     secondaryEffectChance: 0,
   },
-  {
+  FURY_SWIPES: {
     id: "FURY_SWIPES",
-    hexId: "9a",
-    name: "Fury_swipes",
+    numericId: 0x9A,
+    name: "Fury Swipes",
     type: "NORMAL",
     power: 18,
     accuracy: 80,
@@ -1709,9 +1709,9 @@ export const movesList: Move[] = [
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  BONEMERANG: {
     id: "BONEMERANG",
-    hexId: "9b",
+    numericId: 0x9B,
     name: "Bonemerang",
     type: "GROUND",
     power: 50,
@@ -1720,9 +1720,9 @@ export const movesList: Move[] = [
     effect: "DOUBLE_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  REST: {
     id: "REST",
-    hexId: "9c",
+    numericId: 0x9C,
     name: "Rest",
     type: "PSYCHIC",
     power: 0,
@@ -1731,10 +1731,10 @@ export const movesList: Move[] = [
     effect: "HEAL",
     secondaryEffectChance: 0,
   },
-  {
+  ROCK_SLIDE: {
     id: "ROCK_SLIDE",
-    hexId: "9d",
-    name: "Rock_slide",
+    numericId: 0x9D,
+    name: "Rock Slide",
     type: "ROCK",
     power: 75,
     accuracy: 90,
@@ -1742,10 +1742,10 @@ export const movesList: Move[] = [
     effect: "FLINCH_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  HYPER_FANG: {
     id: "HYPER_FANG",
-    hexId: "9e",
-    name: "Hyper_fang",
+    numericId: 0x9E,
+    name: "Hyper Fang",
     type: "NORMAL",
     power: 80,
     accuracy: 90,
@@ -1753,9 +1753,9 @@ export const movesList: Move[] = [
     effect: "FLINCH_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  SHARPEN: {
     id: "SHARPEN",
-    hexId: "9f",
+    numericId: 0x9F,
     name: "Sharpen",
     type: "NORMAL",
     power: 0,
@@ -1764,9 +1764,9 @@ export const movesList: Move[] = [
     effect: "ATTACK_UP",
     secondaryEffectChance: 0,
   },
-  {
+  CONVERSION: {
     id: "CONVERSION",
-    hexId: "a0",
+    numericId: 0xA0,
     name: "Conversion",
     type: "NORMAL",
     power: 0,
@@ -1775,10 +1775,10 @@ export const movesList: Move[] = [
     effect: "CONVERSION",
     secondaryEffectChance: 0,
   },
-  {
+  TRI_ATTACK: {
     id: "TRI_ATTACK",
-    hexId: "a1",
-    name: "Tri_attack",
+    numericId: 0xA1,
+    name: "Tri Attack",
     type: "NORMAL",
     power: 80,
     accuracy: 100,
@@ -1786,10 +1786,10 @@ export const movesList: Move[] = [
     effect: "TRI_ATTACK",
     secondaryEffectChance: 20,
   },
-  {
+  SUPER_FANG: {
     id: "SUPER_FANG",
-    hexId: "a2",
-    name: "Super_fang",
+    numericId: 0xA2,
+    name: "Super Fang",
     type: "NORMAL",
     power: 1,
     accuracy: 90,
@@ -1797,9 +1797,9 @@ export const movesList: Move[] = [
     effect: "SUPER_FANG",
     secondaryEffectChance: 0,
   },
-  {
+  SLASH: {
     id: "SLASH",
-    hexId: "a3",
+    numericId: 0xA3,
     name: "Slash",
     type: "NORMAL",
     power: 70,
@@ -1808,9 +1808,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  SUBSTITUTE: {
     id: "SUBSTITUTE",
-    hexId: "a4",
+    numericId: 0xA4,
     name: "Substitute",
     type: "NORMAL",
     power: 0,
@@ -1819,9 +1819,9 @@ export const movesList: Move[] = [
     effect: "SUBSTITUTE",
     secondaryEffectChance: 0,
   },
-  {
+  STRUGGLE: {
     id: "STRUGGLE",
-    hexId: "a5",
+    numericId: 0xA5,
     name: "Struggle",
     type: "NORMAL",
     power: 50,
@@ -1830,9 +1830,9 @@ export const movesList: Move[] = [
     effect: "RECOIL_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  SKETCH: {
     id: "SKETCH",
-    hexId: "a6",
+    numericId: 0xA6,
     name: "Sketch",
     type: "NORMAL",
     power: 0,
@@ -1841,10 +1841,10 @@ export const movesList: Move[] = [
     effect: "SKETCH",
     secondaryEffectChance: 0,
   },
-  {
+  TRIPLE_KICK: {
     id: "TRIPLE_KICK",
-    hexId: "a7",
-    name: "Triple_kick",
+    numericId: 0xA7,
+    name: "Triple Kick",
     type: "FIGHTING",
     power: 10,
     accuracy: 90,
@@ -1852,9 +1852,9 @@ export const movesList: Move[] = [
     effect: "TRIPLE_KICK",
     secondaryEffectChance: 0,
   },
-  {
+  THIEF: {
     id: "THIEF",
-    hexId: "a8",
+    numericId: 0xA8,
     name: "Thief",
     type: "DARK",
     power: 40,
@@ -1863,10 +1863,10 @@ export const movesList: Move[] = [
     effect: "THIEF",
     secondaryEffectChance: 100,
   },
-  {
+  SPIDER_WEB: {
     id: "SPIDER_WEB",
-    hexId: "a9",
-    name: "Spider_web",
+    numericId: 0xA9,
+    name: "Spider Web",
     type: "BUG",
     power: 0,
     accuracy: 100,
@@ -1874,10 +1874,10 @@ export const movesList: Move[] = [
     effect: "MEAN_LOOK",
     secondaryEffectChance: 0,
   },
-  {
+  MIND_READER: {
     id: "MIND_READER",
-    hexId: "aa",
-    name: "Mind_reader",
+    numericId: 0xAA,
+    name: "Mind Reader",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -1885,9 +1885,9 @@ export const movesList: Move[] = [
     effect: "LOCK_ON",
     secondaryEffectChance: 0,
   },
-  {
+  NIGHTMARE: {
     id: "NIGHTMARE",
-    hexId: "ab",
+    numericId: 0xAB,
     name: "Nightmare",
     type: "GHOST",
     power: 0,
@@ -1896,10 +1896,10 @@ export const movesList: Move[] = [
     effect: "NIGHTMARE",
     secondaryEffectChance: 0,
   },
-  {
+  FLAME_WHEEL: {
     id: "FLAME_WHEEL",
-    hexId: "ac",
-    name: "Flame_wheel",
+    numericId: 0xAC,
+    name: "Flame Wheel",
     type: "FIRE",
     power: 60,
     accuracy: 100,
@@ -1907,9 +1907,9 @@ export const movesList: Move[] = [
     effect: "FLAME_WHEEL",
     secondaryEffectChance: 10,
   },
-  {
+  SNORE: {
     id: "SNORE",
-    hexId: "ad",
+    numericId: 0xAD,
     name: "Snore",
     type: "NORMAL",
     power: 40,
@@ -1918,9 +1918,9 @@ export const movesList: Move[] = [
     effect: "SNORE",
     secondaryEffectChance: 30,
   },
-  {
+  CURSE: {
     id: "CURSE",
-    hexId: "ae",
+    numericId: 0xAE,
     name: "Curse",
     type: "NONE",
     power: 0,
@@ -1929,9 +1929,9 @@ export const movesList: Move[] = [
     effect: "CURSE",
     secondaryEffectChance: 0,
   },
-  {
+  FLAIL: {
     id: "FLAIL",
-    hexId: "af",
+    numericId: 0xAF,
     name: "Flail",
     type: "NORMAL",
     power: 1,
@@ -1940,9 +1940,9 @@ export const movesList: Move[] = [
     effect: "REVERSAL",
     secondaryEffectChance: 0,
   },
-  {
+  CONVERSION2: {
     id: "CONVERSION2",
-    hexId: "b0",
+    numericId: 0xB0,
     name: "Conversion2",
     type: "NORMAL",
     power: 0,
@@ -1951,9 +1951,9 @@ export const movesList: Move[] = [
     effect: "CONVERSION2",
     secondaryEffectChance: 0,
   },
-  {
+  AEROBLAST: {
     id: "AEROBLAST",
-    hexId: "b1",
+    numericId: 0xB1,
     name: "Aeroblast",
     type: "FLYING",
     power: 100,
@@ -1962,10 +1962,10 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  COTTON_SPORE: {
     id: "COTTON_SPORE",
-    hexId: "b2",
-    name: "Cotton_spore",
+    numericId: 0xB2,
+    name: "Cotton Spore",
     type: "GRASS",
     power: 0,
     accuracy: 85,
@@ -1973,9 +1973,9 @@ export const movesList: Move[] = [
     effect: "SPEED_DOWN_2",
     secondaryEffectChance: 0,
   },
-  {
+  REVERSAL: {
     id: "REVERSAL",
-    hexId: "b3",
+    numericId: 0xB3,
     name: "Reversal",
     type: "FIGHTING",
     power: 1,
@@ -1984,9 +1984,9 @@ export const movesList: Move[] = [
     effect: "REVERSAL",
     secondaryEffectChance: 0,
   },
-  {
+  SPITE: {
     id: "SPITE",
-    hexId: "b4",
+    numericId: 0xB4,
     name: "Spite",
     type: "GHOST",
     power: 0,
@@ -1995,10 +1995,10 @@ export const movesList: Move[] = [
     effect: "SPITE",
     secondaryEffectChance: 0,
   },
-  {
+  POWDER_SNOW: {
     id: "POWDER_SNOW",
-    hexId: "b5",
-    name: "Powder_snow",
+    numericId: 0xB5,
+    name: "Powder Snow",
     type: "ICE",
     power: 40,
     accuracy: 100,
@@ -2006,9 +2006,9 @@ export const movesList: Move[] = [
     effect: "FREEZE_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  PROTECT: {
     id: "PROTECT",
-    hexId: "b6",
+    numericId: 0xB6,
     name: "Protect",
     type: "NORMAL",
     power: 0,
@@ -2017,10 +2017,10 @@ export const movesList: Move[] = [
     effect: "PROTECT",
     secondaryEffectChance: 0,
   },
-  {
+  MACH_PUNCH: {
     id: "MACH_PUNCH",
-    hexId: "b7",
-    name: "Mach_punch",
+    numericId: 0xB7,
+    name: "Mach Punch",
     type: "FIGHTING",
     power: 40,
     accuracy: 100,
@@ -2028,10 +2028,10 @@ export const movesList: Move[] = [
     effect: "PRIORITY_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  SCARY_FACE: {
     id: "SCARY_FACE",
-    hexId: "b8",
-    name: "Scary_face",
+    numericId: 0xB8,
+    name: "Scary Face",
     type: "NORMAL",
     power: 0,
     accuracy: 90,
@@ -2039,10 +2039,10 @@ export const movesList: Move[] = [
     effect: "SPEED_DOWN_2",
     secondaryEffectChance: 0,
   },
-  {
+  FAINT_ATTACK: {
     id: "FAINT_ATTACK",
-    hexId: "b9",
-    name: "Faint_attack",
+    numericId: 0xB9,
+    name: "Faint Attack",
     type: "DARK",
     power: 60,
     accuracy: 100,
@@ -2050,10 +2050,10 @@ export const movesList: Move[] = [
     effect: "ALWAYS_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  SWEET_KISS: {
     id: "SWEET_KISS",
-    hexId: "ba",
-    name: "Sweet_kiss",
+    numericId: 0xBA,
+    name: "Sweet Kiss",
     type: "NORMAL",
     power: 0,
     accuracy: 75,
@@ -2061,10 +2061,10 @@ export const movesList: Move[] = [
     effect: "CONFUSE",
     secondaryEffectChance: 0,
   },
-  {
+  BELLY_DRUM: {
     id: "BELLY_DRUM",
-    hexId: "bb",
-    name: "Belly_drum",
+    numericId: 0xBB,
+    name: "Belly Drum",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -2072,10 +2072,10 @@ export const movesList: Move[] = [
     effect: "BELLY_DRUM",
     secondaryEffectChance: 0,
   },
-  {
+  SLUDGE_BOMB: {
     id: "SLUDGE_BOMB",
-    hexId: "bc",
-    name: "Sludge_bomb",
+    numericId: 0xBC,
+    name: "Sludge Bomb",
     type: "POISON",
     power: 90,
     accuracy: 100,
@@ -2083,10 +2083,10 @@ export const movesList: Move[] = [
     effect: "POISON_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  MUD_SLAP: {
     id: "MUD_SLAP",
-    hexId: "bd",
-    name: "Mud_slap",
+    numericId: 0xBD,
+    name: "Mud Slap",
     type: "GROUND",
     power: 20,
     accuracy: 100,
@@ -2094,9 +2094,9 @@ export const movesList: Move[] = [
     effect: "ACCURACY_DOWN_HIT",
     secondaryEffectChance: 100,
   },
-  {
+  OCTAZOOKA: {
     id: "OCTAZOOKA",
-    hexId: "be",
+    numericId: 0xBE,
     name: "Octazooka",
     type: "WATER",
     power: 65,
@@ -2105,9 +2105,9 @@ export const movesList: Move[] = [
     effect: "ACCURACY_DOWN_HIT",
     secondaryEffectChance: 50,
   },
-  {
+  SPIKES: {
     id: "SPIKES",
-    hexId: "bf",
+    numericId: 0xBF,
     name: "Spikes",
     type: "GROUND",
     power: 0,
@@ -2116,10 +2116,10 @@ export const movesList: Move[] = [
     effect: "SPIKES",
     secondaryEffectChance: 0,
   },
-  {
+  ZAP_CANNON: {
     id: "ZAP_CANNON",
-    hexId: "c0",
-    name: "Zap_cannon",
+    numericId: 0xC0,
+    name: "Zap Cannon",
     type: "ELECTRIC",
     power: 100,
     accuracy: 50,
@@ -2127,9 +2127,9 @@ export const movesList: Move[] = [
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 100,
   },
-  {
+  FORESIGHT: {
     id: "FORESIGHT",
-    hexId: "c1",
+    numericId: 0xC1,
     name: "Foresight",
     type: "NORMAL",
     power: 0,
@@ -2138,10 +2138,10 @@ export const movesList: Move[] = [
     effect: "FORESIGHT",
     secondaryEffectChance: 0,
   },
-  {
+  DESTINY_BOND: {
     id: "DESTINY_BOND",
-    hexId: "c2",
-    name: "Destiny_bond",
+    numericId: 0xC2,
+    name: "Destiny Bond",
     type: "GHOST",
     power: 0,
     accuracy: 100,
@@ -2149,10 +2149,10 @@ export const movesList: Move[] = [
     effect: "DESTINY_BOND",
     secondaryEffectChance: 0,
   },
-  {
+  PERISH_SONG: {
     id: "PERISH_SONG",
-    hexId: "c3",
-    name: "Perish_song",
+    numericId: 0xC3,
+    name: "Perish Song",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -2160,10 +2160,10 @@ export const movesList: Move[] = [
     effect: "PERISH_SONG",
     secondaryEffectChance: 0,
   },
-  {
+  ICY_WIND: {
     id: "ICY_WIND",
-    hexId: "c4",
-    name: "Icy_wind",
+    numericId: 0xC4,
+    name: "Icy Wind",
     type: "ICE",
     power: 55,
     accuracy: 95,
@@ -2171,9 +2171,9 @@ export const movesList: Move[] = [
     effect: "SPEED_DOWN_HIT",
     secondaryEffectChance: 100,
   },
-  {
+  DETECT: {
     id: "DETECT",
-    hexId: "c5",
+    numericId: 0xC5,
     name: "Detect",
     type: "FIGHTING",
     power: 0,
@@ -2182,10 +2182,10 @@ export const movesList: Move[] = [
     effect: "PROTECT",
     secondaryEffectChance: 0,
   },
-  {
+  BONE_RUSH: {
     id: "BONE_RUSH",
-    hexId: "c6",
-    name: "Bone_rush",
+    numericId: 0xC6,
+    name: "Bone Rush",
     type: "GROUND",
     power: 25,
     accuracy: 80,
@@ -2193,10 +2193,10 @@ export const movesList: Move[] = [
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  LOCK_ON: {
     id: "LOCK_ON",
-    hexId: "c7",
-    name: "Lock_on",
+    numericId: 0xC7,
+    name: "Lock On",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -2204,9 +2204,9 @@ export const movesList: Move[] = [
     effect: "LOCK_ON",
     secondaryEffectChance: 0,
   },
-  {
+  OUTRAGE: {
     id: "OUTRAGE",
-    hexId: "c8",
+    numericId: 0xC8,
     name: "Outrage",
     type: "DRAGON",
     power: 90,
@@ -2215,9 +2215,9 @@ export const movesList: Move[] = [
     effect: "RAMPAGE",
     secondaryEffectChance: 0,
   },
-  {
+  SANDSTORM: {
     id: "SANDSTORM",
-    hexId: "c9",
+    numericId: 0xC9,
     name: "Sandstorm",
     type: "ROCK",
     power: 0,
@@ -2226,10 +2226,10 @@ export const movesList: Move[] = [
     effect: "SANDSTORM",
     secondaryEffectChance: 0,
   },
-  {
+  GIGA_DRAIN: {
     id: "GIGA_DRAIN",
-    hexId: "ca",
-    name: "Giga_drain",
+    numericId: 0xCA,
+    name: "Giga Drain",
     type: "GRASS",
     power: 60,
     accuracy: 100,
@@ -2237,9 +2237,9 @@ export const movesList: Move[] = [
     effect: "LEECH_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  ENDURE: {
     id: "ENDURE",
-    hexId: "cb",
+    numericId: 0xCB,
     name: "Endure",
     type: "NORMAL",
     power: 0,
@@ -2248,9 +2248,9 @@ export const movesList: Move[] = [
     effect: "ENDURE",
     secondaryEffectChance: 0,
   },
-  {
+  CHARM: {
     id: "CHARM",
-    hexId: "cc",
+    numericId: 0xCC,
     name: "Charm",
     type: "NORMAL",
     power: 0,
@@ -2259,9 +2259,9 @@ export const movesList: Move[] = [
     effect: "ATTACK_DOWN_2",
     secondaryEffectChance: 0,
   },
-  {
+  ROLLOUT: {
     id: "ROLLOUT",
-    hexId: "cd",
+    numericId: 0xCD,
     name: "Rollout",
     type: "ROCK",
     power: 30,
@@ -2270,10 +2270,10 @@ export const movesList: Move[] = [
     effect: "ROLLOUT",
     secondaryEffectChance: 0,
   },
-  {
+  FALSE_SWIPE: {
     id: "FALSE_SWIPE",
-    hexId: "ce",
-    name: "False_swipe",
+    numericId: 0xCE,
+    name: "False Swipe",
     type: "NORMAL",
     power: 40,
     accuracy: 100,
@@ -2281,9 +2281,9 @@ export const movesList: Move[] = [
     effect: "FALSE_SWIPE",
     secondaryEffectChance: 0,
   },
-  {
+  SWAGGER: {
     id: "SWAGGER",
-    hexId: "cf",
+    numericId: 0xCF,
     name: "Swagger",
     type: "NORMAL",
     power: 0,
@@ -2292,10 +2292,10 @@ export const movesList: Move[] = [
     effect: "SWAGGER",
     secondaryEffectChance: 100,
   },
-  {
+  MILK_DRINK: {
     id: "MILK_DRINK",
-    hexId: "d0",
-    name: "Milk_drink",
+    numericId: 0xD0,
+    name: "Milk Drink",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -2303,9 +2303,9 @@ export const movesList: Move[] = [
     effect: "HEAL",
     secondaryEffectChance: 0,
   },
-  {
+  SPARK: {
     id: "SPARK",
-    hexId: "d1",
+    numericId: 0xD1,
     name: "Spark",
     type: "ELECTRIC",
     power: 65,
@@ -2314,10 +2314,10 @@ export const movesList: Move[] = [
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  FURY_CUTTER: {
     id: "FURY_CUTTER",
-    hexId: "d2",
-    name: "Fury_cutter",
+    numericId: 0xD2,
+    name: "Fury Cutter",
     type: "BUG",
     power: 10,
     accuracy: 95,
@@ -2325,10 +2325,10 @@ export const movesList: Move[] = [
     effect: "FURY_CUTTER",
     secondaryEffectChance: 0,
   },
-  {
+  STEEL_WING: {
     id: "STEEL_WING",
-    hexId: "d3",
-    name: "Steel_wing",
+    numericId: 0xD3,
+    name: "Steel Wing",
     type: "STEEL",
     power: 70,
     accuracy: 90,
@@ -2336,10 +2336,10 @@ export const movesList: Move[] = [
     effect: "DEFENSE_UP_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  MEAN_LOOK: {
     id: "MEAN_LOOK",
-    hexId: "d4",
-    name: "Mean_look",
+    numericId: 0xD4,
+    name: "Mean Look",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -2347,9 +2347,9 @@ export const movesList: Move[] = [
     effect: "MEAN_LOOK",
     secondaryEffectChance: 0,
   },
-  {
+  ATTRACT: {
     id: "ATTRACT",
-    hexId: "d5",
+    numericId: 0xD5,
     name: "Attract",
     type: "NORMAL",
     power: 0,
@@ -2358,10 +2358,10 @@ export const movesList: Move[] = [
     effect: "ATTRACT",
     secondaryEffectChance: 0,
   },
-  {
+  SLEEP_TALK: {
     id: "SLEEP_TALK",
-    hexId: "d6",
-    name: "Sleep_talk",
+    numericId: 0xD6,
+    name: "Sleep Talk",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -2369,10 +2369,10 @@ export const movesList: Move[] = [
     effect: "SLEEP_TALK",
     secondaryEffectChance: 0,
   },
-  {
+  HEAL_BELL: {
     id: "HEAL_BELL",
-    hexId: "d7",
-    name: "Heal_bell",
+    numericId: 0xD7,
+    name: "Heal Bell",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -2380,9 +2380,9 @@ export const movesList: Move[] = [
     effect: "HEAL_BELL",
     secondaryEffectChance: 0,
   },
-  {
+  RETURN: {
     id: "RETURN",
-    hexId: "d8",
+    numericId: 0xD8,
     name: "Return",
     type: "NORMAL",
     power: 1,
@@ -2391,9 +2391,9 @@ export const movesList: Move[] = [
     effect: "RETURN",
     secondaryEffectChance: 0,
   },
-  {
+  PRESENT: {
     id: "PRESENT",
-    hexId: "d9",
+    numericId: 0xD9,
     name: "Present",
     type: "NORMAL",
     power: 1,
@@ -2402,9 +2402,9 @@ export const movesList: Move[] = [
     effect: "PRESENT",
     secondaryEffectChance: 0,
   },
-  {
+  FRUSTRATION: {
     id: "FRUSTRATION",
-    hexId: "da",
+    numericId: 0xDA,
     name: "Frustration",
     type: "NORMAL",
     power: 1,
@@ -2413,9 +2413,9 @@ export const movesList: Move[] = [
     effect: "FRUSTRATION",
     secondaryEffectChance: 0,
   },
-  {
+  SAFEGUARD: {
     id: "SAFEGUARD",
-    hexId: "db",
+    numericId: 0xDB,
     name: "Safeguard",
     type: "NORMAL",
     power: 0,
@@ -2424,10 +2424,10 @@ export const movesList: Move[] = [
     effect: "SAFEGUARD",
     secondaryEffectChance: 0,
   },
-  {
+  PAIN_SPLIT: {
     id: "PAIN_SPLIT",
-    hexId: "dc",
-    name: "Pain_split",
+    numericId: 0xDC,
+    name: "Pain Split",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -2435,10 +2435,10 @@ export const movesList: Move[] = [
     effect: "PAIN_SPLIT",
     secondaryEffectChance: 0,
   },
-  {
+  SACRED_FIRE: {
     id: "SACRED_FIRE",
-    hexId: "dd",
-    name: "Sacred_fire",
+    numericId: 0xDD,
+    name: "Sacred Fire",
     type: "FIRE",
     power: 100,
     accuracy: 95,
@@ -2446,9 +2446,9 @@ export const movesList: Move[] = [
     effect: "SACRED_FIRE",
     secondaryEffectChance: 50,
   },
-  {
+  MAGNITUDE: {
     id: "MAGNITUDE",
-    hexId: "de",
+    numericId: 0xDE,
     name: "Magnitude",
     type: "GROUND",
     power: 1,
@@ -2457,9 +2457,9 @@ export const movesList: Move[] = [
     effect: "MAGNITUDE",
     secondaryEffectChance: 0,
   },
-  {
+  DYNAMICPUNCH: {
     id: "DYNAMICPUNCH",
-    hexId: "df",
+    numericId: 0xDF,
     name: "Dynamicpunch",
     type: "FIGHTING",
     power: 100,
@@ -2468,9 +2468,9 @@ export const movesList: Move[] = [
     effect: "CONFUSE_HIT",
     secondaryEffectChance: 100,
   },
-  {
+  MEGAHORN: {
     id: "MEGAHORN",
-    hexId: "e0",
+    numericId: 0xE0,
     name: "Megahorn",
     type: "BUG",
     power: 120,
@@ -2479,9 +2479,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  DRAGONBREATH: {
     id: "DRAGONBREATH",
-    hexId: "e1",
+    numericId: 0xE1,
     name: "Dragonbreath",
     type: "DRAGON",
     power: 60,
@@ -2490,10 +2490,10 @@ export const movesList: Move[] = [
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  BATON_PASS: {
     id: "BATON_PASS",
-    hexId: "e2",
-    name: "Baton_pass",
+    numericId: 0xE2,
+    name: "Baton Pass",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -2501,9 +2501,9 @@ export const movesList: Move[] = [
     effect: "BATON_PASS",
     secondaryEffectChance: 0,
   },
-  {
+  ENCORE: {
     id: "ENCORE",
-    hexId: "e3",
+    numericId: 0xE3,
     name: "Encore",
     type: "NORMAL",
     power: 0,
@@ -2512,9 +2512,9 @@ export const movesList: Move[] = [
     effect: "ENCORE",
     secondaryEffectChance: 0,
   },
-  {
+  PURSUIT: {
     id: "PURSUIT",
-    hexId: "e4",
+    numericId: 0xE4,
     name: "Pursuit",
     type: "DARK",
     power: 40,
@@ -2523,10 +2523,10 @@ export const movesList: Move[] = [
     effect: "PURSUIT",
     secondaryEffectChance: 0,
   },
-  {
+  RAPID_SPIN: {
     id: "RAPID_SPIN",
-    hexId: "e5",
-    name: "Rapid_spin",
+    numericId: 0xE5,
+    name: "Rapid Spin",
     type: "NORMAL",
     power: 20,
     accuracy: 100,
@@ -2534,10 +2534,10 @@ export const movesList: Move[] = [
     effect: "RAPID_SPIN",
     secondaryEffectChance: 0,
   },
-  {
+  SWEET_SCENT: {
     id: "SWEET_SCENT",
-    hexId: "e6",
-    name: "Sweet_scent",
+    numericId: 0xE6,
+    name: "Sweet Scent",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -2545,10 +2545,10 @@ export const movesList: Move[] = [
     effect: "EVASION_DOWN",
     secondaryEffectChance: 0,
   },
-  {
+  IRON_TAIL: {
     id: "IRON_TAIL",
-    hexId: "e7",
-    name: "Iron_tail",
+    numericId: 0xE7,
+    name: "Iron Tail",
     type: "STEEL",
     power: 100,
     accuracy: 75,
@@ -2556,10 +2556,10 @@ export const movesList: Move[] = [
     effect: "DEFENSE_DOWN_HIT",
     secondaryEffectChance: 30,
   },
-  {
+  METAL_CLAW: {
     id: "METAL_CLAW",
-    hexId: "e8",
-    name: "Metal_claw",
+    numericId: 0xE8,
+    name: "Metal Claw",
     type: "STEEL",
     power: 50,
     accuracy: 95,
@@ -2567,10 +2567,10 @@ export const movesList: Move[] = [
     effect: "ATTACK_UP_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  VITAL_THROW: {
     id: "VITAL_THROW",
-    hexId: "e9",
-    name: "Vital_throw",
+    numericId: 0xE9,
+    name: "Vital Throw",
     type: "FIGHTING",
     power: 70,
     accuracy: 100,
@@ -2578,10 +2578,10 @@ export const movesList: Move[] = [
     effect: "ALWAYS_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  MORNING_SUN: {
     id: "MORNING_SUN",
-    hexId: "ea",
-    name: "Morning_sun",
+    numericId: 0xEA,
+    name: "Morning Sun",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -2589,9 +2589,9 @@ export const movesList: Move[] = [
     effect: "MORNING_SUN",
     secondaryEffectChance: 0,
   },
-  {
+  SYNTHESIS: {
     id: "SYNTHESIS",
-    hexId: "eb",
+    numericId: 0xEB,
     name: "Synthesis",
     type: "GRASS",
     power: 0,
@@ -2600,9 +2600,9 @@ export const movesList: Move[] = [
     effect: "SYNTHESIS",
     secondaryEffectChance: 0,
   },
-  {
+  MOONLIGHT: {
     id: "MOONLIGHT",
-    hexId: "ec",
+    numericId: 0xEC,
     name: "Moonlight",
     type: "NORMAL",
     power: 0,
@@ -2611,10 +2611,10 @@ export const movesList: Move[] = [
     effect: "MOONLIGHT",
     secondaryEffectChance: 0,
   },
-  {
+  HIDDEN_POWER: {
     id: "HIDDEN_POWER",
-    hexId: "ed",
-    name: "Hidden_power",
+    numericId: 0xED,
+    name: "Hidden Power",
     type: "NORMAL",
     power: 1,
     accuracy: 100,
@@ -2622,10 +2622,10 @@ export const movesList: Move[] = [
     effect: "HIDDEN_POWER",
     secondaryEffectChance: 0,
   },
-  {
+  CROSS_CHOP: {
     id: "CROSS_CHOP",
-    hexId: "ee",
-    name: "Cross_chop",
+    numericId: 0xEE,
+    name: "Cross Chop",
     type: "FIGHTING",
     power: 100,
     accuracy: 80,
@@ -2633,9 +2633,9 @@ export const movesList: Move[] = [
     effect: "HIT",
     secondaryEffectChance: 0,
   },
-  {
+  TWISTER: {
     id: "TWISTER",
-    hexId: "ef",
+    numericId: 0xEF,
     name: "Twister",
     type: "DRAGON",
     power: 40,
@@ -2644,10 +2644,10 @@ export const movesList: Move[] = [
     effect: "TWISTER",
     secondaryEffectChance: 20,
   },
-  {
+  RAIN_DANCE: {
     id: "RAIN_DANCE",
-    hexId: "f0",
-    name: "Rain_dance",
+    numericId: 0xF0,
+    name: "Rain Dance",
     type: "WATER",
     power: 0,
     accuracy: 90,
@@ -2655,10 +2655,10 @@ export const movesList: Move[] = [
     effect: "RAIN_DANCE",
     secondaryEffectChance: 0,
   },
-  {
+  SUNNY_DAY: {
     id: "SUNNY_DAY",
-    hexId: "f1",
-    name: "Sunny_day",
+    numericId: 0xF1,
+    name: "Sunny Day",
     type: "FIRE",
     power: 0,
     accuracy: 90,
@@ -2666,9 +2666,9 @@ export const movesList: Move[] = [
     effect: "SUNNY_DAY",
     secondaryEffectChance: 0,
   },
-  {
+  CRUNCH: {
     id: "CRUNCH",
-    hexId: "f2",
+    numericId: 0xF2,
     name: "Crunch",
     type: "DARK",
     power: 80,
@@ -2677,10 +2677,10 @@ export const movesList: Move[] = [
     effect: "SP_DEF_DOWN_HIT",
     secondaryEffectChance: 20,
   },
-  {
+  MIRROR_COAT: {
     id: "MIRROR_COAT",
-    hexId: "f3",
-    name: "Mirror_coat",
+    numericId: 0xF3,
+    name: "Mirror Coat",
     type: "PSYCHIC",
     power: 1,
     accuracy: 100,
@@ -2688,10 +2688,10 @@ export const movesList: Move[] = [
     effect: "MIRROR_COAT",
     secondaryEffectChance: 0,
   },
-  {
+  PSYCH_UP: {
     id: "PSYCH_UP",
-    hexId: "f4",
-    name: "Psych_up",
+    numericId: 0xF4,
+    name: "Psych Up",
     type: "NORMAL",
     power: 0,
     accuracy: 100,
@@ -2699,9 +2699,9 @@ export const movesList: Move[] = [
     effect: "PSYCH_UP",
     secondaryEffectChance: 0,
   },
-  {
+  EXTREMESPEED: {
     id: "EXTREMESPEED",
-    hexId: "f5",
+    numericId: 0xF5,
     name: "Extremespeed",
     type: "NORMAL",
     power: 80,
@@ -2710,9 +2710,9 @@ export const movesList: Move[] = [
     effect: "PRIORITY_HIT",
     secondaryEffectChance: 0,
   },
-  {
+  ANCIENTPOWER: {
     id: "ANCIENTPOWER",
-    hexId: "f6",
+    numericId: 0xF6,
     name: "Ancientpower",
     type: "ROCK",
     power: 60,
@@ -2721,10 +2721,10 @@ export const movesList: Move[] = [
     effect: "ALL_UP_HIT",
     secondaryEffectChance: 10,
   },
-  {
+  SHADOW_BALL: {
     id: "SHADOW_BALL",
-    hexId: "f7",
-    name: "Shadow_ball",
+    numericId: 0xF7,
+    name: "Shadow Ball",
     type: "GHOST",
     power: 80,
     accuracy: 100,
@@ -2732,10 +2732,10 @@ export const movesList: Move[] = [
     effect: "SP_DEF_DOWN_HIT",
     secondaryEffectChance: 20,
   },
-  {
+  FUTURE_SIGHT: {
     id: "FUTURE_SIGHT",
-    hexId: "f8",
-    name: "Future_sight",
+    numericId: 0xF8,
+    name: "Future Sight",
     type: "PSYCHIC",
     power: 80,
     accuracy: 90,
@@ -2743,10 +2743,10 @@ export const movesList: Move[] = [
     effect: "FUTURE_SIGHT",
     secondaryEffectChance: 0,
   },
-  {
+  ROCK_SMASH: {
     id: "ROCK_SMASH",
-    hexId: "f9",
-    name: "Rock_smash",
+    numericId: 0xF9,
+    name: "Rock Smash",
     type: "FIGHTING",
     power: 20,
     accuracy: 100,
@@ -2754,9 +2754,9 @@ export const movesList: Move[] = [
     effect: "DEFENSE_DOWN_HIT",
     secondaryEffectChance: 50,
   },
-  {
+  WHIRLPOOL: {
     id: "WHIRLPOOL",
-    hexId: "fa",
+    numericId: 0xFA,
     name: "Whirlpool",
     type: "WATER",
     power: 15,
@@ -2765,10 +2765,10 @@ export const movesList: Move[] = [
     effect: "TRAP_TARGET",
     secondaryEffectChance: 0,
   },
-  {
+  BEAT_UP: {
     id: "BEAT_UP",
-    hexId: "fb",
-    name: "Beat_up",
+    numericId: 0xFB,
+    name: "Beat Up",
     type: "DARK",
     power: 10,
     accuracy: 100,
@@ -2776,4 +2776,4 @@ export const movesList: Move[] = [
     effect: "BEAT_UP",
     secondaryEffectChance: 0,
   },
-]
+}
