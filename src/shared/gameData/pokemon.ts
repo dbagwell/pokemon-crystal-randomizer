@@ -111,7 +111,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "IVYSAUR",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 16,
         },
       },
@@ -227,7 +227,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "VENUSAUR",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 32,
         },
       },
@@ -456,7 +456,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "CHARMELEON",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 16,
         },
       },
@@ -568,7 +568,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "CHARIZARD",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 36,
         },
       },
@@ -807,7 +807,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "WARTORTLE",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 16,
         },
       },
@@ -928,7 +928,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "BLASTOISE",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 36,
         },
       },
@@ -1092,7 +1092,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "METAPOD",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 7,
         },
       },
@@ -1137,7 +1137,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "BUTTERFREE",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 10,
         },
       },
@@ -1278,7 +1278,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "KAKUNA",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 7,
         },
       },
@@ -1324,7 +1324,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "BEEDRILL",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 10,
         },
       },
@@ -1507,7 +1507,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "PIDGEOTTO",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 18,
         },
       },
@@ -1607,7 +1607,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "PIDGEOT",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 36,
         },
       },
@@ -1803,7 +1803,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "RATICATE",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 20,
         },
       },
@@ -1994,7 +1994,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "FEAROW",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 20,
         },
       },
@@ -2188,7 +2188,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "ARBOK",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 22,
         },
       },
@@ -2394,7 +2394,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "RAICHU",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "THUNDERSTONE",
         },
       },
@@ -2580,7 +2580,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "SANDSLASH",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 22,
         },
       },
@@ -2784,7 +2784,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "NIDORINA",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 16,
         },
       },
@@ -2878,7 +2878,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "NIDOQUEEN",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "MOON_STONE",
         },
       },
@@ -3069,7 +3069,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "NIDORINO",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 16,
         },
       },
@@ -3166,7 +3166,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "NIDOKING",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "MOON_STONE",
         },
       },
@@ -3376,7 +3376,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "CLEFABLE",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "MOON_STONE",
         },
       },
@@ -3561,7 +3561,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "NINETALES",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "FIRE_STONE",
         },
       },
@@ -3744,7 +3744,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "WIGGLYTUFF",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "MOON_STONE",
         },
       },
@@ -3920,7 +3920,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "GOLBAT",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 22,
         },
       },
@@ -4015,7 +4015,8 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "CROBAT",
         method: {
-          type: "HAPPINESS",
+          typeId: "HAPPINESS",
+          conditionId: "NONE",
         },
       },
     ],
@@ -4112,7 +4113,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "GLOOM",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 21,
         },
       },
@@ -4212,14 +4213,14 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "VILEPLUME",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "LEAF_STONE",
         },
       },
       {
         pokemonId: "BELLOSSOM",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "SUN_STONE",
         },
       },
@@ -4396,7 +4397,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "PARASECT",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 24,
         },
       },
@@ -4605,7 +4606,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "VENOMOTH",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 31,
         },
       },
@@ -4810,7 +4811,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "DUGTRIO",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 26,
         },
       },
@@ -5010,7 +5011,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "PERSIAN",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 28,
         },
       },
@@ -5217,7 +5218,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "GOLDUCK",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 33,
         },
       },
@@ -5442,7 +5443,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "PRIMEAPE",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 28,
         },
       },
@@ -5656,7 +5657,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "ARCANINE",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "FIRE_STONE",
         },
       },
@@ -5831,7 +5832,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "POLIWHIRL",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 25,
         },
       },
@@ -5941,14 +5942,14 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "POLIWRATH",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "WATER_STONE",
         },
       },
       {
         pokemonId: "POLITOED",
         method: {
-          type: "TRADE",
+          typeId: "TRADE",
           item: "KINGS_ROCK",
         },
       },
@@ -6113,7 +6114,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "KADABRA",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 16,
         },
       },
@@ -6222,7 +6223,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "ALAKAZAM",
         method: {
-          type: "TRADE",
+          typeId: "TRADE",
         },
       },
     ],
@@ -6435,7 +6436,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "MACHOKE",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 28,
         },
       },
@@ -6546,7 +6547,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "MACHAMP",
         method: {
-          type: "TRADE",
+          typeId: "TRADE",
         },
       },
     ],
@@ -6755,7 +6756,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "WEEPINBELL",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 21,
         },
       },
@@ -6863,7 +6864,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "VICTREEBEL",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "LEAF_STONE",
         },
       },
@@ -7035,7 +7036,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "TENTACRUEL",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 30,
         },
       },
@@ -7240,7 +7241,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "GRAVELER",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 25,
         },
       },
@@ -7352,7 +7353,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "GOLEM",
         method: {
-          type: "TRADE",
+          typeId: "TRADE",
         },
       },
     ],
@@ -7562,7 +7563,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "RAPIDASH",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 40,
         },
       },
@@ -7780,14 +7781,14 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "SLOWBRO",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 37,
         },
       },
       {
         pokemonId: "SLOWKING",
         method: {
-          type: "TRADE",
+          typeId: "TRADE",
           item: "KINGS_ROCK",
         },
       },
@@ -8004,7 +8005,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "MAGNETON",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 30,
         },
       },
@@ -8299,7 +8300,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "DODRIO",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 31,
         },
       },
@@ -8488,7 +8489,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "DEWGONG",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 34,
         },
       },
@@ -8683,7 +8684,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "MUK",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 38,
         },
       },
@@ -8880,7 +8881,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "CLOYSTER",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "WATER_STONE",
         },
       },
@@ -9062,7 +9063,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "HAUNTER",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 25,
         },
       },
@@ -9165,7 +9166,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "GENGAR",
         method: {
-          type: "TRADE",
+          typeId: "TRADE",
         },
       },
     ],
@@ -9366,7 +9367,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "STEELIX",
         method: {
-          type: "TRADE",
+          typeId: "TRADE",
           item: "METAL_COAT",
         },
       },
@@ -9477,7 +9478,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "HYPNO",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 26,
         },
       },
@@ -9686,7 +9687,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "KINGLER",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 28,
         },
       },
@@ -9875,7 +9876,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "ELECTRODE",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 30,
         },
       },
@@ -10081,7 +10082,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "EXEGGUTOR",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "LEAF_STONE",
         },
       },
@@ -10284,7 +10285,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "MAROWAK",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 28,
         },
       },
@@ -10804,7 +10805,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "WEEZING",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 35,
         },
       },
@@ -11009,7 +11010,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "RHYDON",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 42,
         },
       },
@@ -11243,7 +11244,8 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "BLISSEY",
         method: {
-          type: "HAPPINESS",
+          typeId: "HAPPINESS",
+          conditionId: "NONE",
         },
       },
     ],
@@ -11553,7 +11555,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "SEADRA",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 32,
         },
       },
@@ -11658,7 +11660,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "KINGDRA",
         method: {
-          type: "TRADE",
+          typeId: "TRADE",
           item: "DRAGON_SCALE",
         },
       },
@@ -11757,7 +11759,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "SEAKING",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 33,
         },
       },
@@ -11954,7 +11956,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "STARMIE",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "WATER_STONE",
         },
       },
@@ -12259,7 +12261,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "SCIZOR",
         method: {
-          type: "TRADE",
+          typeId: "TRADE",
           item: "METAL_COAT",
         },
       },
@@ -12801,7 +12803,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "GYARADOS",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 20,
         },
       },
@@ -13130,34 +13132,36 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "JOLTEON",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "THUNDERSTONE",
         },
       },
       {
         pokemonId: "VAPOREON",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "WATER_STONE",
         },
       },
       {
         pokemonId: "FLAREON",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "FIRE_STONE",
         },
       },
       {
         pokemonId: "ESPEON",
         method: {
-          type: "HAPPINESS",
+          typeId: "HAPPINESS",
+          conditionId: "DAY",
         },
       },
       {
         pokemonId: "UMBREON",
         method: {
-          type: "HAPPINESS",
+          typeId: "HAPPINESS",
+          conditionId: "NIGHT",
         },
       },
     ],
@@ -13550,7 +13554,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "PORYGON2",
         method: {
-          type: "TRADE",
+          typeId: "TRADE",
           item: "UP_GRADE",
         },
       },
@@ -13653,7 +13657,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "OMASTAR",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 40,
         },
       },
@@ -13849,7 +13853,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "KABUTOPS",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 40,
         },
       },
@@ -14528,7 +14532,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "DRAGONAIR",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 30,
         },
       },
@@ -14644,7 +14648,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "DRAGONITE",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 55,
         },
       },
@@ -15104,7 +15108,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "BAYLEEF",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 16,
         },
       },
@@ -15218,7 +15222,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "MEGANIUM",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 32,
         },
       },
@@ -15428,7 +15432,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "QUILAVA",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 14,
         },
       },
@@ -15531,7 +15535,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "TYPHLOSION",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 36,
         },
       },
@@ -15745,7 +15749,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "CROCONAW",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 18,
         },
       },
@@ -15855,7 +15859,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "FERALIGATR",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 30,
         },
       },
@@ -16070,7 +16074,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "FURRET",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 15,
         },
       },
@@ -16280,7 +16284,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "NOCTOWL",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 20,
         },
       },
@@ -16491,7 +16495,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "LEDIAN",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 18,
         },
       },
@@ -16702,7 +16706,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "ARIADOS",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 22,
         },
       },
@@ -16992,7 +16996,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "LANTURN",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 27,
         },
       },
@@ -17174,7 +17178,8 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "PIKACHU",
         method: {
-          type: "HAPPINESS",
+          typeId: "HAPPINESS",
+          conditionId: "NONE",
         },
       },
     ],
@@ -17272,7 +17277,8 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "CLEFAIRY",
         method: {
-          type: "HAPPINESS",
+          typeId: "HAPPINESS",
+          conditionId: "NONE",
         },
       },
     ],
@@ -17363,7 +17369,8 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "JIGGLYPUFF",
         method: {
-          type: "HAPPINESS",
+          typeId: "HAPPINESS",
+          conditionId: "NONE",
         },
       },
     ],
@@ -17464,7 +17471,8 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "TOGETIC",
         method: {
-          type: "HAPPINESS",
+          typeId: "HAPPINESS",
+          conditionId: "NONE",
         },
       },
     ],
@@ -17655,7 +17663,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "XATU",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 25,
         },
       },
@@ -17841,7 +17849,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "FLAAFFY",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 15,
         },
       },
@@ -17939,7 +17947,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "AMPHAROS",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 30,
         },
       },
@@ -18216,7 +18224,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "AZUMARILL",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 18,
         },
       },
@@ -18609,7 +18617,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "SKIPLOOM",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 18,
         },
       },
@@ -18722,7 +18730,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "JUMPLUFF",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 27,
         },
       },
@@ -19016,7 +19024,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "SUNFLORA",
         method: {
-          type: "ITEM",
+          typeId: "ITEM",
           item: "SUN_STONE",
         },
       },
@@ -19295,7 +19303,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "QUAGSIRE",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 20,
         },
       },
@@ -20165,7 +20173,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "FORRETRESS",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 31,
         },
       },
@@ -20663,7 +20671,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "GRANBULL",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 23,
         },
       },
@@ -21369,7 +21377,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "URSARING",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 30,
         },
       },
@@ -21569,7 +21577,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "MAGCARGO",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 38,
         },
       },
@@ -21761,7 +21769,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "PILOSWINE",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 33,
         },
       },
@@ -22054,7 +22062,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "OCTILLERY",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 25,
         },
       },
@@ -22493,7 +22501,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "HOUNDOOM",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 24,
         },
       },
@@ -22783,7 +22791,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "DONPHAN",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 25,
         },
       },
@@ -23195,25 +23203,25 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "HITMONCHAN",
         method: {
-          type: "STAT",
+          typeId: "STAT",
           level: 20,
-          stats: "ATTACK_LESS_THAN_DEFENCE",
+          conditionId: "ATTACK_LESS_THAN_DEFENCE",
         },
       },
       {
         pokemonId: "HITMONLEE",
         method: {
-          type: "STAT",
+          typeId: "STAT",
           level: 20,
-          stats: "ATTACK_GREATER_THAN_DEFENCE",
+          conditionId: "ATTACK_GREATER_THAN_DEFENCE",
         },
       },
       {
         pokemonId: "HITMONTOP",
         method: {
-          type: "STAT",
+          typeId: "STAT",
           level: 20,
-          stats: "ATTACK_EQUAL_DEFENCE",
+          conditionId: "ATTACK_EQUAL_DEFENCE",
         },
       },
     ],
@@ -23408,7 +23416,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "JYNX",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 30,
         },
       },
@@ -23511,7 +23519,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "ELECTABUZZ",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 30,
         },
       },
@@ -23617,7 +23625,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "MAGMAR",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 30,
         },
       },
@@ -24228,7 +24236,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "PUPITAR",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 30,
         },
       },
@@ -24337,7 +24345,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       {
         pokemonId: "TYRANITAR",
         method: {
-          type: "LEVEL",
+          typeId: "LEVEL",
           level: 55,
         },
       },
