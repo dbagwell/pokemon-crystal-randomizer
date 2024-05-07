@@ -318,8 +318,6 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       
       pokemonData.push(0)
       
-      console.log(pokemonId, chosenMoves.map((info) => { return `${info.level}: ${info.move.id}` }))
-      
       pointer += pokemonData.length
       data = [
         ...data,
