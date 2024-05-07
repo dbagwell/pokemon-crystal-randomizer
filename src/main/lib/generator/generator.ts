@@ -421,6 +421,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         items: bagItemValues.map((value) => {
           return {
             path: "giveItem.yml",
+            extraIncludes: {},
             extraValues: value,
           }
         }),
