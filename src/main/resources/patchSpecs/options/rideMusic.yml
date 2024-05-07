@@ -10,7 +10,7 @@ values:
   valueTextLength: "[1]{5}"
   data: "F0 A7 CB 6F 20 2C CB 67 20 30 21 $coord FA D1 CF E6 0C 28 17 FE 04 28 0E FE 08 28 05 11 @$bothText 18 0D 11 @$bikeText 18 08 11 @$surfText 18 03 11 @$noneText CD 78 10 C9 FA D1 CF E6 0C 3D 18 06 FA D1 CF F6 03 3C E6 0C 47 FA D1 CF E6 F3 B0 EA D1 CF 18 BC $bothText $bikeText $surfText $noneText"
 changes:
-  - description: "Skips playing bike music when getting on the bike of the option is not enabled."
+  - description: "Skips playing bike music when getting on the bike if the option is not enabled."
     locations: 
       - bank: 3
         address: 0x50DA

@@ -11,3 +11,8 @@ changes:
   - bank: 30
     address: 0x4CA3
   value: "$pokemonId"
+- description: "Changes the name of the left starter."
+  locations:
+  - bank: 30
+    address: 0x53D9
+  value: "$pokemonName E6 57"
