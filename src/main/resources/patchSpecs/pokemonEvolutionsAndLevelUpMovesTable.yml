@@ -4,4 +4,4 @@ changes:
   locations:
   - bank: 16
     address: 0x65B1
-  value: "$data"
+  value: "@#pokemon.$data #pokemon.$data"

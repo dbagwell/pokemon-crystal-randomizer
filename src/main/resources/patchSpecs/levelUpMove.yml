@@ -1,0 +1,3 @@
+description: "Defines a level up move."
+values: 
+  data: "$level $moveId"

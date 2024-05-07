@@ -1,5 +1,6 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
+import { type ExtraInclude } from "@lib/generator/patchInfo"
 import { type Settings } from "@shared/appData/configHelpers"
 import { evolutionTypesMap } from "@shared/gameData/evolutionTypes"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
@@ -131,25 +132,30 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   const levelUpMovesSettings = pokemonSettings.RANDOMIZE_LEVEL_UP_MOVES
   
   if (isNotNullish(levelUpMovesSettings)) {
-    let pointer = 0x67A7
-    let pointersData: number[] = []
-    let data: number[] = []
+    const extraIncludes: Dictionary<ExtraInclude[]> = {
+      pokemon: [],
+    }
     
     const nonBannedMoveIds = moveIds.filter((moveId) => {
       return !levelUpMovesSettings.BAN.includes(moveId)
     })
     
     pokemonIds.forEach((pokemonId) => {
-      pointersData = [
-        ...pointersData,
-        ...bytesFrom(pointer, 2),
-      ]
-      
       const pokemon = pokemonMap[pokemonId]
-      let pokemonData: number[] = []
+      
+      const pokemonExtraIncludes: Dictionary<ExtraInclude[]> = {
+        evolutions: [],
+        levelUpMoves: [],
+      }
+      
+      extraIncludes.pokemon.push({
+        path: "pokemonEvolutionsAndLevelUpMoves.yml",
+        extraIncludes: pokemonExtraIncludes,
+        extraValues: {},
+      })
       
       pokemon.evolutions?.forEach((evolution) => {
-        const secondByte = () => {
+        const levelOrItemIdOrHappinessCondition = () => {
           switch (evolution.method.typeId) {
           case "LEVEL":
           case "STAT": {
@@ -169,7 +175,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
           }
         }
         
-        const thirdByte = () => {
+        const statConditionOrSpecies = () => {
           if (evolution.method.typeId === "STAT") {
             return statEvolutionConidtionsMap[evolution.method.conditionId].numericId
           } else {
@@ -177,7 +183,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
           }
         }
         
-        const fourthByte = () => {
+        const statSpecies = () => {
           if (evolution.method.typeId === "STAT") {
             return pokemonMap[evolution.pokemonId].numericId
           } else {
@@ -185,18 +191,19 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
           }
         }
         
-        pokemonData = [
-          ...pokemonData,
-          ...compact([
-            evolutionTypesMap[evolution.method.typeId].numericId,
-            secondByte(),
-            thirdByte(),
-            fourthByte(),
-          ]),
-        ]
+        pokemonExtraIncludes.evolutions.push({
+          path: "evolution.yml",
+          extraIncludes: {},
+          extraValues: {
+            typeId: hexStringFrom([evolutionTypesMap[evolution.method.typeId].numericId]),
+            levelOrItemIdOrHappinessCondition: hexStringFrom([levelOrItemIdOrHappinessCondition()]),
+            statConditionAndSpecies: hexStringFrom(compact([
+              statConditionOrSpecies(),
+              statSpecies(),
+            ])),
+          },
+        })
       })
-      
-      pokemonData.push(0)
       
       let moveChoices = nonBannedMoveIds.map((moveId) => {
         return movesMap[moveId]
@@ -312,29 +319,21 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       }
       
       chosenMoves.forEach(({ level, move }) => {
-        pokemonData.push(level)
-        pokemonData.push(move.numericId)
+        pokemonExtraIncludes.levelUpMoves.push({
+          path: "levelUpMove.yml",
+          extraIncludes: {},
+          extraValues: {
+            level: hexStringFrom([level]),
+            moveId: hexStringFrom([move.numericId]),
+          },
+        })
       })
-      
-      pokemonData.push(0)
-      
-      pointer += pokemonData.length
-      data = [
-        ...data,
-        ...pokemonData,
-      ]
     })
     
     const pokemonEvolutionsAndAttacksPatch = Patch.fromYAML(
       romInfo,
-      "pokemonEvolutionsAndAttacks.yml",
-      {},
-      {
-        data: hexStringFrom([
-          ...pointersData,
-          ...data,
-        ]),
-      }
+      "pokemonEvolutionsAndLevelUpMovesTable.yml",
+      extraIncludes,
     )
   
     hunks = [...hunks, ...pokemonEvolutionsAndAttacksPatch.hunks]
