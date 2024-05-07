@@ -102,7 +102,9 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
           && (!randomStartersSettings.MATCH_SIMILAR_BST || baseStatDifference(pokemon) <= randomStartersSettings.MATCH_SIMILAR_BST.THRESHOLD)
       })
       
-      // TODO: We should throw an error if there are no choices
+      if (choices.length < 1) {
+        throw new Error("Unable to satisfy settings for randomized starter Pokémon. Possible reasons: BST threshold too small or too many banned Pokémon. You could try again with a different seed, but different settings might be required.")
+      }
       
       const index = randomInt(choices.length - 1)
       assignedStarters[locationId] = choices[index].id
@@ -245,10 +247,12 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
           }
         })
         
-        // TODO: We should throw an error if there are no choices (should only happen if there a too many banned moves)
-        
         const chosenMove = primaryChoices[randomInt(primaryChoices.length - 1)]
           ?? secondaryChoices[randomInt(secondaryChoices.length - 1)]
+        
+        if (isNullish(chosenMove)) {
+          throw new Error("Unable to satisfy settings for randomized level up moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
+        }
         
         chosenMoves.push({
           level: 1,
@@ -282,13 +286,15 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
             tertiaryChoices.push(move)
           }
         })
-      
-        // TODO: We should throw an error if there are no choices (should only happen if there a too many banned moves)
         
         const chosenMove = primaryChoices[randomInt(primaryChoices.length - 1)]
           ?? secondaryChoices[randomInt(secondaryChoices.length - 1)]
           ?? tertiaryChoices[randomInt(tertiaryChoices.length - 1)]
-          
+        
+        if (isNullish(chosenMove)) {
+          throw new Error("Unable to satisfy settings for randomized level up moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
+        }
+        
         chosenMoves.push({
           level: levelUpMove.level,
           move: chosenMove,
