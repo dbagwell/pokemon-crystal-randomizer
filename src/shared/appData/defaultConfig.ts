@@ -200,6 +200,12 @@ export const defaultConfig = () => {
               },
             },
           },
+          BIKE_ANYWHERE: {
+            label: "Bike Anywhere",
+            description: "Allows the player to bike anywhere.",
+            type: "ToggleInput" as const,
+            value: false,
+          },
           IMPROVE_PERFORMANCE: {
             label: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",

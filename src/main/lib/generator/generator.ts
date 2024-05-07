@@ -255,6 +255,17 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     hunks = [...hunks, ...skipNamePatch.hunks]
   }
   
+  // Bike Anywhere
+  
+  if (otherSettings.BIKE_ANYWHERE) {
+    const bikeAnywherePatch = Patch.fromYAML(
+      romInfo,
+      "bikeAnywhere.yml",
+    )
+  
+    hunks = [...hunks, ...bikeAnywherePatch.hunks]
+  }
+  
   // Performance Improvements
   
   if (otherSettings.IMPROVE_PERFORMANCE) {
