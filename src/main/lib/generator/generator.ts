@@ -255,6 +255,17 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     hunks = [...hunks, ...skipNamePatch.hunks]
   }
   
+  // Performance Improvements
+  
+  if (otherSettings.IMPROVE_PERFORMANCE) {
+    const performanceImprovementsPatch = Patch.fromYAML(
+      romInfo,
+      "performanceImprovements.yml",
+    )
+  
+    hunks = [...hunks, ...performanceImprovementsPatch.hunks]
+  }
+  
   // Additional Options
   
   const selectedAdditionalOptionIds = otherSettings.ADDITIONAL_OPTIONS

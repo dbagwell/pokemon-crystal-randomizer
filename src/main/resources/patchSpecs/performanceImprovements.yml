@@ -1,0 +1,12 @@
+description: "Adds general performance improvements to the game."
+changes:
+- description: "Removes lag when getting on the bike using the register funtion."
+  locations:
+  - bank: 3
+    address: 0x5151
+  value: "0F 38 00 91 00"
+- description: "Removes lag when getting off the bike using the register funtion."
+  locations:
+  - bank: 3
+    address: 0x516F
+  value: "64"

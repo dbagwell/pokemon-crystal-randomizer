@@ -200,6 +200,12 @@ export const defaultConfig = () => {
               },
             },
           },
+          IMPROVE_PERFORMANCE: {
+            label: "Add Performance Improvements",
+            description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",
+            type: "ToggleInput" as const,
+            value: false,
+          },
           ADDITIONAL_OPTIONS: {
             label: "Additional Options",
             description: "Extra settings that are added to the in game options menu.",
