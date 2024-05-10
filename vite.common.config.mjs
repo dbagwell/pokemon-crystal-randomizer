@@ -4,7 +4,6 @@ import tsconfigPaths from "vite-tsconfig-paths"
 export default ({ root, publicDir, rollupOptions, plugins }) => {
   const pluginsArray = plugins ? plugins : []
   return defineConfig(({ mode }) => {
-    console.log(mode)
     const isDev = mode === "development"
     return {
       root: root,

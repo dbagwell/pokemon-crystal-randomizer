@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@shared/*": ["../src/shared/*"],
+      "@utils": ["../src/shared/utils/index.ts"],
+    },
+    "types": [
+      "@types/node"
+    ],
+  },
+  "include": [
+    "./**/*.ts",
+    "../src/shared/**/*"
+  ]
+}

@@ -18,6 +18,7 @@
     "./*.ts",
     "./*.json",
     "./*.html",
-    "./*.svelte"
+    "./*.svelte",
+    "./tools/*.js"
   ]
 }
