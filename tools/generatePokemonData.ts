@@ -8,7 +8,8 @@ import type { HMItemId, HoldableItemId, TMItemId } from "@shared/types/gameDataI
 import type { MoveId } from "@shared/types/gameDataIds/moves"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import type { PokemonTypeId } from "@shared/types/gameDataIds/pokemonTypes"
-import { compact, isNullish, mapToRecord } from "@shared/utils"
+import type { MoveTutorId } from "@shared/types/gameDataIds/teachableMoves"
+import { compact, isNotNullish, isNullish, mapToRecord } from "@shared/utils"
 import fs from "fs"
 import path from "path"
 
@@ -37,9 +38,11 @@ const eggMovesLinesGroups = [
 
 const allPokemon: Pokemon[] = evosAttacksLinesGroups.map(({ codeName, evosLines, attacksLines }, index) => {
   const pokemonId = pokemonIds[index] as PokemonId
-  const baseStatsFilePath = path.resolve(pokecrystalPath, "data/pokemon/base_stats", `${pokemonId === "MR_MIME" ? "mr__mime" : pokemonId.toLowerCase()}.asm`)
+  const pokemonPathName = pokemonId === "MR_MIME" ? "mr__mime" : pokemonId.toLowerCase()
+  const baseStatsFilePath = path.resolve(pokecrystalPath, "data/pokemon/base_stats", `${pokemonPathName}.asm`)
   const baseStatsFile = fs.readFileSync(baseStatsFilePath, "utf-8")
   const baseStatsLineMatches = baseStatsFile.match(/db\s*(\S*),\s*(\S*),\s*(\S*),\s*(\S*),\s*(\S*),\s*(\S*)/)!
+  const genderRatioNumberMatches = baseStatsFile.match(/db\s*GENDER_F(\S*)[_\s]/)
   const teachableMovesLineMatches = baseStatsFile.match(/tmhm\s*([\s\S]*)\n\s*;\s*end/)!
   const teachableMoveIds = teachableMovesLineMatches[1].replaceAll(" ", "").replace("PSYCHIC_M", "PSYCHIC").split(",") as MoveId[]
   const teachableMoves = Object.values(teachableMovesMap).filter((move) => {
@@ -113,6 +116,7 @@ const allPokemon: Pokemon[] = evosAttacksLinesGroups.map(({ codeName, evosLines,
         item,
       ]
     }, []) as [HoldableItemId?, HoldableItemId?],
+    genderRatio: isNotNullish(genderRatioNumberMatches) ? Math.ceil(254 * parseFloat(genderRatioNumberMatches[1]) / 100) : 255,
     eggCycles: parseInt(baseStatsFile.match(/db\s*(\S*)\s*;\s*step/)![1]),
     growthRate: baseStatsFile.match(/db\s*(\S*)\s*;\s*growth/)![1].replace("GROWTH_", "") as GrowthRateId,
     eggGroups: compact(baseStatsFile.match(/dn\s*(\S*),\s*(\S*)\s*;\s*egg/)!.slice(1).map((group) => {
@@ -133,6 +137,11 @@ const allPokemon: Pokemon[] = evosAttacksLinesGroups.map(({ codeName, evosLines,
     }).map((move) => {
       return move.id as HMItemId
     }),
+    moveTutorMoves: teachableMoves.filter((move) => {
+      return move.type === "MOVE_TUTOR"
+    }).map((move) => {
+      return move.id as MoveTutorId
+    }),
     levelUpMoves: compact(attacksLines.split("\n").map((line) => {
       const matches = line.match(/db\s*(\S*),\s*(\S*)/)
       
@@ -152,6 +161,7 @@ const allPokemon: Pokemon[] = evosAttacksLinesGroups.map(({ codeName, evosLines,
       return matches[1].replace("PSYCHIC_M", "PSYCHIC") as MoveId
     }),
     evolutions: evolutions.length > 0 ? evolutions : undefined,
+    spriteDimensions: fs.readFileSync(path.resolve(pokecrystalPath, `gfx/pokemon/${pokemonPathName === "unown" ? "unown_a" : pokemonPathName}/front.dimensions`))[0],
   }
 })
 
