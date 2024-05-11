@@ -21,6 +21,7 @@ import path from "path"
 
 export type ExtraInclude = {
   path: string
+  extraIncludes: Dictionary<ExtraInclude | ExtraInclude[]>
   extraValues: Dictionary<string>
 } | string
 
@@ -77,13 +78,13 @@ export class PatchInfo {
           if (isString(include)) {
             return new PatchInfo(include, {}, {}, this, key, index)
           } else {
-            return new PatchInfo(include.path, {}, include.extraValues, this, key, index)
+            return new PatchInfo(include.path, include.extraIncludes, include.extraValues, this, key, index)
           }
         })
       } else if (isString(value)) {
         return new PatchInfo(value, {}, {}, this, key, index)
       } else {
-        return new PatchInfo(value.path, {}, value.extraValues, this, key, index)
+        return new PatchInfo(value.path, value.extraIncludes, value.extraValues, this, key, index)
       }
     })
     

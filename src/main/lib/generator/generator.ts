@@ -1,15 +1,20 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
+import { type ExtraInclude } from "@lib/generator/patchInfo"
 import { type Settings } from "@shared/appData/configHelpers"
+import { evolutionTypesMap } from "@shared/gameData/evolutionTypes"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
+import { type Move, movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { baseStatTotal, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
+import { happinessEvolutionConidtionsMap, statEvolutionConidtionsMap } from "@shared/types/gameData/evolutionMethod"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
 import type { ItemId } from "@shared/types/gameDataIds/items"
-import { type PokemonId } from "@shared/types/gameDataIds/pokemon"
+import { moveIds } from "@shared/types/gameDataIds/moves"
+import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { type StarterLocationId, starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isString } from "@utils"
 import crypto from "crypto"
@@ -97,6 +102,10 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
           && (!randomStartersSettings.MATCH_SIMILAR_BST || baseStatDifference(pokemon) <= randomStartersSettings.MATCH_SIMILAR_BST.THRESHOLD)
       })
       
+      if (choices.length < 1) {
+        throw new Error("Unable to satisfy settings for randomized starter Pokémon. Possible reasons: BST threshold too small or too many banned Pokémon. You could try again with a different seed, but different settings might be required.")
+      }
+      
       const index = randomInt(choices.length - 1)
       assignedStarters[locationId] = choices[index].id
     })
@@ -122,6 +131,222 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       ).hunks,
     ]
   })
+  
+  // Random Level Up Moves
+  
+  const levelUpMovesSettings = pokemonSettings.RANDOMIZE_LEVEL_UP_MOVES
+  
+  if (isNotNullish(levelUpMovesSettings)) {
+    const extraIncludes: Dictionary<ExtraInclude[]> = {
+      pokemon: [],
+    }
+    
+    const nonBannedMoveIds = moveIds.filter((moveId) => {
+      return !levelUpMovesSettings.BAN.includes(moveId)
+    })
+    
+    pokemonIds.forEach((pokemonId) => {
+      const pokemon = pokemonMap[pokemonId]
+      
+      const pokemonExtraIncludes: Dictionary<ExtraInclude[]> = {
+        evolutions: [],
+        levelUpMoves: [],
+      }
+      
+      extraIncludes.pokemon.push({
+        path: "pokemonEvolutionsAndLevelUpMoves.yml",
+        extraIncludes: pokemonExtraIncludes,
+        extraValues: {},
+      })
+      
+      pokemon.evolutions?.forEach((evolution) => {
+        const levelOrItemIdOrHappinessCondition = () => {
+          switch (evolution.method.typeId) {
+          case "LEVEL":
+          case "STAT": {
+            return evolution.method.level
+          }
+          case "ITEM":
+          case "TRADE": {
+            if (isNotNullish(evolution.method.item)) {
+              return itemsMap[evolution.method.item].numericId
+            } else {
+              return 0xFF
+            }
+          }
+          case "HAPPINESS": {
+            return happinessEvolutionConidtionsMap[evolution.method.conditionId].numericId
+          }
+          }
+        }
+        
+        const statConditionOrSpecies = () => {
+          if (evolution.method.typeId === "STAT") {
+            return statEvolutionConidtionsMap[evolution.method.conditionId].numericId
+          } else {
+            return pokemonMap[evolution.pokemonId].numericId
+          }
+        }
+        
+        const statSpecies = () => {
+          if (evolution.method.typeId === "STAT") {
+            return pokemonMap[evolution.pokemonId].numericId
+          } else {
+            return undefined
+          }
+        }
+        
+        pokemonExtraIncludes.evolutions.push({
+          path: "evolution.yml",
+          extraIncludes: {},
+          extraValues: {
+            typeId: hexStringFrom([evolutionTypesMap[evolution.method.typeId].numericId]),
+            levelOrItemIdOrHappinessCondition: hexStringFrom([levelOrItemIdOrHappinessCondition()]),
+            statConditionAndSpecies: hexStringFrom(compact([
+              statConditionOrSpecies(),
+              statSpecies(),
+            ])),
+          },
+        })
+      })
+      
+      let moveChoices = nonBannedMoveIds.map((moveId) => {
+        return movesMap[moveId]
+      })
+      
+      const numberOfLevelOneMovesToAdd = levelUpMovesSettings.LEVEL_ONE_MOVES - pokemon.levelUpMoves.filter((levelUpMove) => { return levelUpMove.level === 1 }).length
+      const totalNumberOfMoves = numberOfLevelOneMovesToAdd + pokemon.levelUpMoves.length
+      const indicesOfForcedGoodMoves: number[] = []
+      const minPowerForForcedGoodMoves = levelUpMovesSettings.GOOD_DAMAGING_MOVES?.POWER ?? 0
+      
+      if (isNotNullish(levelUpMovesSettings.GOOD_DAMAGING_MOVES)) {
+        const guaranteedNumberOfGoodMoves = Math.ceil(totalNumberOfMoves * levelUpMovesSettings.GOOD_DAMAGING_MOVES.PERCENTAGE / 100)
+        const indicesOfAllMoves = Array(totalNumberOfMoves).map((_, index) => { return index })
+        for (let i = 0; i < guaranteedNumberOfGoodMoves; i++) {
+          const index = indicesOfAllMoves.splice(randomInt(indicesOfAllMoves.length - 1), 1)[0]
+          indicesOfForcedGoodMoves.push(index)
+        }
+      }
+      
+      const matchesForcedGoodMovesConditions = (move: Move, index: number) => {
+        if (indicesOfForcedGoodMoves.includes(index)) {
+          return move.power >= minPowerForForcedGoodMoves
+        } else {
+          return true
+        }
+      }
+      
+      let chosenMoves: { level: number, move: Move }[] = []
+      
+      for (let i = 0; i < numberOfLevelOneMovesToAdd; i++) {
+        const primaryChoices: Move[] = []
+        const secondaryChoices: Move[] = []
+        
+        moveChoices.forEach((move) => {
+          if (matchesForcedGoodMovesConditions(move, i)) {
+            primaryChoices.push(move)
+          } else {
+            secondaryChoices.push(move)
+          }
+        })
+        
+        const chosenMove = primaryChoices[randomInt(primaryChoices.length - 1)]
+          ?? secondaryChoices[randomInt(secondaryChoices.length - 1)]
+        
+        if (isNullish(chosenMove)) {
+          throw new Error("Unable to satisfy settings for randomized level up moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
+        }
+        
+        chosenMoves.push({
+          level: 1,
+          move: chosenMove,
+        })
+        
+        if (levelUpMovesSettings.UNIQUE) {
+          moveChoices = moveChoices.filter((move) => {
+            return move.id !== chosenMove.id
+          })
+        }
+      }
+      
+      pokemon.levelUpMoves.forEach((levelUpMove, index) => {
+        const adjustedIndex = index + numberOfLevelOneMovesToAdd
+        
+        const primaryChoices: Move[] = []
+        const secondaryChoices: Move[] = []
+        const tertiaryChoices: Move[] = []
+        
+        moveChoices.forEach((move) => {
+          if (!levelUpMovesSettings.PREFER_SAME_TYPE || move.type === movesMap[levelUpMove.moveId].type) {
+            if (matchesForcedGoodMovesConditions(move, adjustedIndex)) {
+              primaryChoices.push(move)
+            } else {
+              secondaryChoices.push(move)
+            }
+          } else if (matchesForcedGoodMovesConditions(move, adjustedIndex)) {
+            secondaryChoices.push(move)
+          } else {
+            tertiaryChoices.push(move)
+          }
+        })
+        
+        const chosenMove = primaryChoices[randomInt(primaryChoices.length - 1)]
+          ?? secondaryChoices[randomInt(secondaryChoices.length - 1)]
+          ?? tertiaryChoices[randomInt(tertiaryChoices.length - 1)]
+        
+        if (isNullish(chosenMove)) {
+          throw new Error("Unable to satisfy settings for randomized level up moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
+        }
+        
+        chosenMoves.push({
+          level: levelUpMove.level,
+          move: chosenMove,
+        })
+        
+        if (levelUpMovesSettings.UNIQUE) {
+          moveChoices = moveChoices.filter((move) => {
+            return move.id !== chosenMove.id
+          })
+        }
+      })
+      
+      if (levelUpMovesSettings.PROGRESSIVE) {
+        const sortedDamagingMoves = chosenMoves.map((info) => {
+          return info.move
+        }).filter((move) => {
+          return move.power !== 0
+        }).toSorted((move1, move2) => {
+          return move1.power - move2.power
+        })
+        
+        chosenMoves = chosenMoves.map((info) => {
+          return info.move.power === 0 ? info : {
+            level: info.level,
+            move: sortedDamagingMoves.splice(0, 1)[0],
+          }
+        })
+      }
+      
+      chosenMoves.forEach(({ level, move }) => {
+        pokemonExtraIncludes.levelUpMoves.push({
+          path: "levelUpMove.yml",
+          extraIncludes: {},
+          extraValues: {
+            level: hexStringFrom([level]),
+            moveId: hexStringFrom([move.numericId]),
+          },
+        })
+      })
+    })
+    
+    const pokemonEvolutionsAndAttacksPatch = Patch.fromYAML(
+      romInfo,
+      "pokemonEvolutionsAndLevelUpMovesTable.yml",
+      extraIncludes,
+    )
+  
+    hunks = [...hunks, ...pokemonEvolutionsAndAttacksPatch.hunks]
+  }
   
   // Items
   
@@ -204,6 +429,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         items: bagItemValues.map((value) => {
           return {
             path: "giveItem.yml",
+            extraIncludes: {},
             extraValues: value,
           }
         }),

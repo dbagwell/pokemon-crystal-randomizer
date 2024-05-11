@@ -1,0 +1,7 @@
+description: "Changes the pokemon evolutions and attacks data to the provided value."
+changes:
+- description: "Changes the pokemon evolutions and attacks data."
+  locations:
+  - bank: 16
+    address: 0x65B1
+  value: "@#pokemon.$data #pokemon.$data"
