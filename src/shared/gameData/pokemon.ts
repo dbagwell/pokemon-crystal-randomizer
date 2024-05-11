@@ -2919,7 +2919,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 254,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -3020,7 +3022,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 254,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM01",
       "TM02",
@@ -14823,7 +14827,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 255,
     eggCycles: 80,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM03",
       "TM05",
@@ -14914,7 +14920,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 255,
     eggCycles: 80,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM03",
       "TM05",
@@ -15006,7 +15014,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 255,
     eggCycles: 80,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM03",
       "TM05",
@@ -15473,7 +15483,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 255,
     eggCycles: 120,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM01",
       "TM02",
@@ -15592,7 +15604,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 255,
     eggCycles: 120,
     growthRate: "MEDIUM_SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM01",
       "TM02",
@@ -17874,7 +17888,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 127,
     eggCycles: 10,
     growthRate: "MEDIUM_FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -17970,7 +17986,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 191,
     eggCycles: 10,
     growthRate: "FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -18071,7 +18089,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 191,
     eggCycles: 10,
     growthRate: "FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -18168,7 +18188,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 31,
     eggCycles: 10,
     growthRate: "FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -20791,7 +20813,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 255,
     eggCycles: 40,
     growthRate: "MEDIUM_FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [],
     hmMoves: [],
     moveTutorMoves: [],
@@ -24182,7 +24206,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 0,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -24364,7 +24390,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 254,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM01",
       "TM03",
@@ -24474,7 +24502,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 64,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM01",
       "TM02",
@@ -24584,7 +24614,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 64,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM01",
       "TM02",
@@ -24925,7 +24957,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 255,
     eggCycles: 80,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -25024,7 +25058,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 255,
     eggCycles: 80,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -25123,7 +25159,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 255,
     eggCycles: 80,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -25567,7 +25605,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 255,
     eggCycles: 120,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -25685,7 +25725,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 255,
     eggCycles: 120,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM03",
       "TM05",
@@ -25799,7 +25841,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     genderRatio: 255,
     eggCycles: 120,
     growthRate: "MEDIUM_SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM03",
       "TM06",

@@ -26,7 +26,7 @@ export type Pokemon = {
   genderRatio: number
   eggCycles: number
   growthRate: GrowthRateId
-  eggGroups: [EggGroupId?, EggGroupId?]
+  eggGroups: [EggGroupId, EggGroupId?]
   tmMoves: TMItemId[]
   hmMoves: HMItemId[]
   moveTutorMoves: MoveTutorId[]

@@ -119,14 +119,12 @@ const allPokemon: Pokemon[] = evosAttacksLinesGroups.map(({ codeName, evosLines,
     genderRatio: isNotNullish(genderRatioNumberMatches) ? Math.ceil(254 * parseFloat(genderRatioNumberMatches[1]) / 100) : 255,
     eggCycles: parseInt(baseStatsFile.match(/db\s*(\S*)\s*;\s*step/)![1]),
     growthRate: baseStatsFile.match(/db\s*(\S*)\s*;\s*growth/)![1].replace("GROWTH_", "") as GrowthRateId,
-    eggGroups: compact(baseStatsFile.match(/dn\s*(\S*),\s*(\S*)\s*;\s*egg/)!.slice(1).map((group) => {
-      return group === "EGG_NONE" ? undefined : group.replace("EGG_", "")
-    })).reduce((result: string[], group) => {
+    eggGroups: baseStatsFile.match(/dn\s*EGG_(\S*),\s*EGG_(\S*)\s*;\s*egg/)!.slice(1).reduce((result: string[], group) => {
       return result.includes(group) ? result : [
         ...result,
         group,
       ]
-    }, []) as [EggGroupId?, EggGroupId?],
+    }, []) as [EggGroupId, EggGroupId?],
     tmMoves: teachableMoves.filter((move) => {
       return move.type === "TM"
     }).map((move) => {

@@ -13,6 +13,7 @@ export const eggGroupIds = [
   "WATER_2",
   "DITTO",
   "DRAGON",
+  "NONE",
 ] as const
 
 export type EggGroupId = typeof eggGroupIds[number]
