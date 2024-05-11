@@ -1,0 +1,7 @@
+description: "Changes basic pokemon info."
+changes:
+- description: "Changes basic pokemon info."
+  locations:
+  - bank: 20
+    address: 0x5424
+  value: "#pokemon.$data"

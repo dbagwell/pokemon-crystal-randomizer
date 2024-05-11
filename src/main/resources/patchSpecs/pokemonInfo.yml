@@ -1,0 +1,3 @@
+description: "Defines general info for a pokemon's species."
+values: 
+  data: "$numericId $hp $attack $defence $speed $specialAttack $specialDefence $type1 $type2 $catchRate $baseExperience $item1 $item2 $genderRatio 64 $eggCycles 05 $spriteDimensions 00 00 00 00 $growthRate $eggGroups $teachableMovesData"

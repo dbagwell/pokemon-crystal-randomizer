@@ -2,20 +2,25 @@ import { ROMInfo } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { type ExtraInclude } from "@lib/generator/patchInfo"
 import { type Settings } from "@shared/appData/configHelpers"
+import { eggGroupsMap } from "@shared/gameData/eggGroups"
 import { evolutionTypesMap } from "@shared/gameData/evolutionTypes"
+import { growthRatesMap } from "@shared/gameData/growthRates"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
 import { type Move, movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { baseStatTotal, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
+import { pokemonTypesMap } from "@shared/gameData/pokemonTypes"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
+import { teachableMovesMap } from "@shared/gameData/teachableMoves"
 import { happinessEvolutionConidtionsMap, statEvolutionConidtionsMap } from "@shared/types/gameData/evolutionMethod"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
-import type { ItemId } from "@shared/types/gameDataIds/items"
+import { type HMItemId, hmItemIds, type ItemId, type TMItemId, tmItemIds } from "@shared/types/gameDataIds/items"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { type StarterLocationId, starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
+import { type MoveTutorId, moveTutorIds } from "@shared/types/gameDataIds/teachableMoves"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isString } from "@utils"
 import crypto from "crypto"
 import { app } from "electron"
@@ -346,6 +351,102 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     )
   
     hunks = [...hunks, ...pokemonEvolutionsAndAttacksPatch.hunks]
+  }
+  
+  // Pokemon Info
+  
+  if (
+    pokemonSettings.RANDOMIZE_TM_COMPATABILITY
+    || pokemonSettings.RANDOMIZE_HM_COMPATABILITY
+    || pokemonSettings.RANDOMIZE_MOVE_TUTOR_COMPATABILITY
+  ) {
+    const updatedPokemonDataMap: IdMap<PokemonId, Pokemon> = JSON.parse(JSON.stringify(pokemonMap))
+    
+    if (pokemonSettings.RANDOMIZE_TM_COMPATABILITY) {
+      Object.values(updatedPokemonDataMap).forEach((pokemon) => {
+        const availableTMS = Object.values(teachableMovesMap).filter((move) => {
+          return move.type === "TM"
+        })
+        
+        pokemon.tmMoves = Array(randomInt(tmItemIds.length * (pokemonSettings.RANDOMIZE_TM_COMPATABILITY?.PERCENTAGE ?? randomInt(0, 100)) / 100, tmItemIds.length)).fill(undefined).map(() => {
+          console.log("asdf")
+          return availableTMS.splice(randomInt(0, availableTMS.length - 1), 1)[0].id as TMItemId
+        })
+      })
+    }
+    
+    if (pokemonSettings.RANDOMIZE_HM_COMPATABILITY) {
+      Object.values(updatedPokemonDataMap).forEach((pokemon) => {
+        const availableHMS = Object.values(teachableMovesMap).filter((move) => {
+          return move.type === "HM"
+        })
+        
+        pokemon.hmMoves = Array(randomInt(hmItemIds.length * (pokemonSettings.RANDOMIZE_HM_COMPATABILITY?.PERCENTAGE ?? randomInt(0, 100)) / 100, hmItemIds.length)).fill(undefined).map(() => {
+          return availableHMS.splice(randomInt(0, availableHMS.length - 1), 1)[0].id as HMItemId
+        })
+      })
+    }
+    
+    if (pokemonSettings.RANDOMIZE_TM_COMPATABILITY) {
+      Object.values(updatedPokemonDataMap).forEach((pokemon) => {
+        const availableMoveTutorMoves = Object.values(teachableMovesMap).filter((move) => {
+          return move.type === "MOVE_TUTOR"
+        })
+        
+        pokemon.moveTutorMoves = Array(randomInt(moveTutorIds.length * (pokemonSettings.RANDOMIZE_TM_COMPATABILITY?.PERCENTAGE ?? randomInt(0, 100)) / 100, moveTutorIds.length)).fill(undefined).map(() => {
+          return availableMoveTutorMoves.splice(randomInt(0, availableMoveTutorMoves.length - 1), 1)[0].id as MoveTutorId
+        })
+      })
+    }
+    
+    const pokemonInfoPatch = Patch.fromYAML(
+      romInfo,
+      "pokemonInfoTable.yml",
+      {
+        pokemon: Object.values(updatedPokemonDataMap).map((pokemon) => {
+          const teachableMovesBytes: number[] = Array(8).fill(0)
+          
+          const pokemonTeachableMoveIds = [
+            ...pokemon.tmMoves,
+            ...pokemon.hmMoves,
+            ...pokemon.moveTutorMoves,
+          ]
+          
+          pokemonTeachableMoveIds.forEach((id) => {
+            const move = teachableMovesMap[id]
+            teachableMovesBytes[move.byteIndex] += 1 << move.bitIndex
+          })
+          
+          return {
+            path: "pokemonInfo.yml",
+            extraIncludes: {},
+            extraValues: {
+              numericId: hexStringFrom([pokemon.numericId]),
+              hp: hexStringFrom([pokemon.baseStats.hp]),
+              attack: hexStringFrom([pokemon.baseStats.attack]),
+              defence: hexStringFrom([pokemon.baseStats.defence]),
+              speed: hexStringFrom([pokemon.baseStats.speed]),
+              specialAttack: hexStringFrom([pokemon.baseStats.specialAttack]),
+              specialDefence: hexStringFrom([pokemon.baseStats.specialDefence]),
+              type1: hexStringFrom([pokemonTypesMap[pokemon.types[0]].numericId]),
+              type2: hexStringFrom([pokemonTypesMap[pokemon.types[1] ?? pokemon.types[0]].numericId]),
+              catchRate: hexStringFrom([pokemon.catchRate]),
+              baseExperience: hexStringFrom([pokemon.baseExperience]),
+              item1: hexStringFrom([isNotNullish(pokemon.items[0]) ? itemsMap[pokemon.items[0]].numericId : 0]),
+              item2: hexStringFrom([isNotNullish(pokemon.items[1]) ? itemsMap[pokemon.items[1]].numericId : 0]),
+              genderRatio: hexStringFrom([pokemon.genderRatio]),
+              eggCycles: hexStringFrom([pokemon.eggCycles]),
+              spriteDimensions: hexStringFrom([pokemon.spriteDimensions]),
+              growthRate: hexStringFrom([growthRatesMap[pokemon.growthRate].numericId]),
+              eggGroups: hexStringFrom([(eggGroupsMap[pokemon.eggGroups[0]].numericId << 4) + eggGroupsMap[pokemon.eggGroups[1] ?? pokemon.eggGroups[0]].numericId]),
+              teachableMovesData: hexStringFrom(teachableMovesBytes),
+            },
+          }
+        }),
+      },
+    )
+    
+    hunks = [...hunks, ...pokemonInfoPatch.hunks]
   }
   
   // Items
