@@ -356,44 +356,44 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   // Pokemon Info
   
   if (
-    pokemonSettings.RANDOMIZE_TM_COMPATABILITY
-    || pokemonSettings.RANDOMIZE_HM_COMPATABILITY
-    || pokemonSettings.RANDOMIZE_MOVE_TUTOR_COMPATABILITY
+    pokemonSettings.RANDOMIZE_TM_COMPATIBILITY
+    || pokemonSettings.RANDOMIZE_HM_COMPATIBILITY
+    || pokemonSettings.RANDOMIZE_MOVE_TUTOR_COMPATIBILITY
   ) {
     const updatedPokemonDataMap: IdMap<PokemonId, Pokemon> = JSON.parse(JSON.stringify(pokemonMap))
     
-    if (pokemonSettings.RANDOMIZE_TM_COMPATABILITY) {
+    if (pokemonSettings.RANDOMIZE_TM_COMPATIBILITY) {
       Object.values(updatedPokemonDataMap).forEach((pokemon) => {
         const availableTMS = Object.values(teachableMovesMap).filter((move) => {
           return move.type === "TM"
         })
         
-        pokemon.tmMoves = Array(randomInt(tmItemIds.length * (pokemonSettings.RANDOMIZE_TM_COMPATABILITY?.PERCENTAGE ?? randomInt(0, 100)) / 100, tmItemIds.length)).fill(undefined).map(() => {
+        pokemon.tmMoves = Array(randomInt(tmItemIds.length * (pokemonSettings.RANDOMIZE_TM_COMPATIBILITY?.PERCENTAGE ?? randomInt(0, 100)) / 100, tmItemIds.length)).fill(undefined).map(() => {
           console.log("asdf")
           return availableTMS.splice(randomInt(0, availableTMS.length - 1), 1)[0].id as TMItemId
         })
       })
     }
     
-    if (pokemonSettings.RANDOMIZE_HM_COMPATABILITY) {
+    if (pokemonSettings.RANDOMIZE_HM_COMPATIBILITY) {
       Object.values(updatedPokemonDataMap).forEach((pokemon) => {
         const availableHMS = Object.values(teachableMovesMap).filter((move) => {
           return move.type === "HM"
         })
         
-        pokemon.hmMoves = Array(randomInt(hmItemIds.length * (pokemonSettings.RANDOMIZE_HM_COMPATABILITY?.PERCENTAGE ?? randomInt(0, 100)) / 100, hmItemIds.length)).fill(undefined).map(() => {
+        pokemon.hmMoves = Array(randomInt(hmItemIds.length * (pokemonSettings.RANDOMIZE_HM_COMPATIBILITY?.PERCENTAGE ?? randomInt(0, 100)) / 100, hmItemIds.length)).fill(undefined).map(() => {
           return availableHMS.splice(randomInt(0, availableHMS.length - 1), 1)[0].id as HMItemId
         })
       })
     }
     
-    if (pokemonSettings.RANDOMIZE_TM_COMPATABILITY) {
+    if (pokemonSettings.RANDOMIZE_TM_COMPATIBILITY) {
       Object.values(updatedPokemonDataMap).forEach((pokemon) => {
         const availableMoveTutorMoves = Object.values(teachableMovesMap).filter((move) => {
           return move.type === "MOVE_TUTOR"
         })
         
-        pokemon.moveTutorMoves = Array(randomInt(moveTutorIds.length * (pokemonSettings.RANDOMIZE_TM_COMPATABILITY?.PERCENTAGE ?? randomInt(0, 100)) / 100, moveTutorIds.length)).fill(undefined).map(() => {
+        pokemon.moveTutorMoves = Array(randomInt(moveTutorIds.length * (pokemonSettings.RANDOMIZE_TM_COMPATIBILITY?.PERCENTAGE ?? randomInt(0, 100)) / 100, moveTutorIds.length)).fill(undefined).map(() => {
           return availableMoveTutorMoves.splice(randomInt(0, availableMoveTutorMoves.length - 1), 1)[0].id as MoveTutorId
         })
       })

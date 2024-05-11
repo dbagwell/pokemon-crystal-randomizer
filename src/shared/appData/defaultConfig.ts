@@ -190,8 +190,8 @@ export const defaultConfig = () => {
               },
             },
           },
-          RANDOMIZE_TM_COMPATABILITY: {
-            label: "Randomize TM Compatability",
+          RANDOMIZE_TM_COMPATIBILITY: {
+            label: "Randomize TM Compatibility",
             description: "Randomizes which TMs each Pokémon can learn from.",
             type: "FormSection" as const,
             layout: "vertical" as const,
@@ -209,8 +209,8 @@ export const defaultConfig = () => {
               },
             },
           },
-          RANDOMIZE_HM_COMPATABILITY: {
-            label: "Randomize HM Compatability",
+          RANDOMIZE_HM_COMPATIBILITY: {
+            label: "Randomize HM Compatibility",
             description: "Randomizes which HMs each Pokémon can learn from.",
             type: "FormSection" as const,
             layout: "vertical" as const,
@@ -228,8 +228,8 @@ export const defaultConfig = () => {
               },
             },
           },
-          RANDOMIZE_MOVE_TUTOR_COMPATABILITY: {
-            label: "Randomize Move Tutor Compatability",
+          RANDOMIZE_MOVE_TUTOR_COMPATIBILITY: {
+            label: "Randomize Move Tutor Compatibility",
             description: "Randomizes which Move Tutor moves each Pokémon can learn.",
             type: "FormSection" as const,
             layout: "vertical" as const,
