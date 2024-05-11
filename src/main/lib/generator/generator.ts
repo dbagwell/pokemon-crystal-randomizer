@@ -31,8 +31,8 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   let hunks: DataHunk[] = []
   const seed = customSeed ?? crypto.randomUUID()
   const rng = seedrandom(seed)
-  const randomInt = (max: number): number => {
-    return Math.floor(rng() * max)
+  const randomInt = (min: number, max: number): number => {
+    return Math.floor(rng() * (max + 1 - min)) + min
   }
   
   // Pokemon
@@ -106,7 +106,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         throw new Error("Unable to satisfy settings for randomized starter Pokémon. Possible reasons: BST threshold too small or too many banned Pokémon. You could try again with a different seed, but different settings might be required.")
       }
       
-      const index = randomInt(choices.length - 1)
+      const index = randomInt(0, choices.length - 1)
       assignedStarters[locationId] = choices[index].id
     })
   }
@@ -223,7 +223,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         const guaranteedNumberOfGoodMoves = Math.ceil(totalNumberOfMoves * levelUpMovesSettings.GOOD_DAMAGING_MOVES.PERCENTAGE / 100)
         const indicesOfAllMoves = Array(totalNumberOfMoves).map((_, index) => { return index })
         for (let i = 0; i < guaranteedNumberOfGoodMoves; i++) {
-          const index = indicesOfAllMoves.splice(randomInt(indicesOfAllMoves.length - 1), 1)[0]
+          const index = indicesOfAllMoves.splice(randomInt(0, indicesOfAllMoves.length - 1), 1)[0]
           indicesOfForcedGoodMoves.push(index)
         }
       }
@@ -250,8 +250,8 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
           }
         })
         
-        const chosenMove = primaryChoices[randomInt(primaryChoices.length - 1)]
-          ?? secondaryChoices[randomInt(secondaryChoices.length - 1)]
+        const chosenMove = primaryChoices[randomInt(0, primaryChoices.length - 1)]
+          ?? secondaryChoices[randomInt(0, secondaryChoices.length - 1)]
         
         if (isNullish(chosenMove)) {
           throw new Error("Unable to satisfy settings for randomized level up moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
@@ -290,9 +290,9 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
           }
         })
         
-        const chosenMove = primaryChoices[randomInt(primaryChoices.length - 1)]
-          ?? secondaryChoices[randomInt(secondaryChoices.length - 1)]
-          ?? tertiaryChoices[randomInt(tertiaryChoices.length - 1)]
+        const chosenMove = primaryChoices[randomInt(0, primaryChoices.length - 1)]
+          ?? secondaryChoices[randomInt(0, secondaryChoices.length - 1)]
+          ?? tertiaryChoices[randomInt(0, tertiaryChoices.length - 1)]
         
         if (isNullish(chosenMove)) {
           throw new Error("Unable to satisfy settings for randomized level up moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
