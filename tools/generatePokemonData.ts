@@ -50,13 +50,13 @@ const allPokemon: Pokemon[] = evosAttacksLinesGroups.map(({ codeName, evosLines,
   })
   
   const evolutions = compact(evosLines.split("\n").map((line) => {
-    const matches = line.match(/db\s*(\S*),\s*(\S*),\s*([^\s,]*)(,\s*(\S*))?/)
+    const matches = line.match(/db\s*EVOLVE_(\S*),\s*(\S*),\s*([^\s,]*)(,\s*(\S*))?/)
     
     if (isNullish(matches)) {
       return undefined
     }
     
-    const typeId = matches[1].replace("EVOLVE_", "") as EvolutionTypeId
+    const typeId = matches[1] as EvolutionTypeId
     
     return {
       pokemonId: typeId === "STAT" ? matches[5] as PokemonId : matches[3] as PokemonId,
@@ -110,15 +110,10 @@ const allPokemon: Pokemon[] = evosAttacksLinesGroups.map(({ codeName, evosLines,
     baseExperience: parseInt(baseStatsFile.match(/db\s*(\S*)\s*;\s*base/)![1]),
     items: compact(baseStatsFile.match(/db\s*(\S*),\s*(\S*)\s*;\s*items/)!.slice(1).map((item) => {
       return item === "NO_ITEM" ? undefined : item
-    })).reduce((result: string[], item) => {
-      return result.includes(item) ? result : [
-        ...result,
-        item,
-      ]
-    }, []) as [HoldableItemId?, HoldableItemId?],
+    })) as [HoldableItemId?, HoldableItemId?],
     genderRatio: isNotNullish(genderRatioNumberMatches) ? Math.ceil(254 * parseFloat(genderRatioNumberMatches[1]) / 100) : 255,
     eggCycles: parseInt(baseStatsFile.match(/db\s*(\S*)\s*;\s*step/)![1]),
-    growthRate: baseStatsFile.match(/db\s*(\S*)\s*;\s*growth/)![1].replace("GROWTH_", "") as GrowthRateId,
+    growthRate: baseStatsFile.match(/db\s*GROWTH_(\S*)\s*;\s*growth/)![1] as GrowthRateId,
     eggGroups: baseStatsFile.match(/dn\s*EGG_(\S*),\s*EGG_(\S*)\s*;\s*egg/)!.slice(1).reduce((result: string[], group) => {
       return result.includes(group) ? result : [
         ...result,
@@ -159,7 +154,7 @@ const allPokemon: Pokemon[] = evosAttacksLinesGroups.map(({ codeName, evosLines,
       return matches[1].replace("PSYCHIC_M", "PSYCHIC") as MoveId
     }),
     evolutions: evolutions.length > 0 ? evolutions : undefined,
-    spriteDimensions: fs.readFileSync(path.resolve(pokecrystalPath, `gfx/pokemon/${pokemonPathName === "unown" ? "unown_a" : pokemonPathName}/front.dimensions`))[0],
+    spriteDimensions: fs.readFileSync(path.resolve(pokecrystalPath, baseStatsFile.match(/INCBIN\s*"(\S*)"/)![1]))[0],
   }
 })
 

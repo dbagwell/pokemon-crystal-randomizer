@@ -3643,6 +3643,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 63,
     items: [
       "BURNT_BERRY",
+      "BURNT_BERRY",
     ],
     genderRatio: 191,
     eggCycles: 20,
@@ -3745,6 +3746,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 178,
     items: [
+      "BURNT_BERRY",
       "BURNT_BERRY",
     ],
     genderRatio: 191,
@@ -5822,6 +5824,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 91,
     items: [
       "BURNT_BERRY",
+      "BURNT_BERRY",
     ],
     genderRatio: 64,
     eggCycles: 20,
@@ -5927,6 +5930,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 213,
     items: [
+      "BURNT_BERRY",
       "BURNT_BERRY",
     ],
     genderRatio: 64,
@@ -12827,6 +12831,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 137,
     items: [
       "ICE_BERRY",
+      "ICE_BERRY",
     ],
     genderRatio: 254,
     eggCycles: 25,
@@ -13040,6 +13045,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 167,
     items: [
+      "BURNT_BERRY",
       "BURNT_BERRY",
     ],
     genderRatio: 64,
@@ -14703,6 +14709,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 25,
     baseExperience: 154,
     items: [
+      "LEFTOVERS",
       "LEFTOVERS",
     ],
     genderRatio: 31,
@@ -21935,6 +21942,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 80,
     items: [
       "BERRY",
+      "BERRY",
     ],
     genderRatio: 127,
     eggCycles: 20,
@@ -24386,6 +24394,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 87,
     items: [
       "ICE_BERRY",
+      "ICE_BERRY",
     ],
     genderRatio: 254,
     eggCycles: 25,
@@ -24610,6 +24619,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 117,
     items: [
       "BURNT_BERRY",
+      "BURNT_BERRY",
     ],
     genderRatio: 64,
     eggCycles: 25,
@@ -24721,6 +24731,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 200,
     items: [
+      "MOOMOO_MILK",
       "MOOMOO_MILK",
     ],
     genderRatio: 254,
@@ -25720,6 +25731,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 3,
     baseExperience: 220,
     items: [
+      "SACRED_ASH",
       "SACRED_ASH",
     ],
     genderRatio: 255,
