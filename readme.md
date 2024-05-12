@@ -103,6 +103,13 @@ Certain Patch Specs may need extra information that can only be provided by the 
 
 [Nearley](https://nearley.js.org/) is used to parse the Data Formats included in the Patch Specs. The parsing rules are defined in `src/nearley/data.ne` this is then compiled to a CommonJS javascript module that is included in the application code using `npm run gen:grammars`.
 
+### Tools
+
+The tools folder contains utility scripts for things like generating info about game data. These scripts are not included in the compiled application. They require a `.tools.env` file with the following values to run:
+
+- `pokecrystalPath`: The absolute path to pokemon crystal disassembly project.
+- `outputPath`: The absolute path of where to write the output of these utility scripts.
+
 ### ESLint
 
 [ESLint](https://eslint.org/) is used to maintain a consistent codes style in html, svelte, js, cjs, mjs, ts, and json files throughout the project and help prevent potential runtime issues. Run `npm run lint` to find any issues and automatically fix certain style violations. 

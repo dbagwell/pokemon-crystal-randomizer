@@ -103,6 +103,12 @@ module.exports = {
       },
     },
     {
+      files: ["*.js"],
+      rules: {
+        "@typescript-eslint/no-var-requires": "off",
+      },
+    },
+    {
       files: ["*.cjs"],
       rules: {
         "@typescript-eslint/no-var-requires": "off",

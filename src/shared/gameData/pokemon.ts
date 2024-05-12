@@ -21,6 +21,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 64,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -54,6 +55,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -116,6 +118,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   IVYSAUR: {
     id: "IVYSAUR",
@@ -136,6 +139,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 141,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -169,6 +173,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -232,6 +237,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   VENUSAUR: {
     id: "VENUSAUR",
@@ -252,6 +258,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 208,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -287,6 +294,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -345,6 +353,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 65,
       },
     ],
+    spriteDimensions: 119,
   },
   CHARMANDER: {
     id: "CHARMANDER",
@@ -364,6 +373,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 65,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -401,6 +411,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM01",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -461,6 +474,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   CHARMELEON: {
     id: "CHARMELEON",
@@ -480,6 +494,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 142,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -517,6 +532,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM01",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -573,6 +591,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   CHARIZARD: {
     id: "CHARIZARD",
@@ -593,6 +612,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 209,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -636,6 +656,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM02",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -691,6 +714,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 64,
       },
     ],
+    spriteDimensions: 119,
   },
   SQUIRTLE: {
     id: "SQUIRTLE",
@@ -710,6 +734,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 66,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -748,6 +773,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -812,6 +840,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   WARTORTLE: {
     id: "WARTORTLE",
@@ -831,6 +860,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 143,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -869,6 +899,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -933,6 +966,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   BLASTOISE: {
     id: "BLASTOISE",
@@ -952,6 +986,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 210,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -993,6 +1028,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -1052,6 +1090,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 68,
       },
     ],
+    spriteDimensions: 119,
   },
   CATERPIE: {
     id: "CATERPIE",
@@ -1071,6 +1110,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 53,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -1078,6 +1118,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     tmMoves: [],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -1097,6 +1138,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   METAPOD: {
     id: "METAPOD",
@@ -1116,6 +1158,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 72,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -1123,6 +1166,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     tmMoves: [],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "HARDEN",
@@ -1142,6 +1186,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   BUTTERFREE: {
     id: "BUTTERFREE",
@@ -1164,6 +1209,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "SILVERPOWDER",
     ],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -1195,6 +1241,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "CONFUSION",
@@ -1237,6 +1284,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 40,
       },
     ],
+    spriteDimensions: 119,
   },
   WEEDLE: {
     id: "WEEDLE",
@@ -1257,6 +1305,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 52,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -1264,6 +1313,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     tmMoves: [],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "POISON_STING",
@@ -1283,6 +1333,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   KAKUNA: {
     id: "KAKUNA",
@@ -1303,6 +1354,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 71,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -1310,6 +1362,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     tmMoves: [],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "HARDEN",
@@ -1329,6 +1382,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   BEEDRILL: {
     id: "BEEDRILL",
@@ -1351,6 +1405,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "POISON_BARB",
     ],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -1381,6 +1436,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM01",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "FURY_ATTACK",
@@ -1415,6 +1471,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 40,
       },
     ],
+    spriteDimensions: 119,
   },
   PIDGEY: {
     id: "PIDGEY",
@@ -1435,6 +1492,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 55,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -1464,6 +1522,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM02",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -1512,6 +1571,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   PIDGEOTTO: {
     id: "PIDGEOTTO",
@@ -1532,6 +1592,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 113,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -1561,6 +1622,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM02",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -1612,6 +1674,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   PIDGEOT: {
     id: "PIDGEOT",
@@ -1632,6 +1695,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 172,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -1662,6 +1726,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM02",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -1708,6 +1773,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 61,
       },
     ],
+    spriteDimensions: 119,
   },
   RATTATA: {
     id: "RATTATA",
@@ -1727,6 +1793,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 57,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -1761,6 +1828,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM46",
     ],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -1808,6 +1876,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   RATICATE: {
     id: "RATICATE",
@@ -1827,6 +1896,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 116,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -1866,6 +1936,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM04",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -1900,6 +1974,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 40,
       },
     ],
+    spriteDimensions: 102,
   },
   SPEAROW: {
     id: "SPEAROW",
@@ -1920,6 +1995,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 58,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -1949,6 +2025,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM02",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "PECK",
@@ -1999,6 +2076,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   FEAROW: {
     id: "FEAROW",
@@ -2021,6 +2099,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "SHARP_BEAK",
     ],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -2051,6 +2130,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM02",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "PECK",
@@ -2093,6 +2173,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 47,
       },
     ],
+    spriteDimensions: 119,
   },
   EKANS: {
     id: "EKANS",
@@ -2112,6 +2193,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 62,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -2143,6 +2225,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "WRAP",
@@ -2193,6 +2276,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   ARBOK: {
     id: "ARBOK",
@@ -2212,6 +2296,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 147,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -2244,6 +2329,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "WRAP",
@@ -2286,6 +2372,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 51,
       },
     ],
+    spriteDimensions: 119,
   },
   PIKACHU: {
     id: "PIKACHU",
@@ -2307,6 +2394,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "BERRY",
     ],
+    genderRatio: 127,
     eggCycles: 10,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -2343,6 +2431,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -2399,6 +2490,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   RAICHU: {
     id: "RAICHU",
@@ -2420,6 +2512,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "BERRY",
     ],
+    genderRatio: 127,
     eggCycles: 10,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -2459,6 +2552,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM05",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "THUNDERSHOCK",
@@ -2477,6 +2573,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 1,
       },
     ],
+    spriteDimensions: 119,
   },
   SANDSHREW: {
     id: "SANDSHREW",
@@ -2496,6 +2593,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 93,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -2535,6 +2633,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SCRATCH",
@@ -2585,6 +2684,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   SANDSLASH: {
     id: "SANDSLASH",
@@ -2604,6 +2704,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 163,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -2644,6 +2745,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SCRATCH",
@@ -2686,6 +2788,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 52,
       },
     ],
+    spriteDimensions: 102,
   },
   NIDORAN_F: {
     id: "NIDORAN_F",
@@ -2705,6 +2808,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 235,
     baseExperience: 59,
     items: [],
+    genderRatio: 254,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -2737,6 +2841,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM46",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "GROWL",
@@ -2789,6 +2896,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   NIDORINA: {
     id: "NIDORINA",
@@ -2808,9 +2916,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 117,
     items: [],
+    genderRatio: 254,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -2839,6 +2950,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -2883,6 +2998,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   NIDOQUEEN: {
     id: "NIDOQUEEN",
@@ -2903,9 +3019,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 194,
     items: [],
+    genderRatio: 254,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM01",
       "TM02",
@@ -2945,9 +3064,13 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM49",
     ],
     hmMoves: [
-      "HM01",
       "HM03",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -2971,6 +3094,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 23,
       },
     ],
+    spriteDimensions: 119,
   },
   NIDORAN_M: {
     id: "NIDORAN_M",
@@ -2990,6 +3114,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 235,
     baseExperience: 60,
     items: [],
+    genderRatio: 0,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -3022,6 +3147,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM46",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "LEER",
@@ -3074,6 +3202,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   NIDORINO: {
     id: "NIDORINO",
@@ -3093,6 +3222,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 118,
     items: [],
+    genderRatio: 0,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -3127,6 +3257,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -3171,6 +3305,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   NIDOKING: {
     id: "NIDOKING",
@@ -3191,6 +3326,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 195,
     items: [],
+    genderRatio: 0,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -3236,9 +3372,13 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM49",
     ],
     hmMoves: [
-      "HM01",
       "HM03",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -3262,6 +3402,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 23,
       },
     ],
+    spriteDimensions: 119,
   },
   CLEFAIRY: {
     id: "CLEFAIRY",
@@ -3284,6 +3425,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "MYSTERYBERRY",
       "MOON_STONE",
     ],
+    genderRatio: 191,
     eggCycles: 10,
     growthRate: "FAST",
     eggGroups: [
@@ -3329,6 +3471,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -3381,6 +3528,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   CLEFABLE: {
     id: "CLEFABLE",
@@ -3403,6 +3551,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "MYSTERYBERRY",
       "MOON_STONE",
     ],
+    genderRatio: 191,
     eggCycles: 10,
     growthRate: "FAST",
     eggGroups: [
@@ -3450,6 +3599,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM05",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "SING",
@@ -3468,6 +3622,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 1,
       },
     ],
+    spriteDimensions: 102,
   },
   VULPIX: {
     id: "VULPIX",
@@ -3488,7 +3643,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 63,
     items: [
       "BURNT_BERRY",
+      "BURNT_BERRY",
     ],
+    genderRatio: 191,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -3516,6 +3673,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM45",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+    ],
     levelUpMoves: [
       {
         moveId: "EMBER",
@@ -3566,6 +3726,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   NINETALES: {
     id: "NINETALES",
@@ -3586,7 +3747,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 178,
     items: [
       "BURNT_BERRY",
+      "BURNT_BERRY",
     ],
+    genderRatio: 191,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -3616,6 +3779,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM45",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+    ],
     levelUpMoves: [
       {
         moveId: "EMBER",
@@ -3638,6 +3804,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 43,
       },
     ],
+    spriteDimensions: 119,
   },
   JIGGLYPUFF: {
     id: "JIGGLYPUFF",
@@ -3657,6 +3824,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 170,
     baseExperience: 76,
     items: [],
+    genderRatio: 191,
     eggCycles: 10,
     growthRate: "FAST",
     eggGroups: [
@@ -3701,6 +3869,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -3749,6 +3922,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   WIGGLYTUFF: {
     id: "WIGGLYTUFF",
@@ -3768,6 +3942,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 50,
     baseExperience: 109,
     items: [],
+    genderRatio: 191,
     eggCycles: 10,
     growthRate: "FAST",
     eggGroups: [
@@ -3814,6 +3989,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM05",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "SING",
@@ -3832,6 +4012,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 1,
       },
     ],
+    spriteDimensions: 102,
   },
   ZUBAT: {
     id: "ZUBAT",
@@ -3852,6 +4033,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 54,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -3879,6 +4061,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM47",
     ],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "LEECH_LIFE",
@@ -3925,6 +4108,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   GOLBAT: {
     id: "GOLBAT",
@@ -3945,6 +4129,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 171,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -3973,6 +4158,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM47",
     ],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SCREECH",
@@ -4020,6 +4206,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 119,
   },
   ODDISH: {
     id: "ODDISH",
@@ -4040,6 +4227,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 78,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -4069,6 +4257,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "ABSORB",
@@ -4118,6 +4307,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   GLOOM: {
     id: "GLOOM",
@@ -4138,6 +4328,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 132,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -4167,6 +4358,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "ABSORB",
@@ -4225,6 +4417,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   VILEPLUME: {
     id: "VILEPLUME",
@@ -4245,6 +4438,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 184,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -4275,6 +4469,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "ABSORB",
@@ -4293,6 +4488,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 1,
       },
     ],
+    spriteDimensions: 119,
   },
   PARAS: {
     id: "PARAS",
@@ -4316,6 +4512,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TINYMUSHROOM",
       "BIG_MUSHROOM",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -4350,6 +4547,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SCRATCH",
@@ -4402,6 +4600,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   PARASECT: {
     id: "PARASECT",
@@ -4425,6 +4624,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TINYMUSHROOM",
       "BIG_MUSHROOM",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -4460,6 +4660,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SCRATCH",
@@ -4502,6 +4703,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 55,
       },
     ],
+    spriteDimensions: 119,
   },
   VENONAT: {
     id: "VENONAT",
@@ -4522,6 +4724,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 75,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -4551,6 +4754,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM46",
     ],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -4611,6 +4815,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   VENOMOTH: {
     id: "VENOMOTH",
@@ -4631,6 +4836,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 138,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -4663,6 +4869,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -4717,6 +4924,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 52,
       },
     ],
+    spriteDimensions: 119,
   },
   DIGLETT: {
     id: "DIGLETT",
@@ -4736,6 +4944,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 81,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -4766,6 +4975,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM01",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SCRATCH",
@@ -4816,6 +5026,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   DUGTRIO: {
     id: "DUGTRIO",
@@ -4835,6 +5046,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 50,
     baseExperience: 153,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -4866,6 +5078,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM01",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TRI_ATTACK",
@@ -4912,6 +5125,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 61,
       },
     ],
+    spriteDimensions: 119,
   },
   MEOWTH: {
     id: "MEOWTH",
@@ -4931,6 +5145,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 69,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -4967,6 +5182,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM50",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "SCRATCH",
@@ -5016,6 +5234,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   PERSIAN: {
     id: "PERSIAN",
@@ -5035,6 +5254,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 148,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -5073,6 +5293,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM50",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "SCRATCH",
@@ -5111,6 +5334,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 53,
       },
     ],
+    spriteDimensions: 119,
   },
   PSYDUCK: {
     id: "PSYDUCK",
@@ -5130,6 +5354,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 80,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -5169,6 +5394,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM05",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -5223,6 +5451,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   GOLDUCK: {
     id: "GOLDUCK",
@@ -5242,6 +5471,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 174,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -5278,12 +5508,14 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM49",
     ],
     hmMoves: [
-      "HM01",
       "HM03",
       "HM04",
       "HM05",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -5331,6 +5563,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 58,
       },
     ],
+    spriteDimensions: 119,
   },
   MANKEY: {
     id: "MANKEY",
@@ -5350,6 +5583,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 74,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -5388,6 +5622,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -5448,6 +5685,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   PRIMEAPE: {
     id: "PRIMEAPE",
@@ -5467,6 +5705,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 149,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -5506,6 +5745,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -5561,6 +5803,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 63,
       },
     ],
+    spriteDimensions: 119,
   },
   GROWLITHE: {
     id: "GROWLITHE",
@@ -5581,7 +5824,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 91,
     items: [
       "BURNT_BERRY",
+      "BURNT_BERRY",
     ],
+    genderRatio: 64,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -5612,6 +5857,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM45",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+    ],
     levelUpMoves: [
       {
         moveId: "BITE",
@@ -5662,6 +5910,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   ARCANINE: {
     id: "ARCANINE",
@@ -5682,7 +5931,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 213,
     items: [
       "BURNT_BERRY",
+      "BURNT_BERRY",
     ],
+    genderRatio: 64,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -5714,6 +5965,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM45",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+    ],
     levelUpMoves: [
       {
         moveId: "ROAR",
@@ -5736,6 +5990,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 50,
       },
     ],
+    spriteDimensions: 119,
   },
   POLIWAG: {
     id: "POLIWAG",
@@ -5755,6 +6010,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 77,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -5786,6 +6042,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -5837,6 +6096,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   POLIWHIRL: {
     id: "POLIWHIRL",
@@ -5858,6 +6118,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "KINGS_ROCK",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -5895,6 +6156,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -5954,6 +6218,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   POLIWRATH: {
     id: "POLIWRATH",
@@ -5976,6 +6241,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "KINGS_ROCK",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -6016,6 +6282,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM06",
       "HM07",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "WATER_GUN",
@@ -6042,6 +6311,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 51,
       },
     ],
+    spriteDimensions: 119,
   },
   ABRA: {
     id: "ABRA",
@@ -6061,6 +6331,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 200,
     baseExperience: 73,
     items: [],
+    genderRatio: 64,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -6080,7 +6351,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM18",
       "TM20",
       "TM21",
-      "TM25",
       "TM27",
       "TM29",
       "TM30",
@@ -6099,6 +6369,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TELEPORT",
@@ -6119,6 +6390,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   KADABRA: {
     id: "KADABRA",
@@ -6138,6 +6410,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 100,
     baseExperience: 145,
     items: [],
+    genderRatio: 64,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -6157,7 +6430,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM18",
       "TM20",
       "TM21",
-      "TM25",
       "TM27",
       "TM28",
       "TM29",
@@ -6177,6 +6449,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TELEPORT",
@@ -6227,6 +6500,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   ALAKAZAM: {
     id: "ALAKAZAM",
@@ -6246,6 +6520,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 50,
     baseExperience: 186,
     items: [],
+    genderRatio: 64,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -6266,7 +6541,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM18",
       "TM20",
       "TM21",
-      "TM25",
       "TM27",
       "TM28",
       "TM29",
@@ -6286,6 +6560,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TELEPORT",
@@ -6328,6 +6603,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 45,
       },
     ],
+    spriteDimensions: 119,
   },
   MACHOP: {
     id: "MACHOP",
@@ -6347,6 +6623,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 180,
     baseExperience: 88,
     items: [],
+    genderRatio: 64,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -6364,7 +6641,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM17",
       "TM20",
       "TM21",
-      "TM25",
       "TM26",
       "TM27",
       "TM28",
@@ -6383,6 +6659,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -6441,6 +6720,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   MACHOKE: {
     id: "MACHOKE",
@@ -6460,6 +6740,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 146,
     items: [],
+    genderRatio: 64,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -6477,7 +6758,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM17",
       "TM20",
       "TM21",
-      "TM25",
       "TM26",
       "TM27",
       "TM28",
@@ -6496,6 +6776,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -6551,6 +6834,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 119,
   },
   MACHAMP: {
     id: "MACHAMP",
@@ -6570,6 +6854,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 193,
     items: [],
+    genderRatio: 64,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -6588,7 +6873,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM17",
       "TM20",
       "TM21",
-      "TM25",
       "TM26",
       "TM27",
       "TM28",
@@ -6607,6 +6891,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -6654,6 +6941,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 61,
       },
     ],
+    spriteDimensions: 119,
   },
   BELLSPROUT: {
     id: "BELLSPROUT",
@@ -6674,6 +6962,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 84,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -6703,6 +6992,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "VINE_WHIP",
@@ -6761,6 +7051,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   WEEPINBELL: {
     id: "WEEPINBELL",
@@ -6781,6 +7072,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 151,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -6810,6 +7102,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "VINE_WHIP",
@@ -6869,6 +7162,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   VICTREEBEL: {
     id: "VICTREEBEL",
@@ -6889,6 +7183,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 191,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -6919,6 +7214,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "VINE_WHIP",
@@ -6937,6 +7233,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 1,
       },
     ],
+    spriteDimensions: 119,
   },
   TENTACOOL: {
     id: "TENTACOOL",
@@ -6957,6 +7254,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 105,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -6986,6 +7284,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM03",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -7041,6 +7342,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   TENTACRUEL: {
     id: "TENTACRUEL",
@@ -7061,6 +7363,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 60,
     baseExperience: 205,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -7091,6 +7394,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM03",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -7138,6 +7444,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 55,
       },
     ],
+    spriteDimensions: 102,
   },
   GEODUDE: {
     id: "GEODUDE",
@@ -7160,6 +7467,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "EVERSTONE",
     ],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -7194,6 +7502,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -7246,6 +7557,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   GRAVELER: {
     id: "GRAVELER",
@@ -7268,6 +7580,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "EVERSTONE",
     ],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -7302,6 +7615,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -7357,6 +7673,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   GOLEM: {
     id: "GOLEM",
@@ -7379,6 +7696,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "EVERSTONE",
     ],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -7415,8 +7733,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM49",
     ],
     hmMoves: [
-      "HM01",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -7468,6 +7788,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 48,
       },
     ],
+    spriteDimensions: 102,
   },
   PONYTA: {
     id: "PONYTA",
@@ -7487,6 +7808,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 152,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -7513,6 +7835,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM45",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+    ],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -7568,6 +7893,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   RAPIDASH: {
     id: "RAPIDASH",
@@ -7587,6 +7913,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 60,
     baseExperience: 192,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -7614,6 +7941,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM45",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+    ],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -7668,6 +7998,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 61,
       },
     ],
+    spriteDimensions: 119,
   },
   SLOWPOKE: {
     id: "SLOWPOKE",
@@ -7690,6 +8021,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "KINGS_ROCK",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -7732,6 +8064,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -7793,6 +8129,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   SLOWBRO: {
     id: "SLOWBRO",
@@ -7815,6 +8152,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "KINGS_ROCK",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -7859,10 +8197,13 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM50",
     ],
     hmMoves: [
-      "HM01",
       "HM03",
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -7914,6 +8255,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 54,
       },
     ],
+    spriteDimensions: 119,
   },
   MAGNEMITE: {
     id: "MAGNEMITE",
@@ -7936,6 +8278,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "METAL_COAT",
     ],
+    genderRatio: 255,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -7962,6 +8305,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -8010,6 +8356,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   MAGNETON: {
     id: "MAGNETON",
@@ -8032,6 +8379,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "METAL_COAT",
     ],
+    genderRatio: 255,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -8059,6 +8407,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -8110,6 +8461,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 53,
       },
     ],
+    spriteDimensions: 102,
   },
   FARFETCH_D: {
     id: "FARFETCH_D",
@@ -8132,6 +8484,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "STICK",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -8166,6 +8519,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM02",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "PECK",
@@ -8207,6 +8561,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "QUICK_ATTACK",
       "FLAIL",
     ],
+    spriteDimensions: 102,
   },
   DODUO: {
     id: "DODUO",
@@ -8227,6 +8582,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 96,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -8255,6 +8611,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM02",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "PECK",
@@ -8305,6 +8662,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   DODRIO: {
     id: "DODRIO",
@@ -8327,6 +8685,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "SHARP_BEAK",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -8356,6 +8715,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM02",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "PECK",
@@ -8398,6 +8758,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 47,
       },
     ],
+    spriteDimensions: 119,
   },
   SEEL: {
     id: "SEEL",
@@ -8417,6 +8778,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 100,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -8446,6 +8808,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -8494,6 +8859,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   DEWGONG: {
     id: "DEWGONG",
@@ -8514,6 +8880,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 176,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -8544,6 +8911,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -8583,6 +8953,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 60,
       },
     ],
+    spriteDimensions: 119,
   },
   GRIMER: {
     id: "GRIMER",
@@ -8604,6 +8975,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "NUGGET",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -8637,6 +9009,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM48",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "POISON_GAS",
@@ -8689,6 +9065,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   MUK: {
     id: "MUK",
@@ -8710,6 +9087,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "NUGGET",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -8744,6 +9122,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM48",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "POISON_GAS",
@@ -8786,6 +9168,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 60,
       },
     ],
+    spriteDimensions: 119,
   },
   SHELLDER: {
     id: "SHELLDER",
@@ -8808,6 +9191,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "PEARL",
       "BIG_PEARL",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -8835,6 +9219,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM03",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -8886,6 +9273,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   CLOYSTER: {
     id: "CLOYSTER",
@@ -8909,6 +9297,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "PEARL",
       "BIG_PEARL",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -8938,6 +9327,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM06",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "WITHDRAW",
@@ -8964,6 +9356,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 41,
       },
     ],
+    spriteDimensions: 119,
   },
   GASTLY: {
     id: "GASTLY",
@@ -8984,6 +9377,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 95,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -9016,6 +9410,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM50",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "HYPNOSIS",
@@ -9068,6 +9465,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 119,
   },
   HAUNTER: {
     id: "HAUNTER",
@@ -9088,6 +9486,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 126,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -9120,6 +9519,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM50",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "HYPNOSIS",
@@ -9170,6 +9572,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   GENGAR: {
     id: "GENGAR",
@@ -9190,6 +9593,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 190,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -9230,6 +9634,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -9273,6 +9680,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 48,
       },
     ],
+    spriteDimensions: 102,
   },
   ONIX: {
     id: "ONIX",
@@ -9293,6 +9701,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 108,
     items: [],
+    genderRatio: 127,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -9325,6 +9734,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -9372,6 +9782,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 119,
   },
   DROWZEE: {
     id: "DROWZEE",
@@ -9391,6 +9802,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 102,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -9410,7 +9822,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM18",
       "TM20",
       "TM21",
-      "TM25",
       "TM27",
       "TM29",
       "TM30",
@@ -9428,6 +9839,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "POUND",
@@ -9483,6 +9895,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   HYPNO: {
     id: "HYPNO",
@@ -9502,6 +9915,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 165,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -9522,7 +9936,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM18",
       "TM20",
       "TM21",
-      "TM25",
       "TM27",
       "TM29",
       "TM30",
@@ -9540,6 +9953,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "POUND",
@@ -9590,6 +10004,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 60,
       },
     ],
+    spriteDimensions: 119,
   },
   KRABBY: {
     id: "KRABBY",
@@ -9609,6 +10024,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 225,
     baseExperience: 115,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -9641,6 +10057,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM04",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -9692,6 +10111,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   KINGLER: {
     id: "KINGLER",
@@ -9711,6 +10131,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 60,
     baseExperience: 206,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -9744,6 +10165,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM04",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -9787,6 +10211,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 49,
       },
     ],
+    spriteDimensions: 119,
   },
   VOLTORB: {
     id: "VOLTORB",
@@ -9806,6 +10231,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 103,
     items: [],
+    genderRatio: 255,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -9833,6 +10259,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -9881,6 +10310,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   ELECTRODE: {
     id: "ELECTRODE",
@@ -9900,6 +10330,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 60,
     baseExperience: 150,
     items: [],
+    genderRatio: 255,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -9928,6 +10359,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -9979,6 +10413,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 48,
       },
     ],
+    spriteDimensions: 85,
   },
   EXEGGCUTE: {
     id: "EXEGGCUTE",
@@ -9999,6 +10434,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 98,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -10033,6 +10469,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "BARRAGE",
@@ -10087,6 +10524,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 119,
   },
   EXEGGUTOR: {
     id: "EXEGGUTOR",
@@ -10107,6 +10545,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 212,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -10143,6 +10582,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "BARRAGE",
@@ -10165,6 +10605,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 31,
       },
     ],
+    spriteDimensions: 119,
   },
   CUBONE: {
     id: "CUBONE",
@@ -10186,6 +10627,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "THICK_CLUB",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -10206,7 +10648,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM20",
       "TM21",
       "TM23",
-      "TM25",
       "TM26",
       "TM27",
       "TM28",
@@ -10225,6 +10666,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -10290,6 +10735,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   MAROWAK: {
     id: "MAROWAK",
@@ -10311,6 +10757,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "THICK_CLUB",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -10332,7 +10779,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM20",
       "TM21",
       "TM23",
-      "TM25",
       "TM26",
       "TM27",
       "TM28",
@@ -10351,6 +10797,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -10410,6 +10860,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 53,
       },
     ],
+    spriteDimensions: 102,
   },
   HITMONLEE: {
     id: "HITMONLEE",
@@ -10429,6 +10880,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 139,
     items: [],
+    genderRatio: 0,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -10460,6 +10912,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "DOUBLE_KICK",
@@ -10506,6 +10959,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 51,
       },
     ],
+    spriteDimensions: 119,
   },
   HITMONCHAN: {
     id: "HITMONCHAN",
@@ -10525,6 +10979,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 140,
     items: [],
+    genderRatio: 0,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -10542,7 +10997,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM17",
       "TM20",
       "TM21",
-      "TM25",
       "TM27",
       "TM31",
       "TM32",
@@ -10560,6 +11014,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "COMET_PUNCH",
@@ -10602,6 +11057,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 50,
       },
     ],
+    spriteDimensions: 102,
   },
   LICKITUNG: {
     id: "LICKITUNG",
@@ -10621,6 +11077,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 127,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -10670,6 +11127,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM04",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "LICK",
@@ -10709,6 +11171,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "MAGNITUDE",
       "BODY_SLAM",
     ],
+    spriteDimensions: 119,
   },
   KOFFING: {
     id: "KOFFING",
@@ -10728,6 +11191,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 114,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -10756,6 +11220,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM46",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "POISON_GAS",
@@ -10810,6 +11278,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   WEEZING: {
     id: "WEEZING",
@@ -10829,6 +11298,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 60,
     baseExperience: 173,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -10858,6 +11328,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM46",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "POISON_GAS",
@@ -10904,6 +11378,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 51,
       },
     ],
+    spriteDimensions: 119,
   },
   RHYHORN: {
     id: "RHYHORN",
@@ -10924,6 +11399,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 135,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -10962,6 +11438,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -11015,6 +11496,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 119,
   },
   RHYDON: {
     id: "RHYDON",
@@ -11035,6 +11517,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 60,
     baseExperience: 204,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -11077,9 +11560,13 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM49",
     ],
     hmMoves: [
-      "HM01",
       "HM03",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -11123,6 +11610,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 65,
       },
     ],
+    spriteDimensions: 119,
   },
   CHANSEY: {
     id: "CHANSEY",
@@ -11144,6 +11632,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "LUCKY_EGG",
     ],
+    genderRatio: 254,
     eggCycles: 40,
     growthRate: "FAST",
     eggGroups: [
@@ -11188,6 +11677,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -11249,6 +11743,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   TANGELA: {
     id: "TANGELA",
@@ -11268,6 +11763,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 166,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -11301,6 +11797,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "CONSTRICT",
@@ -11350,6 +11847,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "REFLECT",
       "AMNESIA",
     ],
+    spriteDimensions: 102,
   },
   KANGASKHAN: {
     id: "KANGASKHAN",
@@ -11369,6 +11867,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 175,
     items: [],
+    genderRatio: 254,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -11411,9 +11910,13 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM49",
     ],
     hmMoves: [
-      "HM01",
       "HM03",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -11460,6 +11963,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "SAFEGUARD",
       "DISABLE",
     ],
+    spriteDimensions: 119,
   },
   HORSEA: {
     id: "HORSEA",
@@ -11481,6 +11985,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "DRAGON_SCALE",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -11512,6 +12017,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -11560,6 +12068,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   SEADRA: {
     id: "SEADRA",
@@ -11581,6 +12090,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "DRAGON_SCALE",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -11613,6 +12123,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -11665,6 +12178,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   GOLDEEN: {
     id: "GOLDEEN",
@@ -11684,6 +12198,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 225,
     baseExperience: 111,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -11711,6 +12226,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM03",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -11764,6 +12282,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   SEAKING: {
     id: "SEAKING",
@@ -11783,6 +12302,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 60,
     baseExperience: 170,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -11811,6 +12331,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM03",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -11854,6 +12377,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 61,
       },
     ],
+    spriteDimensions: 119,
   },
   STARYU: {
     id: "STARYU",
@@ -11876,6 +12400,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "STARDUST",
       "STAR_PIECE",
     ],
+    genderRatio: 255,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -11909,6 +12434,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM05",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -11961,6 +12490,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   STARMIE: {
     id: "STARMIE",
@@ -11984,6 +12514,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "STARDUST",
       "STAR_PIECE",
     ],
+    genderRatio: 255,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -12021,6 +12552,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM06",
       "HM07",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -12043,6 +12578,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 37,
       },
     ],
+    spriteDimensions: 102,
   },
   MR_MIME: {
     id: "MR_MIME",
@@ -12064,6 +12600,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "MYSTERYBERRY",
     ],
+    genderRatio: 127,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -12103,6 +12640,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -12155,6 +12695,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HYPNOSIS",
       "MIMIC",
     ],
+    spriteDimensions: 102,
   },
   SCYTHER: {
     id: "SCYTHER",
@@ -12175,6 +12716,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 187,
     items: [],
+    genderRatio: 127,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -12207,6 +12749,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM01",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "QUICK_ATTACK",
@@ -12266,6 +12809,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 119,
   },
   JYNX: {
     id: "JYNX",
@@ -12287,7 +12831,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 137,
     items: [
       "ICE_BERRY",
+      "ICE_BERRY",
     ],
+    genderRatio: 254,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -12324,6 +12870,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM50",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "POUND",
@@ -12374,6 +12923,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 57,
       },
     ],
+    spriteDimensions: 102,
   },
   ELECTABUZZ: {
     id: "ELECTABUZZ",
@@ -12393,6 +12943,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 156,
     items: [],
+    genderRatio: 64,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -12433,6 +12984,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM05",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "QUICK_ATTACK",
@@ -12471,6 +13025,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 58,
       },
     ],
+    spriteDimensions: 102,
   },
   MAGMAR: {
     id: "MAGMAR",
@@ -12491,7 +13046,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 167,
     items: [
       "BURNT_BERRY",
+      "BURNT_BERRY",
     ],
+    genderRatio: 64,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -12511,7 +13068,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM20",
       "TM21",
       "TM23",
-      "TM25",
       "TM27",
       "TM29",
       "TM31",
@@ -12528,6 +13084,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -12579,6 +13138,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 57,
       },
     ],
+    spriteDimensions: 102,
   },
   PINSIR: {
     id: "PINSIR",
@@ -12598,6 +13158,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 200,
     items: [],
+    genderRatio: 127,
     eggCycles: 25,
     growthRate: "SLOW",
     eggGroups: [
@@ -12628,6 +13189,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "VICEGRIP",
@@ -12666,6 +13228,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "FURY_ATTACK",
       "FLAIL",
     ],
+    spriteDimensions: 119,
   },
   TAUROS: {
     id: "TAUROS",
@@ -12685,6 +13248,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 211,
     items: [],
+    genderRatio: 0,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -12719,6 +13283,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM03",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -12758,6 +13327,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 53,
       },
     ],
+    spriteDimensions: 119,
   },
   MAGIKARP: {
     id: "MAGIKARP",
@@ -12777,6 +13347,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 20,
     items: [],
+    genderRatio: 127,
     eggCycles: 5,
     growthRate: "SLOW",
     eggGroups: [
@@ -12785,6 +13356,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     tmMoves: [],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SPLASH",
@@ -12808,6 +13380,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   GYARADOS: {
     id: "GYARADOS",
@@ -12828,6 +13401,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 214,
     items: [],
+    genderRatio: 127,
     eggCycles: 5,
     growthRate: "SLOW",
     eggGroups: [
@@ -12867,6 +13441,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM06",
       "HM07",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "THRASH",
@@ -12901,6 +13480,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 50,
       },
     ],
+    spriteDimensions: 119,
   },
   LAPRAS: {
     id: "LAPRAS",
@@ -12921,6 +13501,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 219,
     items: [],
+    genderRatio: 127,
     eggCycles: 40,
     growthRate: "SLOW",
     eggGroups: [
@@ -12959,6 +13540,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM04",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -13010,6 +13595,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "AURORA_BEAM",
       "FORESIGHT",
     ],
+    spriteDimensions: 119,
   },
   DITTO: {
     id: "DITTO",
@@ -13029,6 +13615,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 35,
     baseExperience: 61,
     items: [],
+    genderRatio: 255,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -13036,12 +13623,14 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     tmMoves: [],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TRANSFORM",
         level: 1,
       },
     ],
+    spriteDimensions: 85,
   },
   EEVEE: {
     id: "EEVEE",
@@ -13061,6 +13650,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 92,
     items: [],
+    genderRatio: 31,
     eggCycles: 35,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -13090,6 +13680,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM45",
     ],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -13165,6 +13756,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   VAPOREON: {
     id: "VAPOREON",
@@ -13184,6 +13776,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 196,
     items: [],
+    genderRatio: 31,
     eggCycles: 35,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -13220,6 +13813,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -13263,6 +13859,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 52,
       },
     ],
+    spriteDimensions: 102,
   },
   JOLTEON: {
     id: "JOLTEON",
@@ -13282,6 +13879,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 197,
     items: [],
+    genderRatio: 31,
     eggCycles: 35,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -13316,6 +13914,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -13359,6 +13960,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 52,
       },
     ],
+    spriteDimensions: 102,
   },
   FLAREON: {
     id: "FLAREON",
@@ -13378,6 +13980,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 198,
     items: [],
+    genderRatio: 31,
     eggCycles: 35,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -13411,6 +14014,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM45",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+    ],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -13453,6 +14059,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 52,
       },
     ],
+    spriteDimensions: 102,
   },
   PORYGON: {
     id: "PORYGON",
@@ -13472,6 +14079,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 130,
     items: [],
+    genderRatio: 255,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -13507,6 +14115,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -13559,6 +14171,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   OMANYTE: {
     id: "OMANYTE",
@@ -13579,6 +14192,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 120,
     items: [],
+    genderRatio: 31,
     eggCycles: 30,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -13611,6 +14225,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM03",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -13662,6 +14279,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   OMASTAR: {
     id: "OMASTAR",
@@ -13682,6 +14300,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 199,
     items: [],
+    genderRatio: 31,
     eggCycles: 30,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -13715,6 +14334,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM03",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -13758,6 +14380,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 65,
       },
     ],
+    spriteDimensions: 102,
   },
   KABUTO: {
     id: "KABUTO",
@@ -13778,6 +14401,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 119,
     items: [],
+    genderRatio: 31,
     eggCycles: 30,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -13808,6 +14432,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM46",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "SCRATCH",
@@ -13858,6 +14485,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   KABUTOPS: {
     id: "KABUTOPS",
@@ -13878,6 +14506,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 201,
     items: [],
+    genderRatio: 31,
     eggCycles: 30,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -13914,6 +14543,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM03",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -13957,6 +14589,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 65,
       },
     ],
+    spriteDimensions: 102,
   },
   AERODACTYL: {
     id: "AERODACTYL",
@@ -13977,6 +14610,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 202,
     items: [],
+    genderRatio: 31,
     eggCycles: 35,
     growthRate: "SLOW",
     eggGroups: [
@@ -14012,6 +14646,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM02",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -14052,6 +14689,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "PURSUIT",
       "FORESIGHT",
     ],
+    spriteDimensions: 119,
   },
   SNORLAX: {
     id: "SNORLAX",
@@ -14072,7 +14710,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 154,
     items: [
       "LEFTOVERS",
+      "LEFTOVERS",
     ],
+    genderRatio: 31,
     eggCycles: 40,
     growthRate: "SLOW",
     eggGroups: [
@@ -14120,6 +14760,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM04",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -14165,6 +14810,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     eggMoves: [
       "LICK",
     ],
+    spriteDimensions: 119,
   },
   ARTICUNO: {
     id: "ARTICUNO",
@@ -14185,9 +14831,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 3,
     baseExperience: 215,
     items: [],
+    genderRatio: 255,
     eggCycles: 80,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM03",
       "TM05",
@@ -14216,6 +14865,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM02",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -14251,6 +14903,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 73,
       },
     ],
+    spriteDimensions: 119,
   },
   ZAPDOS: {
     id: "ZAPDOS",
@@ -14271,9 +14924,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 3,
     baseExperience: 216,
     items: [],
+    genderRatio: 255,
     eggCycles: 80,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM03",
       "TM05",
@@ -14303,6 +14959,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM02",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -14338,6 +14997,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 73,
       },
     ],
+    spriteDimensions: 119,
   },
   MOLTRES: {
     id: "MOLTRES",
@@ -14358,9 +15018,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 3,
     baseExperience: 217,
     items: [],
+    genderRatio: 255,
     eggCycles: 80,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM03",
       "TM05",
@@ -14388,6 +15051,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM02",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -14423,6 +15089,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 73,
       },
     ],
+    spriteDimensions: 119,
   },
   DRATINI: {
     id: "DRATINI",
@@ -14444,6 +15111,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "DRAGON_SCALE",
     ],
+    genderRatio: 127,
     eggCycles: 40,
     growthRate: "SLOW",
     eggGroups: [
@@ -14479,6 +15147,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM03",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -14537,6 +15210,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   DRAGONAIR: {
     id: "DRAGONAIR",
@@ -14558,6 +15232,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "DRAGON_SCALE",
     ],
+    genderRatio: 127,
     eggCycles: 40,
     growthRate: "SLOW",
     eggGroups: [
@@ -14593,6 +15268,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM03",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -14653,6 +15333,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   DRAGONITE: {
     id: "DRAGONITE",
@@ -14675,6 +15356,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "DRAGON_SCALE",
     ],
+    genderRatio: 127,
     eggCycles: 40,
     growthRate: "SLOW",
     eggGroups: [
@@ -14718,12 +15400,16 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM49",
     ],
     hmMoves: [
-      "HM01",
       "HM02",
       "HM03",
       "HM04",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -14779,6 +15465,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 75,
       },
     ],
+    spriteDimensions: 119,
   },
   MEWTWO: {
     id: "MEWTWO",
@@ -14800,9 +15487,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "BERSERK_GENE",
     ],
+    genderRatio: 255,
     eggCycles: 120,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM01",
       "TM02",
@@ -14844,6 +15534,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -14891,6 +15586,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 99,
       },
     ],
+    spriteDimensions: 119,
   },
   MEW: {
     id: "MEW",
@@ -14912,9 +15608,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "MIRACLEBERRY",
     ],
+    genderRatio: 255,
     eggCycles: 120,
     growthRate: "MEDIUM_SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM01",
       "TM02",
@@ -14976,6 +15675,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM06",
       "HM07",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "POUND",
@@ -15002,6 +15706,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 50,
       },
     ],
+    spriteDimensions: 85,
   },
   CHIKORITA: {
     id: "CHIKORITA",
@@ -15021,6 +15726,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 64,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -15054,6 +15760,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -15113,6 +15820,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   BAYLEEF: {
     id: "BAYLEEF",
@@ -15132,6 +15840,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 141,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -15168,6 +15877,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -15227,6 +15937,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   MEGANIUM: {
     id: "MEGANIUM",
@@ -15246,6 +15957,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 208,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -15284,6 +15996,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -15334,6 +16047,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 61,
       },
     ],
+    spriteDimensions: 119,
   },
   CYNDAQUIL: {
     id: "CYNDAQUIL",
@@ -15353,6 +16067,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 65,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -15385,6 +16100,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM01",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -15437,6 +16155,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   QUILAVA: {
     id: "QUILAVA",
@@ -15456,6 +16175,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 142,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -15492,6 +16212,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM01",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -15540,6 +16263,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   TYPHLOSION: {
     id: "TYPHLOSION",
@@ -15559,6 +16283,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 209,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -15580,7 +16305,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM20",
       "TM21",
       "TM23",
-      "TM25",
       "TM26",
       "TM27",
       "TM28",
@@ -15601,6 +16325,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM01",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -15644,6 +16371,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 60,
       },
     ],
+    spriteDimensions: 119,
   },
   TOTODILE: {
     id: "TOTODILE",
@@ -15663,6 +16391,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 66,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -15698,6 +16427,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM03",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -15754,6 +16486,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   CROCONAW: {
     id: "CROCONAW",
@@ -15773,6 +16506,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 143,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -15812,6 +16546,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM04",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -15864,6 +16601,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   FERALIGATR: {
     id: "FERALIGATR",
@@ -15883,6 +16621,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 210,
     items: [],
+    genderRatio: 31,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -15924,6 +16663,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM04",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -15971,6 +16713,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 58,
       },
     ],
+    spriteDimensions: 119,
   },
   SENTRET: {
     id: "SENTRET",
@@ -15992,6 +16735,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "BERRY",
     ],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -16010,7 +16754,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM20",
       "TM21",
       "TM23",
-      "TM25",
       "TM27",
       "TM28",
       "TM30",
@@ -16033,6 +16776,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM03",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -16079,6 +16823,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   FURRET: {
     id: "FURRET",
@@ -16101,6 +16846,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "BERRY",
       "GOLD_BERRY",
     ],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -16120,7 +16866,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM20",
       "TM21",
       "TM23",
-      "TM25",
       "TM27",
       "TM28",
       "TM30",
@@ -16144,6 +16889,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SCRATCH",
@@ -16182,6 +16928,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 48,
       },
     ],
+    spriteDimensions: 102,
   },
   HOOTHOOT: {
     id: "HOOTHOOT",
@@ -16202,6 +16949,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 58,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -16234,6 +16982,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM02",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -16289,6 +17038,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   NOCTOWL: {
     id: "NOCTOWL",
@@ -16309,6 +17059,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 162,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -16342,6 +17093,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM02",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -16388,6 +17140,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 57,
       },
     ],
+    spriteDimensions: 119,
   },
   LEDYBA: {
     id: "LEDYBA",
@@ -16408,6 +17161,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 54,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "FAST",
     eggGroups: [
@@ -16428,7 +17182,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM20",
       "TM21",
       "TM22",
-      "TM25",
       "TM27",
       "TM28",
       "TM32",
@@ -16444,6 +17197,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -16500,6 +17254,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   LEDIAN: {
     id: "LEDIAN",
@@ -16520,6 +17275,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 134,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "FAST",
     eggGroups: [
@@ -16541,7 +17297,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM20",
       "TM21",
       "TM22",
-      "TM25",
       "TM27",
       "TM28",
       "TM32",
@@ -16557,6 +17312,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -16603,6 +17359,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 60,
       },
     ],
+    spriteDimensions: 102,
   },
   SPINARAK: {
     id: "SPINARAK",
@@ -16623,6 +17380,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 54,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "FAST",
     eggGroups: [
@@ -16653,6 +17411,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "POISON_STING",
@@ -16711,6 +17470,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   ARIADOS: {
     id: "ARIADOS",
@@ -16731,6 +17491,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 134,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "FAST",
     eggGroups: [
@@ -16762,6 +17523,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "POISON_STING",
@@ -16812,6 +17574,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 63,
       },
     ],
+    spriteDimensions: 119,
   },
   CROBAT: {
     id: "CROBAT",
@@ -16832,6 +17595,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 204,
     items: [],
+    genderRatio: 127,
     eggCycles: 15,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -16862,6 +17626,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM02",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SCREECH",
@@ -16900,6 +17665,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 55,
       },
     ],
+    spriteDimensions: 119,
   },
   CHINCHOU: {
     id: "CHINCHOU",
@@ -16920,6 +17686,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 90,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -16948,6 +17715,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM05",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -17001,6 +17772,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   LANTURN: {
     id: "LANTURN",
@@ -17021,6 +17793,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 156,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -17050,6 +17823,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM05",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -17093,6 +17870,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 53,
       },
     ],
+    spriteDimensions: 102,
   },
   PICHU: {
     id: "PICHU",
@@ -17114,9 +17892,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "BERRY",
     ],
+    genderRatio: 127,
     eggCycles: 10,
     growthRate: "MEDIUM_FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -17144,6 +17925,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -17183,6 +17967,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   CLEFFA: {
     id: "CLEFFA",
@@ -17205,9 +17990,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "MYSTERYBERRY",
       "MOON_STONE",
     ],
+    genderRatio: 191,
     eggCycles: 10,
     growthRate: "FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -17242,6 +18030,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -17282,6 +18073,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   IGGLYBUFF: {
     id: "IGGLYBUFF",
@@ -17301,9 +18093,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 170,
     baseExperience: 39,
     items: [],
+    genderRatio: 191,
     eggCycles: 10,
     growthRate: "FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -17337,6 +18132,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -17374,6 +18172,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   TOGEPI: {
     id: "TOGEPI",
@@ -17393,9 +18192,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 74,
     items: [],
+    genderRatio: 31,
     eggCycles: 10,
     growthRate: "FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -17429,6 +18231,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -17476,6 +18281,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   TOGETIC: {
     id: "TOGETIC",
@@ -17496,6 +18302,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 114,
     items: [],
+    genderRatio: 31,
     eggCycles: 10,
     growthRate: "FAST",
     eggGroups: [
@@ -17539,6 +18346,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM02",
       "HM05",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+    ],
     levelUpMoves: [
       {
         moveId: "GROWL",
@@ -17569,6 +18379,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 38,
       },
     ],
+    spriteDimensions: 119,
   },
   NATU: {
     id: "NATU",
@@ -17589,6 +18400,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 73,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -17622,6 +18434,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "PECK",
@@ -17668,6 +18481,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   XATU: {
     id: "XATU",
@@ -17688,6 +18502,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 171,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -17723,6 +18538,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM02",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "PECK",
@@ -17757,6 +18573,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 65,
       },
     ],
+    spriteDimensions: 102,
   },
   MAREEP: {
     id: "MAREEP",
@@ -17776,6 +18593,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 235,
     baseExperience: 59,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -17806,6 +18624,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -17854,6 +18675,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   FLAAFFY: {
     id: "FLAAFFY",
@@ -17873,6 +18695,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 117,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -17908,6 +18731,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -17952,6 +18778,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   AMPHAROS: {
     id: "AMPHAROS",
@@ -17971,6 +18798,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 194,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -18007,6 +18835,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -18050,6 +18881,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 57,
       },
     ],
+    spriteDimensions: 119,
   },
   BELLOSSOM: {
     id: "BELLOSSOM",
@@ -18069,6 +18901,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 184,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -18098,6 +18931,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "ABSORB",
@@ -18120,6 +18954,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 55,
       },
     ],
+    spriteDimensions: 119,
   },
   MARILL: {
     id: "MARILL",
@@ -18139,6 +18974,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 58,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "FAST",
     eggGroups: [
@@ -18175,6 +19011,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -18229,6 +19068,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   AZUMARILL: {
     id: "AZUMARILL",
@@ -18248,6 +19088,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 153,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "FAST",
     eggGroups: [
@@ -18287,6 +19128,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -18334,6 +19178,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 48,
       },
     ],
+    spriteDimensions: 119,
   },
   SUDOWOODO: {
     id: "SUDOWOODO",
@@ -18353,6 +19198,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 65,
     baseExperience: 135,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -18372,7 +19218,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM17",
       "TM20",
       "TM21",
-      "TM25",
       "TM26",
       "TM27",
       "TM28",
@@ -18392,6 +19237,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "ROCK_THROW",
@@ -18425,6 +19271,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     eggMoves: [
       "SELFDESTRUCT",
     ],
+    spriteDimensions: 102,
   },
   POLITOED: {
     id: "POLITOED",
@@ -18446,6 +19293,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "KINGS_ROCK",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -18486,6 +19334,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM06",
       "HM07",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "WATER_GUN",
@@ -18512,6 +19363,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 51,
       },
     ],
+    spriteDimensions: 119,
   },
   HOPPIP: {
     id: "HOPPIP",
@@ -18532,6 +19384,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 74,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -18562,6 +19415,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SPLASH",
@@ -18622,6 +19476,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   SKIPLOOM: {
     id: "SKIPLOOM",
@@ -18642,6 +19497,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 136,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -18672,6 +19528,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SPLASH",
@@ -18735,6 +19592,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   JUMPLUFF: {
     id: "JUMPLUFF",
@@ -18755,6 +19613,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 176,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -18786,6 +19645,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SPLASH",
@@ -18840,6 +19700,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 44,
       },
     ],
+    spriteDimensions: 119,
   },
   AIPOM: {
     id: "AIPOM",
@@ -18859,6 +19720,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 94,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "FAST",
     eggGroups: [
@@ -18901,6 +19763,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM01",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -18946,6 +19811,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "DOUBLESLAP",
       "BEAT_UP",
     ],
+    spriteDimensions: 85,
   },
   SUNKERN: {
     id: "SUNKERN",
@@ -18965,6 +19831,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 235,
     baseExperience: 52,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -18994,6 +19861,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "ABSORB",
@@ -19029,6 +19897,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   SUNFLORA: {
     id: "SUNFLORA",
@@ -19048,6 +19917,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 146,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -19078,6 +19948,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "ABSORB",
@@ -19108,6 +19979,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 46,
       },
     ],
+    spriteDimensions: 102,
   },
   YANMA: {
     id: "YANMA",
@@ -19128,6 +20000,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 147,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -19158,6 +20031,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -19201,6 +20075,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "REVERSAL",
       "LEECH_LIFE",
     ],
+    spriteDimensions: 102,
   },
   WOOPER: {
     id: "WOOPER",
@@ -19221,6 +20096,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 255,
     baseExperience: 52,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -19259,6 +20135,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM05",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -19308,6 +20187,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   QUAGSIRE: {
     id: "QUAGSIRE",
@@ -19328,6 +20208,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 90,
     baseExperience: 137,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -19369,6 +20250,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM05",
       "HM06",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "WATER_GUN",
@@ -19403,6 +20287,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 59,
       },
     ],
+    spriteDimensions: 102,
   },
   ESPEON: {
     id: "ESPEON",
@@ -19422,6 +20307,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 197,
     items: [],
+    genderRatio: 31,
     eggCycles: 35,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -19460,6 +20346,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -19502,6 +20389,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 52,
       },
     ],
+    spriteDimensions: 102,
   },
   UMBREON: {
     id: "UMBREON",
@@ -19521,6 +20409,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 197,
     items: [],
+    genderRatio: 31,
     eggCycles: 35,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -19559,6 +20448,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -19601,6 +20491,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 52,
       },
     ],
+    spriteDimensions: 102,
   },
   MURKROW: {
     id: "MURKROW",
@@ -19621,6 +20512,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 30,
     baseExperience: 107,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -19655,6 +20547,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM02",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "PECK",
@@ -19689,6 +20582,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "WING_ATTACK",
       "SKY_ATTACK",
     ],
+    spriteDimensions: 102,
   },
   SLOWKING: {
     id: "SLOWKING",
@@ -19711,6 +20605,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "KINGS_ROCK",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -19755,11 +20650,14 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM50",
     ],
     hmMoves: [
-      "HM01",
       "HM03",
       "HM04",
       "HM05",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -19799,6 +20697,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 48,
       },
     ],
+    spriteDimensions: 119,
   },
   MISDREAVUS: {
     id: "MISDREAVUS",
@@ -19820,6 +20719,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "SPELL_TAG",
     ],
+    genderRatio: 127,
     eggCycles: 25,
     growthRate: "FAST",
     eggGroups: [
@@ -19855,6 +20755,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -19894,6 +20797,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "SCREECH",
       "DESTINY_BOND",
     ],
+    spriteDimensions: 102,
   },
   UNOWN: {
     id: "UNOWN",
@@ -19913,17 +20817,22 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 225,
     baseExperience: 61,
     items: [],
+    genderRatio: 255,
     eggCycles: 40,
     growthRate: "MEDIUM_FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "HIDDEN_POWER",
         level: 1,
       },
     ],
+    spriteDimensions: 85,
   },
   WOBBUFFET: {
     id: "WOBBUFFET",
@@ -19943,6 +20852,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 177,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -19950,6 +20860,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     tmMoves: [],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "COUNTER",
@@ -19968,6 +20879,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 1,
       },
     ],
+    spriteDimensions: 102,
   },
   GIRAFARIG: {
     id: "GIRAFARIG",
@@ -19988,6 +20900,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 60,
     baseExperience: 149,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -20025,6 +20938,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -20075,6 +20991,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "FUTURE_SIGHT",
       "BEAT_UP",
     ],
+    spriteDimensions: 119,
   },
   PINECO: {
     id: "PINECO",
@@ -20094,6 +21011,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 60,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -20125,6 +21043,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -20178,6 +21097,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   FORRETRESS: {
     id: "FORRETRESS",
@@ -20198,6 +21118,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 118,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -20231,6 +21152,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -20273,6 +21195,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 59,
       },
     ],
+    spriteDimensions: 119,
   },
   DUNSPARCE: {
     id: "DUNSPARCE",
@@ -20292,6 +21215,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 75,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -20331,6 +21255,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "RAGE",
@@ -20368,6 +21296,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "BITE",
       "RAGE",
     ],
+    spriteDimensions: 102,
   },
   GLIGAR: {
     id: "GLIGAR",
@@ -20388,6 +21317,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 60,
     baseExperience: 108,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -20422,6 +21352,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "POISON_STING",
@@ -20462,6 +21393,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "RAZOR_WIND",
       "COUNTER",
     ],
+    spriteDimensions: 102,
   },
   STEELIX: {
     id: "STEELIX",
@@ -20484,6 +21416,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "METAL_COAT",
     ],
+    genderRatio: 127,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -20521,6 +21454,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -20559,6 +21493,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 49,
       },
     ],
+    spriteDimensions: 119,
   },
   SNUBBULL: {
     id: "SNUBBULL",
@@ -20578,6 +21513,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 63,
     items: [],
+    genderRatio: 191,
     eggCycles: 20,
     growthRate: "FAST",
     eggGroups: [
@@ -20618,6 +21554,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -20676,6 +21615,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   GRANBULL: {
     id: "GRANBULL",
@@ -20695,6 +21635,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 178,
     items: [],
+    genderRatio: 191,
     eggCycles: 20,
     growthRate: "FAST",
     eggGroups: [
@@ -20737,6 +21678,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+    ],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -20775,6 +21719,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 51,
       },
     ],
+    spriteDimensions: 102,
   },
   QWILFISH: {
     id: "QWILFISH",
@@ -20795,6 +21740,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 100,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -20827,6 +21773,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -20872,6 +21821,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "BUBBLEBEAM",
       "SUPERSONIC",
     ],
+    spriteDimensions: 85,
   },
   SCIZOR: {
     id: "SCIZOR",
@@ -20892,6 +21842,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 25,
     baseExperience: 200,
     items: [],
+    genderRatio: 127,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -20926,6 +21877,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "QUICK_ATTACK",
@@ -20968,6 +21920,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 48,
       },
     ],
+    spriteDimensions: 119,
   },
   SHUCKLE: {
     id: "SHUCKLE",
@@ -20989,7 +21942,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 80,
     items: [
       "BERRY",
+      "BERRY",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -21024,6 +21979,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM04",
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "CONSTRICT",
@@ -21057,6 +22013,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     eggMoves: [
       "SWEET_SCENT",
     ],
+    spriteDimensions: 85,
   },
   HERACROSS: {
     id: "HERACROSS",
@@ -21077,6 +22034,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 200,
     items: [],
+    genderRatio: 127,
     eggCycles: 25,
     growthRate: "SLOW",
     eggGroups: [
@@ -21108,6 +22066,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -21151,6 +22110,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "BIDE",
       "FLAIL",
     ],
+    spriteDimensions: 102,
   },
   SNEASEL: {
     id: "SNEASEL",
@@ -21173,6 +22133,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "QUICK_CLAW",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_SLOW",
     eggGroups: [
@@ -21216,6 +22177,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM03",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -21266,6 +22230,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "REFLECT",
       "BITE",
     ],
+    spriteDimensions: 102,
   },
   TEDDIURSA: {
     id: "TEDDIURSA",
@@ -21285,6 +22250,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 124,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -21305,7 +22271,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM17",
       "TM20",
       "TM21",
-      "TM25",
       "TM26",
       "TM27",
       "TM28",
@@ -21327,6 +22292,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SCRATCH",
@@ -21382,6 +22348,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   URSARING: {
     id: "URSARING",
@@ -21401,6 +22368,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 60,
     baseExperience: 189,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -21422,7 +22390,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM17",
       "TM20",
       "TM21",
-      "TM25",
       "TM26",
       "TM27",
       "TM28",
@@ -21444,6 +22411,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SCRATCH",
@@ -21490,6 +22458,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 59,
       },
     ],
+    spriteDimensions: 119,
   },
   SLUGMA: {
     id: "SLUGMA",
@@ -21509,6 +22478,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 78,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -21536,6 +22506,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM45",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+    ],
     levelUpMoves: [
       {
         moveId: "SMOG",
@@ -21582,6 +22555,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   MAGCARGO: {
     id: "MAGCARGO",
@@ -21602,6 +22576,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 154,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -21632,6 +22607,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -21675,6 +22653,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 60,
       },
     ],
+    spriteDimensions: 102,
   },
   SWINUB: {
     id: "SWINUB",
@@ -21695,6 +22674,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 225,
     baseExperience: 78,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -21727,6 +22707,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -21774,6 +22757,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   PILOSWINE: {
     id: "PILOSWINE",
@@ -21794,6 +22778,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 160,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -21827,6 +22812,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -21870,6 +22858,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 70,
       },
     ],
+    spriteDimensions: 102,
   },
   CORSOLA: {
     id: "CORSOLA",
@@ -21890,6 +22879,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 60,
     baseExperience: 113,
     items: [],
+    genderRatio: 191,
     eggCycles: 20,
     growthRate: "FAST",
     eggGroups: [
@@ -21925,6 +22915,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM04",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -21967,6 +22960,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "MIST",
       "AMNESIA",
     ],
+    spriteDimensions: 102,
   },
   REMORAID: {
     id: "REMORAID",
@@ -21986,6 +22980,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 190,
     baseExperience: 78,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -22016,6 +23011,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM03",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -22067,6 +23066,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   OCTILLERY: {
     id: "OCTILLERY",
@@ -22086,6 +23086,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 164,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -22116,6 +23117,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM03",
       "HM06",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -22155,6 +23160,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 70,
       },
     ],
+    spriteDimensions: 102,
   },
   DELIBIRD: {
     id: "DELIBIRD",
@@ -22175,6 +23181,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 183,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "FAST",
     eggGroups: [
@@ -22207,6 +23214,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM02",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "PRESENT",
@@ -22220,6 +23230,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "SPLASH",
       "RAPID_SPIN",
     ],
+    spriteDimensions: 102,
   },
   MANTINE: {
     id: "MANTINE",
@@ -22240,6 +23251,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 25,
     baseExperience: 168,
     items: [],
+    genderRatio: 127,
     eggCycles: 25,
     growthRate: "SLOW",
     eggGroups: [
@@ -22270,6 +23282,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -22311,6 +23326,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HAZE",
       "SLAM",
     ],
+    spriteDimensions: 119,
   },
   SKARMORY: {
     id: "SKARMORY",
@@ -22331,6 +23347,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 25,
     baseExperience: 168,
     items: [],
+    genderRatio: 127,
     eggCycles: 25,
     growthRate: "SLOW",
     eggGroups: [
@@ -22362,6 +23379,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM02",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "LEER",
@@ -22398,6 +23416,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "WHIRLWIND",
       "SKY_ATTACK",
     ],
+    spriteDimensions: 119,
   },
   HOUNDOUR: {
     id: "HOUNDOUR",
@@ -22418,6 +23437,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 114,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -22454,6 +23474,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM50",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+    ],
     levelUpMoves: [
       {
         moveId: "LEER",
@@ -22506,6 +23529,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   HOUNDOOM: {
     id: "HOUNDOOM",
@@ -22526,6 +23550,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 204,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -22565,6 +23590,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+    ],
     levelUpMoves: [
       {
         moveId: "LEER",
@@ -22599,6 +23627,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 52,
       },
     ],
+    spriteDimensions: 119,
   },
   KINGDRA: {
     id: "KINGDRA",
@@ -22621,6 +23650,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "DRAGON_SCALE",
     ],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -22653,6 +23683,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -22696,6 +23729,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 51,
       },
     ],
+    spriteDimensions: 119,
   },
   PHANPY: {
     id: "PHANPY",
@@ -22715,6 +23749,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 120,
     baseExperience: 124,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -22747,6 +23782,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -22796,6 +23832,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   DONPHAN: {
     id: "DONPHAN",
@@ -22815,6 +23852,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 60,
     baseExperience: 189,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -22848,6 +23886,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "HORN_ATTACK",
@@ -22882,6 +23921,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 49,
       },
     ],
+    spriteDimensions: 119,
   },
   PORYGON2: {
     id: "PORYGON2",
@@ -22901,6 +23941,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 180,
     items: [],
+    genderRatio: 255,
     eggCycles: 20,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -22937,6 +23978,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -22980,6 +24025,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 44,
       },
     ],
+    spriteDimensions: 102,
   },
   STANTLER: {
     id: "STANTLER",
@@ -22999,6 +24045,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 165,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -23035,6 +24082,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -23072,6 +24120,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "LIGHT_SCREEN",
       "BITE",
     ],
+    spriteDimensions: 119,
   },
   SMEARGLE: {
     id: "SMEARGLE",
@@ -23091,6 +24140,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 106,
     items: [],
+    genderRatio: 127,
     eggCycles: 20,
     growthRate: "FAST",
     eggGroups: [
@@ -23098,6 +24148,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     tmMoves: [],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "SKETCH",
@@ -23140,6 +24191,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 91,
       },
     ],
+    spriteDimensions: 119,
   },
   TYROGUE: {
     id: "TYROGUE",
@@ -23159,9 +24211,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 75,
     baseExperience: 91,
     items: [],
+    genderRatio: 0,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -23187,6 +24242,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -23225,6 +24281,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   HITMONTOP: {
     id: "HITMONTOP",
@@ -23244,6 +24301,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 138,
     items: [],
+    genderRatio: 0,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
     eggGroups: [
@@ -23275,6 +24333,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "ROLLING_KICK",
@@ -23313,6 +24372,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 49,
       },
     ],
+    spriteDimensions: 119,
   },
   SMOOCHUM: {
     id: "SMOOCHUM",
@@ -23334,10 +24394,14 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 87,
     items: [
       "ICE_BERRY",
+      "ICE_BERRY",
     ],
+    genderRatio: 254,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM01",
       "TM03",
@@ -23367,6 +24431,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM50",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "POUND",
@@ -23421,6 +24488,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   ELEKID: {
     id: "ELEKID",
@@ -23440,9 +24508,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 106,
     items: [],
+    genderRatio: 64,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM01",
       "TM02",
@@ -23473,6 +24544,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     ],
     hmMoves: [
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -23524,6 +24598,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   MAGBY: {
     id: "MAGBY",
@@ -23544,10 +24619,14 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 117,
     items: [
       "BURNT_BERRY",
+      "BURNT_BERRY",
     ],
+    genderRatio: 64,
     eggCycles: 25,
     growthRate: "MEDIUM_FAST",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM01",
       "TM02",
@@ -23560,7 +24639,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM20",
       "TM21",
       "TM23",
-      "TM25",
       "TM27",
       "TM29",
       "TM31",
@@ -23576,6 +24654,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM48",
     ],
     hmMoves: [],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+    ],
     levelUpMoves: [
       {
         moveId: "EMBER",
@@ -23630,6 +24711,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   MILTANK: {
     id: "MILTANK",
@@ -23650,7 +24732,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 200,
     items: [
       "MOOMOO_MILK",
+      "MOOMOO_MILK",
     ],
+    genderRatio: 254,
     eggCycles: 20,
     growthRate: "SLOW",
     eggGroups: [
@@ -23697,6 +24781,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM04",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "TACKLE",
@@ -23740,6 +24828,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "REVERSAL",
       "SEISMIC_TOSS",
     ],
+    spriteDimensions: 102,
   },
   BLISSEY: {
     id: "BLISSEY",
@@ -23761,6 +24850,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "LUCKY_EGG",
     ],
+    genderRatio: 254,
     eggCycles: 40,
     growthRate: "FAST",
     eggGroups: [
@@ -23803,6 +24893,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -23850,6 +24945,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 47,
       },
     ],
+    spriteDimensions: 119,
   },
   RAIKOU: {
     id: "RAIKOU",
@@ -23869,9 +24965,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 3,
     baseExperience: 216,
     items: [],
+    genderRatio: 255,
     eggCycles: 80,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -23905,6 +25004,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -23944,6 +25046,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 71,
       },
     ],
+    spriteDimensions: 119,
   },
   ENTEI: {
     id: "ENTEI",
@@ -23963,9 +25066,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 3,
     baseExperience: 217,
     items: [],
+    genderRatio: 255,
     eggCycles: 80,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -23999,6 +25105,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
     ],
     levelUpMoves: [
       {
@@ -24038,6 +25147,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 71,
       },
     ],
+    spriteDimensions: 119,
   },
   SUICUNE: {
     id: "SUICUNE",
@@ -24057,9 +25167,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 3,
     baseExperience: 215,
     items: [],
+    genderRatio: 255,
     eggCycles: 80,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -24094,6 +25207,9 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM03",
       "HM06",
       "HM07",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -24133,6 +25249,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 71,
       },
     ],
+    spriteDimensions: 119,
   },
   LARVITAR: {
     id: "LARVITAR",
@@ -24153,6 +25270,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 67,
     items: [],
+    genderRatio: 127,
     eggCycles: 40,
     growthRate: "SLOW",
     eggGroups: [
@@ -24183,6 +25301,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM45",
     ],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "BITE",
@@ -24241,6 +25360,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 85,
   },
   PUPITAR: {
     id: "PUPITAR",
@@ -24261,6 +25381,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 144,
     items: [],
+    genderRatio: 127,
     eggCycles: 40,
     growthRate: "SLOW",
     eggGroups: [
@@ -24291,6 +25412,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM45",
     ],
     hmMoves: [],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "BITE",
@@ -24350,6 +25472,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         },
       },
     ],
+    spriteDimensions: 102,
   },
   TYRANITAR: {
     id: "TYRANITAR",
@@ -24370,6 +25493,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 45,
     baseExperience: 218,
     items: [],
+    genderRatio: 127,
     eggCycles: 40,
     growthRate: "SLOW",
     eggGroups: [
@@ -24392,7 +25516,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "TM21",
       "TM23",
       "TM24",
-      "TM25",
       "TM26",
       "TM27",
       "TM28",
@@ -24413,6 +25536,11 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM01",
       "HM03",
       "HM04",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
     ],
     levelUpMoves: [
       {
@@ -24464,6 +25592,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 75,
       },
     ],
+    spriteDimensions: 119,
   },
   LUGIA: {
     id: "LUGIA",
@@ -24484,9 +25613,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     catchRate: 3,
     baseExperience: 220,
     items: [],
+    genderRatio: 255,
     eggCycles: 120,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM02",
       "TM03",
@@ -24532,6 +25664,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM06",
       "HM07",
     ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_2",
+      "MOVE_TUTOR_3",
+    ],
     levelUpMoves: [
       {
         moveId: "AEROBLAST",
@@ -24574,6 +25710,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 99,
       },
     ],
+    spriteDimensions: 119,
   },
   HO_OH: {
     id: "HO_OH",
@@ -24595,10 +25732,14 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     baseExperience: 220,
     items: [
       "SACRED_ASH",
+      "SACRED_ASH",
     ],
+    genderRatio: 255,
     eggCycles: 120,
     growthRate: "SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM03",
       "TM05",
@@ -24639,6 +25780,10 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
       "HM02",
       "HM04",
       "HM05",
+    ],
+    moveTutorMoves: [
+      "MOVE_TUTOR_1",
+      "MOVE_TUTOR_2",
     ],
     levelUpMoves: [
       {
@@ -24682,6 +25827,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 99,
       },
     ],
+    spriteDimensions: 119,
   },
   CELEBI: {
     id: "CELEBI",
@@ -24704,9 +25850,12 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     items: [
       "MIRACLEBERRY",
     ],
+    genderRatio: 255,
     eggCycles: 120,
     growthRate: "MEDIUM_SLOW",
-    eggGroups: [],
+    eggGroups: [
+      "NONE",
+    ],
     tmMoves: [
       "TM03",
       "TM06",
@@ -24740,6 +25889,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
     hmMoves: [
       "HM05",
     ],
+    moveTutorMoves: [],
     levelUpMoves: [
       {
         moveId: "LEECH_SEED",
@@ -24778,5 +25928,6 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
         level: 50,
       },
     ],
+    spriteDimensions: 85,
   },
 }

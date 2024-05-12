@@ -98,3 +98,9 @@ build/
 
 # VSCode
 .vscode/
+
+# Environment Files
+.tools.env
+
+# Tools output
+tools/output
