@@ -1,0 +1,23 @@
+description: "Changes the moves that are taught by TM, HM and Move Tutor."
+values:
+  moveTutorMenuStrings: "80 04 $moveTutorMoveName1 50 $moveTutorMoveName2 50 $moveTutorMoveName3 50 82 80 8D 82 84 8B 50"
+changes:
+- description: "Changes the moves that are taught by TM, HM and Move Tutor."
+  locations:
+  - bank: 4
+    address: 0x567A
+  value: "$teachableMoves"
+- description: "Changes the moves that are taught by Move Tutor."
+  locations:
+  - bank: 18
+    address: 0x52B0
+  value: "3E $moveTutorMoveId3 C9 3E $moveTutorMoveId1 C9 3E $moveTutorMoveId2 C9"
+- description: "Menu text for the moves that are taught by Move Tutor."
+  locations:
+  - bank: 102
+  value: "$moveTutorMenuStrings"
+- description: "Changes the menu text for the moves that are taught by Move Tutor."
+  locations:
+  - bank: 102
+    address: 0x496C
+  value: "@$moveTutorMenuStrings"

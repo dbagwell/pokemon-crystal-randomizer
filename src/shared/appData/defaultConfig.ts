@@ -249,6 +249,141 @@ export const defaultConfig = () => {
           },
         },
       },
+      MOVES: {
+        label: "Moves",
+        type: "FormSection" as const,
+        layout: "vertical" as const,
+        subElementConfigs: {
+          RANDOMIZE_TMS: {
+            label: "Randomize TMs",
+            description: "Randomize the moves that each TM teaches.",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            hasToggle: true as const,
+            toggleValue: false,
+            subElementConfigs: {
+              UNIQUE: {
+                label: "Unique",
+                description: "Make sure that each TM teaches a different move.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              PREFER_SAME_TYPE: {
+                label: "Prefer Same Type",
+                description: "Limit the randomization options to moves of the same type.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              KEEP_FIELD_MOVES: {
+                label: "Keep Field Moves",
+                description: "Don't randomize TM02 (Headbutt), TM08 (Rock Smash), TM12 (Sweet Scent) or TM28 (Dig).",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              GOOD_DAMAGING_MOVES: {
+                label: "Guarantee Percentage of Good Damaging Moves",
+                description: "Guarantees that the specified percentage of all TMs are damaging moves of at least the specified power, unless doing so would confilct with other settings. If there is a conflict, as many good moves as possible will be selected.",
+                type: "FormSection" as const,
+                layout: "horizontal" as const,
+                hasToggle: true as const,
+                toggleValue: false,
+                subElementConfigs: {
+                  PERCENTAGE: {
+                    label: "Percentage",
+                    type: "IntegerInput" as const,
+                    required: true as const,
+                    min: 0,
+                    max: 100,
+                    value: 0,
+                  },
+                  POWER: {
+                    label: "Power",
+                    type: "IntegerInput" as const,
+                    required: true as const,
+                    min: 0,
+                    max: 250,
+                    value: 0,
+                  },
+                },
+              },
+              BAN: {
+                label: "Ban",
+                description: "Prevent these moves from being selected by the randomizer.",
+                type: "SelectorInput" as const,
+                options: moveIds.map((moveId) => {
+                  return {
+                    id: moveId,
+                    label: movesMap[moveId].name,
+                  }
+                }),
+                multiselect: true as const,
+                selectedOptionIds: [] as MoveId[],
+              },
+            },
+          },
+          RANDOMIZE_MOVE_TUTORS: {
+            label: "Randomize Move Tutor Moves",
+            description: "Randomize the moves that the move tutor can teach.",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            hasToggle: true as const,
+            toggleValue: false,
+            subElementConfigs: {
+              UNIQUE: {
+                label: "Unique",
+                description: "Make sure that each move is different.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              PREFER_SAME_TYPE: {
+                label: "Prefer Same Type",
+                description: "Limit the randomization options to moves of the same type.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              GOOD_DAMAGING_MOVES: {
+                label: "Guarantee Percentage of Good Damaging Moves",
+                description: "Guarantees that the specified percentage of all Move Tutor moves are damaging moves of at least the specified power, unless doing so would confilct with other settings. If there is a conflict, as many good moves as possible will be selected.",
+                type: "FormSection" as const,
+                layout: "horizontal" as const,
+                hasToggle: true as const,
+                toggleValue: false,
+                subElementConfigs: {
+                  PERCENTAGE: {
+                    label: "Percentage",
+                    type: "IntegerInput" as const,
+                    required: true as const,
+                    min: 0,
+                    max: 100,
+                    value: 0,
+                  },
+                  POWER: {
+                    label: "Power",
+                    type: "IntegerInput" as const,
+                    required: true as const,
+                    min: 0,
+                    max: 250,
+                    value: 0,
+                  },
+                },
+              },
+              BAN: {
+                label: "Ban",
+                description: "Prevent these moves from being selected by the randomizer.",
+                type: "SelectorInput" as const,
+                options: moveIds.map((moveId) => {
+                  return {
+                    id: moveId,
+                    label: movesMap[moveId].name,
+                  }
+                }),
+                multiselect: true as const,
+                selectedOptionIds: [] as MoveId[],
+              },
+            },
+          },
+        },
+      },
       ITEMS: {
         label: "Items",
         type: "FormSection" as const,
