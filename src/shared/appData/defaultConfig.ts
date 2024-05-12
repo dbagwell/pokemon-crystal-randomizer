@@ -161,7 +161,7 @@ export const defaultConfig = () => {
                     type: "IntegerInput" as const,
                     required: true as const,
                     min: 0,
-                    max: 150,
+                    max: 250,
                     value: 0,
                   },
                 },
