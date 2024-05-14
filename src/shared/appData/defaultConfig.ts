@@ -142,7 +142,7 @@ export const defaultConfig = () => {
               },
               GOOD_DAMAGING_MOVES: {
                 label: "Guarantee Percentage of Good Damaging Moves",
-                description: "Guarantees that the specified percentage of each Pokémon's moveset are damaging moves of at least the specified power, unless doing so would confilct with other settings. If there is a conflict, as many good moves as possible will be selected.",
+                description: "Guarantees that the specified percentage of each Pokémon's moveset are damaging moves of at least the specified power, unless doing so would conflict with other settings. If there is a conflict, as many good moves as possible will be selected.",
                 type: "FormSection" as const,
                 layout: "horizontal" as const,
                 hasToggle: true as const,
@@ -282,7 +282,7 @@ export const defaultConfig = () => {
               },
               GOOD_DAMAGING_MOVES: {
                 label: "Guarantee Percentage of Good Damaging Moves",
-                description: "Guarantees that the specified percentage of all TMs are damaging moves of at least the specified power, unless doing so would confilct with other settings. If there is a conflict, as many good moves as possible will be selected.",
+                description: "Guarantees that the specified percentage of all TMs are damaging moves of at least the specified power, unless doing so would conflict with other settings. If there is a conflict, as many good moves as possible will be selected.",
                 type: "FormSection" as const,
                 layout: "horizontal" as const,
                 hasToggle: true as const,
@@ -343,7 +343,7 @@ export const defaultConfig = () => {
               },
               GOOD_DAMAGING_MOVES: {
                 label: "Guarantee Percentage of Good Damaging Moves",
-                description: "Guarantees that the specified percentage of all Move Tutor moves are damaging moves of at least the specified power, unless doing so would confilct with other settings. If there is a conflict, as many good moves as possible will be selected.",
+                description: "Guarantees that the specified percentage of all Move Tutor moves are damaging moves of at least the specified power, unless doing so would conflict with other settings. If there is a conflict, as many good moves as possible will be selected.",
                 type: "FormSection" as const,
                 layout: "horizontal" as const,
                 hasToggle: true as const,
