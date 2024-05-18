@@ -1,3 +1,4 @@
+import { wildEncounterAvailabilityOptions } from "@shared/appData/wildEncounterAvailability"
 import { additionalOptionsMap } from "@shared/gameData/additionalOptions"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsGroupedByCategory } from "@shared/gameData/itemHeplers"
@@ -111,6 +112,39 @@ export const defaultConfig = () => {
                     selectedOptionIds: [] as PokemonId[],
                   },
                 },
+              },
+            },
+          },
+          RANDOMIZE_WILD_ENCOUNTERS: {
+            label: "Randomize Wild Encounters",
+            description: "Changes the Pokémon that can be encountered in tall grass, surfing on water, fishing, in trees and in rocks.",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            hasToggle: true as const,
+            toggleValue: false,
+            subElementConfigs: {
+              AVAILABILITY: {
+                label: "Availability",
+                description: "Modifies how many species are available in the wild and where they can be found.",
+                type: "SelectorInput" as const,
+                options: wildEncounterAvailabilityOptions,
+                multiselect: false as const,
+                required: true as const,
+                value: "RANDOM" as typeof wildEncounterAvailabilityOptions[number]["id"],
+              },
+              REMOVE_TIME_BASED_ENCOUNTERS: {
+                label: "Remove Time Based Encounters",
+                description: "Makes it so the Pokémon found in a certain area are the same regardless of the time of day.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              BAN: {
+                label: "Ban",
+                description: "Prevent these Pokémon from being selected by the randomizer.",
+                type: "SelectorInput" as const,
+                options: pokemonOptions,
+                multiselect: true as const,
+                selectedOptionIds: [] as PokemonId[],
               },
             },
           },

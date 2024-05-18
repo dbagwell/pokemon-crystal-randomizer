@@ -1,0 +1,3 @@
+description: "Data for a fishing time group."
+values:
+  data: "$dayPokemonId $dayLevel $nightPokemonId $nightLevel"
