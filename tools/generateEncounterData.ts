@@ -1,5 +1,6 @@
 import type { Encounter } from "@shared/types/gameData/encounter"
 import type { FishingGroupId } from "@shared/types/gameDataIds/fishingGroups"
+import type { FishingRodId } from "@shared/types/gameDataIds/fishingRods"
 import { type GameMapId } from "@shared/types/gameDataIds/gameMaps"
 import { type PokemonId } from "@shared/types/gameDataIds/pokemon"
 import type { TreeGroupId } from "@shared/types/gameDataIds/treeGroups"
@@ -70,13 +71,11 @@ const encounters: Encounter[] = []
   rodGroupMatches[3].split("\n").map((line) => {
     return line.match(/db\s*(\S*)(.*?),\s*((\S*),\s*(\S*)|(time_group)\s*(\S*))/)!
   }).forEach((encounterMatches) => {
-    const isSwarm = rodGroupMatches[1].includes("_Swarm")
     const floatRate = 255 * parseFloat(encounterMatches[1]) / 100
     const basicInfo = {
       type: "FISHING" as const,
-      group: rodGroupMatches[1].replace("_Swarm", "").replace("I", "_I").toUpperCase() as FishingGroupId,
-      rod: rodGroupMatches[2].toUpperCase() as ("OLD" | "GOOD" | "SUPER"),
-      isSwarm: isSwarm ? isSwarm : undefined,
+      group: rodGroupMatches[1].replace("I", "_I").toUpperCase() as FishingGroupId,
+      rod: rodGroupMatches[2].toUpperCase() as FishingRodId,
       rate: encounterMatches[2].includes("+") ? Math.ceil(floatRate) : Math.floor(floatRate),
     }
     

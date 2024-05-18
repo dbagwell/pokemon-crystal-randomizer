@@ -3,12 +3,14 @@ export const fishingGroupIds = [
   "OCEAN",
   "LAKE",
   "POND",
-  "WHIRL_ISLANDS",
-  "REMORAID",
-  "QWILFISH",
-  "GYARADOS",
   "DRATINI",
+  "QWILFISH_SWARM",
+  "REMORAID_SWARM",
+  "GYARADOS",
   "DRATINI_2",
+  "WHIRL_ISLANDS",
+  "QWILFISH",
+  "REMORAID",
 ] as const
 
 export type FishingGroupId = typeof fishingGroupIds[number]

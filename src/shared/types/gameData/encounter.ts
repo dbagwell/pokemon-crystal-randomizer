@@ -1,4 +1,5 @@
 import type { FishingGroupId } from "@shared/types/gameDataIds/fishingGroups"
+import type { FishingRodId } from "@shared/types/gameDataIds/fishingRods"
 import type { GameMapId } from "@shared/types/gameDataIds/gameMaps"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import type { TreeGroupId } from "@shared/types/gameDataIds/treeGroups"
@@ -30,8 +31,7 @@ export type Encounter = ({
 })) | ({
   type: "FISHING"
   group: FishingGroupId
-  rod: "OLD" | "GOOD" | "SUPER"
-  isSwarm?: boolean
+  rod: FishingRodId
   rate: number
 } & ({
   isTimeGroup: false
