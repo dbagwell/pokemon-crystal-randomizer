@@ -11,9 +11,9 @@ export default ({ root, publicDir, rollupOptions, plugins }) => {
       build: {
         rollupOptions: rollupOptions,
         sourcemap: isDev,
+        minify: !isDev,
       },
       esbuild: {
-        minify: !isDev,
         keepNames: true, // This is required for electron-affinity ipc to work.
       },
       plugins: [

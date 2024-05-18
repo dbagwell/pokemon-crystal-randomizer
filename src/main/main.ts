@@ -1,3 +1,5 @@
+import "source-map-support/register"
+
 import { MainAPI } from "@lib/ipc/mainAPI"
 import { bindRendererAPI } from "@lib/ipc/rendererAPIUtils"
 import { app, BrowserWindow, Menu, type MenuItemConstructorOptions, nativeTheme } from "electron"
