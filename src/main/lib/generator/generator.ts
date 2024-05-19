@@ -15,11 +15,12 @@ import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { teachableMovesMap } from "@shared/gameData/teachableMoves"
 import { happinessEvolutionConidtionsMap, statEvolutionConidtionsMap } from "@shared/types/gameData/evolutionMethod"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
+import type { TeachableMove } from "@shared/types/gameData/teachableMove"
 import { type HMItemId, hmItemIds, type ItemId, type TMItemId, tmItemIds } from "@shared/types/gameDataIds/items"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { type PokemonId } from "@shared/types/gameDataIds/pokemon"
 import { type StarterLocationId, starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
-import { type MoveTutorId, moveTutorIds } from "@shared/types/gameDataIds/teachableMoves"
+import { type MoveTutorId, moveTutorIds, type TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isString } from "@utils"
 import crypto from "crypto"
 import { app } from "electron"
@@ -431,6 +432,182 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     )
     
     hunks = [...hunks, ...pokemonInfoPatch.hunks]
+  }
+  
+  // Moves
+  
+  const movesSettings = settings.MOVES
+  
+  // Randomize TMs and Move Tutor Moves
+  
+  if (movesSettings.RANDOMIZE_TMS || movesSettings.RANDOMIZE_MOVE_TUTORS) {
+    const updatedTeachableMovesDataMap: IdMap<TeachableMoveId, TeachableMove> = JSON.parse(JSON.stringify(teachableMovesMap))
+    
+    if (movesSettings.RANDOMIZE_TMS) {
+      const tmsSettings = movesSettings.RANDOMIZE_TMS
+      
+      const tms = Object.values(updatedTeachableMovesDataMap).filter((move) => {
+        return move.type === "TM"
+      })
+      
+      let nonBannedMoves = Object.values(movesMap).filter((move) => {
+        return !tmsSettings.BAN.includes(move.id)
+      })
+      
+      const indicesOfForcedGoodMoves: number[] = []
+      const minPowerForForcedGoodMoves = tmsSettings.GOOD_DAMAGING_MOVES?.POWER ?? 0
+      
+      if (isNotNullish(tmsSettings.GOOD_DAMAGING_MOVES)) {
+        const guaranteedNumberOfGoodMoves = Math.ceil(tms.length * tmsSettings.GOOD_DAMAGING_MOVES.PERCENTAGE / 100)
+        const indicesOfAllMoves = Array(tms.length).map((_, index) => { return index })
+        for (let i = 0; i < guaranteedNumberOfGoodMoves; i++) {
+          const index = indicesOfAllMoves.splice(randomInt(0, indicesOfAllMoves.length - 1), 1)[0]
+          indicesOfForcedGoodMoves.push(index)
+        }
+      }
+      
+      const matchesForcedGoodMovesConditions = (move: Move, index: number) => {
+        if (indicesOfForcedGoodMoves.includes(index)) {
+          return move.power >= minPowerForForcedGoodMoves
+        } else {
+          return true
+        }
+      }
+      
+      tms.forEach((tm, index) => {
+        if (!tmsSettings.KEEP_FIELD_MOVES || !movesMap[tm.moveId].isFieldMove) {
+          const primaryChoices: Move[] = []
+          const secondaryChoices: Move[] = []
+          const tertiaryChoices: Move[] = []
+          
+          nonBannedMoves.forEach((move) => {
+            if (!tmsSettings.PREFER_SAME_TYPE || move.type === movesMap[tm.moveId].type) {
+              if (matchesForcedGoodMovesConditions(move, index)) {
+                primaryChoices.push(move)
+              } else {
+                secondaryChoices.push(move)
+              }
+            } else if (matchesForcedGoodMovesConditions(move, index)) {
+              secondaryChoices.push(move)
+            } else {
+              tertiaryChoices.push(move)
+            }
+          })
+          
+          const chosenMove = primaryChoices[randomInt(0, primaryChoices.length - 1)]
+            ?? secondaryChoices[randomInt(0, secondaryChoices.length - 1)]
+            ?? tertiaryChoices[randomInt(0, tertiaryChoices.length - 1)]
+      
+          if (isNullish(chosenMove)) {
+            throw new Error("Unable to satisfy settings for randomized tm moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
+          }
+          
+          tm.moveId = chosenMove.id
+        }
+        
+        if (tmsSettings.UNIQUE) {
+          nonBannedMoves = nonBannedMoves.filter((move) => {
+            return move.id !== tm.moveId
+          })
+        }
+      })
+    }
+    
+    if (movesSettings.RANDOMIZE_MOVE_TUTORS) {
+      const moveTutorSettings = movesSettings.RANDOMIZE_MOVE_TUTORS
+      
+      const moveTutorMoves = Object.values(updatedTeachableMovesDataMap).filter((move) => {
+        return move.type === "MOVE_TUTOR"
+      })
+      
+      let nonBannedMoves = Object.values(movesMap).filter((move) => {
+        return !moveTutorSettings.BAN.includes(move.id)
+      })
+      
+      const indicesOfForcedGoodMoves: number[] = []
+      const minPowerForForcedGoodMoves = moveTutorSettings.GOOD_DAMAGING_MOVES?.POWER ?? 0
+      
+      if (isNotNullish(moveTutorSettings.GOOD_DAMAGING_MOVES)) {
+        const guaranteedNumberOfGoodMoves = Math.ceil(moveTutorMoves.length * moveTutorSettings.GOOD_DAMAGING_MOVES.PERCENTAGE / 100)
+        const indicesOfAllMoves = Array(moveTutorMoves.length).map((_, index) => { return index })
+        for (let i = 0; i < guaranteedNumberOfGoodMoves; i++) {
+          const index = indicesOfAllMoves.splice(randomInt(0, indicesOfAllMoves.length - 1), 1)[0]
+          indicesOfForcedGoodMoves.push(index)
+        }
+      }
+      
+      const matchesForcedGoodMovesConditions = (move: Move, index: number) => {
+        if (indicesOfForcedGoodMoves.includes(index)) {
+          return move.power >= minPowerForForcedGoodMoves
+        } else {
+          return true
+        }
+      }
+      
+      moveTutorMoves.forEach((moveTutorMove, index) => {
+        const choices = nonBannedMoves.filter((move) => {
+          return (!moveTutorSettings.PREFER_SAME_TYPE || move.type === movesMap[moveTutorMove.moveId].type)
+            && matchesForcedGoodMovesConditions(move, index)
+        })
+        
+        const primaryChoices: Move[] = []
+        const secondaryChoices: Move[] = []
+        const tertiaryChoices: Move[] = []
+        
+        nonBannedMoves.forEach((move) => {
+          if (!moveTutorSettings.PREFER_SAME_TYPE || move.type === movesMap[moveTutorMove.moveId].type) {
+            if (matchesForcedGoodMovesConditions(move, index)) {
+              primaryChoices.push(move)
+            } else {
+              secondaryChoices.push(move)
+            }
+          } else if (matchesForcedGoodMovesConditions(move, index)) {
+            secondaryChoices.push(move)
+          } else {
+            tertiaryChoices.push(move)
+          }
+        })
+        
+        const chosenMove = primaryChoices[randomInt(0, primaryChoices.length - 1)]
+          ?? secondaryChoices[randomInt(0, secondaryChoices.length - 1)]
+          ?? tertiaryChoices[randomInt(0, tertiaryChoices.length - 1)]
+    
+        if (isNullish(chosenMove)) {
+          throw new Error("Unable to satisfy settings for randomized move tutor moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
+        }
+        moveTutorMove.moveId = choices[randomInt(0, choices.length - 1)].id
+        
+        if (moveTutorSettings.UNIQUE) {
+          nonBannedMoves = nonBannedMoves.filter((move) => {
+            return move.id !== moveTutorMove.moveId
+          })
+        }
+      })
+    }
+    
+    const hex = hexStringFrom(Object.values(updatedTeachableMovesDataMap).map((move) => {
+      console.log(move.id, move.moveId)
+      return movesMap[move.moveId].numericId
+    }))
+    
+    console.log(hex)
+    
+    const teachableMovesPatch = Patch.fromYAML(
+      romInfo,
+      "teachableMoves.yml",
+      {},
+      {
+        teachableMoves: hex,
+        moveTutorMoveId1: hexStringFrom([movesMap[updatedTeachableMovesDataMap.MOVE_TUTOR_1.moveId].numericId]),
+        moveTutorMoveId2: hexStringFrom([movesMap[updatedTeachableMovesDataMap.MOVE_TUTOR_2.moveId].numericId]),
+        moveTutorMoveId3: hexStringFrom([movesMap[updatedTeachableMovesDataMap.MOVE_TUTOR_3.moveId].numericId]),
+        moveTutorMoveName1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(movesMap[updatedTeachableMovesDataMap.MOVE_TUTOR_1.moveId].name.toUpperCase())),
+        moveTutorMoveName2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(movesMap[updatedTeachableMovesDataMap.MOVE_TUTOR_2.moveId].name.toUpperCase())),
+        moveTutorMoveName3: hexStringFrom(ROMInfo.displayCharacterBytesFrom(movesMap[updatedTeachableMovesDataMap.MOVE_TUTOR_3.moveId].name.toUpperCase())),
+      }
+    )
+      
+    hunks = [...hunks, ...teachableMovesPatch.hunks]
   }
   
   // Items

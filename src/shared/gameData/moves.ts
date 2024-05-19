@@ -12,6 +12,7 @@ export type Move = {
   pp: number,
   effect: MoveEffectId,
   secondaryEffectChance: number,
+  isFieldMove: boolean,
 }
 
 export const movesMap: IdMap<MoveId, Move> = {
@@ -25,6 +26,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 35,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   KARATE_CHOP: {
     id: "KARATE_CHOP",
@@ -36,6 +38,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   DOUBLESLAP: {
     id: "DOUBLESLAP",
@@ -47,6 +50,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   COMET_PUNCH: {
     id: "COMET_PUNCH",
@@ -58,6 +62,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   MEGA_PUNCH: {
     id: "MEGA_PUNCH",
@@ -69,6 +74,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   PAY_DAY: {
     id: "PAY_DAY",
@@ -80,6 +86,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "PAY_DAY",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FIRE_PUNCH: {
     id: "FIRE_PUNCH",
@@ -91,6 +98,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "BURN_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   ICE_PUNCH: {
     id: "ICE_PUNCH",
@@ -102,6 +110,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "FREEZE_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   THUNDERPUNCH: {
     id: "THUNDERPUNCH",
@@ -113,6 +122,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   SCRATCH: {
     id: "SCRATCH",
@@ -124,6 +134,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 35,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   VICEGRIP: {
     id: "VICEGRIP",
@@ -135,6 +146,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   GUILLOTINE: {
     id: "GUILLOTINE",
@@ -146,6 +158,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "OHKO",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   RAZOR_WIND: {
     id: "RAZOR_WIND",
@@ -157,6 +170,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "RAZOR_WIND",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SWORDS_DANCE: {
     id: "SWORDS_DANCE",
@@ -168,6 +182,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "ATTACK_UP_2",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   CUT: {
     id: "CUT",
@@ -179,6 +194,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: true,
   },
   GUST: {
     id: "GUST",
@@ -190,6 +206,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 35,
     effect: "GUST",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   WING_ATTACK: {
     id: "WING_ATTACK",
@@ -201,6 +218,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 35,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   WHIRLWIND: {
     id: "WHIRLWIND",
@@ -212,6 +230,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "FORCE_SWITCH",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FLY: {
     id: "FLY",
@@ -223,6 +242,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "FLY",
     secondaryEffectChance: 0,
+    isFieldMove: true,
   },
   BIND: {
     id: "BIND",
@@ -234,6 +254,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "TRAP_TARGET",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SLAM: {
     id: "SLAM",
@@ -245,6 +266,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   VINE_WHIP: {
     id: "VINE_WHIP",
@@ -256,6 +278,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   STOMP: {
     id: "STOMP",
@@ -267,6 +290,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "STOMP",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   DOUBLE_KICK: {
     id: "DOUBLE_KICK",
@@ -278,6 +302,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "DOUBLE_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   MEGA_KICK: {
     id: "MEGA_KICK",
@@ -289,6 +314,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   JUMP_KICK: {
     id: "JUMP_KICK",
@@ -300,6 +326,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "JUMP_KICK",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ROLLING_KICK: {
     id: "ROLLING_KICK",
@@ -311,6 +338,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "FLINCH_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   SAND_ATTACK: {
     id: "SAND_ATTACK",
@@ -322,6 +350,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "ACCURACY_DOWN",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   HEADBUTT: {
     id: "HEADBUTT",
@@ -333,6 +362,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "FLINCH_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: true,
   },
   HORN_ATTACK: {
     id: "HORN_ATTACK",
@@ -344,6 +374,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FURY_ATTACK: {
     id: "FURY_ATTACK",
@@ -355,6 +386,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   HORN_DRILL: {
     id: "HORN_DRILL",
@@ -366,6 +398,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "OHKO",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   TACKLE: {
     id: "TACKLE",
@@ -377,6 +410,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 35,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   BODY_SLAM: {
     id: "BODY_SLAM",
@@ -388,6 +422,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   WRAP: {
     id: "WRAP",
@@ -399,6 +434,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "TRAP_TARGET",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   TAKE_DOWN: {
     id: "TAKE_DOWN",
@@ -410,6 +446,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "RECOIL_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   THRASH: {
     id: "THRASH",
@@ -421,6 +458,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "RAMPAGE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   DOUBLE_EDGE: {
     id: "DOUBLE_EDGE",
@@ -432,6 +470,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "RECOIL_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   TAIL_WHIP: {
     id: "TAIL_WHIP",
@@ -443,6 +482,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "DEFENSE_DOWN",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   POISON_STING: {
     id: "POISON_STING",
@@ -454,6 +494,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 35,
     effect: "POISON_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   TWINEEDLE: {
     id: "TWINEEDLE",
@@ -465,6 +506,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "POISON_MULTI_HIT",
     secondaryEffectChance: 20,
+    isFieldMove: false,
   },
   PIN_MISSILE: {
     id: "PIN_MISSILE",
@@ -476,6 +518,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   LEER: {
     id: "LEER",
@@ -487,6 +530,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "DEFENSE_DOWN",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   BITE: {
     id: "BITE",
@@ -498,6 +542,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "FLINCH_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   GROWL: {
     id: "GROWL",
@@ -509,6 +554,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "ATTACK_DOWN",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ROAR: {
     id: "ROAR",
@@ -520,6 +566,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "FORCE_SWITCH",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SING: {
     id: "SING",
@@ -531,6 +578,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "SLEEP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SUPERSONIC: {
     id: "SUPERSONIC",
@@ -542,6 +590,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "CONFUSE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SONICBOOM: {
     id: "SONICBOOM",
@@ -553,6 +602,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "STATIC_DAMAGE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   DISABLE: {
     id: "DISABLE",
@@ -564,6 +614,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "DISABLE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ACID: {
     id: "ACID",
@@ -575,6 +626,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "DEFENSE_DOWN_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   EMBER: {
     id: "EMBER",
@@ -586,6 +638,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "BURN_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   FLAMETHROWER: {
     id: "FLAMETHROWER",
@@ -597,6 +650,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "BURN_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   MIST: {
     id: "MIST",
@@ -608,6 +662,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "MIST",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   WATER_GUN: {
     id: "WATER_GUN",
@@ -619,6 +674,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   HYDRO_PUMP: {
     id: "HYDRO_PUMP",
@@ -630,6 +686,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SURF: {
     id: "SURF",
@@ -641,6 +698,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: true,
   },
   ICE_BEAM: {
     id: "ICE_BEAM",
@@ -652,6 +710,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "FREEZE_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   BLIZZARD: {
     id: "BLIZZARD",
@@ -663,6 +722,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "FREEZE_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   PSYBEAM: {
     id: "PSYBEAM",
@@ -674,6 +734,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "CONFUSE_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   BUBBLEBEAM: {
     id: "BUBBLEBEAM",
@@ -685,6 +746,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "SPEED_DOWN_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   AURORA_BEAM: {
     id: "AURORA_BEAM",
@@ -696,6 +758,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "ATTACK_DOWN_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   HYPER_BEAM: {
     id: "HYPER_BEAM",
@@ -707,6 +770,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "HYPER_BEAM",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   PECK: {
     id: "PECK",
@@ -718,6 +782,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 35,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   DRILL_PECK: {
     id: "DRILL_PECK",
@@ -729,6 +794,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SUBMISSION: {
     id: "SUBMISSION",
@@ -740,6 +806,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "RECOIL_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   LOW_KICK: {
     id: "LOW_KICK",
@@ -751,6 +818,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "FLINCH_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   COUNTER: {
     id: "COUNTER",
@@ -762,6 +830,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "COUNTER",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SEISMIC_TOSS: {
     id: "SEISMIC_TOSS",
@@ -773,6 +842,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "LEVEL_DAMAGE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   STRENGTH: {
     id: "STRENGTH",
@@ -784,6 +854,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: true,
   },
   ABSORB: {
     id: "ABSORB",
@@ -795,6 +866,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "LEECH_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   MEGA_DRAIN: {
     id: "MEGA_DRAIN",
@@ -806,6 +878,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "LEECH_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   LEECH_SEED: {
     id: "LEECH_SEED",
@@ -817,6 +890,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "LEECH_SEED",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   GROWTH: {
     id: "GROWTH",
@@ -828,6 +902,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "SP_ATK_UP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   RAZOR_LEAF: {
     id: "RAZOR_LEAF",
@@ -839,6 +914,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SOLARBEAM: {
     id: "SOLARBEAM",
@@ -850,6 +926,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "SOLARBEAM",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   POISONPOWDER: {
     id: "POISONPOWDER",
@@ -861,6 +938,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 35,
     effect: "POISON",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   STUN_SPORE: {
     id: "STUN_SPORE",
@@ -872,6 +950,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "PARALYZE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SLEEP_POWDER: {
     id: "SLEEP_POWDER",
@@ -883,6 +962,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "SLEEP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   PETAL_DANCE: {
     id: "PETAL_DANCE",
@@ -894,6 +974,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "RAMPAGE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   STRING_SHOT: {
     id: "STRING_SHOT",
@@ -905,6 +986,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "SPEED_DOWN",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   DRAGON_RAGE: {
     id: "DRAGON_RAGE",
@@ -916,6 +998,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "STATIC_DAMAGE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FIRE_SPIN: {
     id: "FIRE_SPIN",
@@ -927,6 +1010,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "TRAP_TARGET",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   THUNDERSHOCK: {
     id: "THUNDERSHOCK",
@@ -938,6 +1022,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   THUNDERBOLT: {
     id: "THUNDERBOLT",
@@ -949,6 +1034,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   THUNDER_WAVE: {
     id: "THUNDER_WAVE",
@@ -960,6 +1046,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "PARALYZE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   THUNDER: {
     id: "THUNDER",
@@ -971,6 +1058,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "THUNDER",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   ROCK_THROW: {
     id: "ROCK_THROW",
@@ -982,6 +1070,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   EARTHQUAKE: {
     id: "EARTHQUAKE",
@@ -993,6 +1082,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "EARTHQUAKE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FISSURE: {
     id: "FISSURE",
@@ -1004,6 +1094,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "OHKO",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   DIG: {
     id: "DIG",
@@ -1015,6 +1106,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "FLY",
     secondaryEffectChance: 0,
+    isFieldMove: true,
   },
   TOXIC: {
     id: "TOXIC",
@@ -1026,6 +1118,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "TOXIC",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   CONFUSION: {
     id: "CONFUSION",
@@ -1037,6 +1130,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "CONFUSE_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   PSYCHIC: {
     id: "PSYCHIC",
@@ -1048,6 +1142,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "SP_DEF_DOWN_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   HYPNOSIS: {
     id: "HYPNOSIS",
@@ -1059,6 +1154,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "SLEEP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   MEDITATE: {
     id: "MEDITATE",
@@ -1070,6 +1166,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "ATTACK_UP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   AGILITY: {
     id: "AGILITY",
@@ -1081,6 +1178,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "SPEED_UP_2",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   QUICK_ATTACK: {
     id: "QUICK_ATTACK",
@@ -1092,6 +1190,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "PRIORITY_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   RAGE: {
     id: "RAGE",
@@ -1103,6 +1202,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "RAGE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   TELEPORT: {
     id: "TELEPORT",
@@ -1114,6 +1214,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "TELEPORT",
     secondaryEffectChance: 0,
+    isFieldMove: true,
   },
   NIGHT_SHADE: {
     id: "NIGHT_SHADE",
@@ -1125,6 +1226,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "LEVEL_DAMAGE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   MIMIC: {
     id: "MIMIC",
@@ -1136,6 +1238,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "MIMIC",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SCREECH: {
     id: "SCREECH",
@@ -1147,6 +1250,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "DEFENSE_DOWN_2",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   DOUBLE_TEAM: {
     id: "DOUBLE_TEAM",
@@ -1158,6 +1262,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "EVASION_UP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   RECOVER: {
     id: "RECOVER",
@@ -1169,6 +1274,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "HEAL",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   HARDEN: {
     id: "HARDEN",
@@ -1180,6 +1286,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "DEFENSE_UP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   MINIMIZE: {
     id: "MINIMIZE",
@@ -1191,6 +1298,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "EVASION_UP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SMOKESCREEN: {
     id: "SMOKESCREEN",
@@ -1202,6 +1310,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "ACCURACY_DOWN",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   CONFUSE_RAY: {
     id: "CONFUSE_RAY",
@@ -1213,6 +1322,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "CONFUSE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   WITHDRAW: {
     id: "WITHDRAW",
@@ -1224,6 +1334,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "DEFENSE_UP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   DEFENSE_CURL: {
     id: "DEFENSE_CURL",
@@ -1235,6 +1346,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "DEFENSE_CURL",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   BARRIER: {
     id: "BARRIER",
@@ -1246,6 +1358,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "DEFENSE_UP_2",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   LIGHT_SCREEN: {
     id: "LIGHT_SCREEN",
@@ -1257,6 +1370,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "LIGHT_SCREEN",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   HAZE: {
     id: "HAZE",
@@ -1268,6 +1382,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "RESET_STATS",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   REFLECT: {
     id: "REFLECT",
@@ -1279,6 +1394,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "REFLECT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FOCUS_ENERGY: {
     id: "FOCUS_ENERGY",
@@ -1290,6 +1406,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "FOCUS_ENERGY",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   BIDE: {
     id: "BIDE",
@@ -1301,6 +1418,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "BIDE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   METRONOME: {
     id: "METRONOME",
@@ -1312,6 +1430,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "METRONOME",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   MIRROR_MOVE: {
     id: "MIRROR_MOVE",
@@ -1323,6 +1442,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "MIRROR_MOVE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SELFDESTRUCT: {
     id: "SELFDESTRUCT",
@@ -1334,6 +1454,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "SELFDESTRUCT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   EGG_BOMB: {
     id: "EGG_BOMB",
@@ -1345,6 +1466,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   LICK: {
     id: "LICK",
@@ -1356,6 +1478,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   SMOG: {
     id: "SMOG",
@@ -1367,6 +1490,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "POISON_HIT",
     secondaryEffectChance: 40,
+    isFieldMove: false,
   },
   SLUDGE: {
     id: "SLUDGE",
@@ -1378,6 +1502,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "POISON_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   BONE_CLUB: {
     id: "BONE_CLUB",
@@ -1389,6 +1514,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "FLINCH_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   FIRE_BLAST: {
     id: "FIRE_BLAST",
@@ -1400,6 +1526,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "BURN_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   WATERFALL: {
     id: "WATERFALL",
@@ -1411,6 +1538,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: true,
   },
   CLAMP: {
     id: "CLAMP",
@@ -1422,6 +1550,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "TRAP_TARGET",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SWIFT: {
     id: "SWIFT",
@@ -1433,6 +1562,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "ALWAYS_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SKULL_BASH: {
     id: "SKULL_BASH",
@@ -1444,6 +1574,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "SKULL_BASH",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SPIKE_CANNON: {
     id: "SPIKE_CANNON",
@@ -1455,6 +1586,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   CONSTRICT: {
     id: "CONSTRICT",
@@ -1466,6 +1598,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 35,
     effect: "SPEED_DOWN_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   AMNESIA: {
     id: "AMNESIA",
@@ -1477,6 +1610,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "SP_DEF_UP_2",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   KINESIS: {
     id: "KINESIS",
@@ -1488,6 +1622,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "ACCURACY_DOWN",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SOFTBOILED: {
     id: "SOFTBOILED",
@@ -1499,6 +1634,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "HEAL",
     secondaryEffectChance: 0,
+    isFieldMove: true,
   },
   HI_JUMP_KICK: {
     id: "HI_JUMP_KICK",
@@ -1510,6 +1646,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "JUMP_KICK",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   GLARE: {
     id: "GLARE",
@@ -1521,6 +1658,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "PARALYZE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   DREAM_EATER: {
     id: "DREAM_EATER",
@@ -1532,6 +1670,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "DREAM_EATER",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   POISON_GAS: {
     id: "POISON_GAS",
@@ -1543,6 +1682,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "POISON",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   BARRAGE: {
     id: "BARRAGE",
@@ -1554,6 +1694,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   LEECH_LIFE: {
     id: "LEECH_LIFE",
@@ -1565,6 +1706,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "LEECH_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   LOVELY_KISS: {
     id: "LOVELY_KISS",
@@ -1576,6 +1718,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "SLEEP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SKY_ATTACK: {
     id: "SKY_ATTACK",
@@ -1587,6 +1730,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "SKY_ATTACK",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   TRANSFORM: {
     id: "TRANSFORM",
@@ -1598,6 +1742,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "TRANSFORM",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   BUBBLE: {
     id: "BUBBLE",
@@ -1609,6 +1754,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "SPEED_DOWN_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   DIZZY_PUNCH: {
     id: "DIZZY_PUNCH",
@@ -1620,6 +1766,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "CONFUSE_HIT",
     secondaryEffectChance: 20,
+    isFieldMove: false,
   },
   SPORE: {
     id: "SPORE",
@@ -1631,6 +1778,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "SLEEP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FLASH: {
     id: "FLASH",
@@ -1642,6 +1790,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "ACCURACY_DOWN",
     secondaryEffectChance: 0,
+    isFieldMove: true,
   },
   PSYWAVE: {
     id: "PSYWAVE",
@@ -1653,6 +1802,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "PSYWAVE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SPLASH: {
     id: "SPLASH",
@@ -1664,6 +1814,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "SPLASH",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ACID_ARMOR: {
     id: "ACID_ARMOR",
@@ -1675,6 +1826,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "DEFENSE_UP_2",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   CRABHAMMER: {
     id: "CRABHAMMER",
@@ -1686,6 +1838,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   EXPLOSION: {
     id: "EXPLOSION",
@@ -1697,6 +1850,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "SELFDESTRUCT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FURY_SWIPES: {
     id: "FURY_SWIPES",
@@ -1708,6 +1862,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   BONEMERANG: {
     id: "BONEMERANG",
@@ -1719,6 +1874,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "DOUBLE_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   REST: {
     id: "REST",
@@ -1730,6 +1886,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "HEAL",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ROCK_SLIDE: {
     id: "ROCK_SLIDE",
@@ -1741,6 +1898,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "FLINCH_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   HYPER_FANG: {
     id: "HYPER_FANG",
@@ -1752,6 +1910,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "FLINCH_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   SHARPEN: {
     id: "SHARPEN",
@@ -1763,6 +1922,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "ATTACK_UP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   CONVERSION: {
     id: "CONVERSION",
@@ -1774,6 +1934,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "CONVERSION",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   TRI_ATTACK: {
     id: "TRI_ATTACK",
@@ -1785,6 +1946,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "TRI_ATTACK",
     secondaryEffectChance: 20,
+    isFieldMove: false,
   },
   SUPER_FANG: {
     id: "SUPER_FANG",
@@ -1796,6 +1958,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "SUPER_FANG",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SLASH: {
     id: "SLASH",
@@ -1807,6 +1970,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SUBSTITUTE: {
     id: "SUBSTITUTE",
@@ -1818,6 +1982,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "SUBSTITUTE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   STRUGGLE: {
     id: "STRUGGLE",
@@ -1829,6 +1994,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 1,
     effect: "RECOIL_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SKETCH: {
     id: "SKETCH",
@@ -1840,6 +2006,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 1,
     effect: "SKETCH",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   TRIPLE_KICK: {
     id: "TRIPLE_KICK",
@@ -1851,6 +2018,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "TRIPLE_KICK",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   THIEF: {
     id: "THIEF",
@@ -1862,6 +2030,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "THIEF",
     secondaryEffectChance: 100,
+    isFieldMove: false,
   },
   SPIDER_WEB: {
     id: "SPIDER_WEB",
@@ -1873,6 +2042,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "MEAN_LOOK",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   MIND_READER: {
     id: "MIND_READER",
@@ -1884,6 +2054,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "LOCK_ON",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   NIGHTMARE: {
     id: "NIGHTMARE",
@@ -1895,6 +2066,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "NIGHTMARE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FLAME_WHEEL: {
     id: "FLAME_WHEEL",
@@ -1906,6 +2078,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "FLAME_WHEEL",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   SNORE: {
     id: "SNORE",
@@ -1917,6 +2090,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "SNORE",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   CURSE: {
     id: "CURSE",
@@ -1928,6 +2102,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "CURSE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FLAIL: {
     id: "FLAIL",
@@ -1939,6 +2114,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "REVERSAL",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   CONVERSION2: {
     id: "CONVERSION2",
@@ -1950,6 +2126,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "CONVERSION2",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   AEROBLAST: {
     id: "AEROBLAST",
@@ -1961,6 +2138,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   COTTON_SPORE: {
     id: "COTTON_SPORE",
@@ -1972,6 +2150,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "SPEED_DOWN_2",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   REVERSAL: {
     id: "REVERSAL",
@@ -1983,6 +2162,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "REVERSAL",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SPITE: {
     id: "SPITE",
@@ -1994,6 +2174,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "SPITE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   POWDER_SNOW: {
     id: "POWDER_SNOW",
@@ -2005,6 +2186,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "FREEZE_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   PROTECT: {
     id: "PROTECT",
@@ -2016,6 +2198,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "PROTECT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   MACH_PUNCH: {
     id: "MACH_PUNCH",
@@ -2027,6 +2210,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "PRIORITY_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SCARY_FACE: {
     id: "SCARY_FACE",
@@ -2038,6 +2222,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "SPEED_DOWN_2",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FAINT_ATTACK: {
     id: "FAINT_ATTACK",
@@ -2049,6 +2234,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "ALWAYS_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SWEET_KISS: {
     id: "SWEET_KISS",
@@ -2060,6 +2246,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "CONFUSE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   BELLY_DRUM: {
     id: "BELLY_DRUM",
@@ -2071,6 +2258,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "BELLY_DRUM",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SLUDGE_BOMB: {
     id: "SLUDGE_BOMB",
@@ -2082,6 +2270,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "POISON_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   MUD_SLAP: {
     id: "MUD_SLAP",
@@ -2093,6 +2282,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "ACCURACY_DOWN_HIT",
     secondaryEffectChance: 100,
+    isFieldMove: false,
   },
   OCTAZOOKA: {
     id: "OCTAZOOKA",
@@ -2104,6 +2294,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "ACCURACY_DOWN_HIT",
     secondaryEffectChance: 50,
+    isFieldMove: false,
   },
   SPIKES: {
     id: "SPIKES",
@@ -2115,6 +2306,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "SPIKES",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ZAP_CANNON: {
     id: "ZAP_CANNON",
@@ -2126,6 +2318,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 100,
+    isFieldMove: false,
   },
   FORESIGHT: {
     id: "FORESIGHT",
@@ -2137,6 +2330,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "FORESIGHT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   DESTINY_BOND: {
     id: "DESTINY_BOND",
@@ -2148,6 +2342,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "DESTINY_BOND",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   PERISH_SONG: {
     id: "PERISH_SONG",
@@ -2159,6 +2354,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "PERISH_SONG",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ICY_WIND: {
     id: "ICY_WIND",
@@ -2170,6 +2366,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "SPEED_DOWN_HIT",
     secondaryEffectChance: 100,
+    isFieldMove: false,
   },
   DETECT: {
     id: "DETECT",
@@ -2181,6 +2378,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "PROTECT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   BONE_RUSH: {
     id: "BONE_RUSH",
@@ -2192,6 +2390,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "MULTI_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   LOCK_ON: {
     id: "LOCK_ON",
@@ -2203,6 +2402,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "LOCK_ON",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   OUTRAGE: {
     id: "OUTRAGE",
@@ -2214,6 +2414,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "RAMPAGE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SANDSTORM: {
     id: "SANDSTORM",
@@ -2225,6 +2426,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "SANDSTORM",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   GIGA_DRAIN: {
     id: "GIGA_DRAIN",
@@ -2236,6 +2438,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "LEECH_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ENDURE: {
     id: "ENDURE",
@@ -2247,6 +2450,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "ENDURE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   CHARM: {
     id: "CHARM",
@@ -2258,6 +2462,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "ATTACK_DOWN_2",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ROLLOUT: {
     id: "ROLLOUT",
@@ -2269,6 +2474,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "ROLLOUT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FALSE_SWIPE: {
     id: "FALSE_SWIPE",
@@ -2280,6 +2486,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "FALSE_SWIPE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SWAGGER: {
     id: "SWAGGER",
@@ -2291,6 +2498,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "SWAGGER",
     secondaryEffectChance: 100,
+    isFieldMove: false,
   },
   MILK_DRINK: {
     id: "MILK_DRINK",
@@ -2302,6 +2510,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "HEAL",
     secondaryEffectChance: 0,
+    isFieldMove: true,
   },
   SPARK: {
     id: "SPARK",
@@ -2313,6 +2522,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   FURY_CUTTER: {
     id: "FURY_CUTTER",
@@ -2324,6 +2534,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "FURY_CUTTER",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   STEEL_WING: {
     id: "STEEL_WING",
@@ -2335,6 +2546,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "DEFENSE_UP_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   MEAN_LOOK: {
     id: "MEAN_LOOK",
@@ -2346,6 +2558,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "MEAN_LOOK",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ATTRACT: {
     id: "ATTRACT",
@@ -2357,6 +2570,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "ATTRACT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SLEEP_TALK: {
     id: "SLEEP_TALK",
@@ -2368,6 +2582,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "SLEEP_TALK",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   HEAL_BELL: {
     id: "HEAL_BELL",
@@ -2379,6 +2594,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "HEAL_BELL",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   RETURN: {
     id: "RETURN",
@@ -2390,6 +2606,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "RETURN",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   PRESENT: {
     id: "PRESENT",
@@ -2401,6 +2618,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "PRESENT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   FRUSTRATION: {
     id: "FRUSTRATION",
@@ -2412,6 +2630,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "FRUSTRATION",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SAFEGUARD: {
     id: "SAFEGUARD",
@@ -2423,6 +2642,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 25,
     effect: "SAFEGUARD",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   PAIN_SPLIT: {
     id: "PAIN_SPLIT",
@@ -2434,6 +2654,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "PAIN_SPLIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SACRED_FIRE: {
     id: "SACRED_FIRE",
@@ -2445,6 +2666,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "SACRED_FIRE",
     secondaryEffectChance: 50,
+    isFieldMove: false,
   },
   MAGNITUDE: {
     id: "MAGNITUDE",
@@ -2456,6 +2678,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 30,
     effect: "MAGNITUDE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   DYNAMICPUNCH: {
     id: "DYNAMICPUNCH",
@@ -2467,6 +2690,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "CONFUSE_HIT",
     secondaryEffectChance: 100,
+    isFieldMove: false,
   },
   MEGAHORN: {
     id: "MEGAHORN",
@@ -2478,6 +2702,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   DRAGONBREATH: {
     id: "DRAGONBREATH",
@@ -2489,6 +2714,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "PARALYZE_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   BATON_PASS: {
     id: "BATON_PASS",
@@ -2500,6 +2726,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "BATON_PASS",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ENCORE: {
     id: "ENCORE",
@@ -2511,6 +2738,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "ENCORE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   PURSUIT: {
     id: "PURSUIT",
@@ -2522,6 +2750,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "PURSUIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   RAPID_SPIN: {
     id: "RAPID_SPIN",
@@ -2533,6 +2762,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 40,
     effect: "RAPID_SPIN",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SWEET_SCENT: {
     id: "SWEET_SCENT",
@@ -2544,6 +2774,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "EVASION_DOWN",
     secondaryEffectChance: 0,
+    isFieldMove: true,
   },
   IRON_TAIL: {
     id: "IRON_TAIL",
@@ -2555,6 +2786,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "DEFENSE_DOWN_HIT",
     secondaryEffectChance: 30,
+    isFieldMove: false,
   },
   METAL_CLAW: {
     id: "METAL_CLAW",
@@ -2566,6 +2798,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 35,
     effect: "ATTACK_UP_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   VITAL_THROW: {
     id: "VITAL_THROW",
@@ -2577,6 +2810,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "ALWAYS_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   MORNING_SUN: {
     id: "MORNING_SUN",
@@ -2588,6 +2822,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "MORNING_SUN",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SYNTHESIS: {
     id: "SYNTHESIS",
@@ -2599,6 +2834,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "SYNTHESIS",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   MOONLIGHT: {
     id: "MOONLIGHT",
@@ -2610,6 +2846,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "MOONLIGHT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   HIDDEN_POWER: {
     id: "HIDDEN_POWER",
@@ -2621,6 +2858,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "HIDDEN_POWER",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   CROSS_CHOP: {
     id: "CROSS_CHOP",
@@ -2632,6 +2870,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   TWISTER: {
     id: "TWISTER",
@@ -2643,6 +2882,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "TWISTER",
     secondaryEffectChance: 20,
+    isFieldMove: false,
   },
   RAIN_DANCE: {
     id: "RAIN_DANCE",
@@ -2654,6 +2894,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "RAIN_DANCE",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   SUNNY_DAY: {
     id: "SUNNY_DAY",
@@ -2665,6 +2906,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "SUNNY_DAY",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   CRUNCH: {
     id: "CRUNCH",
@@ -2676,6 +2918,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "SP_DEF_DOWN_HIT",
     secondaryEffectChance: 20,
+    isFieldMove: false,
   },
   MIRROR_COAT: {
     id: "MIRROR_COAT",
@@ -2687,6 +2930,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 20,
     effect: "MIRROR_COAT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   PSYCH_UP: {
     id: "PSYCH_UP",
@@ -2698,6 +2942,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "PSYCH_UP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   EXTREMESPEED: {
     id: "EXTREMESPEED",
@@ -2709,6 +2954,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "PRIORITY_HIT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ANCIENTPOWER: {
     id: "ANCIENTPOWER",
@@ -2720,6 +2966,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 5,
     effect: "ALL_UP_HIT",
     secondaryEffectChance: 10,
+    isFieldMove: false,
   },
   SHADOW_BALL: {
     id: "SHADOW_BALL",
@@ -2731,6 +2978,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "SP_DEF_DOWN_HIT",
     secondaryEffectChance: 20,
+    isFieldMove: false,
   },
   FUTURE_SIGHT: {
     id: "FUTURE_SIGHT",
@@ -2742,6 +2990,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "FUTURE_SIGHT",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
   ROCK_SMASH: {
     id: "ROCK_SMASH",
@@ -2753,6 +3002,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "DEFENSE_DOWN_HIT",
     secondaryEffectChance: 50,
+    isFieldMove: true,
   },
   WHIRLPOOL: {
     id: "WHIRLPOOL",
@@ -2764,6 +3014,7 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 15,
     effect: "TRAP_TARGET",
     secondaryEffectChance: 0,
+    isFieldMove: true,
   },
   BEAT_UP: {
     id: "BEAT_UP",
@@ -2775,5 +3026,6 @@ export const movesMap: IdMap<MoveId, Move> = {
     pp: 10,
     effect: "BEAT_UP",
     secondaryEffectChance: 0,
+    isFieldMove: false,
   },
 }
