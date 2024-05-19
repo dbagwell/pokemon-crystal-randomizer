@@ -301,6 +301,22 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         kantoLandEncounterGroups: landOrWaterEncounterIncludes("KANTO", "LAND", false),
         kantoWaterEncounterGroups: landOrWaterEncounterIncludes("KANTO", "WATER", false),
         swarmEncounterGroups: landOrWaterEncounterIncludes("JOHTO", "LAND", true),
+        contestEncounterSlots: compact(updatedEncountersData.map((encounter) => {
+          if (encounter.type !== "CONTEST") {
+            return undefined
+          }
+          
+          return {
+            path: "contestEncounterSlot.yml",
+            extraIncludes: {},
+            extraValues: {
+              encounterRate: hexStringFrom([encounter.rate]),
+              pokemonId: hexStringFrom([pokemonMap[encounter.pokemonId].numericId]),
+              minLevel: hexStringFrom([encounter.minLevel]),
+              maxLevel: hexStringFrom([encounter.maxLevel]),
+            },
+          }
+        })),
         fishingEncounterSlots: fishingGroupIds.flatMap((group, groupIndex) => {
           return fishingRodIds.flatMap((rod, rodIndex) => {
             return compact(updatedEncountersData.map((encounter) => {

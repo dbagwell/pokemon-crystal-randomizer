@@ -40,4 +40,10 @@ export type Encounter = ({
 } | {
   isTimeGroup: true
   timeGroupIndex: number
-}))
+})) | {
+  type: "CONTEST"
+  pokemonId: PokemonId
+  minLevel: number
+  maxLevel: number
+  rate: number
+}

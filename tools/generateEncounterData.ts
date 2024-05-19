@@ -13,6 +13,7 @@ const kantoGrassFileText = fs.readFileSync(path.resolve(pokecrystalPath, "data/w
 const johtoWaterFileText = fs.readFileSync(path.resolve(pokecrystalPath, "data/wild/johto_water.asm"), "utf-8")
 const kantoWaterFileText = fs.readFileSync(path.resolve(pokecrystalPath, "data/wild/kanto_water.asm"), "utf-8")
 const swarmFileText = fs.readFileSync(path.resolve(pokecrystalPath, "data/wild/swarm_grass.asm"), "utf-8")
+const contestFileText = fs.readFileSync(path.resolve(pokecrystalPath, "data/wild/bug_contest_mons.asm"), "utf-8")
 const fishFileText = fs.readFileSync(path.resolve(pokecrystalPath, "data/wild/fish.asm"), "utf-8")
 const treemonsFileText = fs.readFileSync(path.resolve(pokecrystalPath, "data/wild/treemons.asm"), "utf-8")
 
@@ -64,6 +65,20 @@ const encounters: Encounter[] = []
         slot: index,
       })
     })
+  })
+})
+
+;[...contestFileText.matchAll(/db\s*(\S*),\s*(\S*),\s*(\S*),\s*(\S*)/g)].forEach((matches) => {
+  if (matches[1] === "-1") {
+    return
+  }
+  
+  encounters.push({
+    type: "CONTEST",
+    pokemonId: matches[2].replace("__", "_") as PokemonId,
+    minLevel: parseInt(matches[3]),
+    maxLevel: parseInt(matches[4]),
+    rate: parseInt(matches[1]),
   })
 })
 

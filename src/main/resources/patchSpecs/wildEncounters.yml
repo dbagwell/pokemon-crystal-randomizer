@@ -5,6 +5,11 @@ changes:
   - bank: 10
     address: 0x65E9
   value: "#johtoLandEncounterGroups.$data FF #johtoWaterEncounterGroups.$data FF #kantoLandEncounterGroups.$data FF #kantoWaterEncounterGroups.$data FF #swarmEncounterGroups.$data FF"
+- description: "Changes the data for the pokemon that can be encountered in the bug catching contest."
+  locations:
+  - bank: 37
+    address: 0x7D87
+  value: "#contestEncounterSlots.$data"
 - description: "Changes the data for the pokemon that can be encountered fishing."
   locations:
   - bank: 36
