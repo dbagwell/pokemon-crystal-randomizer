@@ -11,10 +11,23 @@ changes:
     locations:
       - bank: 0
     value: "$checkHoldToMash"
-  - description: Removes requirement to re press a or b to advance the text.
+  - description: Removes requirement to re press a or b to advance the text in most scenarios.
     locations:
       - bank: 0
         address: 0x0A3C
       - bank: 0
         address: 0x0ADF
     value: "CD @$checkHoldToMash 00"
+- description: Removes requirement to re press a or b to advance the text in certain scenarios.
+  locations:
+    - bank: 0
+      address: 0x373E
+    - bank: 3
+      address: 0x4C14
+    - bank: 15
+      address: 0x707B
+    - bank: 62
+      address: 0x78A1
+    - bank: 62
+      address: 0x78AF
+  value: "@$checkHoldToMash"
