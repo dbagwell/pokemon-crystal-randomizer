@@ -52,7 +52,8 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
       return {
         message: "ROM Generated!",
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.log(error.stack)
       throw new RelayedError(`${error}`)
     }
   }

@@ -261,6 +261,10 @@ export class PatchInfo {
     } else if (component instanceof ReferencePathValueComponent) {
       const path = [this.includePath, "values", component.name].join(".")
       if (token instanceof ValueToken) {
+        if (isNullish(this.values[component.name])) {
+          throw new Error(`No value provided for ${path}.`)
+        }
+        
         const result = this.dataFormatFromTokens(this.values[component.name], offset)
         result.referenceOffsets[path] = offset
         return result
