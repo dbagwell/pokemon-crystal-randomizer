@@ -71,7 +71,7 @@ export class PatchInfo {
     Object.entries(extraIncludes).forEach(([key, value]) => {
       if (Array.isArray(value)) {
         if (value.length > PatchInfo.maxIncludesPerKey) {
-          throw new Error(`Cannont have more than ${PatchInfo.maxIncludesPerKey} includes for key '${key}' of patch '${filePath}'.`)
+          throw new Error(`Cannot have more than ${PatchInfo.maxIncludesPerKey} includes for key '${key}' of patch '${filePath}'.`)
         }
         
         this.includes[key] = value.map((include: ExtraInclude, index: number) => {
@@ -93,8 +93,20 @@ export class PatchInfo {
       ...extraValues,
     }
     
-    this.values = reduceDictionaryInto(combinedValues, {}, (result, key, value) => { result[key] = parseTokens(value) })
-    this.changes = yaml.changes?.map((change: any) => { return new ChangeInfo(change) }) ?? []
+    this.values = reduceDictionaryInto(combinedValues, {}, (result, key, value) => {
+      try {
+        result[key] = parseTokens(value)
+      } catch (error) {
+        throw `Error parsing value with name "${key}".\n\n${error}`
+      }
+    })
+    this.changes = yaml.changes?.map((change: any) => {
+      try {
+        return new ChangeInfo(change)
+      } catch (error) {
+        throw `Error parsing change "${change.value}".\n\n${error}`
+      }
+    }) ?? []
   }
   
   readonly hunks = (romInfo: ROMInfo): DataHunk[] => {
