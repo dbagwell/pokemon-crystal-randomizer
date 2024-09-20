@@ -54,6 +54,7 @@
     } else if (isNotNullish(config.max) && value > config.max) {
       error = `${config.label} must be less than or equal to ${config.max}.`
     } else {
+      error = null
       config.value = value
     }
   }
