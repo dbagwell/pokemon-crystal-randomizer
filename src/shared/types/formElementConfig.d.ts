@@ -72,9 +72,20 @@ type SelectorInputConfig = {
   selectedOptionIds: string[]
 }))
 
+type IntegerGroupInputConfig = {
+  type: "IntegerGroupInput"
+  label: string
+  description?: string
+  min: number
+  max: number
+  sum?: number
+  values: number[]
+}
+
 type FormElementConfig =
   | FormSectionConfig
   | ToggleInputConfig
   | TextInputConfig
   | IntegerInputConfig
   | SelectorInputConfig
+  | IntegerGroupInputConfig
