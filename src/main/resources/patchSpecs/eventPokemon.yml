@@ -1,0 +1,127 @@
+description: "Changes the data for the Pokémon encountered during special events."
+changes:
+- description: "Changes the the Pokémon for the Rattata encounter in the catching tutorial."
+  locations:
+  - bank: 104
+    address: 0x4F90
+  - bank: 104
+    address: 0x4FC6
+  - bank: 104
+    address: 0x500E
+  value: "$rattataPokemonId"
+- description: "Changes the the Pokémon for the Sudowoodo encounter."
+  locations:
+  - bank: 101
+    address: 0x4068
+  value: "$sudowoodoPokemonId"
+- description: "Changes the the Pokémon for the Raikou encounter."
+  locations:
+  - bank: 10
+    address: 0x62A1
+  - bank: 97
+    address: 0x50A5
+  - bank: 97
+    address: 0x617C
+  value: "$raikouPokemonId"
+- description: "Changes the the Pokémon for the Entei encounter."
+  locations:
+  - bank: 10
+    address: 0x62A6
+  - bank: 97
+    address: 0x50C6
+  - bank: 97
+    address: 0x618A
+  value: "$enteiPokemonId"
+- description: "Changes the the Pokémon for the Suicune encounter."
+  locations:
+  - bank: 97
+    address: 0x50E5
+  - bank: 97
+    address: 0x50EA
+  - bank: 97
+    address: 0x6198
+  - bank: 97
+    address: 0x61D2
+  value: "$suicunePokemonId"
+- description: "Changes the the Pokémon for the Gyarados encounter."
+  locations:
+  - bank: 28
+    address: 0x406A
+  - bank: 28
+    address: 0x406E
+  value: "$gyaradosPokemonId"
+- description: "Changes the the Pokémon for the Voltorb encounter."
+  locations:
+  - bank: 27
+    address: 0x4A38
+  - bank: 27
+    address: 0x4A43
+  value: "$voltorbPokemonId"
+- description: "Changes the the Pokémon for the Geodude encounter."
+  locations:
+  - bank: 27
+    address: 0x4A4B
+  - bank: 27
+    address: 0x4A56
+  value: "$geodudePokemonId"
+- description: "Changes the the Pokémon for the Koffing encounter."
+  locations:
+  - bank: 27
+    address: 0x4A5E
+  - bank: 27
+    address: 0x4A69
+  value: "$koffingPokemonId"
+- description: "Changes the the Pokémon for the first Electrode encounter."
+  locations:
+  - bank: 27
+    address: 0x5102
+  - bank: 27
+    address: 0x5104
+  value: "$electrode1PokemonId"
+- description: "Changes the the Pokémon for the second Electrode encounter."
+  locations:
+  - bank: 27
+    address: 0x512D
+  - bank: 27
+    address: 0x512F
+  value: "$electrode2PokemonId"
+- description: "Changes the the Pokémon for the third Electrode encounter."
+  locations:
+  - bank: 27
+    address: 0x5158
+  - bank: 27
+    address: 0x515A
+  value: "$electrode3PokemonId"
+- description: "Changes the the Pokémon for the Lapras encounter."
+  locations:
+  - bank: 22
+    address: 0x6321
+  - bank: 22
+    address: 0x6323
+  value: "$laprasPokemonId"
+- description: "Changes the the Pokémon for the Snorlax encounter."
+  locations:
+  - bank: 106
+    address: 0x69B1
+  - bank: 106
+    address: 0x69B8
+  value: "$snorlaxPokemonId"
+- description: "Changes the the Pokémon for the Ho-Oh encounter."
+  locations:
+  - bank: 29
+    address: 0x724A
+  - bank: 29
+    address: 0x7256
+  value: "$hoOhPokemonId"
+- description: "Changes the the Pokémon for the Lugia encounter."
+  locations:
+  - bank: 99
+    address: 0x451E
+  - bank: 99
+    address: 0x452A
+  value: "$lugiaPokemonId"
+- description: "Changes the the Pokémon for the Celebi encounter."
+  locations:
+  - bank: 27
+    address: 0x6E70
+  value: "$celebiPokemonId"

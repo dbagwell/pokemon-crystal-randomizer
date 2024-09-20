@@ -115,6 +115,30 @@ export const defaultConfig = () => {
               },
             },
           },
+          RANDOMIZE_EVENT_POKEMON: {
+            label: "Randomize Event Pokémon",
+            description: "Makes it so the Pokémon encountered or gifted during special events are randomized.",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            hasToggle: true as const,
+            toggleValue: false,
+            subElementConfigs: {
+              UNIQUE: {
+                label: "Unique",
+                description: "Ensures all event Pokémon are different.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              BAN: {
+                label: "Ban",
+                description: "Prevent these Pokémon from being selected by the randomizer.",
+                type: "SelectorInput" as const,
+                options: pokemonOptions,
+                multiselect: true as const,
+                selectedOptionIds: [] as PokemonId[],
+              },
+            },
+          },
           RANDOMIZE_WILD_ENCOUNTERS: {
             label: "Randomize Wild Encounters",
             description: "Changes the Pokémon that can be encountered in tall grass, surfing on water, fishing, in trees and in rocks.",

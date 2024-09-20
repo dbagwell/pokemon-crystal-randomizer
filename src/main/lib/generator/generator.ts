@@ -144,6 +144,54 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     ]
   })
   
+  // Random Event Pokemon
+    
+  if (pokemonSettings.RANDOMIZE_EVENT_POKEMON) {
+    const eventPokemonSettings = pokemonSettings.RANDOMIZE_EVENT_POKEMON
+    
+    const availablePokemonIds = pokemonIds.filter((pokemonId) => {
+      return !eventPokemonSettings.BAN.includes(pokemonId)
+    })
+    
+    const getRandomPokemonIdHexString = () => {
+      const index = randomInt(0, availablePokemonIds.length - 1)
+      const pokemonId = availablePokemonIds[index]
+      
+      if (eventPokemonSettings.UNIQUE) {
+        availablePokemonIds.splice(index, 1)
+      }
+      
+      return hexStringFrom([pokemonMap[pokemonId].numericId])
+    }
+    
+    const eventPokemonPatch = Patch.fromYAML(
+      romInfo,
+      "eventPokemon.yml",
+      {},
+      {
+        rattataPokemonId: getRandomPokemonIdHexString(),
+        sudowoodoPokemonId: getRandomPokemonIdHexString(),
+        raikouPokemonId: getRandomPokemonIdHexString(),
+        enteiPokemonId: getRandomPokemonIdHexString(),
+        suicunePokemonId: getRandomPokemonIdHexString(),
+        gyaradosPokemonId: getRandomPokemonIdHexString(),
+        voltorbPokemonId: getRandomPokemonIdHexString(),
+        geodudePokemonId: getRandomPokemonIdHexString(),
+        koffingPokemonId: getRandomPokemonIdHexString(),
+        electrode1PokemonId: getRandomPokemonIdHexString(),
+        electrode2PokemonId: getRandomPokemonIdHexString(),
+        electrode3PokemonId: getRandomPokemonIdHexString(),
+        laprasPokemonId: getRandomPokemonIdHexString(),
+        snorlaxPokemonId: getRandomPokemonIdHexString(),
+        hoOhPokemonId: getRandomPokemonIdHexString(),
+        lugiaPokemonId: getRandomPokemonIdHexString(),
+        celebiPokemonId: getRandomPokemonIdHexString(),
+      },
+    )
+  
+    hunks = [...hunks, ...eventPokemonPatch.hunks]
+  }
+  
   // Encounter Data
   
   const updatedEncountersData: Encounter[] = JSON.parse(JSON.stringify(encounters))
