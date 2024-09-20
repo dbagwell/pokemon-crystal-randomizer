@@ -1,75 +1,75 @@
 type FormSectionConfig = {
-  type: "FormSection",
-  label: string,
-  description?: string,
-  layout: "vertical" | "horizontal",
-  subElementConfigs: Dictionary<FormElementConfig>,
+  type: "FormSection"
+  label: string
+  description?: string
+  layout: "vertical" | "horizontal"
+  subElementConfigs: Dictionary<FormElementConfig>
 } & ({
-  hasToggle?: false,
+  hasToggle?: false
 } | {
-  hasToggle: true,
-  label: string,
-  toggleValue: boolean,
+  hasToggle: true
+  label: string
+  toggleValue: boolean
 })
 
 type ToggleInputConfig = {
-  type: "ToggleInput",
-  label: string,
-  description?: string,
-  value: boolean,
+  type: "ToggleInput"
+  label: string
+  description?: string
+  value: boolean
 }
 
 type TextInputConfig = {
   type: "TextInput"
-  label: string,
-  description?: string,
-  value?: string,
-  maxCharacters?: number,
+  label: string
+  description?: string
+  value?: string
+  maxCharacters?: number
 } & ({
-  required?: false,
+  required?: false
 } | {
-  required: true,
-  value: string,
+  required: true
+  value: string
 })
 
 type IntegerInputConfig = {
   type: "IntegerInput"
-  label: string,
-  description?: string,
-  min?: number,
-  max?: number,
+  label: string
+  description?: string
+  min?: number
+  max?: number
 } & ({
-  required: false,
-  value?: number,
+  required: false
+  value?: number
 } | {
-  required: true,
-  value: number,
+  required: true
+  value: number
 })
 
 type SelectorInputOption = {
-  id: string,
-  label: string,
-  description?: string,
-  subElementConfigs?: Dictionary<FormElementConfig>,
+  id: string
+  label: string
+  description?: string
+  subElementConfigs?: Dictionary<FormElementConfig>
 }
 
 type SelectorInputConfig = {
-  type: "SelectorInput",
-  label: string,
-  description?: string,
-  options: SelectorInputOption[],
+  type: "SelectorInput"
+  label: string
+  description?: string
+  options: SelectorInputOption[]
 } & (({
-  multiselect: false,
-  value?: string,
+  multiselect: false
+  value?: string
 } & ({
-  required?: false,
+  required?: false
 } | {
-  required: true,
-  value: string,
+  required: true
+  value: string
 })) | ({
-  multiselect: true,
-  maxSelections?: number,
-  selectedOptionIds: string[],
+  multiselect: true
+  maxSelections?: number
+  selectedOptionIds: string[]
 }))
 
 type FormElementConfig =
