@@ -142,7 +142,7 @@ export class ROMInfo {
       } else if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(character)) {
         return 0x80 + character.charCodeAt(0) - 65
       } else if ("abcdefghijklmnopqrstuvwxyz".includes(character)) {
-        return 0x80 + character.charCodeAt(0) - 97
+        return 0xA0 + character.charCodeAt(0) - 97
       } else if (character === "(") {
         return 0x9A
       } else if (character === ")") {
