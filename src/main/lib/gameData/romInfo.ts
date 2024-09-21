@@ -173,6 +173,8 @@ export class ROMInfo {
         return 0xF3
       } else if (character === ",") {
         return 0xF4
+      } else if (character === "@") {
+        return 0x50
       } else {
         return 0x7F // Treat unmapped characters as spaces.
       }

@@ -254,3 +254,67 @@ changes:
   - bank: 31
     address: 0x6356
   value: "$tyrogue2PokemonNameText 4F A6 AE B3 E7 7F 7F 7F 7F"
+- description: "Changes the Pokémon of the game corner Abra."
+  locations:
+  - bank: 21
+    address: 0x6D34
+  - bank: 21
+    address: 0x6D45
+  - bank: 21
+    address: 0x6D4A
+  value: "$abraPokemonId"
+- description: "Changes the Pokémon of the game corner Cubone."
+  locations:
+  - bank: 21
+    address: 0x6D62
+  - bank: 21
+    address: 0x6D73
+  - bank: 21
+    address: 0x6D78
+  value: "$cubonePokemonId"
+- description: "Changes the Pokémon of the game corner Wobbuffet."
+  locations:
+  - bank: 21
+    address: 0x6D90
+  - bank: 21
+    address: 0x6DA1
+  - bank: 21
+    address: 0x6DA6
+  value: "$wobbuffetPokemonId"
+- description: "Changes the names of the Goldenrod game corner Pokémon."
+  locations:
+  - bank: 21
+    address: 0x6DBA
+  value: "$goldenrodGameCornerPokemonMenuText"
+- description: "Changes the Pokémon of the game corner Pikachu."
+  locations:
+  - bank: 28
+    address: 0x67FB
+  - bank: 28
+    address: 0x680C
+  - bank: 28
+    address: 0x6811
+  value: "$pikachuPokemonId"
+- description: "Changes the Pokémon of the game corner Porygon."
+  locations:
+  - bank: 28
+    address: 0x6829
+  - bank: 28
+    address: 0x683A
+  - bank: 28
+    address: 0x683F
+  value: "$porygonPokemonId"
+- description: "Changes the Pokémon of the game corner Larvitar."
+  locations:
+  - bank: 28
+    address: 0x6857
+  - bank: 28
+    address: 0x6868
+  - bank: 28
+    address: 0x686D
+  value: "$larvitarPokemonId"
+- description: "Changes the names of the Celadon game corner Pokémon."
+  locations:
+  - bank: 28
+    address: 0x6881
+  value: "$celadonGameCornerPokemonMenuText"

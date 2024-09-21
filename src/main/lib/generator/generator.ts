@@ -138,7 +138,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         {},
         {
           pokemonId: hexStringFrom(bytesFrom(pokemon.numericId, 1)),
-          pokemonName: hexStringFrom(ROMInfo.displayCharacterBytesFrom(pokemon.name)),
+          pokemonName: hexStringFrom(ROMInfo.displayCharacterBytesFrom(pokemon.name.toUpperCase())),
         },
       ).hunks,
     ]
@@ -181,6 +181,12 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     const eeveePokemon = getRandomPokemon()
     const dratiniPokemon = getRandomPokemon()
     const tyrogue2Pokemon = getRandomPokemon()
+    const abraPokemon = getRandomPokemon()
+    const cubonePokemon = getRandomPokemon()
+    const wobbuffetPokemon = getRandomPokemon()
+    const pikachuPokemon = getRandomPokemon()
+    const porygonPokemon = getRandomPokemon()
+    const larvitarPokemon = getRandomPokemon()
     
     const eventPokemonPatch = Patch.fromYAML(
       romInfo,
@@ -222,13 +228,21 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         spearowPokemonId: getRandomPokemonIdHexString(),
         shucklePokemonId: getRandomPokemonIdHexString(),
         eeveePokemonId: hexStringFrom([eeveePokemon.numericId]),
-        eeveePokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${eeveePokemon.name}.`.padEnd(11, " "))),
-        eeveePokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${eeveePokemon.name}`.padEnd(10, " "))),
+        eeveePokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${eeveePokemon.name.toUpperCase()}.`.padEnd(11, " "))),
+        eeveePokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${eeveePokemon.name.toUpperCase()}`.padEnd(10, " "))),
         dratiniPokemonId: hexStringFrom([dratiniPokemon.numericId]),
-        dratiniPokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${dratiniPokemon.name}`.padEnd(12, " "))),
-        dratiniPokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${dratiniPokemon.name}`.padEnd(10, " "))),
+        dratiniPokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${dratiniPokemon.name.toUpperCase()}`.padEnd(12, " "))),
+        dratiniPokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${dratiniPokemon.name.toUpperCase()}`.padEnd(10, " "))),
         tyrogue2PokemonId: hexStringFrom([tyrogue2Pokemon.numericId]),
-        tyrogue2PokemonNameText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${tyrogue2Pokemon.name}`.padEnd(10, " "))),
+        tyrogue2PokemonNameText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${tyrogue2Pokemon.name.toUpperCase()}`.padEnd(10, " "))),
+        abraPokemonId: hexStringFrom([abraPokemon.numericId]),
+        cubonePokemonId: hexStringFrom([cubonePokemon.numericId]),
+        wobbuffetPokemonId: hexStringFrom([wobbuffetPokemon.numericId]),
+        goldenrodGameCornerPokemonMenuText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${abraPokemon.name.toUpperCase().padEnd(10, " ")}  100@${cubonePokemon.name.toUpperCase().padEnd(10, " ")}  800@${wobbuffetPokemon.name.toUpperCase().padEnd(10, " ")} 1500@`)),
+        pikachuPokemonId: hexStringFrom([pikachuPokemon.numericId]),
+        porygonPokemonId: hexStringFrom([porygonPokemon.numericId]),
+        larvitarPokemonId: hexStringFrom([larvitarPokemon.numericId]),
+        celadonGameCornerPokemonMenuText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${pikachuPokemon.name.toUpperCase().padEnd(10, " ")} 2222@${porygonPokemon.name.toUpperCase().padEnd(10, " ")} 5555@${larvitarPokemon.name.toUpperCase().padEnd(10, " ")} 8888@`)),
       },
     )
   
