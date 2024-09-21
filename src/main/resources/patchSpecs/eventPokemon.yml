@@ -1,6 +1,6 @@
 description: "Changes the data for the Pokémon encountered during special events."
 changes:
-- description: "Changes the the Pokémon for the Rattata encounter in the catching tutorial."
+- description: "Changes the Pokémon for the Rattata encounter in the catching tutorial."
   locations:
   - bank: 104
     address: 0x4F90
@@ -9,12 +9,12 @@ changes:
   - bank: 104
     address: 0x500E
   value: "$rattataPokemonId"
-- description: "Changes the the Pokémon for the Sudowoodo encounter."
+- description: "Changes the Pokémon for the Sudowoodo encounter."
   locations:
   - bank: 101
     address: 0x4068
   value: "$sudowoodoPokemonId"
-- description: "Changes the the Pokémon for the Raikou encounter."
+- description: "Changes the Pokémon for the Raikou encounter."
   locations:
   - bank: 10
     address: 0x62A1
@@ -23,7 +23,7 @@ changes:
   - bank: 97
     address: 0x617C
   value: "$raikouPokemonId"
-- description: "Changes the the Pokémon for the Entei encounter."
+- description: "Changes the Pokémon for the Entei encounter."
   locations:
   - bank: 10
     address: 0x62A6
@@ -32,7 +32,7 @@ changes:
   - bank: 97
     address: 0x618A
   value: "$enteiPokemonId"
-- description: "Changes the the Pokémon for the Suicune encounter."
+- description: "Changes the Pokémon for the Suicune encounter."
   locations:
   - bank: 97
     address: 0x50E5
@@ -43,162 +43,214 @@ changes:
   - bank: 97
     address: 0x61D2
   value: "$suicunePokemonId"
-- description: "Changes the the Pokémon for the Gyarados encounter."
+- description: "Changes the Pokémon for the Gyarados encounter."
   locations:
   - bank: 28
     address: 0x406A
   - bank: 28
     address: 0x406E
   value: "$gyaradosPokemonId"
-- description: "Changes the the Pokémon for the Voltorb encounter."
+- description: "Changes the Pokémon for the Voltorb encounter."
   locations:
   - bank: 27
     address: 0x4A38
   - bank: 27
     address: 0x4A43
   value: "$voltorbPokemonId"
-- description: "Changes the the Pokémon for the Geodude encounter."
+- description: "Changes the Pokémon for the Geodude encounter."
   locations:
   - bank: 27
     address: 0x4A4B
   - bank: 27
     address: 0x4A56
   value: "$geodudePokemonId"
-- description: "Changes the the Pokémon for the Koffing encounter."
+- description: "Changes the Pokémon for the Koffing encounter."
   locations:
   - bank: 27
     address: 0x4A5E
   - bank: 27
     address: 0x4A69
   value: "$koffingPokemonId"
-- description: "Changes the the Pokémon for the first Electrode encounter."
+- description: "Changes the Pokémon for the first Electrode encounter."
   locations:
   - bank: 27
     address: 0x5102
   - bank: 27
     address: 0x5104
   value: "$electrode1PokemonId"
-- description: "Changes the the Pokémon for the second Electrode encounter."
+- description: "Changes the Pokémon for the second Electrode encounter."
   locations:
   - bank: 27
     address: 0x512D
   - bank: 27
     address: 0x512F
   value: "$electrode2PokemonId"
-- description: "Changes the the Pokémon for the third Electrode encounter."
+- description: "Changes the Pokémon for the third Electrode encounter."
   locations:
   - bank: 27
     address: 0x5158
   - bank: 27
     address: 0x515A
   value: "$electrode3PokemonId"
-- description: "Changes the the Pokémon for the Lapras encounter."
+- description: "Changes the Pokémon for the Lapras encounter."
   locations:
   - bank: 22
     address: 0x6321
   - bank: 22
     address: 0x6323
   value: "$laprasPokemonId"
-- description: "Changes the the Pokémon for the Snorlax encounter."
+- description: "Changes the Pokémon for the Snorlax encounter."
   locations:
   - bank: 106
     address: 0x69B1
   - bank: 106
     address: 0x69B8
   value: "$snorlaxPokemonId"
-- description: "Changes the the Pokémon for the Ho-Oh encounter."
+- description: "Changes the Pokémon for the Ho-Oh encounter."
   locations:
   - bank: 29
     address: 0x724A
   - bank: 29
     address: 0x7256
   value: "$hoOhPokemonId"
-- description: "Changes the the Pokémon for the Lugia encounter."
+- description: "Changes the Pokémon for the Lugia encounter."
   locations:
   - bank: 99
     address: 0x451E
   - bank: 99
     address: 0x452A
   value: "$lugiaPokemonId"
-- description: "Changes the the Pokémon for the Celebi encounter."
+- description: "Changes the Pokémon for the Celebi encounter."
   locations:
   - bank: 27
     address: 0x6E70
   value: "$celebiPokemonId"
-- description: "Changes the the Pokémon in the Togepi egg."
+- description: "Changes the Pokémon in the Togepi egg."
   locations:
   - bank: 5
     address: 0x6FB4
   - bank: 26
     address: 0x54E2
   value: "$togepiPokemonId"
-- description: "Changes the the Pokémon in the Pichu egg."
+- description: "Changes the Pokémon in the Pichu egg."
   locations:
   - bank: 126
     address: 0x756E
   value: "$pichuPokemonId"
-- description: "Changes the the Pokémon in the Shiny Pichu egg."
+- description: "Changes the Pokémon in the Shiny Pichu egg."
   locations:
   - bank: 126
     address: 0x75A9
   value: "$shinyPichuPokemonId"
-- description: "Changes the the Pokémon in the Cleffa egg."
+- description: "Changes the Pokémon in the Cleffa egg."
   locations:
   - bank: 126
     address: 0x75E4
   value: "$cleffaPokemonId"
-- description: "Changes the the Pokémon in the Shiny Cleffa egg."
+- description: "Changes the Pokémon in the Shiny Cleffa egg."
   locations:
   - bank: 126
     address: 0x761F
   value: "$shinyCleffaPokemonId"
-- description: "Changes the the Pokémon in the Igglybuff egg."
+- description: "Changes the Pokémon in the Igglybuff egg."
   locations:
   - bank: 126
     address: 0x765A
   value: "$igglybuffPokemonId"
-- description: "Changes the the Pokémon in the Shiny Igglybuff egg."
+- description: "Changes the Pokémon in the Shiny Igglybuff egg."
   locations:
   - bank: 126
     address: 0x7695
   value: "$shinyIgglybuffPokemonId"
-- description: "Changes the the Pokémon in the Smoochum egg."
+- description: "Changes the Pokémon in the Smoochum egg."
   locations:
   - bank: 126
     address: 0x76D0
   value: "$smoochumPokemonId"
-- description: "Changes the the Pokémon in the Shiny Smoochum egg."
+- description: "Changes the Pokémon in the Shiny Smoochum egg."
   locations:
   - bank: 126
     address: 0x770B
   value: "$shinySmoochumPokemonId"
-- description: "Changes the the Pokémon in the Magby egg."
+- description: "Changes the Pokémon in the Magby egg."
   locations:
   - bank: 126
     address: 0x7746
   value: "$magbyPokemonId"
-- description: "Changes the the Pokémon in the Shiny Magby egg."
+- description: "Changes the Pokémon in the Shiny Magby egg."
   locations:
   - bank: 126
     address: 0x7781
   value: "$shinyMagbyPokemonId"
-- description: "Changes the the Pokémon in the Elekid egg."
+- description: "Changes the Pokémon in the Elekid egg."
   locations:
   - bank: 126
     address: 0x77BC
   value: "$elekidPokemonId"
-- description: "Changes the the Pokémon in the Shiny Elekid egg."
+- description: "Changes the Pokémon in the Shiny Elekid egg."
   locations:
   - bank: 126
     address: 0x77F7
   value: "$shinyElekidPokemonId"
-- description: "Changes the the Pokémon in the Tyrogue egg."
+- description: "Changes the Pokémon in the Tyrogue egg."
   locations:
   - bank: 126
     address: 0x7832
   value: "$tyroguePokemonId"
-- description: "Changes the the Pokémon in the Shiny Tyrogue egg."
+- description: "Changes the Pokémon in the Shiny Tyrogue egg."
   locations:
   - bank: 126
     address: 0x786D
   value: "$shinyTyroguePokemonId"
+- description: "Changes the Pokémon of the Spearow gift."
+  locations:
+  - bank: 26
+    address: 0x5D65
+  value: "$spearowPokemonId"
+- description: "Changes the Pokémon of the Shuckle gift."
+  locations:
+  - bank: 1
+    address: 0x730A
+  - bank: 1
+    address: 0x738A
+  value: "$shucklePokemonId"
+- description: "Changes the Pokémon of the Eevee gift."
+  locations:
+  - bank: 21
+    address: 0x4C06
+  value: "$eeveePokemonId"
+- description: "Changes the Pokémon name in the prompt of the Eevee gift."
+  locations:
+  - bank: 21
+    address: 0x4C99
+  value: "$eeveePokemonNameText1"
+- description: "Changes the received text of the Eevee gift."
+  locations:
+  - bank: 21
+    address: 0x4DAF
+  value: "$eeveePokemonNameText2 4F A6 AE B3 E7 7F 7F"
+- description: "Changes the Pokémon of the Dratini gift."
+  locations:
+  - bank: 99
+    address: 0x51D7
+  value: "$dratiniPokemonId"
+- description: "Changes the Pokémon name in the prompt of the Dratini gift."
+  locations:
+  - bank: 99
+    address: 0x565E
+  value: "$dratiniPokemonNameText1"
+- description: "Changes the received text of the Dratini gift."
+  locations:
+  - bank: 99
+    address: 0x5698
+  value: "$dratiniPokemonNameText2 4F A6 AE B3 E7 7F 7F 7F 7F"
+- description: "Changes the Pokémon of the Tyrogue gift."
+  locations:
+  - bank: 31
+    address: 0x622A
+  value: "$tyrogue2PokemonId"
+- description: "Changes the received text of the Tyrogue gift."
+  locations:
+  - bank: 31
+    address: 0x6356
+  value: "$tyrogue2PokemonNameText 4F A6 AE B3 E7 7F 7F 7F 7F"

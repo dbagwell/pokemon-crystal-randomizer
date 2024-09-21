@@ -153,7 +153,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       return !eventPokemonSettings.BAN.includes(pokemonId)
     })
     
-    const getRandomPokemonIdHexString = () => {
+    const getRandomPokemon = () => {
       const index = randomInt(0, availablePokemonIds.length - 1)
       const pokemonId = availablePokemonIds[index]
       
@@ -161,7 +161,11 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         availablePokemonIds.splice(index, 1)
       }
       
-      return hexStringFrom([pokemonMap[pokemonId].numericId])
+      return pokemonMap[pokemonId]
+    }
+    
+    const getRandomPokemonIdHexString = () => {
+      return hexStringFrom([getRandomPokemon().numericId])
     }
     
     const oddEggArray = [getRandomPokemonIdHexString()]
@@ -173,6 +177,10 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         oddEggArray.push(oddEggArray[index - 1])
       }
     }
+    
+    const eeveePokemon = getRandomPokemon()
+    const dratiniPokemon = getRandomPokemon()
+    const tyrogue2Pokemon = getRandomPokemon()
     
     const eventPokemonPatch = Patch.fromYAML(
       romInfo,
@@ -211,6 +219,16 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         shinyElekidPokemonId: oddEggArray[11],
         tyroguePokemonId: oddEggArray[12],
         shinyTyroguePokemonId: oddEggArray[13],
+        spearowPokemonId: getRandomPokemonIdHexString(),
+        shucklePokemonId: getRandomPokemonIdHexString(),
+        eeveePokemonId: hexStringFrom([eeveePokemon.numericId]),
+        eeveePokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${eeveePokemon.name}.`.padEnd(11, " "))),
+        eeveePokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${eeveePokemon.name}`.padEnd(10, " "))),
+        dratiniPokemonId: hexStringFrom([dratiniPokemon.numericId]),
+        dratiniPokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${dratiniPokemon.name}`.padEnd(12, " "))),
+        dratiniPokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${dratiniPokemon.name}`.padEnd(10, " "))),
+        tyrogue2PokemonId: hexStringFrom([tyrogue2Pokemon.numericId]),
+        tyrogue2PokemonNameText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${tyrogue2Pokemon.name}`.padEnd(10, " "))),
       },
     )
   
