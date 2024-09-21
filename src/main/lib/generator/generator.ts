@@ -164,6 +164,16 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       return hexStringFrom([pokemonMap[pokemonId].numericId])
     }
     
+    const oddEggArray = [getRandomPokemonIdHexString()]
+    
+    for (let index = 1; index < 14; index++) {
+      if (eventPokemonSettings.ODD_EGG === "RANDOM" || index % 2 === 0 && eventPokemonSettings.ODD_EGG === "SHINY_MATCH") {
+        oddEggArray.push(getRandomPokemonIdHexString())
+      } else {
+        oddEggArray.push(oddEggArray[index - 1])
+      }
+    }
+    
     const eventPokemonPatch = Patch.fromYAML(
       romInfo,
       "eventPokemon.yml",
@@ -186,6 +196,21 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         hoOhPokemonId: getRandomPokemonIdHexString(),
         lugiaPokemonId: getRandomPokemonIdHexString(),
         celebiPokemonId: getRandomPokemonIdHexString(),
+        togepiPokemonId: getRandomPokemonIdHexString(),
+        pichuPokemonId: oddEggArray[0],
+        shinyPichuPokemonId: oddEggArray[1],
+        cleffaPokemonId: oddEggArray[2],
+        shinyCleffaPokemonId: oddEggArray[3],
+        igglybuffPokemonId: oddEggArray[4],
+        shinyIgglybuffPokemonId: oddEggArray[5],
+        smoochumPokemonId: oddEggArray[6],
+        shinySmoochumPokemonId: oddEggArray[7],
+        magbyPokemonId: oddEggArray[8],
+        shinyMagbyPokemonId: oddEggArray[9],
+        elekidPokemonId: oddEggArray[10],
+        shinyElekidPokemonId: oddEggArray[11],
+        tyroguePokemonId: oddEggArray[12],
+        shinyTyroguePokemonId: oddEggArray[13],
       },
     )
   
