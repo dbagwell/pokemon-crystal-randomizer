@@ -21,7 +21,9 @@ type MappedConfig<T> = T extends { type: "FormSection", subElementConfigs: infer
                 ? { value: OptionId, config: { [K in keyof OptionSubConfig]: MappedConfig<OptionSubConfig[K]> } } | undefined
                 : OptionId | (T extends { required: true } ? never : undefined)
               : never
-          : never
+          : T extends { type: "IntegerGroupInput" }
+            ? number[]
+            : never
 
 export type Settings = MappedConfig<Config>
 
@@ -76,6 +78,9 @@ const mappedConfig = <T extends FormElementConfig>(config: T): MappedConfig<T> =
         return config.value as MappedConfig<T>
       }
     }
+  }
+  case "IntegerGroupInput": {
+    return config.values as MappedConfig<T>
   }
   }
 }
@@ -230,6 +235,30 @@ export const setConfigValuesFromSettings = (superConfigPath: string, configId: s
         throw new Error(`Too many values for '${configPath}. Must be less than or equal to ${config.maxSelections}.`)
       }
     })
+    break
+  }
+  case "IntegerGroupInput": {
+    const values = settings[configId]
+    if (Array.isArray(values)) {
+      values.forEach((value, index) => {
+        const valueConfigPath = `${configPath}.${index}`
+        if (!isNumber(value) || !Number.isInteger(value)) {
+          throwConfigTypeError(valueConfigPath, "integer", value)
+        } else if (isNotNullish(config.min) && value < config.min) {
+          throw new Error(`Invalid value for '${valueConfigPath}. Value must be greater than or equal to ${config.min}.`)
+        } else if (isNotNullish(config.max) && value > config.max) {
+          throw new Error(`Invalid value for '${valueConfigPath}. Value must be greater than or equal to ${config.max}.`)
+        }
+      })
+      
+      if (isNotNullish(config.sum) && values.reduce((result, value) => { return result + value }, 0) !== config.sum) {
+        throw new Error(`Invalid value for '${configPath}. Values must add up to ${config.sum}.`)
+      }
+      
+      config.values = values
+    } else {
+      throwConfigTypeError(configPath, "array", values)
+    }
     break
   }
   }

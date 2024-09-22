@@ -24,14 +24,17 @@ export type Encounter = ({
   type: "TREE"
   group: TreeGroupId
   rarity: "COMMON" | "RARE"
+  slot: number
   rate: number
 } | {
   type: "ROCK"
+  slot: number
   rate: number
 })) | ({
   type: "FISHING"
   group: FishingGroupId
   rod: FishingRodId
+  slot: number
   rate: number
 } & ({
   isTimeGroup: false
@@ -42,6 +45,7 @@ export type Encounter = ({
   timeGroupIndex: number
 })) | {
   type: "CONTEST"
+  slot: number
   pokemonId: PokemonId
   minLevel: number
   maxLevel: number

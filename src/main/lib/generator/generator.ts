@@ -144,11 +144,14 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     ]
   })
   
+  // Encounter Data
+  
+  const updatedEncountersData: Encounter[] = JSON.parse(JSON.stringify(encounters))
+  
   // Random Wild Encounters
   
   if (pokemonSettings.RANDOMIZE_WILD_ENCOUNTERS) {
     const wildEcountersSettings = pokemonSettings.RANDOMIZE_WILD_ENCOUNTERS
-    const updatedEncountersData: Encounter[] = JSON.parse(JSON.stringify(encounters))
     
     const nonBannedPokemonIds = () => {
       return pokemonIds.filter((pokemonId) => {
@@ -237,199 +240,282 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         }
       })
     }
+  }
+  
+  // Encounter Rates
+  
+  const getAdjustedEncounterRates = (rates: number[], max: number) => {
+    let cumulativeValue = 0
     
-    const landOrWaterEncounterIncludes = (region: "JOHTO" | "KANTO", type: "LAND" | "WATER", isSwarm: boolean) => {
-      return compact(Object.values(gameMapsMap).map((gameMap) => {
-        const encounterRates = (() => {
-          if (isSwarm) {
-            return gameMap.swarmEncounterRates
+    const adjustedRates = rates.map((rate) => {
+      const adjustedRate = rate * max / 100
+      cumulativeValue += Math.floor(adjustedRate)
+      return cumulativeValue
+    })
+    
+    if (cumulativeValue < max) {
+      if (adjustedRates.length === 4) {
+        adjustedRates[adjustedRates.length - 2]++
+        adjustedRates[adjustedRates.length - 1]++
+      } else {
+        let remainingPoints = max - cumulativeValue
+        let cumulativeAdjustment = 0
+        
+        for (let index = 0; index < adjustedRates.length; index++) {
+          if (remainingPoints > 0) {
+            cumulativeAdjustment++
+            remainingPoints--
           }
           
-          switch (type) {
-          case "LAND": return gameMap.landEncounterRates
-          case "WATER": return gameMap.waterEncounterRate ? [gameMap.waterEncounterRate] : undefined
-          }
-        })()
+          adjustedRates[index] += cumulativeAdjustment
+        }
+      }
+    }
+    
+    return adjustedRates
+  }
+  
+  const encounterRateSettings = pokemonSettings.WILD_ENCOUNTER_RATES
+  
+  updatedEncountersData.forEach((encounter) => {
+    switch (encounter.type) {
+    case "FISHING": {
+      switch (encounter.rod) {
+      case "OLD": {
+        encounter.rate = getAdjustedEncounterRates(encounterRateSettings.OLD_ROD, 255)[encounter.slot]
+        break
+      }
+      case "GOOD": {
+        encounter.rate = getAdjustedEncounterRates(encounterRateSettings.GOOD_ROD, 255)[encounter.slot]
+        break
+      }
+      case "SUPER": {
+        encounter.rate = getAdjustedEncounterRates(encounterRateSettings.SUPER_ROD, 255)[encounter.slot]
+        break
+      }
+      }
+      break
+    }
+    case "TREE": {
+      encounter.rate = encounterRateSettings.TREE[encounter.slot]
+      break
+    }
+    case "ROCK": {
+      encounter.rate = encounterRateSettings.ROCK[encounter.slot]
+      break
+    }
+    case "CONTEST": {
+      encounter.rate = encounterRateSettings.CONTEST[encounter.slot]
+      break
+    }
+    }
+  })
+  
+  // Encounter Data Patch
+    
+  const landOrWaterEncounterIncludes = (region: "JOHTO" | "KANTO", type: "LAND" | "WATER", isSwarm: boolean) => {
+    return compact(Object.values(gameMapsMap).map((gameMap) => {
+      const encounterRates = (() => {
+        if (isSwarm) {
+          return gameMap.swarmEncounterRates
+        }
         
-        if (gameMap.encounterRegion !== region || isNullish(encounterRates)) {
+        switch (type) {
+        case "LAND": return gameMap.landEncounterRates
+        case "WATER": return gameMap.waterEncounterRate ? [gameMap.waterEncounterRate] : undefined
+        }
+      })()
+      
+      if (gameMap.encounterRegion !== region || isNullish(encounterRates)) {
+        return undefined
+      }
+      
+      return {
+        path: "landOrWaterEncounterGroup.yml",
+        extraIncludes: {
+          encounterSlots: compact(updatedEncountersData.map((encounter) => {
+            if (encounter.type !== type || encounter.mapId !== gameMap.id || encounter.type === "LAND" && (encounter.isSwarm ?? false) !== isSwarm) {
+              return undefined
+            }
+            
+            const timeIndex = encounter.type === "WATER" || encounter.time === "MORNING" ? 0 : encounter.time === "DAY" ? 10 : 20
+            
+            return {
+              sortOrder: timeIndex + encounter.slot,
+              level: encounter.level,
+              pokemonId: encounter.pokemonId,
+            }
+          })).toSorted((info1, info2) => {
+            return info1.sortOrder - info2.sortOrder
+          }).map((info) => {
+            return {
+              path: "landOrWaterEncounterSlot.yml",
+              extraIncludes: {},
+              extraValues: {
+                level: hexStringFrom([info.level]),
+                pokemonId: hexStringFrom([pokemonMap[info.pokemonId].numericId]),
+              },
+            }
+          }),
+        },
+        extraValues: {
+          mapGroupId: hexStringFrom([gameMapGroupsMap[gameMap.mapGroup].numericId]),
+          mapId: hexStringFrom([gameMap.numericId]),
+          encounterRates: hexStringFrom(encounterRates),
+        },
+      }
+    }))
+  }
+  
+  const wildEncountersPatch = Patch.fromYAML(
+    romInfo,
+    "wildEncounters.yml",
+    {
+      johtoLandEncounterGroups: landOrWaterEncounterIncludes("JOHTO", "LAND", false),
+      johtoWaterEncounterGroups: landOrWaterEncounterIncludes("JOHTO", "WATER", false),
+      kantoLandEncounterGroups: landOrWaterEncounterIncludes("KANTO", "LAND", false),
+      kantoWaterEncounterGroups: landOrWaterEncounterIncludes("KANTO", "WATER", false),
+      swarmEncounterGroups: landOrWaterEncounterIncludes("JOHTO", "LAND", true),
+      contestEncounterSlots: compact(updatedEncountersData.map((encounter) => {
+        if (encounter.type !== "CONTEST") {
           return undefined
         }
         
         return {
-          path: "landOrWaterEncounterGroup.yml",
+          path: "contestEncounterSlot.yml",
+          extraIncludes: {},
+          extraValues: {
+            encounterRate: hexStringFrom([encounter.rate]),
+            pokemonId: hexStringFrom([pokemonMap[encounter.pokemonId].numericId]),
+            minLevel: hexStringFrom([encounter.minLevel]),
+            maxLevel: hexStringFrom([encounter.maxLevel]),
+          },
+        }
+      })),
+      fishingEncounterSlots: fishingGroupIds.flatMap((group, groupIndex) => {
+        return fishingRodIds.flatMap((rod, rodIndex) => {
+          return compact(updatedEncountersData.map((encounter) => {
+            if (encounter.type !== "FISHING" || encounter.group !== group || encounter.rod !== rod) {
+              return undefined
+            }
+            
+            return {
+              sortOrder: groupIndex * 10_000 + rodIndex * 1_000 + encounter.rate,
+              rate: encounter.rate,
+              pokemonId: encounter.isTimeGroup ? 0 : pokemonMap[encounter.pokemonId].numericId,
+              levelOrTimeGroupIndex: encounter.isTimeGroup ? encounter.timeGroupIndex : encounter.level,
+            }
+          }))
+        })
+      }).toSorted((info1, info2) => {
+        return info1.sortOrder - info2.sortOrder
+      }).map((info) => {
+        return {
+          path: "fishingTreeOrRockEncounterSlot.yml",
+          extraIncludes: {},
+          extraValues: {
+            encounterRate: hexStringFrom([info.rate]),
+            pokemonId: hexStringFrom([info.pokemonId]),
+            levelOrTimeGroupIndex: hexStringFrom([info.levelOrTimeGroupIndex]),
+          },
+        }
+      }),
+      fishingTimeEncounterGroups: compact(updatedEncountersData.map((encounter) => {
+        if (encounter.type !== "FISHING_TIME_GROUP") {
+          return undefined
+        }
+            
+        return {
+          sortOrder: encounter.timeGroupIndex,
+          dayPokemonId: pokemonMap[encounter.pokemonId].numericId,
+          dayLevel: encounter.level,
+          nightPokemonId: pokemonMap[encounter.pokemonId].numericId,
+          nightLevel: encounter.level,
+        }
+      })).toSorted((info1, info2) => {
+        return info1.sortOrder - info2.sortOrder
+      }).map((info) => {
+        return {
+          path: "fishingTimeGroup.yml",
+          extraIncludes: {},
+          extraValues: {
+            dayPokemonId: hexStringFrom([info.dayPokemonId]),
+            dayLevel: hexStringFrom([info.dayLevel]),
+            nightPokemonId: hexStringFrom([info.nightPokemonId]),
+            nightLevel: hexStringFrom([info.nightLevel]),
+          },
+        }
+      }),
+      treeEncounterGroups: treeGroupIds.flatMap((group) => {
+        return ["COMMON", "RARE"].map((rarity) => {
+          return compact(updatedEncountersData.map((encounter) => {
+            if (encounter.type !== "TREE" || encounter.group !== group || encounter.rarity !== rarity) {
+              return undefined
+            }
+              
+            return {
+              rate: encounter.rate,
+              pokemonId: pokemonMap[encounter.pokemonId].numericId,
+              level: encounter.level,
+            }
+          }))
+        })
+      }).map((encounterSlots) => {
+        return {
+          path: "treeEncounterGroup.yml",
           extraIncludes: {
-            encounterSlots: compact(updatedEncountersData.map((encounter) => {
-              if (encounter.type !== type || encounter.mapId !== gameMap.id || encounter.type === "LAND" && (encounter.isSwarm ?? false) !== isSwarm) {
-                return undefined
-              }
-              
-              const timeIndex = encounter.type === "WATER" || encounter.time === "MORNING" ? 0 : encounter.time === "DAY" ? 10 : 20
-              
+            encounterSlots: encounterSlots.map((info) => {
               return {
-                sortOrder: timeIndex + encounter.slot,
-                level: encounter.level,
-                pokemonId: encounter.pokemonId,
-              }
-            })).toSorted((info1, info2) => {
-              return info1.sortOrder - info2.sortOrder
-            }).map((info) => {
-              return {
-                path: "landOrWaterEncounterSlot.yml",
+                path: "fishingTreeOrRockEncounterSlot.yml",
                 extraIncludes: {},
                 extraValues: {
-                  level: hexStringFrom([info.level]),
-                  pokemonId: hexStringFrom([pokemonMap[info.pokemonId].numericId]),
+                  encounterRate: hexStringFrom([info.rate]),
+                  pokemonId: hexStringFrom([info.pokemonId]),
+                  levelOrTimeGroupIndex: hexStringFrom([info.level]),
                 },
               }
             }),
           },
+          extraValues: {},
+        }
+      }),
+      rockEncounterSlots: compact(updatedEncountersData.map((encounter) => {
+        if (encounter.type !== "ROCK") {
+          return undefined
+        }
+          
+        return {
+          rate: encounter.rate,
+          pokemonId: pokemonMap[encounter.pokemonId].numericId,
+          level: encounter.level,
+        }
+      })).map((info) => {
+        return {
+          path: "fishingTreeOrRockEncounterSlot.yml",
+          extraIncludes: {},
           extraValues: {
-            mapGroupId: hexStringFrom([gameMapGroupsMap[gameMap.mapGroup].numericId]),
-            mapId: hexStringFrom([gameMap.numericId]),
-            encounterRates: hexStringFrom(encounterRates),
+            encounterRate: hexStringFrom([info.rate]),
+            pokemonId: hexStringFrom([info.pokemonId]),
+            levelOrTimeGroupIndex: hexStringFrom([info.level]),
           },
         }
-      }))
-    }
+      }),
+    },
+    {
+      landAndWaterEncounterRates: hexStringFrom([
+        ...getAdjustedEncounterRates(encounterRateSettings.LAND, 100).flatMap((rate, index) => {
+          return [rate, index * 2]
+        }),
+        ...getAdjustedEncounterRates(encounterRateSettings.WATER, 100).flatMap((rate, index) => {
+          return [rate, index * 2]
+        }),
+      ]),
+    },
+  )
     
-    const wildEncountersPatch = Patch.fromYAML(
-      romInfo,
-      "wildEncounters.yml",
-      {
-        johtoLandEncounterGroups: landOrWaterEncounterIncludes("JOHTO", "LAND", false),
-        johtoWaterEncounterGroups: landOrWaterEncounterIncludes("JOHTO", "WATER", false),
-        kantoLandEncounterGroups: landOrWaterEncounterIncludes("KANTO", "LAND", false),
-        kantoWaterEncounterGroups: landOrWaterEncounterIncludes("KANTO", "WATER", false),
-        swarmEncounterGroups: landOrWaterEncounterIncludes("JOHTO", "LAND", true),
-        contestEncounterSlots: compact(updatedEncountersData.map((encounter) => {
-          if (encounter.type !== "CONTEST") {
-            return undefined
-          }
-          
-          return {
-            path: "contestEncounterSlot.yml",
-            extraIncludes: {},
-            extraValues: {
-              encounterRate: hexStringFrom([encounter.rate]),
-              pokemonId: hexStringFrom([pokemonMap[encounter.pokemonId].numericId]),
-              minLevel: hexStringFrom([encounter.minLevel]),
-              maxLevel: hexStringFrom([encounter.maxLevel]),
-            },
-          }
-        })),
-        fishingEncounterSlots: fishingGroupIds.flatMap((group, groupIndex) => {
-          return fishingRodIds.flatMap((rod, rodIndex) => {
-            return compact(updatedEncountersData.map((encounter) => {
-              if (encounter.type !== "FISHING" || encounter.group !== group || encounter.rod !== rod) {
-                return undefined
-              }
-              
-              return {
-                sortOrder: groupIndex * 10_000 + rodIndex * 1_000 + encounter.rate,
-                rate: encounter.rate,
-                pokemonId: encounter.isTimeGroup ? 0 : pokemonMap[encounter.pokemonId].numericId,
-                levelOrTimeGroupIndex: encounter.isTimeGroup ? encounter.timeGroupIndex : encounter.level,
-              }
-            }))
-          })
-        }).toSorted((info1, info2) => {
-          return info1.sortOrder - info2.sortOrder
-        }).map((info) => {
-          return {
-            path: "fishingTreeOrRockEncounterSlot.yml",
-            extraIncludes: {},
-            extraValues: {
-              encounterRate: hexStringFrom([info.rate]),
-              pokemonId: hexStringFrom([info.pokemonId]),
-              levelOrTimeGroupIndex: hexStringFrom([info.levelOrTimeGroupIndex]),
-            },
-          }
-        }),
-        fishingTimeEncounterGroups: compact(updatedEncountersData.map((encounter) => {
-          if (encounter.type !== "FISHING_TIME_GROUP") {
-            return undefined
-          }
-              
-          return {
-            sortOrder: encounter.timeGroupIndex,
-            dayPokemonId: pokemonMap[encounter.pokemonId].numericId,
-            dayLevel: encounter.level,
-            nightPokemonId: pokemonMap[encounter.pokemonId].numericId,
-            nightLevel: encounter.level,
-          }
-        })).toSorted((info1, info2) => {
-          return info1.sortOrder - info2.sortOrder
-        }).map((info) => {
-          return {
-            path: "fishingTimeGroup.yml",
-            extraIncludes: {},
-            extraValues: {
-              dayPokemonId: hexStringFrom([info.dayPokemonId]),
-              dayLevel: hexStringFrom([info.dayLevel]),
-              nightPokemonId: hexStringFrom([info.nightPokemonId]),
-              nightLevel: hexStringFrom([info.nightLevel]),
-            },
-          }
-        }),
-        treeEncounterGroups: treeGroupIds.flatMap((group) => {
-          return ["COMMON", "RARE"].map((rarity) => {
-            return compact(updatedEncountersData.map((encounter) => {
-              if (encounter.type !== "TREE" || encounter.group !== group || encounter.rarity !== rarity) {
-                return undefined
-              }
-                
-              return {
-                rate: encounter.rate,
-                pokemonId: pokemonMap[encounter.pokemonId].numericId,
-                level: encounter.level,
-              }
-            }))
-          })
-        }).map((encounterSlots) => {
-          return {
-            path: "treeEncounterGroup.yml",
-            extraIncludes: {
-              encounterSlots: encounterSlots.map((info) => {
-                return {
-                  path: "fishingTreeOrRockEncounterSlot.yml",
-                  extraIncludes: {},
-                  extraValues: {
-                    encounterRate: hexStringFrom([info.rate]),
-                    pokemonId: hexStringFrom([info.pokemonId]),
-                    levelOrTimeGroupIndex: hexStringFrom([info.level]),
-                  },
-                }
-              }),
-            },
-            extraValues: {},
-          }
-        }),
-        rockEncounterSlots: compact(updatedEncountersData.map((encounter) => {
-          if (encounter.type !== "ROCK") {
-            return undefined
-          }
-            
-          return {
-            rate: encounter.rate,
-            pokemonId: pokemonMap[encounter.pokemonId].numericId,
-            level: encounter.level,
-          }
-        })).map((info) => {
-          return {
-            path: "fishingTreeOrRockEncounterSlot.yml",
-            extraIncludes: {},
-            extraValues: {
-              encounterRate: hexStringFrom([info.rate]),
-              pokemonId: hexStringFrom([info.pokemonId]),
-              levelOrTimeGroupIndex: hexStringFrom([info.level]),
-            },
-          }
-        }),
-      }
-    )
-      
-    hunks = [...hunks, ...wildEncountersPatch.hunks]
-  }
+  hunks = [...hunks, ...wildEncountersPatch.hunks]
+  
+  // Pokemon Data
   
   const updatedPokemonDataMap: IdMap<PokemonId, Pokemon> = JSON.parse(JSON.stringify(pokemonMap))
   

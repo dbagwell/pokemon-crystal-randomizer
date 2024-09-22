@@ -68,13 +68,14 @@ const encounters: Encounter[] = []
   })
 })
 
-;[...contestFileText.matchAll(/db\s*(\S*),\s*(\S*),\s*(\S*),\s*(\S*)/g)].forEach((matches) => {
+;[...contestFileText.matchAll(/db\s*(\S*),\s*(\S*),\s*(\S*),\s*(\S*)/g)].forEach((matches, index) => {
   if (matches[1] === "-1") {
     return
   }
   
   encounters.push({
     type: "CONTEST",
+    slot: index,
     pokemonId: matches[2].replace("__", "_") as PokemonId,
     minLevel: parseInt(matches[3]),
     maxLevel: parseInt(matches[4]),
@@ -85,12 +86,13 @@ const encounters: Encounter[] = []
 ;[...fishFileText.matchAll(/([^.]*)_(Old|Good|Super):\s*\n([^.][\s\S]*?)(\n\.|\n\s*\n)/g)].forEach((rodGroupMatches) => {
   rodGroupMatches[3].split("\n").map((line) => {
     return line.match(/db\s*(\S*)(.*?),\s*((\S*),\s*(\S*)|(time_group)\s*(\S*))/)!
-  }).forEach((encounterMatches) => {
+  }).forEach((encounterMatches, index) => {
     const floatRate = 255 * parseFloat(encounterMatches[1]) / 100
     const basicInfo = {
       type: "FISHING" as const,
       group: rodGroupMatches[1].replace("I", "_I").toUpperCase() as FishingGroupId,
       rod: rodGroupMatches[2].toUpperCase() as FishingRodId,
+      slot: index,
       rate: encounterMatches[2].includes("+") ? Math.ceil(floatRate) : Math.floor(floatRate),
     }
     
@@ -133,7 +135,7 @@ const encounters: Encounter[] = []
   if (groupMatches[1] === "Rock") {
     groupMatches[2].split("\n").map((line) => {
       return line.match(/db\s*(\S*),\s*(\S*),\s*(\S*)/)
-    }).forEach((encounterMatches) => {
+    }).forEach((encounterMatches, index) => {
       if (!encounterMatches) {
         return
       }
@@ -142,6 +144,7 @@ const encounters: Encounter[] = []
         pokemonId: encounterMatches[2].replace("__", "_") as PokemonId,
         level: parseInt(encounterMatches[3]),
         type: "ROCK",
+        slot: index,
         rate: parseInt(encounterMatches[1]),
       })
     })
@@ -149,13 +152,14 @@ const encounters: Encounter[] = []
     [...groupMatches[2].matchAll(/;\s(\S*).*\n(.*\n.*\n.*\n.*\n.*\n.*)\s*db\s*-1/g)].forEach((rarityMatches) => {
       rarityMatches[2].split("\n").map((line) => {
         return line.match(/db\s*(\S*),\s*(\S*),\s*(\S*)/)!
-      }).forEach((encounterMatches) => {
+      }).forEach((encounterMatches, index) => {
         encounters.push({
           pokemonId: encounterMatches[2].replace("__", "_") as PokemonId,
           level: parseInt(encounterMatches[3]),
           type: "TREE",
           group: groupMatches[1].toUpperCase() as TreeGroupId,
           rarity: rarityMatches[1].toUpperCase() as ("COMMON" | "RARE"),
+          slot: index,
           rate: parseInt(encounterMatches[1]),
         })
       })

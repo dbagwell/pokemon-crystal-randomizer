@@ -48,6 +48,7 @@
     } else if (isNotNullish(config.maxCharacters) && value.length > config.maxCharacters) {
       error = `${config.label} must be less than or equal to ${config.maxCharacters} characters long.`
     } else {
+      error = null
       config.value = value
     }
   }

@@ -11,8 +11,12 @@ export class Patch {
   }
   
   static readonly fromYAML = (romInfo: ROMInfo, filePath: string, extraIncludes: Dictionary<ExtraInclude | ExtraInclude[]> = {}, extraValues: Dictionary<string> = {}): Patch => {
-    const patchInfo = new PatchInfo(filePath, extraIncludes, extraValues)
-    return new Patch(patchInfo.hunks(romInfo))
+    try {
+      const patchInfo = new PatchInfo(filePath, extraIncludes, extraValues)
+      return new Patch(patchInfo.hunks(romInfo))
+    } catch (error) {
+      throw `Error creating patch from file at ${filePath}.\n\n${error}`
+    }
   }
   
 }

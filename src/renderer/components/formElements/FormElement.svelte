@@ -8,10 +8,13 @@
   <IntegerInput config={config}/>
 {:else if config.type === "SelectorInput"}
   <SelectorInput config={config}/>
+{:else if config.type === "IntegerGroupInput"}
+  <IntegerGroupInput config={config}/>
 {/if}
 
 <script lang="ts">
   import FormSection from "@components/formElements/FormSection.svelte"
+  import IntegerGroupInput from "@components/formElements/IntegerGroupInput.svelte"
   import IntegerInput from "@components/formElements/IntegerInput.svelte"
   import SelectorInput from "@components/formElements/SelectorInput.svelte"
   import TextInput from "@components/formElements/TextInput.svelte"

@@ -1,5 +1,10 @@
 description: "Changes the data for the pokemon that can be randomly encountered in the wild."
 changes:
+- description: "Changes the slot encounter rates on land and in the water."
+  locations:
+  - bank: 10
+    address: 0x61CB
+  value: "$landAndWaterEncounterRates"
 - description: "Changes the data for the pokemon that can be randomly encountered in the tall grass, or surfing on the water."
   locations:
   - bank: 10
