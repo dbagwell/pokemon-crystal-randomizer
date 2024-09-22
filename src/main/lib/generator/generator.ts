@@ -886,6 +886,14 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   
   // Pokemon Info
   
+  if (pokemonSettings.INCREASE_POKEMON_CATCH_RATES) {
+    const percentage = pokemonSettings.INCREASE_POKEMON_CATCH_RATES.PERCENTAGE
+    
+    Object.values(updatedPokemonDataMap).forEach((pokemon) => {
+      pokemon.catchRate = (255 - pokemon.catchRate) * percentage / 100 + pokemon.catchRate
+    })
+  }
+  
   if (
     pokemonSettings.RANDOMIZE_TM_COMPATIBILITY
     || pokemonSettings.RANDOMIZE_HM_COMPATIBILITY
