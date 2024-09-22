@@ -10,6 +10,7 @@ import type { AdditionalOptionId } from "@shared/types/gameDataIds/additionalOpt
 import { itemCategoryIds } from "@shared/types/gameDataIds/itemCategories"
 import type { ItemId } from "@shared/types/gameDataIds/items"
 import { type MoveId, moveIds } from "@shared/types/gameDataIds/moves"
+import type { OddEggOptionId } from "@shared/types/gameDataIds/oddEggOptions"
 import { type PlayerSpriteId, playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
@@ -112,6 +113,55 @@ export const defaultConfig = () => {
                     selectedOptionIds: [] as PokemonId[],
                   },
                 },
+              },
+            },
+          },
+          RANDOMIZE_EVENT_POKEMON: {
+            label: "Randomize Event Pokémon",
+            description: "Makes it so the Pokémon encountered or gifted during special events are randomized.",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            hasToggle: true as const,
+            toggleValue: false,
+            subElementConfigs: {
+              UNIQUE: {
+                label: "Unique",
+                description: "Ensures all event Pokémon are different.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              ODD_EGG: {
+                label: "Odd Egg Behaviour",
+                description: "Adds restrictions to the 14 different outcomes for the Odd Egg.",
+                type: "SelectorInput" as const,
+                options: [
+                  {
+                    id: "RANDOM",
+                    label: "All Random",
+                    description: "All 14 options are randomized separately.",
+                  },
+                  {
+                    id: "SHINY_MATCH",
+                    label: "Shiny Match",
+                    description: "The 7 shiny options will match their non-shiny counterparts.",
+                  },
+                  {
+                    id: "SAME",
+                    label: "All Same",
+                    description: "All 14 options will be the same Pokémon.",
+                  },
+                ],
+                multiselect: false as const,
+                required: true as const,
+                value: "RANDOM" as OddEggOptionId,
+              },
+              BAN: {
+                label: "Ban",
+                description: "Prevent these Pokémon from being selected by the randomizer.",
+                type: "SelectorInput" as const,
+                options: pokemonOptions,
+                multiselect: true as const,
+                selectedOptionIds: [] as PokemonId[],
               },
             },
           },
