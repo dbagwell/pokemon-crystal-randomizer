@@ -675,6 +675,18 @@ export const defaultConfig = () => {
               }
             }),
           },
+          POKE_BALLS_NEVER_FAIL: {
+            label: "Poké Balls Never Fail",
+            description: "All Poké Balls are guaranteed to work.",
+            type: "ToggleInput" as const,
+            value: false,
+          },
+          PREVENT_FAILED_POKE_BALL_WOBBLES: {
+            label: "Prevent Failed Poké Ball Wobbles",
+            description: "If a Poké Ball fails to catch a Pokémon, don't show any shake animations.",
+            type: "ToggleInput" as const,
+            value: false,
+          },
         },
       },
       OTHER: {

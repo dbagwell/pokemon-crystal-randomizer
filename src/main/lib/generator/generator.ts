@@ -1255,6 +1255,24 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     hunks = [...hunks, ...startingItemsPatch.hunks]
   }
   
+  if (itemsSettings.POKE_BALLS_NEVER_FAIL) {
+    const pokeBallsNeverFailPatch = Patch.fromYAML(
+      romInfo,
+      "pokeBallsNeverFail.yml",
+    )
+  
+    hunks = [...hunks, ...pokeBallsNeverFailPatch.hunks]
+  }
+  
+  if (itemsSettings.PREVENT_FAILED_POKE_BALL_WOBBLES) {
+    const preventFailedPokeBallWobblesPatch = Patch.fromYAML(
+      romInfo,
+      "preventFailedPokeBallWobbles.yml",
+    )
+  
+    hunks = [...hunks, ...preventFailedPokeBallWobblesPatch.hunks]
+  }
+  
   // Other
   
   const otherSettings = settings.OTHER
