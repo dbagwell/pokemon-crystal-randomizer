@@ -1,0 +1,7 @@
+description: "Prevents Failed Poké Balls from wobbling."
+changes:
+- description: "Prevents Failed Poké Balls from wobbling."
+  locations:
+  - bank: 3
+    address: 0x799C
+  value: "3E FF 00"

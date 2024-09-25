@@ -1,0 +1,7 @@
+description: "Makes it so all Poké Balls are guaranteed to work."
+changes:
+- description: "Makes it so all Poké Balls are guaranteed to work."
+  locations:
+  - bank: 3
+    address: 0x68E8
+  value: "C3"

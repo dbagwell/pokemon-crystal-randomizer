@@ -886,6 +886,14 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   
   // Pokemon Info
   
+  if (pokemonSettings.INCREASE_POKEMON_CATCH_RATES) {
+    const percentage = pokemonSettings.INCREASE_POKEMON_CATCH_RATES.PERCENTAGE
+    
+    Object.values(updatedPokemonDataMap).forEach((pokemon) => {
+      pokemon.catchRate = (255 - pokemon.catchRate) * percentage / 100 + pokemon.catchRate
+    })
+  }
+  
   if (
     pokemonSettings.RANDOMIZE_TM_COMPATIBILITY
     || pokemonSettings.RANDOMIZE_HM_COMPATIBILITY
@@ -1245,6 +1253,24 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     )
   
     hunks = [...hunks, ...startingItemsPatch.hunks]
+  }
+  
+  if (itemsSettings.POKE_BALLS_NEVER_FAIL) {
+    const pokeBallsNeverFailPatch = Patch.fromYAML(
+      romInfo,
+      "pokeBallsNeverFail.yml",
+    )
+  
+    hunks = [...hunks, ...pokeBallsNeverFailPatch.hunks]
+  }
+  
+  if (itemsSettings.PREVENT_FAILED_POKE_BALL_WOBBLES) {
+    const preventFailedPokeBallWobblesPatch = Patch.fromYAML(
+      romInfo,
+      "preventFailedPokeBallWobbles.yml",
+    )
+  
+    hunks = [...hunks, ...preventFailedPokeBallWobblesPatch.hunks]
   }
   
   // Other

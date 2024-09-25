@@ -317,6 +317,24 @@ export const defaultConfig = () => {
               },
             },
           },
+          INCREASE_POKEMON_CATCH_RATES: {
+            label: "Increase Pokémon Catch Rates",
+            description: "Makes it more likely for Pokémon to be caught. Increases each species' catch rate by a percentage of the difference between its vanilla catch rate and the max. At 100%, all Pokémon are as likely to be caught as Rattata.",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            hasToggle: true as const,
+            toggleValue: false,
+            subElementConfigs: {
+              PERCENTAGE: {
+                label: "Percentage",
+                type: "IntegerInput" as const,
+                required: true as const,
+                min: 0,
+                max: 100,
+                value: 0,
+              },
+            },
+          },
           RANDOMIZE_LEVEL_UP_MOVES: {
             label: "Randomize Level Up Moves",
             description: "Change moves Pokémon can learn by level up to random ones.",
@@ -656,6 +674,18 @@ export const defaultConfig = () => {
                 selectedOptionIds: [] as ItemId[],
               }
             }),
+          },
+          POKE_BALLS_NEVER_FAIL: {
+            label: "Poké Balls Never Fail",
+            description: "All Poké Balls are guaranteed to work.",
+            type: "ToggleInput" as const,
+            value: false,
+          },
+          PREVENT_FAILED_POKE_BALL_WOBBLES: {
+            label: "Prevent Failed Poké Ball Wobbles",
+            description: "If a Poké Ball fails to catch a Pokémon, don't show any shake animations.",
+            type: "ToggleInput" as const,
+            value: false,
           },
         },
       },

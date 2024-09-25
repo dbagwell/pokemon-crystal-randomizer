@@ -1491,14 +1491,14 @@ export const itemsMap: IdMap<ItemId, Item> = {
     type: "BAG_ITEM",
     category: "REGULAR_ITEMS",
     numericId: 0x25,
-    name: "Poke Doll",
+    name: "Poké Doll",
   },
   POKE_FLUTE: {
     id: "POKE_FLUTE",
     type: "BAG_ITEM",
     category: "REGULAR_ITEMS",
     numericId: 0x38,
-    name: "Poke Flute",
+    name: "Poké Flute",
   },
   POLKADOT_BOW: {
     id: "POLKADOT_BOW",
@@ -1820,7 +1820,7 @@ export const itemsMap: IdMap<ItemId, Item> = {
     type: "BAG_ITEM",
     category: "BALLS",
     numericId: 0x05,
-    name: "Poke Ball",
+    name: "Poké Ball",
   },
   GREAT_BALL: {
     id: "GREAT_BALL",
