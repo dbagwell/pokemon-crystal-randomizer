@@ -776,6 +776,12 @@ export const defaultConfig = () => {
             type: "ToggleInput" as const,
             value: false,
           },
+          SCALE_EXPERIENCE: {
+            label: "Scale Experience Gain",
+            description: "Changes the battle experience calculation to more closely match that of generations 5 and 7+, where the experience earned is curved up or down based on the difference in level between the fainted Pokémon and the Pokémon earning the experience.",
+            type: "ToggleInput" as const,
+            value: false,
+          },
           IMPROVE_PERFORMANCE: {
             label: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",

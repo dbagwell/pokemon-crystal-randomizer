@@ -1330,6 +1330,17 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     hunks = [...hunks, ...bikeAnywherePatch.hunks]
   }
   
+  // Scale Experience
+  
+  if (otherSettings.SCALE_EXPERIENCE) {
+    const scaleExperiencePatch = Patch.fromYAML(
+      romInfo,
+      "scaleExperience.yml",
+    )
+  
+    hunks = [...hunks, ...scaleExperiencePatch.hunks]
+  }
+  
   // Performance Improvements
   
   if (otherSettings.IMPROVE_PERFORMANCE) {
