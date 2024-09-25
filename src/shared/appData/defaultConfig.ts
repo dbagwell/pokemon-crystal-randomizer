@@ -450,6 +450,39 @@ export const defaultConfig = () => {
               },
             },
           },
+          TRADES: {
+            label: "Trades",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            subElementConfigs: {
+              RANDOMIZE_TRADE_ASKS: {
+                label: "Randomize Trade Asks",
+                description: "Randomizes the Pokémon asked for in trades.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              RANDOMIZE_TRADE_OFFERS: {
+                label: "Randomize Trade Offers",
+                description: "Randomizes the Pokémon offered for in trades.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              UNIQUE: {
+                label: "Unique",
+                description: "Make sure all trade Pokémon are all different.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              BAN: {
+                label: "Ban",
+                description: "Prevent these Pokémon from being selected by the randomizer.",
+                type: "SelectorInput" as const,
+                options: pokemonOptions,
+                multiselect: true as const,
+                selectedOptionIds: [] as PokemonId[],
+              },
+            },
+          },
         },
       },
       MOVES: {

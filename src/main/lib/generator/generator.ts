@@ -16,10 +16,12 @@ import { baseStatTotal, maxNumberOfEvolutionStages } from "@shared/gameData/poke
 import { pokemonTypesMap } from "@shared/gameData/pokemonTypes"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { teachableMovesMap } from "@shared/gameData/teachableMoves"
+import { tradesMap } from "@shared/gameData/trades"
 import type { Encounter } from "@shared/types/gameData/encounter"
 import { happinessEvolutionConidtionsMap, statEvolutionConidtionsMap } from "@shared/types/gameData/evolutionMethod"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
 import type { TeachableMove } from "@shared/types/gameData/teachableMove"
+import type { Trade } from "@shared/types/gameData/trade"
 import { fishingGroupIds } from "@shared/types/gameDataIds/fishingGroups"
 import { fishingRodIds } from "@shared/types/gameDataIds/fishingRods"
 import { type HMItemId, hmItemIds, type ItemId, type TMItemId, tmItemIds } from "@shared/types/gameDataIds/items"
@@ -27,6 +29,7 @@ import { moveIds } from "@shared/types/gameDataIds/moves"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { type StarterLocationId, starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import { type MoveTutorId, moveTutorIds, type TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
+import type { TradeId } from "@shared/types/gameDataIds/trades"
 import { treeGroupIds } from "@shared/types/gameDataIds/treeGroups"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isString } from "@utils"
 import crypto from "crypto"
@@ -619,6 +622,61 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   )
     
   hunks = [...hunks, ...wildEncountersPatch.hunks]
+  
+  // Trades
+  
+  const updatedTradesDataMap = JSON.parse(JSON.stringify(tradesMap)) as IdMap<TradeId, Trade>
+  
+  const availableTradePokemonIds = pokemonIds.filter((pokemonId) => {
+    return !pokemonSettings.TRADES.BAN.includes(pokemonId)
+  })
+    
+  const getRandomTradePokemonId = () => {
+    const index = randomInt(0, availableTradePokemonIds.length - 1)
+    const pokemonId = availableTradePokemonIds[index]
+    
+    if (pokemonSettings.TRADES.UNIQUE) {
+      availableTradePokemonIds.splice(index, 1)
+    }
+    
+    return pokemonId
+  }
+  
+  if (pokemonSettings.TRADES.RANDOMIZE_TRADE_ASKS) {
+    Object.values(updatedTradesDataMap).forEach((trade) => {
+      trade.askPokemonId = getRandomTradePokemonId()
+    })
+  }
+  
+  if (pokemonSettings.TRADES.RANDOMIZE_TRADE_OFFERS) {
+    Object.values(updatedTradesDataMap).forEach((trade) => {
+      trade.offerPokemonId = getRandomTradePokemonId()
+    })
+  }
+  
+  const tradePokemonIdsHexString = (trade: Trade) => {
+    return hexStringFrom([
+      pokemonMap[trade.askPokemonId].numericId,
+      pokemonMap[trade.offerPokemonId].numericId,
+    ])
+  }
+    
+  const tradesPatch = Patch.fromYAML(
+    romInfo,
+    "trades.yml",
+    {},
+    {
+      mikeTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.MIKE),
+      kyleTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.KYLE),
+      timTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.TIM),
+      emyTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.EMY),
+      chirsTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.CHRIS),
+      kimTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.KIM),
+      forestTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.FOREST),
+    },
+  )
+
+  hunks = [...hunks, ...tradesPatch.hunks]
   
   // Pokemon Data
   

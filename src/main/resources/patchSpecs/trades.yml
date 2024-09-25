@@ -1,0 +1,37 @@
+description: "Changes the data for the Pokémon asked for and offered from trades."
+changes:
+- description: "Changes the Pokémon for Mike trade."
+  locations:
+  - bank: 63
+    address: 0x4E59
+  value: "$mikeTradePokemonIds"
+- description: "Changes the Pokémon for Kyle trade."
+  locations:
+  - bank: 63
+    address: 0x4E79
+  value: "$kyleTradePokemonIds"
+- description: "Changes the Pokémon for Tim trade."
+  locations:
+  - bank: 63
+    address: 0x4E99
+  value: "$timTradePokemonIds"
+- description: "Changes the Pokémon for Emy trade."
+  locations:
+  - bank: 63
+    address: 0x4EB9
+  value: "$emyTradePokemonIds"
+- description: "Changes the Pokémon for Chris trade."
+  locations:
+  - bank: 63
+    address: 0x4ED9
+  value: "$chirsTradePokemonIds"
+- description: "Changes the Pokémon for Kim trade."
+  locations:
+  - bank: 63
+    address: 0x4EF9
+  value: "$kimTradePokemonIds"
+- description: "Changes the Pokémon for Forest trade."
+  locations:
+  - bank: 63
+    address: 0x4F19
+  value: "$forestTradePokemonIds"
