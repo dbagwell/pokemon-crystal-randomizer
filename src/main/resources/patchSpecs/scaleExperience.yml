@@ -1,0 +1,13 @@
+description: "Changes the experience calculation to scale based on the level difference."
+values:
+  extraCalculations: "FA 09 D1 11 00 00 FE 00 28 09 47 7B C6 30 5F 78 3D 18 F3 21 FE DC 19 7E 47 FA 13 D2 80 C6 0A 16 00 5F 3E 04 21 87 7B CF 78 E0 B7 06 04 CD 24 31 FA 13 D2 47 80 C6 0A E0 B7 F5 CD 19 31 7B E0 B7 06 04 CD 24 31 F1 E0 B7 F5 CD 19 31 7B E0 B7 06 04 CD 24 31 F1 16 00 5F 3E 04 21 87 7B CF 78 E0 B7 CD 19 31 3E 05 E0 B7 06 04 CD 24 31 C9"
+changes:
+- description: "Adds some calculations to the experience calculation."
+  locations:
+  - bank: 15
+  value: "$extraCalculations"
+- description: "Calls the extra calculations for the experience calculation."
+  locations:
+  - bank: 15
+    address: 0x6EC0
+  value: "CD @$extraCalculations 00 00 00 00 00 00"

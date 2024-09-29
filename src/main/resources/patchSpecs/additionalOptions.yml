@@ -16,9 +16,7 @@ changes:
       - bank: 57
         address: 0x41D0
         maxSize: 937
-        farcall:
-          bank: 1
-          address: 0x5B64
+        freeUnused: true
     value: "$menu $changeOption $update $jumpToOption $onText $offText $binaryOptionHandler split(#options.$title, 22) 50 #options.$data $jumpTable"
   - description: Sets the primary options default values for each of the provided options.
     locations:

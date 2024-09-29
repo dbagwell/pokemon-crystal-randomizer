@@ -35,6 +35,7 @@ export class PatchInfo {
   readonly includes: Dictionary<PatchInfo | PatchInfo[]>
   readonly values: Dictionary<any[]>
   readonly changes: ChangeInfo[]
+  readonly freeLocations: FreeSpace[]
   
   constructor(
     filePath: string,
@@ -58,6 +59,7 @@ export class PatchInfo {
       yaml.includes = { ...extended.includes, ...yaml.includes }
       yaml.values = { ...extended.values, ...yaml.values }
       yaml.changes = [...extended.changes ?? [], ...yaml.changes ?? []]
+      yaml.freeSpaces = [...extended.freeSpaces ?? [], ...yaml.freeSpaces ?? []]
     }
     
     this.parent = parent
@@ -100,6 +102,7 @@ export class PatchInfo {
         throw `Error parsing value with name "${key}".\n\n${error}`
       }
     })
+    
     this.changes = yaml.changes?.map((change: any) => {
       try {
         return new ChangeInfo(change)
@@ -107,9 +110,17 @@ export class PatchInfo {
         throw `Error parsing change "${change.value}".\n\n${error}`
       }
     }) ?? []
+    
+    this.freeLocations = yaml.freeSpaces?.map((space: any) => {
+      return new FreeSpace(space)
+    }) ?? []
   }
   
   readonly hunks = (romInfo: ROMInfo): DataHunk[] => {
+    this.freeLocations.forEach((location) => {
+      romInfo.freeSpace(location.offset, location.size)
+    })
+    
     const hunkFormats = this.changes.flatMap((changeInfo) => { return this.hunkFormatFrom(romInfo, changeInfo) })
     
     const referenceAddresses: Dictionary<number> = {}
@@ -138,26 +149,30 @@ export class PatchInfo {
     changeInfo.locations.forEach((location) => {
       if (location instanceof LocationInfo) {
         if (isNotNullish(location.maxSize)) {
-          if (location.maxSize < dataFormat.size()) {
+          let changeSize = dataFormat.size()
+          
+          if (location.maxSize < changeSize) {
             const newOffset = romInfo.reserveSpace(dataFormat.size())
             const farcall = ROMInfo.farcall(newOffset)
             romOffsets.push(newOffset)
-            if (isNotNullish(location.farcall)) {
-              farcalls.push(new HunkFormat([location.farcall], farcall))
-              romInfo.freeSpace(location.offset, location.maxSize)
-            } else {
+            
+            if (location.freeUnused) {
               farcall.add(ROMInfo.returnInstruction())
-              
-              if (location.maxSize < farcall.size()) {
-                throw new Error(`Cannot add a farcall to a location with a max size less than '${farcall.size()}'.`)
-              }
-              
-              farcalls.push(new HunkFormat([location.offset], farcall))
-              romInfo.freeSpace(new ROMOffset(location.offset.absoluteOffset + farcall.size()), location.maxSize - farcall.size())
             }
+            
+            changeSize = farcall.size()
+            
+            if (location.maxSize < changeSize) {
+              throw new Error(`Cannot add a farcall to a location with a max size less than '${changeSize}'.`)
+            }
+            
+            farcalls.push(new HunkFormat([location.offset], farcall))
           } else {
             romOffsets.push(location.offset)
-            romInfo.freeSpace(new ROMOffset(location.offset.absoluteOffset + dataFormat.size()), location.maxSize - dataFormat.size())
+          }
+          
+          if (location.freeUnused) {
+            romInfo.freeSpace(new ROMOffset(location.offset.absoluteOffset + changeSize), location.maxSize - changeSize)
           }
         } else {
           romOffsets.push(location.offset)
@@ -366,12 +381,24 @@ class LocationInfo {
   
   readonly offset: ROMOffset
   readonly maxSize?: number
-  readonly farcall?: ROMOffset
+  readonly freeUnused: boolean
   
   constructor(object: any) {
     this.offset = ROMOffset.fromBankAddress(object.bank, object.address)
     this.maxSize = object.maxSize
-    this.farcall = isNotNullish(object.farcall) ? ROMOffset.fromBankAddress(object.farcall.bank, object.farcall.address) : undefined
+    this.freeUnused = object.freeUnused ?? false
+  }
+  
+}
+
+class FreeSpace {
+  
+  readonly offset: ROMOffset
+  readonly size: number
+  
+  constructor(object: any) {
+    this.offset = ROMOffset.fromBankAddress(object.bank, object.address)
+    this.size = object.size
   }
   
 }

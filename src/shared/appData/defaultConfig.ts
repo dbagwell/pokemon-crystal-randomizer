@@ -1,5 +1,6 @@
 import { wildEncounterAvailabilityOptions } from "@shared/appData/wildEncounterAvailability"
 import { additionalOptionsMap } from "@shared/gameData/additionalOptions"
+import { growthRatesMap } from "@shared/gameData/growthRates"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsGroupedByCategory } from "@shared/gameData/itemHeplers"
 import { movesMap } from "@shared/gameData/moves"
@@ -7,6 +8,7 @@ import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import type { AdditionalOptionId } from "@shared/types/gameDataIds/additionalOptions"
+import type { GrowthRateId } from "@shared/types/gameDataIds/growthRates"
 import { itemCategoryIds } from "@shared/types/gameDataIds/itemCategories"
 import type { ItemId } from "@shared/types/gameDataIds/items"
 import { type MoveId, moveIds } from "@shared/types/gameDataIds/moves"
@@ -332,6 +334,38 @@ export const defaultConfig = () => {
                 min: 0,
                 max: 100,
                 value: 0,
+              },
+            },
+          },
+          STANDARDIZE_POKEMON_GROWTH_RATES: {
+            label: "Standardize Pokémon Growth Rates",
+            description: "Makes it so that all Pokémon require the same amount of experience for each level.",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            hasToggle: true as const,
+            toggleValue: false,
+            subElementConfigs: {
+              GROWTH_RATE: {
+                label: "Growth Rate",
+                description: "Determines how much experience is required for each level.",
+                type: "SelectorInput" as const,
+                options: Object.values(growthRatesMap).map((growthRate) => {
+                  return {
+                    id: growthRate.id,
+                    label: growthRate.name,
+                  }
+                }),
+                multiselect: false as const,
+                required: true as const,
+                value: "MEDIUM_FAST" as GrowthRateId,
+              },
+              EXCLUDE: {
+                label: "Exclude",
+                description: "These Pokémon will keep their vanilla growth rates.",
+                type: "SelectorInput" as const,
+                options: pokemonOptions,
+                multiselect: true as const,
+                selectedOptionIds: [] as PokemonId[],
               },
             },
           },
@@ -739,6 +773,12 @@ export const defaultConfig = () => {
           BIKE_ANYWHERE: {
             label: "Bike Anywhere",
             description: "Allows the player to bike anywhere.",
+            type: "ToggleInput" as const,
+            value: false,
+          },
+          SCALE_EXPERIENCE: {
+            label: "Scale Experience Gain",
+            description: "Changes the battle experience calculation to more closely match that of generations 5 and 7+, where the experience earned is curved up or down based on the difference in level between the fainted Pokémon and the Pokémon earning the experience.",
             type: "ToggleInput" as const,
             value: false,
           },

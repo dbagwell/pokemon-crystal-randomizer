@@ -894,6 +894,16 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     })
   }
   
+  if (pokemonSettings.STANDARDIZE_POKEMON_GROWTH_RATES) {
+    const growthRatesSettings = pokemonSettings.STANDARDIZE_POKEMON_GROWTH_RATES
+    
+    Object.values(updatedPokemonDataMap).forEach((pokemon) => {
+      if (!growthRatesSettings.EXCLUDE.includes(pokemon.id)) {
+        pokemon.growthRate = growthRatesSettings.GROWTH_RATE
+      }
+    })
+  }
+  
   if (
     pokemonSettings.RANDOMIZE_TM_COMPATIBILITY
     || pokemonSettings.RANDOMIZE_HM_COMPATIBILITY
@@ -1318,6 +1328,17 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     )
   
     hunks = [...hunks, ...bikeAnywherePatch.hunks]
+  }
+  
+  // Scale Experience
+  
+  if (otherSettings.SCALE_EXPERIENCE) {
+    const scaleExperiencePatch = Patch.fromYAML(
+      romInfo,
+      "scaleExperience.yml",
+    )
+  
+    hunks = [...hunks, ...scaleExperiencePatch.hunks]
   }
   
   // Performance Improvements

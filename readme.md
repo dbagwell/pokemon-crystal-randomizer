@@ -49,7 +49,7 @@ A set of shared utility code used by all other segments.
 
 ### Inter-Process Communication (IPC)
 
-Because the *main* and *renderer* process are completely separate they need to use Inter-Process Communication to share information at runtime. To do this in a type safe manor the app uses [electron-affinity](https://github.com/jtlapp/electron-affinity). Each process defines it's own API and calls a function to expose it to the other processes using IPC. The other processes can then import the type of that API and create a binding to access it.
+Because the *main* and *renderer* process are completely separate they need to use Inter-Process Communication to share information at runtime. To do this in a type safe manner the app uses [electron-affinity](https://github.com/jtlapp/electron-affinity). Each process defines it's own API and calls a function to expose it to the other processes using IPC. The other processes can then import the type of that API and create a binding to access it.
 
 ### Patch Specs
 
@@ -60,6 +60,7 @@ The app uses a custom specification for defining data patches with dynamic conte
 - `includes`: **[String: String] (optional)** - A dictionary of paths to other Patch Specs that can be referenced in the Data Formats included in this spec. The paths must be relative to the root of the Patch Spec directory.
 - `values`: **[String: [DataFormat](#DataFormat)] (optional)** - A dictionary of Data Formats that can be referenced by other Data Fromats in this spec.
 - `changes`: **[[Change](#Change)] (optional)** - A list of changes to be applied to the ROM.
+- `freeSpaces`: **[FreeSpace](#FreeSpace) (optional)** - A list of spaces in the ROM that can be marked as free for use by other patches.
 
 #### DataFormat
 
@@ -82,7 +83,7 @@ This is a string made up of whitespace separated tokens that describe sequences 
   - `*`: Multiply two numbers.
   - `/`: Divide the left number by the right number.
   - `<<`: Bit shift the left number to the left by the right number.
-  - `>>`: Bit difht the left number to the right by the right number.
+  - `>>`: Bit shift the left number to the right by the right number.
 
 Certain Patch Specs may need extra information that can only be provided by the generator at runtime. These can be in the form of extra includes (which can also include arrays of includes) or values. Data Formats may reference these includes/values even though they are not defined in their spec, but must be confident that the generator will provide them.
 
@@ -94,10 +95,16 @@ Certain Patch Specs may need extra information that can only be provided by the 
 
 #### Location
 
-- `bank`: **Number** - The numerical identifiery of the ROM Bank where the change should be applied.
+- `bank`: **Number** - The numerical identifier of the ROM Bank where the change should be applied.
 - `address`: **Number (optional)** - The starting address within the ROM Bank where the change should be applied. If the address is omitted, the generator will try to fit the change into a hunk of free space in the specified ROM Bank.
 - `maxSize`: **Number (optional)** - The maximum size the resolved change can be if it were to be applied at the specified bank and address. If the size of the resolved change exceeds this value, the location of the changed will be moved to some other free space in the ROM and a farcall will be added that points to the new location. Any space within the space alloted by the starting location and the max size that is not used will be updated as free space that can be used by other patches. Ignored if `address` is not specified.
-- `farcall`: **[bank: Number, address: Number] (optional)** - The location of a farcall that is already used to access the data at the starting location of this change. If specified, instead of adding a farcall to the original location of this change, an additional change will be applied that changes the pointer of that farcall to point to the new location of this change if it is moved because its size exceeds `maxSize`. Ignored if `maxSize` is not specified.
+- `freeUnused`: **Boolean (optional)** - Tells the generator to mark as free any space in `bank` at `address` up to `maxSize` that does not get overwritten by the patch. Ignored if `maxSize` is not specified.
+
+#### FreeSpace
+
+- `bank`: **Number** - The numerical identifier of the ROM Bank where the start of the space is.
+- `address`: **Number** - The starting address of the space within the ROM Bank.
+- `size`: **Number** - The size the space to be marked as free.
 
 ### Nearley
 
