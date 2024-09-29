@@ -1283,6 +1283,15 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     hunks = [...hunks, ...preventFailedPokeBallWobblesPatch.hunks]
   }
   
+  if (itemsSettings.RODS_ALWAYS_WORK) {
+    const rodsAlwaysWorkPatch = Patch.fromYAML(
+      romInfo,
+      "rodsAlwaysWork.yml",
+    )
+  
+    hunks = [...hunks, ...rodsAlwaysWorkPatch.hunks]
+  }
+  
   // Other
   
   const otherSettings = settings.OTHER

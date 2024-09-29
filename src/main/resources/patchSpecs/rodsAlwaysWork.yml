@@ -1,0 +1,11 @@
+description: "Makes it so fishing rods always work."
+changes:
+- description: "Changes the call to fish to skip the random check to see if something is caught."
+  locations:
+  - bank: 36
+    address: 0x6414
+  value: "20 64"
+freeSpaces:
+- bank: 36
+  address: 0x641A
+  size: 6
