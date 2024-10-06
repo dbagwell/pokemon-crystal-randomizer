@@ -1,0 +1,7 @@
+description: "Changes the movement speed of trainers."
+changes:
+- description: "Changes the max duration of the fast random spin."
+  locations:
+  - bank: 1
+    address: 0x4B2C
+  value: "$fastSpinDurationMask"

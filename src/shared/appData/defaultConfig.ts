@@ -7,6 +7,7 @@ import { movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
+import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
 import type { AdditionalOptionId } from "@shared/types/gameDataIds/additionalOptions"
 import type { GrowthRateId } from "@shared/types/gameDataIds/growthRates"
 import { itemCategoryIds } from "@shared/types/gameDataIds/itemCategories"
@@ -16,6 +17,7 @@ import type { OddEggOptionId } from "@shared/types/gameDataIds/oddEggOptions"
 import { type PlayerSpriteId, playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
+import type { TrainerMovementBehaviourId } from "@shared/types/gameDataIds/trainerMovementBehaviours"
 import { mapToRecord } from "@shared/utils"
 
 const pokemonOptions = pokemonIds.map((pokemonId) => {
@@ -726,6 +728,43 @@ export const defaultConfig = () => {
             description: "Fishing Rods will always generate an encounter.",
             type: "ToggleInput" as const,
             value: false,
+          },
+        },
+      },
+      TRAINERS: {
+        label: "Trainers",
+        type: "FormSection" as const,
+        layout: "vertical" as const,
+        subElementConfigs: {
+          MOVEMENT: {
+            label: "Change Overworld Movement Behaviour",
+            description: "Changes the behaviour of how trainers with vision move on the overworld.",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            hasToggle: true as const,
+            toggleValue: false,
+            subElementConfigs: {
+              BEHAVIOR: {
+                label: "Behaviour",
+                dsecription: "The movement behaviour to apply to the trainers.",
+                type: "SelectorInput" as const,
+                options: Object.values(trainerMovementBehavioursMap).map((movement) => {
+                  return {
+                    id: movement.id,
+                    label: movement.name,
+                  }
+                }),
+                multiselect: false as const,
+                required: true as const,
+                value: "ROTATE_COUNTER_CLOCKWISE" as TrainerMovementBehaviourId,
+              },
+              INCLUDE_STAIONARY: {
+                label: "Include Stationary Trainers",
+                description: "Also changes the behaviour of trainers that normally don't move.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+            },
           },
         },
       },
