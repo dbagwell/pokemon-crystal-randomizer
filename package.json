@@ -12,7 +12,7 @@
     "gen:styles:global": "sass src/sass/global.scss src/renderer/css/global.css",
     "gen:styles": "npm run gen:styles:light && npm run gen:styles:dark && npm run gen:styles:global",
     "gen:grammars": "nearleyc src/nearley/data.ne -o src/main/lib/grammars/dataGrammar.mjs",
-    "gen:data": "set -a; source .tools.env; set +a; vite-node -c vite.tools.config.ts tools/generatePokemonData.ts && vite-node -c vite.tools.config.ts tools/generateMapData.ts && vite-node -c vite.tools.config.ts tools/generateEncounterData.ts",
+    "gen:data": "set -a; source .tools.env; set +a; vite-node -c vite.tools.config.ts tools/generateAllData.ts",
     "gen": "npm run gen:styles",
     "lint": "eslint --fix .",
     "dev": "electron-forge start",

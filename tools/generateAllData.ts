@@ -1,0 +1,7 @@
+import "tools/generateEncounterData.ts"
+import "tools/generateEventFlagData.ts"
+import "tools/generateMapData.ts"
+import "tools/generateObjectEventData.ts"
+import "tools/generateOverworldMovementBehaviourData.ts"
+import "tools/generateOverworldSpriteData.ts"
+import "tools/generatePokemonData.ts"
