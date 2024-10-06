@@ -721,6 +721,12 @@ export const defaultConfig = () => {
             type: "ToggleInput" as const,
             value: false,
           },
+          RODS_ALWAYS_WORK: {
+            label: "Rods Always Work",
+            description: "Fishing Rods will always generate an encounter.",
+            type: "ToggleInput" as const,
+            value: false,
+          },
         },
       },
       OTHER: {

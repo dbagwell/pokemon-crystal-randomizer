@@ -26,15 +26,22 @@ export class DataHunk {
   readonly offset: ROMOffset
   readonly values: number[]
   
-  constructor(offset: ROMOffset, dataFormat: DataFormat, referenceAddresses: Dictionary<number>) {
+  constructor(offset: ROMOffset, values: number[]) {
     this.offset = offset
-    this.values = dataFormat.values.flatMap((value) => {
-      if (isNumber(value)) {
-        return value
-      } else { // isString(value)
-        return bytesFrom(referenceAddresses[value], 2)
-      }
-    })
+    this.values = values
+  }
+  
+  static readonly from = (offset: ROMOffset, dataFormat: DataFormat, referenceAddresses: Dictionary<number>) => {
+    return new DataHunk(
+      offset,
+      dataFormat.values.flatMap((value) => {
+        if (isNumber(value)) {
+          return value
+        } else { // isString(value)
+          return bytesFrom(referenceAddresses[value], 2)
+        }
+      })
+    )
   }
   
 }

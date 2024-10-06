@@ -84,9 +84,9 @@ export class PatchInfo {
           }
         })
       } else if (isString(value)) {
-        return new PatchInfo(value, {}, {}, this, key, index)
+        this.includes[key] = new PatchInfo(value, {}, {}, this, key, index)
       } else {
-        return new PatchInfo(value.path, value.extraIncludes, value.extraValues, this, key, index)
+        this.includes[key] = new PatchInfo(value.path, value.extraIncludes, value.extraValues, this, key, index)
       }
     })
     
@@ -132,7 +132,7 @@ export class PatchInfo {
     
     const hunks = hunkFormats.flatMap((hunkFormat) => {
       return hunkFormat.romOffsets.map((romOffset) => {
-        return new DataHunk(romOffset, hunkFormat.dataFormat, referenceAddresses)
+        return DataHunk.from(romOffset, hunkFormat.dataFormat, referenceAddresses)
       })
     })
     
@@ -158,6 +158,9 @@ export class PatchInfo {
             
             if (location.freeUnused) {
               farcall.add(ROMInfo.returnInstruction())
+            } else {
+              farcall.add(new DataFormat(Array(location.maxSize - farcall.size()).fill(0)))
+              dataFormat.add(ROMInfo.returnInstruction())
             }
             
             changeSize = farcall.size()
