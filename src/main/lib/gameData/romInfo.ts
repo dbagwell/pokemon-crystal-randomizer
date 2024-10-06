@@ -186,7 +186,7 @@ export class ROMInfo {
   }
   
   static readonly farcall = (offset: ROMOffset): DataFormat => {
-    return new DataFormat([0x3E, offset.bank(), 0x21, ...bytesFrom(offset.bankAddress(), 2), 0xCF])
+    return new DataFormat([0xF5, 0xE5, 0x3E, offset.bank(), 0x21, ...bytesFrom(offset.bankAddress(), 2), 0xCF, 0xE1, 0xF1])
   }
   
   readonly reserveSpace = (size: number): ROMOffset => {
