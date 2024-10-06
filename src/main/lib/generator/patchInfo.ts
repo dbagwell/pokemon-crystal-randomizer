@@ -132,7 +132,7 @@ export class PatchInfo {
     
     const hunks = hunkFormats.flatMap((hunkFormat) => {
       return hunkFormat.romOffsets.map((romOffset) => {
-        return new DataHunk(romOffset, hunkFormat.dataFormat, referenceAddresses)
+        return DataHunk.from(romOffset, hunkFormat.dataFormat, referenceAddresses)
       })
     })
     
