@@ -13,6 +13,7 @@ import { itemsMap } from "@shared/gameData/items"
 import { mapObjectEvents } from "@shared/gameData/mapObjectEvents"
 import { mapObjectTypesMap } from "@shared/gameData/mapObjectTypes"
 import { type Move, movesMap } from "@shared/gameData/moves"
+import { oddEggs } from "@shared/gameData/oddEggs"
 import { overworldMovementBehavioursMap } from "@shared/gameData/overworldMovementBehaviours"
 import { overworldSpritePalletsMap } from "@shared/gameData/overworldSpritePallets"
 import { overworldSpritesMap } from "@shared/gameData/overworldSprites"
@@ -27,6 +28,7 @@ import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBe
 import type { Encounter } from "@shared/types/gameData/encounter"
 import { happinessEvolutionConidtionsMap, statEvolutionConidtionsMap } from "@shared/types/gameData/evolutionMethod"
 import type { MapObjectEvent } from "@shared/types/gameData/mapObjectEvent"
+import { type OddEgg } from "@shared/types/gameData/oddEgg"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
 import type { TeachableMove } from "@shared/types/gameData/teachableMove"
 import type { Trade } from "@shared/types/gameData/trade"
@@ -156,6 +158,8 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   })
   
   // Random Event Pokemon
+  
+  const updatedOddEggs = JSON.parse(JSON.stringify(oddEggs)) as OddEgg[]
     
   if (pokemonSettings.RANDOMIZE_EVENT_POKEMON) {
     const eventPokemonSettings = pokemonSettings.RANDOMIZE_EVENT_POKEMON
@@ -164,7 +168,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       return !eventPokemonSettings.BAN.includes(pokemonId)
     })
     
-    const getRandomPokemon = () => {
+    const getRandomPokemonId = () => {
       const index = randomInt(0, availablePokemonIds.length - 1)
       const pokemonId = availablePokemonIds[index]
       
@@ -172,22 +176,74 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         availablePokemonIds.splice(index, 1)
       }
       
-      return pokemonMap[pokemonId]
+      return pokemonId
+    }
+    
+    const getRandomPokemon = () => {
+      return pokemonMap[getRandomPokemonId()]
     }
     
     const getRandomPokemonIdHexString = () => {
       return hexStringFrom([getRandomPokemon().numericId])
     }
     
-    const oddEggArray = [getRandomPokemonIdHexString()]
+    const randomizedOddEggIds = [getRandomPokemonId()]
     
     for (let index = 1; index < 14; index++) {
       if (eventPokemonSettings.ODD_EGG === "RANDOM" || index % 2 === 0 && eventPokemonSettings.ODD_EGG === "SHINY_MATCH") {
-        oddEggArray.push(getRandomPokemonIdHexString())
+        randomizedOddEggIds.push(getRandomPokemonId())
       } else {
-        oddEggArray.push(oddEggArray[index - 1])
+        randomizedOddEggIds.push(randomizedOddEggIds[index - 1])
       }
     }
+    
+    updatedOddEggs.forEach((oddEgg, index) => {
+      oddEgg.pokemonId = randomizedOddEggIds[index]
+    })
+    
+    hunks = [
+      ...hunks,
+      new DataHunk(
+        ROMOffset.fromBankAddress(126, 0x756E),
+        updatedOddEggs.flatMap((oddEgg) => {
+          return [
+            pokemonMap[oddEgg.pokemonId].numericId,
+            isNotNullish(oddEgg.item) ? itemsMap[oddEgg.item].numericId : 0,
+            ...oddEgg.moves.map((move) => {
+              return movesMap[move.id].numericId
+            }).concat(Array(4 - oddEgg.moves.length).fill(0)),
+            ...bytesFrom(oddEgg.ot, 2),
+            ...bytesFrom(oddEgg.experience, 3, true),
+            ...bytesFrom(oddEgg.statExperience.hp, 2, true),
+            ...bytesFrom(oddEgg.statExperience.attack, 2, true),
+            ...bytesFrom(oddEgg.statExperience.defence, 2, true),
+            ...bytesFrom(oddEgg.statExperience.speed, 2, true),
+            ...bytesFrom(oddEgg.statExperience.special, 2, true),
+            (oddEgg.dvs.attack << 4) + oddEgg.dvs.defence,
+            (oddEgg.dvs.speed << 4) + oddEgg.dvs.special,
+            ...oddEgg.moves.map((move) => {
+              return move.pp
+            }).concat(Array(4 - oddEgg.moves.length).fill(0)),
+            oddEgg.hatchCyclesRemaining,
+            isNotNullish(oddEgg.pokerus) ? (oddEgg.pokerus.strain << 4) + oddEgg.pokerus.daysRemaining : 0,
+            0,
+            0,
+            oddEgg.level,
+            0,
+            0,
+            0,
+            0,
+            ...bytesFrom(oddEgg.stats.hp, 2, true),
+            ...bytesFrom(oddEgg.stats.attack, 2, true),
+            ...bytesFrom(oddEgg.stats.defence, 2, true),
+            ...bytesFrom(oddEgg.stats.speed, 2, true),
+            ...bytesFrom(oddEgg.stats.specialAttack, 2, true),
+            ...bytesFrom(oddEgg.stats.specialDefence, 2, true),
+            ...ROMInfo.displayCharacterBytesFrom(oddEgg.name),
+          ]
+        })
+      ),
+    ]
     
     const eeveePokemon = getRandomPokemon()
     const dratiniPokemon = getRandomPokemon()
@@ -222,20 +278,6 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         lugiaPokemonId: getRandomPokemonIdHexString(),
         celebiPokemonId: getRandomPokemonIdHexString(),
         togepiPokemonId: getRandomPokemonIdHexString(),
-        pichuPokemonId: oddEggArray[0],
-        shinyPichuPokemonId: oddEggArray[1],
-        cleffaPokemonId: oddEggArray[2],
-        shinyCleffaPokemonId: oddEggArray[3],
-        igglybuffPokemonId: oddEggArray[4],
-        shinyIgglybuffPokemonId: oddEggArray[5],
-        smoochumPokemonId: oddEggArray[6],
-        shinySmoochumPokemonId: oddEggArray[7],
-        magbyPokemonId: oddEggArray[8],
-        shinyMagbyPokemonId: oddEggArray[9],
-        elekidPokemonId: oddEggArray[10],
-        shinyElekidPokemonId: oddEggArray[11],
-        tyroguePokemonId: oddEggArray[12],
-        shinyTyroguePokemonId: oddEggArray[13],
         spearowPokemonId: getRandomPokemonIdHexString(),
         shucklePokemonId: getRandomPokemonIdHexString(),
         eeveePokemonId: hexStringFrom([eeveePokemon.numericId]),
@@ -244,8 +286,8 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         dratiniPokemonId: hexStringFrom([dratiniPokemon.numericId]),
         dratiniPokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${dratiniPokemon.name.toUpperCase()}`.padEnd(12, " "))),
         dratiniPokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${dratiniPokemon.name.toUpperCase()}`.padEnd(10, " "))),
-        tyrogue2PokemonId: hexStringFrom([tyrogue2Pokemon.numericId]),
-        tyrogue2PokemonNameText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${tyrogue2Pokemon.name.toUpperCase()}`.padEnd(10, " "))),
+        tyroguePokemonId: hexStringFrom([tyrogue2Pokemon.numericId]),
+        tyroguePokemonNameText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${tyrogue2Pokemon.name.toUpperCase()}`.padEnd(10, " "))),
         abraPokemonId: hexStringFrom([abraPokemon.numericId]),
         cubonePokemonId: hexStringFrom([cubonePokemon.numericId]),
         wobbuffetPokemonId: hexStringFrom([wobbuffetPokemon.numericId]),
