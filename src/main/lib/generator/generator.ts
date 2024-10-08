@@ -1,15 +1,21 @@
-import { ROMInfo } from "@lib/gameData/romInfo"
+import { ROMInfo, ROMOffset } from "@lib/gameData/romInfo"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { type Settings } from "@shared/appData/configHelpers"
 import { eggGroupsMap } from "@shared/gameData/eggGroups"
 import { encounters } from "@shared/gameData/encounters"
+import { eventFlagsMap } from "@shared/gameData/eventFlags"
 import { evolutionTypesMap } from "@shared/gameData/evolutionTypes"
 import { gameMapGroupsMap } from "@shared/gameData/gameMapGroups"
 import { gameMapsMap } from "@shared/gameData/gameMaps"
 import { growthRatesMap } from "@shared/gameData/growthRates"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
+import { mapObjectEvents } from "@shared/gameData/mapObjectEvents"
+import { mapObjectTypesMap } from "@shared/gameData/mapObjectTypes"
 import { type Move, movesMap } from "@shared/gameData/moves"
+import { overworldMovementBehavioursMap } from "@shared/gameData/overworldMovementBehaviours"
+import { overworldSpritePalletsMap } from "@shared/gameData/overworldSpritePallets"
+import { overworldSpritesMap } from "@shared/gameData/overworldSprites"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { baseStatTotal, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
@@ -17,8 +23,10 @@ import { pokemonTypesMap } from "@shared/gameData/pokemonTypes"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { teachableMovesMap } from "@shared/gameData/teachableMoves"
 import { tradesMap } from "@shared/gameData/trades"
+import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
 import type { Encounter } from "@shared/types/gameData/encounter"
 import { happinessEvolutionConidtionsMap, statEvolutionConidtionsMap } from "@shared/types/gameData/evolutionMethod"
+import type { MapObjectEvent } from "@shared/types/gameData/mapObjectEvent"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
 import type { TeachableMove } from "@shared/types/gameData/teachableMove"
 import type { Trade } from "@shared/types/gameData/trade"
@@ -1290,6 +1298,75 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     )
   
     hunks = [...hunks, ...rodsAlwaysWorkPatch.hunks]
+  }
+  
+  // Trainers
+  
+  const trainerSettings = settings.TRAINERS
+  
+  if (trainerSettings.MOVEMENT) {
+    const movementSettings = trainerSettings.MOVEMENT
+    const behaviour = trainerMovementBehavioursMap[movementSettings.BEHAVIOR]
+    
+    const updatedMapObjectEvents = JSON.parse(JSON.stringify(mapObjectEvents)) as [MapObjectEvent]
+    updatedMapObjectEvents.forEach((event) => {
+      if (
+        event.typeId === "TRAINER"
+          && (
+            movementSettings.INCLUDE_STAIONARY
+              || event.movementBehaviourId === "SPINCLOCKWISE"
+              || event.movementBehaviourId === "SPINCOUNTERCLOCKWISE"
+              || event.movementBehaviourId === "SPINRANDOM_SLOW"
+              || event.movementBehaviourId === "SPINRANDOM_FAST"
+          )
+      ) {
+        event.movementBehaviourId = behaviour.overworldMovementBehaviourId
+      }
+    })
+    
+    updatedMapObjectEvents.forEach((event) => {
+      let timeArray = [-1, -1]
+      
+      if (event.time === "MORNING") {
+        timeArray[1] = 1
+      } else if (event.time === "DAY") {
+        timeArray[1] = 2
+      } else if (event.time === "NIGHT") {
+        timeArray[1] = 4
+      } else if (event.time !== "ANY") {
+        timeArray = event.time
+      }
+      
+      hunks = [
+        ...hunks,
+        new DataHunk(
+          ROMOffset.fromBankAddress(event.romOffset[0], event.romOffset[1]),
+          [
+            overworldSpritesMap[event.spriteId].numericId,
+            event.coordinate[1] + 4,
+            event.coordinate[0] + 4,
+            overworldMovementBehavioursMap[event.movementBehaviourId].numericId,
+            event.movementRadius[0] + (event.movementRadius[1] << 4),
+            ...timeArray,
+            ((isNotNullish(event.palletId) ? overworldSpritePalletsMap[event.palletId].numericId : 0) << 4) + mapObjectTypesMap[event.typeId].numericId,
+            event.sightRange,
+            ...bytesFrom(event.scriptPointer, 2),
+            ...isNotNullish(event.flagId) ? bytesFrom(eventFlagsMap[event.flagId].numericId, 2) : [-1],
+          ]
+        ),
+      ]
+    })
+    
+    const trainerMovementSpeedPatch = Patch.fromYAML(
+      romInfo,
+      "trainerMovementSpeed.yml",
+      {},
+      {
+        fastSpinDurationMask: hexStringFrom([behaviour.fastSpinDurationMask]),
+      }
+    )
+  
+    hunks = [...hunks, ...trainerMovementSpeedPatch.hunks]
   }
   
   // Other
