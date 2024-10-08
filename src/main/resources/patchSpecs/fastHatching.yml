@@ -1,0 +1,12 @@
+description: "Sets initial hatch cycles to 1."
+changes:
+- description: "Skips the setting the egg hatch cycles, using 1 instead."
+  locations:
+  - bank: 3
+    address: 0x601D
+  value: "00 00 00 00 00"
+- description: "Skips the setting the egg hatch cycles, using 1 instead."
+  locations:
+  - bank: 5
+    address: 0x6BCE
+  value: "3E 01 00"

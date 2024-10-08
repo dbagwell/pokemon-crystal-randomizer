@@ -1,0 +1,9 @@
+description: "Changes the breeding check to always succeed."
+changes:
+- description: "Skips the setting the egg hatch cycles, using 1 instead."
+  locations:
+  - bank: 1
+    address: 0x72DB
+    maxSize: 42
+    freeUnused: true
+  value: "21 F5 DE CB AE CB F6 C9"

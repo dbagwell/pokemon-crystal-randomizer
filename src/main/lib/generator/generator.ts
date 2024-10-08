@@ -201,50 +201,6 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       oddEgg.pokemonId = randomizedOddEggIds[index]
     })
     
-    hunks = [
-      ...hunks,
-      new DataHunk(
-        ROMOffset.fromBankAddress(126, 0x756E),
-        updatedOddEggs.flatMap((oddEgg) => {
-          return [
-            pokemonMap[oddEgg.pokemonId].numericId,
-            isNotNullish(oddEgg.item) ? itemsMap[oddEgg.item].numericId : 0,
-            ...oddEgg.moves.map((move) => {
-              return movesMap[move.id].numericId
-            }).concat(Array(4 - oddEgg.moves.length).fill(0)),
-            ...bytesFrom(oddEgg.ot, 2),
-            ...bytesFrom(oddEgg.experience, 3, true),
-            ...bytesFrom(oddEgg.statExperience.hp, 2, true),
-            ...bytesFrom(oddEgg.statExperience.attack, 2, true),
-            ...bytesFrom(oddEgg.statExperience.defence, 2, true),
-            ...bytesFrom(oddEgg.statExperience.speed, 2, true),
-            ...bytesFrom(oddEgg.statExperience.special, 2, true),
-            (oddEgg.dvs.attack << 4) + oddEgg.dvs.defence,
-            (oddEgg.dvs.speed << 4) + oddEgg.dvs.special,
-            ...oddEgg.moves.map((move) => {
-              return move.pp
-            }).concat(Array(4 - oddEgg.moves.length).fill(0)),
-            oddEgg.hatchCyclesRemaining,
-            isNotNullish(oddEgg.pokerus) ? (oddEgg.pokerus.strain << 4) + oddEgg.pokerus.daysRemaining : 0,
-            0,
-            0,
-            oddEgg.level,
-            0,
-            0,
-            0,
-            0,
-            ...bytesFrom(oddEgg.stats.hp, 2, true),
-            ...bytesFrom(oddEgg.stats.attack, 2, true),
-            ...bytesFrom(oddEgg.stats.defence, 2, true),
-            ...bytesFrom(oddEgg.stats.speed, 2, true),
-            ...bytesFrom(oddEgg.stats.specialAttack, 2, true),
-            ...bytesFrom(oddEgg.stats.specialDefence, 2, true),
-            ...ROMInfo.displayCharacterBytesFrom(oddEgg.name),
-          ]
-        })
-      ),
-    ]
-    
     const eeveePokemon = getRandomPokemon()
     const dratiniPokemon = getRandomPokemon()
     const tyrogue2Pokemon = getRandomPokemon()
@@ -298,8 +254,78 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         celadonGameCornerPokemonMenuText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${pikachuPokemon.name.toUpperCase().padEnd(10, " ")} 2222@${porygonPokemon.name.toUpperCase().padEnd(10, " ")} 5555@${larvitarPokemon.name.toUpperCase().padEnd(10, " ")} 8888@`)),
       },
     )
-  
+    
     hunks = [...hunks, ...eventPokemonPatch.hunks]
+  }
+  
+  // Eggs
+  
+  if (pokemonSettings.EGGS.FAST_BREEDING) {
+    const fastBreedingPatch = Patch.fromYAML(
+      romInfo,
+      "fastBreeding.yml",
+    )
+    
+    hunks = [...hunks, ...fastBreedingPatch.hunks]
+  }
+  
+  if (pokemonSettings.EGGS.FAST_HATCHING) {
+    updatedOddEggs.forEach((oddEgg) => {
+      oddEgg.hatchCyclesRemaining = 1
+    })
+    
+    const fastHatchingPatch = Patch.fromYAML(
+      romInfo,
+      "fastHatching.yml",
+    )
+    
+    hunks = [...hunks, ...fastHatchingPatch.hunks]
+  }
+  
+  if (pokemonSettings.RANDOMIZE_EVENT_POKEMON || pokemonSettings.EGGS.FAST_HATCHING) {
+    hunks = [
+      ...hunks,
+      new DataHunk(
+        ROMOffset.fromBankAddress(126, 0x756E),
+        updatedOddEggs.flatMap((oddEgg) => {
+          return [
+            pokemonMap[oddEgg.pokemonId].numericId,
+            isNotNullish(oddEgg.item) ? itemsMap[oddEgg.item].numericId : 0,
+            ...oddEgg.moves.map((move) => {
+              return movesMap[move.id].numericId
+            }).concat(Array(4 - oddEgg.moves.length).fill(0)),
+            ...bytesFrom(oddEgg.ot, 2),
+            ...bytesFrom(oddEgg.experience, 3, true),
+            ...bytesFrom(oddEgg.statExperience.hp, 2, true),
+            ...bytesFrom(oddEgg.statExperience.attack, 2, true),
+            ...bytesFrom(oddEgg.statExperience.defence, 2, true),
+            ...bytesFrom(oddEgg.statExperience.speed, 2, true),
+            ...bytesFrom(oddEgg.statExperience.special, 2, true),
+            (oddEgg.dvs.attack << 4) + oddEgg.dvs.defence,
+            (oddEgg.dvs.speed << 4) + oddEgg.dvs.special,
+            ...oddEgg.moves.map((move) => {
+              return move.pp
+            }).concat(Array(4 - oddEgg.moves.length).fill(0)),
+            oddEgg.hatchCyclesRemaining,
+            isNotNullish(oddEgg.pokerus) ? (oddEgg.pokerus.strain << 4) + oddEgg.pokerus.daysRemaining : 0,
+            0,
+            0,
+            oddEgg.level,
+            0,
+            0,
+            0,
+            0,
+            ...bytesFrom(oddEgg.stats.hp, 2, true),
+            ...bytesFrom(oddEgg.stats.attack, 2, true),
+            ...bytesFrom(oddEgg.stats.defence, 2, true),
+            ...bytesFrom(oddEgg.stats.speed, 2, true),
+            ...bytesFrom(oddEgg.stats.specialAttack, 2, true),
+            ...bytesFrom(oddEgg.stats.specialDefence, 2, true),
+            ...ROMInfo.displayCharacterBytesFrom(oddEgg.name),
+          ]
+        })
+      ),
+    ]
   }
   
   // Encounter Data
