@@ -24,6 +24,7 @@ import { pokemonTypesMap } from "@shared/gameData/pokemonTypes"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { teachableMovesMap } from "@shared/gameData/teachableMoves"
 import { tradesMap } from "@shared/gameData/trades"
+import { trainerGroupsMap } from "@shared/gameData/trainerGroups"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
 import { trainers } from "@shared/gameData/trainers"
 import type { Encounter } from "@shared/types/gameData/encounter"
@@ -162,6 +163,81 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       ).hunks,
     ]
   })
+  
+  if (pokemonSettings.STARTERS.RIVAL_SYNC) {
+    Object.entries(assignedStarters).forEach(([locationId, newPokemonId]) => {
+      if (isNullish(newPokemonId)) {
+        return
+      }
+      
+      let newPokemon = pokemonMap[newPokemonId]
+      
+      const rivalPokemon = updatedTrainers.filter((trainer) => {
+        return trainerGroupsMap[trainer.groupId].classId === "RIVAL"
+      }).flatMap((trainer) => {
+        return trainer.pokemon
+      })
+      
+      // Update the Rival's initial starters
+      
+      rivalPokemon.filter((pokemon) => {
+        return locationId === "LEFT" && pokemon.id === "CYNDAQUIL"
+          || locationId === "MIDDLE" && pokemon.id === "TOTODILE"
+          || locationId === "RIGHT" && pokemon.id === "CHIKORITA"
+      }).forEach((pokemon) => {
+        pokemon.id = newPokemon.id
+      })
+      
+      // Update the Rival's second stage starters
+      
+      const evolutionId = newPokemon.evolutions?.[0]?.pokemonId
+      
+      // Only evolve the pokemon at this stage if it can evolve further
+      if (isNotNullish(evolutionId) && isNotNullish(pokemonMap[evolutionId].evolutions)) {
+        newPokemon = pokemonMap[evolutionId]
+      }
+      
+      rivalPokemon.filter((pokemon) => {
+        return locationId === "LEFT" && pokemon.id === "QUILAVA"
+          || locationId === "MIDDLE" && pokemon.id === "CROCONAW"
+          || locationId === "RIGHT" && pokemon.id === "BAYLEEF"
+      }).forEach((pokemon) => {
+        pokemon.id = newPokemon.id
+        
+        if (pokemon.moves.length > 0) {
+          const startIndex = newPokemon.levelUpMoves.findIndex((move) => {
+            return move.level >= pokemon.level
+          })
+          
+          pokemon.moves = newPokemon.levelUpMoves.slice(startIndex, 4).map((move) => {
+            return move.moveId
+          })
+        }
+      })
+      
+      // Update the Rival's third stage starters
+      
+      newPokemon = pokemonMap[newPokemon.evolutions?.[0]?.pokemonId ?? newPokemon.id]
+      
+      rivalPokemon.filter((pokemon) => {
+        return locationId === "LEFT" && pokemon.id === "TYPHLOSION"
+          || locationId === "MIDDLE" && pokemon.id === "FERALIGATR"
+          || locationId === "RIGHT" && pokemon.id === "MEGANIUM"
+      }).forEach((pokemon) => {
+        pokemon.id = newPokemon.id
+        
+        if (pokemon.moves.length > 0) {
+          const startIndex = newPokemon.levelUpMoves.findIndex((move) => {
+            return move.level >= pokemon.level
+          })
+          
+          pokemon.moves = newPokemon.levelUpMoves.slice(startIndex, 4).map((move) => {
+            return move.moveId
+          })
+        }
+      })
+    })
+  }
   
   // Random Event Pokemon
   
@@ -1393,12 +1469,15 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         return !randomTeamsSettings.BAN.includes(pokemon.id) && (isNullish(typeFilter) || pokemon.types.includes(typeFilter))
       })
       
-      trainer.pokemon.forEach((pokemon) => {
+      trainer.pokemon.forEach((pokemon, index) => {
         const availablePokemon = randomTeamsSettings.FORCE_FULLY_EVOLVED && pokemon.level >= randomTeamsSettings.FORCE_FULLY_EVOLVED.THRESHOLD ? nonBannedAndTypeFilteredPokemon.filter((pokemon) => {
           return isNullish(pokemon.evolutions)
         }) : nonBannedAndTypeFilteredPokemon
         
-        pokemon.id = availablePokemon[randomInt(0, availablePokemon.length - 1)].id
+        if (trainerGroupsMap[trainer.groupId].classId !== "RIVAL" || !pokemonSettings.STARTERS.RIVAL_SYNC || index !== trainer.pokemon.length - 1) {
+          pokemon.id = availablePokemon[randomInt(0, availablePokemon.length - 1)].id
+        }
+        
         pokemon.moves = []
       })
     })

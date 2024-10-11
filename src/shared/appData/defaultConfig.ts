@@ -118,6 +118,12 @@ export const defaultConfig = () => {
                   },
                 },
               },
+              RIVAL_SYNC: {
+                label: "Rival's Starter Matches Stolen Ball",
+                description: "The 'Ace' Pokémon on the Rival's teams will be always match the starter (and its evolutions when appropriate) that appears to be stolen from Prof. Elm's Lab.",
+                type: "ToggleInput" as const,
+                value: true,
+              },
             },
           },
           RANDOMIZE_EVENT_POKEMON: {
