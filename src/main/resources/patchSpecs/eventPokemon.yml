@@ -132,76 +132,6 @@ changes:
   - bank: 26
     address: 0x54E2
   value: "$togepiPokemonId"
-- description: "Changes the Pokémon in the Pichu egg."
-  locations:
-  - bank: 126
-    address: 0x756E
-  value: "$pichuPokemonId"
-- description: "Changes the Pokémon in the Shiny Pichu egg."
-  locations:
-  - bank: 126
-    address: 0x75A9
-  value: "$shinyPichuPokemonId"
-- description: "Changes the Pokémon in the Cleffa egg."
-  locations:
-  - bank: 126
-    address: 0x75E4
-  value: "$cleffaPokemonId"
-- description: "Changes the Pokémon in the Shiny Cleffa egg."
-  locations:
-  - bank: 126
-    address: 0x761F
-  value: "$shinyCleffaPokemonId"
-- description: "Changes the Pokémon in the Igglybuff egg."
-  locations:
-  - bank: 126
-    address: 0x765A
-  value: "$igglybuffPokemonId"
-- description: "Changes the Pokémon in the Shiny Igglybuff egg."
-  locations:
-  - bank: 126
-    address: 0x7695
-  value: "$shinyIgglybuffPokemonId"
-- description: "Changes the Pokémon in the Smoochum egg."
-  locations:
-  - bank: 126
-    address: 0x76D0
-  value: "$smoochumPokemonId"
-- description: "Changes the Pokémon in the Shiny Smoochum egg."
-  locations:
-  - bank: 126
-    address: 0x770B
-  value: "$shinySmoochumPokemonId"
-- description: "Changes the Pokémon in the Magby egg."
-  locations:
-  - bank: 126
-    address: 0x7746
-  value: "$magbyPokemonId"
-- description: "Changes the Pokémon in the Shiny Magby egg."
-  locations:
-  - bank: 126
-    address: 0x7781
-  value: "$shinyMagbyPokemonId"
-- description: "Changes the Pokémon in the Elekid egg."
-  locations:
-  - bank: 126
-    address: 0x77BC
-  value: "$elekidPokemonId"
-- description: "Changes the Pokémon in the Shiny Elekid egg."
-  locations:
-  - bank: 126
-    address: 0x77F7
-  value: "$shinyElekidPokemonId"
-- description: "Changes the Pokémon in the Tyrogue egg."
-  locations:
-  - bank: 126
-    address: 0x7832
-  value: "$tyroguePokemonId"
-- description: "Changes the Pokémon in the Shiny Tyrogue egg."
-  locations:
-  - bank: 126
-    address: 0x786D
-  value: "$shinyTyroguePokemonId"
 - description: "Changes the Pokémon of the Spearow gift."
   locations:
   - bank: 26
@@ -248,12 +178,12 @@ changes:
   locations:
   - bank: 31
     address: 0x622A
-  value: "$tyrogue2PokemonId"
+  value: "$tyroguePokemonId"
 - description: "Changes the received text of the Tyrogue gift."
   locations:
   - bank: 31
     address: 0x6356
-  value: "$tyrogue2PokemonNameText 4F A6 AE B3 E7 7F 7F 7F 7F"
+  value: "$tyroguePokemonNameText 4F A6 AE B3 E7 7F 7F 7F 7F"
 - description: "Changes the Pokémon of the game corner Abra."
   locations:
   - bank: 21

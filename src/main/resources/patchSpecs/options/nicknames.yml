@@ -40,7 +40,7 @@ changes:
   locations:
   - bank: 5
     address: 0x704D
-  value: "CD @$hatchNicknameCheck"
+  value: "CD @$hatchNicknameCheck 00 00 00 00 00 00"
 freeSpaces:
   - bank: 19
     address: 0x5B3E

@@ -537,6 +537,25 @@ export const defaultConfig = () => {
               },
             },
           },
+          EGGS: {
+            label: "Eggs",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            subElementConfigs: {
+              FAST_BREEDING: {
+                label: "Fast Breeding",
+                description: "Makes eggs guaranteed to appear after only 1 breeding cycle between 2 compatible Pokémon.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              FAST_HATCHING: {
+                label: "Fast Hatching",
+                description: "Makes all eggs hatch after only 1 hatch cycle.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+            },
+          },
         },
       },
       MOVES: {
