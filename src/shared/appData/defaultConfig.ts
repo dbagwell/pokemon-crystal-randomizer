@@ -118,6 +118,12 @@ export const defaultConfig = () => {
                   },
                 },
               },
+              RIVAL_SYNC: {
+                label: "Rival's Starter Matches Stolen Ball",
+                description: "The 'Ace' Pokémon on the Rival's teams will be always match the starter (and its evolutions when appropriate) that appears to be stolen from Prof. Elm's Lab.",
+                type: "ToggleInput" as const,
+                value: true,
+              },
             },
           },
           RANDOMIZE_EVENT_POKEMON: {
@@ -755,6 +761,48 @@ export const defaultConfig = () => {
         type: "FormSection" as const,
         layout: "vertical" as const,
         subElementConfigs: {
+          RANDOMIZE_POKEMON: {
+            label: "Randomize Pokémon Teams",
+            description: "Makes it so the Pokémon on other trainers teams are randomized.",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            hasToggle: true as const,
+            toggleValue: false,
+            subElementConfigs: {
+              THEMED_TEAMS: {
+                label: "Themed Teams",
+                description: "Makes it so all Pokémon on the same team have at least one type in common.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              FORCE_FULLY_EVOLVED: {
+                label: "Force Fully Evolved Over Level",
+                description: "Makes it so the over a certain level threshold (inclusive) are always fully evolved.",
+                type: "FormSection" as const,
+                layout: "vertical" as const,
+                hasToggle: true as const,
+                toggleValue: false,
+                subElementConfigs: {
+                  THRESHOLD: {
+                    label: "Threshold",
+                    type: "IntegerInput" as const,
+                    required: true as const,
+                    min: 1,
+                    max: 99,
+                    value: 50,
+                  },
+                },
+              },
+              BAN: {
+                label: "Ban",
+                description: "Prevent these Pokémon from being selected by the randomizer.",
+                type: "SelectorInput" as const,
+                options: pokemonOptions,
+                multiselect: true as const,
+                selectedOptionIds: [] as PokemonId[],
+              },
+            },
+          },
           MOVEMENT: {
             label: "Change Overworld Movement Behaviour",
             description: "Changes the behaviour of how trainers with vision move on the overworld.",

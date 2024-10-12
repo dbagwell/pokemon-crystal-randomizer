@@ -1,0 +1,3 @@
+description: "Data for a trainer's name and pokemon."
+values:
+  data: "$name $trainerType $pokemon FF"

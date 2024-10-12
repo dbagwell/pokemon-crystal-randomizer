@@ -24,7 +24,9 @@ import { pokemonTypesMap } from "@shared/gameData/pokemonTypes"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { teachableMovesMap } from "@shared/gameData/teachableMoves"
 import { tradesMap } from "@shared/gameData/trades"
+import { trainerGroupsMap } from "@shared/gameData/trainerGroups"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
+import { trainers } from "@shared/gameData/trainers"
 import type { Encounter } from "@shared/types/gameData/encounter"
 import { happinessEvolutionConidtionsMap, statEvolutionConidtionsMap } from "@shared/types/gameData/evolutionMethod"
 import type { MapObjectEvent } from "@shared/types/gameData/mapObjectEvent"
@@ -32,14 +34,17 @@ import { type OddEgg } from "@shared/types/gameData/oddEgg"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
 import type { TeachableMove } from "@shared/types/gameData/teachableMove"
 import type { Trade } from "@shared/types/gameData/trade"
+import type { Trainer } from "@shared/types/gameData/trainer"
 import { fishingGroupIds } from "@shared/types/gameDataIds/fishingGroups"
 import { fishingRodIds } from "@shared/types/gameDataIds/fishingRods"
 import { type HMItemId, hmItemIds, type ItemId, type TMItemId, tmItemIds } from "@shared/types/gameDataIds/items"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
+import { pokemonTypeIds } from "@shared/types/gameDataIds/pokemonTypes"
 import { type StarterLocationId, starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import { type MoveTutorId, moveTutorIds, type TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
 import type { TradeId } from "@shared/types/gameDataIds/trades"
+import { trainerGroupIds } from "@shared/types/gameDataIds/trainerGroups"
 import { treeGroupIds } from "@shared/types/gameDataIds/treeGroups"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish, isString } from "@utils"
 import crypto from "crypto"
@@ -59,6 +64,8 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   const randomInt = (min: number, max: number): number => {
     return Math.floor(rng() * (max + 1 - min)) + min
   }
+  
+  const updatedTrainers = JSON.parse(JSON.stringify(trainers)) as Trainer[]
   
   // Pokemon
   
@@ -156,6 +163,81 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       ).hunks,
     ]
   })
+  
+  if (pokemonSettings.STARTERS.RIVAL_SYNC) {
+    Object.entries(assignedStarters).forEach(([locationId, newPokemonId]) => {
+      if (isNullish(newPokemonId)) {
+        return
+      }
+      
+      let newPokemon = pokemonMap[newPokemonId]
+      
+      const rivalPokemon = updatedTrainers.filter((trainer) => {
+        return trainerGroupsMap[trainer.groupId].classId === "RIVAL"
+      }).flatMap((trainer) => {
+        return trainer.pokemon
+      })
+      
+      // Update the Rival's initial starters
+      
+      rivalPokemon.filter((pokemon) => {
+        return locationId === "LEFT" && pokemon.id === "CYNDAQUIL"
+          || locationId === "MIDDLE" && pokemon.id === "TOTODILE"
+          || locationId === "RIGHT" && pokemon.id === "CHIKORITA"
+      }).forEach((pokemon) => {
+        pokemon.id = newPokemon.id
+      })
+      
+      // Update the Rival's second stage starters
+      
+      const evolutionId = newPokemon.evolutions?.[0]?.pokemonId
+      
+      // Only evolve the pokemon at this stage if it can evolve further
+      if (isNotNullish(evolutionId) && isNotNullish(pokemonMap[evolutionId].evolutions)) {
+        newPokemon = pokemonMap[evolutionId]
+      }
+      
+      rivalPokemon.filter((pokemon) => {
+        return locationId === "LEFT" && pokemon.id === "QUILAVA"
+          || locationId === "MIDDLE" && pokemon.id === "CROCONAW"
+          || locationId === "RIGHT" && pokemon.id === "BAYLEEF"
+      }).forEach((pokemon) => {
+        pokemon.id = newPokemon.id
+        
+        if (pokemon.moves.length > 0) {
+          const startIndex = newPokemon.levelUpMoves.findIndex((move) => {
+            return move.level >= pokemon.level
+          })
+          
+          pokemon.moves = newPokemon.levelUpMoves.slice(startIndex, 4).map((move) => {
+            return move.moveId
+          })
+        }
+      })
+      
+      // Update the Rival's third stage starters
+      
+      newPokemon = pokemonMap[newPokemon.evolutions?.[0]?.pokemonId ?? newPokemon.id]
+      
+      rivalPokemon.filter((pokemon) => {
+        return locationId === "LEFT" && pokemon.id === "TYPHLOSION"
+          || locationId === "MIDDLE" && pokemon.id === "FERALIGATR"
+          || locationId === "RIGHT" && pokemon.id === "MEGANIUM"
+      }).forEach((pokemon) => {
+        pokemon.id = newPokemon.id
+        
+        if (pokemon.moves.length > 0) {
+          const startIndex = newPokemon.levelUpMoves.findIndex((move) => {
+            return move.level >= pokemon.level
+          })
+          
+          pokemon.moves = newPokemon.levelUpMoves.slice(startIndex, 4).map((move) => {
+            return move.moveId
+          })
+        }
+      })
+    })
+  }
   
   // Random Event Pokemon
   
@@ -958,6 +1040,12 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     )
   
     hunks = [...hunks, ...pokemonEvolutionsAndAttacksPatch.hunks]
+    
+    updatedTrainers.forEach((trainer) => {
+      trainer.pokemon.forEach((pokemon) => {
+        pokemon.moves = []
+      })
+    })
   }
   
   // Pokemon Info
@@ -1371,6 +1459,86 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   // Trainers
   
   const trainerSettings = settings.TRAINERS
+  
+  if (trainerSettings.RANDOMIZE_POKEMON) {
+    const randomTeamsSettings = trainerSettings.RANDOMIZE_POKEMON
+    
+    updatedTrainers.forEach((trainer) => {
+      const typeFilter = randomTeamsSettings.THEMED_TEAMS ? pokemonTypeIds[randomInt(0, pokemonTypeIds.length - 1)] : undefined
+      const nonBannedAndTypeFilteredPokemon = (Object.values(pokemonMap) as Pokemon[]).filter((pokemon) => {
+        return !randomTeamsSettings.BAN.includes(pokemon.id) && (isNullish(typeFilter) || pokemon.types.includes(typeFilter))
+      })
+      
+      trainer.pokemon.forEach((pokemon, index) => {
+        const availablePokemon = randomTeamsSettings.FORCE_FULLY_EVOLVED && pokemon.level >= randomTeamsSettings.FORCE_FULLY_EVOLVED.THRESHOLD ? nonBannedAndTypeFilteredPokemon.filter((pokemon) => {
+          return isNullish(pokemon.evolutions)
+        }) : nonBannedAndTypeFilteredPokemon
+        
+        if (trainerGroupsMap[trainer.groupId].classId !== "RIVAL" || !pokemonSettings.STARTERS.RIVAL_SYNC || index !== trainer.pokemon.length - 1) {
+          pokemon.id = availablePokemon[randomInt(0, availablePokemon.length - 1)].id
+        }
+        
+        pokemon.moves = []
+      })
+    })
+  }
+  
+  const trainersPatch = Patch.fromYAML(
+    romInfo,
+    "trainers.yml",
+    {
+      trainerGroups: trainerGroupIds.map((groupId) => {
+        return {
+          path: "trainerGroup.yml",
+          extraIncludes: {
+            trainers: updatedTrainers.filter((trainer) => {
+              return trainer.groupId === groupId
+            }).map((trainer) => {
+              const hasItems = trainer.pokemon.reduce((result, pokemon) => {
+                return result || isNotNullish(pokemon.itemId)
+              }, false)
+              
+              const hasMoves = trainer.pokemon.reduce((result, pokemon) => {
+                return result || pokemon.moves.length > 0
+              }, false)
+              
+              let trainerType = 0
+              
+              if (hasItems && hasMoves) {
+                trainerType = 3
+              } else if (hasMoves) {
+                trainerType = 2
+              } else if (hasItems) {
+                trainerType = 1
+              }
+              
+              return {
+                path: "trainerNameAndPokemon.yml",
+                extraIncludes: {},
+                extraValues: {
+                  name: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${trainer.name}@`)),
+                  trainerType: hexStringFrom([trainerType]),
+                  pokemon: hexStringFrom(compact(trainer.pokemon.flatMap((pokemon) => {
+                    return [
+                      pokemon.level,
+                      pokemonMap[pokemon.id].numericId,
+                      hasItems ? isNotNullish(pokemon.itemId) ? itemsMap[pokemon.itemId].numericId : 0 : null,
+                      hasMoves ? [...pokemon.moves.map((moveId) => {
+                        return movesMap[moveId].numericId
+                      }), ...Array(4 - pokemon.moves.length).fill(0)] : null,
+                    ].flat()
+                  }))),
+                },
+              }
+            }),
+          },
+          extraValues: {},
+        }
+      }),
+    }
+  )
+  
+  hunks = [...hunks, ...trainersPatch.hunks]
   
   if (trainerSettings.MOVEMENT) {
     const movementSettings = trainerSettings.MOVEMENT
