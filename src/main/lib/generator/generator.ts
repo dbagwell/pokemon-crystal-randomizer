@@ -67,6 +67,14 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   
   const updatedTrainers = JSON.parse(JSON.stringify(trainers)) as Trainer[]
   
+  const hasPreEvolution = (pokemon: Pokemon) => {
+    return Object.values(pokemonMap).flatMap((pokemon) => {
+      return pokemon.evolutions?.map((evolution) => {
+        return evolution.pokemonId
+      }) ?? []
+    }).includes(pokemon.id)
+  }
+  
   // Pokemon
   
   const pokemonSettings = settings.POKEMON
@@ -97,14 +105,6 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         return assignedStarterId === pokemon.id
       }))
     }
-      
-    const matchesStage = (pokemon: Pokemon) => {
-      return !Object.values(pokemonMap).flatMap((pokemon) => {
-        return pokemon.evolutions?.map((evolution) => {
-          return evolution.pokemonId
-        }) ?? []
-      }).includes(pokemon.id)
-    }
     
     starterLocationIds.forEach((locationId) => {
       if (isNotNullish(assignedStarters[locationId])) {
@@ -129,7 +129,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         return !isBanned(pokemon)
           && (!randomStartersSettings.UNIQUE || !isAssigned(pokemon))
           && (!randomStartersSettings.MATCH_TYPE || matchesType(pokemon))
-          && (!randomStartersSettings.MATCH_STAGE || matchesStage(pokemon))
+          && (!randomStartersSettings.MATCH_STAGE || !hasPreEvolution(pokemon))
           && (!randomStartersSettings.MATCH_EVOLUTIONS || matchesEvoltions(pokemon))
           && (!randomStartersSettings.MATCH_SIMILAR_BST || baseStatDifference(pokemon) <= randomStartersSettings.MATCH_SIMILAR_BST.THRESHOLD)
       })
@@ -880,7 +880,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       pokemonMap[trade.offerPokemonId].numericId,
     ])
   }
-    
+  
   const tradesPatch = Patch.fromYAML(
     romInfo,
     "trades.yml",
@@ -901,6 +901,55 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   // Pokemon Data
   
   const updatedPokemonDataMap: IdMap<PokemonId, Pokemon> = JSON.parse(JSON.stringify(pokemonMap))
+  
+  // Evolutions
+  
+  Object.values(updatedPokemonDataMap).forEach((pokemon) => {
+    pokemon.evolutions?.forEach((evolution) => {
+      if (isNotNullish(pokemonSettings.CHANGE_TRADE_EVOLUTION_METHODS) && evolution.method.typeId === "TRADE") {
+        if (pokemon.id === "SLOWPOKE") {
+          evolution.method = {
+            typeId: "ITEM",
+            item: "WATER_STONE",
+          }
+        } else if (!hasPreEvolution(pokemon)) {
+          evolution.method = {
+            typeId: "LEVEL",
+            level: pokemonSettings.CHANGE_TRADE_EVOLUTION_METHODS.FIRST_EVO_LEVEL,
+          }
+        } else {
+          evolution.method = {
+            typeId: "LEVEL",
+            level: pokemonSettings.CHANGE_TRADE_EVOLUTION_METHODS.SECOND_EVO_LEVEL,
+          }
+        }
+      }
+      
+      if (pokemonSettings.CHANGE_TIME_EVOLUTION_METHODS && evolution.method.typeId === "HAPPINESS") {
+        if (evolution.method.conditionId === "DAY") {
+          evolution.method = {
+            typeId: "ITEM",
+            item: "SUN_STONE",
+          }
+        } else if (evolution.method.conditionId === "NIGHT") {
+          evolution.method = {
+            typeId: "ITEM",
+            item: "MOON_STONE",
+          }
+        }
+      }
+      
+      if (isNotNullish(pokemonSettings.DECREASE_HIGH_EVOLUTION_LEVELS) && evolution.method.typeId === "LEVEL") {
+        if (evolution.method.level > pokemonSettings.DECREASE_HIGH_EVOLUTION_LEVELS.FIRST_EVO_THRESHOLD && !hasPreEvolution(pokemon)) {
+          evolution.method.level = pokemonSettings.DECREASE_HIGH_EVOLUTION_LEVELS.FIRST_EVO_THRESHOLD
+        } else if (evolution.method.level > pokemonSettings.DECREASE_HIGH_EVOLUTION_LEVELS.SECOND_EVO_THRESHOLD && hasPreEvolution(pokemon)) {
+          evolution.method.level = pokemonSettings.DECREASE_HIGH_EVOLUTION_LEVELS.SECOND_EVO_THRESHOLD
+        }
+      }
+    })
+  })
+  
+  hunks = [...hunks, new DataHunk(ROMOffset.fromBankAddress(16, 0x6287), [pokemonSettings.HAPPINESS_EVOLUTION_REQUIREMENT])]
   
   // Random Level Up Moves
   
