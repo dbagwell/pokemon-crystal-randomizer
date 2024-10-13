@@ -3,6 +3,10 @@ import { isNullish, isNumber } from "@utils"
 import nearley from "nearley"
 
 export const parseTokens = (value: string): Token[] => {
+  if (value === "") {
+    return []
+  }
+  
   const parser = new nearley.Parser(nearley.Grammar.fromCompiled(dataFormatGrammar))
   parser.feed(value)
   return tokensFrom(parser.results[0])

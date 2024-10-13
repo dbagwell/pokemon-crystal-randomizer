@@ -1,6 +1,6 @@
 description: "Changes the data for the trainer names and pokemon."
 changes:
-- description: "Changes the slot encounter rates on land and in the water."
+- description: "Changes the data for the trainer names and pokemon."
   locations:
   - bank: 14
     address: 0x5999
