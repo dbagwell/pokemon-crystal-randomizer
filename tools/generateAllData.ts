@@ -1,6 +1,7 @@
 import "tools/generateEncounterData.ts"
 import "tools/generateEventFlagData.ts"
 import "tools/generateMapData.ts"
+import "tools/generateMartData.ts"
 import "tools/generateObjectEventData.ts"
 import "tools/generateOddEggData.ts"
 import "tools/generateOverworldMovementBehaviourData.ts"
