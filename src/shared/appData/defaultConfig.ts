@@ -198,6 +198,24 @@ export const defaultConfig = () => {
                 type: "ToggleInput" as const,
                 value: false,
               },
+              FORCE_FULLY_EVOLVED: {
+                label: "Force Fully Evolved Below Level",
+                description: "Makes it so the wild Pokémon below a certain level threshold (inclusive) are always fully evolved.",
+                type: "FormSection" as const,
+                layout: "vertical" as const,
+                hasToggle: true as const,
+                toggleValue: false,
+                subElementConfigs: {
+                  THRESHOLD: {
+                    label: "Threshold",
+                    type: "IntegerInput" as const,
+                    required: true as const,
+                    min: 1,
+                    max: 100,
+                    value: 9,
+                  },
+                },
+              },
               BAN: {
                 label: "Ban",
                 description: "Prevent these Pokémon from being selected by the randomizer.",
@@ -777,7 +795,7 @@ export const defaultConfig = () => {
               },
               FORCE_FULLY_EVOLVED: {
                 label: "Force Fully Evolved Over Level",
-                description: "Makes it so the over a certain level threshold (inclusive) are always fully evolved.",
+                description: "Makes it so the trainer Pokémon over a certain level threshold (inclusive) are always fully evolved.",
                 type: "FormSection" as const,
                 layout: "vertical" as const,
                 hasToggle: true as const,
@@ -788,7 +806,7 @@ export const defaultConfig = () => {
                     type: "IntegerInput" as const,
                     required: true as const,
                     min: 1,
-                    max: 99,
+                    max: 100,
                     value: 50,
                   },
                 },

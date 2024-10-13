@@ -419,64 +419,126 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   if (pokemonSettings.RANDOMIZE_WILD_ENCOUNTERS) {
     const wildEcountersSettings = pokemonSettings.RANDOMIZE_WILD_ENCOUNTERS
     
-    const nonBannedPokemonIds = () => {
-      return pokemonIds.filter((pokemonId) => {
-        return !wildEcountersSettings.BAN.includes(pokemonId)
-      })
+    const nonBannedPokemonIds = pokemonIds.filter((pokemonId) => {
+      return !wildEcountersSettings.BAN.includes(pokemonId)
+    })
+    
+    const nonBannedFullyEvolvedPokemonIds = nonBannedPokemonIds.filter((pokemonId) => {
+      return isNullish(pokemonMap[pokemonId].evolutions) || pokemonMap[pokemonId].evolutions.length < 1
+    })
+    
+    const nonBannedNotFullyEvolvedPokemonIds = nonBannedPokemonIds.filter((pokemonId) => {
+      return isNotNullish(pokemonMap[pokemonId].evolutions) && pokemonMap[pokemonId].evolutions.length > 0
+    })
+    
+    const shouldBeFullyEvolved = (encounter: Encounter): boolean => {
+      return isNotNullish(wildEcountersSettings.FORCE_FULLY_EVOLVED)
+        && (encounter.type !== "FISHING" || !encounter.isTimeGroup)
+        && (
+          encounter.type !== "CONTEST" && encounter.level <= wildEcountersSettings.FORCE_FULLY_EVOLVED.THRESHOLD
+            || encounter.type === "CONTEST" && encounter.minLevel <= wildEcountersSettings.FORCE_FULLY_EVOLVED.THRESHOLD
+        )
     }
     
-    const availablePokemonIds = {
-      unrestricted: nonBannedPokemonIds(),
-      restricted: nonBannedPokemonIds(),
-      kanto: nonBannedPokemonIds(),
-    }
+    const unrestrictedEncounters: Encounter[] = []
+    const fullyEvolvedEncounters: Encounter[] = []
     
-    compact(updatedEncountersData.map((encounter) => {
+    const balancedEncounters = [
+      {
+        fullyEvolved: [] as Encounter[],
+        others: [] as Encounter[],
+      },
+      {
+        fullyEvolved: [] as Encounter[],
+        others: [] as Encounter[],
+      },
+    ]
+    
+    updatedEncountersData.forEach((encounter) => {
       if (
         wildEcountersSettings.REMOVE_TIME_BASED_ENCOUNTERS
         && (encounter.type === "LAND" || encounter.type === "FISHING_TIME_GROUP")
         && encounter.time !== "DAY"
       ) {
-        return undefined
+        return
       }
-      
-      let typeIndex = 0
-      let regionIndex = 0
-      let availabilityGroup: keyof typeof availablePokemonIds = wildEcountersSettings.AVAILABILITY === "FULL" ? "restricted" : "unrestricted"
       
       if (wildEcountersSettings.AVAILABILITY === "SEARCHABLE" || wildEcountersSettings.AVAILABILITY === "REGIONAL") {
         if (encounter.type === "LAND" && !encounter.isSwarm || encounter.type === "WATER") {
-          if (wildEcountersSettings.AVAILABILITY === "REGIONAL" && gameMapsMap[encounter.mapId].encounterRegion === "KANTO") {
-            regionIndex = updatedEncountersData.length
-            availabilityGroup = "kanto"
+          const index = wildEcountersSettings.AVAILABILITY === "REGIONAL" && gameMapsMap[encounter.mapId].encounterRegion === "KANTO" ? 1 : 0
+          
+          if (shouldBeFullyEvolved(encounter)) {
+            balancedEncounters[index].fullyEvolved.push(encounter)
           } else {
-            availabilityGroup = "restricted"
+            balancedEncounters[index].others.push(encounter)
           }
-        } else {
-          typeIndex = updatedEncountersData.length * 2
+          
+          return
         }
       }
       
-      return {
-        sortOrder: typeIndex + regionIndex + randomInt(0, updatedEncountersData.length - 1),
-        availabilityGroup: availabilityGroup,
-        encounter: encounter,
+      if (shouldBeFullyEvolved(encounter)) {
+        fullyEvolvedEncounters.push(encounter)
+      } else {
+        unrestrictedEncounters.push(encounter)
       }
-    })).toSorted((info1, info2) => {
-      return info1.sortOrder - info2.sortOrder
-    }).forEach((info) => {
-      if (info.encounter.type !== "FISHING" || !info.encounter.isTimeGroup) {
-        const choices = availablePokemonIds[info.availabilityGroup] ?? nonBannedPokemonIds
-        const index = randomInt(0, choices.length - 1)
-        info.encounter.pokemonId = choices[index]
+    })
+    
+    const balancedEncounterChoices = balancedEncounters.map((group) => {
+      const numberOfSharedSets = Math.floor(group.fullyEvolved.length / nonBannedFullyEvolvedPokemonIds.length)
+      
+      const choices = (totalNumber: number, partialSet: PokemonId[], carryOverSet: PokemonId[]) => {
+        const choices = Array(numberOfSharedSets).fill(partialSet).flat()
+        let possibleRemainingChoices = carryOverSet
         
-        if (info.availabilityGroup !== "unrestricted") {
-          availablePokemonIds[info.availabilityGroup].splice(index, 1)
-          if (availablePokemonIds[info.availabilityGroup].length < 1) {
-            availablePokemonIds[info.availabilityGroup] = nonBannedPokemonIds()
+        while (choices.length < totalNumber) {
+          const index = totalNumber - choices.length < possibleRemainingChoices.length ? randomInt(0, possibleRemainingChoices.length - 1) : 0
+          choices.push(possibleRemainingChoices[index])
+          possibleRemainingChoices.splice(index, 1)
+          
+          if (possibleRemainingChoices.length < 1) {
+            possibleRemainingChoices = nonBannedPokemonIds.map((pokemonId) => { return pokemonId })
           }
         }
+        
+        return choices
       }
+      
+      const carryOverSet = nonBannedFullyEvolvedPokemonIds.map((pokemonId) => { return pokemonId })
+      
+      return {
+        fullyEvolved: choices(
+          group.fullyEvolved.length,
+          nonBannedFullyEvolvedPokemonIds,
+          carryOverSet,
+        ),
+        others: choices(
+          group.others.length,
+          nonBannedNotFullyEvolvedPokemonIds,
+          [...carryOverSet, ...nonBannedNotFullyEvolvedPokemonIds],
+        ),
+      }
+    })
+    
+    const randomizeEcounters = (encounters: Encounter[], choices: PokemonId[], removeChoiceOnSelection: boolean) => {
+      encounters.forEach((encounter) => {
+        if (encounter.type !== "FISHING" || !encounter.isTimeGroup) {
+          const index = randomInt(0, choices.length - 1)
+          encounter.pokemonId = choices[index]
+          
+          if (removeChoiceOnSelection) {
+            choices.splice(index, 1)
+          }
+        }
+      })
+    }
+    
+    randomizeEcounters(unrestrictedEncounters, nonBannedPokemonIds, false)
+    randomizeEcounters(fullyEvolvedEncounters, nonBannedFullyEvolvedPokemonIds, false)
+    
+    balancedEncounters.forEach((group, index) => {
+      randomizeEcounters(group.fullyEvolved, balancedEncounterChoices[index].fullyEvolved, true)
+      randomizeEcounters(group.others, balancedEncounterChoices[index].others, true)
     })
     
     if (wildEcountersSettings.REMOVE_TIME_BASED_ENCOUNTERS) {

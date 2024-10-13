@@ -7,12 +7,12 @@ export const wildEncounterAvailabilityOptions = [
   {
     id: "FULL" as const,
     label: "Full",
-    description: "All species of Pokémon that aren't banned are guaranteed to exist as at least one wild encounter.",
+    description: "All species of Pokémon that aren't banned are guaranteed to exist as at least one wild encounter, unless too many slots are forced to be fully evolved.",
   },
   {
     id: "SEARCHABLE" as const,
     label: "Pokédex Searchable",
-    description: "All species of Pokémon that aren't banned are guaranteed to exist as at least one wild encounter that is visible in the Pokédex (in the tall grass, in caves, or on the water).",
+    description: "All species of Pokémon that aren't banned are guaranteed to exist as at least one wild encounter that is visible in the Pokédex (in the tall grass, in caves, or on the water), unless too many slots are forced to be fully evolved.",
   },
   {
     id: "REGIONAL" as const,
