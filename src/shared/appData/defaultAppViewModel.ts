@@ -1,0 +1,123 @@
+import { createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputViewModel, createSelectorViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createTabViewModel } from "@shared/types/viewModels"
+
+export const defaultAppViewModel = () => {
+  return {
+    tabViewModels: [
+      createTabViewModel({
+        id: "POKEMON" as const,
+        name: "Pokémon",
+        subViewModels: [
+          createConfigurableToggleViewModel({
+            id: "CHANGE_STARTERS" as const,
+            name: "Change Starters",
+            description: "Change the starter Pokémon choices offered by Prof. Elm at the start of the game.",
+            isOn: false,
+            subViewModels: [
+              createSelectorViewModel({
+                selectedOptionId: "RANDOM",
+                id: "METHOD" as const,
+                options: [
+                  createConfigurableSelectorOption({
+                    id: "RANDOM" as const,
+                    name: "Random",
+                    description: "Change the starter Pokémon to random ones.",
+                    viewModels: [
+                      createSimpleToggleViewModel({
+                        id: "UNIQUE" as const,
+                        name: "Unique",
+                        description: "Make sure all three chosen starter Pokémon are different.",
+                        isOn: false,
+                      }),
+                      createSimpleToggleViewModel({
+                        id: "MATCH_TYPE" as const,
+                        name: "Match Type",
+                        description: "Make sure each chosen starter Pokémon shares a type with the Pokémon it's replacing.",
+                        isOn: false,
+                      }),
+                      createSimpleToggleViewModel({
+                        id: "MATCH_STAGE" as const,
+                        name: "Match Stage",
+                        description: "Make sure each chosen starter Pokémon doesn't have any pre-evolutions.",
+                        isOn: false,
+                      }),
+                      createSimpleToggleViewModel({
+                        id: "MATCH_EVOLUTIONS" as const,
+                        name: "Match Evolutions",
+                        description: "Make sure each chosen starter Pokémon can evolve twice.",
+                        isOn: false,
+                      }),
+                      createConfigurableToggleViewModel({
+                        id: "MATCH_SIMILAR_BST" as const,
+                        name: "Match Similar BST",
+                        description: "Make sure each chosen starter Pokémon's Base Stat Total is within a specified threshold of the Pokémon it's replacing.",
+                        isOn: false,
+                        subViewModels: [
+                          createIntegerInputViewModel({
+                            id: "THRESHOLD" as const,
+                            name: "Threshold",
+                            isRequired: true as const,
+                            min: 0,
+                            max: 371,
+                            value: 50,
+                          }),
+                        ] as const,
+                      }),
+                    ] as const,
+                  }),
+                  createSimpleSelectorOption({
+                    id: "CUSTOM" as const,
+                    name: "Custom",
+                    description: "Set a specific Pokémon for each starter.",
+                  }),
+                ] as const,
+              }),
+              createSimpleToggleViewModel({
+                id: "CHANGE_RIVALS_STARTER" as const,
+                name: "Also Change Rival's Starter",
+                description: "Change the Pokémon on the Rival's Pokémon teams to match the Pokémon that appears to be stolen from Prof. Elm's Lab.",
+                isOn: false,
+              }),
+            ] as const,
+          }),
+        ] as const,
+      }),
+      createTabViewModel({
+        id: "POKEMON_PROPERTIES" as const,
+        name: "Pokémon Properties",
+        subViewModels: [
+          {
+            type: "TOGGLE" as const,
+            id: "INCREASE_POKEMON_CATCH_RATES" as const,
+            name: "Increase Pokémon Catch Rates",
+            description: "Makes it more likely for Pokémon to be caught. "
+             + "Increases each species' catch rate by a percentage of the difference between its vanilla catch rate and the max. "
+             + "At 100%, all Pokémon are as likely to be caught as Rattata.",
+            isOn: false,
+            subViewModels: [
+              createIntegerInputViewModel({
+                id: "PERCENTAGE" as const,
+                name: "Percentage",
+                isRequired: true as const,
+                min: 0,
+                max: 100,
+                value: 0,
+              }),
+            ] as const,
+          },
+        ] as const,
+      }),
+      createTabViewModel({
+        id: "OTHER" as const,
+        name: "Other",
+        subViewModels: [
+          createSimpleToggleViewModel({
+            id: "BIKE_INDOORS" as const,
+            name: "Bike Indoors",
+            description: "Allows the player to use the bike inside all buildings.",
+            isOn: false,
+          }),
+        ] as const,
+      }),
+    ],
+  }
+}
