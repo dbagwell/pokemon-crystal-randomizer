@@ -1,6 +1,6 @@
 import type { defaultAppViewModel } from "@shared/appData/defaultAppViewModel"
 
-// Integer Input View Models
+// Integer Input View Model
 
 export type IntegerInputViewModel = ReturnType<typeof createIntegerInputViewModel>
 export const createIntegerInputViewModel = <IdType extends string, IsRequiredType extends boolean>(params: {
@@ -18,11 +18,30 @@ export const createIntegerInputViewModel = <IdType extends string, IsRequiredTyp
   }
 }
 
+// Text Input View Model
+
+export type TextInputViewModel = ReturnType<typeof createTextInputViewModel>
+export const createTextInputViewModel = <IdType extends string, IsRequiredType extends boolean>(params: {
+  id: IdType
+  name?: string
+  description?: string
+  maxCharacters?: number
+  isRequired: IsRequiredType
+  value: IsRequiredType extends true ? string : string | undefined
+}) => {
+  return {
+    ...params,
+    type: "TEXT_INPUT" as const,
+  }
+}
+
 // Selector View Model
 
 export type SelectorViewModel = ReturnType<typeof createSelectorViewModel>
 export const createSelectorViewModel = <IdType extends string, SelectedOptionIdType extends OptionType["id"], OptionType extends SelectorOption>(params: {
   id: IdType
+  name?: string
+  description?: string
   selectedOptionId: SelectedOptionIdType
   options: OptionType[]
 }) => {
@@ -46,11 +65,11 @@ export const createSimpleSelectorOption = <IdType extends string>(params: {
 }
 
 export type ConfigurableSelectorOption = ReturnType<typeof createConfigurableSelectorOption>
-export const createConfigurableSelectorOption = <IdType extends string, ViewModelType extends ToggleViewModel>(params: {
+export const createConfigurableSelectorOption = <IdType extends string, ViewModelArrayType extends InputViewModelubViewModelArray>(params: {
   id: IdType,
   name: string,
   description?: string,
-  viewModels: ViewModelType[],
+  viewModels: ViewModelArrayType,
 }) => {
   return params
 }
@@ -73,7 +92,7 @@ export const createSimpleToggleViewModel = <IdType extends string>(params: {
 }
 
 export type ConfigurableToggleViewModel = ReturnType<typeof createConfigurableToggleViewModel>
-export const createConfigurableToggleViewModel = <IdType extends string, SubViewModelsType extends ToggleSubViewModelArray>(params: {
+export const createConfigurableToggleViewModel = <IdType extends string, SubViewModelsType extends InputViewModelubViewModelArray>(params: {
   id: IdType
   name: string
   description?: string
@@ -86,10 +105,10 @@ export const createConfigurableToggleViewModel = <IdType extends string, SubView
   }
 }
 
-// Toggle Sub View Models
+// Input View Models
 
-export type ToggleSubViewModel = IntegerInputViewModel | SelectorViewModel | ToggleViewModel
-type ToggleSubViewModelArray = ToggleSubViewModel[] | IntegerInputViewModel[] // Workaround to suppress circular type reference error
+export type InputViewModel = IntegerInputViewModel | TextInputViewModel | SelectorViewModel | ToggleViewModel
+type InputViewModelubViewModelArray = InputViewModel[] | [] // Workaround to suppress circular type reference error
 
 // Tab View Model
 

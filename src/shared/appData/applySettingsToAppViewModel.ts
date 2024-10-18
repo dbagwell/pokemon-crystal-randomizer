@@ -1,4 +1,4 @@
-import type { AppViewModel, SelectorViewModel, ToggleViewModel } from "@shared/types/viewModels"
+import type { AppViewModel, InputViewModel, IntegerInputViewModel, SelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
 import { isBoolean, isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
 
 export const applySettingsToAppViewModel = (settings: any, appViewModel: AppViewModel, warnings: string[]) => {
@@ -66,37 +66,61 @@ const applySettingsToToggleViewModel = (settings: any, toggleViewModel: ToggleVi
   }
     
   toggleViewModel.subViewModels.forEach((subViewModel) => {
-    const subSettings = settings.SETTINGS[subViewModel.id]
-      
-    switch (subViewModel.type) {
-    case "INTEGER_INPUT": {
-      if (isNullish(subSettings)) {
-        if (subViewModel.isRequired) {
-          warnings.push(missingValueWarning(`${path}.SETTINGS.${subViewModel.id}`, "integer"))
-        } else {
-          subViewModel.value = undefined
-        }
-      } else if (isNumber(subSettings) && Number.isInteger(subSettings)) {
-        subViewModel.value = subSettings
-      } else {
-        warnings.push(invalidValueWarning(`${path}.SETTINGS.${subViewModel.id}`, "integer", subSettings))
-      }
-      break
-    }
-    case "TOGGLE": {
-      applySettingsToToggleViewModel(subSettings, subViewModel, `${path}.SETTINGS.${subViewModel.id}`, warnings)
-      break
-    }
-    case "SELECTOR": {
-      applySettingsToSelectorViewModel(subSettings, subViewModel, `${path}.SETTINGS.${subViewModel.id}`, warnings)
-      break
-    }
-    default: {
-      const unhandledCase: never = subViewModel
-      throw new Error(`Unhandled case: ${unhandledCase}`)
-    }
-    }
+    applySettingsToInputViewModel(settings.SETTINGS[subViewModel.id], subViewModel, `${path}.SETTINGS.${subViewModel.id}`, warnings)
   })
+}
+
+const applySettingsToInputViewModel = (settings: any, viewModel: InputViewModel, path: string, warnings: string[]) => {
+  switch (viewModel.type) {
+  case "INTEGER_INPUT": {
+    applySettingsToIntegerInputViewModel(settings, viewModel, path, warnings)
+    break
+  }
+  case "TEXT_INPUT": {
+    applySettingsToTextInputViewModel(settings, viewModel, path, warnings)
+    break
+  }
+  case "SELECTOR": {
+    applySettingsToSelectorViewModel(settings, viewModel, path, warnings)
+    break
+  }
+  case "TOGGLE": {
+    applySettingsToToggleViewModel(settings, viewModel, path, warnings)
+    break
+  }
+  default: {
+    const unhandledCase: never = viewModel
+    throw new Error(`Unhandled case: ${unhandledCase}`)
+  }
+  }
+}
+
+const applySettingsToIntegerInputViewModel = (settings: any, viewModel: IntegerInputViewModel, path: string, warnings: string[]) => {
+  if (isNullish(settings)) {
+    if (viewModel.isRequired) {
+      warnings.push(missingValueWarning(path, "integer"))
+    } else {
+      viewModel.value = undefined
+    }
+  } else if (isNumber(settings) && Number.isInteger(settings)) {
+    viewModel.value = settings
+  } else {
+    warnings.push(invalidValueWarning(path, "integer", settings))
+  }
+}
+
+const applySettingsToTextInputViewModel = (settings: any, viewModel: TextInputViewModel, path: string, warnings: string[]) => {
+  if (isNullish(settings)) {
+    if (viewModel.isRequired) {
+      warnings.push(missingValueWarning(path, "string"))
+    } else {
+      viewModel.value = undefined
+    }
+  } else if (isString(settings)) {
+    viewModel.value = settings
+  } else {
+    warnings.push(invalidValueWarning(path, "string", settings))
+  }
 }
 
 const applySettingsToSelectorViewModel = (settings: any, viewModel: SelectorViewModel, path: string, warnings: string[]) => {
@@ -173,7 +197,7 @@ const applySettingsToSelectorViewModel = (settings: any, viewModel: SelectorView
       })
       
       option.viewModels.forEach((viewModel) => {
-        applySettingsToToggleViewModel(settings.SETTINGS[option.id][viewModel.id], viewModel, `${path}.SETTINGS.${option.id}.${viewModel.id}`, warnings)
+        applySettingsToInputViewModel(settings.SETTINGS[option.id][viewModel.id], viewModel, `${path}.SETTINGS.${option.id}.${viewModel.id}`, warnings)
       })
     } else if (isNotNullish(settings.SETTINGS) && isNotNullish(settings.SETTINGS[option.id])) {
       warnings.push(unexpectedKeyWarning(`${path}.SETTINGS`, option.id))

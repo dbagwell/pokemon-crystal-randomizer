@@ -1,4 +1,6 @@
-import { createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputViewModel, createSelectorViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createTabViewModel } from "@shared/types/viewModels"
+import { pokemonMap } from "@shared/gameData/pokemon"
+import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
+import { createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputViewModel, createSelectorViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createTabViewModel, createTextInputViewModel } from "@shared/types/viewModels"
 
 export const defaultAppViewModel = () => {
   return {
@@ -64,10 +66,48 @@ export const defaultAppViewModel = () => {
                       }),
                     ] as const,
                   }),
-                  createSimpleSelectorOption({
+                  createConfigurableSelectorOption({
                     id: "CUSTOM" as const,
                     name: "Custom",
                     description: "Set a specific Pokémon for each starter.",
+                    viewModels: [
+                      createSelectorViewModel({
+                        id: "LEFT" as const,
+                        name: "Left",
+                        description: "The Pokémon to set as the starter in the left Poké Ball on the table in Prof. Elm's Lab.",
+                        selectedOptionId: "CYNDAQUIL",
+                        options: pokemonIds.map((pokemonId) => {
+                          return createSimpleSelectorOption({
+                            id: pokemonId,
+                            name: pokemonMap[pokemonId].name,
+                          })
+                        }),
+                      }),
+                      createSelectorViewModel({
+                        id: "MIDDLE" as const,
+                        name: "Middle",
+                        description: "The Pokémon to set as the starter in the left Poké Ball on the table in Prof. Elm's Lab.",
+                        selectedOptionId: "TOTODILE",
+                        options: pokemonIds.map((pokemonId) => {
+                          return createSimpleSelectorOption({
+                            id: pokemonId,
+                            name: pokemonMap[pokemonId].name,
+                          })
+                        }),
+                      }),
+                      createSelectorViewModel({
+                        id: "RIGHT" as const,
+                        name: "Right",
+                        description: "The Pokémon to set as the starter in the left Poké Ball on the table in Prof. Elm's Lab.",
+                        selectedOptionId: "CHIKORITA",
+                        options: pokemonIds.map((pokemonId) => {
+                          return createSimpleSelectorOption({
+                            id: pokemonId,
+                            name: pokemonMap[pokemonId].name,
+                          })
+                        }),
+                      }),
+                    ] as const,
                   }),
                 ] as const,
               }),
@@ -76,6 +116,43 @@ export const defaultAppViewModel = () => {
                 name: "Also Change Rival's Starter",
                 description: "Change the Pokémon on the Rival's Pokémon teams to match the Pokémon that appears to be stolen from Prof. Elm's Lab.",
                 isOn: false,
+              }),
+            ] as const,
+          }),
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_EVENT_POKEMON" as const,
+            name: "Randomize Event Pokémon",
+            description: "Changes the Pokémon encountered or gifted during special events to random Pokémon.",
+            isOn: false,
+            subViewModels: [
+              createSimpleToggleViewModel({
+                id: "UNIQUE" as const,
+                name: "Unique",
+                description: "Ensures all event Pokémon are different.",
+                isOn: false,
+              }),
+              createSelectorViewModel({
+                id: "ODD_EGG" as const,
+                name: "Odd Egg Variation",
+                description: "Determines how many different Pokémon the Odd Egg could hatch into.",
+                selectedOptionId: "RANDOM",
+                options: [
+                  createSimpleSelectorOption({
+                    id: "RANDOM" as const,
+                    name: "All Random",
+                    description: "All 14 options are randomized separately.",
+                  }),
+                  createSimpleSelectorOption({
+                    id: "SHINY_MATCH" as const,
+                    name: "Shiny Match",
+                    description: "The 7 shiny options will match their non-shiny counterparts.",
+                  }),
+                  createSimpleSelectorOption({
+                    id: "SAME" as const,
+                    name: "All Same",
+                    description: "All 14 options will be the same Pokémon.",
+                  }),
+                ] as const,
               }),
             ] as const,
           }),
@@ -110,6 +187,21 @@ export const defaultAppViewModel = () => {
         id: "OTHER" as const,
         name: "Other",
         subViewModels: [
+          createConfigurableToggleViewModel({
+            id: "SKIP_NAME",
+            name: "Use Preset Name",
+            description: "Skips the name selection prompt when starting a new game, "
+              + "setting the player's name to the provided value instead.",
+            isOn: false,
+            subViewModels: [
+              createTextInputViewModel({
+                id: "PLAYER_NAME",
+                maxCharacters: 7,
+                isRequired: true as const,
+                value: "KRIS",
+              }),
+            ] as const,
+          }),
           createSimpleToggleViewModel({
             id: "BIKE_INDOORS" as const,
             name: "Bike Indoors",
