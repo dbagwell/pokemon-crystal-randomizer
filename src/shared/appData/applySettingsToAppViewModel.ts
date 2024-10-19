@@ -1,5 +1,5 @@
-import type { AppViewModel, InputViewModel, IntegerInputViewModel, SelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
-import { isBoolean, isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
+import type { AppViewModel, ConfigurableMultiSelectorViewModel, InputViewModel, IntegerInputViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
+import { compact, isBoolean, isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
 
 export const applySettingsToAppViewModel = (settings: any, appViewModel: AppViewModel, warnings: string[]) => {
   if (isNullish(settings)) {
@@ -80,8 +80,16 @@ const applySettingsToInputViewModel = (settings: any, viewModel: InputViewModel,
     applySettingsToTextInputViewModel(settings, viewModel, path, warnings)
     break
   }
-  case "SELECTOR": {
-    applySettingsToSelectorViewModel(settings, viewModel, path, warnings)
+  case "SINGLE_SELECTOR": {
+    applySettingsToSingleSelectorViewModel(settings, viewModel, path, warnings)
+    break
+  }
+  case "SIMPLE_MULTI_SELECTOR": {
+    applySettingsToSimpleMultiSelectorViewModel(settings, viewModel, path, warnings)
+    break
+  }
+  case "CONFIGURABLE_MULTI_SELECTOR": {
+    applySettingsToConfigurableMultiSelectorViewModel(settings, viewModel, path, warnings)
     break
   }
   case "TOGGLE": {
@@ -123,7 +131,7 @@ const applySettingsToTextInputViewModel = (settings: any, viewModel: TextInputVi
   }
 }
 
-const applySettingsToSelectorViewModel = (settings: any, viewModel: SelectorViewModel, path: string, warnings: string[]) => {
+const applySettingsToSingleSelectorViewModel = (settings: any, viewModel: SingleSelectorViewModel, path: string, warnings: string[]) => {
   const hasConfigurableOptions = viewModel.options.find((option) => {
     return "viewModels" in option
   })
@@ -205,11 +213,61 @@ const applySettingsToSelectorViewModel = (settings: any, viewModel: SelectorView
   })
 }
 
+const applySettingsToSimpleMultiSelectorViewModel = (settings: any, viewModel: SimpleMultiSelectorViewModel, path: string, warnings: string[]) => {
+  const optionIds = viewModel.options.map((option) => { return option.id })
+  const elipsis = optionIds.length > 4 ? "..., " : ""
+  const expectedValues = `[${optionIds[0]}, ${optionIds[1]}, ${optionIds[2]}, ${elipsis}${optionIds[optionIds.length - 1]}]`
+  const expectedValueType = `one of ${expectedValues}`
+  const expectedSettingsType = `array of ${expectedValues}`
+  
+  if (Array.isArray(settings)) {
+    viewModel.selectedOptionIds = compact(settings.map((value, index) => {
+      if (isNullish(value)) {
+        return undefined
+      } else if (isString(value) && optionIds.includes(value)) {
+        return value
+      } else {
+        warnings.push(invalidValueWarning(`${path}.${index}`, expectedValueType, value))
+      }
+    }))
+  } else if (isNotNullish(settings)) {
+    warnings.push(invalidValueWarning(path, expectedSettingsType, settings))
+  }
+}
+
+const applySettingsToConfigurableMultiSelectorViewModel = (settings: any, viewModel: ConfigurableMultiSelectorViewModel, path: string, warnings: string[]) => {
+  const expectedSettingsType = "dictionary of option configurations"
+  
+  if (isNullish(settings)) {
+    return
+  } else if (!isObject(settings) || Array.isArray(settings)) {
+    warnings.push(invalidValueWarning(path, expectedSettingsType, settings))
+    return
+  }
+  
+  viewModel.selectedOptionIds = compact(Object.keys(settings).map((key) => {
+    const optionIds = viewModel.options.map((option) => { return option.id })
+    
+    if (!optionIds.includes(key)) {
+      warnings.push(unexpectedKeyWarning(path, key))
+      return undefined
+    }
+    
+    viewModel.options.find((option) => {
+      return option.id === key
+    })?.viewModels.forEach((viewModel) => {
+      applySettingsToInputViewModel(settings[key], viewModel, `${path}.${key}`, warnings)
+    })
+    
+    return key
+  }))
+}
+
 const missingValueWarning = (path: string, expectedType: string) => {
   return `Missing value at path '${path}'. Expected ${expectedType}. Using default instead.`
 }
 
-const invalidValueWarning = (path: string, expectedType: string, foundValue: string) => {
+const invalidValueWarning = (path: string, expectedType: string, foundValue: any) => {
   return `Invalid value at path '${path}'. Expected ${expectedType} but found '${foundValue}'. Using default instead.`
 }
 

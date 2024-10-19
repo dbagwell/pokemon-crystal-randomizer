@@ -37,8 +37,8 @@ export const createTextInputViewModel = <IdType extends string, IsRequiredType e
 
 // Selector View Model
 
-export type SelectorViewModel = ReturnType<typeof createSelectorViewModel>
-export const createSelectorViewModel = <IdType extends string, SelectedOptionIdType extends OptionType["id"], OptionType extends SelectorOption>(params: {
+export type SingleSelectorViewModel = ReturnType<typeof createSingleSelectorViewModel>
+export const createSingleSelectorViewModel = <IdType extends string, SelectedOptionIdType extends OptionType["id"], OptionType extends SelectorOption>(params: {
   id: IdType
   name?: string
   description?: string
@@ -47,7 +47,37 @@ export const createSelectorViewModel = <IdType extends string, SelectedOptionIdT
 }) => {
   return {
     ...params,
-    type: "SELECTOR" as const,
+    type: "SINGLE_SELECTOR" as const,
+  }
+}
+
+// Multiselect View Models
+
+export type SimpleMultiSelectorViewModel = ReturnType<typeof createSimpleMultiSelectorViewModel>
+export const createSimpleMultiSelectorViewModel = <IdType extends string, SelectedOptionIdType extends OptionType["id"], OptionType extends SimpleSelectorOption>(params: {
+  id: IdType
+  name: string
+  description?: string
+  selectedOptionIds: SelectedOptionIdType[]
+  options: OptionType[]
+}) => {
+  return {
+    ...params,
+    type: "SIMPLE_MULTI_SELECTOR" as const,
+  }
+}
+
+export type ConfigurableMultiSelectorViewModel = ReturnType<typeof createConfigurableMultiSelectorViewModel>
+export const createConfigurableMultiSelectorViewModel = <IdType extends string, SelectedOptionIdType extends OptionType["id"], OptionType extends ConfigurableSelectorOption>(params: {
+  id: IdType
+  name: string
+  description?: string
+  selectedOptionIds: SelectedOptionIdType[]
+  options: OptionType[]
+}) => {
+  return {
+    ...params,
+    type: "CONFIGURABLE_MULTI_SELECTOR" as const,
   }
 }
 
@@ -107,7 +137,7 @@ export const createConfigurableToggleViewModel = <IdType extends string, SubView
 
 // Input View Models
 
-export type InputViewModel = IntegerInputViewModel | TextInputViewModel | SelectorViewModel | ToggleViewModel
+export type InputViewModel = IntegerInputViewModel | TextInputViewModel | SingleSelectorViewModel | SimpleMultiSelectorViewModel | ConfigurableMultiSelectorViewModel | ToggleViewModel
 type InputViewModelubViewModelArray = InputViewModel[] | [] // Workaround to suppress circular type reference error
 
 // Tab View Model

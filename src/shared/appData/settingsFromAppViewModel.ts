@@ -1,10 +1,12 @@
 import type {
   AppViewModel,
+  ConfigurableMultiSelectorViewModel,
   ConfigurableSelectorOption,
   InputViewModel,
   IntegerInputViewModel,
   SelectorOption,
-  SelectorViewModel,
+  SimpleMultiSelectorViewModel,
+  SingleSelectorViewModel,
   TabViewModel,
   TextInputViewModel,
   ToggleViewModel,
@@ -36,8 +38,8 @@ const settingsFromArrayOfToggleViewModels = <ArrayType extends ToggleViewModel[]
   }) as SettingsFromArrayOfToggleViewModels<ArrayType>
 }
 
-type SettingsFromToggleViewModel<ViewModelType extends ToggleViewModel> = ViewModelType extends { subViewModels: InputViewModel[] }
-  ? {
+type SettingsFromToggleViewModel<ViewModelType extends ToggleViewModel> =
+  ViewModelType extends { subViewModels: InputViewModel[] } ? {
     VALUE: boolean
     SETTINGS: Expand<SettingsFromArrayOfInputViewModels<ViewModelType["subViewModels"]>>
   }
@@ -72,14 +74,15 @@ const settingsFromTextInputViewModel = <ViewModelType extends TextInputViewModel
   return viewModel.value as SettingsFromTextInputViewModel<ViewModelType>
 }
 
-type SettingsFromSelectorViewModel<ViewModelType extends SelectorViewModel> = keyof SettingsFromArrayOfSelectorOptions<ViewModelType["options"]> extends never
-  ? ViewModelType["options"][number]["id"]
+type SettingsFromSelectorViewModel<ViewModelType extends SingleSelectorViewModel> =
+  keyof SettingsFromArrayOfSelectorOptions<ViewModelType["options"]> extends never ? ViewModelType["options"][number]["id"]
   : {
     VALUE: ViewModelType["options"][number]["id"]
     SETTINGS: Expand<SettingsFromArrayOfSelectorOptions<ViewModelType["options"]>>
   }
-const settingsFromSelectorViewModel = <ViewModelType extends SelectorViewModel>(viewModel: ViewModelType): SettingsFromSelectorViewModel<ViewModelType> => {
-  const optionSettings = settingsFromArrayOfSelectorOptions(viewModel.options)
+const settingsFromSelectorViewModel = <ViewModelType extends SingleSelectorViewModel>(viewModel: ViewModelType): SettingsFromSelectorViewModel<ViewModelType> => {
+  const optionIds = viewModel.options.map((option) => { return option.id })
+  const optionSettings = settingsFromArrayOfSelectorOptions(viewModel.options, optionIds)
   
   if (Object.keys(optionSettings).length > 0) {
     return {
@@ -91,19 +94,30 @@ const settingsFromSelectorViewModel = <ViewModelType extends SelectorViewModel>(
   }
 }
 
+type SettingsFromSimpleMultiSelectorViewModel<ViewModelType extends SimpleMultiSelectorViewModel> = ViewModelType["options"][number]["id"][]
+const settingsFromSimpleMultiSelectorViewModel = <ViewModelType extends SimpleMultiSelectorViewModel>(viewModel: ViewModelType): SettingsFromSimpleMultiSelectorViewModel<ViewModelType> => {
+  return viewModel.selectedOptionIds as SettingsFromSimpleMultiSelectorViewModel<ViewModelType>
+}
+
+type SettingsFromConfigurableMultiSelectorViewModel<ViewModelType extends ConfigurableMultiSelectorViewModel> = Expand<Partial<SettingsFromArrayOfSelectorOptions<ViewModelType["options"]>>>
+const settingsFromConfigurableMultiSelectorViewModel = <ViewModelType extends ConfigurableMultiSelectorViewModel>(viewModel: ViewModelType): SettingsFromConfigurableMultiSelectorViewModel<ViewModelType> => {
+  const optionSettings = settingsFromArrayOfSelectorOptions(viewModel.options, viewModel.selectedOptionIds)
+  return optionSettings as SettingsFromConfigurableMultiSelectorViewModel<ViewModelType>
+}
+
 type SettingsFromArrayOfSelectorOptions<ArrayType extends SelectorOption[]> = {
   [OptionType in ArrayType[number] as OptionType extends ConfigurableSelectorOption ? OptionType["id"] : never]: SettingsFromSelectorOption<OptionType>
 }
-const settingsFromArrayOfSelectorOptions = <ArrayType extends SelectorOption[]>(options: ArrayType): SettingsFromArrayOfSelectorOptions<ArrayType> => {
+const settingsFromArrayOfSelectorOptions = <ArrayType extends SelectorOption[]>(options: ArrayType, allowedIds: ArrayType[number]["id"][]): SettingsFromArrayOfSelectorOptions<ArrayType> => {
   return reduceArrayIntoRecord(options, (result, option) => {
-    if ("viewModels" in option) {
+    if ("viewModels" in option && allowedIds.includes(option.id)) {
       result[option.id] = settingsFromSelectorOption(option) as SettingsFromSelectorOption<ArrayType[number]>
     }
   }) as SettingsFromArrayOfSelectorOptions<ArrayType>
 }
 
-type SettingsFromSelectorOption<OptionType extends SelectorOption> = OptionType extends ConfigurableSelectorOption
-  ? Expand<SettingsFromConfigurableSelectorOption<OptionType>>
+type SettingsFromSelectorOption<OptionType extends SelectorOption> =
+  OptionType extends ConfigurableSelectorOption ? Expand<SettingsFromConfigurableSelectorOption<OptionType>>
   : undefined
 const settingsFromSelectorOption = <OptionType extends SelectorOption>(option: OptionType): SettingsFromSelectorOption<OptionType> => {
   if ("viewModels" in option) {
@@ -122,28 +136,33 @@ const settingsFromConfigurableSelectorOption = <OptionType extends ConfigurableS
   }) as SettingsFromConfigurableSelectorOption<OptionType>
 }
 
-type SettingsFromInputViewModel<ViewModelType extends InputViewModel> = ViewModelType extends IntegerInputViewModel
-  ? SettingsFromIntegerInputViewModel<ViewModelType>
-  : ViewModelType extends TextInputViewModel
-    ? SettingsFromTextInputViewModel<ViewModelType>
-    : ViewModelType extends ToggleViewModel
-      ? SettingsFromToggleViewModel<ViewModelType>
-      : ViewModelType extends SelectorViewModel
-        ? Expand<SettingsFromSelectorViewModel<ViewModelType>>
-        : never
+type SettingsFromInputViewModel<ViewModelType extends InputViewModel> =
+  ViewModelType extends IntegerInputViewModel ? SettingsFromIntegerInputViewModel<ViewModelType>
+  : ViewModelType extends TextInputViewModel ? SettingsFromTextInputViewModel<ViewModelType>
+  : ViewModelType extends SingleSelectorViewModel ? Expand<SettingsFromSelectorViewModel<ViewModelType>>
+  : ViewModelType extends SimpleMultiSelectorViewModel ? Expand<SettingsFromSimpleMultiSelectorViewModel<ViewModelType>>
+  : ViewModelType extends ConfigurableMultiSelectorViewModel ? Expand<SettingsFromConfigurableMultiSelectorViewModel<ViewModelType>>
+  : ViewModelType extends ToggleViewModel ? SettingsFromToggleViewModel<ViewModelType>
+  : never
 const settingsFromInputViewModel = <SubViewModelType extends InputViewModel>(subViewModel: SubViewModelType): SettingsFromInputViewModel<SubViewModelType> => {
   switch (subViewModel.type) {
   case "INTEGER_INPUT": {
     return settingsFromIntegerInputViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
   }
-  case "TOGGLE": {
-    return settingsFromToggleViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
-  }
-  case "SELECTOR": {
-    return settingsFromSelectorViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
-  }
   case "TEXT_INPUT": {
     return settingsFromTextInputViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
+  }
+  case "SINGLE_SELECTOR": {
+    return settingsFromSelectorViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
+  }
+  case "SIMPLE_MULTI_SELECTOR": {
+    return settingsFromSimpleMultiSelectorViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
+  }
+  case "CONFIGURABLE_MULTI_SELECTOR": {
+    return settingsFromConfigurableMultiSelectorViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
+  }
+  case "TOGGLE": {
+    return settingsFromToggleViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
   }
   default: {
     const unhandledCase: never = subViewModel
