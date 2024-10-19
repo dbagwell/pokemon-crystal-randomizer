@@ -122,11 +122,11 @@ export const createSimpleToggleViewModel = <IdType extends string>(params: {
 }
 
 export type ConfigurableToggleViewModel = ReturnType<typeof createConfigurableToggleViewModel>
-export const createConfigurableToggleViewModel = <IdType extends string, SubViewModelsType extends InputViewModelArray>(params: {
+export const createConfigurableToggleViewModel = <IdType extends string, ViewModelsType extends InputViewModelArray>(params: {
   id: IdType
   name: string
   description?: string
-  subViewModels: SubViewModelsType
+  viewModels: ViewModelsType
 }) => {
   return {
     isOn: false,
@@ -143,10 +143,10 @@ type InputViewModelArray = InputViewModel[] | [] // Workaround to suppress circu
 // Tab View Model
 
 export type TabViewModel = ReturnType<typeof createTabViewModel>
-export const createTabViewModel = <SubViewModelType extends ToggleViewModel>(params: {
+export const createTabViewModel = <ViewModelType extends InputViewModel>(params: {
   id: string
   name: string
-  subViewModels: SubViewModelType[]
+  viewModels: ViewModelType[]
 }) => {
   return params
 }

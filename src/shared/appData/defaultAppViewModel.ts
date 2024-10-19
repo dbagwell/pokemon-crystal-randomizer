@@ -10,12 +10,12 @@ export const defaultAppViewModel = () => {
       createTabViewModel({
         id: "POKEMON" as const,
         name: "Pokémon",
-        subViewModels: [
+        viewModels: [
           createConfigurableToggleViewModel({
             id: "CHANGE_STARTERS" as const,
             name: "Change Starters",
             description: "Change the starter Pokémon choices offered by Prof. Elm at the start of the game.",
-            subViewModels: [
+            viewModels: [
               createSingleSelectorViewModel({
                 selectedOptionId: "RANDOM",
                 id: "METHOD" as const,
@@ -45,7 +45,7 @@ export const defaultAppViewModel = () => {
                         id: "MATCH_SIMILAR_BST" as const,
                         name: "Match Similar BST",
                         description: "Make sure each chosen starter Pokémon's Base Stat Total is within a specified threshold of the Pokémon it's replacing.",
-                        subViewModels: [
+                        viewModels: [
                           createIntegerInputViewModel({
                             id: "THRESHOLD" as const,
                             name: "Threshold",
@@ -115,7 +115,7 @@ export const defaultAppViewModel = () => {
             id: "RANDOMIZE_EVENT_POKEMON" as const,
             name: "Randomize Event Pokémon",
             description: "Changes the Pokémon encountered or gifted during special events to random Pokémon.",
-            subViewModels: [
+            viewModels: [
               createUniquePokemonSelectorViewModel(),
               createSingleSelectorViewModel({
                 id: "ODD_EGG" as const,
@@ -148,7 +148,7 @@ export const defaultAppViewModel = () => {
             name: "Randomize Random Pokémon Encounters",
             description: "Change the Pokémon that randomly encountered in the grass, on the water, "
               + "in Headbutt trees, under Rock Smash rocks and from fishing to random Pokémon.",
-            subViewModels: [
+            viewModels: [
               createSimpleToggleViewModel({
                 id: "REMOVE_TIME_BASED_ENCOUNTERS" as const,
                 name: "Remove Time Based Encounters",
@@ -198,7 +198,7 @@ export const defaultAppViewModel = () => {
             id: "RANDOMIZE_TRADES" as const,
             name: "Randomize Trades",
             description: "Randomize the Pokémon asked for and offered in the in-game trades.",
-            subViewModels: [
+            viewModels: [
               createSingleSelectorViewModel({
                 id: "METHOD" as const,
                 selectedOptionId: "BOTH",
@@ -228,7 +228,7 @@ export const defaultAppViewModel = () => {
             id: "RANDOMIZE_TRAINER_POKEMON" as const,
             name: "Randomize Trainer Pokémon",
             description: "Randomize the Pokémon used by other trainers in battle.",
-            subViewModels: [
+            viewModels: [
               createSimpleToggleViewModel({
                 id: "TYPE_THEME_TEAMS" as const,
                 name: "Type Theme Teams",
@@ -258,29 +258,23 @@ export const defaultAppViewModel = () => {
       createTabViewModel({
         id: "POKEMON_PROPERTIES" as const,
         name: "Pokémon Properties",
-        subViewModels: [
-          createConfigurableToggleViewModel({
-            id: "INCREASE_POKEMON_CATCH_RATES" as const,
+        viewModels: [
+          createIntegerInputViewModel({
+            id: "INCREASE_POKEMON_CATCH_RATES_PERCENTAGE" as const,
             name: "Increase Pokémon Catch Rates",
             description: "Makes it more likely for Pokémon to be caught. "
              + "Increases each species' catch rate by a percentage of the difference between its vanilla catch rate and the max. "
              + "At 100%, all Pokémon are as likely to be caught as Rattata.",
-            subViewModels: [
-              createIntegerInputViewModel({
-                id: "PERCENTAGE" as const,
-                name: "Percentage",
-                isRequired: true as const,
-                min: 0,
-                max: 100,
-                value: 0,
-              }),
-            ] as const,
-          }), // END INCREASE_POKEMON_CATCH_RATES
+            isRequired: true as const,
+            min: 0,
+            max: 100,
+            value: 0,
+          }),
           createConfigurableToggleViewModel({
             id: "STANDARDIZE_POKEMON_GROWTH_RATES" as const,
             name: "Standardize Pokémon Growth Rates",
             description: "Makes it so that all Pokémon require the same amount of experience for each level.",
-            subViewModels: [
+            viewModels: [
               createSingleSelectorViewModel({
                 id: "GROWTH_RATE" as const,
                 name: "Growth Rate",
@@ -321,7 +315,7 @@ export const defaultAppViewModel = () => {
             id: "DECREASE_HIGH_EVOLUTION_LEVELS" as const,
             name: "Decrease High Evolution Levels",
             description: "Change the level at which Pokémon evolve if it is higher than the specified threshold.",
-            subViewModels: [
+            viewModels: [
               createIntegerInputViewModel({
                 id: "FIRST_EVOLUTION_THRESHOLD" as const,
                 name: "Max First Evolution Level",
@@ -347,7 +341,7 @@ export const defaultAppViewModel = () => {
             name: "Change Trade Evolution Methods",
             description: "Change the Pokémon that evolve by trading to evolve by level instead "
               + "(or by Water Stone in the case of Slowpoke into Slowking).",
-            subViewModels: [
+            viewModels: [
               createIntegerInputViewModel({
                 id: "FIRST_EVOLUTION_LEVEL" as const,
                 name: "First Evolution Level",
@@ -373,32 +367,27 @@ export const defaultAppViewModel = () => {
             name: "Change Time Based Evolution Methods",
             description: "Changes Espeon and Umbreon to evolve using Sun and Moon stones respectively.",
           }),
-          createConfigurableToggleViewModel({
-            id: "CHANGE_HAPPINESS_EVOLUTION_REQUIREMENT" as const,
+          createIntegerInputViewModel({
+            id: "HAPPINESS_EVOLUTION_REQUIREMENT" as const,
             name: "Change Happiness Evolution Requirement",
             description: "Sets the minimum happiness required to trigger a happiness evolution.",
-            subViewModels: [
-              createIntegerInputViewModel({
-                id: "HAPPINESS" as const,
-                isRequired: true as const,
-                min: 0,
-                max: 255,
-                value: 0,
-              }),
-            ] as const,
+            isRequired: false as const,
+            min: 0,
+            max: 255,
+            value: undefined,
           }),
         ] as const,
       }), // END POKEMON_PROPERTIES
       createTabViewModel({
         id: "OTHER" as const,
         name: "Other",
-        subViewModels: [
+        viewModels: [
           createConfigurableToggleViewModel({
             id: "SKIP_NAME" as const,
             name: "Use Preset Name",
             description: "Skips the name selection prompt when starting a new game, "
               + "setting the player's name to the provided value instead.",
-            subViewModels: [
+            viewModels: [
               createTextInputViewModel({
                 id: "PLAYER_NAME" as const,
                 maxCharacters: 7,

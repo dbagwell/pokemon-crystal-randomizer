@@ -24,31 +24,31 @@ export const settingsFromAppViewModel = (appViewModel: AppViewModel): SettingsFr
   })) as SettingsFromAppViewModel
 }
 
-type SettingsFromTabViewModel<ViewModelType extends TabViewModel> = SettingsFromArrayOfToggleViewModels<ViewModelType["subViewModels"]>
+type SettingsFromTabViewModel<ViewModelType extends TabViewModel> = SettingsFromArrayOfToggleViewModels<ViewModelType["viewModels"]>
 const settingsFromTabViewModel = <ViewModelType extends TabViewModel>(viewModel: ViewModelType): SettingsFromTabViewModel<ViewModelType> => {
-  return settingsFromArrayOfToggleViewModels(viewModel.subViewModels) as SettingsFromTabViewModel<ViewModelType>
+  return settingsFromArrayOfToggleViewModels(viewModel.viewModels) as SettingsFromTabViewModel<ViewModelType>
 }
 
-type SettingsFromArrayOfToggleViewModels<ArrayType extends ToggleViewModel[]> = {
-  [ViewModelType in ArrayType[number] as ViewModelType["id"]]: SettingsFromToggleViewModel<ViewModelType>
+type SettingsFromArrayOfToggleViewModels<ArrayType extends InputViewModel[]> = {
+  [ViewModelType in ArrayType[number] as ViewModelType["id"]]: SettingsFromInputViewModel<ViewModelType>
 }
-const settingsFromArrayOfToggleViewModels = <ArrayType extends ToggleViewModel[]>(viewModels: ArrayType): SettingsFromArrayOfToggleViewModels<ArrayType> => {
+const settingsFromArrayOfToggleViewModels = <ArrayType extends InputViewModel[]>(viewModels: ArrayType): SettingsFromArrayOfToggleViewModels<ArrayType> => {
   return reduceArrayIntoRecord(viewModels, (result, viewModel) => {
-    result[viewModel.id] = settingsFromToggleViewModel(viewModel) as SettingsFromToggleViewModel<ArrayType[number]>
+    result[viewModel.id] = settingsFromInputViewModel(viewModel) as SettingsFromInputViewModel<ArrayType[number]>
   }) as SettingsFromArrayOfToggleViewModels<ArrayType>
 }
 
 type SettingsFromToggleViewModel<ViewModelType extends ToggleViewModel> =
-  ViewModelType extends { subViewModels: InputViewModel[] } ? {
+  ViewModelType extends { viewModels: InputViewModel[] } ? {
     VALUE: boolean
-    SETTINGS: Expand<SettingsFromArrayOfInputViewModels<ViewModelType["subViewModels"]>>
+    SETTINGS: Expand<SettingsFromArrayOfInputViewModels<ViewModelType["viewModels"]>>
   }
   : boolean
 const settingsFromToggleViewModel = <ViewModel extends ToggleViewModel>(viewModel: ViewModel): SettingsFromToggleViewModel<ViewModel> => {
-  if ("subViewModels" in viewModel) {
+  if ("viewModels" in viewModel) {
     return {
       VALUE: viewModel.isOn,
-      SETTINGS: settingsFromArrayOfInputViewModels(viewModel.subViewModels),
+      SETTINGS: settingsFromArrayOfInputViewModels(viewModel.viewModels),
     } as SettingsFromToggleViewModel<ViewModel>
   } else {
     return viewModel.isOn as SettingsFromToggleViewModel<ViewModel>
@@ -144,28 +144,28 @@ type SettingsFromInputViewModel<ViewModelType extends InputViewModel> =
   : ViewModelType extends ConfigurableMultiSelectorViewModel ? Expand<SettingsFromConfigurableMultiSelectorViewModel<ViewModelType>>
   : ViewModelType extends ToggleViewModel ? SettingsFromToggleViewModel<ViewModelType>
   : never
-const settingsFromInputViewModel = <SubViewModelType extends InputViewModel>(subViewModel: SubViewModelType): SettingsFromInputViewModel<SubViewModelType> => {
-  switch (subViewModel.type) {
+const settingsFromInputViewModel = <ViewModelType extends InputViewModel>(viewModel: ViewModelType): SettingsFromInputViewModel<ViewModelType> => {
+  switch (viewModel.type) {
   case "INTEGER_INPUT": {
-    return settingsFromIntegerInputViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
+    return settingsFromIntegerInputViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
   case "TEXT_INPUT": {
-    return settingsFromTextInputViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
+    return settingsFromTextInputViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
   case "SINGLE_SELECTOR": {
-    return settingsFromSelectorViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
+    return settingsFromSelectorViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
   case "SIMPLE_MULTI_SELECTOR": {
-    return settingsFromSimpleMultiSelectorViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
+    return settingsFromSimpleMultiSelectorViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
   case "CONFIGURABLE_MULTI_SELECTOR": {
-    return settingsFromConfigurableMultiSelectorViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
+    return settingsFromConfigurableMultiSelectorViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
   case "TOGGLE": {
-    return settingsFromToggleViewModel(subViewModel) as SettingsFromInputViewModel<SubViewModelType>
+    return settingsFromToggleViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
   default: {
-    const unhandledCase: never = subViewModel
+    const unhandledCase: never = viewModel
     throw new Error(`Unhandled case: ${unhandledCase}`)
   }
   }

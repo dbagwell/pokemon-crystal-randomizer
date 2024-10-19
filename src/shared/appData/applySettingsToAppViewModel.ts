@@ -1,73 +1,20 @@
 import type { AppViewModel, ConfigurableMultiSelectorViewModel, InputViewModel, IntegerInputViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
 import { compact, isBoolean, isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
 
-export const applySettingsToAppViewModel = (settings: any, appViewModel: AppViewModel, warnings: string[]) => {
+export const applySettingsToAppViewModel = (settings: any, viewModel: AppViewModel, warnings: string[]) => {
   if (isNullish(settings)) {
     return
   }
   
   try {
-    appViewModel.tabViewModels.forEach((tabViewModel) => {
-      tabViewModel.subViewModels.forEach((subViewModel) => {
-        applySettingsToToggleViewModel(settings[subViewModel.id], subViewModel, subViewModel.id, warnings)
+    viewModel.tabViewModels.forEach((tabViewModel) => {
+      tabViewModel.viewModels.forEach((subViewModel) => {
+        applySettingsToInputViewModel(settings[subViewModel.id], subViewModel, subViewModel.id, warnings)
       })
     })
   } catch (error) {
     throw new Error(`Unable to apply settings: ${error}`)
   }
-}
-
-const applySettingsToToggleViewModel = (settings: any, toggleViewModel: ToggleViewModel, path: string, warnings: string[]) => {
-  const expectedSettingsType = "boolean or a dictionary of with a 'VALUE' and 'SETTINGS'"
-  const hasConfigurableSettings = "subViewModels" in toggleViewModel
-  const value = isBoolean(settings) ? settings : settings.VALUE
-  
-  if (isBoolean(value)) {
-    toggleViewModel.isOn = value
-  } else if (isNullish(settings)) {
-    warnings.push(missingValueWarning(path, expectedSettingsType))
-    return
-  } else if (!hasConfigurableSettings || !isObject(settings)) {
-    warnings.push(invalidValueWarning(path, expectedSettingsType, value))
-  } else if (isNullish(settings.VALUE)) {
-    warnings.push(missingValueWarning(`${path}.VALUE`, "boolean"))
-  } else {
-    warnings.push(invalidValueWarning(`${path}.VALUE`, "boolean", value))
-  }
-  
-  if (!hasConfigurableSettings) {
-    if (isNotNullish(settings.SETTINGS)) {
-      warnings.push(unexpectedKeyWarning(path, "SETTINGS"))
-    }
-    
-    return
-  }
-  
-  if (isObject(settings)) {
-    Object.keys(settings).forEach((key) => {
-      if (key !== "VALUE" && key !== "SETTINGS") {
-        warnings.push(unexpectedKeyWarning(path, key))
-      }
-    })
-  }
-  
-  if (isObject(settings.SETTINGS)) {
-    const subViewModelIds = toggleViewModel.subViewModels.map((subViewModel) => {
-      return subViewModel.id
-    })
-    
-    Object.keys(settings.SETTINGS).find((key) => {
-      if (!subViewModelIds.includes(key)) {
-        warnings.push(unexpectedKeyWarning(`${path}.SETTINGS`, key))
-      }
-    })
-  } else if (isNotNullish(settings.SETTINGS)) {
-    warnings.push(invalidValueWarning(`${path}.SETTINGS`, "a dictionary of settings", settings.SETTINGS))
-  }
-    
-  toggleViewModel.subViewModels.forEach((subViewModel) => {
-    applySettingsToInputViewModel(settings.SETTINGS[subViewModel.id], subViewModel, `${path}.SETTINGS.${subViewModel.id}`, warnings)
-  })
 }
 
 const applySettingsToInputViewModel = (settings: any, viewModel: InputViewModel, path: string, warnings: string[]) => {
@@ -129,6 +76,59 @@ const applySettingsToTextInputViewModel = (settings: any, viewModel: TextInputVi
   } else {
     warnings.push(invalidValueWarning(path, "string", settings))
   }
+}
+
+const applySettingsToToggleViewModel = (settings: any, viewModel: ToggleViewModel, path: string, warnings: string[]) => {
+  const expectedSettingsType = "boolean or a dictionary of with a 'VALUE' and 'SETTINGS'"
+  const hasConfigurableSettings = "viewModels" in viewModel
+  const value = isBoolean(settings) ? settings : settings.VALUE
+  
+  if (isBoolean(value)) {
+    viewModel.isOn = value
+  } else if (isNullish(settings)) {
+    warnings.push(missingValueWarning(path, expectedSettingsType))
+    return
+  } else if (!hasConfigurableSettings || !isObject(settings)) {
+    warnings.push(invalidValueWarning(path, expectedSettingsType, value))
+  } else if (isNullish(settings.VALUE)) {
+    warnings.push(missingValueWarning(`${path}.VALUE`, "boolean"))
+  } else {
+    warnings.push(invalidValueWarning(`${path}.VALUE`, "boolean", value))
+  }
+  
+  if (!hasConfigurableSettings) {
+    if (isNotNullish(settings.SETTINGS)) {
+      warnings.push(unexpectedKeyWarning(path, "SETTINGS"))
+    }
+    
+    return
+  }
+  
+  if (isObject(settings)) {
+    Object.keys(settings).forEach((key) => {
+      if (key !== "VALUE" && key !== "SETTINGS") {
+        warnings.push(unexpectedKeyWarning(path, key))
+      }
+    })
+  }
+  
+  if (isObject(settings.SETTINGS)) {
+    const subViewModelIds = viewModel.viewModels.map((subViewModel) => {
+      return subViewModel.id
+    })
+    
+    Object.keys(settings.SETTINGS).find((key) => {
+      if (!subViewModelIds.includes(key)) {
+        warnings.push(unexpectedKeyWarning(`${path}.SETTINGS`, key))
+      }
+    })
+  } else if (isNotNullish(settings.SETTINGS)) {
+    warnings.push(invalidValueWarning(`${path}.SETTINGS`, "a dictionary of settings", settings.SETTINGS))
+  }
+    
+  viewModel.viewModels.forEach((subViewModel) => {
+    applySettingsToInputViewModel(settings.SETTINGS[subViewModel.id], subViewModel, `${path}.SETTINGS.${subViewModel.id}`, warnings)
+  })
 }
 
 const applySettingsToSingleSelectorViewModel = (settings: any, viewModel: SingleSelectorViewModel, path: string, warnings: string[]) => {
