@@ -63,20 +63,10 @@ export const defaultAppViewModel = () => {
                             value: 50,
                           }),
                         ] as const,
-                      }),
-                      createSimpleMultiSelectorViewModel({
-                        id: "BAN" as const,
-                        name: "Ban",
-                        selectedOptionIds: [],
-                        options: pokemonIds.map((pokemonId) => {
-                          return createSimpleSelectorOption({
-                            id: pokemonId,
-                            name: pokemonMap[pokemonId].name,
-                          })
-                        }),
-                      }),
+                      }), // END MATCH_SIMILAR_BST
+                      bannedPokemonSelector,
                     ] as const,
-                  }),
+                  }), // END RANDOM
                   createConfigurableSelectorOption({
                     id: "CUSTOM" as const,
                     name: "Custom",
@@ -93,7 +83,7 @@ export const defaultAppViewModel = () => {
                             name: pokemonMap[pokemonId].name,
                           })
                         }),
-                      }),
+                      }), // END LEFT
                       createSingleSelectorViewModel({
                         id: "MIDDLE" as const,
                         name: "Middle",
@@ -105,7 +95,7 @@ export const defaultAppViewModel = () => {
                             name: pokemonMap[pokemonId].name,
                           })
                         }),
-                      }),
+                      }), // END MIDDLE
                       createSingleSelectorViewModel({
                         id: "RIGHT" as const,
                         name: "Right",
@@ -117,9 +107,9 @@ export const defaultAppViewModel = () => {
                             name: pokemonMap[pokemonId].name,
                           })
                         }),
-                      }),
+                      }), // END RIGHT
                     ] as const,
-                  }),
+                  }), // END CUSTOM
                 ] as const,
               }),
               createSimpleToggleViewModel({
@@ -164,17 +154,76 @@ export const defaultAppViewModel = () => {
                     description: "All 14 options will be the same Pokémon.",
                   }),
                 ] as const,
-              }),
+              }), // END ODD_EGG
+              bannedPokemonSelector,
             ] as const,
-          }),
+          }), // END RANDOMIZE_EVENT_POKEMON
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_RANDOM_ENCOUNTERS" as const,
+            name: "Randomize Random Pokémon Encounters",
+            description: "Change the Pokémon that randomly encountered in the grass, on the water, "
+              + "in Headbutt trees, under Rock Smash rocks and from fishing to random Pokémon.",
+            isOn: false,
+            subViewModels: [
+              createSimpleToggleViewModel({
+                id: "REMOVE_TIME_BASED_ENCOUNTERS" as const,
+                name: "Remove Time Based Encounters",
+                description: "Makes it so that the Pokémon encountered in a specific area are the same regardless of the time of day.",
+                isOn: false,
+              }),
+              createConfigurableToggleViewModel({
+                id: "FORCE_FULLY_EVOLVED" as const,
+                name: "Force Fully Evolved Up To Level ",
+                description: "Force the randomly encountered Pokémon up to a specified level to be fully evolved.",
+                isOn: false,
+                subViewModels: [
+                  createIntegerInputViewModel({
+                    id: "MAX_LEVEL" as const,
+                    min: 1,
+                    max: 100,
+                    isRequired: true as const,
+                    value: 9,
+                  }),
+                ] as const,
+              }), // END FORCE_FULLY_EVOLVED
+              createSingleSelectorViewModel({
+                id: "AVAILABILITY" as const,
+                name: "Availability",
+                description: "Rules for determining which Pokémon are available and where they can be found.",
+                selectedOptionId: "RANDOM",
+                options: [
+                  createSimpleSelectorOption({
+                    id: "RANDOM" as const,
+                    name: "No Guarantee",
+                    description: "All random encounters are selected entirely at random. Some Pokémon might not be available as wild encounter.",
+                  }),
+                  createSimpleSelectorOption({
+                    id: "FULL" as const,
+                    name: "Full",
+                    description: "All species of Pokémon that aren't banned are guaranteed to exist as at least one wild encounter, unless too many slots are forced to be fully evolved.",
+                  }),
+                  createSimpleSelectorOption({
+                    id: "SEARCHABLE" as const,
+                    name: "Pokédex Searchable",
+                    description: "All species of Pokémon that aren't banned are guaranteed to exist as at least one wild encounter that is visible in the Pokédex (in the tall grass, in caves, or on the water), unless too many slots are forced to be fully evolved.",
+                  }),
+                  createSimpleSelectorOption({
+                    id: "REGIONAL" as const,
+                    name: "Regional",
+                    description: "Same as 'Pokédex Searchable', but the rules are applied to each region separately.",
+                  }),
+                ] as const,
+              }), // END AVAILABILITY
+              bannedPokemonSelector,
+            ] as const,
+          }), // END RANDOMIZE_RANDOM_ENCOUNTERS
         ] as const,
-      }),
+      }), // END POKEMON
       createTabViewModel({
         id: "POKEMON_PROPERTIES" as const,
         name: "Pokémon Properties",
         subViewModels: [
-          {
-            type: "TOGGLE" as const,
+          createConfigurableToggleViewModel({
             id: "INCREASE_POKEMON_CATCH_RATES" as const,
             name: "Increase Pokémon Catch Rates",
             description: "Makes it more likely for Pokémon to be caught. "
@@ -191,9 +240,9 @@ export const defaultAppViewModel = () => {
                 value: 0,
               }),
             ] as const,
-          },
+          }), // END INCREASE_POKEMON_CATCH_RATES
         ] as const,
-      }),
+      }), // END POKEMON_PROPERTIES
       createTabViewModel({
         id: "OTHER" as const,
         name: "Other",
@@ -212,7 +261,7 @@ export const defaultAppViewModel = () => {
                 value: "KRIS",
               }),
             ] as const,
-          }),
+          }), // END SKIP_NAME
           createSimpleToggleViewModel({
             id: "BIKE_INDOORS" as const,
             name: "Bike Indoors",
@@ -220,7 +269,20 @@ export const defaultAppViewModel = () => {
             isOn: false,
           }),
         ] as const,
-      }),
+      }), // END OTHER
     ],
   }
 }
+
+const bannedPokemonSelector = createSimpleMultiSelectorViewModel({
+  id: "BAN" as const,
+  name: "Ban",
+  description: "A list of Pokémon to exclude when choosing the random Pokémon (in addition to the default list of banned Pokémon).",
+  selectedOptionIds: [],
+  options: pokemonIds.map((pokemonId) => {
+    return createSimpleSelectorOption({
+      id: pokemonId,
+      name: pokemonMap[pokemonId].name,
+    })
+  }),
+})
