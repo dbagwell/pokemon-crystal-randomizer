@@ -188,14 +188,14 @@ export const defaultAppViewModel = () => {
         name: "Other",
         subViewModels: [
           createConfigurableToggleViewModel({
-            id: "SKIP_NAME",
+            id: "SKIP_NAME" as const,
             name: "Use Preset Name",
             description: "Skips the name selection prompt when starting a new game, "
               + "setting the player's name to the provided value instead.",
             isOn: false,
             subViewModels: [
               createTextInputViewModel({
-                id: "PLAYER_NAME",
+                id: "PLAYER_NAME" as const,
                 maxCharacters: 7,
                 isRequired: true as const,
                 value: "KRIS",

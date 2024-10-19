@@ -92,7 +92,7 @@ const settingsFromSelectorViewModel = <ViewModelType extends SelectorViewModel>(
 }
 
 type SettingsFromArrayOfSelectorOptions<ArrayType extends SelectorOption[]> = {
-  [OptionType in ArrayType[number] as OptionType extends { viewModels: ToggleViewModel[] } ? OptionType["id"] : never]: SettingsFromSelectorOption<OptionType>
+  [OptionType in ArrayType[number] as OptionType extends ConfigurableSelectorOption ? OptionType["id"] : never]: SettingsFromSelectorOption<OptionType>
 }
 const settingsFromArrayOfSelectorOptions = <ArrayType extends SelectorOption[]>(options: ArrayType): SettingsFromArrayOfSelectorOptions<ArrayType> => {
   return reduceArrayIntoRecord(options, (result, option) => {
