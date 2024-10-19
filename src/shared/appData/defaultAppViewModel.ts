@@ -13,7 +13,6 @@ export const defaultAppViewModel = () => {
             id: "CHANGE_STARTERS" as const,
             name: "Change Starters",
             description: "Change the starter Pokémon choices offered by Prof. Elm at the start of the game.",
-            isOn: false,
             subViewModels: [
               createSingleSelectorViewModel({
                 selectedOptionId: "RANDOM",
@@ -24,35 +23,26 @@ export const defaultAppViewModel = () => {
                     name: "Random",
                     description: "Change the starter Pokémon to random ones.",
                     viewModels: [
-                      createSimpleToggleViewModel({
-                        id: "UNIQUE" as const,
-                        name: "Unique",
-                        description: "Make sure all three chosen starter Pokémon are different.",
-                        isOn: false,
-                      }),
+                      createUniquePokemonSelectorViewModel(),
                       createSimpleToggleViewModel({
                         id: "MATCH_TYPE" as const,
                         name: "Match Type",
                         description: "Make sure each chosen starter Pokémon shares a type with the Pokémon it's replacing.",
-                        isOn: false,
                       }),
                       createSimpleToggleViewModel({
                         id: "MATCH_STAGE" as const,
                         name: "Match Stage",
                         description: "Make sure each chosen starter Pokémon doesn't have any pre-evolutions.",
-                        isOn: false,
                       }),
                       createSimpleToggleViewModel({
                         id: "MATCH_EVOLUTIONS" as const,
                         name: "Match Evolutions",
                         description: "Make sure each chosen starter Pokémon can evolve twice.",
-                        isOn: false,
                       }),
                       createConfigurableToggleViewModel({
                         id: "MATCH_SIMILAR_BST" as const,
                         name: "Match Similar BST",
                         description: "Make sure each chosen starter Pokémon's Base Stat Total is within a specified threshold of the Pokémon it's replacing.",
-                        isOn: false,
                         subViewModels: [
                           createIntegerInputViewModel({
                             id: "THRESHOLD" as const,
@@ -64,7 +54,7 @@ export const defaultAppViewModel = () => {
                           }),
                         ] as const,
                       }), // END MATCH_SIMILAR_BST
-                      bannedPokemonSelector,
+                      createBannedPokemonSelectorViewModel(),
                     ] as const,
                   }), // END RANDOM
                   createConfigurableSelectorOption({
@@ -116,7 +106,6 @@ export const defaultAppViewModel = () => {
                 id: "CHANGE_RIVALS_STARTER" as const,
                 name: "Also Change Rival's Starter",
                 description: "Change the Pokémon on the Rival's Pokémon teams to match the Pokémon that appears to be stolen from Prof. Elm's Lab.",
-                isOn: false,
               }),
             ] as const,
           }),
@@ -124,14 +113,8 @@ export const defaultAppViewModel = () => {
             id: "RANDOMIZE_EVENT_POKEMON" as const,
             name: "Randomize Event Pokémon",
             description: "Changes the Pokémon encountered or gifted during special events to random Pokémon.",
-            isOn: false,
             subViewModels: [
-              createSimpleToggleViewModel({
-                id: "UNIQUE" as const,
-                name: "Unique",
-                description: "Ensures all event Pokémon are different.",
-                isOn: false,
-              }),
+              createUniquePokemonSelectorViewModel(),
               createSingleSelectorViewModel({
                 id: "ODD_EGG" as const,
                 name: "Odd Egg Variation",
@@ -155,7 +138,7 @@ export const defaultAppViewModel = () => {
                   }),
                 ] as const,
               }), // END ODD_EGG
-              bannedPokemonSelector,
+              createBannedPokemonSelectorViewModel(),
             ] as const,
           }), // END RANDOMIZE_EVENT_POKEMON
           createConfigurableToggleViewModel({
@@ -163,29 +146,21 @@ export const defaultAppViewModel = () => {
             name: "Randomize Random Pokémon Encounters",
             description: "Change the Pokémon that randomly encountered in the grass, on the water, "
               + "in Headbutt trees, under Rock Smash rocks and from fishing to random Pokémon.",
-            isOn: false,
             subViewModels: [
               createSimpleToggleViewModel({
                 id: "REMOVE_TIME_BASED_ENCOUNTERS" as const,
                 name: "Remove Time Based Encounters",
                 description: "Makes it so that the Pokémon encountered in a specific area are the same regardless of the time of day.",
-                isOn: false,
               }),
-              createConfigurableToggleViewModel({
-                id: "FORCE_FULLY_EVOLVED" as const,
-                name: "Force Fully Evolved Up To Level ",
-                description: "Force the randomly encountered Pokémon up to a specified level to be fully evolved.",
-                isOn: false,
-                subViewModels: [
-                  createIntegerInputViewModel({
-                    id: "MAX_LEVEL" as const,
-                    min: 1,
-                    max: 100,
-                    isRequired: true as const,
-                    value: 9,
-                  }),
-                ] as const,
-              }), // END FORCE_FULLY_EVOLVED
+              createIntegerInputViewModel({
+                id: "FULLY_EVOLVED_LEVEL_THRESHOLD" as const,
+                name: "Fully Evolved Level Threshold",
+                description: "Ensure all selected Pokémon below the specified level are fully evolved.",
+                min: 1,
+                max: 100,
+                isRequired: false as const,
+                value: undefined,
+              }),
               createSingleSelectorViewModel({
                 id: "AVAILABILITY" as const,
                 name: "Availability",
@@ -214,9 +189,68 @@ export const defaultAppViewModel = () => {
                   }),
                 ] as const,
               }), // END AVAILABILITY
-              bannedPokemonSelector,
+              createBannedPokemonSelectorViewModel(),
             ] as const,
           }), // END RANDOMIZE_RANDOM_ENCOUNTERS
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_TRADES" as const,
+            name: "Randomize Trades",
+            description: "Randomize the Pokémon asked for and offered in the in-game trades.",
+            subViewModels: [
+              createSingleSelectorViewModel({
+                id: "METHOD" as const,
+                selectedOptionId: "BOTH",
+                options: [
+                  createSimpleSelectorOption({
+                    id: "BOTH" as const,
+                    name: "Both",
+                    description: "Randomize both the Pokémon being asked for and the Pokémon being offered in the trade.",
+                  }),
+                  createSimpleSelectorOption({
+                    id: "ASK_ONLY" as const,
+                    name: "Ask Only",
+                    description: "Randomize only the Pokémon being asked for in the trade.",
+                  }),
+                  createSimpleSelectorOption({
+                    id: "OFFER_ONLY" as const,
+                    name: "Offer Only",
+                    description: "Randomize only the Pokémon being offered in the trade.",
+                  }),
+                ] as const,
+              }), // END METHOD
+              createUniquePokemonSelectorViewModel(),
+              createBannedPokemonSelectorViewModel(),
+            ] as const,
+          }), // END RANDOMIZE_TRADES
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_TRAINER_POKEMON" as const,
+            name: "Randomize Trainer Pokémon",
+            description: "Randomize the Pokémon used by other trainers in battle.",
+            subViewModels: [
+              createSimpleToggleViewModel({
+                id: "TYPE_THEME_TEAMS" as const,
+                name: "Type Theme Teams",
+                description: "Ensure all Pokémon on each Trainer's team share at least one common type.",
+              }),
+              createIntegerInputViewModel({
+                id: "FULLY_EVOLVED_LEVEL_THRESHOLD" as const,
+                name: "Fully Evolved Level Threshold",
+                description: "Ensure all selected Pokémon above the specified level are fully evolved.",
+                min: 1,
+                max: 100,
+                isRequired: false as const,
+                value: undefined,
+              }),
+              createSimpleToggleViewModel({
+                id: "INGORE_RIVALS_STARTER" as const,
+                name: "Ignore Rival's Starter",
+                description: "Don't randomize the last Pokémon on each of the Rival's teams "
+                  + "so that it still appears as though they are keeping that Pokémon with them throughout the game. "
+                  + "And so that it doesn't get changed again if it was already changed to match the random or custom starter Pokémon.",
+              }),
+              createBannedPokemonSelectorViewModel(),
+            ] as const,
+          }), // END RANDOMIZE_TRAINER_POKEMON
         ] as const,
       }), // END POKEMON
       createTabViewModel({
@@ -229,7 +263,6 @@ export const defaultAppViewModel = () => {
             description: "Makes it more likely for Pokémon to be caught. "
              + "Increases each species' catch rate by a percentage of the difference between its vanilla catch rate and the max. "
              + "At 100%, all Pokémon are as likely to be caught as Rattata.",
-            isOn: false,
             subViewModels: [
               createIntegerInputViewModel({
                 id: "PERCENTAGE" as const,
@@ -252,7 +285,6 @@ export const defaultAppViewModel = () => {
             name: "Use Preset Name",
             description: "Skips the name selection prompt when starting a new game, "
               + "setting the player's name to the provided value instead.",
-            isOn: false,
             subViewModels: [
               createTextInputViewModel({
                 id: "PLAYER_NAME" as const,
@@ -266,7 +298,6 @@ export const defaultAppViewModel = () => {
             id: "BIKE_INDOORS" as const,
             name: "Bike Indoors",
             description: "Allows the player to use the bike inside all buildings.",
-            isOn: false,
           }),
         ] as const,
       }), // END OTHER
@@ -274,15 +305,25 @@ export const defaultAppViewModel = () => {
   }
 }
 
-const bannedPokemonSelector = createSimpleMultiSelectorViewModel({
-  id: "BAN" as const,
-  name: "Ban",
-  description: "A list of Pokémon to exclude when choosing the random Pokémon (in addition to the default list of banned Pokémon).",
-  selectedOptionIds: [],
-  options: pokemonIds.map((pokemonId) => {
-    return createSimpleSelectorOption({
-      id: pokemonId,
-      name: pokemonMap[pokemonId].name,
-    })
-  }),
-})
+const createUniquePokemonSelectorViewModel = () => {
+  return createSimpleToggleViewModel({
+    id: "UNIQUE" as const,
+    name: "Unique",
+    description: "Ensures all randomly selected Pokémon are different.",
+  })
+}
+
+const createBannedPokemonSelectorViewModel = () => {
+  return createSimpleMultiSelectorViewModel({
+    id: "BAN" as const,
+    name: "Ban",
+    description: "A list of Pokémon to exclude when choosing the random Pokémon (in addition to the default list of banned Pokémon).",
+    selectedOptionIds: [],
+    options: pokemonIds.map((pokemonId) => {
+      return createSimpleSelectorOption({
+        id: pokemonId,
+        name: pokemonMap[pokemonId].name,
+      })
+    }),
+  })
+}
