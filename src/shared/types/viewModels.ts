@@ -95,7 +95,7 @@ export const createSimpleSelectorOption = <IdType extends string>(params: {
 }
 
 export type ConfigurableSelectorOption = ReturnType<typeof createConfigurableSelectorOption>
-export const createConfigurableSelectorOption = <IdType extends string, ViewModelArrayType extends InputViewModelubViewModelArray>(params: {
+export const createConfigurableSelectorOption = <IdType extends string, ViewModelArrayType extends InputViewModelArray>(params: {
   id: IdType,
   name: string,
   description?: string,
@@ -122,7 +122,7 @@ export const createSimpleToggleViewModel = <IdType extends string>(params: {
 }
 
 export type ConfigurableToggleViewModel = ReturnType<typeof createConfigurableToggleViewModel>
-export const createConfigurableToggleViewModel = <IdType extends string, SubViewModelsType extends InputViewModelubViewModelArray>(params: {
+export const createConfigurableToggleViewModel = <IdType extends string, SubViewModelsType extends InputViewModelArray>(params: {
   id: IdType
   name: string
   description?: string
@@ -138,7 +138,7 @@ export const createConfigurableToggleViewModel = <IdType extends string, SubView
 // Input View Models
 
 export type InputViewModel = IntegerInputViewModel | TextInputViewModel | SingleSelectorViewModel | SimpleMultiSelectorViewModel | ConfigurableMultiSelectorViewModel | ToggleViewModel
-type InputViewModelubViewModelArray = InputViewModel[] | [] // Workaround to suppress circular type reference error
+type InputViewModelArray = InputViewModel[] | [] // Workaround to suppress circular type reference error
 
 // Tab View Model
 

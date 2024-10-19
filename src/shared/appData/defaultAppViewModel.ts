@@ -1,4 +1,6 @@
+import { growthRatesMap } from "@shared/gameData/growthRates"
 import { pokemonMap } from "@shared/gameData/pokemon"
+import { growthRateIds } from "@shared/types/gameDataIds/growthRates"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputViewModel, createSimpleMultiSelectorViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createSingleSelectorViewModel, createTabViewModel, createTextInputViewModel } from "@shared/types/viewModels"
 
@@ -156,9 +158,9 @@ export const defaultAppViewModel = () => {
                 id: "FULLY_EVOLVED_LEVEL_THRESHOLD" as const,
                 name: "Fully Evolved Level Threshold",
                 description: "Ensure all selected Pokémon below the specified level are fully evolved.",
+                isRequired: false as const,
                 min: 1,
                 max: 100,
-                isRequired: false as const,
                 value: undefined,
               }),
               createSingleSelectorViewModel({
@@ -236,9 +238,9 @@ export const defaultAppViewModel = () => {
                 id: "FULLY_EVOLVED_LEVEL_THRESHOLD" as const,
                 name: "Fully Evolved Level Threshold",
                 description: "Ensure all selected Pokémon above the specified level are fully evolved.",
+                isRequired: false as const,
                 min: 1,
                 max: 100,
-                isRequired: false as const,
                 value: undefined,
               }),
               createSimpleToggleViewModel({
@@ -274,6 +276,117 @@ export const defaultAppViewModel = () => {
               }),
             ] as const,
           }), // END INCREASE_POKEMON_CATCH_RATES
+          createConfigurableToggleViewModel({
+            id: "STANDARDIZE_POKEMON_GROWTH_RATES" as const,
+            name: "Standardize Pokémon Growth Rates",
+            description: "Makes it so that all Pokémon require the same amount of experience for each level.",
+            subViewModels: [
+              createSingleSelectorViewModel({
+                id: "GROWTH_RATE" as const,
+                name: "Growth Rate",
+                description: "Determines how much experience is required for each level.",
+                selectedOptionId: "MEDIUM_FAST",
+                options: growthRateIds.map((growthRateId) => {
+                  return createSimpleSelectorOption({
+                    id: growthRateId,
+                    name: growthRatesMap[growthRateId].name,
+                  })
+                }),
+              }), // END GROWTH_RATE
+              createSimpleMultiSelectorViewModel({
+                id: "EXCLUDE" as const,
+                name: "Exclude",
+                description: "A list of Pokémon that should keep their 'vanilla' growth rates.",
+                selectedOptionIds: [],
+                options: pokemonIds.map((pokemonId) => {
+                  return createSimpleSelectorOption({
+                    id: pokemonId,
+                    name: pokemonMap[pokemonId].name,
+                  })
+                }),
+              }), // END EXCLUDE
+            ] as const,
+          }), // END STANDARDIZE_POKEMON_GROWTH_RATES
+          createSimpleToggleViewModel({
+            id: "FAST_BREEDING" as const,
+            name: "Fast Breeding",
+            description: "Makes eggs guaranteed to appear after only one breeding cycle between two compatible Pokémon.",
+          }),
+          createSimpleToggleViewModel({
+            id: "FAST_HATCHING" as const,
+            name: "Fast Hatching",
+            description: "Makes all eggs hatch after only one hatch cycle.",
+          }),
+          createConfigurableToggleViewModel({
+            id: "DECREASE_HIGH_EVOLUTION_LEVELS" as const,
+            name: "Decrease High Evolution Levels",
+            description: "Change the level at which Pokémon evolve if it is higher than the specified threshold.",
+            subViewModels: [
+              createIntegerInputViewModel({
+                id: "FIRST_EVOLUTION_THRESHOLD" as const,
+                name: "Max First Evolution Level",
+                description: "The maximum evolution level for Pokémon that don't have a pre-evolution.",
+                isRequired: true as const,
+                min: 1,
+                max: 100,
+                value: 30,
+              }),
+              createIntegerInputViewModel({
+                id: "SECOND_EVOLUTION_THRESHOLD" as const,
+                name: "Max Second Evolution Level",
+                description: "The maximum evolution level for Pokémon that have already evolved.",
+                isRequired: true as const,
+                min: 1,
+                max: 100,
+                value: 40,
+              }),
+            ] as const,
+          }), // END DECREASE_HIGH_EVOLUTION_LEVELS
+          createConfigurableToggleViewModel({
+            id: "CHANGE_TRADE_EVOLUTION_METHODS" as const,
+            name: "Change Trade Evolution Methods",
+            description: "Change the Pokémon that evolve by trading to evolve by level instead "
+              + "(or by Water Stone in the case of Slowpoke into Slowking).",
+            subViewModels: [
+              createIntegerInputViewModel({
+                id: "FIRST_EVOLUTION_LEVEL" as const,
+                name: "First Evolution Level",
+                description: "The evolution level for trade evolution Pokémon that don't have a pre-evolution.",
+                isRequired: true as const,
+                min: 1,
+                max: 100,
+                value: 30,
+              }),
+              createIntegerInputViewModel({
+                id: "SECOND_EVOLUTION_LEVEL" as const,
+                name: "Second Evolution Level",
+                description: "The evolution level for trade evolution Pokémon have already evolved.",
+                isRequired: true as const,
+                min: 1,
+                max: 100,
+                value: 37,
+              }),
+            ] as const,
+          }), // END CHANGE_TRADE_EVOLUTION_METHODS
+          createSimpleToggleViewModel({
+            id: "CHANGE_TIME_BASED_EVOLUTION_METHODS" as const,
+            name: "Change Time Based Evolution Methods",
+            description: "Changes Espeon and Umbreon to evolve using Sun and Moon stones respectively.",
+          }),
+          createConfigurableToggleViewModel({
+            id: "CHANGE_HAPPINESS_EVOLUTION_REQUIREMENT" as const,
+            name: "Change Happiness Evolution Requirement",
+            description: "Sets the minimum happiness required to trigger a happiness evolution.",
+            subViewModels: [
+              createIntegerInputViewModel({
+                id: "HAPPINESS" as const,
+                isRequired: true as const,
+                min: 0,
+                max: 255,
+                value: 0,
+              }),
+            ] as const,
+          }),
         ] as const,
       }), // END POKEMON_PROPERTIES
       createTabViewModel({
