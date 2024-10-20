@@ -18,6 +18,24 @@ export const createIntegerInputViewModel = <IdType extends string, IsRequiredTyp
   }
 }
 
+// Integer Input Group View Model
+
+export type IntegerInputGroupViewModel = ReturnType<typeof createIntegerInputGroupViewModel>
+export const createIntegerInputGroupViewModel = <IdType extends string>(params: {
+  id: IdType
+  name: string
+  description?: string
+  min: number
+  max: number
+  sum?: number
+  values: number[]
+}) => {
+  return {
+    ...params,
+    type: "INTEGER_INPUT_GROUP" as const,
+  }
+}
+
 // Text Input View Model
 
 export type TextInputViewModel = ReturnType<typeof createTextInputViewModel>
@@ -139,7 +157,7 @@ export const createConfigurableToggleViewModel = <IdType extends string, ViewMod
 
 // Input View Models
 
-export type InputViewModel = IntegerInputViewModel | TextInputViewModel | SingleSelectorViewModel | SimpleMultiSelectorViewModel | ConfigurableMultiSelectorViewModel | ToggleViewModel
+export type InputViewModel = IntegerInputViewModel | IntegerInputGroupViewModel | TextInputViewModel | SingleSelectorViewModel | SimpleMultiSelectorViewModel | ConfigurableMultiSelectorViewModel | ToggleViewModel
 type InputViewModelArray = InputViewModel[] | [] // Workaround to suppress circular type reference error
 
 // Tab View Model

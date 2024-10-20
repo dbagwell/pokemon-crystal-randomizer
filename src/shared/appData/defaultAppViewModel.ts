@@ -12,7 +12,7 @@ import { itemCategoryIds } from "@shared/types/gameDataIds/itemCategories"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
-import { createConfigurableMultiSelectorViewModel, createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputViewModel, createSimpleMultiSelectorViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createSingleSelectorViewModel, createTabViewModel, createTextInputViewModel } from "@shared/types/viewModels"
+import { createConfigurableMultiSelectorViewModel, createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputGroupViewModel, createIntegerInputViewModel, createSimpleMultiSelectorViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createSingleSelectorViewModel, createTabViewModel, createTextInputViewModel } from "@shared/types/viewModels"
 
 export const defaultAppViewModel = () => {
   return {
@@ -269,6 +269,71 @@ export const defaultAppViewModel = () => {
         id: "POKEMON_PROPERTIES" as const,
         name: "Pokémon Properties",
         viewModels: [
+          createConfigurableToggleViewModel({
+            id: "CHANGE_POKEMON_ENCOUNTER_RATIOS" as const,
+            name: "Change Pokémon Encounter Ratios",
+            description: "Change the relative chances of encountering each Pokémon in a specific area and with a specific method. "
+              + "Values are the percent chance of encountering the Pokémon assigned to that slot index "
+              + "when a random encounter occurs. Each set of ratios must add up to 100.",
+            viewModels: [
+              createIntegerInputGroupViewModel({
+                id: "GRASS_AND_CAVES" as const,
+                name: "Grass and Caves",
+                min: 0,
+                max: 100,
+                sum: 100,
+                values: [30, 30, 20, 10, 5, 4, 1],
+              }),
+              createIntegerInputGroupViewModel({
+                id: "WATER" as const,
+                name: "Water",
+                min: 0,
+                max: 100,
+                sum: 100,
+                values: [60, 30, 10],
+              }),
+              createIntegerInputGroupViewModel({
+                id: "OLD_ROD" as const,
+                name: "Old Rod",
+                min: 0,
+                max: 100,
+                sum: 100,
+                values: [70, 15, 15],
+              }),
+              createIntegerInputGroupViewModel({
+                id: "GOOD_ROD" as const,
+                name: "Good Rod",
+                min: 0,
+                max: 100,
+                sum: 100,
+                values: [35, 35, 20, 10],
+              }),
+              createIntegerInputGroupViewModel({
+                id: "SUPER_ROD" as const,
+                name: "Super Rod",
+                min: 0,
+                max: 100,
+                sum: 100,
+                values: [40, 30, 20, 10],
+              }),
+              createIntegerInputGroupViewModel({
+                id: "TREE" as const,
+                name: "Headbutt Trees",
+                min: 0,
+                max: 100,
+                sum: 100,
+                values: [50, 15, 15, 10, 5, 5],
+              }),
+              createIntegerInputGroupViewModel({
+                id: "CONTEST" as const,
+                name: "Bug Catching Contest",
+                min: 0,
+                max: 100,
+                sum: 100,
+                values: [20, 20, 10, 10, 5, 5, 10, 10, 5, 5],
+              }),
+            ] as const,
+          }), // END CHANGE_POKEMON_ENCOUNTER_RATIOS
           createIntegerInputViewModel({
             id: "INCREASE_POKEMON_CATCH_RATES_PERCENTAGE" as const,
             name: "Increase Pokémon Catch Rates",

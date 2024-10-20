@@ -1,4 +1,4 @@
-import type { AppViewModel, ConfigurableMultiSelectorViewModel, InputViewModel, IntegerInputViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
+import type { AppViewModel, ConfigurableMultiSelectorViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
 import { compact, isBoolean, isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
 
 export const applySettingsToAppViewModel = (settings: any, viewModel: AppViewModel, warnings: string[]) => {
@@ -21,6 +21,10 @@ const applySettingsToInputViewModel = (settings: any, viewModel: InputViewModel,
   switch (viewModel.type) {
   case "INTEGER_INPUT": {
     applySettingsToIntegerInputViewModel(settings, viewModel, path, warnings)
+    break
+  }
+  case "INTEGER_INPUT_GROUP": {
+    applySettingsToIntegerInputGroupViewModel(settings, viewModel, path, warnings)
     break
   }
   case "TEXT_INPUT": {
@@ -61,6 +65,38 @@ const applySettingsToIntegerInputViewModel = (settings: any, viewModel: IntegerI
     viewModel.value = settings
   } else {
     warnings.push(invalidValueWarning(path, "integer", settings))
+  }
+}
+
+const applySettingsToIntegerInputGroupViewModel = (settings: any, viewModel: IntegerInputGroupViewModel, path: string, warnings: string[]) => {
+  if (isNullish(settings)) {
+    warnings.push(missingValueWarning(path, "array of integers"))
+    return
+  } else if (!Array.isArray(settings)) {
+    warnings.push(invalidValueWarning(path, "array of integers", settings))
+    return
+  }
+  
+  if (settings.length > viewModel.values.length) {
+    warnings.push(`Too many selections at path '${path}'. Removing the extras.`)
+  }
+  
+  const values = viewModel.values.map((value) => { return value })
+  
+  settings.map((value, index) => {
+    if (isNumber(value) && Number.isInteger(value)) {
+      values[index] = value
+    } else {
+      warnings.push(invalidValueWarning(`${path}.${index}`, "integer", value))
+    }
+  })
+  
+  const sum = values.reduce((result, value) => { return result + value }, 0)
+  
+  if (isNotNullish(viewModel.sum) && sum !== viewModel.sum) {
+    warnings.push(invalidValueWarning(path, `array of integers adding up to ${sum}`, settings))
+  } else {
+    viewModel.values = values
   }
 }
 
@@ -300,5 +336,5 @@ const unexpectedKeyWarning = (path: string, key: string) => {
 }
 
 const tooManySelectionsWarning = (path: string) => {
-  return `Too many selections at path '${path}. Removing the extras.`
+  return `Too many selections at path '${path}'. Removing the extras.`
 }
