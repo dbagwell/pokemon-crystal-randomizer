@@ -51,17 +51,18 @@ export const createSingleSelectorViewModel = <IdType extends string, SelectedOpt
   }
 }
 
-// Multiselect View Models
+// Multi Selector View Models
 
 export type SimpleMultiSelectorViewModel = ReturnType<typeof createSimpleMultiSelectorViewModel>
 export const createSimpleMultiSelectorViewModel = <IdType extends string, SelectedOptionIdType extends OptionType["id"], OptionType extends SimpleSelectorOption>(params: {
   id: IdType
   name: string
   description?: string
-  selectedOptionIds: SelectedOptionIdType[]
+  maxSelections?: number
   options: OptionType[]
 }) => {
   return {
+    selectedOptionIds: [] as SelectedOptionIdType[],
     ...params,
     type: "SIMPLE_MULTI_SELECTOR" as const,
   }
@@ -72,10 +73,11 @@ export const createConfigurableMultiSelectorViewModel = <IdType extends string, 
   id: IdType
   name: string
   description?: string
-  selectedOptionIds: SelectedOptionIdType[]
+  maxSelections?: number
   options: OptionType[]
 }) => {
   return {
+    selectedOptionIds: [] as SelectedOptionIdType[],
     ...params,
     type: "CONFIGURABLE_MULTI_SELECTOR" as const,
   }

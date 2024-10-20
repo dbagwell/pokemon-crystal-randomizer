@@ -221,10 +221,22 @@ const applySettingsToSimpleMultiSelectorViewModel = (settings: any, viewModel: S
   const expectedSettingsType = `array of ${expectedValues}`
   
   if (Array.isArray(settings)) {
+    let numberOfSelections = 0
     viewModel.selectedOptionIds = compact(settings.map((value, index) => {
+      if (isNotNullish(viewModel.maxSelections)) {
+        if (numberOfSelections === viewModel.maxSelections + 1) {
+          warnings.push(tooManySelectionsWarning(path))
+        }
+        
+        if (numberOfSelections >= viewModel.maxSelections) {
+          return undefined
+        }
+      }
+      
       if (isNullish(value)) {
         return undefined
       } else if (isString(value) && optionIds.includes(value)) {
+        numberOfSelections++
         return value
       } else {
         warnings.push(invalidValueWarning(`${path}.${index}`, expectedValueType, value))
@@ -236,16 +248,26 @@ const applySettingsToSimpleMultiSelectorViewModel = (settings: any, viewModel: S
 }
 
 const applySettingsToConfigurableMultiSelectorViewModel = (settings: any, viewModel: ConfigurableMultiSelectorViewModel, path: string, warnings: string[]) => {
-  const expectedSettingsType = "dictionary of option configurations"
-  
   if (isNullish(settings)) {
     return
   } else if (!isObject(settings) || Array.isArray(settings)) {
-    warnings.push(invalidValueWarning(path, expectedSettingsType, settings))
+    warnings.push(invalidValueWarning(path, "dictionary of option configurations", settings))
     return
   }
   
+  let numberOfSelections = 0
+  
   viewModel.selectedOptionIds = compact(Object.keys(settings).map((key) => {
+    if (isNotNullish(viewModel.maxSelections)) {
+      if (numberOfSelections === viewModel.maxSelections + 1) {
+        warnings.push(tooManySelectionsWarning(path))
+      }
+      
+      if (numberOfSelections >= viewModel.maxSelections) {
+        return undefined
+      }
+    }
+    
     const optionIds = viewModel.options.map((option) => { return option.id })
     
     if (!optionIds.includes(key)) {
@@ -258,6 +280,8 @@ const applySettingsToConfigurableMultiSelectorViewModel = (settings: any, viewMo
     })?.viewModels.forEach((viewModel) => {
       applySettingsToInputViewModel(settings[key], viewModel, `${path}.${key}`, warnings)
     })
+    
+    numberOfSelections++
     
     return key
   }))
@@ -273,4 +297,8 @@ const invalidValueWarning = (path: string, expectedType: string, foundValue: any
 
 const unexpectedKeyWarning = (path: string, key: string) => {
   return `Unexpected key '${key}' at path '${path}'.`
+}
+
+const tooManySelectionsWarning = (path: string) => {
+  return `Too many selections at path '${path}. Removing the extras.`
 }

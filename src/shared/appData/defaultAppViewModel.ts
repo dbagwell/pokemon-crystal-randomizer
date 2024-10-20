@@ -1,10 +1,18 @@
+import { additionalOptionsMap } from "@shared/gameData/additionalOptions"
 import { growthRatesMap } from "@shared/gameData/growthRates"
+import { itemCategoriesMap } from "@shared/gameData/itemCategories"
+import { itemsMap } from "@shared/gameData/items"
 import { movesMap } from "@shared/gameData/moves"
+import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
+import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
+import { additionalOptionIds } from "@shared/types/gameDataIds/additionalOptions"
 import { growthRateIds } from "@shared/types/gameDataIds/growthRates"
+import { itemCategoryIds } from "@shared/types/gameDataIds/itemCategories"
 import { moveIds } from "@shared/types/gameDataIds/moves"
+import { playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
-import { createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputViewModel, createSimpleMultiSelectorViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createSingleSelectorViewModel, createTabViewModel, createTextInputViewModel } from "@shared/types/viewModels"
+import { createConfigurableMultiSelectorViewModel, createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputViewModel, createSimpleMultiSelectorViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createSingleSelectorViewModel, createTabViewModel, createTextInputViewModel } from "@shared/types/viewModels"
 
 export const defaultAppViewModel = () => {
   return {
@@ -293,7 +301,6 @@ export const defaultAppViewModel = () => {
                 id: "EXCLUDE" as const,
                 name: "Exclude",
                 description: "A list of Pokémon that should keep their 'vanilla' growth rates.",
-                selectedOptionIds: [],
                 options: pokemonIds.map((pokemonId) => {
                   return createSimpleSelectorOption({
                     id: pokemonId,
@@ -487,9 +494,121 @@ export const defaultAppViewModel = () => {
         ] as const,
       }), // END MOVES
       createTabViewModel({
+        id: "ITEMS" as const,
+        name: "Items",
+        viewModels: [
+          createConfigurableToggleViewModel({
+            id: "START_WITH_ITEMS" as const,
+            name: "Start With Items",
+            description: "Add the selected items to the player's inventory when starting a new game.",
+            viewModels: itemCategoryIds.map((categoryId) => {
+              const category = itemCategoriesMap[categoryId]
+              return createConfigurableMultiSelectorViewModel({
+                id: category.id,
+                name: category.name,
+                maxSelections: category.maxSlots,
+                options: category.itemIds.map((itemId) => {
+                  return createConfigurableSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                    viewModels: [
+                      createIntegerInputViewModel({
+                        id: "AMOUNT" as const,
+                        name: "Amount",
+                        isRequired: true as const,
+                        min: 1,
+                        max: category.slotSize,
+                        value: 1,
+                      }),
+                    ] as const,
+                  })
+                }),
+              })
+            }),
+          }), // END START_WITH_ITEMS
+        ] as const,
+      }), // END ITEMS
+      createTabViewModel({
+        id: "ITEM_PROPERTIES" as const,
+        name: "Item Properties",
+        viewModels: [
+          createSimpleToggleViewModel({
+            id: "BIKE_INDOORS" as const,
+            name: "Bike Indoors",
+            description: "Allows the player to use the bike inside all buildings.",
+          }),
+          createSimpleToggleViewModel({
+            id: "RODS_ALWAYS_WORK" as const,
+            name: "Rods Always Work",
+            description: "Allows makes it so fishing rods will trigger a Pokémon encounter every time they are used.",
+          }),
+          createSimpleToggleViewModel({
+            id: "POKE_BALLS_NEVER_FAIL" as const,
+            name: "Poké Balls Never Fail",
+            description: "All Poké Balls are always guaranteed to capture the Pokémon they are use on.",
+          }),
+          createSimpleToggleViewModel({
+            id: "PREVENT_FAILED_POKE_BALL_WOBBLES" as const,
+            name: "Prevent Failed Poké Ball Wobbles",
+            description: "If a Poké Ball fails to catch a Pokémon, don't show any shake animations.",
+          }),
+        ] as const,
+      }), // END ITEM_PROPERTIES
+      createTabViewModel({
+        id: "MARTS" as const,
+        name: "Marts",
+        viewModels: [
+          createSimpleToggleViewModel({
+            id: "EARLY_CHARRGROVE_MART_POKE_BALLS" as const,
+            name: "Early Cherrygrove Poké Balls",
+            description: "Poké Balls will be available to buy in Cherrygrove City Mart "
+              + "before giving the Mystery Egg to Prof. Elm.",
+          }),
+          createSimpleToggleViewModel({
+            id: "CHERRYGROVE_MART_REPELS" as const,
+            name: "Cherrygrove Repels",
+            description: "Add Repels to the Cherrygrove City Mart.",
+          }),
+          createSimpleToggleViewModel({
+            id: "VIOLET_MART_REPELS" as const,
+            name: "Violet Repels",
+            description: "Add Repels to the Violet City Mart.",
+          }),
+          createSimpleToggleViewModel({
+            id: "BUYABLE_EVOLUTION_STONES" as const,
+            name: "Buyable Evolution Stones",
+            description: "Add Evolution Stones to the Goledenrod City Mart on the 4th floor.",
+          }),
+          createSimpleToggleViewModel({
+            id: "BUYABLE_TM12" as const,
+            name: "Buyable TM12 (Sweet Scent)",
+            description: "Add TM12 (Sweet Scent) to the Goledenrod City Mart on the 5th floor "
+              + "after obtaining the item from the lady in the gate north of Ilex Forest.",
+          }),
+        ] as const,
+      }), // END MARTS
+      createTabViewModel({
         id: "OTHER" as const,
         name: "Other",
         viewModels: [
+          createConfigurableToggleViewModel({
+            id: "SKIP_GENDER" as const,
+            name: "Use Preset Gender",
+            description: "Skips the gender selection prompt when starting a new game, "
+              + "setting the player's gender to the provided value instead.",
+            viewModels: [
+              createSingleSelectorViewModel({
+                id: "GENDER" as const,
+                selectedOptionId: "GIRL",
+                options: playerSpriteIds.map((spriteId) => {
+                  return createSimpleSelectorOption({
+                    id: spriteId,
+                    name: playerSpriteMap[spriteId].label,
+                  })
+                }),
+              }), // END GENDER
+            ] as const,
+          }), // END SKIP_GENDER
           createConfigurableToggleViewModel({
             id: "SKIP_NAME" as const,
             name: "Use Preset Name",
@@ -505,10 +624,53 @@ export const defaultAppViewModel = () => {
             ] as const,
           }), // END SKIP_NAME
           createSimpleToggleViewModel({
-            id: "BIKE_INDOORS" as const,
-            name: "Bike Indoors",
-            description: "Allows the player to use the bike inside all buildings.",
+            id: "SCALE_EXPERIENCE" as const,
+            name: "Scale Experience Gain",
+            description: "Changes the battle experience calculation to more closely match that of generations 5 and 7+, "
+              + "where the experience earned is curved up or down based on the difference in level "
+              + "between the fainted Pokémon and the Pokémon earning the experience.",
           }),
+          createConfigurableToggleViewModel({
+            id: "CHANGE_OVERWORLD_TRAINER_MOVEMENT" as const,
+            name: "Change Overworld Trainer Movement Behaviour",
+            description: "Changes the behaviour of how trainers with vision move on the overworld.",
+            viewModels: [
+              createSingleSelectorViewModel({
+                id: "MOVEMENT" as const,
+                name: "Movement",
+                description: "The movement behaviour to apply to the trainers.",
+                selectedOptionId: "ROTATE_COUNTER_CLOCKWISE",
+                options: Object.values(trainerMovementBehavioursMap).map((movement) => {
+                  return createSimpleSelectorOption({
+                    id: movement.id,
+                    name: movement.name,
+                  })
+                }),
+              }), // END MOVEMENT
+              createSimpleToggleViewModel({
+                id: "INCLUDE_STATIONARY" as const,
+                name: "Include Stationary Trainers",
+                description: "Also changes the behaviour of trainers that normally don't move.",
+              }),
+            ] as const,
+          }), // END CHANGE_OVERWORLD_TRAINER_MOVEMENT
+          createSimpleToggleViewModel({
+            id: "IMPROVE_PERFORMANCE" as const,
+            name: "Add Performance Improvements",
+            description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",
+          }),
+          createSimpleMultiSelectorViewModel({
+            id: "ADDITIONAL_OPTIONS" as const,
+            name: "Additional Options",
+            description: "Extra settings that are added to the in game options menu.",
+            options: additionalOptionIds.map((optionId) => {
+              return createSimpleSelectorOption({
+                id: optionId,
+                name: additionalOptionsMap[optionId].name,
+                description: additionalOptionsMap[optionId].description,
+              })
+            }),
+          }), // END ADDITIONAL_OPTIONS
         ] as const,
       }), // END OTHER
     ],
@@ -529,7 +691,6 @@ const createBannedPokemonSelectorViewModel = () => {
     name: "Ban",
     description: "A list of Pokémon to exclude when choosing the random Pokémon "
       + "(in addition to the default list of banned Pokémon).",
-    selectedOptionIds: [],
     options: pokemonIds.map((pokemonId) => {
       return createSimpleSelectorOption({
         id: pokemonId,
@@ -590,7 +751,6 @@ const createBannedMovesSelectorViewModel = () => {
     name: "Ban",
     description: "A list of Moves to exclude when choosing the random Moves "
       + "(in addition to the default list of banned Moves).",
-    selectedOptionIds: [],
     options: moveIds.map((moveId) => {
       return createSimpleSelectorOption({
         id: moveId,
