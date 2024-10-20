@@ -1,6 +1,8 @@
 import { growthRatesMap } from "@shared/gameData/growthRates"
+import { movesMap } from "@shared/gameData/moves"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { growthRateIds } from "@shared/types/gameDataIds/growthRates"
+import { moveIds } from "@shared/types/gameDataIds/moves"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputViewModel, createSimpleMultiSelectorViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createSingleSelectorViewModel, createTabViewModel, createTextInputViewModel } from "@shared/types/viewModels"
 
@@ -379,6 +381,112 @@ export const defaultAppViewModel = () => {
         ] as const,
       }), // END POKEMON_PROPERTIES
       createTabViewModel({
+        id: "MOVES" as const,
+        name: "Moves",
+        viewModels: [
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_LEVEL_UP_MOVES" as const,
+            name: "Randomize Level Up Moves",
+            description: "Change moves Pokémon can learn by level up to random ones.",
+            viewModels: [
+              createUniqueMovesSelectorViewModel("Ensures that each Pokémon cannot learn the same Move by level up more than once."),
+              createPreferSameTypeMovesToggleViewModel(),
+              createSimpleToggleViewModel({
+                id: "PROGRESSIVE" as const,
+                name: "Reorder Damaging Moves",
+                description: "Reorders the moves after randomization so that damaging moves with more power are learned after damaging moves with less power.",
+              }),
+              createGoodDamagingMovesToggleViewModel("that each Pokémon can learn by level up "),
+              createIntegerInputViewModel({
+                id: "LEVEL_ONE_MOVES" as const,
+                name: "Guaranteed Number of Level 1 Moves",
+                description: "Adds level 1 moves to a Pokémon's level up moves if they normally have less than the specified number.",
+                isRequired: false as const,
+                min: 1,
+                max: 4,
+                value: undefined,
+              }),
+              createBannedMovesSelectorViewModel(),
+            ] as const,
+          }), // END RANDOMIZE_LEVEL_UP_MOVES
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_TM_MOVES" as const,
+            name: "Randomize TM Moves",
+            description: "Randomize the move that each TM teaches.",
+            viewModels: [
+              createUniqueMovesSelectorViewModel(),
+              createPreferSameTypeMovesToggleViewModel(),
+              createSimpleToggleViewModel({
+                id: "KEEP_FIELD_MOVES" as const,
+                name: "Keep Field Moves",
+                description: "Don't randomize TM02 (Headbutt), TM08 (Rock Smash), TM12 (Sweet Scent) or TM28 (Dig).",
+              }),
+              createGoodDamagingMovesToggleViewModel(),
+              createBannedMovesSelectorViewModel(),
+            ] as const,
+          }), // END RANDOMIZE_TM_MOVES
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_MOVE_TUTOR_MOVES" as const,
+            name: "Randomize Move Tutor Moves",
+            description: "Randomize the move that the Move Tutor teaches.",
+            viewModels: [
+              createUniqueMovesSelectorViewModel(),
+              createPreferSameTypeMovesToggleViewModel(),
+              createGoodDamagingMovesToggleViewModel(),
+              createBannedMovesSelectorViewModel(),
+            ] as const,
+          }), // END RANDOMIZE_MOVE_TUTOR_MOVES
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_HM_COMPATABILITY" as const,
+            name: "Randomize HM Compatability",
+            description: "Randomizes which HMs each Pokémon can learn from.",
+            viewModels: [
+              createIntegerInputViewModel({
+                id: "PERCENTAGE" as const,
+                name: "Percentage",
+                description: "Set this to make all Pokémon be able to learn from that percentage of all the HMs.",
+                isRequired: false as const,
+                min: 0,
+                max: 100,
+                value: undefined,
+              }),
+            ] as const,
+          }), // END RANDOMIZE_HM_COMPATABILITY
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_TM_COMPATABILITY" as const,
+            name: "Randomize TM Compatability",
+            description: "Randomizes which TMs each Pokémon can learn from.",
+            viewModels: [
+              createIntegerInputViewModel({
+                id: "PERCENTAGE" as const,
+                name: "Percentage",
+                description: "Set this to make all Pokémon be able to learn from that percentage of all the TMs.",
+                isRequired: false as const,
+                min: 0,
+                max: 100,
+                value: undefined,
+              }),
+            ] as const,
+          }), // END RANDOMIZE_TM_COMPATABILITY
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_MOVE_TUTOR_COMPATABILITY" as const,
+            name: "Randomize Move Tutor Compatability",
+            description: "Randomizes which Move Tutor Moves each Pokémon can learn.",
+            viewModels: [
+              createIntegerInputViewModel({
+                id: "PERCENTAGE" as const,
+                name: "Percentage",
+                description: "Set this to make all Pokémon be able to learn from that percentage of all the Move Tutor Moves.",
+                isRequired: false as const,
+                min: 0,
+                max: 100,
+                value: undefined,
+              }),
+            ] as const,
+          }), // END RANDOMIZE_HM_COMPATABILITY
+        ] as const,
+      }), // END MOVES
+      createTabViewModel({
         id: "OTHER" as const,
         name: "Other",
         viewModels: [
@@ -419,12 +527,74 @@ const createBannedPokemonSelectorViewModel = () => {
   return createSimpleMultiSelectorViewModel({
     id: "BAN" as const,
     name: "Ban",
-    description: "A list of Pokémon to exclude when choosing the random Pokémon (in addition to the default list of banned Pokémon).",
+    description: "A list of Pokémon to exclude when choosing the random Pokémon "
+      + "(in addition to the default list of banned Pokémon).",
     selectedOptionIds: [],
     options: pokemonIds.map((pokemonId) => {
       return createSimpleSelectorOption({
         id: pokemonId,
         name: pokemonMap[pokemonId].name,
+      })
+    }),
+  })
+}
+
+const createUniqueMovesSelectorViewModel = (description: string = "Ensures all randomly selected Moves are different.") => {
+  return createSimpleToggleViewModel({
+    id: "UNIQUE" as const,
+    name: "Unique",
+    description: description,
+  })
+}
+
+const createPreferSameTypeMovesToggleViewModel = () => {
+  return createSimpleToggleViewModel({
+    id: "PREFER_SAME_TYPE" as const,
+    name: "Prefer Same Type",
+    description: "Only replace moves with moves of the same type, "
+      + "unless all moves of that type are banned.",
+  })
+}
+
+const createGoodDamagingMovesToggleViewModel = (distinguisher: string = "") => {
+  return createConfigurableToggleViewModel({
+    id: "GOOD_DAMAGING_MOVES" as const,
+    name: "Guarantee Percentage of Good Damaging Moves",
+    description: `Guarantees that the specified percentage of the Moves ${distinguisher}`
+      + "are damaging moves of at least the specified power, unless doing so would conflict with other settings. "
+      + "If there is a conflict, as many good moves as possible will be selected.",
+    viewModels: [
+      createIntegerInputViewModel({
+        id: "PERCENTAGE" as const,
+        name: "Percentage",
+        isRequired: true as const,
+        min: 1,
+        max: 100,
+        value: 20,
+      }),
+      createIntegerInputViewModel({
+        id: "POWER" as const,
+        name: "Power",
+        isRequired: true as const,
+        min: 1,
+        max: 250,
+        value: 60,
+      }),
+    ] as const,
+  })
+}
+
+const createBannedMovesSelectorViewModel = () => {
+  return createSimpleMultiSelectorViewModel({
+    id: "BAN" as const,
+    name: "Ban",
+    description: "A list of Moves to exclude when choosing the random Moves "
+      + "(in addition to the default list of banned Moves).",
+    selectedOptionIds: [],
+    options: moveIds.map((moveId) => {
+      return createSimpleSelectorOption({
+        id: moveId,
+        name: movesMap[moveId].name,
       })
     }),
   })
