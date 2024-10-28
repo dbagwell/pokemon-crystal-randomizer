@@ -6,6 +6,7 @@
   style:height="100%"
   style:background-color="#00000055"
   style:backdrop-filter="blur(10px)"
+  style:z-index="9999999"
 >
   <div
     style:display="flex"
