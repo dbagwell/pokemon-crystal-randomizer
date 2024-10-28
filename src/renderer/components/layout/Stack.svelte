@@ -3,7 +3,7 @@
 </div>
 
 <script lang="ts">
-  import { isNumber } from "@shared/utils"
+  import { isNotNullish, isNumber } from "@shared/utils"
   import { onMount } from "svelte"
   
   const directionMap = {
@@ -31,6 +31,10 @@
   export let minSpacing: number = 0
   export let padding: number | [number, number] | [number, number, number, number] = 0
   export let wrap = false
+  export let width: string | undefined = undefined
+  export let height: string | undefined = undefined
+  export let minWidth: string | undefined = undefined
+  export let minHeight: string | undefined = undefined
   
   let container: HTMLDivElement
   
@@ -44,6 +48,22 @@
     container.style.padding = (isNumber(padding) ? [padding] : padding).map((value) => {
       return `${value}px`
     }).join(" ")
+    
+    if (isNotNullish(width)) {
+      container.style.width = width
+    }
+    
+    if (isNotNullish(height)) {
+      container.style.height = height
+    }
+    
+    if (isNotNullish(minWidth)) {
+      container.style.minWidth = minWidth
+    }
+    
+    if (isNotNullish(minHeight)) {
+      container.style.minHeight = minHeight
+    }
   })
   
 </script>
