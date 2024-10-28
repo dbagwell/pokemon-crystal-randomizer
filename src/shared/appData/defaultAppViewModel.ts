@@ -340,10 +340,10 @@ export const defaultAppViewModel = () => {
             description: "Makes it more likely for Pokémon to be caught. "
              + "Increases each species' catch rate by a percentage of the difference between its vanilla catch rate and the max. "
              + "At 100%, all Pokémon are as likely to be caught as Rattata.",
-            isRequired: true as const,
+            isRequired: false as const,
             min: 0,
             max: 100,
-            value: 0,
+            value: undefined,
           }),
           createConfigurableToggleViewModel({
             id: "STANDARDIZE_POKEMON_GROWTH_RATES" as const,
@@ -568,27 +568,41 @@ export const defaultAppViewModel = () => {
             description: "Add the selected items to the player's inventory when starting a new game.",
             viewModels: itemCategoryIds.map((categoryId) => {
               const category = itemCategoriesMap[categoryId]
-              return createConfigurableMultiSelectorViewModel({
-                id: category.id,
-                name: category.name,
-                maxSelections: category.maxSlots,
-                options: category.itemIds.map((itemId) => {
-                  return createConfigurableSelectorOption({
-                    id: itemId,
-                    name: itemsMap[itemId].name,
-                    viewModels: [
-                      createIntegerInputViewModel({
-                        id: "AMOUNT" as const,
-                        name: "Amount",
-                        isRequired: true as const,
-                        min: 1,
-                        max: category.slotSize,
-                        value: 1,
-                      }),
-                    ] as const,
-                  })
-                }),
-              })
+              if (category.slotSize === 1) {
+                return createSimpleMultiSelectorViewModel({
+                  id: category.id,
+                  name: category.name,
+                  maxSelections: category.maxSlots,
+                  options: category.itemIds.map((itemId) => {
+                    return createSimpleSelectorOption({
+                      id: itemId,
+                      name: itemsMap[itemId].name,
+                    })
+                  }),
+                })
+              } else {
+                return createConfigurableMultiSelectorViewModel({
+                  id: category.id,
+                  name: category.name,
+                  maxSelections: category.maxSlots,
+                  options: category.itemIds.map((itemId) => {
+                    return createConfigurableSelectorOption({
+                      id: itemId,
+                      name: itemsMap[itemId].name,
+                      viewModels: [
+                        createIntegerInputViewModel({
+                          id: "AMOUNT" as const,
+                          name: "Amount",
+                          isRequired: true as const,
+                          min: 1,
+                          max: category.slotSize,
+                          value: 1,
+                        }),
+                      ] as const,
+                    })
+                  }),
+                })
+              }
             }),
           }), // END START_WITH_ITEMS
         ] as const,

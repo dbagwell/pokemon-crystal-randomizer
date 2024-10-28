@@ -53,7 +53,7 @@ export const createTextInputViewModel = <IdType extends string, IsRequiredType e
   }
 }
 
-// Selector View Model
+// Single Selector View Model
 
 export type SingleSelectorViewModel = ReturnType<typeof createSingleSelectorViewModel>
 export const createSingleSelectorViewModel = <IdType extends string, SelectedOptionIdType extends OptionType["id"], OptionType extends SelectorOption>(params: {
