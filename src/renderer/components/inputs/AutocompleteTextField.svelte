@@ -1,7 +1,8 @@
-<Textfield
+<TextField
   bind:this={textField}
-  style="min-width: 50px;"
-  label={label}
+  minWidth={50}
+  title={label}
+  type="text"
   bind:value={filter}
   on:focus={handleTextFieldEvent}
   on:blur={handleTextFieldEvent}
@@ -14,7 +15,8 @@
   style:display="none"
   style:overflow="scroll"
   style:z-index="1"
-  class="surface elevated"
+  style:box-shadow="0px 5px 5px -3px rgba(0, 0, 0, 0.3), 0px 8px 10px 1px rgba(0, 0, 0, 0.3), 0px 3px 14px 2px rgba(0, 0, 0, 0.3)"
+  style:background-color={colors.background}
 >
   <Stack
     alignment="fill"
@@ -25,7 +27,8 @@
       <div
         bind:this={optionElements[option.id]}
         style:cursor="pointer"
-        class={index === highlightedOptionIndex ? "highlighted" : ""}
+        style:color={index === highlightedOptionIndex ? colors.activeTint : colors.text}
+        style:background-color={index === highlightedOptionIndex ? colors.highlightedBackround : colors.background}
         data-index={index}
         role="button"
         tabindex="0"
@@ -56,10 +59,11 @@
 </div>
 
 <script lang="ts">
+  import TextField from "@components/inputs/TextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
   import { computePosition, flip, size } from "@floating-ui/dom"
+  import { colors } from "@scripts/colors"
   import { isNotNullish, isNullish } from "@shared/utils"
-  import Textfield from "@smui/textfield"
   import { createEventDispatcher } from "svelte"
   
   type Option = {
@@ -77,7 +81,7 @@
   export let filter = ""
   export let previousSelection: Option | undefined = undefined
   
-  let textField: Textfield
+  let textField: TextField<string, "text">
   let optionsContainer: HTMLElement
   const optionElements: Record<string, HTMLDivElement> = {}
   
@@ -204,27 +208,11 @@
       return option.keywords.toLowerCase().includes(filter.toLowerCase())
     })
     
-    highlightedOptionIndex = 0
+    highlightedOptionIndex = filteredOptions.findIndex((option) => {
+      return option.id === previousSelection?.id
+    })
+    
+    highlightedOptionIndex = highlightedOptionIndex === -1 ? 0 : highlightedOptionIndex
   }
   
 </script>
-
-<style>
-  /* TODO Move this somewhere better */
-  .highlighted {
-    background-color: #ff3e0030;
-    color: #ff3e00;
-  }
-
-  * {
-    font-family: Roboto, sans-serif;
-  }
-
-  .surface {
-    background-color: #212125;
-  }
-
-  .elevated {
-    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.3), 0px 8px 10px 1px rgba(0, 0, 0, 0.3), 0px 3px 14px 2px rgba(0, 0, 0, 0.3);
-  }
-</style>

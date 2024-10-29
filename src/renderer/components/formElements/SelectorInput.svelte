@@ -69,8 +69,8 @@
 </Stack>
 
 <script lang="ts">
-  import AutocompleteTextField from "@components/AutocompleteTextField.svelte"
   import FormElement from "@components/formElements/FormElement.svelte"
+  import AutocompleteTextField from "@components/inputs/AutocompleteTextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
   import { isNotNullish, isNullish } from "@shared/utils"
   import { Icon } from "@smui/common"

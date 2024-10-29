@@ -16,6 +16,7 @@ import { createConfigurableMultiSelectorViewModel, createConfigurableSelectorOpt
 
 export const defaultAppViewModel = () => {
   return {
+    selectedTabId: "POKEMON",
     tabViewModels: [
       createTabViewModel({
         id: "POKEMON" as const,

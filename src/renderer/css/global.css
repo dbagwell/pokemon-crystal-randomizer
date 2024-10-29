@@ -22,4 +22,15 @@ input[type=file]::file-selector-button {
   --mdc-typography-subtitle2-font-weight: 600 !important;
 }
 
+* {
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 /*# sourceMappingURL=global.css.map */
