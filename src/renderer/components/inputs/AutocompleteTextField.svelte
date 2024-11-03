@@ -1,7 +1,7 @@
 <TextField
   bind:this={textField}
   minWidth={50}
-  title={label}
+  title={title}
   type="text"
   bind:value={filter}
   on:focus={handleTextFieldEvent}
@@ -73,7 +73,7 @@
     value: any,
   }
   
-  export let label: string
+  export let title: string | undefined
   export let options: Option[]
   export let clearOnFocus: boolean
   export let clearOnSelect: boolean

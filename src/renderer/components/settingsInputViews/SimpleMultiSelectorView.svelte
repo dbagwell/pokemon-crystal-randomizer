@@ -7,7 +7,6 @@
     bind:this={autocompleteTextField}
     clearOnFocus={true}
     clearOnSelect={true}
-    label={viewModel.name ?? ""}
     options={availableOptions.map((option) => {
       return {
         id: option.id,
@@ -17,6 +16,7 @@
       }
     })}
     restoreOnBlur={false}
+    title={viewModel.name ?? ""}
     on:select={handleAutocompleteSelection}
   />
   <!-- TODO: Description -->
