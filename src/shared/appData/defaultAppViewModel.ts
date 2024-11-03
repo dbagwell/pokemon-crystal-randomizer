@@ -6,13 +6,27 @@ import { movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
+import type { ItemCategory } from "@shared/types/gameData/itemCategory"
 import { additionalOptionIds } from "@shared/types/gameDataIds/additionalOptions"
 import { growthRateIds } from "@shared/types/gameDataIds/growthRates"
-import { itemCategoryIds } from "@shared/types/gameDataIds/itemCategories"
+import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
+import type { ItemId } from "@shared/types/gameDataIds/items"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
-import { createConfigurableMultiSelectorViewModel, createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputGroupViewModel, createIntegerInputViewModel, createSimpleMultiSelectorViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createSingleSelectorViewModel, createTabViewModel, createTextInputViewModel } from "@shared/types/viewModels"
+import {
+  createConfigurableMultiSelectorViewModel,
+  createConfigurableSelectorOption,
+  createConfigurableToggleViewModel,
+  createIntegerInputGroupViewModel,
+  createIntegerInputViewModel,
+  createSimpleMultiSelectorViewModel,
+  createSimpleSelectorOption,
+  createSimpleToggleViewModel,
+  createSingleSelectorViewModel,
+  createTabViewModel,
+  createTextInputViewModel,
+} from "@shared/types/viewModels"
 
 export const defaultAppViewModel = () => {
   return {
@@ -567,45 +581,8 @@ export const defaultAppViewModel = () => {
             id: "START_WITH_ITEMS" as const,
             name: "Start With Items",
             description: "Add the selected items to the player's inventory when starting a new game.",
-            viewModels: itemCategoryIds.map((categoryId) => {
-              const category = itemCategoriesMap[categoryId]
-              if (category.slotSize === 1) {
-                return createSimpleMultiSelectorViewModel({
-                  id: category.id,
-                  name: category.name,
-                  maxSelections: category.maxSlots,
-                  options: category.itemIds.map((itemId) => {
-                    return createSimpleSelectorOption({
-                      id: itemId,
-                      name: itemsMap[itemId].name,
-                    })
-                  }),
-                })
-              } else {
-                return createConfigurableMultiSelectorViewModel({
-                  id: category.id,
-                  name: category.name,
-                  maxSelections: category.maxSlots,
-                  options: category.itemIds.map((itemId) => {
-                    return createConfigurableSelectorOption({
-                      id: itemId,
-                      name: itemsMap[itemId].name,
-                      viewModels: [
-                        createIntegerInputViewModel({
-                          id: "AMOUNT" as const,
-                          name: "Amount",
-                          isRequired: true as const,
-                          min: 1,
-                          max: category.slotSize,
-                          value: 1,
-                        }),
-                      ] as const,
-                    })
-                  }),
-                })
-              }
-            }),
-          }), // END START_WITH_ITEMS
+            viewModels: createSelectorsFromItemCategories(),
+          }),
         ] as const,
       }), // END ITEMS
       createTabViewModel({
@@ -838,4 +815,64 @@ const createBannedMovesSelectorViewModel = () => {
       })
     }),
   })
+}
+
+const createSelectorFromSimpleItemCategory = <ItemCategoryIdType extends ItemCategoryId, ItemIdType extends ItemId>(category: ItemCategory<ItemCategoryIdType, ItemIdType, number>) => {
+  return createSimpleMultiSelectorViewModel({
+    id: category.id,
+    name: category.name,
+    maxSelections: category.maxSlots,
+    options: category.itemIds.map((itemId) => {
+      return createSimpleSelectorOption({
+        id: itemId,
+        name: itemsMap[itemId].name,
+      })
+    }),
+  })
+}
+
+const createSelectorFromConfigurableItemCategory = <ItemCategoryIdType extends ItemCategoryId, ItemIdType extends ItemId>(category: ItemCategory<ItemCategoryIdType, ItemIdType, number>) => {
+  return createConfigurableMultiSelectorViewModel({
+    id: category.id,
+    name: category.name,
+    maxSelections: category.maxSlots,
+    options: category.itemIds.map((itemId) => {
+      return createConfigurableSelectorOption({
+        id: itemId,
+        name: itemsMap[itemId].name,
+        viewModels: [
+          createIntegerInputViewModel({
+            id: "AMOUNT" as const,
+            name: "Amount",
+            isRequired: true as const,
+            min: 1,
+            max: category.slotSize,
+            value: 1,
+          }),
+        ] as const,
+      })
+    }),
+  })
+}
+
+type SelectorFromItemCategory<ItemCategoryIdType extends ItemCategoryId, ItemIdType extends ItemId, SlotSizeType extends number> =
+  SlotSizeType extends 1 ? ReturnType<typeof createSelectorFromSimpleItemCategory<ItemCategoryIdType, ItemIdType>>
+    : ReturnType<typeof createSelectorFromConfigurableItemCategory<ItemCategoryIdType, ItemIdType>>
+const createSelectorFromItemCategory = <ItemCategoryIdType extends ItemCategoryId, ItemIdType extends ItemId, SlotSizeType extends number>(category: ItemCategory<ItemCategoryIdType, ItemIdType, SlotSizeType>): SelectorFromItemCategory<ItemCategoryIdType, ItemIdType, SlotSizeType> => {
+  if (category.slotSize === 1) {
+    return createSelectorFromSimpleItemCategory(category) as SelectorFromItemCategory<ItemCategoryIdType, ItemIdType, SlotSizeType>
+  } else {
+    return createSelectorFromConfigurableItemCategory(category) as SelectorFromItemCategory<ItemCategoryIdType, ItemIdType, SlotSizeType>
+  }
+}
+
+type SelectorsMapFromItemCategoriesMap = {
+  [ItemCategoryIdType in keyof typeof itemCategoriesMap]: ReturnType<typeof createSelectorFromItemCategory<ItemCategoryIdType, typeof itemCategoriesMap[ItemCategoryIdType]["itemIds"][number], typeof itemCategoriesMap[ItemCategoryIdType]["slotSize"]>>
+}
+
+type SelectorsFromItemCategoriesMap = SelectorsMapFromItemCategoriesMap[keyof SelectorsMapFromItemCategoriesMap][]
+const createSelectorsFromItemCategories = (): SelectorsFromItemCategoriesMap => {
+  return Object.values(itemCategoriesMap).map((category) => {
+    return createSelectorFromItemCategory(category) as ReturnType<typeof createSelectorFromItemCategory>
+  }) as SelectorsFromItemCategoriesMap
 }
