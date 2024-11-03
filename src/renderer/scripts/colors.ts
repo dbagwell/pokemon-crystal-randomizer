@@ -10,9 +10,10 @@ const gray25 = "#252525"
 const gray18 = "#181818"
 const gray0A = "#0A0A0A"
 
-const crystalPurple = "#8828b0"
-const crystalPurpleHighlight = "#9848f8"
+const crystalPurple = "#8828B0"
+const crystalPurpleHighlight = "#9848F8"
 const crystalRed = "#980000"
+const crystalGold = "#D0A800"
 
 export const lightThemeColors = {
   activeTint: crystalPurple,
@@ -27,6 +28,7 @@ export const lightThemeColors = {
   primaryButtonForeground: grayF0,
   primaryButtonHighlightedBackground: crystalPurpleHighlight,
   progressIndicator: crystalPurple,
+  progressIndicatorHighlight: crystalGold,
   separator: gray44,
   text: gray0A,
 }
@@ -44,6 +46,7 @@ export const darkThemeColors = {
   primaryButtonForeground: grayF0,
   primaryButtonHighlightedBackground: crystalPurpleHighlight,
   progressIndicator: crystalPurple,
+  progressIndicatorHighlight: crystalGold,
   separator: gray77,
   text: grayEE,
 } satisfies typeof lightThemeColors

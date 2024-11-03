@@ -14,17 +14,57 @@
     style:justify-content="center"
     style:height="100%"
   >
-    <CircularProgress
-      style="width: 100px; height: 100px;"
-      indeterminate={true}
-    />
+    <div
+      style:width="100px"
+      style:height="100px"
+      style:position="absolute"
+    >
+      {#each indicatorColors as indicatorColor, index (index)}
+        <div
+          bind:this={indicators[index]}
+          style:width="100%"
+          style:height="100%"
+          style:border-width="10px"
+          style:border-style="solid"
+          style:border-color={indicatorColor}
+          style:border-radius="50%"
+          style:position="absolute"
+          style:top="0"
+          style:left="0"
+        >
+        </div>
+      {/each}
+    </div>
   </div>
 </div>
 
 <script lang="ts">
-  import CircularProgress from "@smui/circular-progress"
+  import { colors } from "@scripts/colors"
+  import { onMount } from "svelte"
   
+  const indicatorColors = [
+    colors.progressIndicatorHighlight,
+    `${colors.progressIndicator} ${colors.progressIndicator} transparent transparent`,
+    `transparent transparent ${colors.progressIndicator} ${colors.progressIndicator}`,
+  ]
+  
+  const indicators: HTMLElement[] = []
   let display = "none"
+  
+  onMount(() => {
+    indicators[1].animate({
+      transform: ["rotate(0deg)", "rotate(360deg)", "rotate(540deg)", "rotate(720deg)"],
+    }, {
+      duration: 1500,
+      iterations: Infinity,
+    })
+    indicators[2].animate({
+      transform: ["rotate(0deg)", "rotate(270deg)", "rotate(450deg)", "rotate(720deg)"],
+    }, {
+      duration: 1500,
+      iterations: Infinity,
+    })
+  })
   
   showProgressIndicator = () => {
     display = "block"
@@ -33,7 +73,6 @@
   hideProgressIndicator = () => {
     display = "none"
   }
-  
 </script>
 
 <script
