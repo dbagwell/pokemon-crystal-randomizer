@@ -18,7 +18,7 @@ type ArrayOfSettingsFromArrayOfTabViewModels<ArrayType extends TabViewModel[]> =
   [I in keyof ArrayType]: SettingsFromTabViewModel<ArrayType[I]>
 }
 
-type SettingsFromAppViewModel = ObjectFromIntersectionOfArrayValues<ArrayOfSettingsFromArrayOfTabViewModels<AppViewModel["tabViewModels"]>>
+export type SettingsFromAppViewModel = ObjectFromIntersectionOfArrayValues<ArrayOfSettingsFromArrayOfTabViewModels<AppViewModel["tabViewModels"]>>
 export const settingsFromAppViewModel = (appViewModel: AppViewModel): SettingsFromAppViewModel => {
   return Object.assign({}, ...appViewModel.tabViewModels.map((tabViewModel) => {
     return settingsFromTabViewModel(tabViewModel)

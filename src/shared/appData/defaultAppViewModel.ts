@@ -340,6 +340,14 @@ export const defaultAppViewModel = () => {
                 values: [50, 15, 15, 10, 5, 5],
               }),
               createIntegerInputGroupViewModel({
+                id: "ROCK" as const,
+                name: "Rock Smash Rocks",
+                min: 0,
+                max: 100,
+                sum: 100,
+                values: [90, 10],
+              }),
+              createIntegerInputGroupViewModel({
                 id: "CONTEST" as const,
                 name: "Bug Catching Contest",
                 min: 0,
@@ -524,8 +532,8 @@ export const defaultAppViewModel = () => {
             ] as const,
           }), // END RANDOMIZE_MOVE_TUTOR_MOVES
           createConfigurableToggleViewModel({
-            id: "RANDOMIZE_HM_COMPATABILITY" as const,
-            name: "Randomize HM Compatability",
+            id: "RANDOMIZE_HM_COMPATIBILITY" as const,
+            name: "Randomize HM Compatibility",
             description: "Randomizes which HMs each Pokémon can learn from.",
             viewModels: [
               createIntegerInputViewModel({
@@ -538,10 +546,10 @@ export const defaultAppViewModel = () => {
                 value: undefined,
               }),
             ] as const,
-          }), // END RANDOMIZE_HM_COMPATABILITY
+          }), // END RANDOMIZE_HM_COMPATIBILITY
           createConfigurableToggleViewModel({
-            id: "RANDOMIZE_TM_COMPATABILITY" as const,
-            name: "Randomize TM Compatability",
+            id: "RANDOMIZE_TM_COMPATIBILITY" as const,
+            name: "Randomize TM Compatibility",
             description: "Randomizes which TMs each Pokémon can learn from.",
             viewModels: [
               createIntegerInputViewModel({
@@ -554,10 +562,10 @@ export const defaultAppViewModel = () => {
                 value: undefined,
               }),
             ] as const,
-          }), // END RANDOMIZE_TM_COMPATABILITY
+          }), // END RANDOMIZE_TM_COMPATIBILITY
           createConfigurableToggleViewModel({
-            id: "RANDOMIZE_MOVE_TUTOR_COMPATABILITY" as const,
-            name: "Randomize Move Tutor Compatability",
+            id: "RANDOMIZE_MOVE_TUTOR_COMPATIBILITY" as const,
+            name: "Randomize Move Tutor Compatibility",
             description: "Randomizes which Move Tutor Moves each Pokémon can learn.",
             viewModels: [
               createIntegerInputViewModel({
@@ -570,7 +578,7 @@ export const defaultAppViewModel = () => {
                 value: undefined,
               }),
             ] as const,
-          }), // END RANDOMIZE_HM_COMPATABILITY
+          }), // END RANDOMIZE_HM_COMPATIBILITY
         ] as const,
       }), // END MOVES
       createTabViewModel({

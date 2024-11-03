@@ -128,10 +128,12 @@
   import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/utility/ProgressIndicator.svelte"
   import { colors } from "@scripts/colors"
+  import { applySettingsToAppViewModel } from "@shared/appData/applySettingsToAppViewModel"
   import { defaultAppViewModel } from "@shared/appData/defaultAppViewModel"
+  import { settingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
   import { onMount } from "svelte"
   
-  // export let initialSettings: any | undefined
+  export let initialSettings: unknown | undefined
   
   let mainContentContainer: HTMLElement
   let seed = ""
@@ -139,8 +141,9 @@
   
   onMount(() => {
     try {
+      const warnings: string[] = []
       const newViewModel = defaultAppViewModel()
-      // setConfigValuesFromSettings("", "", newConfig, initialSettings)
+      applySettingsToAppViewModel(initialSettings, newViewModel, warnings)
       viewModel = newViewModel
     } catch (error) {
       showErrorDialog(error)
@@ -150,9 +153,8 @@
   const generateROMButtonClicked = async () => {
     try {
       showProgressIndicator()
-    // TODO:
-      // const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, getSettingsFromConfig(config))
-      // showSuccessDialog(response.message)
+      const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, settingsFromAppViewModel(viewModel))
+      showSuccessDialog(response.message)
     } catch (error) {
       showErrorDialog(error)
     } finally {

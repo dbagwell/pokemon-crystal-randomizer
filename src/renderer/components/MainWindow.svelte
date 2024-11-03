@@ -49,8 +49,8 @@
   const generateROMButtonClicked = async () => {
     try {
       showProgressIndicator()
-      const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, getSettingsFromConfig(config))
-      showSuccessDialog(response.message)
+    // const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, getSettingsFromConfig(config))
+      // showSuccessDialog(response.message)
     } catch (error) {
       showErrorDialog(error)
     } finally {
