@@ -3,23 +3,48 @@
   direction="vertical"
   distribution="fill"
 >
-  <!-- TODO: style it up -->
   <label
     style:cursor="pointer"
     style:color={colors.text}
     style:font-size="16px"
   >
     <input
-      style:cursor="pointer"
+      style:position="absolute"
+      style:width="0"
+      style:height="0"
       type="checkbox"
       bind:checked={viewModel.isOn}
     />
-    {viewModel.name}
+    <Stack
+      alignment="center"
+      direction="horizontal"
+      distribution="start"
+      minSpacing={10}
+    >
+      <div
+        style:border="2px solid {viewModel.isOn ? colors.activeTint : colors.inactiveTint}"
+        style:border-radius="5px"
+        style:cursor="pointer"
+        style:width="20px"
+        style:height="20px"
+        style:font-size="15px"
+        style:font-weight="900"
+        style:color={viewModel.isOn ? colors.primaryButtonForeground : "transparent"}
+        style:background-color={viewModel.isOn ? colors.primaryButtonBackground : "transparent"}
+        class="material-icons"
+      >
+        checkmark
+      </div>
+      <div>
+        {viewModel.name}
+      </div>
+    </Stack>
   </label>
   <!-- TODO: Description -->
   {#if "viewModels" in viewModel && viewModel.isOn}
     <div
-      style:border-left="1px solid {colors.separator}"
+      style:margin-left="9.5px"
+      style:border-left="2px solid {colors.activeTint}"
       style:border-radius="0 0 0 20px"
     >
       <Stack

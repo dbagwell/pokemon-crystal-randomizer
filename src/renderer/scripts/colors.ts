@@ -28,7 +28,7 @@ export const lightThemeColors = {
   primaryButtonHighlightedBackground: crystalPurpleHighlight,
   progressIndicator: crystalPurple,
   separator: gray44,
-  text: gray18,
+  text: gray0A,
 }
 
 export const darkThemeColors = {

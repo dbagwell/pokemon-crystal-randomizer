@@ -23,7 +23,7 @@
   {#each viewModel.options as option (option.id)}
     {#if option.id === viewModel.selectedOptionId && "viewModels" in option}
       <div
-        style:border-left="1px solid {colors.separator}"
+        style:border-left="2px solid {colors.separator}"
         style:border-radius="0 0 0 20px"
       >
         <Stack
