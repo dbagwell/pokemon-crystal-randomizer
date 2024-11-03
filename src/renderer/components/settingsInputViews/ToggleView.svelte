@@ -22,7 +22,7 @@
       minSpacing={10}
     >
       <div
-        style:border="2px solid {viewModel.isOn ? colors.activeTint : colors.inactiveTint}"
+        style:border="2px solid {viewModel.isOn ? colors.primaryButtonBackground : colors.inactiveTint}"
         style:border-radius="5px"
         style:cursor="pointer"
         style:width="20px"
@@ -44,7 +44,7 @@
   {#if "viewModels" in viewModel && viewModel.isOn}
     <div
       style:margin-left="9.5px"
-      style:border-left="2px solid {colors.activeTint}"
+      style:border-left="2px solid {colors.primaryButtonBackground}"
       style:border-radius="0 0 0 20px"
     >
       <Stack

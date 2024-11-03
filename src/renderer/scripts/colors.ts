@@ -32,7 +32,7 @@ export const lightThemeColors = {
 }
 
 export const darkThemeColors = {
-  activeTint: crystalPurpleHighlight,
+  activeTint: crystalPurple,
   appBackground: gray0A,
   background: gray18,
   deemphasizedText: grayCC,
