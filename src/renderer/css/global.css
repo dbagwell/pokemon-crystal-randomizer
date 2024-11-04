@@ -1,27 +1,3 @@
-input[type=file]::file-selector-button {
-  display: none;
-}
-
-:not(.mdc-text-field--label-floating) input[type=file] {
-  color: transparent;
-}
-
-.mdc-tooltip--rich .mdc-tooltip__surface {
-  overflow: scroll !important;
-}
-
-.mdc-tooltip--rich :is(.mdc-tooltip__surface, .mdc-tooltip__title, .mdc-tooltip__content) {
-  max-width: 100% !important;
-}
-
-.smui-text-field--standard {
-  height: 50px !important;
-}
-
-:root {
-  --mdc-typography-subtitle2-font-weight: 600 !important;
-}
-
 * {
   box-sizing: border-box;
   font-family: Roboto, sans-serif;
