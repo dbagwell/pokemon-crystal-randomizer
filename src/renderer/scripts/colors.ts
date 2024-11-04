@@ -13,6 +13,7 @@ const gray0A = "#0A0A0A"
 const crystalPurple = "#8828B0"
 const crystalPurpleHighlight = "#9848F8"
 const crystalRed = "#980000"
+const crystalPink = "#F80868"
 const crystalGold = "#D0A800"
 
 export const lightThemeColors = {
@@ -20,6 +21,7 @@ export const lightThemeColors = {
   appBackground: grayAA,
   background: grayF0,
   deemphasizedText: gray28,
+  destructiveHighlight: crystalPink,
   destructiveTint: crystalRed,
   highlightedBackround: grayDD,
   inactiveTabBackground: grayDD,
@@ -38,6 +40,7 @@ export const darkThemeColors = {
   appBackground: gray0A,
   background: gray18,
   deemphasizedText: grayCC,
+  destructiveHighlight: crystalPink,
   destructiveTint: crystalRed,
   highlightedBackround: gray25,
   inactiveTabBackground: gray28,

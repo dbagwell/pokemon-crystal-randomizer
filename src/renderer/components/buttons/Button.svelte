@@ -1,14 +1,8 @@
 <div
   bind:this={container}
-  style:background-color={style === "fill" ? colors.primaryButtonBackground : ""}
-  style:border-style={style === "fill" ? "solid" : ""}
-  style:border-width={style === "fill" ? "3px" : ""}
-  style:border-color={style === "fill" ? colors.primaryButtonBackground : ""}
-  style:height={style === "fill" ? "44px" : ""}
-  style:border-radius={style === "fill" ? "10px" : ""}
-  style:box-shadow={style === "fill" ? "2px 2px 5px #00000070" : ""}
   style:cursor="pointer"
-  on:click={onClick}
+  style:flex-grow={flexGrow ? "1" : ""}
+  on:click|preventDefault={onClick}
   on:mousedown={onMouseDown}
   on:mouseup={onMouseUp}
   on:mouseleave={onMouseLeave}
@@ -24,9 +18,6 @@
     <div
       bind:this={textContainer}
       style:text-align="center"
-      style:font-size="{style === "fill" ? 20 : 16}px"
-      style:color={style === "fill" ? colors.primaryButtonForeground : colors.inactiveTint}
-      class={style === "fill" ? "" : "material-icons"}
     >
       {title}
     </div>
@@ -36,40 +27,78 @@
 <script lang="ts">
   import Stack from "@components/layout/Stack.svelte"
   import { colors } from "@scripts/colors"
+  import { onMount } from "svelte"
   
   export let style: "fill" | "icon"
   export let isDestructive = false
   export let title: string
+  export let flexGrow = false
   export let onClick: () => void
   
   let container: HTMLElement
   let textContainer: HTMLElement
+  let isActive = false
+  let isHovered = false
+  
+  onMount(() => {
+    updateStyle()
+  })
   
   const onMouseEnter = () => {
-    if (style === "fill") {
-      container.style.borderColor = colors.primaryButtonHighlightedBackground
-    } else if (style === "icon") {
-      textContainer.style.color = isDestructive ? colors.activeTint : colors.destructiveTint
-    }
-    
-    container.style.opacity = container.matches.call(container, ":active") ? "0.2" : "1"
+    isHovered = true
+    isActive = container.matches.call(container, ":active")
+    updateStyle()
   }
   
   const onMouseDown = () => {
-    container.style.opacity = "0.2"
+    isActive = true
+    updateStyle()
   }
   
   const onMouseUp = () => {
-    container.style.opacity = "1"
+    isActive = false
+    updateStyle()
   }
   
   const onMouseLeave = () => {
-    container.style.opacity = "1"
-    
-    if (style === "fill") {
-      container.style.borderColor = colors.primaryButtonBackground
-    } else if (style === "icon") {
-      textContainer.style.color = colors.inactiveTint
+    isHovered = false
+    isActive = false
+    updateStyle()
+  }
+  
+  const updateStyle = () => {
+    container.style.opacity = isActive ? "0.2" : "1"
+      
+    switch (style) {
+    case "fill": {
+      container.style.backgroundColor = isDestructive ? colors.destructiveTint : colors.primaryButtonBackground
+      container.style.borderStyle = "solid"
+      container.style.borderWidth = "3px"
+      container.style.borderColor = isHovered
+        ? isDestructive ? colors.destructiveHighlight : colors.primaryButtonHighlightedBackground
+        : isDestructive ? colors.destructiveTint : colors.primaryButtonBackground
+      container.style.height = "44px"
+      container.style.borderRadius = "10px"
+      container.style.boxShadow = "2px 2px 5px #00000070"
+      textContainer.style.fontSize = "20px"
+      textContainer.style.color = colors.primaryButtonForeground
+      textContainer.className = ""
+      return
+    }
+    case "icon": {
+      container.style.backgroundColor = ""
+      container.style.borderStyle = ""
+      container.style.borderWidth = ""
+      container.style.borderColor = ""
+      container.style.height = ""
+      container.style.borderRadius = ""
+      container.style.boxShadow = ""
+      textContainer.style.fontSize = "16px"
+      textContainer.style.color = isHovered
+        ? isDestructive ? colors.destructiveTint : colors.activeTint
+        : colors.inactiveTint
+      textContainer.className = "material-icons"
+    }
     }
   }
 </script>

@@ -37,6 +37,7 @@
         >
           <Button
             style="icon"
+            isDestructive={true}
             onClick={() => { removeSelectedValue(index) }}
             title="cancel"
           />

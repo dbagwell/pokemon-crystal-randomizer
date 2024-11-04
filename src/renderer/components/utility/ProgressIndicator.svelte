@@ -6,7 +6,7 @@
   style:height="100%"
   style:background-color="#00000055"
   style:backdrop-filter="blur(10px)"
-  style:z-index="9999999"
+  style:z-index={zIndexes.progressIndicatorLayer}
 >
   <div
     style:display="flex"
@@ -40,6 +40,7 @@
 
 <script lang="ts">
   import { colors } from "@scripts/colors"
+  import { zIndexes } from "@scripts/constants"
   import { onMount } from "svelte"
   
   const indicatorColors = [
