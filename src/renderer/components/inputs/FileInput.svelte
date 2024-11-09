@@ -11,6 +11,8 @@
   <div
     style:border="3px dashed {colors.inactiveTint}"
     style:width="100%"
+    on:dragover|preventDefault|stopPropagation={handleDragOverEvent}
+    on:drop|preventDefault|stopPropagation={handleDropEvent}
   >
     <Stack
       alignment="fill"
@@ -82,8 +84,21 @@
   import { colors } from "@scripts/colors"
   import { isNotNullish } from "@shared/utils"
 
-  export let allowedFileTypes: string | undefined
-  export let value: string | undefined
-  export let files: FileList | undefined
-  export let title: string | undefined
+  export let allowedFileTypes: string | undefined = undefined
+  export let value: string | undefined = undefined
+  export let files: FileList | undefined = undefined
+  export let title: string | undefined = undefined
+  
+  const handleDragOverEvent = (event: DragEvent) => {
+    if (isNotNullish(event.dataTransfer)) {
+      event.dataTransfer.dropEffect = "copy"
+    }
+  }
+  
+  const handleDropEvent = (event: DragEvent) => {
+    if (isNotNullish(event.dataTransfer)) {
+      files = event.dataTransfer.files
+      value = files[0].name
+    }
+  }
 </script>
