@@ -1,4 +1,4 @@
 export const zIndexes = {
-  progressIndicatorLayer: "9999",
-  dialogLayer: "999",
+  dialogLayer: "9999",
+  progressIndicatorLayer: "999",
 }
