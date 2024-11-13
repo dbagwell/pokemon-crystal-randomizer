@@ -5,7 +5,7 @@ import type { defaultAppViewModel } from "@shared/appData/defaultAppViewModel"
 export type IntegerInputViewModel = ReturnType<typeof createIntegerInputViewModel>
 export const createIntegerInputViewModel = <IdType extends string, IsRequiredType extends boolean>(params: {
   id: IdType
-  name?: string
+  name: string
   description?: string
   min?: number
   max?: number
@@ -41,7 +41,7 @@ export const createIntegerInputGroupViewModel = <IdType extends string>(params: 
 export type TextInputViewModel = ReturnType<typeof createTextInputViewModel>
 export const createTextInputViewModel = <IdType extends string, IsRequiredType extends boolean>(params: {
   id: IdType
-  name?: string
+  name: string
   description?: string
   maxCharacters?: number
   isRequired: IsRequiredType

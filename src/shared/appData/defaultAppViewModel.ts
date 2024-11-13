@@ -682,6 +682,7 @@ export const defaultAppViewModel = () => {
             viewModels: [
               createTextInputViewModel({
                 id: "PLAYER_NAME" as const,
+                name: "Player Name",
                 maxCharacters: 7,
                 isRequired: true as const,
                 value: "KRIS",
