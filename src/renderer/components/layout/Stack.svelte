@@ -1,10 +1,10 @@
 <div bind:this={container}>
-  <slot/>
+  {@render children()}
 </div>
 
 <script lang="ts">
   import { isNotNullish, isNumber } from "@shared/utils"
-  import { onMount } from "svelte"
+  import { onMount, type Snippet } from "svelte"
   
   const directionMap = {
     vertical: "column",
@@ -24,17 +24,34 @@
     center: "center",
     fill: "space-between",
   }
-
-  export let direction: keyof typeof directionMap
-  export let alignment: keyof typeof alignmentMap
-  export let distribution: keyof typeof distributionMap
-  export let minSpacing: number = 0
-  export let padding: number | [number, number] | [number, number, number, number] = 0
-  export let wrap = false
-  export let width: string | undefined = undefined
-  export let height: string | undefined = undefined
-  export let minWidth: string | undefined = undefined
-  export let minHeight: string | undefined = undefined
+  
+  type Props = {
+    direction: keyof typeof directionMap
+    alignment: keyof typeof alignmentMap
+    distribution: keyof typeof distributionMap
+    minSpacing?: number
+    padding?: number | [number, number] | [number, number, number, number]
+    wrap?: boolean
+    width?: string
+    height?: string
+    minWidth?: string
+    minHeight?: string
+    children: Snippet
+  }
+  
+  const {
+    direction,
+    alignment,
+    distribution,
+    minSpacing = 0,
+    padding = 0,
+    wrap = false,
+    width,
+    height,
+    minWidth,
+    minHeight,
+    children,
+  }: Props = $props()
   
   let container: HTMLDivElement
   

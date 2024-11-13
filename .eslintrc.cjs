@@ -32,6 +32,15 @@ module.exports = {
     "@html-eslint/no-trailing-spaces": "error",
     "@html-eslint/sort-attrs": "error",
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+        destructuredArrayIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+      },
+    ],
     "array-bracket-newline": ["error", "consistent"],
     "array-bracket-spacing": "error",
     "array-element-newline": ["error", "consistent"],

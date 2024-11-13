@@ -1,28 +1,27 @@
 <TextField
+  onBlur={textFieldBlurHandler}
+  onFocus={textFieldFocusHandler}
   title={viewModel.name}
   type="text"
   bind:value={value}
-  on:blur={textFieldBlurHandler}
-  on:focus={textFieldFocusHandler}
 />  <!-- TODO: Description -->
 <script lang="ts">
   import { showErrorDialog } from "@components/dialogs/DialogContainer.svelte"
   import TextField from "@components/inputs/TextField.svelte"
   import type { TextInputViewModel } from "@shared/types/viewModels"
   import { isNotNullish, isNullish } from "@shared/utils"
-  import { onMount } from "svelte"
   
-  export let viewModel: TextInputViewModel
+  type Props = {
+    viewModel: TextInputViewModel
+  }
+  
+  const {
+    viewModel = $bindable(),
+  }: Props = $props()
   
   let oldValue: string | undefined = undefined
-  let value: string | undefined = undefined
-  let hasMounted = false
+  let value: string | undefined = $state(viewModel.value)
   let error: string | null = null
-  
-  onMount(() => {
-    value = viewModel.value
-    hasMounted = true
-  })
   
   const textFieldFocusHandler = () => {
     oldValue = value
@@ -30,18 +29,6 @@
   }
   
   const textFieldBlurHandler = () => {
-    if (isNotNullish(error)) {
-      value = oldValue
-      showErrorDialog(error)
-    }
-  }
-  
-  $: value, valueListener()
-  const valueListener = () => {
-    if (!hasMounted) {
-      return
-    }
-    
     if (isNullish(value) || value === "") {
       if (viewModel.isRequired) {
         error = `${viewModel.name} is required.`
@@ -54,10 +41,15 @@
       error = null
       viewModel.value = value
     }
+    
+    if (isNotNullish(error)) {
+      value = oldValue
+      showErrorDialog(error)
+    }
   }
   
-  $: viewModel.value, configValueListener()
-  const configValueListener = () => {
+  $effect(() => { viewModel.value; viewModelValueListener() })
+  const viewModelValueListener = () => {
     value = viewModel.value
   }
 </script>

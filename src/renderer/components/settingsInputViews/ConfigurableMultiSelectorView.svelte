@@ -4,9 +4,9 @@
   distribution="start"
 >
   <AutocompleteTextField
-    bind:this={autocompleteTextField}
     clearOnFocus={true}
     clearOnSelect={true}
+    onSelect={handleAutocompleteSelection}
     options={availableOptions.map((option) => {
       return {
         id: option.id,
@@ -17,7 +17,6 @@
     })}
     restoreOnBlur={false}
     title={viewModel.name ?? ""}
-    on:select={handleAutocompleteSelection}
   />
   <!-- TODO: Description -->
   {#if viewModel.selectedOptionIds.length > 0}
@@ -57,8 +56,8 @@
             padding={[10, 0, 0, 20]}
             wrap={true}
           >
-            {#each selectedOption.viewModels as subViewModel (subViewModel.id)}
-              <SettingsInputView viewModel={subViewModel}/>
+            {#each selectedOption.viewModels as subViewModel, index (subViewModel.id)}
+              <SettingsInputView viewModel={selectedOption.viewModels[index]}/>
             {/each}
           </Stack>
         </Stack>
@@ -75,22 +74,32 @@
   import { colors } from "@scripts/colors"
   import type { ConfigurableMultiSelectorViewModel, ConfigurableSelectorOption } from "@shared/types/viewModels"
   import { isNotNullish } from "@shared/utils"
-  import { onMount } from "svelte"
   
-  export let viewModel: ConfigurableMultiSelectorViewModel
+  type Props = {
+    viewModel: ConfigurableMultiSelectorViewModel
+  }
   
-  let availableOptions: ConfigurableSelectorOption[] = []
-  let selectedOptions: ConfigurableSelectorOption[] = []
+  let {
+    viewModel = $bindable(),
+  }: Props = $props()
   
-  let autocompleteTextField: AutocompleteTextField
-  
-  onMount(() => {
-    viewModel = viewModel
+  const availableOptions: ConfigurableSelectorOption[] = $derived.by(() => {
+    return viewModel.options.filter((option) => {
+      return !viewModel.selectedOptionIds.includes(option.id)
+    })
   })
   
-  const handleAutocompleteSelection = (event: CustomEvent) => {
+  const selectedOptions: ConfigurableSelectorOption[] = $derived.by(() => {
+    return viewModel.selectedOptionIds.map((id) => {
+      return viewModel.options.find((option) => {
+        return option.id === id
+      })!
+    })
+  })
+  
+  const handleAutocompleteSelection = (optionId: string | undefined) => {
     const option = viewModel.options.find((option) => {
-      return option.id === event.detail
+      return option.id === optionId
     })
     
     if (isNotNullish(option)) {
@@ -104,16 +113,4 @@
     viewModel.selectedOptionIds = viewModel.selectedOptionIds
   }
   
-  $: viewModel.selectedOptionIds, valueListener()
-  const valueListener = () => {
-    selectedOptions = viewModel.selectedOptionIds.map((id) => {
-      return viewModel.options.find((option) => {
-        return option.id === id
-      })!
-    })
-    
-    availableOptions = viewModel.options.filter((option) => {
-      return !viewModel.selectedOptionIds.includes(option.id)
-    })
-  }
 </script>

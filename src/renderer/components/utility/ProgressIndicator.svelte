@@ -77,8 +77,8 @@
 </script>
 
 <script
-  context="module"
   lang="ts"
+  module
 >
   
   export let showProgressIndicator: () => void

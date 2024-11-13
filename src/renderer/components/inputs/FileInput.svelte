@@ -11,8 +11,8 @@
   <div
     style:border="3px dashed {colors.inactiveTint}"
     style:width="100%"
-    on:dragover|preventDefault|stopPropagation={handleDragOverEvent}
-    on:drop|preventDefault|stopPropagation={handleDropEvent}
+    ondragover={handleDragOverEvent}
+    ondrop={handleDropEvent}
   >
     <Stack
       alignment="fill"
@@ -69,7 +69,7 @@
           <Button
             style="icon"
             isDestructive={true}
-            onClick={() => { files = undefined; value = undefined }}
+            onClick={() => { files = undefined; value = "" }}
             title="cancel"
           />
         </Stack>
@@ -83,22 +83,38 @@
   import Stack from "@components/layout/Stack.svelte"
   import { colors } from "@scripts/colors"
   import { isNotNullish } from "@shared/utils"
-
-  export let allowedFileTypes: string | undefined = undefined
-  export let value: string | undefined = undefined
-  export let files: FileList | undefined = undefined
-  export let title: string | undefined = undefined
+  
+  type Props = {
+    allowedFileTypes?: string
+    value?: string
+    files?: FileList
+    title?: string
+  }
+  
+  /* eslint-disable prefer-const */
+  let {
+    allowedFileTypes,
+    value = $bindable(),
+    files = $bindable(),
+    title,
+  }: Props = $props()
+  /* eslint-enable prefer-const */
   
   const handleDragOverEvent = (event: DragEvent) => {
+    event.preventDefault()
+    event.stopPropagation()
+    
     if (isNotNullish(event.dataTransfer)) {
       event.dataTransfer.dropEffect = "copy"
     }
   }
   
   const handleDropEvent = (event: DragEvent) => {
+    event.preventDefault()
+    event.stopPropagation()
+    
     if (isNotNullish(event.dataTransfer)) {
       files = event.dataTransfer.files
-      value = files[0].name
     }
   }
 </script>

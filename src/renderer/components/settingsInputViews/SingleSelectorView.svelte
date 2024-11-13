@@ -4,9 +4,10 @@
   distribution="start"
 >
   <AutocompleteTextField
-    bind:this={autocompleteTextField}
     clearOnFocus={true}
     clearOnSelect={false}
+    filter={filter}
+    onSelect={handleAutocompleteSelection}
     options={viewModel.options.map((option) => {
       return {
         id: option.id,
@@ -15,9 +16,9 @@
         value: option.id,
       }
     })}
+    previousSelection={previousSelection}
     restoreOnBlur={true}
     title={viewModel.name}
-    on:select={handleAutocompleteSelection}
   />
   <!-- TODO: Description -->
   {#each viewModel.options as option (option.id)}
@@ -44,37 +45,38 @@
 </Stack>
 
 <script lang="ts">
-  import AutocompleteTextField from "@components/inputs/AutocompleteTextField.svelte"
+  import AutocompleteTextField, { type Option } from "@components/inputs/AutocompleteTextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
   import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
   import { colors } from "@scripts/colors"
   import type { SingleSelectorViewModel } from "@shared/types/viewModels"
-  import { isNullish } from "@shared/utils"
-  import { onMount } from "svelte"
+  import { isNotNullish } from "@shared/utils"
   
-  export let viewModel: SingleSelectorViewModel
-  
-  let autocompleteTextField: AutocompleteTextField
-  
-  onMount(() => {
-    viewModel = viewModel
-  })
-  
-  const handleAutocompleteSelection = (event: CustomEvent) => {
-    viewModel.selectedOptionId = event.detail
+  type Props = {
+    viewModel: SingleSelectorViewModel
   }
   
-  $: viewModel.selectedOptionId, valueListener()
-  const valueListener = () => {
-    if (isNullish(autocompleteTextField)) {
-      return
-    }
-    
-    const option = viewModel.options.find((option) => {
+  const {
+    viewModel = $bindable(),
+  }: Props = $props()
+  
+  const filter: string = $derived.by(() => {
+    return viewModel.options.find((option) => {
       return option.id === viewModel.selectedOptionId
-    })
-    
-    autocompleteTextField.filter = option?.name ?? ""
-    autocompleteTextField.previousSelection = option
+    })?.name ?? ""
+  })
+  
+  const previousSelection: Option | undefined = $derived.by(() => {
+    return viewModel.options.find((option) => {
+      return option.id === viewModel.selectedOptionId
+    }) as Option
+  })
+  
+  const handleAutocompleteSelection = (optionId: string | undefined) => {
+    if (isNotNullish(optionId)) {
+      viewModel.selectedOptionId = optionId
+    } else {
+      throw new Error("SingleSelectorView received undefined Option Id.")
+    }
   }
 </script>

@@ -31,7 +31,7 @@
               style:background-color={viewModel.selectedTabId === tabViewModel.id ? colors.background : colors.inactiveTabBackground}
               style:cursor={viewModel.selectedTabId === tabViewModel.id ? "inherit" : "pointer"}
               style:z-index={viewModel.selectedTabId === tabViewModel.id ? "1" : "auto"}
-              on:click={() => {
+              onclick={() => {
                 viewModel.selectedTabId = tabViewModel.id
                 mainContentContainer.scrollTo(0, 0)
               }}
@@ -83,8 +83,8 @@
             padding={20}
             width="100%"
           >
-            {#each tabViewModel.viewModels as subViewModel (subViewModel.id)}
-              <SettingsInputView viewModel={subViewModel}/>
+            {#each tabViewModel.viewModels as subViewModel, index (subViewModel.id)}
+              <SettingsInputView bind:viewModel={tabViewModel.viewModels[index]}/>
             {/each}
           </Stack>
         {/if}
@@ -133,11 +133,15 @@
   import { settingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
   import { onMount } from "svelte"
   
-  export let initialSettings: unknown | undefined
+  type Props = {
+    initialSettings: unknown | undefined,
+  }
+  
+  const { initialSettings }: Props = $props()
   
   let mainContentContainer: HTMLElement
-  let seed = ""
-  let viewModel = defaultAppViewModel()
+  let seed = $state("")
+  let viewModel = $state(defaultAppViewModel())
   
   onMount(() => {
     try {
@@ -153,7 +157,7 @@
   const generateROMButtonClicked = async () => {
     try {
       showProgressIndicator()
-      const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, settingsFromAppViewModel(viewModel))
+      const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, settingsFromAppViewModel($state.snapshot(viewModel) as typeof viewModel))
       showSuccessDialog(response.message)
     } catch (error) {
       showErrorDialog(error)

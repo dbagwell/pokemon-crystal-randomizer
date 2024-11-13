@@ -5,6 +5,7 @@ import type { MainAPI } from "@mainAPI" // Only the type is allowed to be import
 import { updateColors } from "@scripts/colors"
 import { RendererAPI } from "@scripts/ipc/rendererAPI"
 import { bindMainApi, exposeWindowApi } from "electron-affinity/window"
+import { mount } from "svelte"
 
 const init = async () => {
   exposeWindowApi(new RendererAPI())
@@ -12,7 +13,7 @@ const init = async () => {
   
   updateColors()
   
-  new AppView({
+  mount(AppView, {
     target: document.getElementById("mainWindow")!,
     props: {
       initialSettings: (await window.mainAPI.getPreviousSettings()).result,

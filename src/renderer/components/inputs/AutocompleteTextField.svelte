@@ -1,13 +1,13 @@
 <TextField
   bind:this={textField}
   minWidth={50}
+  onBlur={handleTextFieldEvent}
+  onFocus={handleTextFieldEvent}
+  onKeyDown={handleTextFieldEvent}
+  onKeyPress={handleTextFieldEvent}
   title={title}
   type="text"
   bind:value={filter}
-  on:focus={handleTextFieldEvent}
-  on:blur={handleTextFieldEvent}
-  on:keydown={handleTextFieldEvent}
-  on:keypress={handleTextFieldEvent}
 />
 <div
   bind:this={optionsContainer}
@@ -30,11 +30,11 @@
         style:color={index === highlightedOptionIndex ? colors.activeTint : colors.text}
         style:background-color={index === highlightedOptionIndex ? colors.highlightedBackround : colors.background}
         data-index={index}
+        onclick={handleOptionElementEvent}
+        onkeypress={handleOptionElementEvent}
+        onmouseenter={handleOptionElementEvent}
         role="button"
         tabindex="0"
-        on:mouseenter={handleOptionElementEvent}
-        on:keypress={handleOptionElementEvent}
-        on:click={handleOptionElementEvent}
       >
         <Stack
           alignment="fill"
@@ -58,71 +58,124 @@
   </Stack>
 </div>
 
+<script
+  lang="ts"
+  module
+>
+  export type Option = {
+    id: string
+    name: string
+    keywords: string
+    value: any
+  }
+  
+</script>
+
 <script lang="ts">
   import TextField from "@components/inputs/TextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
-  import { computePosition, flip, size } from "@floating-ui/dom"
+  import { autoUpdate, computePosition, flip, type Placement, size } from "@floating-ui/dom"
   import { colors } from "@scripts/colors"
   import { isNotNullish, isNullish } from "@shared/utils"
-  import { createEventDispatcher } from "svelte"
   
-  type Option = {
-    id: string,
-    name: string,
-    keywords: string,
-    value: any,
+  type Props = {
+    title: string | undefined
+    options: Option[]
+    clearOnFocus: boolean
+    clearOnSelect: boolean
+    restoreOnBlur: boolean
+    filter?: string
+    previousSelection?: Option
+    onSelect: (optionId: string | undefined) => void
   }
   
-  export let title: string | undefined
-  export let options: Option[]
-  export let clearOnFocus: boolean
-  export let clearOnSelect: boolean
-  export let restoreOnBlur: boolean
-  export let filter = ""
-  export let previousSelection: Option | undefined = undefined
+  /* eslint-disable prefer-const */
+  let {
+    title,
+    options,
+    clearOnFocus,
+    clearOnSelect,
+    restoreOnBlur,
+    filter = $bindable(""),
+    previousSelection = $bindable(),
+    onSelect,
+  }: Props = $props()
+  /* eslint-enable prefer-const */
   
   let textField: TextField<string, "text">
   let optionsContainer: HTMLElement
-  const optionElements: Record<string, HTMLDivElement> = {}
+  const optionElements: Record<string, HTMLDivElement> = $state({})
   
-  const dispath = createEventDispatcher()
+  let hoveredOptionIndex: number | undefined = $state()
+  let optionsPlacement: Placement | undefined
+  let removeOptionsContainerAutoUpdates: (() => void) | undefined
   
-  let filteredOptions: Option[]
-  let highlightedOptionIndex: number = 0
+  const filteredOptions: Option[] = $derived.by(() => {
+    return options.filter((option) => {
+      return option.keywords.toLowerCase().includes(filter.toLowerCase())
+    })
+  })
+  
+  const highlightedOptionIndex: number = $derived.by(() => {
+    if (isNotNullish(hoveredOptionIndex)) {
+      return hoveredOptionIndex
+    }
+    
+    const index = filteredOptions.findIndex((option) => {
+      return option.id === previousSelection?.id
+    })
+    
+    return index === -1 ? 0 : index
+  })
   
   const showOptions = () => {
     updateOptionsLayout()
     optionsContainer.style.display = "block"
     optionsContainer.scroll({ top: 0, behavior: "instant" }) // Needs to happen after changing the display style.
+    removeOptionsContainerAutoUpdates?.()
+    removeOptionsContainerAutoUpdates = autoUpdate(
+      textField.getElement(),
+      optionsContainer,
+      async () => { await updateOptionsLayout() },
+      {
+        elementResize: false,
+      }
+    )
   }
   
   const hideOptions = () => {
-    highlightedOptionIndex = 0
+    hoveredOptionIndex = undefined
     optionsContainer.style.display = "none"
+    optionsPlacement = undefined
+    removeOptionsContainerAutoUpdates?.()
+    removeOptionsContainerAutoUpdates = undefined
   }
   
   const selectOption = (option: Option | undefined) => {
-    optionsContainer.style.display = "none"
+    hideOptions()
+    
     if (clearOnSelect) {
       filter = ""
+      previousSelection = undefined
     } else {
       filter = option?.name ?? ""
+      previousSelection = option
     }
     
-    previousSelection = option
+    hoveredOptionIndex = undefined
     
-    dispath("select", option?.id)
+    onSelect(option?.id)
   }
   
-  const updateOptionsLayout = async () => {
+  const updateOptionsLayout = async (placement?: Placement) => {
     const position = await computePosition(textField.getElement(), optionsContainer, {
-      placement: "bottom-start",
+      placement: placement ?? "bottom-start",
       middleware: [
-        flip(),
+        ...isNullish(placement) ? [flip()] : [],
         size({
           apply({ availableWidth, availableHeight, rects, elements }) {
             elements.floating.style.maxWidth = `${availableWidth}px`
-            elements.floating.style.maxHeight = `${availableHeight - 15}px`
+            elements.floating.style.maxHeight = availableHeight >= elements.floating.scrollHeight ? "" : `${availableHeight - 15}px`
             elements.floating.style.minWidth = `${rects.reference.width}px`
           },
         }),
@@ -131,6 +184,7 @@
     
     optionsContainer.style.left = `${position.x}px`
     optionsContainer.style.top = `${position.y}px`
+    optionsPlacement = position.placement
   }
   
   const handleTextFieldEvent = (event: Event) => {
@@ -141,8 +195,12 @@
     
       showOptions()
     } else if (
-      event.type === "blur" && event instanceof CustomEvent
-        && (isNullish(event.detail.relatedTarget) || Object.values(optionElements).indexOf(event.detail.relatedTarget) === -1)
+      event.type === "blur"
+      && event instanceof FocusEvent
+      && (
+        isNullish(event.relatedTarget)
+        || event.relatedTarget instanceof HTMLDivElement && Object.values(optionElements).indexOf(event.relatedTarget) === -1
+      )
     ) {
       hideOptions()
       
@@ -156,9 +214,9 @@
         event.preventDefault()
       
         if (isNullish(highlightedOptionIndex) || highlightedOptionIndex === filteredOptions.length - 1) {
-          highlightedOptionIndex = 0
+          hoveredOptionIndex = 0
         } else {
-          highlightedOptionIndex++
+          hoveredOptionIndex = highlightedOptionIndex + 1
         }
       
         optionElements[filteredOptions[highlightedOptionIndex].id]?.scrollIntoView({ block: "nearest" })
@@ -166,9 +224,9 @@
         event.preventDefault()
       
         if (isNullish(highlightedOptionIndex) || highlightedOptionIndex === 0) {
-          highlightedOptionIndex = filteredOptions.length - 1
+          hoveredOptionIndex = filteredOptions.length - 1
         } else {
-          highlightedOptionIndex--
+          hoveredOptionIndex = highlightedOptionIndex - 1
         }
       
         optionElements[filteredOptions[highlightedOptionIndex].id]?.scrollIntoView({ block: "nearest" })
@@ -194,7 +252,7 @@
     }
     
     if (event.type === "mouseenter") {
-      highlightedOptionIndex = index
+      hoveredOptionIndex = index
     } else if (event.type === "keypress" && event instanceof KeyboardEvent && event.key === "Enter") {
       selectOption(filteredOptions[index])
     } else if (event.type === "click") {
@@ -202,17 +260,9 @@
     }
   }
   
-  $: filter, options, filterListener()
+  $effect(() => { filter; filterListener() })
   const filterListener = () => {
-    filteredOptions = options.filter((option) => {
-      return option.keywords.toLowerCase().includes(filter.toLowerCase())
-    })
-    
-    highlightedOptionIndex = filteredOptions.findIndex((option) => {
-      return option.id === previousSelection?.id
-    })
-    
-    highlightedOptionIndex = highlightedOptionIndex === -1 ? 0 : highlightedOptionIndex
+    updateOptionsLayout(optionsPlacement)
   }
   
 </script>

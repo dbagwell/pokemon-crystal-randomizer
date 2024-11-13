@@ -1,12 +1,11 @@
 <div
   bind:this={container}
-  style:cursor="pointer"
   style:flex-grow={flexGrow ? "1" : ""}
-  on:click|preventDefault={onClick}
-  on:mousedown={onMouseDown}
-  on:mouseup={onMouseUp}
-  on:mouseleave={onMouseLeave}
-  on:mouseenter={onMouseEnter}
+  onclick={handleClickEvent}
+  onmousedown={handleMouseDownEvent}
+  onmouseenter={handleMouseEnterEvent}
+  onmouseleave={handleMouseLeaveEvent}
+  onmouseup={handleMouseUpEvent}
 >
   <Stack
     alignment="center"
@@ -29,11 +28,23 @@
   import { colors } from "@scripts/colors"
   import { onMount } from "svelte"
   
-  export let style: "fill" | "icon"
-  export let isDestructive = false
-  export let title: string
-  export let flexGrow = false
-  export let onClick: () => void
+  type Props = {
+    style: "fill" | "icon"
+    isDestructive?: boolean
+    title: string
+    flexGrow?: boolean
+    isDisabled?: boolean
+    onClick: () => void
+  }
+  
+  const {
+    style,
+    isDestructive = false,
+    title,
+    flexGrow = false,
+    isDisabled = $bindable(false),
+    onClick,
+  }: Props = $props()
   
   let container: HTMLElement
   let textContainer: HTMLElement
@@ -44,37 +55,46 @@
     updateStyle()
   })
   
-  const onMouseEnter = () => {
+  const handleClickEvent = (event: Event) => {
+    event.preventDefault()
+    
+    if (!isDisabled) {
+      onClick()
+    }
+  }
+  
+  const handleMouseEnterEvent = () => {
     isHovered = true
     isActive = container.matches.call(container, ":active")
     updateStyle()
   }
   
-  const onMouseDown = () => {
+  const handleMouseDownEvent = () => {
     isActive = true
     updateStyle()
   }
   
-  const onMouseUp = () => {
+  const handleMouseUpEvent = () => {
     isActive = false
     updateStyle()
   }
   
-  const onMouseLeave = () => {
+  const handleMouseLeaveEvent = () => {
     isHovered = false
     isActive = false
     updateStyle()
   }
   
   const updateStyle = () => {
-    container.style.opacity = isActive ? "0.2" : "1"
+    container.style.opacity = isActive || isDisabled ? "0.2" : "1"
+    container.style.cursor = isDisabled ? "default" : "pointer"
       
     switch (style) {
     case "fill": {
       container.style.backgroundColor = isDestructive ? colors.destructiveTint : colors.primaryButtonBackground
       container.style.borderStyle = "solid"
       container.style.borderWidth = "3px"
-      container.style.borderColor = isHovered
+      container.style.borderColor = isHovered && !isDisabled
         ? isDestructive ? colors.destructiveHighlight : colors.primaryButtonHighlightedBackground
         : isDestructive ? colors.destructiveTint : colors.primaryButtonBackground
       container.style.height = "44px"
@@ -94,11 +114,16 @@
       container.style.borderRadius = ""
       container.style.boxShadow = ""
       textContainer.style.fontSize = "16px"
-      textContainer.style.color = isHovered
+      textContainer.style.color = isHovered && !isDisabled
         ? isDestructive ? colors.destructiveTint : colors.activeTint
         : colors.inactiveTint
       textContainer.className = "material-icons"
     }
     }
+  }
+  
+  $effect(() => { isDisabled; isDisabledListener() })
+  const isDisabledListener = () => {
+    updateStyle()
   }
 </script>

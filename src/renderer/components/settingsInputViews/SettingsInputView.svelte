@@ -1,17 +1,17 @@
 {#if viewModel.type === "INTEGER_INPUT"}
-  <IntegerInputView viewModel={viewModel}/>
+  <IntegerInputView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "INTEGER_INPUT_GROUP"}
-  <IntegerInputGroupView viewModel={viewModel}/>
+  <IntegerInputGroupView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "TEXT_INPUT"}
-  <TextInputView viewModel={viewModel}/>
+  <TextInputView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "SINGLE_SELECTOR"}
-  <SingleSelectorView viewModel={viewModel}/>
+  <SingleSelectorView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "SIMPLE_MULTI_SELECTOR"}
-  <SimpleMultiSelectorView viewModel={viewModel}/>
+  <SimpleMultiSelectorView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "CONFIGURABLE_MULTI_SELECTOR"}
-  <ConfigurableMultiSelectorView viewModel={viewModel}/>
+  <ConfigurableMultiSelectorView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "TOGGLE"}
-  <ToggleView viewModel={viewModel}/>
+  <ToggleView bind:viewModel={viewModel}/>
 {:else}
   <Never neverValue={viewModel}/>
 {/if}
@@ -28,6 +28,12 @@
   import ToggleView from "@components/settingsInputViews/ToggleView.svelte"
   import Never from "@components/utility/Never.svelte"
   import type { InputViewModel } from "@shared/types/viewModels"
-
-  export let viewModel: InputViewModel
+  
+  type Props = {
+    viewModel: InputViewModel
+  }
+  
+  let {
+    viewModel = $bindable(),
+  }: Props = $props()
 </script>

@@ -23,17 +23,18 @@
         style:width="100%"
         max={max}
         min={min}
+        onblur={handleBlurEvent}
+        onfocus={handleFocusEvent}
+        oninput={handleInputEvent}
+        onkeydown={handleKeyDownEvent}
+        onkeypress={handleKeyPressEvent}
         type={type}
         value={value}
-        on:focus={onFocus}
-        on:blur={onBlur}
-        on:input={onInput}
       />
       {#if isNotNullish(title)}
         <div
           bind:this={titleDiv}
           style:position="absolute"
-          style:transition="all 0.25s"
           style:transform-origin="bottom left"
           style:bottom="0px"
           style:color={colors.inactiveTint}
@@ -64,15 +65,36 @@
   import Stack from "@components/layout/Stack.svelte"
   import { colors } from "@scripts/colors"
   import { isNotNullish, isNullish } from "@shared/utils"
-  import { createEventDispatcher, onMount } from "svelte"
-
-  export let title: string | undefined = undefined
-  export let value: ValueType | undefined = undefined
-  export let type: TypeType
-  export let min: number = Number.NaN
-  export let max: number = Number.NaN
-  export let width: number | undefined = undefined
-  export let minWidth: number | undefined = undefined
+  
+  type Props = {
+    title?: string
+    value?: ValueType
+    type: TypeType
+    min?: number
+    max?: number
+    width?: number
+    minWidth?: number
+    onFocus?: (event: Event) => void
+    onBlur?: (event: Event) => void
+    onKeyDown?: (event: Event) => void
+    onKeyPress?: (event: Event) => void
+  }
+  
+  /* eslint-disable prefer-const */
+  let {
+    title,
+    value = $bindable(),
+    type,
+    min = Number.NaN,
+    max = Number.NaN,
+    width,
+    minWidth,
+    onFocus,
+    onBlur,
+    onKeyDown,
+    onKeyPress,
+  }: Props = $props()
+  /* eslint-enable prefer-const */
   
   let _isFocused = false
   export const isFocused = () => {
@@ -83,20 +105,13 @@
     return container
   }
   
-  let isMounted = false
+  let hasSetInitialStyle = false
   let container: HTMLElement
   let input: HTMLInputElement
-  let titleDiv: HTMLElement
-  
-  const dispath = createEventDispatcher()
-  
-  onMount(() => {
-    isMounted = true
-    updateStyle()
-  })
+  let titleDiv: HTMLElement | undefined = $state()
   
   const updateStyle = () => {
-    if (isNotNullish(title)) {
+    if (isNotNullish(titleDiv)) {
       if (isFocused()) {
         titleDiv.style.color = colors.activeTint
       } else {
@@ -112,12 +127,18 @@
         titleDiv.style.transform = "scale(0.7)"
         titleDiv.style.width = "130%"
       }
+      
+      if (hasSetInitialStyle) {
+        titleDiv.style.transition = "all 0.25s"
+      }
     }
+    
+    hasSetInitialStyle = true
   }
   
-  const onInput = () => {
+  const handleInputEvent = () => {
     if (type === "number") {
-      if (Number.isNaN(input.value)) {
+      if (Number.isNaN(input.value) || isNullish(input.value)) {
         value = undefined
       } else {
         value = parseInt(input.value) as ValueType
@@ -127,22 +148,28 @@
     }
   }
   
-  const onFocus = (event: Event) => {
+  const handleFocusEvent = (event: Event) => {
     _isFocused = true
     updateStyle()
-    dispath("focus", event)
+    onFocus?.(event)
   }
   
-  const onBlur = (event: Event) => {
+  const handleBlurEvent = (event: Event) => {
     _isFocused = false
     updateStyle()
-    dispath("blur", event)
+    onBlur?.(event)
   }
   
-  $: value, valueListener()
+  const handleKeyDownEvent = (event: Event) => {
+    onKeyDown?.(event)
+  }
+  
+  const handleKeyPressEvent = (event: Event) => {
+    onKeyPress?.(event)
+  }
+  
+  $effect(() => { value; valueListener() })
   const valueListener = () => {
-    if (isMounted) {
-      updateStyle()
-    }
+    updateStyle()
   }
 </script>

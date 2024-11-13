@@ -7,73 +7,75 @@
   style:background-color="#00000055"
   style:backdrop-filter="blur(10px)"
   style:z-index={zIndexes.dialogLayer}
-  on:click|self={cancelButtonClicked}
+  onclick={cancelButtonClicked}
 >
-  <div
-    style:position="absolute"
-    style:margin="auto"
-    style:width="auto"
-    style:height="auto"
-    style:background-color={colors.background}
-    style:box-shadow="5px 5px 5px #00000070"
-    style:border-radius="20px"
-    style:top="50%"
-    style:left="50%"
-    style:transform="translate(-50%, -50%)"
+</div>
+<div
+  style:position="absolute"
+  style:margin="auto"
+  style:width="auto"
+  style:height="auto"
+  style:background-color={colors.background}
+  style:box-shadow="5px 5px 5px #00000070"
+  style:border-radius="20px"
+  style:top="50%"
+  style:left="50%"
+  style:transform="translate(-50%, -50%)"
+  style:z-index={zIndexes.dialogLayer}
+>
+  <Stack
+    alignment="fill"
+    direction="vertical"
+    distribution="fill"
+    minSpacing={20}
+    padding={50}
   >
+    {#if isNotNullish(title)}
+      <div
+        style:color={colors.text}
+        style:font-size="20px"
+      >
+        {title}
+      </div>
+    {/if}
+  
+    {#if isNotNullish(message)}
+      <div style:color={colors.text}>{message}</div>
+    {/if}
+  
+    {#if isNotNullish(inputInfo)}
+      <FileInput
+        allowedFileTypes={inputInfo.fileExtension}
+        title={inputInfo.title}
+        bind:value={selectedFileName}
+        bind:files={files}
+      />
+    {/if}
     <Stack
       alignment="fill"
-      direction="vertical"
+      direction="horizontal"
       distribution="fill"
       minSpacing={20}
-      padding={50}
     >
-      {#if isNotNullish(title)}
-        <div
-          style:color={colors.text}
-          style:font-size="20px"
-        >
-          {title}
-        </div>
-      {/if}
-    
-      {#if isNotNullish(message)}
-        <div style:color={colors.text}>{message}</div>
-      {/if}
-    
-      {#if isNotNullish(inputInfo)}
-        <FileInput
-          allowedFileTypes={inputInfo.fileExtension}
-          title={inputInfo.title}
-          bind:value={selectedFileName}
-          bind:files={files}
-        />
-      {/if}
-      <Stack
-        alignment="fill"
-        direction="horizontal"
-        distribution="fill"
-        minSpacing={20}
-      >
-        {#if hasCancelButton}
-          <Button
-            style="fill"
-            flexGrow={true}
-            isDestructive={true}
-            onClick={cancelButtonClicked}
-            title="Cancel"
-          />
-        {/if}
-    
+      {#if hasCancelButton}
         <Button
           style="fill"
           flexGrow={true}
-          onClick={submitButtonClicked}
-          title={submitButtonLabel}
+          isDestructive={true}
+          onClick={cancelButtonClicked}
+          title="Cancel"
         />
-      </Stack>
+      {/if}
+  
+      <Button
+        style="fill"
+        flexGrow={true}
+        onClick={submitButtonClicked}
+        title={submitButtonLabel}
+        bind:isDisabled={isSubmitButtonDisabled}
+      />
     </Stack>
-  </div>
+  </Stack>
 </div>
 
 <script lang="ts">
@@ -84,20 +86,33 @@
   import { zIndexes } from "@scripts/constants"
   import type { DialogInputInfo } from "@shared/types/dialog"
   import { isNotNullish, isNullish } from "@utils"
-
-  export let open = true
-  export let title: string | undefined
-  export let message: string | undefined
-  export let inputInfo: DialogInputInfo | undefined
-  export let hasCancelButton = false
-  export let submitButtonLabel = "Submit"
-  export let onCancel: () => void
-  export let onSubmit: ((inputValue: any) => void)
-  export let onDismiss: () => void
   
-  let submitButton: Button
-  let selectedFileName: string | undefined
-  let files: FileList | undefined
+  type Props = {
+    title?: string
+    message?: string
+    inputInfo?: DialogInputInfo
+    hasCancelButton?: boolean
+    submitButtonLabel?: string
+    onCancel: () => void
+    onSubmit: ((inputValue: any) => void)
+    onDismiss: () => void
+  }
+  
+  const {
+    title,
+    message,
+    inputInfo,
+    hasCancelButton = false,
+    submitButtonLabel = "Submit",
+    onCancel,
+    onSubmit,
+    onDismiss,
+  }: Props = $props()
+  
+  let selectedFileName: string | undefined = $state()
+  let files: FileList | undefined = $state()
+  let open = $state(true)
+  let isSubmitButtonDisabled = $state(false)
   
   const selectedFile = (): File | undefined => {
     if (isNotNullish(files) && files.length !== 0) {
@@ -135,14 +150,14 @@
     open = false
   }
   
-  $: files, selectedFileName, filesChanged()
+  $effect(() => { files; selectedFileName; filesChanged() })
   const filesChanged = async () => {
-    if (submitButton !== null && submitButton !== undefined) {
-      submitButton.getElement().disabled = isNullish(await inputValue())
+    if (isNotNullish(inputInfo)) {
+      isSubmitButtonDisabled = isNullish(await inputValue())
     }
   }
   
-  $: open, openListener()
+  $effect(() => { open; openListener() })
   const openListener = () => {
     if (!open) {
       onDismiss()

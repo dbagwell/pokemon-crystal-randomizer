@@ -55,8 +55,8 @@
         padding={[10, 0, 0, 20]}
         wrap={true}
       >
-        {#each viewModel.viewModels as subViewModel (subViewModel.id)}
-          <SettingsInputView viewModel={subViewModel}/>
+        {#each viewModel.viewModels as subViewModel, index (subViewModel.id)}
+          <SettingsInputView bind:viewModel={viewModel.viewModels[index]}/>
         {/each}
       </Stack>
     </div>
@@ -69,5 +69,11 @@
   import { colors } from "@scripts/colors"
   import type { ToggleViewModel } from "@shared/types/viewModels"
   
-  export let viewModel: ToggleViewModel
+  type Props = {
+    viewModel: ToggleViewModel
+  }
+  
+  const {
+    viewModel = $bindable(),
+  }: Props = $props()
 </script>
