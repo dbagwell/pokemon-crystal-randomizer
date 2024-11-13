@@ -1678,8 +1678,17 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     const randomTeamsSettings = settings.RANDOMIZE_TRAINER_POKEMON.SETTINGS
     
     updatedTrainers.forEach((trainer) => {
-      const typeFilter = randomTeamsSettings.TYPE_THEME_TEAMS ? pokemonTypeIds[randomInt(0, pokemonTypeIds.length - 1)] : undefined
-      const nonBannedAndTypeFilteredPokemon = (Object.values(pokemonMap) as Pokemon[]).filter((pokemon) => {
+      const nonBannedPokemon = (Object.values(pokemonMap) as Pokemon[]).filter((pokemon) => {
+        return !randomTeamsSettings.BAN.includes(pokemon.id)
+      })
+      
+      const availableTypes = pokemonTypeIds.filter((typeId) => {
+        return typeId !== "NONE"
+      })
+      
+      const typeFilter = randomTeamsSettings.TYPE_THEME_TEAMS ? availableTypes[randomInt(0, availableTypes.length - 1)] : undefined
+      
+      const nonBannedAndTypeFilteredPokemon = nonBannedPokemon.filter((pokemon) => {
         return !randomTeamsSettings.BAN.includes(pokemon.id) && (isNullish(typeFilter) || pokemon.types.includes(typeFilter))
       })
       
