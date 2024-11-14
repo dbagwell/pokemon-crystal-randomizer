@@ -7,6 +7,8 @@
     style:cursor="pointer"
     style:color={colors.text}
     style:font-size="16px"
+    onmouseenter={handleMouseEnterEvent}
+    onmouseleave={handleMouseLeaveEvent}
     use:tooltip={isNotNullish(viewModel.description) ? descriptionTooltip : undefined}
   >
     <input
@@ -23,7 +25,7 @@
       minSpacing={10}
     >
       <div
-        style:border="2px solid {viewModel.isOn ? colors.primaryButtonBackground : colors.inactiveTint}"
+        style:border="2px solid {isHovered ? colors.primaryButtonHighlightedBackground : viewModel.isOn ? colors.primaryButtonBackground : colors.inactiveTint}"
         style:border-radius="5px"
         style:cursor="pointer"
         style:width="20px"
@@ -43,7 +45,7 @@
   </label>
   {#if "viewModels" in viewModel && viewModel.isOn}
     <div
-      style:margin-left="9.5px"
+      style:margin-left="9px"
       style:border-left="2px solid {colors.primaryButtonBackground}"
       style:border-radius="0 0 0 20px"
     >
@@ -84,4 +86,14 @@
   const {
     viewModel = $bindable(),
   }: Props = $props()
+  
+  let isHovered = $state(false)
+  
+  const handleMouseEnterEvent = () => {
+    isHovered = true
+  }
+  
+  const handleMouseLeaveEvent = () => {
+    isHovered = false
+  }
 </script>
