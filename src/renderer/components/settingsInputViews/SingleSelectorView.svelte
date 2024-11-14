@@ -26,7 +26,7 @@
   {#each viewModel.options as option (option.id)}
     {#if option.id === viewModel.selectedOptionId && "viewModels" in option}
       <div
-        style:border-left="2px solid {colors.separator}"
+        style:border-left="2px solid {colors.activeTint}"
         style:border-radius="0 0 0 20px"
       >
         <Stack
@@ -34,7 +34,7 @@
           direction="vertical"
           distribution="start"
           minSpacing={15}
-          padding={[10, 0, 0, 20]}
+          padding={[10, 0, 10, 20]}
           wrap={true}
         >
           {#each option.viewModels as subViewModel (subViewModel.id)}

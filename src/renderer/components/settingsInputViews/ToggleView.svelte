@@ -52,7 +52,7 @@
         direction="vertical"
         distribution="start"
         minSpacing={15}
-        padding={[10, 0, 0, 20]}
+        padding={[10, 0, 10, 20]}
         wrap={true}
       >
         {#each viewModel.viewModels as subViewModel, index (subViewModel.id)}
