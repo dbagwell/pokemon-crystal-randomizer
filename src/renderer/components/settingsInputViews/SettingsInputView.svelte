@@ -15,8 +15,6 @@
 {:else}
   <Never neverValue={viewModel}/>
 {/if}
-<div>
-</div>
 
 <script lang="ts">
   import ConfigurableMultiSelectorView from "@components/settingsInputViews/ConfigurableMultiSelectorView.svelte"

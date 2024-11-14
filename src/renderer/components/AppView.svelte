@@ -76,7 +76,7 @@
       {#each viewModel.tabViewModels as tabViewModel (tabViewModel.id)}
         {#if viewModel.selectedTabId === tabViewModel.id}
           <Stack
-            alignment="fill"
+            alignment="start"
             direction="vertical"
             distribution="start"
             minSpacing={20}

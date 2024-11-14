@@ -33,7 +33,7 @@
           alignment="start"
           direction="vertical"
           distribution="start"
-          minSpacing={10}
+          minSpacing={15}
           padding={[10, 0, 0, 20]}
           wrap={true}
         >
