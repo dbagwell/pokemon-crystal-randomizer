@@ -120,6 +120,8 @@
 
 <DialogContainer/>
 
+<Tooltip/>
+
 <script lang="ts">
   import Button from "@components/buttons/Button.svelte"
   import DialogContainer, { showErrorDialog, showSuccessDialog } from "@components/dialogs/DialogContainer.svelte"
@@ -127,6 +129,7 @@
   import Stack from "@components/layout/Stack.svelte"
   import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/utility/ProgressIndicator.svelte"
+  import Tooltip from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
   import { applySettingsToAppViewModel } from "@shared/appData/applySettingsToAppViewModel"
   import { defaultAppViewModel } from "@shared/appData/defaultAppViewModel"

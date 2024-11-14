@@ -1,13 +1,23 @@
-<TextField
-  onBlur={textFieldBlurHandler}
-  onFocus={textFieldFocusHandler}
-  title={viewModel.name}
-  type="text"
-  bind:value={value}
-/>  <!-- TODO: Description -->
+<div use:tooltip={isNotNullish(viewModel.description) ? descriptionTooltip : undefined}>
+  <TextField
+    onBlur={textFieldBlurHandler}
+    onFocus={textFieldFocusHandler}
+    title={viewModel.name}
+    type="text"
+    bind:value={value}
+  />
+</div>
+
+{#snippet descriptionTooltip()}
+  <div>
+    {viewModel.description}
+  </div>
+{/snippet}
+
 <script lang="ts">
   import { showErrorDialog } from "@components/dialogs/DialogContainer.svelte"
   import TextField from "@components/inputs/TextField.svelte"
+  import { tooltip } from "@components/utility/Tooltip.svelte"
   import type { TextInputViewModel } from "@shared/types/viewModels"
   import { isNotNullish, isNullish } from "@shared/utils"
   

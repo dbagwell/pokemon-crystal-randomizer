@@ -7,6 +7,7 @@
     style:cursor="pointer"
     style:color={colors.text}
     style:font-size="16px"
+    use:tooltip={isNotNullish(viewModel.description) ? descriptionTooltip : undefined}
   >
     <input
       style:position="absolute"
@@ -40,7 +41,6 @@
       </div>
     </Stack>
   </label>
-  <!-- TODO: Description -->
   {#if "viewModels" in viewModel && viewModel.isOn}
     <div
       style:margin-left="9.5px"
@@ -63,11 +63,19 @@
   {/if}
 </Stack>
 
+{#snippet descriptionTooltip()}
+  <div>
+    {viewModel.description}
+  </div>
+{/snippet}
+
 <script lang="ts">
   import Stack from "@components/layout/Stack.svelte"
   import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
+  import { tooltip } from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
   import type { ToggleViewModel } from "@shared/types/viewModels"
+  import { isNotNullish } from "@shared/utils"
   
   type Props = {
     viewModel: ToggleViewModel

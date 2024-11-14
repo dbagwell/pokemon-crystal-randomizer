@@ -24,6 +24,12 @@
     distribution="start"
   >
     {#each filteredOptions as option, index (option.id)}
+      {#snippet descriptionTooltip()}
+        <div>
+          {option.description}
+        </div>
+      {/snippet}
+      
       <div
         bind:this={optionElements[option.id]}
         style:cursor="pointer"
@@ -35,6 +41,7 @@
         onmouseenter={handleOptionElementEvent}
         role="button"
         tabindex="0"
+        use:tooltip={isNotNullish(option.description) ? descriptionTooltip : undefined}
       >
         <Stack
           alignment="fill"
@@ -52,7 +59,9 @@
         distribution="fill"
         padding={10}
       >
-        No matches found.
+        <div style:color={colors.text}>
+          No matches found.
+        </div>
       </Stack>
     {/each}
   </Stack>
@@ -65,6 +74,7 @@
   export type Option = {
     id: string
     name: string
+    description?: string
     keywords: string
     value: any
   }
@@ -74,6 +84,7 @@
 <script lang="ts">
   import TextField from "@components/inputs/TextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
+  import { tooltip } from "@components/utility/Tooltip.svelte"
   import { autoUpdate, computePosition, flip, type Placement, size } from "@floating-ui/dom"
   import { colors } from "@scripts/colors"
   import { isNotNullish, isNullish } from "@shared/utils"

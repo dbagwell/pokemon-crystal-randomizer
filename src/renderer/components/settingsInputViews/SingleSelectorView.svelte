@@ -3,24 +3,26 @@
   direction="vertical"
   distribution="start"
 >
-  <AutocompleteTextField
-    clearOnFocus={true}
-    clearOnSelect={false}
-    filter={filter}
-    onSelect={handleAutocompleteSelection}
-    options={viewModel.options.map((option) => {
-      return {
-        id: option.id,
-        name: option.name,
-        keywords: option.name,
-        value: option.id,
-      }
-    })}
-    previousSelection={previousSelection}
-    restoreOnBlur={true}
-    title={viewModel.name}
-  />
-  <!-- TODO: Description -->
+  <div use:tooltip={isNotNullish(viewModel.description) ? descriptionTooltip : undefined}>
+    <AutocompleteTextField
+      clearOnFocus={true}
+      clearOnSelect={false}
+      filter={filter}
+      onSelect={handleAutocompleteSelection}
+      options={viewModel.options.map((option) => {
+        return {
+          id: option.id,
+          name: option.name,
+          description: option.description,
+          keywords: option.name,
+          value: option.id,
+        }
+      })}
+      previousSelection={previousSelection}
+      restoreOnBlur={true}
+      title={viewModel.name}
+    />
+  </div>
   {#each viewModel.options as option (option.id)}
     {#if option.id === viewModel.selectedOptionId && "viewModels" in option}
       <div
@@ -44,10 +46,17 @@
   {/each}
 </Stack>
 
+{#snippet descriptionTooltip()}
+  <div>
+    {viewModel.description}
+  </div>
+{/snippet}
+
 <script lang="ts">
   import AutocompleteTextField, { type Option } from "@components/inputs/AutocompleteTextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
   import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
+  import { tooltip } from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
   import type { SingleSelectorViewModel } from "@shared/types/viewModels"
   import { isNotNullish } from "@shared/utils"

@@ -1,6 +1,7 @@
 <div
   style:color={colors.text}
   style:font-size="16px"
+  use:tooltip={isNotNullish(viewModel.description) ? descriptionTooltip : undefined}
 >
   {viewModel.name}
 </div>
@@ -25,11 +26,18 @@
     />
   {/each}
 </Stack>
-<!-- TODO: Description -->
+
+{#snippet descriptionTooltip()}
+  <div>
+    {viewModel.description}
+  </div>
+{/snippet}
+
 <script lang="ts">
   import { showErrorDialog } from "@components/dialogs/DialogContainer.svelte"
   import TextField from "@components/inputs/TextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
+  import { tooltip } from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
   import type { IntegerInputGroupViewModel } from "@shared/types/viewModels"
   import { isNotNullish, isNullish } from "@shared/utils"

@@ -3,23 +3,25 @@
   direction="vertical"
   distribution="start"
 >
-  <AutocompleteTextField
-    bind:this={autocompleteTextField}
-    clearOnFocus={true}
-    clearOnSelect={true}
-    onSelect={handleAutocompleteSelection}
-    options={availableOptions.map((option) => {
-      return {
-        id: option.id,
-        name: option.name,
-        keywords: option.name,
-        value: option.id,
-      }
-    })}
-    restoreOnBlur={false}
-    title={viewModel.name ?? ""}
-  />
-  <!-- TODO: Description -->
+  <div use:tooltip={isNotNullish(viewModel.description) ? descriptionTooltip : undefined}>
+    <AutocompleteTextField
+      bind:this={autocompleteTextField}
+      clearOnFocus={true}
+      clearOnSelect={true}
+      onSelect={handleAutocompleteSelection}
+      options={availableOptions.map((option) => {
+        return {
+          id: option.id,
+          name: option.name,
+          description: option.description,
+          keywords: option.name,
+          value: option.id,
+        }
+      })}
+      restoreOnBlur={false}
+      title={viewModel.name ?? ""}
+    />
+  </div>
   {#if viewModel.selectedOptionIds.length > 0}
     <Stack
       alignment="fill"
@@ -29,6 +31,12 @@
       padding={5}
     >
       {#each selectedOptions as selectedOption, index (selectedOption.id)}
+        {#snippet optionDescriptionTooltip()}
+          <div>
+            {selectedOption.description}
+          </div>
+        {/snippet}
+        
         <Stack
           alignment="center"
           direction="horizontal"
@@ -46,6 +54,7 @@
             style:flex-grow="1"
             style:color={colors.text}
             style:font-size="16px"
+            use:tooltip={isNotNullish(selectedOption.description) ? optionDescriptionTooltip : undefined}
           >
             {selectedOption.name}
           </div>
@@ -55,10 +64,17 @@
   {/if}
 </Stack>
 
+{#snippet descriptionTooltip()}
+  <div>
+    {viewModel.description}
+  </div>
+{/snippet}
+
 <script lang="ts">
   import Button from "@components/buttons/Button.svelte"
   import AutocompleteTextField from "@components/inputs/AutocompleteTextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
+  import { tooltip } from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
   import type { SelectorOption, SimpleMultiSelectorViewModel } from "@shared/types/viewModels"
   import { isNotNullish } from "@shared/utils"

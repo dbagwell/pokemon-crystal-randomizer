@@ -33,6 +33,7 @@ export const lightThemeColors = {
   progressIndicatorHighlight: crystalGold,
   separator: gray44,
   text: gray0A,
+  tooltipBackground: grayDD,
 }
 
 export const darkThemeColors = {
@@ -52,6 +53,7 @@ export const darkThemeColors = {
   progressIndicatorHighlight: crystalGold,
   separator: gray77,
   text: grayEE,
+  tooltipBackground: gray28,
 } satisfies typeof lightThemeColors
 
 export let colors = darkThemeColors
