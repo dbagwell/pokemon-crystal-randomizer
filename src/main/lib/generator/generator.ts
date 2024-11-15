@@ -431,11 +431,11 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     })
     
     const shouldBeFullyEvolved = (encounter: Encounter): boolean => {
-      return isNotNullish(wildEcountersSettings.FULLY_EVOLVED_LEVEL_THRESHOLD)
+      return wildEcountersSettings.FORCE_FULLY_EVOLVED_BELOW_LEVEL.VALUE
         && (encounter.type !== "FISHING" || !encounter.isTimeGroup)
         && (
-          encounter.type !== "CONTEST" && encounter.level <= wildEcountersSettings.FULLY_EVOLVED_LEVEL_THRESHOLD
-            || encounter.type === "CONTEST" && encounter.minLevel <= wildEcountersSettings.FULLY_EVOLVED_LEVEL_THRESHOLD
+          encounter.type !== "CONTEST" && encounter.level < wildEcountersSettings.FORCE_FULLY_EVOLVED_BELOW_LEVEL.SETTINGS.THRESHOLD
+            || encounter.type === "CONTEST" && encounter.minLevel < wildEcountersSettings.FORCE_FULLY_EVOLVED_BELOW_LEVEL.SETTINGS.THRESHOLD
         )
     }
     
@@ -958,8 +958,8 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     })
   })
   
-  if (isNotNullish(settings.HAPPINESS_EVOLUTION_REQUIREMENT)) {
-    hunks = [...hunks, new DataHunk(ROMOffset.fromBankAddress(16, 0x6287), [settings.HAPPINESS_EVOLUTION_REQUIREMENT])]
+  if (settings.CHANGE_HAPPINESS_EVOLUTION_REQUIREMENT.VALUE) {
+    hunks = [...hunks, new DataHunk(ROMOffset.fromBankAddress(16, 0x6287), [settings.CHANGE_HAPPINESS_EVOLUTION_REQUIREMENT.SETTINGS.MINIMUM_HAPPINESS])]
   }
   
   // Random Level Up Moves
@@ -976,7 +976,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         return movesMap[moveId]
       })
       
-      const numberOfLevelOneMovesToAdd = (levelUpMovesSettings.LEVEL_ONE_MOVES ?? 0) - pokemon.levelUpMoves.filter((levelUpMove) => { return levelUpMove.level === 1 }).length
+      const numberOfLevelOneMovesToAdd = (levelUpMovesSettings.GUARANTEE_LEVEL_ONE_MOVES.VALUE ? levelUpMovesSettings.GUARANTEE_LEVEL_ONE_MOVES.SETTINGS.MINIMUM : 0) - pokemon.levelUpMoves.filter((levelUpMove) => { return levelUpMove.level === 1 }).length
       const totalNumberOfMoves = numberOfLevelOneMovesToAdd + pokemon.levelUpMoves.length
       const indicesOfForcedGoodMoves: number[] = []
       const minPowerForForcedGoodMoves = levelUpMovesSettings.GOOD_DAMAGING_MOVES.SETTINGS.POWER
@@ -1172,8 +1172,8 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   
   // Pokemon Info
   
-  if (isNotNullish(settings.INCREASE_POKEMON_CATCH_RATES_PERCENTAGE)) {
-    const percentage = settings.INCREASE_POKEMON_CATCH_RATES_PERCENTAGE
+  if (settings.INCREASE_POKEMON_CATCH_RATES.VALUE) {
+    const percentage = settings.INCREASE_POKEMON_CATCH_RATES.SETTINGS.PERCENTAGE
     
     Object.values(updatedPokemonDataMap).forEach((pokemon) => {
       pokemon.catchRate = (255 - pokemon.catchRate) * percentage / 100 + pokemon.catchRate
@@ -1693,7 +1693,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       })
       
       trainer.pokemon.forEach((pokemon, index) => {
-        const availablePokemon = isNotNullish(randomTeamsSettings.FULLY_EVOLVED_LEVEL_THRESHOLD) && pokemon.level >= randomTeamsSettings.FULLY_EVOLVED_LEVEL_THRESHOLD ? nonBannedAndTypeFilteredPokemon.filter((pokemon) => {
+        const availablePokemon = randomTeamsSettings.FORCE_FULLY_EVOLVED_ABOVE_LEVEL.VALUE && pokemon.level > randomTeamsSettings.FORCE_FULLY_EVOLVED_ABOVE_LEVEL.SETTINGS.THRESHOLD ? nonBannedAndTypeFilteredPokemon.filter((pokemon) => {
           return isNullish(pokemon.evolutions)
         }) : nonBannedAndTypeFilteredPokemon
         

@@ -179,15 +179,21 @@ export const defaultAppViewModel = () => {
                 name: "Remove Time Based Encounters",
                 description: "Makes it so that the Pokémon encountered in a specific area are the same regardless of the time of day.",
               }),
-              createIntegerInputViewModel({
-                id: "FULLY_EVOLVED_LEVEL_THRESHOLD" as const,
-                name: "Fully Evolved Level Threshold",
+              createConfigurableToggleViewModel({
+                id: "FORCE_FULLY_EVOLVED_BELOW_LEVEL" as const,
+                name: "Force Fully Evolved Below Level",
                 description: "Ensure all selected Pokémon below the specified level are fully evolved.",
-                isRequired: false as const,
-                min: 1,
-                max: 100,
-                value: undefined,
-              }),
+                viewModels: [
+                  createIntegerInputViewModel({
+                    id: "THRESHOLD" as const,
+                    name: "Threshold",
+                    isRequired: true as const,
+                    min: 1,
+                    max: 100,
+                    value: 10,
+                  }),
+                ] as const,
+              }), // END FORCE_FULLY_EVOLVED_BELOW_LEVEL
               createSingleSelectorViewModel({
                 id: "AVAILABILITY" as const,
                 name: "Availability",
@@ -259,15 +265,21 @@ export const defaultAppViewModel = () => {
                 name: "Type Theme Teams",
                 description: "Ensure all Pokémon on each Trainer's team share at least one common type.",
               }),
-              createIntegerInputViewModel({
-                id: "FULLY_EVOLVED_LEVEL_THRESHOLD" as const,
-                name: "Fully Evolved Level Threshold",
+              createConfigurableToggleViewModel({
+                id: "FORCE_FULLY_EVOLVED_ABOVE_LEVEL" as const,
+                name: "Force Fully Evolved Above Level",
                 description: "Ensure all selected Pokémon above the specified level are fully evolved.",
-                isRequired: false as const,
-                min: 1,
-                max: 100,
-                value: undefined,
-              }),
+                viewModels: [
+                  createIntegerInputViewModel({
+                    id: "THRESHOLD" as const,
+                    name: "Threshold",
+                    isRequired: true as const,
+                    min: 1,
+                    max: 100,
+                    value: 49,
+                  }),
+                ] as const,
+              }), // END FORCE_FULLY_EVOLVED_ABOVE_LEVEL
               createSimpleToggleViewModel({
                 id: "INGORE_RIVALS_STARTER" as const,
                 name: "Ignore Rival's Starter",
@@ -357,17 +369,23 @@ export const defaultAppViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_POKEMON_ENCOUNTER_RATIOS
-          createIntegerInputViewModel({
-            id: "INCREASE_POKEMON_CATCH_RATES_PERCENTAGE" as const,
+          createConfigurableToggleViewModel({
+            id: "INCREASE_POKEMON_CATCH_RATES" as const,
             name: "Increase Pokémon Catch Rates",
             description: "Makes it more likely for Pokémon to be caught. "
-             + "Increases each species' catch rate by a percentage of the difference between its vanilla catch rate and the max. "
-             + "At 100%, all Pokémon are as likely to be caught as Rattata.",
-            isRequired: false as const,
-            min: 0,
-            max: 100,
-            value: undefined,
-          }),
+              + "Increases each species' catch rate by a percentage of the difference between its vanilla catch rate and the max. "
+              + "At 100%, all Pokémon are as likely to be caught as Rattata.",
+            viewModels: [
+              createIntegerInputViewModel({
+                id: "PERCENTAGE" as const,
+                name: "Percentage",
+                isRequired: true as const,
+                min: 0,
+                max: 100,
+                value: 100,
+              }),
+            ] as const,
+          }), // END INCREASE_POKEMON_CATCH_RATES
           createConfigurableToggleViewModel({
             id: "STANDARDIZE_POKEMON_GROWTH_RATES" as const,
             name: "Standardize Pokémon Growth Rates",
@@ -464,15 +482,21 @@ export const defaultAppViewModel = () => {
             name: "Change Time Based Evolution Methods",
             description: "Changes Espeon and Umbreon to evolve using Sun and Moon stones respectively.",
           }),
-          createIntegerInputViewModel({
-            id: "HAPPINESS_EVOLUTION_REQUIREMENT" as const,
+          createConfigurableToggleViewModel({
+            id: "CHANGE_HAPPINESS_EVOLUTION_REQUIREMENT" as const,
             name: "Change Happiness Evolution Requirement",
-            description: "Sets the minimum happiness required to trigger a happiness evolution.",
-            isRequired: false as const,
-            min: 0,
-            max: 255,
-            value: undefined,
-          }),
+            description: "Change the minimum happiness required to trigger a happiness evolution.",
+            viewModels: [
+              createIntegerInputViewModel({
+                id: "MINIMUM_HAPPINESS" as const,
+                name: "Minimum Happiness",
+                isRequired: true as const,
+                min: 0,
+                max: 255,
+                value: 0,
+              }),
+            ] as const,
+          }), // END CHANGE_HAPPINESS_EVOLUTION_REQUIREMENT
         ] as const,
       }), // END POKEMON_PROPERTIES
       createTabViewModel({
@@ -492,15 +516,21 @@ export const defaultAppViewModel = () => {
                 description: "Reorders the moves after randomization so that damaging moves with more power are learned after damaging moves with less power.",
               }),
               createGoodDamagingMovesToggleViewModel("that each Pokémon can learn by level up "),
-              createIntegerInputViewModel({
-                id: "LEVEL_ONE_MOVES" as const,
-                name: "Guaranteed Number of Level 1 Moves",
+              createConfigurableToggleViewModel({
+                id: "GUARANTEE_LEVEL_ONE_MOVES" as const,
+                name: "Guarantee Level 1 Moves",
                 description: "Adds level 1 moves to a Pokémon's level up moves if they normally have less than the specified number.",
-                isRequired: false as const,
-                min: 1,
-                max: 4,
-                value: undefined,
-              }),
+                viewModels: [
+                  createIntegerInputViewModel({
+                    id: "MINIMUM" as const,
+                    name: "Minimum",
+                    isRequired: true as const,
+                    min: 1,
+                    max: 4,
+                    value: 4,
+                  }),
+                ] as const,
+              }), // END ADD_LEVEL_ONE_MOVES
               createBannedMovesSelectorViewModel(),
             ] as const,
           }), // END RANDOMIZE_LEVEL_UP_MOVES

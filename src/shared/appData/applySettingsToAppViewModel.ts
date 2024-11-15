@@ -117,7 +117,7 @@ const applySettingsToTextInputViewModel = (settings: any, viewModel: TextInputVi
 const applySettingsToToggleViewModel = (settings: any, viewModel: ToggleViewModel, path: string, warnings: string[]) => {
   const expectedSettingsType = "boolean or a dictionary of with a 'VALUE' and 'SETTINGS'"
   const hasConfigurableSettings = "viewModels" in viewModel
-  const value = isBoolean(settings) ? settings : settings.VALUE
+  const value = isBoolean(settings) ? settings : settings?.VALUE ?? false
   
   if (isBoolean(value)) {
     viewModel.isOn = value
@@ -130,6 +130,10 @@ const applySettingsToToggleViewModel = (settings: any, viewModel: ToggleViewMode
     warnings.push(missingValueWarning(`${path}.VALUE`, "boolean"))
   } else {
     warnings.push(invalidValueWarning(`${path}.VALUE`, "boolean", value))
+  }
+  
+  if (isNullish(settings)) {
+    return
   }
   
   if (!hasConfigurableSettings) {
@@ -163,7 +167,7 @@ const applySettingsToToggleViewModel = (settings: any, viewModel: ToggleViewMode
   }
     
   viewModel.viewModels.forEach((subViewModel) => {
-    applySettingsToInputViewModel(settings.SETTINGS[subViewModel.id], subViewModel, `${path}.SETTINGS.${subViewModel.id}`, warnings)
+    applySettingsToInputViewModel(settings.SETTINGS?.[subViewModel.id], subViewModel, `${path}.SETTINGS.${subViewModel.id}`, warnings)
   })
 }
 
@@ -222,7 +226,7 @@ const applySettingsToSingleSelectorViewModel = (settings: any, viewModel: Single
   
   viewModel.options.forEach((option) => {
     if ("viewModels" in option) {
-      if (isNullish(settings.SETTINGS) || isNullish(settings.SETTINGS[option.id])) {
+      if (isNullish(settings.SETTINGS) || isNullish(settings.SETTINGS?.[option.id])) {
         if (option.id === selectedOptionId) {
           warnings.push(missingValueWarning(`${path}.SETTINGS.${option.id}`, "a dictionary of option configurations"))
         }
@@ -234,16 +238,16 @@ const applySettingsToSingleSelectorViewModel = (settings: any, viewModel: Single
         return viewModel.id
       })
       
-      Object.keys(settings.SETTINGS[option.id]).forEach((key) => {
+      Object.keys(settings.SETTINGS?.[option.id]).forEach((key) => {
         if (!viewModelIds.includes(key)) {
           warnings.push(unexpectedKeyWarning(`${path}.SETTINGS.${option.id}`, key))
         }
       })
       
       option.viewModels.forEach((viewModel) => {
-        applySettingsToInputViewModel(settings.SETTINGS[option.id][viewModel.id], viewModel, `${path}.SETTINGS.${option.id}.${viewModel.id}`, warnings)
+        applySettingsToInputViewModel(settings.SETTINGS?.[option.id][viewModel.id], viewModel, `${path}.SETTINGS.${option.id}.${viewModel.id}`, warnings)
       })
-    } else if (isNotNullish(settings.SETTINGS) && isNotNullish(settings.SETTINGS[option.id])) {
+    } else if (isNotNullish(settings.SETTINGS) && isNotNullish(settings.SETTINGS?.[option.id])) {
       warnings.push(unexpectedKeyWarning(`${path}.SETTINGS`, option.id))
     }
   })
