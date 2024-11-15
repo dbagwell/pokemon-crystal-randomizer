@@ -125,7 +125,7 @@
 
 <script lang="ts">
   import Button from "@components/buttons/Button.svelte"
-  import DialogContainer, { showErrorDialog, showSuccessDialog } from "@components/dialogs/DialogContainer.svelte"
+  import DialogContainer, { showDialog, showErrorDialog, showSuccessDialog } from "@components/dialogs/DialogContainer.svelte"
   import TextField from "@components/inputs/TextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
   import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
@@ -153,6 +153,14 @@
       const newViewModel = defaultAppViewModel()
       applySettingsToAppViewModel(initialSettings, newViewModel, warnings)
       viewModel = newViewModel
+      
+      if (warnings.length > 0) {
+        showDialog({
+          title: "Warning",
+          message: `Found invalid data while loading previous settings.\n\n${warnings.join("\n\n")}`,
+          submitButtonLabel: "OK",
+        })
+      }
     } catch (error) {
       showErrorDialog(error)
     }
