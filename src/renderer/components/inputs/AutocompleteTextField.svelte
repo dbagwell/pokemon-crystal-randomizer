@@ -57,7 +57,7 @@
         distribution="fill"
         padding={10}
       >
-        <div style:color={colors.text}>
+        <div use:textStyle={"item"}>
           No matches found.
         </div>
       </Stack>
@@ -86,6 +86,7 @@
   import { tooltip } from "@components/utility/Tooltip.svelte"
   import { autoUpdate, computePosition, flip, type Placement, size } from "@floating-ui/dom"
   import { colors } from "@scripts/colors"
+  import { textStyle } from "@scripts/textStyle"
   import { isNotNullish, isNullish } from "@shared/utils"
   
   type Props = {

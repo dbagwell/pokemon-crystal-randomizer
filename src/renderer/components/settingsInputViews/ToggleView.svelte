@@ -38,7 +38,7 @@
       >
         checkmark
       </div>
-      <div>
+      <div use:textStyle={"item"}>
         {viewModel.name}
       </div>
     </Stack>
@@ -75,6 +75,7 @@
   import TextTooltip from "@components/utility/TextTooltip.svelte"
   import { tooltip } from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
+  import { textStyle } from "@scripts/textStyle"
   import type { ToggleViewModel } from "@shared/types/viewModels"
   import { isNotNullish } from "@shared/utils"
   

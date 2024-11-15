@@ -31,16 +31,13 @@
     padding={50}
   >
     {#if isNotNullish(title)}
-      <div
-        style:color={colors.text}
-        style:font-size="20px"
-      >
+      <div use:textStyle={"title"}>
         {title}
       </div>
     {/if}
   
     {#if isNotNullish(message)}
-      <div style:color={colors.text}>{message}</div>
+      <div use:textStyle={"content"}>{message}</div>
     {/if}
   
     {#if isNotNullish(inputInfo)}
@@ -84,6 +81,7 @@
   import Stack from "@components/layout/Stack.svelte"
   import { colors } from "@scripts/colors"
   import { zIndexes } from "@scripts/constants"
+  import { textStyle } from "@scripts/textStyle"
   import type { DialogInputInfo } from "@shared/types/dialog"
   import { isNotNullish, isNullish } from "@utils"
   
