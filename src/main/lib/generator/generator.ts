@@ -12,6 +12,7 @@ import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
 import { mapObjectEvents } from "@shared/gameData/mapObjectEvents"
 import { mapObjectTypesMap } from "@shared/gameData/mapObjectTypes"
+import { martsMap } from "@shared/gameData/marts"
 import { type Move, movesMap } from "@shared/gameData/moves"
 import { oddEggs } from "@shared/gameData/oddEggs"
 import { overworldMovementBehavioursMap } from "@shared/gameData/overworldMovementBehaviours"
@@ -30,6 +31,7 @@ import { trainers } from "@shared/gameData/trainers"
 import type { Encounter } from "@shared/types/gameData/encounter"
 import { happinessEvolutionConidtionsMap, statEvolutionConidtionsMap } from "@shared/types/gameData/evolutionMethod"
 import type { MapObjectEvent } from "@shared/types/gameData/mapObjectEvent"
+import type { Mart } from "@shared/types/gameData/mart"
 import { type OddEgg } from "@shared/types/gameData/oddEgg"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
 import type { TeachableMove } from "@shared/types/gameData/teachableMove"
@@ -38,6 +40,7 @@ import type { Trainer } from "@shared/types/gameData/trainer"
 import { fishingGroupIds } from "@shared/types/gameDataIds/fishingGroups"
 import { fishingRodIds } from "@shared/types/gameDataIds/fishingRods"
 import { type HMItemId, hmItemIds, type ItemId, type TMItemId, tmItemIds } from "@shared/types/gameDataIds/items"
+import type { MartId } from "@shared/types/gameDataIds/marts"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { pokemonTypeIds } from "@shared/types/gameDataIds/pokemonTypes"
@@ -1565,6 +1568,111 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     )
   
     hunks = [...hunks, ...rodsAlwaysWorkPatch.hunks]
+  }
+  
+  // Marts
+  
+  const martsSettings = itemsSettings.MARTS
+  const updatedMartData = JSON.parse(JSON.stringify(martsMap)) as IdMap<MartId, Mart>
+  let didUpdateMarts = false
+  
+  if (martsSettings.CHERRYGROVE_REPELS) {
+    didUpdateMarts = true
+    updatedMartData.CHERRYGROVE_1.items.splice(1, 0, "REPEL")
+    updatedMartData.CHERRYGROVE_2.items.splice(2, 0, "REPEL")
+  }
+  
+  if (martsSettings.EARLY_CHERRYGROVE_POKEBALLS) {
+    didUpdateMarts = true
+    
+    updatedMartData.CHERRYGROVE_1.items = []
+    
+    hunks = [
+      ...hunks,
+      new DataHunk(
+        ROMOffset.fromBankAddress(101, 0x6813),
+        [1],
+      ),
+    ]
+  }
+  
+  if (martsSettings.VIOLET_REPELS) {
+    didUpdateMarts = true
+    
+    updatedMartData.VIOLET.items.splice(2, 0, "REPEL")
+  }
+  
+  if (martsSettings.EVOLUTION_STONES) {
+    didUpdateMarts = true
+    
+    updatedMartData.GOLDENROD_4F.items.splice(0, 0, ...([
+      "FIRE_STONE",
+      "WATER_STONE",
+      "LEAF_STONE",
+      "THUNDERSTONE",
+      "SUN_STONE",
+      "MOON_STONE",
+    ] as ItemId[]))
+    
+    hunks = [
+      ...hunks,
+      new DataHunk(
+        ROMOffset.fromBankAddress(1, 0x67F2),
+        bytesFrom(2100, 2),
+      ),
+    ]
+  }
+  
+  if (martsSettings.TM12) {
+    didUpdateMarts = true
+    
+    updatedMartData.GOLDENROD_5F_5.items = [
+      ...updatedMartData.GOLDENROD_5F_1.items,
+      "TM12",
+    ]
+    
+    updatedMartData.GOLDENROD_5F_6.items = [
+      ...updatedMartData.GOLDENROD_5F_2.items,
+      "TM12",
+    ]
+    
+    updatedMartData.GOLDENROD_5F_7.items = [
+      ...updatedMartData.GOLDENROD_5F_3.items,
+      "TM12",
+    ]
+    
+    updatedMartData.GOLDENROD_5F_8.items = [
+      ...updatedMartData.GOLDENROD_5F_4.items,
+      "TM12",
+    ]
+    
+    const buyableSweetScentPatch = Patch.fromYAML(
+      romInfo,
+      "buyableSweetScent.yml",
+    )
+  
+    hunks = [...hunks, ...buyableSweetScentPatch.hunks]
+  }
+  
+  if (didUpdateMarts) {
+    const martsPatch = Patch.fromYAML(
+      romInfo,
+      "marts.yml",
+      {
+        marts: Object.values(updatedMartData).map((mart) => {
+          return {
+            path: "martItems.yml",
+            extraIncludes: {},
+            extraValues: {
+              numberOfItems: hexStringFrom([mart.items.length]),
+              items: hexStringFrom(mart.items.map((item) => { return itemsMap[item].numericId })),
+            },
+          }
+        }),
+      }
+    )
+
+    hunks = [...hunks, ...martsPatch.hunks]
   }
   
   // Trainers

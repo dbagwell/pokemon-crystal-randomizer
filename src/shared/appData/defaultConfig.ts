@@ -843,6 +843,43 @@ export const defaultConfig = () => {
             type: "ToggleInput" as const,
             value: false,
           },
+          MARTS: {
+            label: "Marts",
+            type: "FormSection" as const,
+            layout: "vertical" as const,
+            subElementConfigs: {
+              EARLY_CHERRYGROVE_POKEBALLS: {
+                label: "Early Cherrygrove Poké Balls",
+                description: "Poké Balls will be available to buy in Cherrygrove City Mart before giving the Mystery Egg to Prof. Elm.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              CHERRYGROVE_REPELS: {
+                label: "Add Cherrygrove Repels",
+                description: "Add Repels to the Cherrygrove City Mart.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              VIOLET_REPELS: {
+                label: "Add Violet Repels",
+                description: "Add Repels to the Violet City Mart.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              EVOLUTION_STONES: {
+                label: "Add Evolution Stones",
+                description: "Add Evolution Stones to the Goledenrod City Mart on the 4th floor.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+              TM12: {
+                label: "Add TM12 (Sweet Scent)",
+                description: "Add TM12 (Sweet Scent) to the Goledenrod City Mart on the 5th floor after obtaining the item from the lady in the gate north of Ilex Forest.",
+                type: "ToggleInput" as const,
+                value: false,
+              },
+            },
+          },
         },
       },
       TRAINERS: {

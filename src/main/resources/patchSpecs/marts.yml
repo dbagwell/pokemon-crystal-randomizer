@@ -1,0 +1,13 @@
+description: "Changes the data for the marts items."
+values:
+  martData: "@#marts.$data #marts.$data"
+changes:
+- description: "Changes the data for the marts items."
+  locations:
+  - bank: 5
+  value: "$martData"
+- description: "References the new location for the mart data."
+  locations:
+  - bank: 5
+    address: 0x5B3D
+  value: "@$martData"
