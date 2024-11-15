@@ -15,8 +15,6 @@
 <div
   style:position="absolute"
   style:margin="auto"
-  style:width="auto"
-  style:height="auto"
   style:background-color={colors.primarySurface}
   style:box-shadow="5px 5px 5px #00000070"
   style:border-radius="20px"
@@ -29,6 +27,7 @@
     alignment="fill"
     direction="vertical"
     distribution="fill"
+    maxHeight="100vh"
     minSpacing={20}
     padding={50}
   >
@@ -39,7 +38,21 @@
     {/if}
   
     {#if isNotNullish(message)}
-      <div use:textStyle={"content"}>{message}</div>
+      <div
+        style:min-height="20px"
+        style:overflow="scroll"
+      >
+        <Stack
+          alignment="start"
+          direction="vertical"
+          distribution="fill"
+          minSpacing={10}
+        >
+          {#each message.split("\n") as paragraph}
+            <div use:textStyle={"content"}>{paragraph}</div>
+          {/each}
+        </Stack>
+      </div>
     {/if}
   
     {#if isNotNullish(inputInfo)}

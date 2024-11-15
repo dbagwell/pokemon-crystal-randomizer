@@ -36,6 +36,8 @@
     height?: string
     minWidth?: string
     minHeight?: string
+    maxWidth?: string
+    maxHeight?: string
     children: Snippet
   }
   
@@ -50,6 +52,8 @@
     height,
     minWidth,
     minHeight,
+    maxWidth,
+    maxHeight,
     children,
   }: Props = $props()
   
@@ -80,6 +84,14 @@
     
     if (isNotNullish(minHeight)) {
       container.style.minHeight = minHeight
+    }
+    
+    if (isNotNullish(maxWidth)) {
+      container.style.maxWidth = maxWidth
+    }
+    
+    if (isNotNullish(maxHeight)) {
+      container.style.maxHeight = maxHeight
     }
   })
   
