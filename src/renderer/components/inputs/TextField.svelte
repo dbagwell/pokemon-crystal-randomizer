@@ -1,4 +1,8 @@
-<div bind:this={container}>
+<div
+  bind:this={container}
+  onmouseenter={handleMouseEnterEvent}
+  onmouseleave={handleMouseLeaveEvent}
+>
   <Stack
     alignment="center"
     direction="vertical"
@@ -50,7 +54,7 @@
       {/if}
     </div>
     <div
-      style:background-color={isFocused() ? colors.activeTint : colors.inactiveTint}
+      style:background-color={isHovered || isFocused ? colors.activeTint : colors.inactiveTint}
       style:height="2px"
       style:width="100%"
     >
@@ -96,9 +100,9 @@
   }: Props = $props()
   /* eslint-enable prefer-const */
   
-  let _isFocused = false
-  export const isFocused = () => {
-    return _isFocused
+  let isFocused = $state(false)
+  export const getIsFocused = () => {
+    return isFocused
   }
   
   export const getElement = () => {
@@ -109,16 +113,17 @@
   let container: HTMLElement
   let input: HTMLInputElement
   let titleDiv: HTMLElement | undefined = $state()
+  let isHovered = $state(false)
   
   const updateStyle = () => {
     if (isNotNullish(titleDiv)) {
-      if (isFocused()) {
+      if (isFocused) {
         titleDiv.style.color = colors.activeTint
       } else {
         titleDiv.style.color = colors.inactiveTint
       }
       
-      if ((isNullish(value) || value === "" || Number.isNaN(value)) && !isFocused()) {
+      if ((isNullish(value) || value === "" || Number.isNaN(value)) && !isFocused) {
         titleDiv.style.bottom = "0px"
         titleDiv.style.transform = "scale(1)"
         titleDiv.style.width = "100%"
@@ -148,14 +153,22 @@
     }
   }
   
+  const handleMouseEnterEvent = () => {
+    isHovered = true
+  }
+  
+  const handleMouseLeaveEvent = () => {
+    isHovered = false
+  }
+  
   const handleFocusEvent = (event: Event) => {
-    _isFocused = true
+    isFocused = true
     updateStyle()
     onFocus?.(event)
   }
   
   const handleBlurEvent = (event: Event) => {
-    _isFocused = false
+    isFocused = false
     updateStyle()
     onBlur?.(event)
   }
