@@ -22,13 +22,14 @@
           padding={[5, 5, 0, 5]}
         >
           {#each viewModel.tabViewModels as tabViewModel (tabViewModel.id)}
-            <div
+            <button
               style:display="flex"
               style:width="{100 / viewModel.tabViewModels.length}%"
               style:height="auto"
               style:border-radius="15px 15px 0 0"
               style:align-items="center"
               style:background-color={viewModel.selectedTabId === tabViewModel.id ? colors.primarySurface : colors.secondarySurface}
+              style:border="0px none transparent"
               style:cursor={viewModel.selectedTabId === tabViewModel.id ? "inherit" : "pointer"}
               style:z-index={viewModel.selectedTabId === tabViewModel.id ? "1" : "auto"}
               onclick={() => {
@@ -59,7 +60,7 @@
                 >
                 </div>
               </Stack>
-            </div>
+            </button>
           {/each}
         </Stack>
       </div>

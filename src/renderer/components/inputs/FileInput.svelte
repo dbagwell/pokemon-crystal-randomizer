@@ -8,7 +8,7 @@
     bind:value={value}
     bind:files={files}
   />
-  <div
+  <button
     style:border="3px dashed {colors.inactiveTint}"
     style:width="100%"
     ondragover={handleDragOverEvent}
@@ -75,7 +75,7 @@
         </Stack>
       {/if}
     </Stack>
-  </div>
+  </button>
 </label>
 
 <script lang="ts">

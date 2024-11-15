@@ -15,6 +15,8 @@
       style:position="absolute"
       style:width="0"
       style:height="0"
+      onblur={handleMouseLeaveEvent}
+      onfocus={handleMouseEnterEvent}
       type="checkbox"
       bind:checked={viewModel.isOn}
     />

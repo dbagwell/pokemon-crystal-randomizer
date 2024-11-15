@@ -1,3 +1,4 @@
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
   bind:this={tooltipContainer}
   style:position="absolute"
@@ -74,7 +75,7 @@
     const id = currentTooltipId
     if (isNotNullish(id)) {
       setTimeout(() => {
-        if (anchorElement?.matches(":hover") !== true && tooltipContainer.matches(":hover") !== true) {
+        if (anchorElement?.matches(":hover") !== true && !tooltipContainer.matches(":hover")) {
           hideTooltip(id)
         }
       }, 300)
@@ -126,7 +127,7 @@
     
     element.onmouseenter = () => {
       setTimeout(() => {
-        if (element.matches(":hover") === true || tooltips[element.id]?.matches(":hover") === true) {
+        if (element.matches(":hover") || tooltips[element.id]?.matches(":hover") === true) {
           tooltips[element.id] = showTooltip(element.id, content, element)
         }
       }, 500)
@@ -134,7 +135,7 @@
       
     element.onmouseleave = () => {
       setTimeout(() => {
-        if (element.matches(":hover") !== true && tooltips[element.id]?.matches(":hover") !== true) {
+        if (!element.matches(":hover") && tooltips[element.id]?.matches(":hover") !== true) {
           hideTooltip(element.id)
           tooltips[element.id] = undefined
         }

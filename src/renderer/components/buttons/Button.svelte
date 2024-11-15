@@ -1,4 +1,4 @@
-<div
+<button
   bind:this={container}
   style:flex-grow={flexGrow ? "1" : ""}
   onclick={handleClickEvent}
@@ -21,7 +21,7 @@
       {title}
     </div>
   </Stack>
-</div>
+</button>
 
 <script lang="ts">
   import Stack from "@components/layout/Stack.svelte"
@@ -106,10 +106,10 @@
       return
     }
     case "icon": {
-      container.style.backgroundColor = ""
-      container.style.borderStyle = ""
-      container.style.borderWidth = ""
-      container.style.borderColor = ""
+      container.style.backgroundColor = "transparent"
+      container.style.borderStyle = "none"
+      container.style.borderWidth = "0px"
+      container.style.borderColor = "transparent"
       container.style.height = ""
       container.style.borderRadius = ""
       container.style.boxShadow = ""

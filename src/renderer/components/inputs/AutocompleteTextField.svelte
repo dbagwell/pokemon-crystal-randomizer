@@ -88,6 +88,7 @@
   import { colors } from "@scripts/colors"
   import { textStyle } from "@scripts/textStyle"
   import { isNotNullish, isNullish } from "@shared/utils"
+  import { onDestroy } from "svelte"
   
   type Props = {
     title: string | undefined
@@ -137,6 +138,11 @@
     })
     
     return index === -1 ? 0 : index
+  })
+  
+  onDestroy(() => {
+    removeOptionsContainerAutoUpdates?.()
+    removeOptionsContainerAutoUpdates = undefined
   })
   
   const showOptions = () => {
