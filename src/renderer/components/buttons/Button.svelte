@@ -91,17 +91,17 @@
       
     switch (style) {
     case "fill": {
-      container.style.backgroundColor = isDestructive ? colors.destructiveTint : colors.primaryButtonBackground
+      container.style.backgroundColor = isDestructive ? colors.destructiveTint : colors.primaryTint
       container.style.borderStyle = "solid"
       container.style.borderWidth = "3px"
       container.style.borderColor = isHovered && !isDisabled
-        ? isDestructive ? colors.destructiveHighlight : colors.primaryButtonHighlightedBackground
-        : isDestructive ? colors.destructiveTint : colors.primaryButtonBackground
+        ? isDestructive ? colors.secondaryDestructiveTint : colors.secondaryTint
+        : isDestructive ? colors.destructiveTint : colors.primaryTint
       container.style.height = "44px"
       container.style.borderRadius = "10px"
       container.style.boxShadow = "2px 2px 5px #00000070"
       textContainer.style.fontSize = "20px"
-      textContainer.style.color = colors.primaryButtonForeground
+      textContainer.style.color = colors.buttonText
       textContainer.className = ""
       return
     }
@@ -115,7 +115,7 @@
       container.style.boxShadow = ""
       textContainer.style.fontSize = "16px"
       textContainer.style.color = isHovered && !isDisabled
-        ? isDestructive ? colors.destructiveTint : colors.activeTint
+        ? isDestructive ? colors.destructiveTint : colors.primaryTint
         : colors.inactiveTint
       textContainer.className = "material-icons"
     }

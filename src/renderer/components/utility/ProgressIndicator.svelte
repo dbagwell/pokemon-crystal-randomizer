@@ -44,9 +44,9 @@
   import { onMount } from "svelte"
   
   const indicatorColors = [
-    colors.progressIndicatorHighlight,
-    `${colors.progressIndicator} ${colors.progressIndicator} transparent transparent`,
-    `transparent transparent ${colors.progressIndicator} ${colors.progressIndicator}`,
+    colors.secondaryTint,
+    `${colors.primaryTint} ${colors.primaryTint} transparent transparent`,
+    `transparent transparent ${colors.primaryTint} ${colors.primaryTint}`,
   ]
   
   const indicators: HTMLElement[] = []

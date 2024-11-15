@@ -44,7 +44,7 @@
       {#if isNotNullish(files?.[0]?.name)}
         <div
           style:height="1px"
-          style:background-color={colors.separator}
+          style:background-color={colors.inactiveTint}
         >
         </div>
         <Stack

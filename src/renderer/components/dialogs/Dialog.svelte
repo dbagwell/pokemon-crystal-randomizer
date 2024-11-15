@@ -15,7 +15,7 @@
   style:margin="auto"
   style:width="auto"
   style:height="auto"
-  style:background-color={colors.background}
+  style:background-color={colors.primarySurface}
   style:box-shadow="5px 5px 5px #00000070"
   style:border-radius="20px"
   style:top="50%"

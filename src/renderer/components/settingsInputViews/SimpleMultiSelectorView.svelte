@@ -10,7 +10,7 @@
     minSpacing={10}
   >
     <div
-      style:background-color={viewModel.selectedOptionIds.length > 0 ? colors.activeTint : colors.separator}
+      style:background-color={viewModel.selectedOptionIds.length > 0 ? colors.primaryTint : colors.inactiveTint}
       style:border-radius="5px"
       style:width="20px"
       style:height="20px"
@@ -24,7 +24,7 @@
     </div>
   </Stack>
   <div
-    style:border-left="2px solid {viewModel.selectedOptionIds.length > 0 ? colors.activeTint : colors.separator}"
+    style:border-left="2px solid {viewModel.selectedOptionIds.length > 0 ? colors.primaryTint : colors.inactiveTint}"
     style:border-radius="0 0 0 20px"
     style:margin-left="9px"
   >

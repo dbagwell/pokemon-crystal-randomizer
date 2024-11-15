@@ -54,7 +54,7 @@
       {/if}
     </div>
     <div
-      style:background-color={isHovered || isFocused ? colors.activeTint : colors.inactiveTint}
+      style:background-color={isHovered || isFocused ? colors.primaryTint : colors.inactiveTint}
       style:height="2px"
       style:width="100%"
     >
@@ -118,7 +118,7 @@
   const updateStyle = () => {
     if (isNotNullish(titleDiv)) {
       if (isFocused) {
-        titleDiv.style.color = colors.activeTint
+        titleDiv.style.color = colors.primaryTint
       } else {
         titleDiv.style.color = colors.inactiveTint
       }

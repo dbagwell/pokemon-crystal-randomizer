@@ -16,7 +16,7 @@
   style:overflow="scroll"
   style:z-index="1"
   style:box-shadow="0px 5px 5px -3px rgba(0, 0, 0, 0.3), 0px 8px 10px 1px rgba(0, 0, 0, 0.3), 0px 3px 14px 2px rgba(0, 0, 0, 0.3)"
-  style:background-color={colors.background}
+  style:background-color={colors.primarySurface}
 >
   <Stack
     alignment="fill"
@@ -31,8 +31,8 @@
       <div
         bind:this={optionElements[option.id]}
         style:cursor="pointer"
-        style:color={index === highlightedOptionIndex ? colors.activeTint : colors.text}
-        style:background-color={index === highlightedOptionIndex ? colors.highlightedBackround : colors.background}
+        style:color={index === highlightedOptionIndex ? colors.primaryTint : colors.text}
+        style:background-color={index === highlightedOptionIndex ? colors.secondarySurface : colors.primarySurface}
         data-index={index}
         onclick={handleOptionElementEvent}
         onkeypress={handleOptionElementEvent}

@@ -6,7 +6,6 @@ const grayAA = "#AAAAAA"
 const gray77 = "#777777"
 const gray44 = "#444444"
 const gray28 = "#282828"
-const gray25 = "#252525"
 const gray18 = "#181818"
 const gray0A = "#0A0A0A"
 
@@ -14,46 +13,37 @@ const crystalPurple = "#8828B0"
 const crystalPurpleHighlight = "#9848F8"
 const crystalRed = "#980000"
 const crystalPink = "#F80868"
-const crystalGold = "#D0A800"
 
 export const lightThemeColors = {
-  activeTint: crystalPurple,
-  appBackground: grayAA,
-  background: grayF0,
-  deemphasizedText: gray28,
-  destructiveHighlight: crystalPink,
-  destructiveTint: crystalRed,
-  highlightedBackround: grayDD,
-  inactiveTabBackground: grayDD,
-  inactiveTint: gray44,
-  primaryButtonBackground: crystalPurple,
-  primaryButtonForeground: grayF0,
-  primaryButtonHighlightedBackground: crystalPurpleHighlight,
-  progressIndicator: crystalPurple,
-  progressIndicatorHighlight: crystalGold,
-  separator: gray44,
+  primarySurface: grayF0,
+  secondarySurface: grayDD,
+  tertiarySurface: grayAA,
+  
   text: gray0A,
-  tooltipBackground: grayDD,
+  subtleText: gray28,
+  buttonText: grayF0,
+  
+  primaryTint: crystalPurple,
+  secondaryTint: crystalPurpleHighlight,
+  inactiveTint: gray44,
+  destructiveTint: crystalRed,
+  secondaryDestructiveTint: crystalPink,
 }
 
 export const darkThemeColors = {
-  activeTint: crystalPurple,
-  appBackground: gray0A,
-  background: gray18,
-  deemphasizedText: grayCC,
-  destructiveHighlight: crystalPink,
-  destructiveTint: crystalRed,
-  highlightedBackround: gray25,
-  inactiveTabBackground: gray28,
-  inactiveTint: gray77,
-  primaryButtonBackground: crystalPurple,
-  primaryButtonForeground: grayF0,
-  primaryButtonHighlightedBackground: crystalPurpleHighlight,
-  progressIndicator: crystalPurple,
-  progressIndicatorHighlight: crystalGold,
-  separator: gray77,
+  primarySurface: gray18,
+  secondarySurface: gray28,
+  tertiarySurface: gray0A,
+  
   text: grayEE,
-  tooltipBackground: gray28,
+  subtleText: grayCC,
+  buttonText: grayF0,
+  
+  primaryTint: crystalPurple,
+  secondaryTint: crystalPurpleHighlight,
+  inactiveTint: gray77,
+  destructiveTint: crystalRed,
+  secondaryDestructiveTint: crystalPink,
 } satisfies typeof lightThemeColors
 
 export let colors = darkThemeColors

@@ -1,6 +1,6 @@
 <div
   style:position="absolute"
-  style:background-color={colors.appBackground}
+  style:background-color={colors.tertiarySurface}
   style:width="100%"
   style:height="100%"
 >
@@ -28,7 +28,7 @@
               style:height="auto"
               style:border-radius="15px 15px 0 0"
               style:align-items="center"
-              style:background-color={viewModel.selectedTabId === tabViewModel.id ? colors.background : colors.inactiveTabBackground}
+              style:background-color={viewModel.selectedTabId === tabViewModel.id ? colors.primarySurface : colors.secondarySurface}
               style:cursor={viewModel.selectedTabId === tabViewModel.id ? "inherit" : "pointer"}
               style:z-index={viewModel.selectedTabId === tabViewModel.id ? "1" : "auto"}
               onclick={() => {
@@ -48,12 +48,12 @@
                 <div
                   style:text-align="center"
                   style:font-size="16px"
-                  style:color={viewModel.selectedTabId === tabViewModel.id ? colors.activeTint : colors.deemphasizedText}
+                  style:color={viewModel.selectedTabId === tabViewModel.id ? colors.primaryTint : colors.subtleText}
                 >
                   {tabViewModel.name}
                 </div>
                 <div
-                  style:background-color={viewModel.selectedTabId === tabViewModel.id ? colors.activeTint : "inherit"}
+                  style:background-color={viewModel.selectedTabId === tabViewModel.id ? colors.primaryTint : "inherit"}
                   style:height="3px"
                   style:width="90%"
                 >
@@ -68,7 +68,7 @@
       bind:this={mainContentContainer}
       style:flex-grow="1"
       style:flex-shrink="1"
-      style:background-color={colors.background}
+      style:background-color={colors.primarySurface}
       style:box-shadow="0 -2px 5px #00000070"
       style:height="auto"
       style:overflow="scroll"
@@ -91,7 +91,7 @@
       {/each}
     </div>
     <div
-      style:background-color={colors.background}
+      style:background-color={colors.primarySurface}
       style:box-shadow="0 -2px 5px #00000070"
     >
       <Stack

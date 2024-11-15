@@ -9,14 +9,14 @@
   <div
     bind:this={arrowElement}
     style:position="absolute"
-    style:background-color={colors.tooltipBackground}
+    style:background-color={colors.secondarySurface}
     style:transform="rotate(45deg)"
     style:width="14px"
     style:height="14px"
   >
   </div>
   <div
-    style:background-color={colors.tooltipBackground}
+    style:background-color={colors.secondarySurface}
     style:color={colors.text}
     style:padding="10px"
     style:top="0px"

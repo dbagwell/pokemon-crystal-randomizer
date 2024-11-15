@@ -25,15 +25,15 @@
       minSpacing={10}
     >
       <div
-        style:border="2px solid {isHovered ? colors.primaryButtonHighlightedBackground : viewModel.isOn ? colors.primaryButtonBackground : colors.inactiveTint}"
+        style:border="2px solid {isHovered ? colors.secondaryTint : viewModel.isOn ? colors.primaryTint : colors.inactiveTint}"
         style:border-radius="5px"
         style:cursor="pointer"
         style:width="20px"
         style:height="20px"
         style:font-size="15px"
         style:font-weight="900"
-        style:color={viewModel.isOn ? colors.primaryButtonForeground : "transparent"}
-        style:background-color={viewModel.isOn ? colors.primaryButtonBackground : "transparent"}
+        style:color={viewModel.isOn ? colors.buttonText : "transparent"}
+        style:background-color={viewModel.isOn ? colors.primaryTint : "transparent"}
         class="material-icons"
       >
         checkmark
@@ -46,7 +46,7 @@
   {#if "viewModels" in viewModel && viewModel.isOn}
     <div
       style:margin-left="9px"
-      style:border-left="2px solid {colors.primaryButtonBackground}"
+      style:border-left="2px solid {colors.primaryTint}"
       style:border-radius="0 0 0 20px"
     >
       <Stack
