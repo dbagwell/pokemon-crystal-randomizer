@@ -45,9 +45,7 @@
           >
             {#each selectedOptions as selectedOption, index (selectedOption.id)}
               {#snippet optionDescriptionTooltip()}
-                <div>
-                  {selectedOption.description}
-                </div>
+                <TextTooltip text={selectedOption.description!}/>
               {/snippet}
       
               <Stack
@@ -111,9 +109,7 @@
 </Stack>
 
 {#snippet descriptionTooltip()}
-  <div>
-    {viewModel.description}
-  </div>
+  <TextTooltip text={viewModel.description!}/>
 {/snippet}
 
 <script lang="ts">
@@ -121,6 +117,7 @@
   import AutocompleteTextField from "@components/inputs/AutocompleteTextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
   import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
+  import TextTooltip from "@components/utility/TextTooltip.svelte"
   import { tooltip } from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
   import type { ConfigurableMultiSelectorViewModel, ConfigurableSelectorOption } from "@shared/types/viewModels"

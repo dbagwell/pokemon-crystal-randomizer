@@ -25,9 +25,7 @@
   >
     {#each filteredOptions as option, index (option.id)}
       {#snippet descriptionTooltip()}
-        <div>
-          {option.description}
-        </div>
+        <TextTooltip text={option.description!}/>
       {/snippet}
       
       <div
@@ -84,6 +82,7 @@
 <script lang="ts">
   import TextField from "@components/inputs/TextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
+  import TextTooltip from "@components/utility/TextTooltip.svelte"
   import { tooltip } from "@components/utility/Tooltip.svelte"
   import { autoUpdate, computePosition, flip, type Placement, size } from "@floating-ui/dom"
   import { colors } from "@scripts/colors"

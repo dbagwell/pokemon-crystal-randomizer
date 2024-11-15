@@ -172,7 +172,9 @@ export const defaultAppViewModel = () => {
             id: "RANDOMIZE_RANDOM_ENCOUNTERS" as const,
             name: "Randomize Random Pokémon Encounters",
             description: "Change the Pokémon that randomly encountered in the grass, on the water, "
-              + "in Headbutt trees, under Rock Smash rocks and from fishing to random Pokémon.",
+              + "in Headbutt trees, under Rock Smash rocks and from fishing to random Pokémon.\n\n"
+              + "IMPORTANT: If this is enabled and the 'Randomize HM Compatibility' setting is not enabled with a 'Percentage' of 100%, "
+              + "the generated ROM may be unbeatable due to not having access to Pokémon that can learn the HMs required to progress the game.",
             viewModels: [
               createSimpleToggleViewModel({
                 id: "REMOVE_TIME_BASED_ENCOUNTERS" as const,
@@ -569,7 +571,9 @@ export const defaultAppViewModel = () => {
               createIntegerInputViewModel({
                 id: "PERCENTAGE" as const,
                 name: "Percentage",
-                description: "Set this to make all Pokémon be able to learn from that percentage of all the HMs.",
+                description: "Set this to make all Pokémon be able to learn from that percentage of all the HMs.\n\n"
+                  + "IMPORTANT: If this is not set to 100% the generated ROM could be unbeatable "
+                  + "due to not having access to Pokémon that can learn the HMs required to progress the game.",
                 isRequired: false as const,
                 min: 0,
                 max: 100,

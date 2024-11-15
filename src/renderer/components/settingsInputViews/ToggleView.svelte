@@ -66,14 +66,13 @@
 </Stack>
 
 {#snippet descriptionTooltip()}
-  <div>
-    {viewModel.description}
-  </div>
+  <TextTooltip text={viewModel.description!}/>
 {/snippet}
 
 <script lang="ts">
   import Stack from "@components/layout/Stack.svelte"
   import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
+  import TextTooltip from "@components/utility/TextTooltip.svelte"
   import { tooltip } from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
   import type { ToggleViewModel } from "@shared/types/viewModels"

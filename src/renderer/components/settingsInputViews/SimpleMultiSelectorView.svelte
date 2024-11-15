@@ -39,9 +39,7 @@
         {#if viewModel.selectedOptionIds.length > 0}
           {#each selectedOptions as selectedOption, index (selectedOption.id)}
             {#snippet optionDescriptionTooltip()}
-              <div>
-                {selectedOption.description}
-              </div>
+              <TextTooltip text={selectedOption.description!}/>
             {/snippet}
           
             <Stack
@@ -92,15 +90,14 @@
 </Stack>
 
 {#snippet descriptionTooltip()}
-  <div>
-    {viewModel.description}
-  </div>
+  <TextTooltip text={viewModel.description!}/>
 {/snippet}
 
 <script lang="ts">
   import Button from "@components/buttons/Button.svelte"
   import AutocompleteTextField from "@components/inputs/AutocompleteTextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
+  import TextTooltip from "@components/utility/TextTooltip.svelte"
   import { tooltip } from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
   import type { SelectorOption, SimpleMultiSelectorViewModel } from "@shared/types/viewModels"

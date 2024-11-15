@@ -11,14 +11,13 @@
 </div>
 
 {#snippet descriptionTooltip()}
-  <div>
-    {viewModel.description}
-  </div>
+  <TextTooltip text={viewModel.description!}/>
 {/snippet}
 
 <script lang="ts">
   import { showErrorDialog } from "@components/dialogs/DialogContainer.svelte"
   import TextField from "@components/inputs/TextField.svelte"
+  import TextTooltip from "@components/utility/TextTooltip.svelte"
   import { tooltip } from "@components/utility/Tooltip.svelte"
   import type { IntegerInputViewModel } from "@shared/types/viewModels"
   import { isNotNullish, isNullish } from "@shared/utils"
