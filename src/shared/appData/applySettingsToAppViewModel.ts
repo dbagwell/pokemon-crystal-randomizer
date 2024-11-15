@@ -245,7 +245,7 @@ const applySettingsToSingleSelectorViewModel = (settings: any, viewModel: Single
       })
       
       option.viewModels.forEach((viewModel) => {
-        applySettingsToInputViewModel(settings.SETTINGS?.[option.id][viewModel.id], viewModel, `${path}.SETTINGS.${option.id}.${viewModel.id}`, warnings)
+        applySettingsToInputViewModel(settings.SETTINGS?.[option.id]?.[viewModel.id], viewModel, `${path}.SETTINGS.${option.id}.${viewModel.id}`, warnings)
       })
     } else if (isNotNullish(settings.SETTINGS) && isNotNullish(settings.SETTINGS?.[option.id])) {
       warnings.push(unexpectedKeyWarning(`${path}.SETTINGS`, option.id))
@@ -279,7 +279,7 @@ const applySettingsToSimpleMultiSelectorViewModel = (settings: any, viewModel: S
         numberOfSelections++
         return value
       } else {
-        warnings.push(invalidValueWarning(`${path}.${index}`, expectedValueType, value))
+        warnings.push(invalidValueWarning(`${path}.${index}`, expectedValueType, value, true))
       }
     }))
   } else if (isNotNullish(settings)) {
@@ -318,7 +318,7 @@ const applySettingsToConfigurableMultiSelectorViewModel = (settings: any, viewMo
     viewModel.options.find((option) => {
       return option.id === key
     })?.viewModels.forEach((viewModel) => {
-      applySettingsToInputViewModel(settings[key], viewModel, `${path}.${key}`, warnings)
+      applySettingsToInputViewModel(settings[key]?.[viewModel.id], viewModel, `${path}.${key}`, warnings)
     })
     
     numberOfSelections++
@@ -331,8 +331,8 @@ const missingValueWarning = (path: string, expectedType: string) => {
   return `Missing value at path '${path}'. Expected ${expectedType}. Using default instead.`
 }
 
-const invalidValueWarning = (path: string, expectedType: string, foundValue: any) => {
-  return `Invalid value at path '${path}'. Expected ${expectedType} but found '${foundValue}'. Using default instead.`
+const invalidValueWarning = (path: string, expectedType: string, foundValue: any, ignored: boolean = false) => {
+  return `Invalid value at path '${path}'. Expected ${expectedType} but found '${foundValue}'. ${ignored ? "Ignoring." : "Using default instead."}`
 }
 
 const unexpectedKeyWarning = (path: string, key: string) => {
