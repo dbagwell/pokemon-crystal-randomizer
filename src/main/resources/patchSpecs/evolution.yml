@@ -1,3 +1,0 @@
-description: "Defines an evolution."
-values: 
-  data: "$typeId $levelOrItemIdOrHappinessCondition $statConditionAndSpecies"

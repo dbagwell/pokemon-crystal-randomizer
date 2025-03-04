@@ -1,3 +1,0 @@
-description: "Data for a group of land or water encounter slots."
-values:
-  data: "$mapGroupId $mapId $encounterRates #encounterSlots.$data"

@@ -4,33 +4,43 @@ import type { GameMapId } from "@shared/types/gameDataIds/gameMaps"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import type { TreeGroupId } from "@shared/types/gameDataIds/treeGroups"
 
-export type Encounter = ({
-  pokemonId: PokemonId
-  level: number
-} & ((({
+export type LandEncounter = {
   type: "LAND"
-  time: "MORNING" | "DAY" | "NIGHT"
-  isSwarm?: boolean
-} | {
-  type: "WATER"
-}) & {
   mapId: GameMapId
   slot: number
-}) | {
-  type: "FISHING_TIME_GROUP"
-  timeGroupIndex: number
-  time: "DAY" | "NIGHT"
-} | {
+  time: "MORNING" | "DAY" | "NIGHT"
+  pokemonId: PokemonId
+  level: number
+  isSwarm?: boolean
+}
+
+export type WaterEncounter = {
+  type: "WATER"
+  mapId: GameMapId
+  slot: number
+  pokemonId: PokemonId
+  level: number
+}
+
+export type TreeEncounter = {
   type: "TREE"
   group: TreeGroupId
   rarity: "COMMON" | "RARE"
   slot: number
   rate: number
-} | {
+  pokemonId: PokemonId
+  level: number
+}
+
+export type RockEncounter = {
   type: "ROCK"
   slot: number
   rate: number
-})) | ({
+  pokemonId: PokemonId
+  level: number
+}
+
+export type FishingEncounter = {
   type: "FISHING"
   group: FishingGroupId
   rod: FishingRodId
@@ -43,7 +53,17 @@ export type Encounter = ({
 } | {
   isTimeGroup: true
   timeGroupIndex: number
-})) | {
+})
+
+export type FishingTimeGroupEncounter = {
+  type: "FISHING_TIME_GROUP"
+  timeGroupIndex: number
+  time: "DAY" | "NIGHT"
+  pokemonId: PokemonId
+  level: number
+}
+
+export type ContestEncounter = {
   type: "CONTEST"
   slot: number
   pokemonId: PokemonId
@@ -51,3 +71,12 @@ export type Encounter = ({
   maxLevel: number
   rate: number
 }
+
+export type Encounter =
+  LandEncounter
+  | WaterEncounter
+  | TreeEncounter
+  | RockEncounter
+  | FishingEncounter
+  | FishingTimeGroupEncounter
+  | ContestEncounter

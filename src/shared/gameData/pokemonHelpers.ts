@@ -17,3 +17,11 @@ export const maxNumberOfEvolutionStages = (pokemon: Pokemon): number => {
     return 0
   }
 }
+
+export const hasPreEvolution = (pokemon: Pokemon) => {
+  return Object.values(pokemonMap).flatMap((pokemon) => {
+    return pokemon.evolutions?.map((evolution) => {
+      return evolution.pokemonId
+    }) ?? []
+  }).includes(pokemon.id)
+}

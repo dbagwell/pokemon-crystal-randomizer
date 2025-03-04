@@ -1,3 +1,0 @@
-description: "Data for a fishing, tree or rock encounter slot."
-values:
-  data: "$encounterRate $pokemonId $levelOrTimeGroupIndex"
