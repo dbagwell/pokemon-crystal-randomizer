@@ -26,7 +26,7 @@ export const updateStarters = (
   } else if (startersSettings.METHOD.VALUE === "RANDOM") {
     const randomStartersSettings = startersSettings.METHOD.SETTINGS.RANDOM
     const isBanned = (pokemon: Pokemon) => {
-      return randomStartersSettings.BAN.includes(pokemon.id)
+      return settings.BANNED_POKEMON.includes(pokemon.id) || randomStartersSettings.BAN.includes(pokemon.id)
     }
     
     const isAssigned = (pokemon: Pokemon) => {

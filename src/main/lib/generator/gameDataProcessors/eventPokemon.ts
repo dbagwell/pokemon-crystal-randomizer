@@ -12,7 +12,7 @@ export const updateEventPokemon = (
   const eventPokemonSettings = settings.RANDOMIZE_EVENT_POKEMON.SETTINGS
     
   const availablePokemonIds = pokemonIds.filter((pokemonId) => {
-    return !eventPokemonSettings.BAN.includes(pokemonId)
+    return !settings.BANNED_POKEMON.includes(pokemonId) && !eventPokemonSettings.BAN.includes(pokemonId)
   })
     
   const getRandomPokemonId = () => {

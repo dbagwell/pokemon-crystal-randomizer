@@ -17,7 +17,7 @@ export const updateTrainers = (
     
   romInfo.gameData.trainers.forEach((trainer) => {
     const nonBannedPokemon = (Object.values(pokemonMap) as Pokemon[]).filter((pokemon) => {
-      return !randomTeamsSettings.BAN.includes(pokemon.id)
+      return !settings.BANNED_POKEMON.includes(pokemon.id) && !randomTeamsSettings.BAN.includes(pokemon.id)
     })
       
     const availableTypes = pokemonTypeIds.filter((typeId) => {
@@ -27,7 +27,7 @@ export const updateTrainers = (
     const typeFilter = randomTeamsSettings.TYPE_THEME_TEAMS ? availableTypes[randomInt(0, availableTypes.length - 1)] : undefined
       
     const nonBannedAndTypeFilteredPokemon = nonBannedPokemon.filter((pokemon) => {
-      return !randomTeamsSettings.BAN.includes(pokemon.id) && (isNullish(typeFilter) || pokemon.types.includes(typeFilter))
+      return isNullish(typeFilter) || pokemon.types.includes(typeFilter)
     })
       
     trainer.pokemon.forEach((pokemon, index) => {
