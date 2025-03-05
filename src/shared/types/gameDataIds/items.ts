@@ -1,13 +1,16 @@
-export const menuItemIds = [
+export const pokedexPartItemIds = [
   "POKEDEX",
   "UNONWNDEX",
+] as const
+
+export const pokegearPartItemIds = [
   "POKEGEAR",
   "MAP_CARD",
   "RADIO_CARD",
   "EXPN_CARD",
 ] as const
 
-export const badgeItemIds = [
+export const johtoBadgeItemIds = [
   "ZEPHYRBADGE",
   "HIVEBADGE",
   "PLAINBADGE",
@@ -16,6 +19,9 @@ export const badgeItemIds = [
   "MINERALBADGE",
   "GLACIERBADGE",
   "RISINGBADGE",
+] as const
+
+export const kantoBadgeItemIds = [
   "BOULDERBADGE",
   "CASCADEBADGE",
   "THUNDERBADGE",
@@ -290,13 +296,28 @@ export const ballItemIds = [
   "PARK_BALL",
 ] as const
 
-export type MenuItemId = typeof menuItemIds[number]
-export type BadgeItemId = typeof badgeItemIds[number]
+export type PokedexPartItemId = typeof pokedexPartItemIds[number]
+export type PokegearPartItemId = typeof pokegearPartItemIds[number]
+export type JohtoBadgeItemId = typeof johtoBadgeItemIds[number]
+export type KantoBadgeItemId = typeof kantoBadgeItemIds[number]
 export type KeyItemId = typeof keyItemIds[number]
 export type HMItemId = typeof hmItemIds[number]
 export type TMItemId = typeof tmItemIds[number]
 export type RegularItemId = typeof regularItemIds[number]
 export type BallItemId = typeof ballItemIds[number]
+
+export const menuItemIds = [
+  ...pokedexPartItemIds,
+  ...pokegearPartItemIds,
+] as const
+
+export const badgeItemIds = [
+  ...johtoBadgeItemIds,
+  ...kantoBadgeItemIds,
+] as const
+
+export type MenuItemId = typeof menuItemIds[number]
+export type BadgeItemId = typeof badgeItemIds[number]
 
 export type HoldableItemId =
   | TMItemId

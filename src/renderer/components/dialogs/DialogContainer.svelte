@@ -45,8 +45,8 @@
 </script>
 
 <script
-  context="module"
   lang="ts"
+  module
 >
   import type { DialogInputInfo } from "@shared/types/dialog"
 
@@ -77,7 +77,7 @@
       submitButtonLabel: "OK",
     })
     
-    throw error
+    console.error(error)
   }
 
 </script>

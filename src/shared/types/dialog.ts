@@ -1,5 +1,5 @@
 export type DialogInputInfo = {
   title?: string,
-  type?: "file",
+  type: "file",
   fileExtension?: string,
 }

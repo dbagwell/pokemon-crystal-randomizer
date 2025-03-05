@@ -2,7 +2,7 @@ import { generateROM } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
 import { getPreviousSettings, setPreviousSettings } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
-import type { Settings } from "@shared/appData/configHelpers"
+import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
 import { isNullish } from "@shared/utils"
 import { dialog } from "electron"
 import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
@@ -10,11 +10,13 @@ import fs from "fs"
 
 export class MainAPI implements ElectronMainApi<MainAPI> {
   
-  readonly getPreviousSettings = async (): Promise<Response<any | undefined>> => {
-    return getPreviousSettings()
+  readonly getPreviousSettings = async (): Promise<Response<unknown | undefined>> => {
+    return {
+      result: getPreviousSettings(),
+    }
   }
   
-  readonly generateROM = async (seed: string | undefined, settings: Settings): Promise<Response<void>> => {
+  readonly generateROM = async (seed: string | undefined, settings: SettingsFromAppViewModel): Promise<Response<void>> => {
     try {
       const vanillaData = await getVanillaROM()
         

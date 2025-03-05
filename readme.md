@@ -37,7 +37,7 @@ The user interface. Behaves like a web page. It runs on a completely separate pr
 
 `mainWindow.html` acts as the root for all the UI of the main application window and loads all the necessary resources for displaying the UI. The UI is created using Svelte components and attached to the window using the `mainWindow.ts` script.
 
-The Project uses base components from [Svelte Material UI](https://sveltematerialui.com/). These are styled with themes using [Sass](https://sass-lang.com/). The app's custom styles are also written in Sass. Whenever these change (such as when a new SMUI component type is installed), they need to be compiled into their CSS. This can be done by running `npm run gen:styles`.
+The components are styled motly with inline styles which colors being dynamically being determined using the `colors` object exported from `scripts/colors.ts`. There are also a few global styles written in [Sass](https://sass-lang.com/). Whenever the sass files are changed, they need to be compiled into their CSS. This can be done by running `npm run gen:styles`.
 
 #### preload
 

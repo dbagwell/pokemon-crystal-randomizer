@@ -1,10 +1,10 @@
 <div bind:this={container}>
-  <slot/>
+  {@render children()}
 </div>
 
 <script lang="ts">
-  import { isNumber } from "@shared/utils"
-  import { onMount } from "svelte"
+  import { isNotNullish, isNumber } from "@shared/utils"
+  import { onMount, type Snippet } from "svelte"
   
   const directionMap = {
     vertical: "column",
@@ -24,13 +24,38 @@
     center: "center",
     fill: "space-between",
   }
-
-  export let direction: keyof typeof directionMap
-  export let alignment: keyof typeof alignmentMap
-  export let distribution: keyof typeof distributionMap
-  export let minSpacing: number = 0
-  export let padding: number | [number, number] | [number, number, number, number] = 0
-  export let wrap = false
+  
+  type Props = {
+    direction: keyof typeof directionMap
+    alignment: keyof typeof alignmentMap
+    distribution: keyof typeof distributionMap
+    minSpacing?: number
+    padding?: number | [number, number] | [number, number, number, number]
+    wrap?: boolean
+    width?: string
+    height?: string
+    minWidth?: string
+    minHeight?: string
+    maxWidth?: string
+    maxHeight?: string
+    children: Snippet
+  }
+  
+  const {
+    direction,
+    alignment,
+    distribution,
+    minSpacing = 0,
+    padding = 0,
+    wrap = false,
+    width,
+    height,
+    minWidth,
+    minHeight,
+    maxWidth,
+    maxHeight,
+    children,
+  }: Props = $props()
   
   let container: HTMLDivElement
   
@@ -44,6 +69,30 @@
     container.style.padding = (isNumber(padding) ? [padding] : padding).map((value) => {
       return `${value}px`
     }).join(" ")
+    
+    if (isNotNullish(width)) {
+      container.style.width = width
+    }
+    
+    if (isNotNullish(height)) {
+      container.style.height = height
+    }
+    
+    if (isNotNullish(minWidth)) {
+      container.style.minWidth = minWidth
+    }
+    
+    if (isNotNullish(minHeight)) {
+      container.style.minHeight = minHeight
+    }
+    
+    if (isNotNullish(maxWidth)) {
+      container.style.maxWidth = maxWidth
+    }
+    
+    if (isNotNullish(maxHeight)) {
+      container.style.maxHeight = maxHeight
+    }
   })
   
 </script>

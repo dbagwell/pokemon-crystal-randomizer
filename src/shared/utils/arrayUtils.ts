@@ -12,3 +12,19 @@ export const mapToRecord = <Key extends string, Value>(keys: readonly Key[], val
     }
   }, {}) as Record<Key, Value>
 }
+
+export const reduceArrayIntoRecord = <Element, ResultKey extends PropertyKey, ResultValue>(
+  array: Element[],
+  reduceFunction: (
+    result: Partial<Record<ResultKey, ResultValue>>,
+    element: Element,
+    index: number,
+  ) => void,
+  result: Partial<Record<ResultKey, ResultValue>> = {},
+): Record<ResultKey, ResultValue> => {
+  array.forEach((element, index) => {
+    reduceFunction(result, element, index)
+  })
+  
+  return result as Record<ResultKey, ResultValue>
+}

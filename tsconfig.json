@@ -8,6 +8,7 @@
     "isolatedModules": true,
     "skipLibCheck": false,
     "strict": true,
+    "noErrorTruncation": true,
     "outDir": "build/js" // Not used because of vite but needs to be specified
   },
   "include": [

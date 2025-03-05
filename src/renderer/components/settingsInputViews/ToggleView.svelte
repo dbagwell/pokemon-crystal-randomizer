@@ -1,0 +1,101 @@
+<Stack
+  alignment="start"
+  direction="vertical"
+  distribution="fill"
+>
+  <label
+    style:cursor="pointer"
+    style:color={colors.text}
+    style:font-size="16px"
+    onmouseenter={handleMouseEnterEvent}
+    onmouseleave={handleMouseLeaveEvent}
+    use:tooltip={isNotNullish(viewModel.description) ? descriptionTooltip : undefined}
+  >
+    <input
+      style:position="absolute"
+      style:width="0"
+      style:height="0"
+      onblur={handleMouseLeaveEvent}
+      onfocus={handleMouseEnterEvent}
+      type="checkbox"
+      bind:checked={viewModel.isOn}
+    />
+    <Stack
+      alignment="center"
+      direction="horizontal"
+      distribution="start"
+      minSpacing={10}
+    >
+      <div
+        style:border="2px solid {isHovered ? colors.secondaryTint : viewModel.isOn ? colors.primaryTint : colors.inactiveTint}"
+        style:border-radius="5px"
+        style:cursor="pointer"
+        style:width="20px"
+        style:height="20px"
+        style:font-size="15px"
+        style:font-weight="900"
+        style:color={viewModel.isOn ? colors.buttonText : "transparent"}
+        style:background-color={viewModel.isOn ? colors.primaryTint : "transparent"}
+        class="material-icons"
+      >
+        checkmark
+      </div>
+      <div use:textStyle={"item"}>
+        {viewModel.name}
+      </div>
+    </Stack>
+  </label>
+  {#if "viewModels" in viewModel && viewModel.isOn}
+    <div
+      style:margin-left="9px"
+      style:border-left="2px solid {colors.primaryTint}"
+      style:border-radius="0 0 0 20px"
+    >
+      <Stack
+        alignment="start"
+        direction="vertical"
+        distribution="start"
+        minSpacing={15}
+        padding={[10, 0, 10, 20]}
+        wrap={true}
+      >
+        {#each viewModel.viewModels as subViewModel, index (subViewModel.id)}
+          <SettingsInputView bind:viewModel={viewModel.viewModels[index]}/>
+        {/each}
+      </Stack>
+    </div>
+  {/if}
+</Stack>
+
+{#snippet descriptionTooltip()}
+  <TextTooltip text={viewModel.description!}/>
+{/snippet}
+
+<script lang="ts">
+  import Stack from "@components/layout/Stack.svelte"
+  import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
+  import TextTooltip from "@components/utility/TextTooltip.svelte"
+  import { tooltip } from "@components/utility/Tooltip.svelte"
+  import { colors } from "@scripts/colors"
+  import { textStyle } from "@scripts/textStyle"
+  import type { ToggleViewModel } from "@shared/types/viewModels"
+  import { isNotNullish } from "@shared/utils"
+  
+  type Props = {
+    viewModel: ToggleViewModel
+  }
+  
+  const {
+    viewModel = $bindable(),
+  }: Props = $props()
+  
+  let isHovered = $state(false)
+  
+  const handleMouseEnterEvent = () => {
+    isHovered = true
+  }
+  
+  const handleMouseLeaveEvent = () => {
+    isHovered = false
+  }
+</script>
