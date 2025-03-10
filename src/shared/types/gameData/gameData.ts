@@ -1,4 +1,5 @@
 import type { Encounter } from "@shared/types/gameData/encounter"
+import type { ItemLocation } from "@shared/types/gameData/itemLocation"
 import type { MapObjectEvent } from "@shared/types/gameData/mapObjectEvent"
 import type { Mart } from "@shared/types/gameData/mart"
 import type { OddEgg } from "@shared/types/gameData/oddEgg"
@@ -7,6 +8,7 @@ import type { TeachableMove } from "@shared/types/gameData/teachableMove"
 import type { Trade } from "@shared/types/gameData/trade"
 import type { Trainer } from "@shared/types/gameData/trainer"
 import type { EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
+import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
 import type { MartId } from "@shared/types/gameDataIds/marts"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import type { StarterLocationId } from "@shared/types/gameDataIds/starterLocations"
@@ -24,4 +26,5 @@ export type GameData = {
   trainers: Trainer[]
   mapObjectEvents: [MapObjectEvent]
   marts: IdMap<MartId, Mart>
+  itemLocations: IdMap<ItemLocationId, ItemLocation>
 }

@@ -296,16 +296,6 @@ export const ballItemIds = [
   "PARK_BALL",
 ] as const
 
-export type PokedexPartItemId = typeof pokedexPartItemIds[number]
-export type PokegearPartItemId = typeof pokegearPartItemIds[number]
-export type JohtoBadgeItemId = typeof johtoBadgeItemIds[number]
-export type KantoBadgeItemId = typeof kantoBadgeItemIds[number]
-export type KeyItemId = typeof keyItemIds[number]
-export type HMItemId = typeof hmItemIds[number]
-export type TMItemId = typeof tmItemIds[number]
-export type RegularItemId = typeof regularItemIds[number]
-export type BallItemId = typeof ballItemIds[number]
-
 export const menuItemIds = [
   ...pokedexPartItemIds,
   ...pokegearPartItemIds,
@@ -316,20 +306,35 @@ export const badgeItemIds = [
   ...kantoBadgeItemIds,
 ] as const
 
+export const holdableItemIds = [
+  ...tmItemIds,
+  ...regularItemIds,
+  ...ballItemIds,
+] as const
+
+export const bagItemIds = [
+  ...keyItemIds,
+  ...hmItemIds,
+  ...holdableItemIds,
+] as const
+
+export const itemIds = [
+  ...menuItemIds,
+  ...badgeItemIds,
+  ...bagItemIds,
+] as const
+
+export type PokedexPartItemId = typeof pokedexPartItemIds[number]
+export type PokegearPartItemId = typeof pokegearPartItemIds[number]
+export type JohtoBadgeItemId = typeof johtoBadgeItemIds[number]
+export type KantoBadgeItemId = typeof kantoBadgeItemIds[number]
+export type KeyItemId = typeof keyItemIds[number]
+export type HMItemId = typeof hmItemIds[number]
+export type TMItemId = typeof tmItemIds[number]
+export type RegularItemId = typeof regularItemIds[number]
+export type BallItemId = typeof ballItemIds[number]
 export type MenuItemId = typeof menuItemIds[number]
 export type BadgeItemId = typeof badgeItemIds[number]
-
-export type HoldableItemId =
-  | TMItemId
-  | RegularItemId
-  | BallItemId
-
-export type BagItemId =
-  | KeyItemId
-  | HMItemId
-  | HoldableItemId
-
-export type ItemId =
-  | MenuItemId
-  | BadgeItemId
-  | BagItemId
+export type HoldableItemId = typeof holdableItemIds[number]
+export type BagItemId = typeof bagItemIds[number]
+export type ItemId = typeof itemIds[number]

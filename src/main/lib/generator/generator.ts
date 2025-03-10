@@ -8,6 +8,7 @@ import { updateEncounterRates } from "@lib/generator/gameDataProcessors/encounte
 import { updateRandomEncounters } from "@lib/generator/gameDataProcessors/encounters"
 import { updateEventPokemon } from "@lib/generator/gameDataProcessors/eventPokemon"
 import { updateEvolutionMethods } from "@lib/generator/gameDataProcessors/evolutionMethods"
+import { updateItems } from "@lib/generator/gameDataProcessors/itemLocations"
 import { updateLevelUpMoves } from "@lib/generator/gameDataProcessors/levelUpMoves"
 import { updateMapObjectEvents } from "@lib/generator/gameDataProcessors/mapObjectEvents"
 import { updateMarts } from "@lib/generator/gameDataProcessors/marts"
@@ -94,6 +95,7 @@ const updateGameData = (
   updateMarts(settings, romInfo)
   updateTrainers(settings, romInfo, randomInt)
   updateMapObjectEvents(settings, romInfo)
+  updateItems(settings, romInfo, randomInt)
 }
 
 const createPatches = (
@@ -362,6 +364,26 @@ const createPatches = (
   )
       
   romInfo.patchHunks = [...romInfo.patchHunks, ...teachableMovesPatch.hunks]
+  
+  // Items
+  
+  if (settings.RANDOMIZE_REGULAR_ITEM_BALLS || settings.RANDOMIZE_TM_ITEM_BALLS || settings.RANDOMIZE_HIDDEN_ITEMS) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Object.values(romInfo.gameData.itemLocations).map((itemLocation) => {
+        return new DataHunk(
+          ROMOffset.fromBankAddress(
+            itemLocation.romOffset[0],
+            itemLocation.romOffset[1]
+          ),
+          compact([
+            itemsMap[itemLocation.itemId].numericId,
+            itemLocation.type === "ITEM_BALL" ? 1 : null,
+          ]),
+        )
+      }),
+    ]
+  }
     
   // Starting Inventory
     
