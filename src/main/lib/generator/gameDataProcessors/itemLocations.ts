@@ -8,7 +8,7 @@ export const updateItems = (
   romInfo: ROMInfo,
   randomInt: (min: number, max: number) => number
 ) => {
-  if (settings.RANDOMIZE_REGULAR_ITEM_BALLS) {
+  if (settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE) {
     const availableItemIds = [
       ...regularItemIds,
       ...ballItemIds,
@@ -25,7 +25,7 @@ export const updateItems = (
     })!.typeId = "ITEMBALL"
   }
   
-  if (settings.RANDOMIZE_TM_ITEM_BALLS) {
+  if (settings.RANDOMIZE_TM_ITEM_BALLS.VALUE) {
     const availableItemIds = tmItemIds.filter((itemId) => {
       return !settings.BANNED_ITEMS.includes(itemId)
     })
@@ -35,7 +35,7 @@ export const updateItems = (
     })
   }
   
-  if (settings.RANDOMIZE_HIDDEN_ITEMS) {
+  if (settings.RANDOMIZE_HIDDEN_ITEMS.VALUE) {
     const availableItemIds = [
       ...regularItemIds,
       ...ballItemIds,
