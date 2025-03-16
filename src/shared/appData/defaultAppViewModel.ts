@@ -762,7 +762,82 @@ export const defaultAppViewModel = () => {
                 }),
               }), // END BAN
             ] as const,
-          }), // END RANDOMIZE_HIDDEN_ITEMS
+          }), // END RANDOMIZE_WILD_HELD_ITEMS
+          createConfigurableToggleViewModel({
+            id: "CHANGE_STARTER_HELD_ITEMS" as const,
+            name: "Change Items Held by Starter Pokémon",
+            description: "Change the items that are held by the starter Pokémon.",
+            viewModels: [
+              createSingleSelectorViewModel({
+                selectedOptionId: "RANDOM",
+                id: "METHOD" as const,
+                options: [
+                  createConfigurableSelectorOption({
+                    id: "RANDOM" as const,
+                    name: "Random",
+                    description: "Change the items held by the starter Pokémon to random ones.",
+                    viewModels: [
+                      createSimpleMultiSelectorViewModel({
+                        id: "BAN" as const,
+                        name: "Ban",
+                        description: "A list of items to exclude when choosing the random items "
+                          + "(in addition to the default list of banned items).",
+                        options: holdableItemIds.map((itemId) => {
+                          return createSimpleSelectorOption({
+                            id: itemId,
+                            name: itemsMap[itemId].name,
+                          })
+                        }),
+                      }), // END BAN
+                    ] as const,
+                  }), // END RANDOM
+                  createConfigurableSelectorOption({
+                    id: "CUSTOM" as const,
+                    name: "Custom",
+                    description: "Set a specific item for each starter.",
+                    viewModels: [
+                      createSingleSelectorViewModel({
+                        id: "LEFT" as const,
+                        name: "Left",
+                        description: "The item held by the starter in the left Poké Ball on the table in Prof. Elm's Lab.",
+                        selectedOptionId: "BERRY",
+                        options: holdableItemIds.map((itemId) => {
+                          return createSimpleSelectorOption({
+                            id: itemId,
+                            name: itemsMap[itemId].name,
+                          })
+                        }),
+                      }), // END LEFT
+                      createSingleSelectorViewModel({
+                        id: "MIDDLE" as const,
+                        name: "Middle",
+                        description: "The item held by the starter in the left Poké Ball on the table in Prof. Elm's Lab.",
+                        selectedOptionId: "BERRY",
+                        options: holdableItemIds.map((itemId) => {
+                          return createSimpleSelectorOption({
+                            id: itemId,
+                            name: itemsMap[itemId].name,
+                          })
+                        }),
+                      }), // END MIDDLE
+                      createSingleSelectorViewModel({
+                        id: "RIGHT" as const,
+                        name: "Right",
+                        description: "The item held by the starter in the left Poké Ball on the table in Prof. Elm's Lab.",
+                        selectedOptionId: "BERRY",
+                        options: holdableItemIds.map((itemId) => {
+                          return createSimpleSelectorOption({
+                            id: itemId,
+                            name: itemsMap[itemId].name,
+                          })
+                        }),
+                      }), // END RIGHT
+                    ] as const,
+                  }), // END CUSTOM
+                ] as const,
+              }),
+            ] as const,
+          }), // END CHANGE_STARTER_HELD_ITEMS
           createGroupMultiSelectorViewModel({
             id: "SHUFFLED_ITEM_GROUPS" as const,
             name: "Shuffle Items",

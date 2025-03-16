@@ -25,6 +25,7 @@ export class ROMInfo {
     this.gameData = {
       pokemon: JSON.parse(JSON.stringify(pokemonMap)),
       starters: {},
+      starterItems: {},
       encounters: JSON.parse(JSON.stringify(encounters)),
       oddEggs: JSON.parse(JSON.stringify(oddEggs)),
       eventPokemon: JSON.parse(JSON.stringify(eventPokemonMap)),

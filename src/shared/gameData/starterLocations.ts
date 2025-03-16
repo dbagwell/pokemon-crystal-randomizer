@@ -6,15 +6,27 @@ export const starterLocationsMap: IdMap<StarterLocationId, StarterLocation> = {
     id: "LEFT",
     pokemonId: "CYNDAQUIL",
     name: "Left (Cyndaquil)",
+    itemRomOffset: [
+      30,
+      0x4CA5,
+    ],
   },
   MIDDLE: {
     id: "MIDDLE",
     pokemonId: "TOTODILE",
     name: "Middle (Totodile)",
+    itemRomOffset: [
+      30,
+      0x4CE7,
+    ],
   },
   RIGHT: {
     id: "RIGHT",
     pokemonId: "CHIKORITA",
     name: "Right (Chikorita)",
+    itemRomOffset: [
+      30,
+      0x4D23,
+    ],
   },
 }

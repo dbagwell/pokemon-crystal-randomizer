@@ -5,6 +5,7 @@ import { baseStatTotal, hasPreEvolution, maxNumberOfEvolutionStages } from "@sha
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { trainerGroupsMap } from "@shared/gameData/trainerGroups"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
+import { holdableItemIds } from "@shared/types/gameDataIds/items"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import { isNotNullish, isNullish } from "@shared/utils"
 
@@ -19,7 +20,7 @@ export const updateStarters = (
   
   if (startersSettings.METHOD.VALUE === "CUSTOM") {
     const customStartersSettings = startersSettings.METHOD.SETTINGS.CUSTOM
-  
+    
     starterLocationIds.forEach((locationId) => {
       romInfo.gameData.starters[locationId] = customStartersSettings[locationId]
     })
@@ -145,5 +146,28 @@ export const updateStarters = (
         }
       })
     })
+  }
+}
+
+export const updateStarterItems = (
+  settings: SettingsFromAppViewModel,
+  romInfo: ROMInfo,
+  randomInt: (min: number, max: number) => number,
+) => {
+  if (settings.CHANGE_STARTER_HELD_ITEMS.VALUE) {
+    const starterHeldItemsMethod = settings.CHANGE_STARTER_HELD_ITEMS.SETTINGS.METHOD
+    if (starterHeldItemsMethod.VALUE === "CUSTOM") {
+      starterLocationIds.forEach((locationId) => {
+        romInfo.gameData.starterItems[locationId] = starterHeldItemsMethod.SETTINGS.CUSTOM[locationId]
+      })
+    } else {
+      const availableItemIds = holdableItemIds.filter((itemId) => {
+        return !settings.BANNED_ITEMS.includes(itemId) && !starterHeldItemsMethod.SETTINGS.RANDOM.BAN.includes(itemId)
+      })
+      
+      starterLocationIds.forEach((locationId) => {
+        romInfo.gameData.starterItems[locationId] = availableItemIds[randomInt(0, availableItemIds.length - 1)]
+      })
+    }
   }
 }
