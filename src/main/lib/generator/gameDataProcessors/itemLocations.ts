@@ -48,3 +48,25 @@ export const updateItems = (
     })
   }
 }
+
+export const shuffleItems = (
+  settings: SettingsFromAppViewModel,
+  romInfo: ROMInfo,
+  randomInt: (min: number, max: number) => number
+) => {
+  settings.SHUFFLED_ITEM_GROUPS.forEach((group) => {
+    const itemLocations = Object.values(romInfo.gameData.itemLocations).filter((location) => {
+      return group.includes(location.groupId)
+    })
+    
+    const itemIds = itemLocations.map((location) => {
+      return location.itemId
+    })
+    
+    itemLocations.forEach((location) => {
+      const itemIndex = randomInt(0, itemIds.length - 1)
+      location.itemId = itemIds[itemIndex]
+      itemIds.splice(itemIndex, 1)
+    })
+  })
+}

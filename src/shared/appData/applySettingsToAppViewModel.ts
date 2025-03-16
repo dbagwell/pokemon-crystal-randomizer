@@ -1,4 +1,4 @@
-import type { AppViewModel, ConfigurableMultiSelectorViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
+import type { AppViewModel, ConfigurableMultiSelectorViewModel, GroupMultiSelectorViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
 import { compact, isBoolean, isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
 
 export const applySettingsToAppViewModel = (settings: any, viewModel: AppViewModel, warnings: string[]) => {
@@ -41,6 +41,10 @@ const applySettingsToInputViewModel = (settings: any, viewModel: InputViewModel,
   }
   case "CONFIGURABLE_MULTI_SELECTOR": {
     applySettingsToConfigurableMultiSelectorViewModel(settings, viewModel, path, warnings)
+    break
+  }
+  case "GROUP_MULTI_SELECTOR": {
+    applySettingsToGroupMultiSelectorViewModel(settings, viewModel, path, warnings)
     break
   }
   case "TOGGLE": {
@@ -280,6 +284,7 @@ const applySettingsToSimpleMultiSelectorViewModel = (settings: any, viewModel: S
         return value
       } else {
         warnings.push(invalidValueWarning(`${path}.${index}`, expectedValueType, value, true))
+        return undefined
       }
     }))
   } else if (isNotNullish(settings)) {
@@ -327,6 +332,44 @@ const applySettingsToConfigurableMultiSelectorViewModel = (settings: any, viewMo
   }))
 }
 
+const applySettingsToGroupMultiSelectorViewModel = (settings: any, viewModel: GroupMultiSelectorViewModel, path: string, warnings: string[]) => {
+  const optionIds = viewModel.options.map((option) => { return option.id })
+  const elipsis = optionIds.length > 4 ? "..., " : ""
+  const expectedValues = `[${optionIds[0]}, ${optionIds[1]}, ${optionIds[2]}, ${elipsis}${optionIds[optionIds.length - 1]}]`
+  const expectedValueType = `one of ${expectedValues}`
+  const expectedSettingsType = `array of arrays of ${expectedValues}`
+  const expectedArrayType = `array of ${expectedValues}`
+  
+  if (Array.isArray(settings)) {
+    viewModel.selectedOptionIds = []
+    settings.forEach((group, outerIndex) => {
+      viewModel.selectedOptionIds[outerIndex] = []
+      if (Array.isArray(group)) {
+        return group.forEach((value, innerIndex) => {
+          if (isNullish(value)) {
+            return
+          } else if (isString(value) && optionIds.includes(value)) {
+            if (viewModel.selectedOptionIds.flat().includes(value)) {
+              warnings.push(duplicateValueWarning(path, value))
+            } else {
+              viewModel.selectedOptionIds[outerIndex] = [
+                ...viewModel.selectedOptionIds[outerIndex],
+                value,
+              ]
+            }
+          } else {
+            warnings.push(invalidValueWarning(`${path}.${outerIndex}.${innerIndex}`, expectedValueType, value, true))
+          }
+        })
+      } else {
+        warnings.push(invalidValueWarning(`${path}.${outerIndex}`, expectedArrayType, settings))
+      }
+    })
+  } else if (isNotNullish(settings)) {
+    warnings.push(invalidValueWarning(path, expectedSettingsType, settings))
+  }
+}
+
 const missingValueWarning = (path: string, expectedType: string) => {
   return `Missing value at path '${path}'. Expected ${expectedType}. Using default instead.`
 }
@@ -341,4 +384,8 @@ const unexpectedKeyWarning = (path: string, key: string) => {
 
 const tooManySelectionsWarning = (path: string) => {
   return `Too many selections at path '${path}'. Removing the extras.`
+}
+
+const duplicateValueWarning = (path: string, value: any) => {
+  return `Duplicate value '${value}' at path '${path}'. Removing the extra.`
 }

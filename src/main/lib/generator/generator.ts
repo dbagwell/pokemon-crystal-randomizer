@@ -8,7 +8,7 @@ import { updateEncounterRates } from "@lib/generator/gameDataProcessors/encounte
 import { updateRandomEncounters } from "@lib/generator/gameDataProcessors/encounters"
 import { updateEventPokemon } from "@lib/generator/gameDataProcessors/eventPokemon"
 import { updateEvolutionMethods } from "@lib/generator/gameDataProcessors/evolutionMethods"
-import { updateItems } from "@lib/generator/gameDataProcessors/itemLocations"
+import { shuffleItems, updateItems } from "@lib/generator/gameDataProcessors/itemLocations"
 import { updateLevelUpMoves } from "@lib/generator/gameDataProcessors/levelUpMoves"
 import { updateMapObjectEvents } from "@lib/generator/gameDataProcessors/mapObjectEvents"
 import { updateMarts } from "@lib/generator/gameDataProcessors/marts"
@@ -96,6 +96,7 @@ const updateGameData = (
   updateTrainers(settings, romInfo, randomInt)
   updateMapObjectEvents(settings, romInfo)
   updateItems(settings, romInfo, randomInt)
+  shuffleItems(settings, romInfo, randomInt)
 }
 
 const createPatches = (

@@ -49,10 +49,10 @@
               minSpacing={5}
             >
               <Button
-                style="icon"
+                style="text"
+                icon="cancel"
                 isDestructive={true}
                 onClick={() => { removeSelectedValue(index) }}
-                title="cancel"
               />
               <div
                 style:text-wrap="nowrap"

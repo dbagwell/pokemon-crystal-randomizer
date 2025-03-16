@@ -18,7 +18,27 @@
       bind:this={textContainer}
       style:text-align="center"
     >
-      {title}
+      <Stack
+        alignment="center"
+        direction="horizontal"
+        distribution="center"
+        height="100%"
+        minSpacing={5}
+      >
+        {#if isNotNullish(icon)}
+          <div
+            style:font-size="16px"
+            class="material-icons"
+          >
+            {icon}
+          </div>
+        {/if}
+        {#if isNotNullish(title)}
+          <div>
+            {title}
+          </div>
+        {/if}
+      </Stack>
     </div>
   </Stack>
 </button>
@@ -26,12 +46,14 @@
 <script lang="ts">
   import Stack from "@components/layout/Stack.svelte"
   import { colors } from "@scripts/colors"
+  import { isNotNullish } from "@shared/utils"
   import { onMount } from "svelte"
   
   type Props = {
-    style: "fill" | "icon"
+    style: "fill" | "text"
     isDestructive?: boolean
-    title: string
+    title?: string
+    icon?: string
     flexGrow?: boolean
     isDisabled?: boolean
     onClick: () => void
@@ -40,7 +62,8 @@
   const {
     style,
     isDestructive = false,
-    title,
+    title = undefined,
+    icon = undefined,
     flexGrow = false,
     isDisabled = $bindable(false),
     onClick,
@@ -88,6 +111,7 @@
   const updateStyle = () => {
     container.style.opacity = isActive || isDisabled ? "0.2" : "1"
     container.style.cursor = isDisabled ? "default" : "pointer"
+    container.style.padding = "0"
       
     switch (style) {
     case "fill": {
@@ -102,10 +126,9 @@
       container.style.boxShadow = "2px 2px 5px #00000070"
       textContainer.style.fontSize = "20px"
       textContainer.style.color = colors.buttonText
-      textContainer.className = ""
       return
     }
-    case "icon": {
+    case "text": {
       container.style.backgroundColor = "transparent"
       container.style.borderStyle = "none"
       container.style.borderWidth = "0px"
@@ -117,7 +140,6 @@
       textContainer.style.color = isHovered && !isDisabled
         ? isDestructive ? colors.destructiveTint : colors.primaryTint
         : colors.inactiveTint
-      textContainer.className = "material-icons"
     }
     }
   }

@@ -2,6 +2,7 @@ import type {
   AppViewModel,
   ConfigurableMultiSelectorViewModel,
   ConfigurableSelectorOption,
+  GroupMultiSelectorViewModel,
   InputViewModel,
   IntegerInputGroupViewModel,
   IntegerInputViewModel,
@@ -111,6 +112,11 @@ const settingsFromConfigurableMultiSelectorViewModel = <ViewModelType extends Co
   return optionSettings as SettingsFromConfigurableMultiSelectorViewModel<ViewModelType>
 }
 
+type SettingsFromGroupMultiSelectorViewModel<ViewModelType extends GroupMultiSelectorViewModel> = ViewModelType["options"][number]["id"][][]
+const settingsFromGroupMultiSelectorViewModel = <ViewModelType extends GroupMultiSelectorViewModel>(viewModel: ViewModelType): SettingsFromGroupMultiSelectorViewModel<ViewModelType> => {
+  return viewModel.selectedOptionIds as SettingsFromGroupMultiSelectorViewModel<ViewModelType>
+}
+
 type SettingsFromArrayOfSelectorOptions<ArrayType extends SelectorOption[]> = {
   [OptionType in ArrayType[number] as OptionType extends ConfigurableSelectorOption ? OptionType["id"] : never]: SettingsFromSelectorOption<OptionType>
 }
@@ -149,6 +155,7 @@ type SettingsFromInputViewModel<ViewModelType extends InputViewModel> =
   : ViewModelType extends SingleSelectorViewModel ? SettingsFromSelectorViewModel<ViewModelType>
   : ViewModelType extends SimpleMultiSelectorViewModel ? SettingsFromSimpleMultiSelectorViewModel<ViewModelType>
   : ViewModelType extends ConfigurableMultiSelectorViewModel ? SettingsFromConfigurableMultiSelectorViewModel<ViewModelType>
+  : ViewModelType extends GroupMultiSelectorViewModel ? SettingsFromGroupMultiSelectorViewModel<ViewModelType>
   : ViewModelType extends ToggleViewModel ? SettingsFromToggleViewModel<ViewModelType>
   : never
 const settingsFromInputViewModel = <ViewModelType extends InputViewModel>(viewModel: ViewModelType): SettingsFromInputViewModel<ViewModelType> => {
@@ -170,6 +177,9 @@ const settingsFromInputViewModel = <ViewModelType extends InputViewModel>(viewMo
   }
   case "CONFIGURABLE_MULTI_SELECTOR": {
     return settingsFromConfigurableMultiSelectorViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
+  }
+  case "GROUP_MULTI_SELECTOR": {
+    return settingsFromGroupMultiSelectorViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
   case "TOGGLE": {
     return settingsFromToggleViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>

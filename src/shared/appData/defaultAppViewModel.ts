@@ -1,6 +1,7 @@
 import { additionalOptionsMap } from "@shared/gameData/additionalOptions"
 import { growthRatesMap } from "@shared/gameData/growthRates"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
+import { itemLocationGroupsMap } from "@shared/gameData/itemLocationGroups"
 import { itemsMap } from "@shared/gameData/items"
 import { movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
@@ -10,6 +11,7 @@ import type { ItemCategory } from "@shared/types/gameData/itemCategory"
 import { additionalOptionIds } from "@shared/types/gameDataIds/additionalOptions"
 import { growthRateIds } from "@shared/types/gameDataIds/growthRates"
 import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
+import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGroups"
 import { ballItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
@@ -18,6 +20,7 @@ import {
   createConfigurableMultiSelectorViewModel,
   createConfigurableSelectorOption,
   createConfigurableToggleViewModel,
+  createGroupMultiSelectorViewModel,
   createIntegerInputGroupViewModel,
   createIntegerInputViewModel,
   createSimpleMultiSelectorViewModel,
@@ -695,6 +698,17 @@ export const defaultAppViewModel = () => {
               }), // END BAN
             ] as const,
           }), // END RANDOMIZE_HIDDEN_ITEMS
+          createGroupMultiSelectorViewModel({
+            id: "SHUFFLED_ITEM_GROUPS" as const,
+            name: "Shuffle Items",
+            description: "Create groups of item locations and shuffle the items that can be found at the locations within each group.",
+            options: itemLocationGroupIds.map((groupId) => {
+              return createSimpleSelectorOption({
+                id: groupId,
+                name: itemLocationGroupsMap[groupId].name,
+              })
+            }),
+          }), // END SHUFFLED_ITEM_GROUPS
           createConfigurableToggleViewModel({
             id: "START_WITH_ITEMS" as const,
             name: "Start With Items",

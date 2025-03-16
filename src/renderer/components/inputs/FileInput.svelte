@@ -67,10 +67,10 @@
             {files[0].name}
           </div>
           <Button
-            style="icon"
+            style="text"
+            icon="cancel"
             isDestructive={true}
             onClick={() => { files = undefined; value = "" }}
-            title="cancel"
           />
         </Stack>
       {/if}
