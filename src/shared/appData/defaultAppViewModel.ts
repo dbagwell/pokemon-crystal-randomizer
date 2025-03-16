@@ -679,7 +679,7 @@ export const defaultAppViewModel = () => {
             id: "RANDOMIZE_HIDDEN_ITEMS" as const,
             name: "Randomize Hidden Items",
             description: "Change the items received from hidden items to random ones. "
-              + "Doesn't include hidden items that give key items.",
+              + "Doesn't include hidden items that give key items or the items in trash cans.",
             viewModels: [
               createSimpleMultiSelectorViewModel({
                 id: "BAN" as const,
