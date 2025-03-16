@@ -1,6 +1,7 @@
 import { additionalOptionsMap } from "@shared/gameData/additionalOptions"
 import { growthRatesMap } from "@shared/gameData/growthRates"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
+import { itemLocationGroupsMap } from "@shared/gameData/itemLocationGroups"
 import { itemsMap } from "@shared/gameData/items"
 import { movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
@@ -10,7 +11,8 @@ import type { ItemCategory } from "@shared/types/gameData/itemCategory"
 import { additionalOptionIds } from "@shared/types/gameDataIds/additionalOptions"
 import { growthRateIds } from "@shared/types/gameDataIds/growthRates"
 import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
-import type { ItemId } from "@shared/types/gameDataIds/items"
+import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGroups"
+import { ballItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
@@ -18,6 +20,7 @@ import {
   createConfigurableMultiSelectorViewModel,
   createConfigurableSelectorOption,
   createConfigurableToggleViewModel,
+  createGroupMultiSelectorViewModel,
   createIntegerInputGroupViewModel,
   createIntegerInputViewModel,
   createSimpleMultiSelectorViewModel,
@@ -302,7 +305,7 @@ export const defaultAppViewModel = () => {
                 name: pokemonMap[pokemonId].name,
               })
             }),
-          }),
+          }), // END BANNED_POKEMON
         ] as const,
       }), // END POKEMON
       createTabViewModel({
@@ -631,11 +634,98 @@ export const defaultAppViewModel = () => {
         name: "Items",
         viewModels: [
           createConfigurableToggleViewModel({
+            id: "RANDOMIZE_REGULAR_ITEM_BALLS" as const,
+            name: "Randomize Regular Item Balls",
+            description: "Change the items received from item balls to random ones. "
+              + "Doesn't include item balls that give TM's, HM's or key items.",
+            viewModels: [
+              createSimpleMultiSelectorViewModel({
+                id: "BAN" as const,
+                name: "Ban",
+                description: "A list of items to exclude when choosing the random items "
+                  + "(in addition to the default list of banned items).",
+                options: [
+                  ...regularItemIds,
+                  ...ballItemIds,
+                ].map((itemId) => {
+                  return createSimpleSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                  })
+                }),
+              }), // END BAN
+            ] as const,
+          }), // END RANDOMIZE_REGULAR_ITEM_BALLS
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_TM_ITEM_BALLS" as const,
+            name: "Randomize TM Item Balls",
+            description: "Change the TM's received from item balls to random ones.",
+            viewModels: [
+              createSimpleMultiSelectorViewModel({
+                id: "BAN" as const,
+                name: "Ban",
+                description: "A list of items to exclude when choosing the random items "
+                  + "(in addition to the default list of banned items).",
+                options: tmItemIds.map((itemId) => {
+                  return createSimpleSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                  })
+                }),
+              }), // END BAN
+            ] as const,
+          }), // END RANDOMIZE_TM_ITEM_BALLS
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_HIDDEN_ITEMS" as const,
+            name: "Randomize Hidden Items",
+            description: "Change the items received from hidden items to random ones. "
+              + "Doesn't include hidden items that give key items or the items in trash cans.",
+            viewModels: [
+              createSimpleMultiSelectorViewModel({
+                id: "BAN" as const,
+                name: "Ban",
+                description: "A list of items to exclude when choosing the random items "
+                  + "(in addition to the default list of banned items).",
+                options: [
+                  ...regularItemIds,
+                  ...ballItemIds,
+                ].map((itemId) => {
+                  return createSimpleSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                  })
+                }),
+              }), // END BAN
+            ] as const,
+          }), // END RANDOMIZE_HIDDEN_ITEMS
+          createGroupMultiSelectorViewModel({
+            id: "SHUFFLED_ITEM_GROUPS" as const,
+            name: "Shuffle Items",
+            description: "Create groups of item locations and shuffle the items that can be found at the locations within each group.",
+            options: itemLocationGroupIds.map((groupId) => {
+              return createSimpleSelectorOption({
+                id: groupId,
+                name: itemLocationGroupsMap[groupId].name,
+              })
+            }),
+          }), // END SHUFFLED_ITEM_GROUPS
+          createConfigurableToggleViewModel({
             id: "START_WITH_ITEMS" as const,
             name: "Start With Items",
             description: "Add the selected items to the player's inventory when starting a new game.",
             viewModels: createSelectorsFromItemCategories(),
           }),
+          createSimpleMultiSelectorViewModel({
+            id: "BANNED_ITEMS" as const,
+            name: "Globally Banned Items",
+            description: "A list of items to always exclude when choosing random items.",
+            options: itemIds.map((itemId) => {
+              return createSimpleSelectorOption({
+                id: itemId,
+                name: itemsMap[itemId].name,
+              })
+            }),
+          }), // END BANNED_ITEMS
         ] as const,
       }), // END ITEMS
       createTabViewModel({

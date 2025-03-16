@@ -1,6 +1,7 @@
 import type { DataHunk } from "@lib/generator/patch"
 import { DataFormat } from "@lib/generator/patchInfo"
 import { encounters } from "@shared/gameData/encounters"
+import { itemLocationsMap } from "@shared/gameData/itemLocations"
 import { mapObjectEvents } from "@shared/gameData/mapObjectEvents"
 import { martsMap } from "@shared/gameData/marts"
 import { oddEggs } from "@shared/gameData/oddEggs"
@@ -32,6 +33,7 @@ export class ROMInfo {
       trainers: JSON.parse(JSON.stringify(trainers)),
       mapObjectEvents: JSON.parse(JSON.stringify(mapObjectEvents)),
       marts: JSON.parse(JSON.stringify(martsMap)),
+      itemLocations: JSON.parse(JSON.stringify(itemLocationsMap)),
     }
   }
   

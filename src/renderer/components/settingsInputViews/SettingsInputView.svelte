@@ -10,6 +10,8 @@
   <SimpleMultiSelectorView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "CONFIGURABLE_MULTI_SELECTOR"}
   <ConfigurableMultiSelectorView bind:viewModel={viewModel}/>
+{:else if viewModel.type === "GROUP_MULTI_SELECTOR"}
+  <GroupMultiSelectorView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "TOGGLE"}
   <ToggleView bind:viewModel={viewModel}/>
 {:else}
@@ -18,6 +20,7 @@
 
 <script lang="ts">
   import ConfigurableMultiSelectorView from "@components/settingsInputViews/ConfigurableMultiSelectorView.svelte"
+  import GroupMultiSelectorView from "@components/settingsInputViews/GroupMultiSelectorView.svelte"
   import IntegerInputGroupView from "@components/settingsInputViews/IntegerInputGroupView.svelte"
   import IntegerInputView from "@components/settingsInputViews/IntegerInputView.svelte"
   import SimpleMultiSelectorView from "@components/settingsInputViews/SimpleMultiSelectorView.svelte"

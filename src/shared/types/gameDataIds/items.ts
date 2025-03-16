@@ -172,31 +172,6 @@ export const regularItemIds = [
   "ICE_BERRY",
   "ICE_HEAL",
   "IRON",
-  "ITEM_2D",
-  "ITEM_5A",
-  "ITEM_8D",
-  "ITEM_8E",
-  "ITEM_9A",
-  "ITEM_9B",
-  "ITEM_19",
-  "ITEM_32",
-  "ITEM_64",
-  "ITEM_78",
-  "ITEM_87",
-  "ITEM_88",
-  "ITEM_89",
-  "ITEM_91",
-  "ITEM_93",
-  "ITEM_94",
-  "ITEM_95",
-  "ITEM_99",
-  "ITEM_A2",
-  "ITEM_AB",
-  "ITEM_B0",
-  "ITEM_B3",
-  "ITEM_BE",
-  "ITEM_C3",
-  "ITEM_DC",
   "KINGS_ROCK",
   "LEAF_STONE",
   "LEFTOVERS",
@@ -233,7 +208,6 @@ export const regularItemIds = [
   "PNK_APRICORN",
   "POISON_BARB",
   "POKE_DOLL",
-  "POKE_FLUTE",
   "POLKADOT_BOW",
   "PORTRAITMAIL",
   "POTION",
@@ -268,7 +242,6 @@ export const regularItemIds = [
   "THICK_CLUB",
   "THUNDERSTONE",
   "TINYMUSHROOM",
-  "TOWN_MAP",
   "TWISTEDSPOON",
   "UP_GRADE",
   "WATER_STONE",
@@ -296,16 +269,6 @@ export const ballItemIds = [
   "PARK_BALL",
 ] as const
 
-export type PokedexPartItemId = typeof pokedexPartItemIds[number]
-export type PokegearPartItemId = typeof pokegearPartItemIds[number]
-export type JohtoBadgeItemId = typeof johtoBadgeItemIds[number]
-export type KantoBadgeItemId = typeof kantoBadgeItemIds[number]
-export type KeyItemId = typeof keyItemIds[number]
-export type HMItemId = typeof hmItemIds[number]
-export type TMItemId = typeof tmItemIds[number]
-export type RegularItemId = typeof regularItemIds[number]
-export type BallItemId = typeof ballItemIds[number]
-
 export const menuItemIds = [
   ...pokedexPartItemIds,
   ...pokegearPartItemIds,
@@ -316,20 +279,35 @@ export const badgeItemIds = [
   ...kantoBadgeItemIds,
 ] as const
 
+export const holdableItemIds = [
+  ...tmItemIds,
+  ...regularItemIds,
+  ...ballItemIds,
+] as const
+
+export const bagItemIds = [
+  ...keyItemIds,
+  ...hmItemIds,
+  ...holdableItemIds,
+] as const
+
+export const itemIds = [
+  ...menuItemIds,
+  ...badgeItemIds,
+  ...bagItemIds,
+] as const
+
+export type PokedexPartItemId = typeof pokedexPartItemIds[number]
+export type PokegearPartItemId = typeof pokegearPartItemIds[number]
+export type JohtoBadgeItemId = typeof johtoBadgeItemIds[number]
+export type KantoBadgeItemId = typeof kantoBadgeItemIds[number]
+export type KeyItemId = typeof keyItemIds[number]
+export type HMItemId = typeof hmItemIds[number]
+export type TMItemId = typeof tmItemIds[number]
+export type RegularItemId = typeof regularItemIds[number]
+export type BallItemId = typeof ballItemIds[number]
 export type MenuItemId = typeof menuItemIds[number]
 export type BadgeItemId = typeof badgeItemIds[number]
-
-export type HoldableItemId =
-  | TMItemId
-  | RegularItemId
-  | BallItemId
-
-export type BagItemId =
-  | KeyItemId
-  | HMItemId
-  | HoldableItemId
-
-export type ItemId =
-  | MenuItemId
-  | BadgeItemId
-  | BagItemId
+export type HoldableItemId = typeof holdableItemIds[number]
+export type BagItemId = typeof bagItemIds[number]
+export type ItemId = typeof itemIds[number]
