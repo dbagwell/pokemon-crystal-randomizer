@@ -1,3 +1,0 @@
-description: "Data for a land or water encounter slot."
-values:
-  data: "$level $pokemonId"

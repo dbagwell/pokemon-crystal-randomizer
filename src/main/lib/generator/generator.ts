@@ -1,54 +1,32 @@
 import { ROMInfo, ROMOffset } from "@lib/gameData/romInfo"
+import { bytesFromLandAndWaterEncounterRates } from "@lib/generator/dataConverters/encounterRates"
+import { bytesFromContestEncounters, bytesFromFishingEncounters, bytesFromLandAndWaterEncounters, bytesFromTreeAndRockEncounters, encountersGroupedByType } from "@lib/generator/dataConverters/encounters"
+import { dataHunkFromMapObjectEvent } from "@lib/generator/dataConverters/mapObjectEvent"
+import { bytesFromOddEgg } from "@lib/generator/dataConverters/oddEgg"
+import { bytesForEvolutionsAndLevelUpMovesFromPokemon, bytesForInfoFromPokemon } from "@lib/generator/dataConverters/pokemon"
+import { updateEncounterRates } from "@lib/generator/gameDataProcessors/encounterRates"
+import { updateRandomEncounters } from "@lib/generator/gameDataProcessors/encounters"
+import { updateEventPokemon } from "@lib/generator/gameDataProcessors/eventPokemon"
+import { updateEvolutionMethods } from "@lib/generator/gameDataProcessors/evolutionMethods"
+import { updateLevelUpMoves } from "@lib/generator/gameDataProcessors/levelUpMoves"
+import { updateMapObjectEvents } from "@lib/generator/gameDataProcessors/mapObjectEvents"
+import { updateMarts } from "@lib/generator/gameDataProcessors/marts"
+import { updatePokemonInfo } from "@lib/generator/gameDataProcessors/pokemonInfo"
+import { updateStarters } from "@lib/generator/gameDataProcessors/starters"
+import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
+import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
-import { eggGroupsMap } from "@shared/gameData/eggGroups"
-import { encounters } from "@shared/gameData/encounters"
-import { eventFlagsMap } from "@shared/gameData/eventFlags"
-import { evolutionTypesMap } from "@shared/gameData/evolutionTypes"
-import { gameMapGroupsMap } from "@shared/gameData/gameMapGroups"
-import { gameMapsMap } from "@shared/gameData/gameMaps"
-import { growthRatesMap } from "@shared/gameData/growthRates"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
-import { mapObjectEvents } from "@shared/gameData/mapObjectEvents"
-import { mapObjectTypesMap } from "@shared/gameData/mapObjectTypes"
-import { martsMap } from "@shared/gameData/marts"
-import { type Move, movesMap } from "@shared/gameData/moves"
-import { oddEggs } from "@shared/gameData/oddEggs"
-import { overworldMovementBehavioursMap } from "@shared/gameData/overworldMovementBehaviours"
-import { overworldSpritePalletsMap } from "@shared/gameData/overworldSpritePallets"
-import { overworldSpritesMap } from "@shared/gameData/overworldSprites"
+import { movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
-import { baseStatTotal, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
-import { pokemonTypesMap } from "@shared/gameData/pokemonTypes"
-import { starterLocationsMap } from "@shared/gameData/starterLocations"
-import { teachableMovesMap } from "@shared/gameData/teachableMoves"
-import { tradesMap } from "@shared/gameData/trades"
-import { trainerGroupsMap } from "@shared/gameData/trainerGroups"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
-import { trainers } from "@shared/gameData/trainers"
-import type { Encounter } from "@shared/types/gameData/encounter"
-import { happinessEvolutionConidtionsMap, statEvolutionConidtionsMap } from "@shared/types/gameData/evolutionMethod"
-import type { MapObjectEvent } from "@shared/types/gameData/mapObjectEvent"
-import type { Mart } from "@shared/types/gameData/mart"
-import { type OddEgg } from "@shared/types/gameData/oddEgg"
-import type { Pokemon } from "@shared/types/gameData/pokemon"
-import type { TeachableMove } from "@shared/types/gameData/teachableMove"
 import type { Trade } from "@shared/types/gameData/trade"
-import type { Trainer } from "@shared/types/gameData/trainer"
-import { fishingGroupIds } from "@shared/types/gameDataIds/fishingGroups"
-import { fishingRodIds } from "@shared/types/gameDataIds/fishingRods"
-import { type HMItemId, hmItemIds, type ItemId, type TMItemId, tmItemIds } from "@shared/types/gameDataIds/items"
-import type { MartId } from "@shared/types/gameDataIds/marts"
-import { moveIds } from "@shared/types/gameDataIds/moves"
-import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
-import { pokemonTypeIds } from "@shared/types/gameDataIds/pokemonTypes"
-import { type StarterLocationId, starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
-import { type MoveTutorId, moveTutorIds, type TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
-import type { TradeId } from "@shared/types/gameDataIds/trades"
+import type { EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
+import { type ItemId } from "@shared/types/gameDataIds/items"
 import { trainerGroupIds } from "@shared/types/gameDataIds/trainerGroups"
-import { treeGroupIds } from "@shared/types/gameDataIds/treeGroups"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish } from "@utils"
 import crypto from "crypto"
 import { app } from "electron"
@@ -60,1416 +38,347 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   data: Buffer,
 } => {
   const romInfo = ROMInfo.vanilla()
-  
-  let hunks: DataHunk[] = []
   const seed = customSeed ?? crypto.randomUUID()
   const rng = seedrandom(seed)
   const randomInt = (min: number, max: number): number => {
     return Math.floor(rng() * (max + 1 - min)) + min
   }
   
-  const updatedTrainers = JSON.parse(JSON.stringify(trainers)) as Trainer[]
+  // Update game data based on settings
   
-  const hasPreEvolution = (pokemon: Pokemon) => {
-    return Object.values(pokemonMap).flatMap((pokemon) => {
-      return pokemon.evolutions?.map((evolution) => {
-        return evolution.pokemonId
-      }) ?? []
-    }).includes(pokemon.id)
+  updateGameData(settings, romInfo, randomInt)
+  
+  // Create patch hunks based on settings and updated game data
+  
+  createPatches(settings, romInfo)
+  
+  // Base Patch
+  
+  const checkValue = romInfo.patchHunks.length > 0 ? hash(romInfo.patchHunks).slice(0, 8).toUpperCase() : "00000000"
+  
+  const basePatch = Patch.fromYAML(
+    romInfo,
+    "randomizerBase.yml",
+    {},
+    {
+      versionNumber: hexStringFrom(ROMInfo.displayCharacterBytesFrom(app.getVersion())),
+      checkValue: hexStringFrom(ROMInfo.displayCharacterBytesFrom(checkValue)),
+    },
+  )
+      
+  romInfo.patchHunks = [...romInfo.patchHunks, ...basePatch.hunks]
+  
+  romInfo.patchHunks.forEach((hunk) => {
+    data.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
+  })
+  
+  return {
+    seed: "",
+    data: data,
   }
-  
-  // Pokemon
-  
+}
+
+const updateGameData = (
+  settings: SettingsFromAppViewModel,
+  romInfo: ROMInfo,
+  randomInt: (min: number, max: number) => number,
+) => {
+  updateStarters(settings, romInfo, randomInt)
+  updateEventPokemon(settings, romInfo, randomInt)
+  updateRandomEncounters(settings, romInfo, randomInt)
+  updateEncounterRates(settings, romInfo)
+  updateTrades(settings, romInfo, randomInt)
+  updateEvolutionMethods(settings, romInfo)
+  updateLevelUpMoves(settings, romInfo, randomInt)
+  updatePokemonInfo(settings, romInfo, randomInt)
+  updateMarts(settings, romInfo)
+  updateTrainers(settings, romInfo, randomInt)
+  updateMapObjectEvents(settings, romInfo)
+}
+
+const createPatches = (
+  settings: SettingsFromAppViewModel,
+  romInfo: ROMInfo,
+) => {
   // Starter Pokemon
   
-  if (settings.CHANGE_STARTERS.VALUE) {
-    const startersSettings = settings.CHANGE_STARTERS.SETTINGS
-    const assignedStarters: Partial<Record<StarterLocationId, PokemonId>> = {}
-    
-    if (startersSettings.METHOD.VALUE === "CUSTOM") {
-      const customStartersSettings = startersSettings.METHOD.SETTINGS.CUSTOM
-    
-      starterLocationIds.forEach((locationId) => {
-        assignedStarters[locationId] = customStartersSettings[locationId]
-      })
-    } else if (startersSettings.METHOD.VALUE === "RANDOM") {
-      const randomStartersSettings = startersSettings.METHOD.SETTINGS.RANDOM
-      const isBanned = (pokemon: Pokemon) => {
-        return randomStartersSettings.BAN.includes(pokemon.id)
-      }
-      
-      const isAssigned = (pokemon: Pokemon) => {
-        return isNotNullish(Object.values(assignedStarters).find((assignedStarterId) => {
-          return assignedStarterId === pokemon.id
-        }))
-      }
-      
-      starterLocationIds.forEach((locationId) => {
-        if (isNotNullish(assignedStarters[locationId])) {
-          return
-        }
-        
-        const vanillaStarter = pokemonMap[starterLocationsMap[locationId].pokemonId]
-        
-        const matchesType = (pokemon: Pokemon) => {
-          return pokemon.types.includes(vanillaStarter.types[0]) // Vanilla starters only have 1 type each
-        }
-        
-        const matchesEvoltions = (pokemon: Pokemon) => {
-          return maxNumberOfEvolutionStages(pokemon) === maxNumberOfEvolutionStages(vanillaStarter)
-        }
-        
-        const baseStatDifference = (pokemon: Pokemon) => {
-          return Math.abs(baseStatTotal(pokemon) - baseStatTotal(vanillaStarter))
-        }
-        
-        const choices = Object.values(pokemonMap).filter((pokemon) => {
-          return !isBanned(pokemon)
-            && (!randomStartersSettings.UNIQUE || !isAssigned(pokemon))
-            && (!randomStartersSettings.MATCH_TYPE || matchesType(pokemon))
-            && (!randomStartersSettings.MATCH_STAGE || !hasPreEvolution(pokemon))
-            && (!randomStartersSettings.MATCH_EVOLUTIONS || matchesEvoltions(pokemon))
-            && (!randomStartersSettings.MATCH_SIMILAR_BST.VALUE || baseStatDifference(pokemon) <= randomStartersSettings.MATCH_SIMILAR_BST.SETTINGS.THRESHOLD)
-        })
-        
-        if (choices.length < 1) {
-          throw new Error("Unable to satisfy settings for randomized starter Pokémon. Possible reasons: BST threshold too small or too many banned Pokémon. You could try again with a different seed, but different settings might be required.")
-        }
-        
-        const index = randomInt(0, choices.length - 1)
-        assignedStarters[locationId] = choices[index].id
-      })
+  Object.entries(romInfo.gameData.starters).forEach(([locationId, pokemonId]) => {
+    if (isNullish(pokemonId)) {
+      return
     }
-    
-    Object.entries(assignedStarters).forEach(([locationId, pokemonId]) => {
-      if (isNullish(pokemonId)) {
-        return
-      }
       
-      const pokemon = pokemonMap[pokemonId]
+    const pokemon = pokemonMap[pokemonId]
       
-      hunks = [
-        ...hunks,
-        ...Patch.fromYAML(
-          romInfo,
-          `starters/${locationId.toLowerCase()}.yml`,
-          {},
-          {
-            pokemonId: hexStringFrom(bytesFrom(pokemon.numericId, 1)),
-            pokemonName: hexStringFrom(ROMInfo.displayCharacterBytesFrom(pokemon.name.toUpperCase())),
-          },
-        ).hunks,
-      ]
-    })
-    
-    if (startersSettings.CHANGE_RIVALS_STARTER) {
-      Object.entries(assignedStarters).forEach(([locationId, newPokemonId]) => {
-        if (isNullish(newPokemonId)) {
-          return
-        }
-        
-        let newPokemon = pokemonMap[newPokemonId]
-        
-        const rivalPokemon = updatedTrainers.filter((trainer) => {
-          return trainerGroupsMap[trainer.groupId].classId === "RIVAL"
-        }).flatMap((trainer) => {
-          return trainer.pokemon
-        })
-        
-        // Update the Rival's initial starters
-        
-        rivalPokemon.filter((pokemon) => {
-          return locationId === "LEFT" && pokemon.id === "CYNDAQUIL"
-            || locationId === "MIDDLE" && pokemon.id === "TOTODILE"
-            || locationId === "RIGHT" && pokemon.id === "CHIKORITA"
-        }).forEach((pokemon) => {
-          pokemon.id = newPokemon.id
-        })
-        
-        // Update the Rival's second stage starters
-        
-        const evolutionId = newPokemon.evolutions?.[0]?.pokemonId
-        
-        // Only evolve the pokemon at this stage if it can evolve further
-        if (isNotNullish(evolutionId) && isNotNullish(pokemonMap[evolutionId].evolutions)) {
-          newPokemon = pokemonMap[evolutionId]
-        }
-        
-        rivalPokemon.filter((pokemon) => {
-          return locationId === "LEFT" && pokemon.id === "QUILAVA"
-            || locationId === "MIDDLE" && pokemon.id === "CROCONAW"
-            || locationId === "RIGHT" && pokemon.id === "BAYLEEF"
-        }).forEach((pokemon) => {
-          pokemon.id = newPokemon.id
-          
-          if (pokemon.moves.length > 0) {
-            const startIndex = newPokemon.levelUpMoves.findIndex((move) => {
-              return move.level >= pokemon.level
-            })
-            
-            pokemon.moves = newPokemon.levelUpMoves.slice(startIndex, 4).map((move) => {
-              return move.moveId
-            })
-          }
-        })
-        
-        // Update the Rival's third stage starters
-        
-        newPokemon = pokemonMap[newPokemon.evolutions?.[0]?.pokemonId ?? newPokemon.id]
-        
-        rivalPokemon.filter((pokemon) => {
-          return locationId === "LEFT" && pokemon.id === "TYPHLOSION"
-            || locationId === "MIDDLE" && pokemon.id === "FERALIGATR"
-            || locationId === "RIGHT" && pokemon.id === "MEGANIUM"
-        }).forEach((pokemon) => {
-          pokemon.id = newPokemon.id
-          
-          if (pokemon.moves.length > 0) {
-            const startIndex = newPokemon.levelUpMoves.findIndex((move) => {
-              return move.level >= pokemon.level
-            })
-            
-            pokemon.moves = newPokemon.levelUpMoves.slice(startIndex, 4).map((move) => {
-              return move.moveId
-            })
-          }
-        })
-      })
-    }
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        `starters/${locationId.toLowerCase()}.yml`,
+        {},
+        {
+          pokemonId: hexStringFrom(bytesFrom(pokemon.numericId, 1)),
+          pokemonName: hexStringFrom(ROMInfo.displayCharacterBytesFrom(pokemon.name.toUpperCase())),
+        },
+      ).hunks,
+    ]
+  })
+  
+  // Event Pokémon
+  
+  const eventPokemonFromId = (eventPokemonId: EventPokemonId) => {
+    return pokemonMap[romInfo.gameData.eventPokemon[eventPokemonId]]
   }
   
-  // Random Event Pokemon
-  
-  const updatedOddEggs = JSON.parse(JSON.stringify(oddEggs)) as OddEgg[]
-    
-  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE) {
-    const eventPokemonSettings = settings.RANDOMIZE_EVENT_POKEMON.SETTINGS
-    
-    const availablePokemonIds = pokemonIds.filter((pokemonId) => {
-      return !eventPokemonSettings.BAN.includes(pokemonId)
-    })
-    
-    const getRandomPokemonId = () => {
-      const index = randomInt(0, availablePokemonIds.length - 1)
-      const pokemonId = availablePokemonIds[index]
-      
-      if (eventPokemonSettings.UNIQUE) {
-        availablePokemonIds.splice(index, 1)
-      }
-      
-      return pokemonId
-    }
-    
-    const getRandomPokemon = () => {
-      return pokemonMap[getRandomPokemonId()]
-    }
-    
-    const getRandomPokemonIdHexString = () => {
-      return hexStringFrom([getRandomPokemon().numericId])
-    }
-    
-    const randomizedOddEggIds = [getRandomPokemonId()]
-    
-    for (let index = 1; index < 14; index++) {
-      if (eventPokemonSettings.ODD_EGG === "RANDOM" || index % 2 === 0 && eventPokemonSettings.ODD_EGG === "SHINY_MATCH") {
-        randomizedOddEggIds.push(getRandomPokemonId())
-      } else {
-        randomizedOddEggIds.push(randomizedOddEggIds[index - 1])
-      }
-    }
-    
-    updatedOddEggs.forEach((oddEgg, index) => {
-      oddEgg.pokemonId = randomizedOddEggIds[index]
-    })
-    
-    const eeveePokemon = getRandomPokemon()
-    const dratiniPokemon = getRandomPokemon()
-    const tyrogue2Pokemon = getRandomPokemon()
-    const abraPokemon = getRandomPokemon()
-    const cubonePokemon = getRandomPokemon()
-    const wobbuffetPokemon = getRandomPokemon()
-    const pikachuPokemon = getRandomPokemon()
-    const porygonPokemon = getRandomPokemon()
-    const larvitarPokemon = getRandomPokemon()
-    
-    const eventPokemonPatch = Patch.fromYAML(
-      romInfo,
-      "eventPokemon.yml",
-      {},
-      {
-        rattataPokemonId: getRandomPokemonIdHexString(),
-        sudowoodoPokemonId: getRandomPokemonIdHexString(),
-        raikouPokemonId: getRandomPokemonIdHexString(),
-        enteiPokemonId: getRandomPokemonIdHexString(),
-        suicunePokemonId: getRandomPokemonIdHexString(),
-        gyaradosPokemonId: getRandomPokemonIdHexString(),
-        voltorbPokemonId: getRandomPokemonIdHexString(),
-        geodudePokemonId: getRandomPokemonIdHexString(),
-        koffingPokemonId: getRandomPokemonIdHexString(),
-        electrode1PokemonId: getRandomPokemonIdHexString(),
-        electrode2PokemonId: getRandomPokemonIdHexString(),
-        electrode3PokemonId: getRandomPokemonIdHexString(),
-        laprasPokemonId: getRandomPokemonIdHexString(),
-        snorlaxPokemonId: getRandomPokemonIdHexString(),
-        hoOhPokemonId: getRandomPokemonIdHexString(),
-        lugiaPokemonId: getRandomPokemonIdHexString(),
-        celebiPokemonId: getRandomPokemonIdHexString(),
-        togepiPokemonId: getRandomPokemonIdHexString(),
-        spearowPokemonId: getRandomPokemonIdHexString(),
-        shucklePokemonId: getRandomPokemonIdHexString(),
-        eeveePokemonId: hexStringFrom([eeveePokemon.numericId]),
-        eeveePokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${eeveePokemon.name.toUpperCase()}.`.padEnd(11, " "))),
-        eeveePokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${eeveePokemon.name.toUpperCase()}`.padEnd(10, " "))),
-        dratiniPokemonId: hexStringFrom([dratiniPokemon.numericId]),
-        dratiniPokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${dratiniPokemon.name.toUpperCase()}`.padEnd(12, " "))),
-        dratiniPokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${dratiniPokemon.name.toUpperCase()}`.padEnd(10, " "))),
-        tyroguePokemonId: hexStringFrom([tyrogue2Pokemon.numericId]),
-        tyroguePokemonNameText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${tyrogue2Pokemon.name.toUpperCase()}`.padEnd(10, " "))),
-        abraPokemonId: hexStringFrom([abraPokemon.numericId]),
-        cubonePokemonId: hexStringFrom([cubonePokemon.numericId]),
-        wobbuffetPokemonId: hexStringFrom([wobbuffetPokemon.numericId]),
-        goldenrodGameCornerPokemonMenuText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${abraPokemon.name.toUpperCase().padEnd(10, " ")}  100@${cubonePokemon.name.toUpperCase().padEnd(10, " ")}  800@${wobbuffetPokemon.name.toUpperCase().padEnd(10, " ")} 1500@`)),
-        pikachuPokemonId: hexStringFrom([pikachuPokemon.numericId]),
-        porygonPokemonId: hexStringFrom([porygonPokemon.numericId]),
-        larvitarPokemonId: hexStringFrom([larvitarPokemon.numericId]),
-        celadonGameCornerPokemonMenuText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${pikachuPokemon.name.toUpperCase().padEnd(10, " ")} 2222@${porygonPokemon.name.toUpperCase().padEnd(10, " ")} 5555@${larvitarPokemon.name.toUpperCase().padEnd(10, " ")} 8888@`)),
-      },
-    )
-    
-    hunks = [...hunks, ...eventPokemonPatch.hunks]
+  const hexStringFromEventPokemonId = (eventPokemonId: EventPokemonId) => {
+    return hexStringFrom([eventPokemonFromId(eventPokemonId).numericId])
   }
   
+  const nameStringFromEventPokemonId = (eventPokemonId: EventPokemonId) => {
+    return eventPokemonFromId(eventPokemonId).name.toUpperCase()
+  }
+  
+  const eventPokemonPatch = Patch.fromYAML(
+    romInfo,
+    "eventPokemon.yml",
+    {},
+    {
+      rattataPokemonId: hexStringFromEventPokemonId("RATTATA"),
+      sudowoodoPokemonId: hexStringFromEventPokemonId("SUDOWOODO"),
+      raikouPokemonId: hexStringFromEventPokemonId("RAIKOU"),
+      enteiPokemonId: hexStringFromEventPokemonId("ENTEI"),
+      suicunePokemonId: hexStringFromEventPokemonId("SUICUNE"),
+      gyaradosPokemonId: hexStringFromEventPokemonId("GYARADOS"),
+      voltorbPokemonId: hexStringFromEventPokemonId("VOLTORB"),
+      geodudePokemonId: hexStringFromEventPokemonId("GEODUDE"),
+      koffingPokemonId: hexStringFromEventPokemonId("KOFFING"),
+      electrode1PokemonId: hexStringFromEventPokemonId("ELECTRODE1"),
+      electrode2PokemonId: hexStringFromEventPokemonId("ELECTRODE2"),
+      electrode3PokemonId: hexStringFromEventPokemonId("ELECTRODE3"),
+      laprasPokemonId: hexStringFromEventPokemonId("LAPRAS"),
+      snorlaxPokemonId: hexStringFromEventPokemonId("SNORLAX"),
+      hoOhPokemonId: hexStringFromEventPokemonId("HO_OH"),
+      lugiaPokemonId: hexStringFromEventPokemonId("LUGIA"),
+      celebiPokemonId: hexStringFromEventPokemonId("CELEBI"),
+      togepiPokemonId: hexStringFromEventPokemonId("TOGEPI"),
+      spearowPokemonId: hexStringFromEventPokemonId("SPEAROW"),
+      shucklePokemonId: hexStringFromEventPokemonId("SHUCKLE"),
+      eeveePokemonId: hexStringFromEventPokemonId("EEVEE"),
+      eeveePokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("EEVEE")}.`.padEnd(11, " "))),
+      eeveePokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("EEVEE")}`.padEnd(10, " "))),
+      dratiniPokemonId: hexStringFromEventPokemonId("DRATINI"),
+      dratiniPokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("DRATINI")}`.padEnd(12, " "))),
+      dratiniPokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("DRATINI")}`.padEnd(10, " "))),
+      tyroguePokemonId: hexStringFromEventPokemonId("TYROGUE"),
+      tyroguePokemonNameText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("TYROGUE")}`.padEnd(10, " "))),
+      abraPokemonId: hexStringFromEventPokemonId("ABRA"),
+      cubonePokemonId: hexStringFromEventPokemonId("CUBONE"),
+      wobbuffetPokemonId: hexStringFromEventPokemonId("WOBBUFFET"),
+      goldenrodGameCornerPokemonMenuText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("ABRA").padEnd(10, " ")}  100@${nameStringFromEventPokemonId("CUBONE").padEnd(10, " ")}  800@${nameStringFromEventPokemonId("WOBBUFFET").padEnd(10, " ")} 1500@`)),
+      pikachuPokemonId: hexStringFromEventPokemonId("PIKACHU"),
+      porygonPokemonId: hexStringFromEventPokemonId("PORYGON"),
+      larvitarPokemonId: hexStringFromEventPokemonId("LARVITAR"),
+      celadonGameCornerPokemonMenuText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("PIKACHU").padEnd(10, " ")} 2222@${nameStringFromEventPokemonId("PORYGON").padEnd(10, " ")} 5555@${nameStringFromEventPokemonId("LARVITAR").padEnd(10, " ")} 8888@`)),
+    },
+  )
+    
+  romInfo.patchHunks = [...romInfo.patchHunks, ...eventPokemonPatch.hunks]
+    
   // Eggs
-  
+    
   if (settings.FAST_BREEDING) {
     const fastBreedingPatch = Patch.fromYAML(
       romInfo,
       "fastBreeding.yml",
     )
-    
-    hunks = [...hunks, ...fastBreedingPatch.hunks]
+      
+    romInfo.patchHunks = [...romInfo.patchHunks, ...fastBreedingPatch.hunks]
   }
-  
-  if (settings.FAST_HATCHING) {
-    updatedOddEggs.forEach((oddEgg) => {
-      oddEgg.hatchCyclesRemaining = 1
-    })
     
+  if (settings.FAST_HATCHING) {
     const fastHatchingPatch = Patch.fromYAML(
       romInfo,
       "fastHatching.yml",
     )
-    
-    hunks = [...hunks, ...fastHatchingPatch.hunks]
+      
+    romInfo.patchHunks = [...romInfo.patchHunks, ...fastHatchingPatch.hunks]
   }
-  
+    
   if (settings.RANDOMIZE_EVENT_POKEMON.VALUE || settings.FAST_HATCHING) {
-    hunks = [
-      ...hunks,
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
       new DataHunk(
         ROMOffset.fromBankAddress(126, 0x756E),
-        updatedOddEggs.flatMap((oddEgg) => {
-          return [
-            pokemonMap[oddEgg.pokemonId].numericId,
-            isNotNullish(oddEgg.item) ? itemsMap[oddEgg.item].numericId : 0,
-            ...oddEgg.moves.map((move) => {
-              return movesMap[move.id].numericId
-            }).concat(Array(4 - oddEgg.moves.length).fill(0)),
-            ...bytesFrom(oddEgg.ot, 2),
-            ...bytesFrom(oddEgg.experience, 3, true),
-            ...bytesFrom(oddEgg.statExperience.hp, 2, true),
-            ...bytesFrom(oddEgg.statExperience.attack, 2, true),
-            ...bytesFrom(oddEgg.statExperience.defence, 2, true),
-            ...bytesFrom(oddEgg.statExperience.speed, 2, true),
-            ...bytesFrom(oddEgg.statExperience.special, 2, true),
-            (oddEgg.dvs.attack << 4) + oddEgg.dvs.defence,
-            (oddEgg.dvs.speed << 4) + oddEgg.dvs.special,
-            ...oddEgg.moves.map((move) => {
-              return move.pp
-            }).concat(Array(4 - oddEgg.moves.length).fill(0)),
-            oddEgg.hatchCyclesRemaining,
-            isNotNullish(oddEgg.pokerus) ? (oddEgg.pokerus.strain << 4) + oddEgg.pokerus.daysRemaining : 0,
-            0,
-            0,
-            oddEgg.level,
-            0,
-            0,
-            0,
-            0,
-            ...bytesFrom(oddEgg.stats.hp, 2, true),
-            ...bytesFrom(oddEgg.stats.attack, 2, true),
-            ...bytesFrom(oddEgg.stats.defence, 2, true),
-            ...bytesFrom(oddEgg.stats.speed, 2, true),
-            ...bytesFrom(oddEgg.stats.specialAttack, 2, true),
-            ...bytesFrom(oddEgg.stats.specialDefence, 2, true),
-            ...ROMInfo.displayCharacterBytesFrom(oddEgg.name),
-          ]
+        romInfo.gameData.oddEggs.flatMap((oddEgg) => {
+          return bytesFromOddEgg(oddEgg)
         })
       ),
     ]
   }
-  
-  // Encounter Data
-  
-  const updatedEncountersData: Encounter[] = JSON.parse(JSON.stringify(encounters))
-  
-  // Random Wild Encounters
-  
-  if (settings.RANDOMIZE_RANDOM_ENCOUNTERS.VALUE) {
-    const wildEcountersSettings = settings.RANDOMIZE_RANDOM_ENCOUNTERS.SETTINGS
     
-    const nonBannedPokemonIds = pokemonIds.filter((pokemonId) => {
-      return !wildEcountersSettings.BAN.includes(pokemonId)
-    })
-    
-    const nonBannedFullyEvolvedPokemonIds = nonBannedPokemonIds.filter((pokemonId) => {
-      return isNullish(pokemonMap[pokemonId].evolutions) || pokemonMap[pokemonId].evolutions.length < 1
-    })
-    
-    const nonBannedNotFullyEvolvedPokemonIds = nonBannedPokemonIds.filter((pokemonId) => {
-      return isNotNullish(pokemonMap[pokemonId].evolutions) && pokemonMap[pokemonId].evolutions.length > 0
-    })
-    
-    const shouldBeFullyEvolved = (encounter: Encounter): boolean => {
-      return wildEcountersSettings.FORCE_FULLY_EVOLVED_BELOW_LEVEL.VALUE
-        && (encounter.type !== "FISHING" || !encounter.isTimeGroup)
-        && (
-          encounter.type !== "CONTEST" && encounter.level < wildEcountersSettings.FORCE_FULLY_EVOLVED_BELOW_LEVEL.SETTINGS.THRESHOLD
-            || encounter.type === "CONTEST" && encounter.minLevel < wildEcountersSettings.FORCE_FULLY_EVOLVED_BELOW_LEVEL.SETTINGS.THRESHOLD
-        )
-    }
-    
-    const unrestrictedEncounters: Encounter[] = []
-    const fullyEvolvedEncounters: Encounter[] = []
-    
-    const balancedEncounters = [
-      {
-        fullyEvolved: [] as Encounter[],
-        others: [] as Encounter[],
-      },
-      {
-        fullyEvolved: [] as Encounter[],
-        others: [] as Encounter[],
-      },
-    ]
-    
-    updatedEncountersData.forEach((encounter) => {
-      if (
-        wildEcountersSettings.REMOVE_TIME_BASED_ENCOUNTERS
-        && (encounter.type === "LAND" || encounter.type === "FISHING_TIME_GROUP")
-        && encounter.time !== "DAY"
-      ) {
-        return
-      }
-      
-      if (wildEcountersSettings.AVAILABILITY === "SEARCHABLE" || wildEcountersSettings.AVAILABILITY === "REGIONAL") {
-        if (encounter.type === "LAND" && !encounter.isSwarm || encounter.type === "WATER") {
-          const index = wildEcountersSettings.AVAILABILITY === "REGIONAL" && gameMapsMap[encounter.mapId].encounterRegion === "KANTO" ? 1 : 0
-          
-          if (shouldBeFullyEvolved(encounter)) {
-            balancedEncounters[index].fullyEvolved.push(encounter)
-          } else {
-            balancedEncounters[index].others.push(encounter)
-          }
-          
-          return
-        }
-      }
-      
-      if (shouldBeFullyEvolved(encounter)) {
-        fullyEvolvedEncounters.push(encounter)
-      } else {
-        unrestrictedEncounters.push(encounter)
-      }
-    })
-    
-    const balancedEncounterChoices = balancedEncounters.map((group) => {
-      const numberOfSharedSets = Math.floor(group.fullyEvolved.length / nonBannedFullyEvolvedPokemonIds.length)
-      
-      const choices = (totalNumber: number, partialSet: PokemonId[], carryOverSet: PokemonId[]) => {
-        const choices = Array(numberOfSharedSets).fill(partialSet).flat()
-        let possibleRemainingChoices = carryOverSet
-        
-        while (choices.length < totalNumber) {
-          const index = totalNumber - choices.length < possibleRemainingChoices.length ? randomInt(0, possibleRemainingChoices.length - 1) : 0
-          choices.push(possibleRemainingChoices[index])
-          possibleRemainingChoices.splice(index, 1)
-          
-          if (possibleRemainingChoices.length < 1) {
-            possibleRemainingChoices = nonBannedPokemonIds.map((pokemonId) => { return pokemonId })
-          }
-        }
-        
-        return choices
-      }
-      
-      const carryOverSet = nonBannedFullyEvolvedPokemonIds.map((pokemonId) => { return pokemonId })
-      
-      return {
-        fullyEvolved: choices(
-          group.fullyEvolved.length,
-          nonBannedFullyEvolvedPokemonIds,
-          carryOverSet,
-        ),
-        others: choices(
-          group.others.length,
-          nonBannedNotFullyEvolvedPokemonIds,
-          [...carryOverSet, ...nonBannedNotFullyEvolvedPokemonIds],
-        ),
-      }
-    })
-    
-    const randomizeEcounters = (encounters: Encounter[], choices: PokemonId[], removeChoiceOnSelection: boolean) => {
-      encounters.forEach((encounter) => {
-        if (encounter.type !== "FISHING" || !encounter.isTimeGroup) {
-          const index = randomInt(0, choices.length - 1)
-          encounter.pokemonId = choices[index]
-          
-          if (removeChoiceOnSelection) {
-            choices.splice(index, 1)
-          }
-        }
-      })
-    }
-    
-    randomizeEcounters(unrestrictedEncounters, nonBannedPokemonIds, false)
-    randomizeEcounters(fullyEvolvedEncounters, nonBannedFullyEvolvedPokemonIds, false)
-    
-    balancedEncounters.forEach((group, index) => {
-      randomizeEcounters(group.fullyEvolved, balancedEncounterChoices[index].fullyEvolved, true)
-      randomizeEcounters(group.others, balancedEncounterChoices[index].others, true)
-    })
-    
-    if (wildEcountersSettings.REMOVE_TIME_BASED_ENCOUNTERS) {
-      updatedEncountersData.forEach((encounter) => {
-        switch (encounter.type) {
-        case "LAND":
-          if (encounter.time !== "DAY") {
-            encounter.pokemonId = (updatedEncountersData.find((otherEncounter) => {
-              return otherEncounter.type === encounter.type
-                && otherEncounter.mapId === encounter.mapId
-                && (otherEncounter.isSwarm ?? false) === (encounter.isSwarm ?? false)
-                && otherEncounter.time === "DAY"
-                && otherEncounter.slot === encounter.slot
-            }) as { pokemonId: PokemonId }).pokemonId
-          }
-          break
-        case "FISHING_TIME_GROUP":
-          if (encounter.time !== "DAY") {
-            encounter.pokemonId = (updatedEncountersData.find((otherEncounter) => {
-              return otherEncounter.type === encounter.type
-                && otherEncounter.timeGroupIndex === encounter.timeGroupIndex
-                && otherEncounter.time === "DAY"
-            }) as { pokemonId: PokemonId }).pokemonId
-          }
-          break
-        default: break
-        }
-      })
-    }
-  }
-  
   // Encounter Rates
-  
-  const getAdjustedEncounterRates = (rates: number[], max: number) => {
-    let cumulativeValue = 0
     
-    const adjustedRates = rates.map((rate) => {
-      const adjustedRate = rate * max / 100
-      cumulativeValue += Math.floor(adjustedRate)
-      return cumulativeValue
-    })
-    
-    if (cumulativeValue < max) {
-      if (adjustedRates.length === 4) {
-        adjustedRates[adjustedRates.length - 2]++
-        adjustedRates[adjustedRates.length - 1]++
-      } else {
-        let remainingPoints = max - cumulativeValue
-        let cumulativeAdjustment = 0
-        
-        for (let index = 0; index < adjustedRates.length; index++) {
-          if (remainingPoints > 0) {
-            cumulativeAdjustment++
-            remainingPoints--
-          }
-          
-          adjustedRates[index] += cumulativeAdjustment
-        }
-      }
-    }
-    
-    return adjustedRates
-  }
-  
   if (settings.CHANGE_POKEMON_ENCOUNTER_RATIOS.VALUE) {
     const encounterRateSettings = settings.CHANGE_POKEMON_ENCOUNTER_RATIOS.SETTINGS
-    
-    updatedEncountersData.forEach((encounter) => {
-      switch (encounter.type) {
-      case "FISHING": {
-        switch (encounter.rod) {
-        case "OLD": {
-          encounter.rate = getAdjustedEncounterRates(encounterRateSettings.OLD_ROD, 255)[encounter.slot]
-          break
-        }
-        case "GOOD": {
-          encounter.rate = getAdjustedEncounterRates(encounterRateSettings.GOOD_ROD, 255)[encounter.slot]
-          break
-        }
-        case "SUPER": {
-          encounter.rate = getAdjustedEncounterRates(encounterRateSettings.SUPER_ROD, 255)[encounter.slot]
-          break
-        }
-        }
-        break
-      }
-      case "TREE": {
-        encounter.rate = encounterRateSettings.TREE[encounter.slot]
-        break
-      }
-      case "ROCK": {
-        encounter.rate = encounterRateSettings.ROCK[encounter.slot]
-        break
-      }
-      case "CONTEST": {
-        encounter.rate = encounterRateSettings.CONTEST[encounter.slot]
-        break
-      }
-      }
-    })
-    
-    hunks = [
-      ...hunks,
+      
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
       new DataHunk(
         ROMOffset.fromBankAddress(10, 0x61CB),
-        [
-          ...getAdjustedEncounterRates(encounterRateSettings.GRASS_AND_CAVES, 100).flatMap((rate, index) => {
-            return [rate, index * 2]
-          }),
-          ...getAdjustedEncounterRates(encounterRateSettings.WATER, 100).flatMap((rate, index) => {
-            return [rate, index * 2]
-          }),
-        ]
+        bytesFromLandAndWaterEncounterRates(
+          encounterRateSettings.GRASS_AND_CAVES,
+          encounterRateSettings.WATER,
+        ),
       ),
     ]
   }
-  
-  // Encounter Data Patch
     
-  const landOrWaterEncounterIncludes = (region: "JOHTO" | "KANTO", type: "LAND" | "WATER", isSwarm: boolean) => {
-    return compact(Object.values(gameMapsMap).map((gameMap) => {
-      const encounterRates = (() => {
-        if (isSwarm) {
-          return gameMap.swarmEncounterRates
-        }
-        
-        switch (type) {
-        case "LAND": return gameMap.landEncounterRates
-        case "WATER": return gameMap.waterEncounterRate ? [gameMap.waterEncounterRate] : undefined
-        }
-      })()
-      
-      if (gameMap.encounterRegion !== region || isNullish(encounterRates)) {
-        return undefined
-      }
-      
-      return {
-        path: "landOrWaterEncounterGroup.yml",
-        extraIncludes: {
-          encounterSlots: compact(updatedEncountersData.map((encounter) => {
-            if (encounter.type !== type || encounter.mapId !== gameMap.id || encounter.type === "LAND" && (encounter.isSwarm ?? false) !== isSwarm) {
-              return undefined
-            }
-            
-            const timeIndex = encounter.type === "WATER" || encounter.time === "MORNING" ? 0 : encounter.time === "DAY" ? 10 : 20
-            
-            return {
-              sortOrder: timeIndex + encounter.slot,
-              level: encounter.level,
-              pokemonId: encounter.pokemonId,
-            }
-          })).toSorted((info1, info2) => {
-            return info1.sortOrder - info2.sortOrder
-          }).map((info) => {
-            return {
-              path: "landOrWaterEncounterSlot.yml",
-              extraIncludes: {},
-              extraValues: {
-                level: hexStringFrom([info.level]),
-                pokemonId: hexStringFrom([pokemonMap[info.pokemonId].numericId]),
-              },
-            }
-          }),
-        },
-        extraValues: {
-          mapGroupId: hexStringFrom([gameMapGroupsMap[gameMap.mapGroup].numericId]),
-          mapId: hexStringFrom([gameMap.numericId]),
-          encounterRates: hexStringFrom(encounterRates),
-        },
-      }
-    }))
+  // Encounters
+    
+  const groupedEncounters = encountersGroupedByType(romInfo.gameData.encounters)
+    
+  romInfo.patchHunks = [
+    ...romInfo.patchHunks,
+    new DataHunk(
+      ROMOffset.fromBankAddress(10, 0x65E9),
+      bytesFromLandAndWaterEncounters(groupedEncounters.landAndWaterEncounters),
+    ),
+  ]
+    
+  romInfo.patchHunks = [
+    ...romInfo.patchHunks,
+    new DataHunk(
+      ROMOffset.fromBankAddress(46, 0x42FA),
+      bytesFromTreeAndRockEncounters(groupedEncounters.treeEncounters, groupedEncounters.rockEnounters),
+    ),
+  ]
+    
+  romInfo.patchHunks = [
+    ...romInfo.patchHunks,
+    new DataHunk(
+      ROMOffset.fromBankAddress(36, 0x64E3),
+      bytesFromFishingEncounters(groupedEncounters.fishingEncounters, groupedEncounters.fishingTimeGroupEncounters),
+    ),
+  ]
+    
+  romInfo.patchHunks = [
+    ...romInfo.patchHunks,
+    new DataHunk(
+      ROMOffset.fromBankAddress(37, 0x7D87),
+      bytesFromContestEncounters(groupedEncounters.contestEncounters),
+    ),
+  ]
+    
+  // Trades
+    
+  const tradePokemonIdsHexString = (trade: Trade) => {
+    return hexStringFrom([
+      pokemonMap[trade.askPokemonId].numericId,
+      pokemonMap[trade.offerPokemonId].numericId,
+    ])
   }
-  
-  const wildEncountersPatch = Patch.fromYAML(
+      
+  const tradesPatch = Patch.fromYAML(
     romInfo,
-    "wildEncounters.yml",
+    "trades.yml",
+    {},
     {
-      johtoLandEncounterGroups: landOrWaterEncounterIncludes("JOHTO", "LAND", false),
-      johtoWaterEncounterGroups: landOrWaterEncounterIncludes("JOHTO", "WATER", false),
-      kantoLandEncounterGroups: landOrWaterEncounterIncludes("KANTO", "LAND", false),
-      kantoWaterEncounterGroups: landOrWaterEncounterIncludes("KANTO", "WATER", false),
-      swarmEncounterGroups: landOrWaterEncounterIncludes("JOHTO", "LAND", true),
-      contestEncounterSlots: compact(updatedEncountersData.map((encounter) => {
-        if (encounter.type !== "CONTEST") {
-          return undefined
-        }
-        
-        return {
-          path: "contestEncounterSlot.yml",
-          extraIncludes: {},
-          extraValues: {
-            encounterRate: hexStringFrom([encounter.rate]),
-            pokemonId: hexStringFrom([pokemonMap[encounter.pokemonId].numericId]),
-            minLevel: hexStringFrom([encounter.minLevel]),
-            maxLevel: hexStringFrom([encounter.maxLevel]),
-          },
-        }
-      })),
-      fishingEncounterSlots: fishingGroupIds.flatMap((group, groupIndex) => {
-        return fishingRodIds.flatMap((rod, rodIndex) => {
-          return compact(updatedEncountersData.map((encounter) => {
-            if (encounter.type !== "FISHING" || encounter.group !== group || encounter.rod !== rod) {
-              return undefined
-            }
-            
-            return {
-              sortOrder: groupIndex * 10_000 + rodIndex * 1_000 + encounter.rate,
-              rate: encounter.rate,
-              pokemonId: encounter.isTimeGroup ? 0 : pokemonMap[encounter.pokemonId].numericId,
-              levelOrTimeGroupIndex: encounter.isTimeGroup ? encounter.timeGroupIndex : encounter.level,
-            }
-          }))
-        })
-      }).toSorted((info1, info2) => {
-        return info1.sortOrder - info2.sortOrder
-      }).map((info) => {
-        return {
-          path: "fishingTreeOrRockEncounterSlot.yml",
-          extraIncludes: {},
-          extraValues: {
-            encounterRate: hexStringFrom([info.rate]),
-            pokemonId: hexStringFrom([info.pokemonId]),
-            levelOrTimeGroupIndex: hexStringFrom([info.levelOrTimeGroupIndex]),
-          },
-        }
-      }),
-      fishingTimeEncounterGroups: compact(updatedEncountersData.map((encounter) => {
-        if (encounter.type !== "FISHING_TIME_GROUP") {
-          return undefined
-        }
-            
-        return {
-          sortOrder: encounter.timeGroupIndex,
-          dayPokemonId: pokemonMap[encounter.pokemonId].numericId,
-          dayLevel: encounter.level,
-          nightPokemonId: pokemonMap[encounter.pokemonId].numericId,
-          nightLevel: encounter.level,
-        }
-      })).toSorted((info1, info2) => {
-        return info1.sortOrder - info2.sortOrder
-      }).map((info) => {
-        return {
-          path: "fishingTimeGroup.yml",
-          extraIncludes: {},
-          extraValues: {
-            dayPokemonId: hexStringFrom([info.dayPokemonId]),
-            dayLevel: hexStringFrom([info.dayLevel]),
-            nightPokemonId: hexStringFrom([info.nightPokemonId]),
-            nightLevel: hexStringFrom([info.nightLevel]),
-          },
-        }
-      }),
-      treeEncounterGroups: treeGroupIds.flatMap((group) => {
-        return ["COMMON", "RARE"].map((rarity) => {
-          return compact(updatedEncountersData.map((encounter) => {
-            if (encounter.type !== "TREE" || encounter.group !== group || encounter.rarity !== rarity) {
-              return undefined
-            }
-              
-            return {
-              rate: encounter.rate,
-              pokemonId: pokemonMap[encounter.pokemonId].numericId,
-              level: encounter.level,
-            }
-          }))
-        })
-      }).map((encounterSlots) => {
-        return {
-          path: "treeEncounterGroup.yml",
-          extraIncludes: {
-            encounterSlots: encounterSlots.map((info) => {
-              return {
-                path: "fishingTreeOrRockEncounterSlot.yml",
-                extraIncludes: {},
-                extraValues: {
-                  encounterRate: hexStringFrom([info.rate]),
-                  pokemonId: hexStringFrom([info.pokemonId]),
-                  levelOrTimeGroupIndex: hexStringFrom([info.level]),
-                },
-              }
-            }),
-          },
-          extraValues: {},
-        }
-      }),
-      rockEncounterSlots: compact(updatedEncountersData.map((encounter) => {
-        if (encounter.type !== "ROCK") {
-          return undefined
-        }
-          
-        return {
-          rate: encounter.rate,
-          pokemonId: pokemonMap[encounter.pokemonId].numericId,
-          level: encounter.level,
-        }
-      })).map((info) => {
-        return {
-          path: "fishingTreeOrRockEncounterSlot.yml",
-          extraIncludes: {},
-          extraValues: {
-            encounterRate: hexStringFrom([info.rate]),
-            pokemonId: hexStringFrom([info.pokemonId]),
-            levelOrTimeGroupIndex: hexStringFrom([info.level]),
-          },
-        }
-      }),
+      mikeTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.MIKE),
+      kyleTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.KYLE),
+      timTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.TIM),
+      emyTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.EMY),
+      chirsTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.CHRIS),
+      kimTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.KIM),
+      forestTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.FOREST),
     },
   )
     
-  hunks = [...hunks, ...wildEncountersPatch.hunks]
-  
-  // Trades
-  
-  if (settings.RANDOMIZE_TRADES.VALUE) {
-    const tradesSettings = settings.RANDOMIZE_TRADES.SETTINGS
-    const updatedTradesDataMap = JSON.parse(JSON.stringify(tradesMap)) as IdMap<TradeId, Trade>
+  romInfo.patchHunks = [...romInfo.patchHunks, ...tradesPatch.hunks]
     
-    const availableTradePokemonIds = pokemonIds.filter((pokemonId) => {
-      return !tradesSettings.BAN.includes(pokemonId)
-    })
-      
-    const getRandomTradePokemonId = () => {
-      const index = randomInt(0, availableTradePokemonIds.length - 1)
-      const pokemonId = availableTradePokemonIds[index]
-      
-      if (tradesSettings.UNIQUE) {
-        availableTradePokemonIds.splice(index, 1)
-      }
-      
-      return pokemonId
-    }
-    
-    if (tradesSettings.METHOD === "ASK_ONLY" || tradesSettings.METHOD === "BOTH") {
-      Object.values(updatedTradesDataMap).forEach((trade) => {
-        trade.askPokemonId = getRandomTradePokemonId()
-      })
-    }
-    
-    if (tradesSettings.METHOD === "OFFER_ONLY" || tradesSettings.METHOD === "BOTH") {
-      Object.values(updatedTradesDataMap).forEach((trade) => {
-        trade.offerPokemonId = getRandomTradePokemonId()
-      })
-    }
-    
-    const tradePokemonIdsHexString = (trade: Trade) => {
-      return hexStringFrom([
-        pokemonMap[trade.askPokemonId].numericId,
-        pokemonMap[trade.offerPokemonId].numericId,
-      ])
-    }
-    
-    const tradesPatch = Patch.fromYAML(
-      romInfo,
-      "trades.yml",
-      {},
-      {
-        mikeTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.MIKE),
-        kyleTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.KYLE),
-        timTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.TIM),
-        emyTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.EMY),
-        chirsTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.CHRIS),
-        kimTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.KIM),
-        forestTradePokemonIds: tradePokemonIdsHexString(updatedTradesDataMap.FOREST),
-      },
-    )
-  
-    hunks = [...hunks, ...tradesPatch.hunks]
-  }
-  
-  // Pokemon Data
-  
-  const updatedPokemonDataMap: IdMap<PokemonId, Pokemon> = JSON.parse(JSON.stringify(pokemonMap))
-  
   // Evolutions
-  
-  Object.values(updatedPokemonDataMap).forEach((pokemon) => {
-    pokemon.evolutions?.forEach((evolution) => {
-      if (settings.CHANGE_TRADE_EVOLUTION_METHODS.VALUE && evolution.method.typeId === "TRADE") {
-        if (pokemon.id === "SLOWPOKE") {
-          evolution.method = {
-            typeId: "ITEM",
-            item: "WATER_STONE",
-          }
-        } else if (!hasPreEvolution(pokemon)) {
-          evolution.method = {
-            typeId: "LEVEL",
-            level: settings.CHANGE_TRADE_EVOLUTION_METHODS.SETTINGS.FIRST_EVOLUTION_LEVEL,
-          }
-        } else {
-          evolution.method = {
-            typeId: "LEVEL",
-            level: settings.CHANGE_TRADE_EVOLUTION_METHODS.SETTINGS.SECOND_EVOLUTION_LEVEL,
-          }
-        }
-      }
-      
-      if (settings.CHANGE_TIME_BASED_EVOLUTION_METHODS && evolution.method.typeId === "HAPPINESS") {
-        if (evolution.method.conditionId === "DAY") {
-          evolution.method = {
-            typeId: "ITEM",
-            item: "SUN_STONE",
-          }
-        } else if (evolution.method.conditionId === "NIGHT") {
-          evolution.method = {
-            typeId: "ITEM",
-            item: "MOON_STONE",
-          }
-        }
-      }
-      
-      if (settings.DECREASE_HIGH_EVOLUTION_LEVELS.VALUE && evolution.method.typeId === "LEVEL") {
-        if (evolution.method.level > settings.DECREASE_HIGH_EVOLUTION_LEVELS.SETTINGS.FIRST_EVOLUTION_THRESHOLD && !hasPreEvolution(pokemon)) {
-          evolution.method.level = settings.DECREASE_HIGH_EVOLUTION_LEVELS.SETTINGS.FIRST_EVOLUTION_THRESHOLD
-        } else if (evolution.method.level > settings.DECREASE_HIGH_EVOLUTION_LEVELS.SETTINGS.SECOND_EVOLUTION_THRESHOLD && hasPreEvolution(pokemon)) {
-          evolution.method.level = settings.DECREASE_HIGH_EVOLUTION_LEVELS.SETTINGS.SECOND_EVOLUTION_THRESHOLD
-        }
-      }
-    })
-  })
-  
+    
   if (settings.CHANGE_HAPPINESS_EVOLUTION_REQUIREMENT.VALUE) {
-    hunks = [...hunks, new DataHunk(ROMOffset.fromBankAddress(16, 0x6287), [settings.CHANGE_HAPPINESS_EVOLUTION_REQUIREMENT.SETTINGS.MINIMUM_HAPPINESS])]
+    romInfo.patchHunks = [...romInfo.patchHunks, new DataHunk(ROMOffset.fromBankAddress(16, 0x6287), [settings.CHANGE_HAPPINESS_EVOLUTION_REQUIREMENT.SETTINGS.MINIMUM_HAPPINESS])]
   }
-  
+    
   // Random Level Up Moves
-  
-  if (settings.RANDOMIZE_LEVEL_UP_MOVES.VALUE) {
-    const levelUpMovesSettings = settings.RANDOMIZE_LEVEL_UP_MOVES.SETTINGS
-    
-    const nonBannedMoveIds = moveIds.filter((moveId) => {
-      return !levelUpMovesSettings.BAN.includes(moveId)
-    })
-    
-    Object.values(updatedPokemonDataMap).forEach((pokemon) => {
-      let moveChoices = nonBannedMoveIds.map((moveId) => {
-        return movesMap[moveId]
-      })
-      
-      const numberOfLevelOneMovesToAdd = (levelUpMovesSettings.GUARANTEE_LEVEL_ONE_MOVES.VALUE ? levelUpMovesSettings.GUARANTEE_LEVEL_ONE_MOVES.SETTINGS.MINIMUM : 0) - pokemon.levelUpMoves.filter((levelUpMove) => { return levelUpMove.level === 1 }).length
-      const totalNumberOfMoves = numberOfLevelOneMovesToAdd + pokemon.levelUpMoves.length
-      const indicesOfForcedGoodMoves: number[] = []
-      const minPowerForForcedGoodMoves = levelUpMovesSettings.GOOD_DAMAGING_MOVES.SETTINGS.POWER
-      
-      if (levelUpMovesSettings.GOOD_DAMAGING_MOVES.VALUE) {
-        const guaranteedNumberOfGoodMoves = Math.ceil(totalNumberOfMoves * levelUpMovesSettings.GOOD_DAMAGING_MOVES.SETTINGS.PERCENTAGE / 100)
-        const indicesOfAllMoves = Array(totalNumberOfMoves).map((_, index) => { return index })
-        for (let i = 0; i < guaranteedNumberOfGoodMoves; i++) {
-          const index = indicesOfAllMoves.splice(randomInt(0, indicesOfAllMoves.length - 1), 1)[0]
-          indicesOfForcedGoodMoves.push(index)
-        }
-      }
-      
-      const matchesForcedGoodMovesConditions = (move: Move, index: number) => {
-        if (indicesOfForcedGoodMoves.includes(index)) {
-          return move.power >= minPowerForForcedGoodMoves
-        } else {
-          return true
-        }
-      }
-      
-      pokemon.levelUpMoves.forEach((levelUpMove, index) => {
-        const adjustedIndex = index + numberOfLevelOneMovesToAdd
-        
-        const primaryChoices: Move[] = []
-        const secondaryChoices: Move[] = []
-        const tertiaryChoices: Move[] = []
-        
-        moveChoices.forEach((move) => {
-          if (!levelUpMovesSettings.PREFER_SAME_TYPE || move.type === movesMap[levelUpMove.moveId].type) {
-            if (matchesForcedGoodMovesConditions(move, adjustedIndex)) {
-              primaryChoices.push(move)
-            } else {
-              secondaryChoices.push(move)
-            }
-          } else if (matchesForcedGoodMovesConditions(move, adjustedIndex)) {
-            secondaryChoices.push(move)
-          } else {
-            tertiaryChoices.push(move)
-          }
-        })
-        
-        const chosenMove = primaryChoices[randomInt(0, primaryChoices.length - 1)]
-          ?? secondaryChoices[randomInt(0, secondaryChoices.length - 1)]
-          ?? tertiaryChoices[randomInt(0, tertiaryChoices.length - 1)]
-        
-        if (isNullish(chosenMove)) {
-          throw new Error("Unable to satisfy settings for randomized level up moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
-        }
-        
-        levelUpMove.moveId = chosenMove.id
-        
-        if (levelUpMovesSettings.UNIQUE) {
-          moveChoices = moveChoices.filter((move) => {
-            return move.id !== chosenMove.id
-          })
-        }
-      })
-      
-      for (let i = 0; i < numberOfLevelOneMovesToAdd; i++) {
-        const primaryChoices: Move[] = []
-        const secondaryChoices: Move[] = []
-        
-        moveChoices.forEach((move) => {
-          if (matchesForcedGoodMovesConditions(move, i)) {
-            primaryChoices.push(move)
-          } else {
-            secondaryChoices.push(move)
-          }
-        })
-        
-        const chosenMove = primaryChoices[randomInt(0, primaryChoices.length - 1)]
-          ?? secondaryChoices[randomInt(0, secondaryChoices.length - 1)]
-        
-        if (isNullish(chosenMove)) {
-          throw new Error("Unable to satisfy settings for randomized level up moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
-        }
-        
-        pokemon.levelUpMoves.push({
-          moveId: chosenMove.id,
-          level: 1,
-        })
-        
-        if (levelUpMovesSettings.UNIQUE) {
-          moveChoices = moveChoices.filter((move) => {
-            return move.id !== chosenMove.id
-          })
-        }
-      }
-        
-      pokemon.levelUpMoves.sort((move1, move2) => {
-        return move1.level - move2.level
-      })
-      
-      if (levelUpMovesSettings.PROGRESSIVE) {
-        const sortedDamagingMoves = pokemon.levelUpMoves.map((levelUpMove) => {
-          return movesMap[levelUpMove.moveId]
-        }).filter((move) => {
-          return move.power !== 0
-        }).toSorted((move1, move2) => {
-          return move1.power - move2.power
-        })
-        
-        pokemon.levelUpMoves.forEach((levelUpMove) => {
-          levelUpMove.moveId = movesMap[levelUpMove.moveId].power === 0 ? levelUpMove.moveId : sortedDamagingMoves.splice(0, 1)[0].id
-        })
-      }
-    })
-    
-    updatedTrainers.forEach((trainer) => {
-      trainer.pokemon.forEach((pokemon) => {
-        pokemon.moves = []
-      })
-    })
-  }
     
   const pokemonEvolutionsAndAttacksPatch = Patch.fromYAML(
     romInfo,
     "pokemonEvolutionsAndLevelUpMovesTable.yml",
     {
-      pokemon: Object.values(updatedPokemonDataMap).map((pokemon) => {
+      pokemon: Object.values(romInfo.gameData.pokemon).map((pokemon) => {
         return {
           path: "pokemonEvolutionsAndLevelUpMoves.yml",
-          extraIncludes: {
-            evolutions: pokemon.evolutions?.map((evolution) => {
-              const levelOrItemIdOrHappinessCondition = () => {
-                switch (evolution.method.typeId) {
-                case "LEVEL":
-                case "STAT": {
-                  return evolution.method.level
-                }
-                case "ITEM":
-                case "TRADE": {
-                  if (isNotNullish(evolution.method.item)) {
-                    return itemsMap[evolution.method.item].numericId
-                  } else {
-                    return 0xFF
-                  }
-                }
-                case "HAPPINESS": {
-                  return happinessEvolutionConidtionsMap[evolution.method.conditionId].numericId
-                }
-                }
-              }
-        
-              const statConditionOrSpecies = () => {
-                if (evolution.method.typeId === "STAT") {
-                  return statEvolutionConidtionsMap[evolution.method.conditionId].numericId
-                } else {
-                  return pokemonMap[evolution.pokemonId].numericId
-                }
-              }
-        
-              const statSpecies = () => {
-                if (evolution.method.typeId === "STAT") {
-                  return pokemonMap[evolution.pokemonId].numericId
-                } else {
-                  return undefined
-                }
-              }
-              
-              return {
-                path: "evolution.yml",
-                extraIncludes: {},
-                extraValues: {
-                  typeId: hexStringFrom([evolutionTypesMap[evolution.method.typeId].numericId]),
-                  levelOrItemIdOrHappinessCondition: hexStringFrom([levelOrItemIdOrHappinessCondition()]),
-                  statConditionAndSpecies: hexStringFrom(compact([
-                    statConditionOrSpecies(),
-                    statSpecies(),
-                  ])),
-                },
-              }
-            }) ?? [],
-            levelUpMoves: pokemon.levelUpMoves.map(({ level, moveId }) => {
-              return {
-                path: "levelUpMove.yml",
-                extraIncludes: {},
-                extraValues: {
-                  level: hexStringFrom([level]),
-                  moveId: hexStringFrom([movesMap[moveId].numericId]),
-                },
-              }
-            }),
+          extraIncludes: {},
+          extraValues: {
+            data: hexStringFrom(bytesForEvolutionsAndLevelUpMovesFromPokemon(pokemon)),
           },
-          extraValues: {},
         }
       }),
     },
   )
-
-  hunks = [...hunks, ...pokemonEvolutionsAndAttacksPatch.hunks]
   
+  romInfo.patchHunks = [...romInfo.patchHunks, ...pokemonEvolutionsAndAttacksPatch.hunks]
+    
   // Pokemon Info
-  
-  if (settings.INCREASE_POKEMON_CATCH_RATES.VALUE) {
-    const percentage = settings.INCREASE_POKEMON_CATCH_RATES.SETTINGS.PERCENTAGE
+      
+  const pokemonInfoPatch = Patch.fromYAML(
+    romInfo,
+    "pokemonInfoTable.yml",
+    {
+      pokemon: Object.values(romInfo.gameData.pokemon).map((pokemon) => {
+        return {
+          path: "pokemonInfo.yml",
+          extraIncludes: {},
+          extraValues: {
+            data: hexStringFrom(bytesForInfoFromPokemon(pokemon)),
+          },
+        }
+      }),
+    },
+  )
+      
+  romInfo.patchHunks = [...romInfo.patchHunks, ...pokemonInfoPatch.hunks]
     
-    Object.values(updatedPokemonDataMap).forEach((pokemon) => {
-      pokemon.catchRate = (255 - pokemon.catchRate) * percentage / 100 + pokemon.catchRate
-    })
-  }
-  
-  if (settings.STANDARDIZE_POKEMON_GROWTH_RATES.VALUE) {
-    const growthRatesSettings = settings.STANDARDIZE_POKEMON_GROWTH_RATES.SETTINGS
+  // Teachable Moves
     
-    Object.values(updatedPokemonDataMap).forEach((pokemon) => {
-      if (!growthRatesSettings.EXCLUDE.includes(pokemon.id)) {
-        pokemon.growthRate = growthRatesSettings.GROWTH_RATE
-      }
-    })
-  }
-  
-  if (
-    settings.RANDOMIZE_TM_COMPATIBILITY.VALUE
-    || settings.RANDOMIZE_HM_COMPATIBILITY.VALUE
-    || settings.RANDOMIZE_MOVE_TUTOR_COMPATIBILITY.VALUE
-  ) {
-    if (settings.RANDOMIZE_TM_COMPATIBILITY.VALUE) {
-      Object.values(updatedPokemonDataMap).forEach((pokemon) => {
-        const availableTMS = Object.values(teachableMovesMap).filter((move) => {
-          return move.type === "TM"
-        })
-        
-        pokemon.tmMoves = Array(randomInt(tmItemIds.length * (settings.RANDOMIZE_TM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? randomInt(0, 100)) / 100, tmItemIds.length)).fill(undefined).map(() => {
-          return availableTMS.splice(randomInt(0, availableTMS.length - 1), 1)[0].id as TMItemId
-        })
-      })
+  const hex = hexStringFrom(Object.values(romInfo.gameData.teachableMoves).map((move) => {
+    return movesMap[move.moveId].numericId
+  }))
+    
+  const teachableMovesPatch = Patch.fromYAML(
+    romInfo,
+    "teachableMoves.yml",
+    {},
+    {
+      teachableMoves: hex,
+      moveTutorMoveId1: hexStringFrom([movesMap[romInfo.gameData.teachableMoves.MOVE_TUTOR_1.moveId].numericId]),
+      moveTutorMoveId2: hexStringFrom([movesMap[romInfo.gameData.teachableMoves.MOVE_TUTOR_2.moveId].numericId]),
+      moveTutorMoveId3: hexStringFrom([movesMap[romInfo.gameData.teachableMoves.MOVE_TUTOR_3.moveId].numericId]),
+      moveTutorMoveName1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(movesMap[romInfo.gameData.teachableMoves.MOVE_TUTOR_1.moveId].name.toUpperCase())),
+      moveTutorMoveName2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(movesMap[romInfo.gameData.teachableMoves.MOVE_TUTOR_2.moveId].name.toUpperCase())),
+      moveTutorMoveName3: hexStringFrom(ROMInfo.displayCharacterBytesFrom(movesMap[romInfo.gameData.teachableMoves.MOVE_TUTOR_3.moveId].name.toUpperCase())),
     }
+  )
+      
+  romInfo.patchHunks = [...romInfo.patchHunks, ...teachableMovesPatch.hunks]
     
-    if (settings.RANDOMIZE_HM_COMPATIBILITY.VALUE) {
-      Object.values(updatedPokemonDataMap).forEach((pokemon) => {
-        const availableHMS = Object.values(teachableMovesMap).filter((move) => {
-          return move.type === "HM"
-        })
-        
-        pokemon.hmMoves = Array(randomInt(hmItemIds.length * (settings.RANDOMIZE_HM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? randomInt(0, 100)) / 100, hmItemIds.length)).fill(undefined).map(() => {
-          return availableHMS.splice(randomInt(0, availableHMS.length - 1), 1)[0].id as HMItemId
-        })
-      })
-    }
-    
-    if (settings.RANDOMIZE_TM_COMPATIBILITY.VALUE) {
-      Object.values(updatedPokemonDataMap).forEach((pokemon) => {
-        const availableMoveTutorMoves = Object.values(teachableMovesMap).filter((move) => {
-          return move.type === "MOVE_TUTOR"
-        })
-        
-        pokemon.moveTutorMoves = Array(randomInt(moveTutorIds.length * (settings.RANDOMIZE_TM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? randomInt(0, 100)) / 100, moveTutorIds.length)).fill(undefined).map(() => {
-          return availableMoveTutorMoves.splice(randomInt(0, availableMoveTutorMoves.length - 1), 1)[0].id as MoveTutorId
-        })
-      })
-    }
-    
-    const pokemonInfoPatch = Patch.fromYAML(
-      romInfo,
-      "pokemonInfoTable.yml",
-      {
-        pokemon: Object.values(updatedPokemonDataMap).map((pokemon) => {
-          const teachableMovesBytes: number[] = Array(8).fill(0)
-          
-          const pokemonTeachableMoveIds = [
-            ...pokemon.tmMoves,
-            ...pokemon.hmMoves,
-            ...pokemon.moveTutorMoves,
-          ]
-          
-          pokemonTeachableMoveIds.forEach((id) => {
-            const move = teachableMovesMap[id]
-            teachableMovesBytes[move.byteIndex] += 1 << move.bitIndex
-          })
-          
-          return {
-            path: "pokemonInfo.yml",
-            extraIncludes: {},
-            extraValues: {
-              numericId: hexStringFrom([pokemon.numericId]),
-              hp: hexStringFrom([pokemon.baseStats.hp]),
-              attack: hexStringFrom([pokemon.baseStats.attack]),
-              defence: hexStringFrom([pokemon.baseStats.defence]),
-              speed: hexStringFrom([pokemon.baseStats.speed]),
-              specialAttack: hexStringFrom([pokemon.baseStats.specialAttack]),
-              specialDefence: hexStringFrom([pokemon.baseStats.specialDefence]),
-              type1: hexStringFrom([pokemonTypesMap[pokemon.types[0]].numericId]),
-              type2: hexStringFrom([pokemonTypesMap[pokemon.types[1] ?? pokemon.types[0]].numericId]),
-              catchRate: hexStringFrom([pokemon.catchRate]),
-              baseExperience: hexStringFrom([pokemon.baseExperience]),
-              item1: hexStringFrom([isNotNullish(pokemon.items[0]) ? itemsMap[pokemon.items[0]].numericId : 0]),
-              item2: hexStringFrom([isNotNullish(pokemon.items[1]) ? itemsMap[pokemon.items[1]].numericId : 0]),
-              genderRatio: hexStringFrom([pokemon.genderRatio]),
-              eggCycles: hexStringFrom([pokemon.eggCycles]),
-              spriteDimensions: hexStringFrom([pokemon.spriteDimensions]),
-              growthRate: hexStringFrom([growthRatesMap[pokemon.growthRate].numericId]),
-              eggGroups: hexStringFrom([(eggGroupsMap[pokemon.eggGroups[0]].numericId << 4) + eggGroupsMap[pokemon.eggGroups[1] ?? pokemon.eggGroups[0]].numericId]),
-              teachableMovesData: hexStringFrom(teachableMovesBytes),
-            },
-          }
-        }),
-      },
-    )
-    
-    hunks = [...hunks, ...pokemonInfoPatch.hunks]
-  }
-  
-  // Moves
-  
-  // Randomize TMs and Move Tutor Moves
-  
-  if (settings.RANDOMIZE_TM_MOVES.VALUE || settings.RANDOMIZE_MOVE_TUTOR_MOVES.VALUE) {
-    const updatedTeachableMovesDataMap: IdMap<TeachableMoveId, TeachableMove> = JSON.parse(JSON.stringify(teachableMovesMap))
-    
-    if (settings.RANDOMIZE_TM_MOVES.VALUE) {
-      const tmsSettings = settings.RANDOMIZE_TM_MOVES.SETTINGS
-      
-      const tms = Object.values(updatedTeachableMovesDataMap).filter((move) => {
-        return move.type === "TM"
-      })
-      
-      let nonBannedMoves = Object.values(movesMap).filter((move) => {
-        return !tmsSettings.BAN.includes(move.id)
-      })
-      
-      const indicesOfForcedGoodMoves: number[] = []
-      const minPowerForForcedGoodMoves = tmsSettings.GOOD_DAMAGING_MOVES.SETTINGS.POWER
-      
-      if (tmsSettings.GOOD_DAMAGING_MOVES.VALUE) {
-        const guaranteedNumberOfGoodMoves = Math.ceil(tms.length * tmsSettings.GOOD_DAMAGING_MOVES.SETTINGS.PERCENTAGE / 100)
-        const indicesOfAllMoves = Array(tms.length).map((_, index) => { return index })
-        for (let i = 0; i < guaranteedNumberOfGoodMoves; i++) {
-          const index = indicesOfAllMoves.splice(randomInt(0, indicesOfAllMoves.length - 1), 1)[0]
-          indicesOfForcedGoodMoves.push(index)
-        }
-      }
-      
-      const matchesForcedGoodMovesConditions = (move: Move, index: number) => {
-        if (indicesOfForcedGoodMoves.includes(index)) {
-          return move.power >= minPowerForForcedGoodMoves
-        } else {
-          return true
-        }
-      }
-      
-      tms.forEach((tm, index) => {
-        if (!tmsSettings.KEEP_FIELD_MOVES || !movesMap[tm.moveId].isFieldMove) {
-          const primaryChoices: Move[] = []
-          const secondaryChoices: Move[] = []
-          const tertiaryChoices: Move[] = []
-          
-          nonBannedMoves.forEach((move) => {
-            if (!tmsSettings.PREFER_SAME_TYPE || move.type === movesMap[tm.moveId].type) {
-              if (matchesForcedGoodMovesConditions(move, index)) {
-                primaryChoices.push(move)
-              } else {
-                secondaryChoices.push(move)
-              }
-            } else if (matchesForcedGoodMovesConditions(move, index)) {
-              secondaryChoices.push(move)
-            } else {
-              tertiaryChoices.push(move)
-            }
-          })
-          
-          const chosenMove = primaryChoices[randomInt(0, primaryChoices.length - 1)]
-            ?? secondaryChoices[randomInt(0, secondaryChoices.length - 1)]
-            ?? tertiaryChoices[randomInt(0, tertiaryChoices.length - 1)]
-      
-          if (isNullish(chosenMove)) {
-            throw new Error("Unable to satisfy settings for randomized tm moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
-          }
-          
-          tm.moveId = chosenMove.id
-        }
-        
-        if (tmsSettings.UNIQUE) {
-          nonBannedMoves = nonBannedMoves.filter((move) => {
-            return move.id !== tm.moveId
-          })
-        }
-      })
-    }
-    
-    if (settings.RANDOMIZE_MOVE_TUTOR_MOVES.VALUE) {
-      const moveTutorSettings = settings.RANDOMIZE_MOVE_TUTOR_MOVES.SETTINGS
-      
-      const moveTutorMoves = Object.values(updatedTeachableMovesDataMap).filter((move) => {
-        return move.type === "MOVE_TUTOR"
-      })
-      
-      let nonBannedMoves = Object.values(movesMap).filter((move) => {
-        return !moveTutorSettings.BAN.includes(move.id)
-      })
-      
-      const indicesOfForcedGoodMoves: number[] = []
-      const minPowerForForcedGoodMoves = moveTutorSettings.GOOD_DAMAGING_MOVES.SETTINGS.POWER
-      
-      if (moveTutorSettings.GOOD_DAMAGING_MOVES.VALUE) {
-        const guaranteedNumberOfGoodMoves = Math.ceil(moveTutorMoves.length * moveTutorSettings.GOOD_DAMAGING_MOVES.SETTINGS.PERCENTAGE / 100)
-        const indicesOfAllMoves = Array(moveTutorMoves.length).map((_, index) => { return index })
-        for (let i = 0; i < guaranteedNumberOfGoodMoves; i++) {
-          const index = indicesOfAllMoves.splice(randomInt(0, indicesOfAllMoves.length - 1), 1)[0]
-          indicesOfForcedGoodMoves.push(index)
-        }
-      }
-      
-      const matchesForcedGoodMovesConditions = (move: Move, index: number) => {
-        if (indicesOfForcedGoodMoves.includes(index)) {
-          return move.power >= minPowerForForcedGoodMoves
-        } else {
-          return true
-        }
-      }
-      
-      moveTutorMoves.forEach((moveTutorMove, index) => {
-        const choices = nonBannedMoves.filter((move) => {
-          return (!moveTutorSettings.PREFER_SAME_TYPE || move.type === movesMap[moveTutorMove.moveId].type)
-            && matchesForcedGoodMovesConditions(move, index)
-        })
-        
-        const primaryChoices: Move[] = []
-        const secondaryChoices: Move[] = []
-        const tertiaryChoices: Move[] = []
-        
-        nonBannedMoves.forEach((move) => {
-          if (!moveTutorSettings.PREFER_SAME_TYPE || move.type === movesMap[moveTutorMove.moveId].type) {
-            if (matchesForcedGoodMovesConditions(move, index)) {
-              primaryChoices.push(move)
-            } else {
-              secondaryChoices.push(move)
-            }
-          } else if (matchesForcedGoodMovesConditions(move, index)) {
-            secondaryChoices.push(move)
-          } else {
-            tertiaryChoices.push(move)
-          }
-        })
-        
-        const chosenMove = primaryChoices[randomInt(0, primaryChoices.length - 1)]
-          ?? secondaryChoices[randomInt(0, secondaryChoices.length - 1)]
-          ?? tertiaryChoices[randomInt(0, tertiaryChoices.length - 1)]
-    
-        if (isNullish(chosenMove)) {
-          throw new Error("Unable to satisfy settings for randomized move tutor moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
-        }
-        moveTutorMove.moveId = choices[randomInt(0, choices.length - 1)].id
-        
-        if (moveTutorSettings.UNIQUE) {
-          nonBannedMoves = nonBannedMoves.filter((move) => {
-            return move.id !== moveTutorMove.moveId
-          })
-        }
-      })
-    }
-    
-    const hex = hexStringFrom(Object.values(updatedTeachableMovesDataMap).map((move) => {
-      return movesMap[move.moveId].numericId
-    }))
-    
-    const teachableMovesPatch = Patch.fromYAML(
-      romInfo,
-      "teachableMoves.yml",
-      {},
-      {
-        teachableMoves: hex,
-        moveTutorMoveId1: hexStringFrom([movesMap[updatedTeachableMovesDataMap.MOVE_TUTOR_1.moveId].numericId]),
-        moveTutorMoveId2: hexStringFrom([movesMap[updatedTeachableMovesDataMap.MOVE_TUTOR_2.moveId].numericId]),
-        moveTutorMoveId3: hexStringFrom([movesMap[updatedTeachableMovesDataMap.MOVE_TUTOR_3.moveId].numericId]),
-        moveTutorMoveName1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(movesMap[updatedTeachableMovesDataMap.MOVE_TUTOR_1.moveId].name.toUpperCase())),
-        moveTutorMoveName2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(movesMap[updatedTeachableMovesDataMap.MOVE_TUTOR_2.moveId].name.toUpperCase())),
-        moveTutorMoveName3: hexStringFrom(ROMInfo.displayCharacterBytesFrom(movesMap[updatedTeachableMovesDataMap.MOVE_TUTOR_3.moveId].name.toUpperCase())),
-      }
-    )
-      
-    hunks = [...hunks, ...teachableMovesPatch.hunks]
-  }
-  
-  // Items
-  
   // Starting Inventory
-  
+    
   if (settings.START_WITH_ITEMS.VALUE) {
     const startingInventorySettings = settings.START_WITH_ITEMS.SETTINGS
-    
+      
     let hasStartingInventory = false
     let pokedexPartsValue = 0
     let pokegearPartsValue = 0
     let johtoBadgesValue = 0
     let kantoBadgesValue = 0
     const bagItemValues: {itemId: string, itemAmount: string}[] = []
-      
+        
     Object.values(itemCategoriesMap).forEach((category) => {
       const itemCategorySettings = startingInventorySettings[category.id]
       let itemAmountMap: Partial<Record<ItemId, { AMOUNT: number}>> = {}
-      
+        
       if (Array.isArray(itemCategorySettings)) {
         itemCategorySettings.forEach((itemId) => {
           return itemAmountMap[itemId] = {
@@ -1482,12 +391,12 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
           ...itemCategorySettings,
         }
       }
-      
+        
       Object.entries(itemAmountMap).forEach(([itemId, settings]) => {
         hasStartingInventory = true
-        
+          
         const item = itemsMap[itemId as ItemId]
-            
+              
         switch (item.type) {
         case "POKEDEX_PART": {
           pokedexPartsValue |= item.numericId
@@ -1515,7 +424,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         }
       })
     })
-    
+      
     if (hasStartingInventory) {
       const startingItemsPatch = Patch.fromYAML(
         romInfo,
@@ -1536,56 +445,54 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
           kantoBadges: hexStringFrom(bytesFrom(kantoBadgesValue, 1)),
         }
       )
-    
-      hunks = [...hunks, ...startingItemsPatch.hunks]
+      
+      romInfo.patchHunks = [...romInfo.patchHunks, ...startingItemsPatch.hunks]
     }
   }
-  
+    
+  // Item Behaviours
+    
+  if (settings.BIKE_INDOORS) {
+    const bikeAnywherePatch = Patch.fromYAML(
+      romInfo,
+      "bikeAnywhere.yml",
+    )
+    
+    romInfo.patchHunks = [...romInfo.patchHunks, ...bikeAnywherePatch.hunks]
+  }
+    
   if (settings.POKE_BALLS_NEVER_FAIL) {
     const pokeBallsNeverFailPatch = Patch.fromYAML(
       romInfo,
       "pokeBallsNeverFail.yml",
     )
-  
-    hunks = [...hunks, ...pokeBallsNeverFailPatch.hunks]
+    
+    romInfo.patchHunks = [...romInfo.patchHunks, ...pokeBallsNeverFailPatch.hunks]
   }
-  
+    
   if (settings.PREVENT_FAILED_POKE_BALL_WOBBLES) {
     const preventFailedPokeBallWobblesPatch = Patch.fromYAML(
       romInfo,
       "preventFailedPokeBallWobbles.yml",
     )
-  
-    hunks = [...hunks, ...preventFailedPokeBallWobblesPatch.hunks]
+    
+    romInfo.patchHunks = [...romInfo.patchHunks, ...preventFailedPokeBallWobblesPatch.hunks]
   }
-  
+    
   if (settings.RODS_ALWAYS_WORK) {
     const rodsAlwaysWorkPatch = Patch.fromYAML(
       romInfo,
       "rodsAlwaysWork.yml",
     )
-  
-    hunks = [...hunks, ...rodsAlwaysWorkPatch.hunks]
+    
+    romInfo.patchHunks = [...romInfo.patchHunks, ...rodsAlwaysWorkPatch.hunks]
   }
   
   // Marts
   
-  const updatedMartData = JSON.parse(JSON.stringify(martsMap)) as IdMap<MartId, Mart>
-  let didUpdateMarts = false
-  
-  if (settings.CHERRYGROVE_MART_REPELS) {
-    didUpdateMarts = true
-    updatedMartData.CHERRYGROVE_1.items.splice(1, 0, "REPEL")
-    updatedMartData.CHERRYGROVE_2.items.splice(2, 0, "REPEL")
-  }
-  
   if (settings.EARLY_CHARRGROVE_MART_POKE_BALLS) {
-    didUpdateMarts = true
-    
-    updatedMartData.CHERRYGROVE_1.items = []
-    
-    hunks = [
-      ...hunks,
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
       new DataHunk(
         ROMOffset.fromBankAddress(101, 0x6813),
         [1],
@@ -1593,26 +500,9 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
     ]
   }
   
-  if (settings.VIOLET_MART_REPELS) {
-    didUpdateMarts = true
-    
-    updatedMartData.VIOLET.items.splice(2, 0, "REPEL")
-  }
-  
   if (settings.BUYABLE_EVOLUTION_STONES) {
-    didUpdateMarts = true
-    
-    updatedMartData.GOLDENROD_4F.items.splice(0, 0, ...([
-      "FIRE_STONE",
-      "WATER_STONE",
-      "LEAF_STONE",
-      "THUNDERSTONE",
-      "SUN_STONE",
-      "MOON_STONE",
-    ] as ItemId[]))
-    
-    hunks = [
-      ...hunks,
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
       new DataHunk(
         ROMOffset.fromBankAddress(1, 0x67F2),
         bytesFrom(2100, 2),
@@ -1621,42 +511,26 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   }
   
   if (settings.BUYABLE_TM12) {
-    didUpdateMarts = true
-    
-    updatedMartData.GOLDENROD_5F_5.items = [
-      ...updatedMartData.GOLDENROD_5F_1.items,
-      "TM12",
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks, ...Patch.fromYAML(
+        romInfo,
+        "buyableSweetScent.yml",
+      ).hunks,
     ]
-    
-    updatedMartData.GOLDENROD_5F_6.items = [
-      ...updatedMartData.GOLDENROD_5F_2.items,
-      "TM12",
-    ]
-    
-    updatedMartData.GOLDENROD_5F_7.items = [
-      ...updatedMartData.GOLDENROD_5F_3.items,
-      "TM12",
-    ]
-    
-    updatedMartData.GOLDENROD_5F_8.items = [
-      ...updatedMartData.GOLDENROD_5F_4.items,
-      "TM12",
-    ]
-    
-    const buyableSweetScentPatch = Patch.fromYAML(
-      romInfo,
-      "buyableSweetScent.yml",
-    )
-  
-    hunks = [...hunks, ...buyableSweetScentPatch.hunks]
   }
   
-  if (didUpdateMarts) {
+  if (
+    settings.CHERRYGROVE_MART_REPELS
+    || settings.EARLY_CHARRGROVE_MART_POKE_BALLS
+    || settings.VIOLET_MART_REPELS
+    || settings.BUYABLE_EVOLUTION_STONES
+    || settings.BUYABLE_TM12
+  ) {
     const martsPatch = Patch.fromYAML(
       romInfo,
       "marts.yml",
       {
-        marts: Object.values(updatedMartData).map((mart) => {
+        marts: Object.values(romInfo.gameData.marts).map((mart) => {
           return {
             path: "martItems.yml",
             extraIncludes: {},
@@ -1669,43 +543,11 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       }
     )
 
-    hunks = [...hunks, ...martsPatch.hunks]
+    romInfo.patchHunks = [...romInfo.patchHunks, ...martsPatch.hunks]
   }
-  
-  // Trainers
-  
-  if (settings.RANDOMIZE_TRAINER_POKEMON.VALUE) {
-    const randomTeamsSettings = settings.RANDOMIZE_TRAINER_POKEMON.SETTINGS
     
-    updatedTrainers.forEach((trainer) => {
-      const nonBannedPokemon = (Object.values(pokemonMap) as Pokemon[]).filter((pokemon) => {
-        return !randomTeamsSettings.BAN.includes(pokemon.id)
-      })
-      
-      const availableTypes = pokemonTypeIds.filter((typeId) => {
-        return typeId !== "NONE"
-      })
-      
-      const typeFilter = randomTeamsSettings.TYPE_THEME_TEAMS ? availableTypes[randomInt(0, availableTypes.length - 1)] : undefined
-      
-      const nonBannedAndTypeFilteredPokemon = nonBannedPokemon.filter((pokemon) => {
-        return !randomTeamsSettings.BAN.includes(pokemon.id) && (isNullish(typeFilter) || pokemon.types.includes(typeFilter))
-      })
-      
-      trainer.pokemon.forEach((pokemon, index) => {
-        const availablePokemon = randomTeamsSettings.FORCE_FULLY_EVOLVED_ABOVE_LEVEL.VALUE && pokemon.level > randomTeamsSettings.FORCE_FULLY_EVOLVED_ABOVE_LEVEL.SETTINGS.THRESHOLD ? nonBannedAndTypeFilteredPokemon.filter((pokemon) => {
-          return isNullish(pokemon.evolutions)
-        }) : nonBannedAndTypeFilteredPokemon
-        
-        if (trainerGroupsMap[trainer.groupId].classId !== "RIVAL" || !randomTeamsSettings.INGORE_RIVALS_STARTER || index !== trainer.pokemon.length - 1) {
-          pokemon.id = availablePokemon[randomInt(0, availablePokemon.length - 1)].id
-        }
-        
-        pokemon.moves = []
-      })
-    })
-  }
-  
+  // Trainers
+    
   const trainersPatch = Patch.fromYAML(
     romInfo,
     "trainers.yml",
@@ -1714,19 +556,19 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         return {
           path: "trainerGroup.yml",
           extraIncludes: {
-            trainers: updatedTrainers.filter((trainer) => {
+            trainers: romInfo.gameData.trainers.filter((trainer) => {
               return trainer.groupId === groupId
             }).map((trainer) => {
               const hasItems = trainer.pokemon.reduce((result, pokemon) => {
                 return result || isNotNullish(pokemon.itemId)
               }, false)
-              
+                
               const hasMoves = trainer.pokemon.reduce((result, pokemon) => {
                 return result || pokemon.moves.length > 0
               }, false)
-              
+                
               let trainerType = 0
-              
+                
               if (hasItems && hasMoves) {
                 trainerType = 3
               } else if (hasMoves) {
@@ -1734,7 +576,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
               } else if (hasItems) {
                 trainerType = 1
               }
-              
+                
               return {
                 path: "trainerNameAndPokemon.yml",
                 extraIncludes: {},
@@ -1760,78 +602,29 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       }),
     }
   )
-  
-  hunks = [...hunks, ...trainersPatch.hunks]
-  
-  if (settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.VALUE) {
-    const movementSettings = settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.SETTINGS
-    const behaviour = trainerMovementBehavioursMap[movementSettings.MOVEMENT]
     
-    const updatedMapObjectEvents = JSON.parse(JSON.stringify(mapObjectEvents)) as [MapObjectEvent]
-    updatedMapObjectEvents.forEach((event) => {
-      if (
-        event.typeId === "TRAINER"
-          && (
-            movementSettings.INCLUDE_STATIONARY
-              || event.movementBehaviourId === "SPINCLOCKWISE"
-              || event.movementBehaviourId === "SPINCOUNTERCLOCKWISE"
-              || event.movementBehaviourId === "SPINRANDOM_SLOW"
-              || event.movementBehaviourId === "SPINRANDOM_FAST"
-          )
-      ) {
-        event.movementBehaviourId = behaviour.overworldMovementBehaviourId
-      }
-    })
+  romInfo.patchHunks = [...romInfo.patchHunks, ...trainersPatch.hunks]
     
-    updatedMapObjectEvents.forEach((event) => {
-      let timeArray = [-1, -1]
-      
-      if (event.time === "MORNING") {
-        timeArray[1] = 1
-      } else if (event.time === "DAY") {
-        timeArray[1] = 2
-      } else if (event.time === "NIGHT") {
-        timeArray[1] = 4
-      } else if (event.time !== "ANY") {
-        timeArray = event.time
-      }
-      
-      hunks = [
-        ...hunks,
-        new DataHunk(
-          ROMOffset.fromBankAddress(event.romOffset[0], event.romOffset[1]),
-          [
-            overworldSpritesMap[event.spriteId].numericId,
-            event.coordinate[1] + 4,
-            event.coordinate[0] + 4,
-            overworldMovementBehavioursMap[event.movementBehaviourId].numericId,
-            event.movementRadius[0] + (event.movementRadius[1] << 4),
-            ...timeArray,
-            ((isNotNullish(event.palletId) ? overworldSpritePalletsMap[event.palletId].numericId : 0) << 4) + mapObjectTypesMap[event.typeId].numericId,
-            event.sightRange,
-            ...bytesFrom(event.scriptPointer, 2),
-            ...isNotNullish(event.flagId) ? bytesFrom(eventFlagsMap[event.flagId].numericId, 2) : [-1],
-          ]
-        ),
-      ]
-    })
+  romInfo.gameData.mapObjectEvents.forEach((event) => {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      dataHunkFromMapObjectEvent(event),
+    ]
+  })
     
-    const trainerMovementSpeedPatch = Patch.fromYAML(
-      romInfo,
-      "trainerMovementSpeed.yml",
-      {},
-      {
-        fastSpinDurationMask: hexStringFrom([behaviour.fastSpinDurationMask]),
-      }
-    )
+  const trainerMovementSpeedPatch = Patch.fromYAML(
+    romInfo,
+    "trainerMovementSpeed.yml",
+    {},
+    {
+      fastSpinDurationMask: hexStringFrom([trainerMovementBehavioursMap[settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.SETTINGS.MOVEMENT].fastSpinDurationMask]),
+    }
+  )
   
-    hunks = [...hunks, ...trainerMovementSpeedPatch.hunks]
-  }
-  
-  // Other
-  
+  romInfo.patchHunks = [...romInfo.patchHunks, ...trainerMovementSpeedPatch.hunks]
+    
   // Skip Gender
-  
+    
   if (settings.SKIP_GENDER.VALUE) {
     const genderId = playerSpriteMap[settings.SKIP_GENDER.SETTINGS.GENDER].numericId
     const skipGenderPatch = Patch.fromYAML(
@@ -1842,12 +635,12 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         genderId: hexStringFrom(bytesFrom(genderId, 1)),
       }
     )
-  
-    hunks = [...hunks, ...skipGenderPatch.hunks]
+    
+    romInfo.patchHunks = [...romInfo.patchHunks, ...skipGenderPatch.hunks]
   }
-  
+    
   // Skip Name
-  
+    
   if (settings.SKIP_NAME.VALUE) {
     const nameBytes = ROMInfo.displayCharacterBytesFrom(settings.SKIP_NAME.SETTINGS.PLAYER_NAME)
     const skipNamePatch = Patch.fromYAML(
@@ -1858,47 +651,36 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         name: hexStringFrom(nameBytes),
       }
     )
-  
-    hunks = [...hunks, ...skipNamePatch.hunks]
+    
+    romInfo.patchHunks = [...romInfo.patchHunks, ...skipNamePatch.hunks]
   }
-  
-  // Bike Anywhere
-  
-  if (settings.BIKE_INDOORS) {
-    const bikeAnywherePatch = Patch.fromYAML(
-      romInfo,
-      "bikeAnywhere.yml",
-    )
-  
-    hunks = [...hunks, ...bikeAnywherePatch.hunks]
-  }
-  
+    
   // Scale Experience
-  
+    
   if (settings.SCALE_EXPERIENCE) {
     const scaleExperiencePatch = Patch.fromYAML(
       romInfo,
       "scaleExperience.yml",
     )
-  
-    hunks = [...hunks, ...scaleExperiencePatch.hunks]
+    
+    romInfo.patchHunks = [...romInfo.patchHunks, ...scaleExperiencePatch.hunks]
   }
-  
+    
   // Performance Improvements
-  
+    
   if (settings.IMPROVE_PERFORMANCE) {
     const performanceImprovementsPatch = Patch.fromYAML(
       romInfo,
       "performanceImprovements.yml",
     )
-  
-    hunks = [...hunks, ...performanceImprovementsPatch.hunks]
+    
+    romInfo.patchHunks = [...romInfo.patchHunks, ...performanceImprovementsPatch.hunks]
   }
-  
+    
   // Additional Options
-  
+    
   const selectedAdditionalOptionIds = settings.ADDITIONAL_OPTIONS
-  
+    
   if (selectedAdditionalOptionIds.length > 0) {
     const additionalOptionsPatch = Patch.fromYAML(
       romInfo,
@@ -1918,32 +700,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
         ]),
       },
     )
-    
-    hunks = [...hunks, ...additionalOptionsPatch.hunks]
-  }
-  
-  // Base Patch
-  
-  const checkValue = hunks.length > 0 ? hash(hunks).slice(0, 8).toUpperCase() : "00000000"
-  
-  const basePatch = Patch.fromYAML(
-    romInfo,
-    "randomizerBase.yml",
-    {},
-    {
-      versionNumber: hexStringFrom(ROMInfo.displayCharacterBytesFrom(app.getVersion())),
-      checkValue: hexStringFrom(ROMInfo.displayCharacterBytesFrom(checkValue)),
-    },
-  )
       
-  hunks = [...hunks, ...basePatch.hunks]
-  
-  hunks.forEach((hunk) => {
-    data.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
-  })
-  
-  return {
-    seed: "",
-    data: data,
+    romInfo.patchHunks = [...romInfo.patchHunks, ...additionalOptionsPatch.hunks]
   }
 }

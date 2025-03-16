@@ -1,12 +1,38 @@
+import type { DataHunk } from "@lib/generator/patch"
 import { DataFormat } from "@lib/generator/patchInfo"
+import { encounters } from "@shared/gameData/encounters"
+import { mapObjectEvents } from "@shared/gameData/mapObjectEvents"
+import { martsMap } from "@shared/gameData/marts"
+import { oddEggs } from "@shared/gameData/oddEggs"
+import { pokemonMap } from "@shared/gameData/pokemon"
+import { teachableMovesMap } from "@shared/gameData/teachableMoves"
+import { tradesMap } from "@shared/gameData/trades"
+import { trainers } from "@shared/gameData/trainers"
+import { eventPokemonMap } from "@shared/types/gameData/eventPokemon"
+import type { GameData } from "@shared/types/gameData/gameData"
 import { bytesFrom } from "@utils"
 
 export class ROMInfo {
   
   emptyHunks: Hunk[]
+  patchHunks: DataHunk[]
+  gameData: GameData
   
   constructor(emptyHunks: Hunk[]) {
     this.emptyHunks = emptyHunks
+    this.patchHunks = []
+    this.gameData = {
+      pokemon: JSON.parse(JSON.stringify(pokemonMap)),
+      starters: {},
+      encounters: JSON.parse(JSON.stringify(encounters)),
+      oddEggs: JSON.parse(JSON.stringify(oddEggs)),
+      eventPokemon: JSON.parse(JSON.stringify(eventPokemonMap)),
+      trades: JSON.parse(JSON.stringify(tradesMap)),
+      teachableMoves: JSON.parse(JSON.stringify(teachableMovesMap)),
+      trainers: JSON.parse(JSON.stringify(trainers)),
+      mapObjectEvents: JSON.parse(JSON.stringify(mapObjectEvents)),
+      marts: JSON.parse(JSON.stringify(martsMap)),
+    }
   }
   
   static readonly vanillaMD5Hash = "301899b8087289a6436b0a241fbbb474"

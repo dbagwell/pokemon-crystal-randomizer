@@ -1,3 +1,0 @@
-description: "Data for a tree encounter group."
-values:
-  data: "#encounterSlots.$data FF"
