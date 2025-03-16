@@ -1,7 +1,7 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
 import { teachableMovesMap } from "@shared/gameData/teachableMoves"
-import { type HMItemId, hmItemIds, type TMItemId, tmItemIds } from "@shared/types/gameDataIds/items"
+import { type HMItemId, hmItemIds, holdableItemIds, type TMItemId, tmItemIds } from "@shared/types/gameDataIds/items"
 import { type MoveTutorId, moveTutorIds } from "@shared/types/gameDataIds/teachableMoves"
 
 export const updatePokemonInfo = (
@@ -61,5 +61,85 @@ export const updatePokemonInfo = (
         return availableMoveTutorMoves.splice(randomInt(0, availableMoveTutorMoves.length - 1), 1)[0].id as MoveTutorId
       })
     })
+  }
+  
+  if (settings.RANDOMIZE_WILD_HELD_ITEMS.VALUE) {
+    const randomItemId = () => {
+      return holdableItemIds[randomInt(0, holdableItemIds.length - 1)]
+    }
+    
+    const wildHeldItemsSettings = settings.RANDOMIZE_WILD_HELD_ITEMS.SETTINGS
+    if (wildHeldItemsSettings.CHANGE_NUMBER_OF_ITEMS_PER_POKEMON.VALUE) {
+      const itemsPerPokemonSettings = wildHeldItemsSettings.CHANGE_NUMBER_OF_ITEMS_PER_POKEMON.SETTINGS
+      switch (itemsPerPokemonSettings.NUMBER.VALUE) {
+      case "RANDOM": {
+        Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {
+          pokemon.items = []
+          for (let i = 0; i < randomInt(0, 2); i++) {
+            pokemon.items[i] = randomItemId()
+          }
+        })
+        break
+      }
+      case "SHUFFLED": {
+        if (itemsPerPokemonSettings.NUMBER.SETTINGS.SHUFFLED.KEEP_RATIOS) {
+          const itemGroups = Object.values(romInfo.gameData.pokemon).map((pokemon) => {
+            for (let i = 0; i < pokemon.items.length; i++) {
+              pokemon.items[i] = randomItemId()
+            }
+            
+            return pokemon.items
+          })
+          
+          const pokemonArray = Object.values(romInfo.gameData.pokemon).map((pokemon) => {
+            pokemon.items = []
+            return pokemon
+          })
+          
+          itemGroups.forEach((group) => {
+            const index = randomInt(0, pokemonArray.length - 1)
+            pokemonArray[index].items = group
+            pokemonArray.splice(index, 1)
+          })
+        } else {
+          const itemIds = Object.values(romInfo.gameData.pokemon).flatMap((pokemon) => {
+            return pokemon.items.map((_) => {
+              return randomItemId()
+            })
+          })
+          
+          const pokemonArray = Object.values(romInfo.gameData.pokemon).flatMap((pokemon) => {
+            pokemon.items = []
+            return [pokemon, pokemon]
+          })
+          
+          itemIds.forEach((itemId) => {
+            const index = randomInt(0, pokemonArray.length - 1)
+            pokemonArray[index].items.push(itemId)
+            pokemonArray.splice(index, 1)
+          })
+        }
+        break
+      }
+      case "NONE": {
+        Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {
+          pokemon.items = []
+        })
+        break
+      }
+      case "ONE": {
+        Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {
+          pokemon.items = [randomItemId()]
+        })
+        break
+      }
+      case "TWO": {
+        Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {
+          pokemon.items = [randomItemId(), randomItemId()]
+        })
+        break
+      }
+      }
+    }
   }
 }
