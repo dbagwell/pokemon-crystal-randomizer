@@ -13,7 +13,7 @@ export const updateItems = (
       ...regularItemIds,
       ...ballItemIds,
     ].filter((itemId) => {
-      return !settings.BANNED_ITEMS.includes(itemId)
+      return !settings.BANNED_ITEMS.includes(itemId) && !settings.RANDOMIZE_REGULAR_ITEM_BALLS.SETTINGS.BAN.includes(itemId)
     })
     
     regularItemBallLocationIds.forEach((locationId) => {
@@ -27,7 +27,7 @@ export const updateItems = (
   
   if (settings.RANDOMIZE_TM_ITEM_BALLS.VALUE) {
     const availableItemIds = tmItemIds.filter((itemId) => {
-      return !settings.BANNED_ITEMS.includes(itemId)
+      return !settings.BANNED_ITEMS.includes(itemId) && !settings.RANDOMIZE_TM_ITEM_BALLS.SETTINGS.BAN.includes(itemId)
     })
     
     tmItemBallLocationIds.forEach((locationId) => {
@@ -40,7 +40,7 @@ export const updateItems = (
       ...regularItemIds,
       ...ballItemIds,
     ].filter((itemId) => {
-      return !settings.BANNED_ITEMS.includes(itemId)
+      return !settings.BANNED_ITEMS.includes(itemId) && !settings.RANDOMIZE_HIDDEN_ITEMS.SETTINGS.BAN.includes(itemId)
     })
     
     hiddenItemLocationIds.forEach((locationId) => {
