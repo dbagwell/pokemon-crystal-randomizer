@@ -135,7 +135,7 @@ export const defaultAppViewModel = () => {
                 description: "Change the Pokémon on the Rival's Pokémon teams to match the Pokémon that appears to be stolen from Prof. Elm's Lab.",
               }),
             ] as const,
-          }),
+          }), // END CHANGE_STARTERS
           createConfigurableToggleViewModel({
             id: "RANDOMIZE_EVENT_POKEMON" as const,
             name: "Randomize Event Pokémon",
@@ -292,6 +292,17 @@ export const defaultAppViewModel = () => {
               createBannedPokemonSelectorViewModel(),
             ] as const,
           }), // END RANDOMIZE_TRAINER_POKEMON
+          createSimpleMultiSelectorViewModel({
+            id: "BANNED_POKEMON" as const,
+            name: "Globally Banned Pokémon",
+            description: "A list of Pokémon to always exclude when choosing random Pokémon.",
+            options: pokemonIds.map((pokemonId) => {
+              return createSimpleSelectorOption({
+                id: pokemonId,
+                name: pokemonMap[pokemonId].name,
+              })
+            }),
+          }),
         ] as const,
       }), // END POKEMON
       createTabViewModel({

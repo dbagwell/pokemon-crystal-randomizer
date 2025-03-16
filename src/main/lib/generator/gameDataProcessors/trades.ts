@@ -12,7 +12,7 @@ export const updateTrades = (
   const tradesSettings = settings.RANDOMIZE_TRADES.SETTINGS
     
   const availableTradePokemonIds = pokemonIds.filter((pokemonId) => {
-    return !tradesSettings.BAN.includes(pokemonId)
+    return !settings.BANNED_POKEMON.includes(pokemonId) && !tradesSettings.BAN.includes(pokemonId)
   })
       
   const getRandomTradePokemonId = () => {

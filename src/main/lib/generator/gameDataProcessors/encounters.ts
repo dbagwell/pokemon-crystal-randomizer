@@ -16,7 +16,7 @@ export const updateRandomEncounters = (
   const wildEcountersSettings = settings.RANDOMIZE_RANDOM_ENCOUNTERS.SETTINGS
     
   const nonBannedPokemonIds = pokemonIds.filter((pokemonId) => {
-    return !wildEcountersSettings.BAN.includes(pokemonId)
+    return !settings.BANNED_POKEMON.includes(pokemonId) && !wildEcountersSettings.BAN.includes(pokemonId)
   })
     
   const nonBannedFullyEvolvedPokemonIds = nonBannedPokemonIds.filter((pokemonId) => {
