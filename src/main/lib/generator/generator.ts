@@ -8,6 +8,7 @@ import { updateEncounterRates } from "@lib/generator/gameDataProcessors/encounte
 import { updateRandomEncounters } from "@lib/generator/gameDataProcessors/encounters"
 import { updateEventPokemon } from "@lib/generator/gameDataProcessors/eventPokemon"
 import { updateEvolutionMethods } from "@lib/generator/gameDataProcessors/evolutionMethods"
+import { updateIntroPokemon } from "@lib/generator/gameDataProcessors/introPokemon"
 import { shuffleItems, updateItems } from "@lib/generator/gameDataProcessors/itemLocations"
 import { updateLevelUpMoves } from "@lib/generator/gameDataProcessors/levelUpMoves"
 import { updateMapObjectEvents } from "@lib/generator/gameDataProcessors/mapObjectEvents"
@@ -86,6 +87,7 @@ const updateGameData = (
   romInfo: ROMInfo,
   randomInt: (min: number, max: number) => number,
 ) => {
+  updateIntroPokemon(settings, romInfo, randomInt)
   updateStarters(settings, romInfo, randomInt)
   updateStarterItems(settings, romInfo, randomInt)
   updateEventPokemon(settings, romInfo, randomInt)
@@ -106,6 +108,24 @@ const createPatches = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
 ) => {
+  // Intro Pokemon
+  
+  if (isNotNullish(romInfo.gameData.introPokemonId)) {
+    const numericId = pokemonMap[romInfo.gameData.introPokemonId].numericId
+    
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      new DataHunk(
+        ROMOffset.fromBankAddress(1, 0x5FD2),
+        [numericId],
+      ),
+      new DataHunk(
+        ROMOffset.fromBankAddress(1, 0x6050),
+        [numericId],
+      ),
+    ]
+  }
+  
   // Starter Pokemon
   
   Object.entries(romInfo.gameData.starters).forEach(([locationId, pokemonId]) => {
