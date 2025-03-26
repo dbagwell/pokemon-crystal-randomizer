@@ -13,7 +13,7 @@ import { updateLevelUpMoves } from "@lib/generator/gameDataProcessors/levelUpMov
 import { updateMapObjectEvents } from "@lib/generator/gameDataProcessors/mapObjectEvents"
 import { updateMarts } from "@lib/generator/gameDataProcessors/marts"
 import { updatePokemonInfo } from "@lib/generator/gameDataProcessors/pokemonInfo"
-import { updateStarters } from "@lib/generator/gameDataProcessors/starters"
+import { updateStarterItems, updateStarters } from "@lib/generator/gameDataProcessors/starters"
 import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { DataHunk, Patch } from "@lib/generator/patch"
@@ -23,10 +23,12 @@ import { itemsMap } from "@shared/gameData/items"
 import { movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
+import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
 import type { Trade } from "@shared/types/gameData/trade"
 import type { EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
 import { type ItemId } from "@shared/types/gameDataIds/items"
+import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import { trainerGroupIds } from "@shared/types/gameDataIds/trainerGroups"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish } from "@utils"
 import crypto from "crypto"
@@ -85,6 +87,7 @@ const updateGameData = (
   randomInt: (min: number, max: number) => number,
 ) => {
   updateStarters(settings, romInfo, randomInt)
+  updateStarterItems(settings, romInfo, randomInt)
   updateEventPokemon(settings, romInfo, randomInt)
   updateRandomEncounters(settings, romInfo, randomInt)
   updateEncounterRates(settings, romInfo)
@@ -123,6 +126,27 @@ const createPatches = (
           pokemonName: hexStringFrom(ROMInfo.displayCharacterBytesFrom(pokemon.name.toUpperCase())),
         },
       ).hunks,
+    ]
+  })
+  
+  starterLocationIds.forEach((locationId) => {
+    const itemId = romInfo.gameData.starterItems[locationId]
+    
+    if (isNullish(itemId)) {
+      return
+    }
+      
+    const item = itemsMap[itemId]
+      
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      new DataHunk(
+        ROMOffset.fromBankAddress(
+          starterLocationsMap[locationId].itemRomOffset[0],
+          starterLocationsMap[locationId].itemRomOffset[1],
+        ),
+        [item.numericId],
+      ),
     ]
   })
   

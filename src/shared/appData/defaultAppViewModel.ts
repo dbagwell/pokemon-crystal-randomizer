@@ -12,7 +12,7 @@ import { additionalOptionIds } from "@shared/types/gameDataIds/additionalOptions
 import { growthRateIds } from "@shared/types/gameDataIds/growthRates"
 import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
 import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGroups"
-import { ballItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
+import { ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
@@ -698,6 +698,146 @@ export const defaultAppViewModel = () => {
               }), // END BAN
             ] as const,
           }), // END RANDOMIZE_HIDDEN_ITEMS
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_WILD_HELD_ITEMS" as const,
+            name: "Randomize Items Held by Wild Pokémon",
+            description: "Change the items that wild Pokémon can hold.",
+            viewModels: [
+              createConfigurableToggleViewModel({
+                id: "CHANGE_NUMBER_OF_ITEMS_PER_POKEMON" as const,
+                name: "Change Number of Items per Pokémon",
+                description: "Change the number of different kinds of items each species of Pokémon can hold in the wild.",
+                viewModels: [
+                  createSingleSelectorViewModel({
+                    id: "NUMBER" as const,
+                    selectedOptionId: "RANDOM",
+                    options: [
+                      createSimpleSelectorOption({
+                        id: "RANDOM" as const,
+                        name: "Random",
+                        description: "Each species of Pokémon is assigned a random number (from 0 to 2) of items that they can hold in the wild.",
+                      }),
+                      createConfigurableSelectorOption({
+                        id: "SHUFFLED" as const,
+                        name: "Shuffled",
+                        description: "The total number of items that can be held by wild Pokémon remains unchanged, "
+                          + "but the Pokémon that can hold each of those items is randomized.",
+                        viewModels: [
+                          createSimpleToggleViewModel({
+                            id: "KEEP_RATIOS" as const,
+                            name: "Keep Ratios",
+                            description: "Make sure that the number of Pokémon that can hold 0, 1, and 2 items respectively remains unchanged.",
+                          }),
+                        ] as const,
+                      }),
+                      createSimpleSelectorOption({
+                        id: "NONE" as const,
+                        name: "0 Items",
+                        description: "No wild Pokémon can hold items.",
+                      }),
+                      createSimpleSelectorOption({
+                        id: "ONE" as const,
+                        name: "1 Item",
+                        description: "Each species of Pokémon is assigned 1 of kind of item that they can hold in the wild.",
+                      }),
+                      createSimpleSelectorOption({
+                        id: "TWO" as const,
+                        name: "2 Items",
+                        description: "Each species of Pokémon is assigned 2 of kinds of items that they can hold in the wild.",
+                      }),
+                    ] as const,
+                  }), // END NUMBER
+                ] as const,
+              }), // END CHANGE_NUMBER_OF_ITEMS_PER_POKEMON
+              createSimpleMultiSelectorViewModel({
+                id: "BAN" as const,
+                name: "Ban",
+                description: "A list of items to exclude when choosing the random items "
+                  + "(in addition to the default list of banned items).",
+                options: holdableItemIds.map((itemId) => {
+                  return createSimpleSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                  })
+                }),
+              }), // END BAN
+            ] as const,
+          }), // END RANDOMIZE_WILD_HELD_ITEMS
+          createConfigurableToggleViewModel({
+            id: "CHANGE_STARTER_HELD_ITEMS" as const,
+            name: "Change Items Held by Starter Pokémon",
+            description: "Change the items that are held by the starter Pokémon.",
+            viewModels: [
+              createSingleSelectorViewModel({
+                selectedOptionId: "RANDOM",
+                id: "METHOD" as const,
+                options: [
+                  createConfigurableSelectorOption({
+                    id: "RANDOM" as const,
+                    name: "Random",
+                    description: "Change the items held by the starter Pokémon to random ones.",
+                    viewModels: [
+                      createSimpleMultiSelectorViewModel({
+                        id: "BAN" as const,
+                        name: "Ban",
+                        description: "A list of items to exclude when choosing the random items "
+                          + "(in addition to the default list of banned items).",
+                        options: holdableItemIds.map((itemId) => {
+                          return createSimpleSelectorOption({
+                            id: itemId,
+                            name: itemsMap[itemId].name,
+                          })
+                        }),
+                      }), // END BAN
+                    ] as const,
+                  }), // END RANDOM
+                  createConfigurableSelectorOption({
+                    id: "CUSTOM" as const,
+                    name: "Custom",
+                    description: "Set a specific item for each starter.",
+                    viewModels: [
+                      createSingleSelectorViewModel({
+                        id: "LEFT" as const,
+                        name: "Left",
+                        description: "The item held by the starter in the left Poké Ball on the table in Prof. Elm's Lab.",
+                        selectedOptionId: "BERRY",
+                        options: holdableItemIds.map((itemId) => {
+                          return createSimpleSelectorOption({
+                            id: itemId,
+                            name: itemsMap[itemId].name,
+                          })
+                        }),
+                      }), // END LEFT
+                      createSingleSelectorViewModel({
+                        id: "MIDDLE" as const,
+                        name: "Middle",
+                        description: "The item held by the starter in the left Poké Ball on the table in Prof. Elm's Lab.",
+                        selectedOptionId: "BERRY",
+                        options: holdableItemIds.map((itemId) => {
+                          return createSimpleSelectorOption({
+                            id: itemId,
+                            name: itemsMap[itemId].name,
+                          })
+                        }),
+                      }), // END MIDDLE
+                      createSingleSelectorViewModel({
+                        id: "RIGHT" as const,
+                        name: "Right",
+                        description: "The item held by the starter in the left Poké Ball on the table in Prof. Elm's Lab.",
+                        selectedOptionId: "BERRY",
+                        options: holdableItemIds.map((itemId) => {
+                          return createSimpleSelectorOption({
+                            id: itemId,
+                            name: itemsMap[itemId].name,
+                          })
+                        }),
+                      }), // END RIGHT
+                    ] as const,
+                  }), // END CUSTOM
+                ] as const,
+              }),
+            ] as const,
+          }), // END CHANGE_STARTER_HELD_ITEMS
           createGroupMultiSelectorViewModel({
             id: "SHUFFLED_ITEM_GROUPS" as const,
             name: "Shuffle Items",
