@@ -1,0 +1,36 @@
+description: "Removes the Pokéball bounce animation."
+changes:
+- description: "Changes to remove the Pokéball bounce animation."
+  locations:
+  - bank: 50
+    address: 0x539B
+  value: "D7 01 04 14 DB FB 01 BC 53 FB 02 BE 53 D6 01 E0 01 B3 30 FC 9F 53"
+- description: "Changes to remove the Pokéball bounce animation."
+  locations:
+  - bank: 51
+    address: 0x5165
+  - bank: 51
+    address: 0x5167
+  value: "C0"
+- description: "Changes to remove the Pokéball bounce animation."
+  locations:
+  - bank: 51
+    address: 0x51C1
+  value: "08"
+- description: "Changes to remove the Pokéball bounce animation."
+  locations:
+  - bank: 51
+    address: 0x51C6
+  value: "03"
+- description: "Changes to remove the Pokéball bounce animation."
+  locations:
+  - bank: 51
+    address: 0x51C8
+  value: "00"
+freeLocations:
+- bank: 50
+  address: 0x53B1
+  size: 11
+- bank: 51
+  address: 0x5196
+  size: 42
