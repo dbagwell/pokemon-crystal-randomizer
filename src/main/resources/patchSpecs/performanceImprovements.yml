@@ -20,9 +20,15 @@ values:
   waitBGMap2: "F0 D6 A7 20 1C F0 44 FE 7E D4 5A 04 C3 5A 04"
   waitBGMap3: "F0 E6 A7 28 09 3E 02 E0 D4 CD @$waitBGMap2 18 DF"
   waitBGMap4: "3E 01 E0 D4 0E 04 CD 68 04 C9"
+  pushLYOverrides1: "CD @$pushLYOverrides2"
+  pushLYOverrides2: "EA 6B CF 3E 04 EA D9 CF C9"
   disableLCDForCopyright: "CD 68 05 CD C8 0F C9"
   enableLCDAfterCopyright: "CD 78 10 C3 8A 05"
   introAnimationFix: "EA D9 CF EA 67 CF 76 00 FA 67 CF A7 20 F8 C9"
+  magnetTrain1: "@$magnetTrain2"
+  magnetTrain2: "CD BA 0E F0 C6 F5 AF E0 C6 76 00 FA 67 CF A7 20 F8 F1 E0 C6 C9"
+  credits1: "@$credits2"
+  credits2: "3E 04 EA D9 CF 76 00 FA 67 CF A7 20 F8 C3 51 59"
 changes:
 - description: "Removes lag when getting on the bike using the register funtion."
   locations:
@@ -136,6 +142,11 @@ changes:
   - bank: 2
     address: 0x4C1A
   value: "3E"
+- description: "Performance changes related to the graphics engine."
+  locations:
+  - bank: 0
+    address: 0x3B21
+  value: "$pushLYOverrides1"
 - description: "Calls code to disable the LCD for the copyright notice."
   locations:
   - bank: 1
@@ -161,6 +172,18 @@ changes:
   - bank: 57
     address: 0x5492
   value: "CD @$introAnimationFix"
+- description: "Performance changes to the magnet train animation."
+  locations:
+  - bank: 35
+    address: 0x4D02
+  - bank: 35
+    address: 0x4D10
+  value: "$magnetTrain1"
+- description: "Performance changes to the credits."
+  locations:
+  - bank: 66
+    address: 0x5983
+  value: "$credits1"
 - description: "Performance changes to the LCD code."
   locations:
   - bank: 0
@@ -189,6 +212,10 @@ changes:
   locations:
   - bank: 0
   value: "$waitBGMap1"
+- description: "Performance changes related to the graphics engine."
+  locations:
+  - bank: 0
+  value: "$pushLYOverrides2"
 - description: "Adds code to disable the LCD for the copyright notice."
   locations:
   - bank: 1
@@ -201,3 +228,11 @@ changes:
   locations:
   - bank: 57
   value: "$introAnimationFix"
+- description: "Performance changes to the magnet train animation."
+  locations:
+  - bank: 35
+  value: "$magnetTrain2"
+- description: "Performance changes to the credits."
+  locations:
+  - bank: 66
+  value: "$credits2"
