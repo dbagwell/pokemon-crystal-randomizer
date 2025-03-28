@@ -878,6 +878,12 @@ export const defaultAppViewModel = () => {
         name: "Item Properties",
         viewModels: [
           createSimpleToggleViewModel({
+            id: "POKEMON_RADAR" as const,
+            name: "Pokémon Radar",
+            description: "Plays a sound effect when viewing the 'AREA' page of a Pokémon in the Pokédex "
+              + "if the Pokémon can be encountered on Land or when surfing in the Water of the player's current area.",
+          }),
+          createSimpleToggleViewModel({
             id: "BIKE_INDOORS" as const,
             name: "Bike Indoors",
             description: "Allows the player to use the bike inside all buildings.",
