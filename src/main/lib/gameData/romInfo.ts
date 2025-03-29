@@ -46,8 +46,14 @@ export class ROMInfo {
   static readonly vanilla = (): ROMInfo => {
     return new ROMInfo([
       new Hunk(ROMOffset.fromBankAddress(0, 0x0547), 11),
+      new Hunk(ROMOffset.fromBankAddress(0, 0x308D), 16),
       new Hunk(ROMOffset.fromBankAddress(0, 0x3ED7), 19),
+      new Hunk(ROMOffset.fromBankAddress(0, 0x048C), 23),
+      new Hunk(ROMOffset.fromBankAddress(0, 0x392D), 24),
+      new Hunk(ROMOffset.fromBankAddress(0, 0x0A1B), 27),
       new Hunk(ROMOffset.fromBankAddress(0, 0x3EFD), 35),
+      new Hunk(ROMOffset.fromBankAddress(0, 0x36F5), 40),
+      new Hunk(ROMOffset.fromBankAddress(0, 0x19B8), 49),
       new Hunk(ROMOffset.fromBankAddress(0, 0x3D9F), 63),
       new Hunk(ROMOffset.fromBankAddress(0, 0x3F88), 0x004B),
       new Hunk(ROMOffset.fromBankAddress(0, 0x0DFD), 77),
