@@ -1,0 +1,33 @@
+description: "Adds the option to change the current box when Bill calls to tell the player about their box being full."
+values:
+  changeBoxCode: "FA 72 DB 47 3C FE 0E 20 01 AF B8 EA 72 DB 28 3E CD D8 50 CD CB 2F 1A FE 14 20 05 FA 72 DB 18 E4 FA 72 DB 4F 78 EA 72 DB C5 CD 89 4B 38 1B CD 54 4B CD 99 4C CD 0C 4E C1 79 EA 72 DB CD 21 50 CD E6 4B CD 5A 4B 3E 00 18 07 C1 3E 01 18 02 3E 02 EA DD C2 C9"
+  phoneCallScript1: "4B 6D @$phoneCallText1 4E 09 @$phoneCallScript3"
+  phoneCallScript2: "4B 6D @$phoneCallText2 54 91"
+  phoneCallScript3: "0E 05 @$changeBoxCode 06 01 @$phoneCallScript2 06 02 @$phoneCallScript4 4B 6D @$phoneCallText3 54 91"
+  phoneCallScript4: "4B 6D @$phoneCallText4 54 91"
+  phoneCallText1: "00 87 A8 F4 7F 14 E6 4F 88 B3 D4 7F AC A4 F4 7F 81 88 8B 8B E7 51 93 A7 A0 AD AA B2 7F A5 AE B1 7F B4 B2 A8 AD A6 4F AC B8 7F 92 93 8E 91 80 86 84 7F 92 98 92 93 84 8C E8 51 93 A7 A0 B3 7F AB A0 B2 B3 7F 54 8C 8E 8D 4F B8 AE B4 7F B2 A4 AD B3 7F A5 A8 AB AB A4 A3 55 B8 AE B4 B1 7F 81 8E 97 7F B4 AF E8 51 98 AE B4 D1 AB 7F A7 A0 B5 A4 7F B3 AE 4F B2 B6 A8 B3 A2 A7 7F 81 8E 97 84 92 7F A8 A5 51 B8 AE B4 7F B6 A0 AD B3 7F B3 AE 7F A2 A0 B3 A2 A7 4F AC AE B1 A4 7F 54 8C 8E 8D E8 51 83 AE 7F B8 AE B4 7F B6 A0 AD B3 7F AC A4 7F B3 AE 4F B2 A0 B5 A4 7F B8 AE B4 B1 7F A6 A0 AC A4 7F A0 AD A3 55 A2 A7 A0 AD A6 A4 7F B3 AE 7F A0 55 AD AE AD E3 A5 B4 AB AB 7F 81 8E 97 E6 57"
+  phoneCallText2: "00 8E AA F4 7F 14 E7 51 8F AB A4 A0 B2 A4 7F B2 B3 AE AF 7F A1 B8 4F A0 7F 54 8C 8E 8D 7F 82 84 8D 93 84 91 55 B3 AE 7F A2 A7 A0 AD A6 A4 7F 81 8E 97 E8 51 81 B8 A4 7F AD AE B6 E7 57"
+  phoneCallText3: "00 83 AE AD A4 F4 7F 14 E7 51 98 AE B4 7F A2 A0 AD 7F A2 AE AD B3 A8 AD B4 A4 4F A2 A0 B3 A2 A7 A8 AD A6 7F 54 8C 8E 8D 55 B6 A8 B3 A7 7F AD AE 7F A8 B2 B2 B4 A4 B2 E8 51 81 B8 A4 7F AD AE B6 E7 57"
+  phoneCallText4: "00 81 A0 A3 7F AD A4 B6 B2 F4 4F 14 E8 51 80 AB AB 7F B8 AE B4 B1 7F 81 8E 97 84 92 4F A0 B1 A4 7F A5 B4 AB AB E7 51 8F AB A4 A0 B2 A4 7F B5 A8 B2 A8 B3 4F A0 7F 54 8C 8E 8D 7F 82 84 8D 93 84 91 55 B3 AE 7F B1 A4 AB A4 A0 B2 A4 55 B2 AE AC A4 7F 54 8C 8E 8D E8 51 81 B8 A4 7F AD AE B6 E7 57"
+changes:
+- description: "Adds code to change to a non full box if possible."
+  locations:
+  - bank: 5
+  value: "$changeBoxCode"
+- description: "Changes the script that runs when Bill calls the player."
+  locations:
+  - bank: 47
+    address: 0x5007
+  value: "03 @$phoneCallScript1"
+- description: "The new script that is called when Bill calls the player."
+  locations:
+  - bank: 47
+  value: "$phoneCallScript1 $phoneCallScript2 $phoneCallScript3 $phoneCallScript4"
+- description: "Adds text to Bill's phone call when the player's box is full."
+  locations:
+  - bank: 109
+  value: "$phoneCallText1 $phoneCallText2 $phoneCallText3 $phoneCallText4"
+freeSpaces:
+- bank: 109
+  address: 0x4652
+  size: 170

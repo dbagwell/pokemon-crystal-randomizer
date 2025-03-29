@@ -742,6 +742,17 @@ const createPatches = (
     romInfo.patchHunks = [...romInfo.patchHunks, ...skipNamePatch.hunks]
   }
     
+  // Change Box Phone Call
+    
+  if (settings.CHANGE_BOX_PHONE_CALL) {
+    const scaleExperiencePatch = Patch.fromYAML(
+      romInfo,
+      "changeBoxCall.yml",
+    )
+    
+    romInfo.patchHunks = [...romInfo.patchHunks, ...scaleExperiencePatch.hunks]
+  }
+    
   // Scale Experience
     
   if (settings.SCALE_EXPERIENCE) {
