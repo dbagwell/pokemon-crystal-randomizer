@@ -1,6 +1,6 @@
 import type { ROMInfo, ROMOffset } from "@lib/gameData/romInfo"
 import { type DataFormat, type ExtraInclude, PatchInfo } from "@lib/generator/patchInfo"
-import { bytesFrom, isNumber } from "@utils"
+import { bytesFrom, isNullish, isNumber } from "@utils"
 
 export class Patch {
   
@@ -38,6 +38,10 @@ export class DataHunk {
         if (isNumber(value)) {
           return value
         } else { // isString(value)
+          if (isNullish(referenceAddresses[value])) {
+            throw new Error(`Cannot find data reference with path '${value}'.`)
+          }
+          
           return bytesFrom(referenceAddresses[value], 2)
         }
       })

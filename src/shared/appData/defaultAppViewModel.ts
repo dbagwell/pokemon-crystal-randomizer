@@ -295,6 +295,11 @@ export const defaultAppViewModel = () => {
               createBannedPokemonSelectorViewModel(),
             ] as const,
           }), // END RANDOMIZE_TRAINER_POKEMON
+          createSimpleToggleViewModel({
+            id: "RANDOMIZE_INTRO_POKEMON" as const,
+            name: "Randomize Intro Pokémon",
+            description: "Randomizes the Pokémon shown by Prof. Oak during the game's introduction.",
+          }),
           createSimpleMultiSelectorViewModel({
             id: "BANNED_POKEMON" as const,
             name: "Globally Banned Pokémon",
