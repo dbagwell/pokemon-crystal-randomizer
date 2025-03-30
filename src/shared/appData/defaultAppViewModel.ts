@@ -981,6 +981,11 @@ export const defaultAppViewModel = () => {
             ] as const,
           }), // END SKIP_NAME
           createSimpleToggleViewModel({
+            id: "CHANGE_BOX_PHONE_CALL" as const,
+            name: "Change Box Phone Call",
+            description: "Adds the option to change the PC box when Bill calls the player to tell them that their current box is full.",
+          }),
+          createSimpleToggleViewModel({
             id: "SCALE_EXPERIENCE" as const,
             name: "Scale Experience Gain",
             description: "Changes the battle experience calculation to more closely match that of generations 5 and 7+, "
