@@ -15,6 +15,7 @@ import { updateMapObjectEvents } from "@lib/generator/gameDataProcessors/mapObje
 import { updateMarts } from "@lib/generator/gameDataProcessors/marts"
 import { updatePokemonInfo } from "@lib/generator/gameDataProcessors/pokemonInfo"
 import { updateStarterItems, updateStarters } from "@lib/generator/gameDataProcessors/starters"
+import { updateTeachableMoves } from "@lib/generator/gameDataProcessors/teachableMoves"
 import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { DataHunk, Patch } from "@lib/generator/patch"
@@ -96,6 +97,7 @@ const updateGameData = (
   updateTrades(settings, romInfo, randomInt)
   updateEvolutionMethods(settings, romInfo)
   updateLevelUpMoves(settings, romInfo, randomInt)
+  updateTeachableMoves(settings, romInfo, randomInt)
   updatePokemonInfo(settings, romInfo, randomInt)
   updateMarts(settings, romInfo)
   updateTrainers(settings, romInfo, randomInt)
