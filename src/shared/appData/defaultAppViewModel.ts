@@ -1056,6 +1056,12 @@ export const defaultAppViewModel = () => {
             ] as const,
           }),
           createSimpleToggleViewModel({
+            id: "SKIP_CLAIR_BADGE_TEST" as const,
+            name: "Skip Clair's Badge Test",
+            description: "Makes it so Clair gives you her Badge and TM immediately after defeating her "
+              + "instead of after passing the test in the Dragon Shrine.",
+          }),
+          createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",

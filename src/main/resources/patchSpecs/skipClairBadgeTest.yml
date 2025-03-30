@@ -1,0 +1,25 @@
+description: "Makes Clair gives you her badge and TM immediately after defeating her."
+values:
+  newClairScript: "4C @$newClairText1 55 4C @$newClairText2 86 85 9C 00 86 36 22 00 9C 08 00 4C @$newClairText3 55 9E D7 01 08 8E 4E 33 0F 00 4C D1 51 03 48 4E"
+  newClairText1: "00 88 7F B6 AE AD D5 7F A0 A3 AC A8 B3 4F B3 A7 A8 B2 E8 51 88 7F AC A0 B8 7F A7 A0 B5 A4 7F AB AE B2 B3 F4 4F A1 B4 B3 7F B8 AE B4 D3 A4 7F B2 B3 A8 AB AB 51 AD AE B3 7F B1 A4 A0 A3 B8 7F A5 AE B1 7F B3 A7 A4 4F 54 8C 8E 8D 7F 8B 84 80 86 94 84 E8 51 75 7F 98 AE B4 7F AA AD AE B6 7F B6 A7 A0 B3 E6 4F 88 D2 7F A5 A4 A4 AB A8 AD A6 7F AF A0 B1 E3 55 B3 A8 A2 B4 AB A0 B1 AB B8 7F AB A0 B9 B8 E8 51 8D AE B1 AC A0 AB AB B8 7F 88 7F B2 A4 AD A3 4F 93 91 80 88 8D 84 91 92 7F B3 AE 7F B3 A7 A4 55 83 91 80 86 8E 8D E0 92 7F 83 84 8D 75 51 81 B4 B3 7F 88 7F A3 AE AD D5 7F A5 A4 A4 AB 4F AB A8 AA A4 7F AF B4 B3 B3 A8 AD A6 51 AC B8 B2 A4 AB A5 7F B3 A7 B1 AE B4 A6 A7 4F B3 A7 AE B2 A4 7F AC AE B3 A8 AE AD B2 E8 51 93 A7 A8 B2 7F A8 B2 7F B3 A7 A4 4F 91 88 92 88 8D 86 81 80 83 86 84 E8 55 89 B4 B2 B3 7F B3 A0 AA A4 7F A8 B3 E8 57"
+  newClairText2: "00 52 7F B1 A4 A2 A4 A8 B5 A4 A3 4F 91 88 92 88 8D 86 81 80 83 86 84 E8 57"
+  newClairText3: "00 91 88 92 88 8D 86 81 80 83 86 84 7F B6 A8 AB AB 4F A4 AD A0 A1 AB A4 7F B8 AE B4 B1 51 54 8C 8E 8D 7F B3 AE 7F B4 B2 A4 7F B3 A7 A4 4F AC AE B5 A4 7F A5 AE B1 7F A2 AB A8 AC A1 A8 AD A6 55 B6 A0 B3 A4 B1 A5 A0 AB AB B2 E8 51 80 AB B2 AE F4 7F A0 AB AB 7F 54 8C 8E 8D 4F B6 A8 AB AB 7F B1 A4 A2 AE A6 AD A8 B9 A4 7F B8 AE B4 51 A0 B2 7F A0 7F B3 B1 A0 A8 AD A4 B1 7F A0 AD A3 4F AE A1 A4 B8 7F B8 AE B4 B1 7F A4 B5 A4 B1 B8 51 A2 AE AC AC A0 AD A3 7F B6 A8 B3 A7 AE B4 B3 4F B0 B4 A4 B2 B3 A8 AE AD E8 51 80 AD A3 7F A7 A4 B1 A4 F4 7F A7 A0 B5 A4 4F B3 A7 A8 B2 7F A9 B4 AD AA 7F B3 AE AE E8 57"
+changes:
+- description: "Adds code to give Clair's badge and TM."
+  locations:
+  - bank: 101
+  value: "$newClairScript $newClairText1 $newClairText2 $newClairText3"
+- description: "Calls the new code to give Clair's badge and TM."
+  locations:
+  - bank: 101
+    address: 0x4E45
+  value: "03 @$newClairScript 55"
+- description: "Skips the cutsene after passing the dragon shrine test."
+  locations:
+  - bank: 99
+    address: 0x5105
+  value: "14 01 91"
+freeSpaces:
+- bank: 99
+  address: 0x5108
+  size: 157

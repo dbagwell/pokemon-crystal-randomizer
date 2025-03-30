@@ -798,6 +798,18 @@ const createPatches = (
     ]
   }
   
+  // Early Tin Tower
+  
+  if (settings.SKIP_CLAIR_BADGE_TEST) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipClairBadgeTest.yml",
+      ).hunks,
+    ]
+  }
+  
   // Performance Improvements
     
   if (settings.IMPROVE_PERFORMANCE) {
