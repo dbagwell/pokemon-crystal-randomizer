@@ -1037,6 +1037,24 @@ export const defaultAppViewModel = () => {
               + "- the NPC blocking the entrance to the Blackthorn Gym will move out of the way\n"
               + "- the shady shopkeeper in the Mahogany Town Mart will be replaced with the real one",
           }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_TIN_TOWER_REQUIREMENTS" as const,
+            name: "Change Tin Tower Requirements",
+            description: "Changes the requirements to be able to get the Rainbow Wing "
+              + "and reveal the staircase to the 2nd floor of Tin Tower.",
+            options: [
+              createSimpleSelectorOption({
+                id: "SKIP_E4" as const,
+                name: "Change E4 Requirement",
+                description: "Instead of having to defeat Champion Lance, you just need to have the Clear Bell.",
+              }),
+              createSimpleSelectorOption({
+                id: "SKIP_BEASTS" as const,
+                name: "Remove Beasts Requirement",
+                description: "Removes the requirement of needing to have a Suicune, an Entei and a Raikou from your game in your party or PC.",
+              }),
+            ] as const,
+          }),
           createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",
