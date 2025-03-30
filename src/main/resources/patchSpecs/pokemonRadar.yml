@@ -1,0 +1,18 @@
+description: "Adds a sound effect to the Pokédex area page if the Pokémon is located in the grass or water of the player's current area."
+values:
+  intermediate: "CD 1E 5E 3E 0A 21 @$checkAreaCode CF C9"
+  checkAreaCode: "CD 05 62 30 08 01 05 00 09 0E 15 18 09 CD 1D 62 D0 23 23 23 0E 03 23 2A 47 FA 65 D2 B8 28 06 0D 28 18 23 18 F2 11 22 00 CD 23 3C CD 55 3C CD 23 3C CD 55 3C CD 23 3C CD 55 3C C9"
+changes:
+- description: "Adds code to check if the Pokémon is in the area and play the sound effect."
+  locations:
+  - bank: 10
+  value: "$checkAreaCode"
+- description: "Adds code that calls the swizzled call and then does a farcall to the check area code."
+  locations:
+  - bank: 36
+  value: "$intermediate"
+- description: "Swizzles a call to call the intermediate code instead."
+  locations:
+  - bank: 36
+    address: 0x5D6C
+  value: "@$intermediate"

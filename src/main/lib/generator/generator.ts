@@ -521,6 +521,16 @@ const createPatches = (
     
   // Item Behaviours
     
+  if (settings.POKEMON_RADAR) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "pokemonRadar.yml",
+      ).hunks,
+    ]
+  }
+    
   if (settings.BIKE_INDOORS) {
     const bikeAnywherePatch = Patch.fromYAML(
       romInfo,
