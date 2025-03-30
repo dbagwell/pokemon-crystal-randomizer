@@ -765,7 +765,24 @@ const createPatches = (
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...scaleExperiencePatch.hunks]
   }
-    
+  
+  // Skip Rockets
+  
+  if (settings.SKIP_MAHOGANY_ROCKETS || settings.SKIP_GOLDENROD_ROCKETS) {
+    const additionalOptionsPatch = Patch.fromYAML(
+      romInfo,
+      "skipRockets.yml",
+      {
+        options: compact([
+          settings.SKIP_MAHOGANY_ROCKETS ? "skipRocketsOptions/skipMahoganyRockets.yml" : null,
+          settings.SKIP_GOLDENROD_ROCKETS ? "skipRocketsOptions/skipGoldenrodRockets.yml" : null,
+        ]),
+      },
+    )
+      
+    romInfo.patchHunks = [...romInfo.patchHunks, ...additionalOptionsPatch.hunks]
+  }
+  
   // Performance Improvements
     
   if (settings.IMPROVE_PERFORMANCE) {

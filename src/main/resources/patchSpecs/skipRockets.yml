@@ -1,0 +1,23 @@
+description: "Gives items and sets flags after talking to Lance at the Lake of Rage in order to skip certain parts of the game's storyline."
+values:
+  giveItemsAndSetFlags: "#options.$giveItemsAndSetFlags 91"
+changes:
+- description: "Adds code to give items and set flags based on which options have been included."
+  locations:
+  - bank: 28
+  value: "$giveItemsAndSetFlags"
+- description: "Calls the code to give items and set flags."
+  locations:
+  - bank: 28
+    address: 0x4038
+  value: "00 @$giveItemsAndSetFlags 54 49 85 13 00 69 02 55 41 6E 02 91"
+- description: "Changes Lance's text to ask if you want items."
+  locations:
+  - bank: 28
+    address: 0x4207
+  value: "B2 A0 B6 7F B3 A7 A4 7F B6 A0 B8 7F B8 AE B4 4F A1 A0 B3 B3 AB A4 A3 7F A4 A0 B1 AB A8 A4 B1 F4 55 14 E8 51 88 7F A2 A0 AD 7F B3 A4 AB AB 7F B3 A7 A0 B3 4F B8 AE B4 D3 A4 7F A0 7F B3 B1 A0 A8 AD A4 B1 51 B6 A8 B3 A7 7F A2 AE AD B2 A8 A3 A4 B1 A0 A1 AB A4 4F B2 AA A8 AB AB E8 51 88 A5 7F B8 AE B4 7F A3 AE AD D5 7F AC A8 AD A3 F4 4F A2 AE B4 AB A3 7F B8 AE B4 7F B3 A0 AA A4 55 B3 A7 A8 B2 7F A9 B4 AD AA 7F A0 B6 A0 B8 E6 57"
+- description: "Changes Lance's text to give you items."
+  locations:
+  - bank: 28
+    address: 0x42DA
+  value: "7F A5 AE B4 AD A3 7F A0 AB AB 7F B3 A7 A8 B2 4F A0 B1 AE B4 AD A3 7F B3 AE B6 AD F4 55 A1 B4 B3 7F 88 7F A7 A0 B5 A4 7F AD AE 7F B4 B2 A4 55 A5 AE B1 7F A8 B3 7F A0 B3 7F A0 AB AB E8 51 93 A0 AA A4 7F A8 B3 7F AE A5 A5 7F AC B8 4F A7 A0 AD A3 B2 F4 7F AF AB A4 A0 B2 A4 E7 57"

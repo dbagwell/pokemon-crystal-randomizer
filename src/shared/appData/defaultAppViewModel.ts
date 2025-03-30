@@ -1017,6 +1017,27 @@ export const defaultAppViewModel = () => {
             ] as const,
           }), // END CHANGE_OVERWORLD_TRAINER_MOVEMENT
           createSimpleToggleViewModel({
+            id: "SKIP_MAHOGANY_ROCKETS" as const,
+            name: "Skip Mahogany Rockets",
+            description: "After talking to Lance at the Lake of Rage, he will give you HM06 (Whirlpool) "
+              + "and the game will act as if you've chased the Rockets out out of their secret base in Mahogany Town "
+              + "and shut down their radio transmission from there (but the Electrodes will still be there). "
+              + "This causes the following notable changes:\n"
+              + "- the Rocket Base and Route 43 Gatehouse will be fully accessible and will have no trainers or cutscenes\n"
+              + "- the NPC blocking the entrance to the Mahogany Gym will move out of the way\n"
+              + "- the NPC who stops you from going from Mahogany Town to Route 44 will let you go past\n",
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_GOLDENROD_ROCKETS" as const,
+            name: "Skip Goldenrod Rockets",
+            description: "After talking to Lance at the Lake of Rage, he will give you the Basement Key, the Card Key, and the Clear Bell "
+              + "and the game will act as if you've chased the Rockets out of Goldenrod City. "
+              + "This causes the following notable changes:\n"
+              + "- the Goldenrod Radio Tower and underground warehouse will be fully accessible and will have no trainers (other than the Rival) or cutscenes\n"
+              + "- the NPC blocking the entrance to the Blackthorn Gym will move out of the way\n"
+              + "- the shady shopkeeper in the Mahogany Town Mart will be replaced with the real one",
+          }),
+          createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",
