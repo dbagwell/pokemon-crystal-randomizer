@@ -639,9 +639,9 @@ const createPatches = (
               if (hasItems && hasMoves) {
                 trainerType = 3
               } else if (hasMoves) {
-                trainerType = 2
-              } else if (hasItems) {
                 trainerType = 1
+              } else if (hasItems) {
+                trainerType = 2
               }
                 
               return {
