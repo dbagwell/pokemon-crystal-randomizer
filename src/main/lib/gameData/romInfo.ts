@@ -52,7 +52,7 @@ export class ROMInfo {
       new Hunk(ROMOffset.fromBankAddress(0, 0x392D), 24),
       new Hunk(ROMOffset.fromBankAddress(0, 0x0A1B), 27),
       new Hunk(ROMOffset.fromBankAddress(0, 0x3EFD), 35),
-      new Hunk(ROMOffset.fromBankAddress(0, 0x36F5), 40),
+      new Hunk(ROMOffset.fromBankAddress(0, 0x36F5), 35),
       new Hunk(ROMOffset.fromBankAddress(0, 0x19B8), 49),
       new Hunk(ROMOffset.fromBankAddress(0, 0x3D9F), 63),
       new Hunk(ROMOffset.fromBankAddress(0, 0x3F88), 0x004B),
