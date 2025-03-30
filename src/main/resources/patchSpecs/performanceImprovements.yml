@@ -1,4 +1,34 @@
 description: "Adds general performance improvements to the game."
+values:
+  lcd1: "F5 E5 C3 @$lcd4 $lcd2 $lcd3"
+  lcd2: "F0 44 4F 06 D1 0A 47 F0 C6 4F 78 E2"
+  lcd3: "C1 D1 E1 F1 D9"
+  lcd4: "D5 C5 F0 C6 A7 C2 @$lcd2 FA 67 CF A7 C2 @$lcd5 FA 6C CF A7 C2 @$lcd6 F0 D4 A7 28 09 F0 44 FE 80 20 03 CD @$lcd7 C3 @$lcd3"
+  lcd5: "21 6A CF 2A 56 5F 21 68 CF 2A 66 6F F0 41 E6 03 20 28 2A 12 1C 2A 12 1C 2A 12 1C 2A 12 13 7B EA 6A CF 7A EA 6B CF 7D EA 68 CF 7C EA 69 CF 21 D9 CF 35 20 06 36 04 21 67 CF 35 C3 @$lcd3"
+  lcd6: "21 6F CF 2A 56 5F 21 6D CF 2A 66 6F F0 41 E6 03 20 2E 2A 12 1C 12 1C 2A 12 1C 12 FA 41 FF A7 FE 03 28 1D 13 7B EA 6F CF 7A EA 70 CF 7D EA 6D CF 7C EA 6E CF 21 D8 CF 35 20 06 36 04 21 6C CF 35 C3 @$lcd3"
+  lcd7: "F0 70 F5 3E 04 E0 70 F0 D4 CB 47 21 A0 C4 20 03 21 D9 CD 08 D9 FF F9 21 00 D0 01 0D 00 3E 12 D1 73 2C 72 2C D1 73 2C 72 2C D1 73 2C 72 2C D1 73 2C 72 2C D1 73 2C 72 2C D1 73 2C 72 2C D1 73 2C 72 2C D1 73 2C 72 2C D1 73 2C 72 2C D1 73 2C 72 09 3D 20 CB F0 D9 6F F0 DA 67 F9 F1 E0 70 3E 01 E0 EC C9"
+  updateBGMap1: "F0 EC A7 CA 4C 16 AF E0 EC F0 D4 A7 C8 47 FE 03 30 06 F0 D6 A7 C2 4C 16 AF E0 D5 05 28 30 05 28 22 F0 D6 6F F0 D7 67 E5 AF E0 D6 3E 9C E0 D7 05 28 06 05 CC @$updateBGMap2 18 03 CD @$updateBGMap3 E1 7D E0 D6 7C E0 D7 C9 $updateBGMap2 $updateBGMap3"
+  updateBGMap2: "3E 01 E0 4F CD @$updateBGMap3 AF E0 4F C9"
+  updateBGMap3: "F0 70 F5 3E 04 EA 70 FF AF 6F 26 D0 F0 D7 C3 @$updateBGMap4"
+  updateBGMap4: "57 06 12 7C E0 51 7D E0 52 E0 54 7A E0 53 AF E0 55 CB E5 5D 2A 12 1C 2A 12 1C 2A 12 1C 7E 12 05 28 0A 3E 0D 85 6F 30 DB 24 14 18 D7 F1 E0 70 C9"
+  serve2bppRequest1: "06 0F FA 67 CF B8 30 07 47 AF EA 67 CF 18 04 90 EA 67 CF FA D9 CF FE 04 28 03 05 28 03 C3 @$serve2bppRequest3 $serve2bppRequest2"
+  serve2bppRequest2: "47"
+  serve2bppRequest3: "D1 73 2C 72 2C D1 73 2C 72 23 D1 73 2C 72 2C D1 73 2C 72 23 D1 73 2C 72 2C D1 73 2C 72 23 D1 73 2C 72 2C D1 73 2C 72 23 05 20 D5 FA D9 CF FE 04 CA @$serve2bppRequest5 C3 @$serve2bppRequest2"
+  serve2bppRequest4: "23 05 20 F3 3E 04 EA D9 CF $serve2bppRequest5"
+  serve2bppRequest5: "7D"
+  waitBGMap1: "F0 E6 A7 28 21 3E 01 E0 D4 $waitBGMap2 $waitBGMap3 $waitBGMap4"
+  waitBGMap2: "F0 D6 A7 20 1C F0 44 FE 7E D4 5A 04 C3 5A 04"
+  waitBGMap3: "F0 E6 A7 28 09 3E 02 E0 D4 CD @$waitBGMap2 18 DF"
+  waitBGMap4: "3E 01 E0 D4 0E 04 CD 68 04 C9"
+  pushLYOverrides1: "CD @$pushLYOverrides2"
+  pushLYOverrides2: "EA 6B CF 3E 04 EA D9 CF C9"
+  disableLCDForCopyright: "CD 68 05 CD C8 0F C9"
+  enableLCDAfterCopyright: "CD 78 10 C3 8A 05"
+  introAnimationFix: "EA D9 CF EA 67 CF 76 00 FA 67 CF A7 20 F8 C9"
+  magnetTrain1: "@$magnetTrain2"
+  magnetTrain2: "CD BA 0E F0 C6 F5 AF E0 C6 76 00 FA 67 CF A7 20 F8 F1 E0 C6 C9"
+  credits1: "@$credits2"
+  credits2: "3E 04 EA D9 CF 76 00 FA 67 CF A7 20 F8 C3 51 59"
 changes:
 - description: "Removes lag when getting on the bike using the register funtion."
   locations:
@@ -10,3 +40,199 @@ changes:
   - bank: 3
     address: 0x516F
   value: "64"
+- description: "Makes the game use the GameBoy Color's fatster clock speed."
+  locations:
+  - bank: 0
+    address: 0x0229
+  value: "EF 2F"
+- description: "Removes calls to graphics code that is removed with these performance changes."
+  locations:
+  - bank: 0
+    address: 0x02EE
+  - bank: 0
+    address: 0x0446
+  value: "00 00 00"
+- description: "Performance changes to the LCD code."
+  locations:
+  - bank: 0
+    address: 0x0552
+  value: "$lcd1"
+- description: "Performance changes to the GFX code."
+  locations:
+  - bank: 0
+    address: 0x0EC5
+    maxSize: 89
+    freeUnused: true
+  value: "7B EA 68 CF 7A EA 69 CF 7D EA 6A CF 7C EA 6B CF 3E 04 EA D9 CF 79 EA 67 CF 76 00 FA 67 CF A7 20 F8 F1 D7 F1 E0 D4 C9"
+- description: "Performance changes to the GFX code."
+  locations:
+  - bank: 0
+    address: 0x0F29
+    maxSize: 89
+    freeUnused: true
+  value: "7B EA 6D CF 7A EA 6E CF 7D EA 6F CF 7C EA 70 CF 3E 04 EA D8 CF 79 EA 6C CF 76 00 FA 6C CF A7 20 F8 F1 D7 F1 E0 D4 C9"
+- description: "Adds code for improved performance when updating the background map."
+  locations:
+  - bank: 0
+    address: 0x170A
+  value: "$updateBGMap1"
+- description: "Changes calls to update the background map to use the new more performant code."
+  locations:
+  - bank: 0
+    address: 0x02E9
+  - bank: 0
+    address: 0x0349
+  - bank: 0
+    address: 0x03AB
+  - bank: 0
+    address: 0x03E4
+  - bank: 0
+    address: 0x040E
+  value: "@$updateBGMap1"
+- description: "Performance changes to the video code."
+  locations:
+  - bank: 0
+    address: 0x178D
+  value: "$serve2bppRequest1"
+- description: "Performance changes to the video code."
+  locations:
+  - bank: 0
+    address: 0x17B7
+  value: "$serve2bppRequest4"
+- description: "Calls the new code for updating the background map."
+  locations:
+  - bank: 0
+    address: 0x31F6
+    maxSize: 10
+    freeUnused: true
+  value: "C3 @$waitBGMap1"
+- description: "Calls the new code for updating the background map."
+  locations:
+  - bank: 0
+    address: 0x3200
+    maxSize: 24
+    freeUnused: true
+  value: "C3 @$waitBGMap3"
+- description: "Performance changes to updating the tile map."
+  locations:
+  - bank: 0
+    address: 0x321F
+  value: "CA @$waitBGMap4 FA CE C2 A7"
+- description: "Performance changes to updating the tile map."
+  locations:
+  - bank: 0
+    address: 0x3227
+  value: "CE"
+- description: "Performance changes to updating the tile map."
+  locations:
+  - bank: 0
+    address: 0x322D
+    maxSize: 11
+    freeUnused: true
+  value: "10"
+- description: "Performance changes to updating the tile map."
+  locations:
+  - bank: 0
+    address: 0x323B
+    maxSize: 190
+    freeUnused: true
+  value: "CA @$waitBGMap4 F0 D4 F5 AF E0 D4 F0 DE F5 AF E0 DE F0 44 FE 7E D4 5A 04 3E 01 E0 D4 CD 5A 04 3E 02 E0 D4 CD 5A 04 F1 E0 DE F1 E0 D4 C9"
+- description: "Performance changes to updating the tile map."
+  locations:
+  - bank: 2
+    address: 0x4C1A
+  value: "3E"
+- description: "Performance changes related to the graphics engine."
+  locations:
+  - bank: 0
+    address: 0x3B21
+  value: "$pushLYOverrides1"
+- description: "Calls code to disable the LCD for the copyright notice."
+  locations:
+  - bank: 1
+    address: 0x63E3
+  value: "@$disableLCDForCopyright"
+- description: "Uses a more performant method for rendering the copyright notice."
+  locations:
+  - bank: 1
+    address: 0x63F2
+  value: "82 0F"
+- description: "Calls code to enable the LCD after the copyright notice."
+  locations:
+  - bank: 1
+    address: 0x63FB
+  value: "@$enableLCDAfterCopyright"
+- description: "Removes delay before loading up the copyright notice."
+  locations:
+  - bank: 57
+    address: 0x45A1
+  value: "00 00 00 00 00"
+- description: "Calls code to fix a graphical issue with the intro animation caused by the performance improvments to the graphical engine."
+  locations:
+  - bank: 57
+    address: 0x5492
+  value: "CD @$introAnimationFix"
+- description: "Performance changes to the magnet train animation."
+  locations:
+  - bank: 35
+    address: 0x4D02
+  - bank: 35
+    address: 0x4D10
+  value: "$magnetTrain1"
+- description: "Performance changes to the credits."
+  locations:
+  - bank: 66
+    address: 0x5983
+  value: "$credits1"
+- description: "Performance changes to the LCD code."
+  locations:
+  - bank: 0
+  value: "$lcd7"
+- description: "Performance changes to the video code."
+  locations:
+  - bank: 0
+  value: "$serve2bppRequest3"
+- description: "Performance changes to the LCD code."
+  locations:
+  - bank: 0
+  value: "$lcd4"
+- description: "Performance changes to the LCD code."
+  locations:
+  - bank: 0
+  value: "$lcd5"
+- description: "Performance changes to the LCD code."
+  locations:
+  - bank: 0
+  value: "$lcd6"
+- description: "Adds code for improved performance when updating the background map."
+  locations:
+  - bank: 0
+  value: "$updateBGMap4"
+- description: "Adds code for improved performance when updating the background map."
+  locations:
+  - bank: 0
+  value: "$waitBGMap1"
+- description: "Performance changes related to the graphics engine."
+  locations:
+  - bank: 0
+  value: "$pushLYOverrides2"
+- description: "Adds code to disable the LCD for the copyright notice."
+  locations:
+  - bank: 1
+  value: "$disableLCDForCopyright"
+- description: "Adds code to enabled the LCD after the copyright notice."
+  locations:
+  - bank: 1
+  value: "$enableLCDAfterCopyright"
+- description: "Adds code to fix a graphical issue with the intro animation caused by the performance improvments to the graphical engine."
+  locations:
+  - bank: 57
+  value: "$introAnimationFix"
+- description: "Performance changes to the magnet train animation."
+  locations:
+  - bank: 35
+  value: "$magnetTrain2"
+- description: "Performance changes to the credits."
+  locations:
+  - bank: 66
+  value: "$credits2"
