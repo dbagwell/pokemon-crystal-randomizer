@@ -548,6 +548,16 @@ const createPatches = (
     romInfo.patchHunks = [...romInfo.patchHunks, ...preventFailedPokeBallWobblesPatch.hunks]
   }
     
+  if (settings.REMOVE_POKE_BALL_BOUNCE_ANIMATION) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "removePokeballBounceAnimation.yml",
+      ).hunks,
+    ]
+  }
+    
   if (settings.RODS_ALWAYS_WORK) {
     const rodsAlwaysWorkPatch = Patch.fromYAML(
       romInfo,

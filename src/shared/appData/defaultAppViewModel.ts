@@ -897,6 +897,11 @@ export const defaultAppViewModel = () => {
             name: "Prevent Failed Poké Ball Wobbles",
             description: "If a Poké Ball fails to catch a Pokémon, don't show any shake animations.",
           }),
+          createSimpleToggleViewModel({
+            id: "REMOVE_POKE_BALL_BOUNCE_ANIMATION" as const,
+            name: "Remove Poké Ball Bounce Animation",
+            description: "Removes the bounce animation after throwing a Poké Ball.",
+          }),
         ] as const,
       }), // END ITEM_PROPERTIES
       createTabViewModel({
