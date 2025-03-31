@@ -316,6 +316,15 @@ const createPatches = (
       bytesFromContestEncounters(groupedEncounters.contestEncounters),
     ),
   ]
+  
+  if (settings.PREVENT_WILD_POKEMON_FLEEING) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      new DataHunk(ROMOffset.fromBankAddress(15, 0x459A), [0xFF]),
+      new DataHunk(ROMOffset.fromBankAddress(15, 0x45A8), [0xFF]),
+      new DataHunk(ROMOffset.fromBankAddress(15, 0x45B1), [0xFF]),
+    ]
+  }
     
   // Trades
     

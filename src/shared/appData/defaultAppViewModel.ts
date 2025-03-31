@@ -390,6 +390,11 @@ export const defaultAppViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_POKEMON_ENCOUNTER_RATIOS
+          createSimpleToggleViewModel({
+            id: "PREVENT_WILD_POKEMON_FLEEING" as const,
+            name: "Prevent Wild Pokémon from Fleeing",
+            description: "Makes it so that all Pokémon cannot flee from wild battles without the use of a fleeing move.",
+          }),
           createConfigurableToggleViewModel({
             id: "INCREASE_POKEMON_CATCH_RATES" as const,
             name: "Increase Pokémon Catch Rates",
