@@ -76,21 +76,21 @@ changes:
   - bank: 27
     address: 0x5102
   - bank: 27
-    address: 0x5104
+    address: 0x5105
   value: "$electrode1PokemonId"
 - description: "Changes the Pokémon for the second Electrode encounter."
   locations:
   - bank: 27
     address: 0x512D
   - bank: 27
-    address: 0x512F
+    address: 0x5130
   value: "$electrode2PokemonId"
 - description: "Changes the Pokémon for the third Electrode encounter."
   locations:
   - bank: 27
     address: 0x5158
   - bank: 27
-    address: 0x515A
+    address: 0x515B
   value: "$electrode3PokemonId"
 - description: "Changes the Pokémon for the Lapras encounter."
   locations:
