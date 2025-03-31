@@ -207,6 +207,8 @@ export class ROMInfo {
         return 0xE7
       } else if (character === ".") {
         return 0xE8
+      } else if (character === "&") {
+        return 0xE9
       } else if (character === "×") {
         return 0xF1
       } else if (character === "/") {
