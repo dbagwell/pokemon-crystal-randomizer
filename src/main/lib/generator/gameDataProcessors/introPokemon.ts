@@ -13,5 +13,16 @@ export const updateIntroPokemon = (
     return !settings.BANNED_POKEMON.includes(pokemonId)
   })
   
-  romInfo.gameData.introPokemonId = availablePokemonIds[randomInt(0, availablePokemonIds.length - 1)]
+  const pokemonId = availablePokemonIds[randomInt(0, availablePokemonIds.length - 1)]
+  
+  if (pokemonId === "UNOWN") {
+    romInfo.gameData.introPokemonInfo = {
+      pokemonId: "UNOWN",
+      unownId: randomInt(1, 26),
+    }
+  } else {
+    romInfo.gameData.introPokemonInfo = {
+      pokemonId: pokemonId,
+    }
+  }
 }

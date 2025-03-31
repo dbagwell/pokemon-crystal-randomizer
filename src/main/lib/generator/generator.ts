@@ -112,8 +112,8 @@ const createPatches = (
 ) => {
   // Intro Pokemon
   
-  if (isNotNullish(romInfo.gameData.introPokemonId)) {
-    const numericId = pokemonMap[romInfo.gameData.introPokemonId].numericId
+  if (isNotNullish(romInfo.gameData.introPokemonInfo)) {
+    const numericId = pokemonMap[romInfo.gameData.introPokemonInfo.pokemonId].numericId
     
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
@@ -126,6 +126,20 @@ const createPatches = (
         [numericId],
       ),
     ]
+    
+    if (romInfo.gameData.introPokemonInfo.pokemonId === "UNOWN") {
+      romInfo.patchHunks = [
+        ...romInfo.patchHunks,
+        ...Patch.fromYAML(
+          romInfo,
+          "unownInIntro.yml",
+          {},
+          {
+            unownLetter: hexStringFrom([romInfo.gameData.introPokemonInfo.unownId]),
+          },
+        ).hunks,
+      ]
+    }
   }
   
   // Starter Pokemon
@@ -229,8 +243,18 @@ const createPatches = (
       celadonGameCornerPokemonMenuText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("PIKACHU").padEnd(10, " ")} 2222@${nameStringFromEventPokemonId("PORYGON").padEnd(10, " ")} 5555@${nameStringFromEventPokemonId("LARVITAR").padEnd(10, " ")} 8888@`)),
     },
   )
-    
+  
   romInfo.patchHunks = [...romInfo.patchHunks, ...eventPokemonPatch.hunks]
+  
+  if (settings.RANDOMIZE_EVENT_POKEMON || settings.RANDOMIZE_RANDOM_ENCOUNTERS) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "unownsInWildBattles.yml",
+      ).hunks,
+    ]
+  }
     
   // Eggs
     

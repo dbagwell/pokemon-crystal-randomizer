@@ -17,7 +17,12 @@ import type { TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
 import type { TradeId } from "@shared/types/gameDataIds/trades"
 
 export type GameData = {
-  introPokemonId?: PokemonId
+  introPokemonInfo?: {
+    pokemonId: Exclude<PokemonId, "UNOWN">
+  } | {
+    pokemonId: "UNOWN"
+    unownId: number
+  }
   pokemon: IdMap<PokemonId, Pokemon>
   starters: Partial<Record<StarterLocationId, PokemonId>>
   starterItems: Partial<Record<StarterLocationId, HoldableItemId>>
