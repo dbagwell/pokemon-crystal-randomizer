@@ -643,6 +643,17 @@ export const defaultAppViewModel = () => {
               }),
             ] as const,
           }), // END RANDOMIZE_HM_COMPATIBILITY
+          createSimpleMultiSelectorViewModel({
+            id: "BANNED_MOVES" as const,
+            name: "Globally Banned Moves",
+            description: "A list of moves to always exclude when choosing random moves.",
+            options: moveIds.map((moveId) => {
+              return createSimpleSelectorOption({
+                id: moveId,
+                name: movesMap[moveId].name,
+              })
+            }),
+          }), // END BANNED_MOVES
         ] as const,
       }), // END MOVES
       createTabViewModel({

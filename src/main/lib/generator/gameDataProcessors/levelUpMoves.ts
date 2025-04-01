@@ -14,7 +14,7 @@ export const updateLevelUpMoves = (
   const levelUpMovesSettings = settings.RANDOMIZE_LEVEL_UP_MOVES.SETTINGS
     
   const nonBannedMoveIds = moveIds.filter((moveId) => {
-    return !levelUpMovesSettings.BAN.includes(moveId)
+    return !settings.BANNED_MOVES.includes(moveId) && !levelUpMovesSettings.BAN.includes(moveId)
   })
     
   Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {

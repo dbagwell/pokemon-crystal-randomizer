@@ -18,7 +18,7 @@ export const updateTeachableMoves = (
     })
       
     let nonBannedMoves = Object.values(movesMap).filter((move) => {
-      return !tmsSettings.BAN.includes(move.id)
+      return !settings.BANNED_MOVES.includes(move.id) && !tmsSettings.BAN.includes(move.id)
     })
       
     const indicesOfForcedGoodMoves: number[] = []
@@ -88,7 +88,7 @@ export const updateTeachableMoves = (
     })
       
     let nonBannedMoves = Object.values(movesMap).filter((move) => {
-      return !moveTutorSettings.BAN.includes(move.id)
+      return !settings.BANNED_MOVES.includes(move.id) && !moveTutorSettings.BAN.includes(move.id)
     })
       
     const indicesOfForcedGoodMoves: number[] = []
