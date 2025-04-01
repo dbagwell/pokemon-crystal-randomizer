@@ -443,6 +443,12 @@ export const defaultAppViewModel = () => {
             ] as const,
           }), // END STANDARDIZE_POKEMON_GROWTH_RATES
           createSimpleToggleViewModel({
+            id: "USE_UPDATED_BASE_EXP" as const,
+            name: "Use Updated Base Experience",
+            description: "Changes the base experience that Pokémon give out when they are defeated "
+              + "to the new amounts that have been used in official Pokémon games since Pokémon Black Version and Pokémon White Version.",
+          }),
+          createSimpleToggleViewModel({
             id: "FAST_BREEDING" as const,
             name: "Fast Breeding",
             description: "Makes eggs guaranteed to appear after only one breeding cycle between two compatible Pokémon.",

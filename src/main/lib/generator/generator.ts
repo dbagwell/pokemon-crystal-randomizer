@@ -413,7 +413,7 @@ const createPatches = (
           path: "pokemonInfo.yml",
           extraIncludes: {},
           extraValues: {
-            data: hexStringFrom(bytesForInfoFromPokemon(pokemon)),
+            data: hexStringFrom(bytesForInfoFromPokemon(pokemon, settings.USE_UPDATED_BASE_EXP)),
           },
         }
       }),
@@ -421,6 +421,13 @@ const createPatches = (
   )
       
   romInfo.patchHunks = [...romInfo.patchHunks, ...pokemonInfoPatch.hunks]
+  
+  if (settings.USE_UPDATED_BASE_EXP) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(romInfo, "updatedBaseExp.yml").hunks,
+    ]
+  }
     
   // Teachable Moves
     
