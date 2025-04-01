@@ -21,3 +21,115 @@ changes:
   - bank: 102
     address: 0x496C
   value: "@$moveTutorMenuStrings"
+- description: "Changes Falkner's dialog after giving you TM31."
+  locations:
+  - bank: 26
+    address: 0x46BF
+  value: "$tm31Text"
+- description: "Changes Bugsy's dialog after giving you TM49."
+  locations:
+  - bank: 99
+    address: 0x6F08
+  value: "$tm49Text"
+- description: "Changes Whitney's dialog after giving you TM45."
+  locations:
+  - bank: 21
+    address: 0x4302
+  value: "$tm45Text"
+- description: "Changes Morty's dialog after giving you TM30."
+  locations:
+  - bank: 38
+    address: 0x60EC
+  value: "$tm30Text"
+- description: "Changes Chuck's dialog after giving you TM01."
+  locations:
+  - bank: 39
+    address: 0x58DA
+  value: "$tm01Text"
+- description: "Changes Jasmine's dialog after giving you TM23."
+  locations:
+  - bank: 39
+    address: 0x43A5
+  value: "$tm23Text"
+- description: "Changes Pryce's dialog after giving you TM16."
+  locations:
+  - bank: 102
+    address: 0x5DEF
+  value: "$tm16Text"
+- description: "Changes Clair's dialog after giving you TM24."
+  locations:
+  - bank: 99
+    address: 0x4A0D
+  - bank: 101
+    address: 0x51D1
+  value: "$tm24Text"
+- description: "Changes Erika's dialog after giving you TM19."
+  locations:
+  - bank: 28
+    address: 0x6D09
+  value: "$tm19Text"
+- description: "Changes Janine's dialog after giving you TM06."
+  locations:
+  - bank: 101
+    address: 0x6031
+  value: "$tm06Text"
+- description: "Changes dialog after getting TM03."
+  locations:
+  - bank: 28
+    address: 0x5DB3
+  value: "$tm03Text"
+- description: "Changes dialog after getting TM05."
+  locations:
+  - bank: 100
+    address: 0x5195
+  value: "$tm05Text"
+- description: "Changes dialog after getting TM07."
+  locations:
+  - bank: 98
+    address: 0x5405
+  value: "$tm07Text"
+- description: "Changes dialog after getting TM08."
+  locations:
+  - bank: 101
+    address: 0x452C
+  value: "$tm08Text"
+- description: "Changes dialog after getting TM10."
+  locations:
+  - bank: 102
+    address: 0x65F0
+  value: "$tm10Text"
+- description: "Changes dialog after getting TM11."
+  locations:
+  - bank: 23
+    address: 0x6821
+  value: "$tm11Text"
+- description: "Changes dialog after getting TM12."
+  locations:
+  - bank: 24
+    address: 0x6DF6
+  value: "$tm12Text"
+- description: "Changes dialog after getting TM13."
+  locations:
+  - bank: 39
+    address: 0x51C7
+  value: "$tm13Text"
+- description: "Changes dialog after getting TM29."
+  locations:
+  - bank: 98
+    address: 0x67BB
+  value: "$tm29Text"
+- description: "Changes dialog after getting TM37."
+  locations:
+  - bank: 30
+    address: 0x74A2
+  value: "$tm37Text"
+- description: "Changes dialog after getting TM42."
+  locations:
+  - bank: 106
+    address: 0x5D94
+  value: "$tm42Text"
+- description: "Changes dialog after getting TM50."
+  locations:
+  - bank: 105
+    address: 0x5896
+  value: "$tm50Text"
