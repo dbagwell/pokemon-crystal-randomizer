@@ -58,9 +58,13 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   
   createPatches(settings, romInfo)
   
+  // Create player specific patches so that the settings can still be used to affect the CV
+  // but use static values so that the effect on the CV is the same for all players
+  const staticPlayerSpecificHunks = createPlayerSpecificPatches(settings, romInfo, true)
+  
   // Base Patch
   
-  const checkValue = romInfo.patchHunks.length > 0 ? hash(romInfo.patchHunks).slice(0, 8).toUpperCase() : "00000000"
+  const checkValue = romInfo.patchHunks.length > 0 ? hash([...romInfo.patchHunks, ...staticPlayerSpecificHunks]).slice(0, 8).toUpperCase() : "00000000"
   
   const basePatch = Patch.fromYAML(
     romInfo,
@@ -71,8 +75,11 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
       checkValue: hexStringFrom(ROMInfo.bytesFromText(checkValue)),
     },
   )
-      
+  
   romInfo.patchHunks = [...romInfo.patchHunks, ...basePatch.hunks]
+  
+  // Now create the actual player specific patches
+  romInfo.patchHunks = [...romInfo.patchHunks, ...createPlayerSpecificPatches(settings, romInfo, false)]
   
   romInfo.patchHunks.forEach((hunk) => {
     data.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
@@ -780,39 +787,7 @@ const createPatches = (
   )
   
   romInfo.patchHunks = [...romInfo.patchHunks, ...trainerMovementSpeedPatch.hunks]
-    
-  // Skip Gender
-    
-  if (settings.SKIP_GENDER.VALUE) {
-    const genderId = playerSpriteMap[settings.SKIP_GENDER.SETTINGS.GENDER].numericId
-    const skipGenderPatch = Patch.fromYAML(
-      romInfo,
-      "skipGender.yml",
-      {},
-      {
-        genderId: hexStringFrom(bytesFrom(genderId, 1)),
-      }
-    )
-    
-    romInfo.patchHunks = [...romInfo.patchHunks, ...skipGenderPatch.hunks]
-  }
-    
-  // Skip Name
-    
-  if (settings.SKIP_NAME.VALUE) {
-    const nameBytes = ROMInfo.bytesFromText(settings.SKIP_NAME.SETTINGS.PLAYER_NAME)
-    const skipNamePatch = Patch.fromYAML(
-      romInfo,
-      "skipName.yml",
-      {},
-      {
-        name: hexStringFrom(nameBytes),
-      }
-    )
-    
-    romInfo.patchHunks = [...romInfo.patchHunks, ...skipNamePatch.hunks]
-  }
-    
+  
   // Change Box Phone Call
     
   if (settings.CHANGE_BOX_PHONE_CALL) {
@@ -916,4 +891,42 @@ const createPatches = (
       
     romInfo.patchHunks = [...romInfo.patchHunks, ...additionalOptionsPatch.hunks]
   }
+}
+
+const createPlayerSpecificPatches = (settings: SettingsFromAppViewModel, romInfo: ROMInfo, useDefaults: boolean): DataHunk[] => {
+  let hunks: DataHunk[] = []
+  
+  // Skip Gender
+    
+  if (settings.SKIP_GENDER.VALUE) {
+    const genderId = playerSpriteMap[useDefaults ? "GIRL" : settings.SKIP_GENDER.SETTINGS.GENDER].numericId
+    const skipGenderPatch = Patch.fromYAML(
+      romInfo,
+      "skipGender.yml",
+      {},
+      {
+        genderId: hexStringFrom(bytesFrom(genderId, 1)),
+      }
+    )
+    
+    hunks = [...hunks, ...skipGenderPatch.hunks]
+  }
+    
+  // Skip Name
+    
+  if (settings.SKIP_NAME.VALUE) {
+    const nameBytes = ROMInfo.bytesFromText(useDefaults ? "KRIS" : settings.SKIP_NAME.SETTINGS.PLAYER_NAME)
+    const skipNamePatch = Patch.fromYAML(
+      romInfo,
+      "skipName.yml",
+      {},
+      {
+        name: hexStringFrom(nameBytes),
+      }
+    )
+    
+    hunks = [...hunks, ...skipNamePatch.hunks]
+  }
+  
+  return hunks
 }
