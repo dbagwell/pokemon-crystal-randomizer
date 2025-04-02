@@ -1,0 +1,24 @@
+description: "Gives Basement Key, Card Key and Clear Bell and skips the Goldenrod Rockets."
+values:
+  giveItemsAndSetFlags: "9E 85 01 9E 7F 01 9E 46 01 33 4A 00 33 78 00 33 CE 06 33 D1 06 33 25 00 33 71 05 33 73 05 33 21 00 33 61 07 33 04 03 33 CC 06 33 CD 06 33 E3 06 32 05 03 32 06 03 32 E4 06 32 D0 06 32 36 07 35 13 00 12 03 15 02 12 04 01 00"
+  rocketTakeoverScript1: "31 21 00 09 @$rocketTakeoverScript2 36 13 00 33 CF 06 33 D1 06 32 CE 06 32 25 00 33 56 07 9C 04 00 12 02 07 01"
+  rocketTakeoverScript2: "91"
+changes:
+- description: "Skip code that adds more rockets to Goldenrod City."
+  locations:
+  - bank: 47
+    address: 0x423E
+  value: "91"
+- description: "New script that to the script that causes the rockets to take over the Goldenrod radio tower."
+  locations:
+  - bank: 47
+  value: "$rocketTakeoverScript1 $rocketTakeoverScript2"
+- description: "Calls the new script that causes the rockets to take over."
+  locations:
+  - bank: 47
+    address: 0x4242
+  value: "03 @$rocketTakeoverScript1"
+freeSpaces:
+- bank: 47
+  address: 0x4245
+  size: 23

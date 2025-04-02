@@ -1017,6 +1017,51 @@ export const defaultAppViewModel = () => {
             ] as const,
           }), // END CHANGE_OVERWORLD_TRAINER_MOVEMENT
           createSimpleToggleViewModel({
+            id: "SKIP_MAHOGANY_ROCKETS" as const,
+            name: "Skip Mahogany Rockets",
+            description: "After talking to Lance at the Lake of Rage, he will give you HM06 (Whirlpool) "
+              + "and the game will act as if you've chased the Rockets out out of their secret base in Mahogany Town "
+              + "and shut down their radio transmission from there (but the Electrodes will still be there). "
+              + "This causes the following notable changes:\n"
+              + "- the Rocket Base and Route 43 Gatehouse will be fully accessible and will have no trainers or cutscenes\n"
+              + "- the NPC blocking the entrance to the Mahogany Gym will move out of the way\n"
+              + "- the NPC who stops you from going from Mahogany Town to Route 44 will let you go past\n",
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_GOLDENROD_ROCKETS" as const,
+            name: "Skip Goldenrod Rockets",
+            description: "After talking to Lance at the Lake of Rage, he will give you the Basement Key, the Card Key, and the Clear Bell "
+              + "and the game will act as if you've chased the Rockets out of Goldenrod City. "
+              + "This causes the following notable changes:\n"
+              + "- the Goldenrod Radio Tower and underground warehouse will be fully accessible and will have no trainers (other than the Rival) or cutscenes\n"
+              + "- the NPC blocking the entrance to the Blackthorn Gym will move out of the way\n"
+              + "- the shady shopkeeper in the Mahogany Town Mart will be replaced with the real one",
+          }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_TIN_TOWER_REQUIREMENTS" as const,
+            name: "Change Tin Tower Requirements",
+            description: "Changes the requirements to be able to get the Rainbow Wing "
+              + "and reveal the staircase to the 2nd floor of Tin Tower.",
+            options: [
+              createSimpleSelectorOption({
+                id: "SKIP_E4" as const,
+                name: "Change E4 Requirement",
+                description: "Instead of having to defeat Champion Lance, you just need to have the Clear Bell.",
+              }),
+              createSimpleSelectorOption({
+                id: "SKIP_BEASTS" as const,
+                name: "Remove Beasts Requirement",
+                description: "Removes the requirement of needing to have a Suicune, an Entei and a Raikou from your game in your party or PC.",
+              }),
+            ] as const,
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_CLAIR_BADGE_TEST" as const,
+            name: "Skip Clair's Badge Test",
+            description: "Makes it so Clair gives you her Badge and TM immediately after defeating her "
+              + "instead of after passing the test in the Dragon Shrine.",
+          }),
+          createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",

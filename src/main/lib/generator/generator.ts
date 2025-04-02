@@ -765,7 +765,51 @@ const createPatches = (
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...scaleExperiencePatch.hunks]
   }
-    
+  
+  // Skip Rockets
+  
+  if (settings.SKIP_MAHOGANY_ROCKETS || settings.SKIP_GOLDENROD_ROCKETS) {
+    const additionalOptionsPatch = Patch.fromYAML(
+      romInfo,
+      "skipRockets.yml",
+      {
+        options: compact([
+          settings.SKIP_MAHOGANY_ROCKETS ? "skipRocketsOptions/skipMahoganyRockets.yml" : null,
+          settings.SKIP_GOLDENROD_ROCKETS ? "skipRocketsOptions/skipGoldenrodRockets.yml" : null,
+        ]),
+      },
+    )
+      
+    romInfo.patchHunks = [...romInfo.patchHunks, ...additionalOptionsPatch.hunks]
+  }
+  
+  // Early Tin Tower
+  
+  if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.length > 0) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("SKIP_E4") ? [
+        new DataHunk(ROMOffset.fromBankAddress(97, 0x5035), [0x18, 0x21, 0x46]),
+      ] : [],
+      ...settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("SKIP_BEASTS") ? [
+        new DataHunk(ROMOffset.fromBankAddress(97, 0x503B), [0x32, 0xC5, 0x07, 0x33, 0xB6, 0x07, 0x0F, 0x96, 0x00, 0x08, 0x50, 0x50]),
+        new DataHunk(ROMOffset.fromBankAddress(97, 0x507D), [0x90]),
+      ] : [],
+    ]
+  }
+  
+  // Early Tin Tower
+  
+  if (settings.SKIP_CLAIR_BADGE_TEST) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipClairBadgeTest.yml",
+      ).hunks,
+    ]
+  }
+  
   // Performance Improvements
     
   if (settings.IMPROVE_PERFORMANCE) {
