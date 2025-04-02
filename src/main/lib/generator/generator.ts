@@ -19,6 +19,7 @@ import { updateTeachableMoves } from "@lib/generator/gameDataProcessors/teachabl
 import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { DataHunk, Patch } from "@lib/generator/patch"
+import { Random } from "@lib/generator/random"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
@@ -37,7 +38,6 @@ import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish } from "@uti
 import crypto from "crypto"
 import { app } from "electron"
 import hash from "object-hash"
-import seedrandom from "seedrandom"
 
 export const generateROM = (data: Buffer, customSeed: string | undefined, settings: SettingsFromAppViewModel): {
   seed: string,
@@ -45,14 +45,11 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
 } => {
   const romInfo = ROMInfo.vanilla()
   const seed = customSeed ?? crypto.randomUUID()
-  const rng = seedrandom(seed)
-  const randomInt = (min: number, max: number): number => {
-    return Math.floor(rng() * (max + 1 - min)) + min
-  }
+  const random = new Random(seed)
   
   // Update game data based on settings
   
-  updateGameData(settings, romInfo, randomInt)
+  updateGameData(settings, romInfo, random)
   
   // Create patch hunks based on settings and updated game data
   
@@ -94,24 +91,24 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
 const updateGameData = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
-  randomInt: (min: number, max: number) => number,
+  random: Random,
 ) => {
-  updateIntroPokemon(settings, romInfo, randomInt)
-  updateStarters(settings, romInfo, randomInt)
-  updateStarterItems(settings, romInfo, randomInt)
-  updateEventPokemon(settings, romInfo, randomInt)
-  updateRandomEncounters(settings, romInfo, randomInt)
+  updateIntroPokemon(settings, romInfo, random)
+  updateStarters(settings, romInfo, random)
+  updateStarterItems(settings, romInfo, random)
+  updateEventPokemon(settings, romInfo, random)
+  updateRandomEncounters(settings, romInfo, random)
   updateEncounterRates(settings, romInfo)
-  updateTrades(settings, romInfo, randomInt)
+  updateTrades(settings, romInfo, random)
   updateEvolutionMethods(settings, romInfo)
-  updateLevelUpMoves(settings, romInfo, randomInt)
-  updateTeachableMoves(settings, romInfo, randomInt)
-  updatePokemonInfo(settings, romInfo, randomInt)
+  updateLevelUpMoves(settings, romInfo, random)
+  updateTeachableMoves(settings, romInfo, random)
+  updatePokemonInfo(settings, romInfo, random)
   updateMarts(settings, romInfo)
-  updateTrainers(settings, romInfo, randomInt)
+  updateTrainers(settings, romInfo, random)
   updateMapObjectEvents(settings, romInfo)
-  updateItems(settings, romInfo, randomInt)
-  shuffleItems(settings, romInfo, randomInt)
+  updateItems(settings, romInfo, random)
+  shuffleItems(settings, romInfo, random)
 }
 
 const createPatches = (

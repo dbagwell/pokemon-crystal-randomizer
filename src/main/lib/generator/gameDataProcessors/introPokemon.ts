@@ -1,11 +1,12 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
+import type { Random } from "@lib/generator/random"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
 
 export const updateIntroPokemon = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
-  randomInt: (min: number, max: number) => number,
+  random: Random,
 ) => {
   if (!settings.RANDOMIZE_INTRO_POKEMON) { return }
   
@@ -13,12 +14,21 @@ export const updateIntroPokemon = (
     return !settings.BANNED_POKEMON.includes(pokemonId)
   })
   
-  const pokemonId = availablePokemonIds[randomInt(0, availablePokemonIds.length - 1)]
+  const pokemonId = random.element({
+    array: availablePokemonIds,
+    errorInfo: {
+      elementName: "Pokémon",
+      mainSettingName: "RANDOMIZE_INTRO_POKEMON",
+      conflictingSettings: [
+        "BANNED_POKEMON",
+      ],
+    },
+  })
   
   if (pokemonId === "UNOWN") {
     romInfo.gameData.introPokemonInfo = {
       pokemonId: "UNOWN",
-      unownId: randomInt(1, 26),
+      unownId: random.int(1, 26),
     }
   } else {
     romInfo.gameData.introPokemonInfo = {

@@ -1,4 +1,5 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
+import type { Random } from "@lib/generator/random"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
 import { gameMapsMap } from "@shared/gameData/gameMaps"
 import { pokemonMap } from "@shared/gameData/pokemon"
@@ -9,7 +10,7 @@ import { isNotNullish, isNullish } from "@shared/utils"
 export const updateRandomEncounters = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
-  randomInt: (min: number, max: number) => number
+  random: Random,
 ) => {
   if (!settings.RANDOMIZE_RANDOM_ENCOUNTERS.VALUE) { return }
   
@@ -88,9 +89,7 @@ export const updateRandomEncounters = (
       let possibleRemainingChoices = carryOverSet
         
       while (choices.length < totalNumber) {
-        const index = totalNumber - choices.length < possibleRemainingChoices.length ? randomInt(0, possibleRemainingChoices.length - 1) : 0
-        choices.push(possibleRemainingChoices[index])
-        possibleRemainingChoices.splice(index, 1)
+        choices.push(totalNumber - choices.length < possibleRemainingChoices.length ? random.element({ array: possibleRemainingChoices, remove: true }) : possibleRemainingChoices.splice(0, 1))
           
         if (possibleRemainingChoices.length < 1) {
           possibleRemainingChoices = nonBannedPokemonIds.map((pokemonId) => { return pokemonId })
@@ -119,12 +118,20 @@ export const updateRandomEncounters = (
   const randomizeEcounters = (encounters: Encounter[], choices: PokemonId[], removeChoiceOnSelection: boolean) => {
     encounters.forEach((encounter) => {
       if (encounter.type !== "FISHING" || !encounter.isTimeGroup) {
-        const index = randomInt(0, choices.length - 1)
-        encounter.pokemonId = choices[index]
-          
-        if (removeChoiceOnSelection) {
-          choices.splice(index, 1)
-        }
+        encounter.pokemonId = random.element({
+          array: choices,
+          errorInfo: {
+            elementName: "Pokémon",
+            mainSettingName: "RANDOMIZE_RANDOM_ENCOUNTERS",
+            conflictingSettings: [
+              "RANDOMIZE_RANDOM_ENCOUNTERS.SETTINGS.FORCE_FULLY_EVOLVED_BELOW_LEVEL",
+              "RANDOMIZE_RANDOM_ENCOUNTERS.SETTINGS.AVAILABILITY",
+              "RANDOMIZE_RANDOM_ENCOUNTERS.SETTINGS.BAN",
+              "BANNED_POKEMON",
+            ],
+          },
+          remove: removeChoiceOnSelection,
+        })
       }
     })
   }
