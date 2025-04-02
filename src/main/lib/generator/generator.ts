@@ -461,7 +461,7 @@ const createPatches = (
         tm49Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\n${updatedTeachableMove("TM49").name.toUpperCase()}.\rIsn't that great?\nI discovered it!\f`)),
         tm45Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM45 is\n${updatedTeachableMove("TM45").name.toUpperCase()}!\rIsn't it just per-\nfect for a cutie\tlike me?\f`)),
         tm30Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM30 is\n${updatedTeachableMove("TM30").name.toUpperCase()}.\rUse it if it\nappeals to you.\f`)),
-        tm01Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM01 is\n${updatedTeachableMove("TM01").name}.\f`)),
+        tm01Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM01 is\n${updatedTeachableMove("TM01").name.toUpperCase()}.\f`)),
         tm23Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0…TM23 teaches\n${updatedTeachableMove("TM23").name.toUpperCase()}.\f`)),
         tm16Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM16 contains\n${updatedTeachableMove("TM16").name.toUpperCase()}.\rIt demonstrates\nthe harshness of\twinter.\f`)),
         tm24Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM24 contains\n${updatedTeachableMove("TM24").name.toUpperCase()}.\rIf you don't want\nit, you don't have\tto take it.\f`)),
