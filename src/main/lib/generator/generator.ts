@@ -21,6 +21,7 @@ import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { Random } from "@lib/generator/random"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import { gen5BaseExpMap } from "@shared/gameData/gen5BaseExp"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
 import { movesMap } from "@shared/gameData/moves"
@@ -418,7 +419,7 @@ const createPatches = (
           path: "pokemonInfo.yml",
           extraIncludes: {},
           extraValues: {
-            data: hexStringFrom(bytesForInfoFromPokemon(pokemon, settings.USE_UPDATED_BASE_EXP)),
+            data: hexStringFrom(bytesForInfoFromPokemon(pokemon)),
           },
         }
       }),
@@ -426,13 +427,6 @@ const createPatches = (
   )
       
   romInfo.patchHunks = [...romInfo.patchHunks, ...pokemonInfoPatch.hunks]
-  
-  if (settings.USE_UPDATED_BASE_EXP) {
-    romInfo.patchHunks = [
-      ...romInfo.patchHunks,
-      ...Patch.fromYAML(romInfo, "updatedBaseExp.yml").hunks,
-    ]
-  }
     
   // Teachable Moves
   
@@ -788,23 +782,34 @@ const createPatches = (
   // Change Box Phone Call
     
   if (settings.CHANGE_BOX_PHONE_CALL) {
-    const scaleExperiencePatch = Patch.fromYAML(
+    const changeBoxCallPatch = Patch.fromYAML(
       romInfo,
       "changeBoxCall.yml",
     )
     
-    romInfo.patchHunks = [...romInfo.patchHunks, ...scaleExperiencePatch.hunks]
+    romInfo.patchHunks = [...romInfo.patchHunks, ...changeBoxCallPatch.hunks]
   }
     
   // Scale Experience
     
-  if (settings.SCALE_EXPERIENCE) {
-    const scaleExperiencePatch = Patch.fromYAML(
+  if (settings.SCALE_EXPERIENCE || settings.USE_UPDATED_BASE_EXP) {
+    const experiencePatch = Patch.fromYAML(
       romInfo,
-      "scaleExperience.yml",
+      "experienceCalculation.yml",
+      {
+        options: compact([
+          settings.USE_UPDATED_BASE_EXP ? "updatedBaseExperience.yml" : undefined,
+          settings.SCALE_EXPERIENCE ? "scaleExperience.yml" : undefined,
+        ]),
+      },
+      {
+        gen5BaseExpTable: settings.USE_UPDATED_BASE_EXP ? hexStringFrom(Object.values(gen5BaseExpMap).flatMap((value) => {
+          return bytesFrom(value, 2)
+        })) : "",
+      }
     )
     
-    romInfo.patchHunks = [...romInfo.patchHunks, ...scaleExperiencePatch.hunks]
+    romInfo.patchHunks = [...romInfo.patchHunks, ...experiencePatch.hunks]
   }
   
   // Skip Rockets

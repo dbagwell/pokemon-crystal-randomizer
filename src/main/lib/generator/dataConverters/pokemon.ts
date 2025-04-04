@@ -1,6 +1,5 @@
 import { eggGroupsMap } from "@shared/gameData/eggGroups"
 import { evolutionTypesMap } from "@shared/gameData/evolutionTypes"
-import { gen5BaseExpMap } from "@shared/gameData/gen5BaseExp"
 import { growthRatesMap } from "@shared/gameData/growthRates"
 import { itemsMap } from "@shared/gameData/items"
 import { movesMap } from "@shared/gameData/moves"
@@ -10,7 +9,7 @@ import { teachableMovesMap } from "@shared/gameData/teachableMoves"
 import { type EvolutionMethod, happinessEvolutionConidtionsMap, statEvolutionConidtionsMap } from "@shared/types/gameData/evolutionMethod"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
-import { bytesFrom, compact, isNotNullish } from "@shared/utils"
+import { compact, isNotNullish } from "@shared/utils"
 
 export const bytesForEvolutionsAndLevelUpMovesFromPokemon = (pokemon: Pokemon) => {
   return [
@@ -76,7 +75,7 @@ const bytesFromEvolution = (evolution: {
   ])
 }
 
-export const bytesForInfoFromPokemon = (pokemon: Pokemon, addGen5BaseExp: boolean) => {
+export const bytesForInfoFromPokemon = (pokemon: Pokemon) => {
   const teachableMovesBytes: number[] = Array(8).fill(0)
           
   const pokemonTeachableMoveIds = [
@@ -109,7 +108,8 @@ export const bytesForInfoFromPokemon = (pokemon: Pokemon, addGen5BaseExp: boolea
     pokemon.eggCycles,
     5,
     pokemon.spriteDimensions,
-    ...addGen5BaseExp ? bytesFrom(gen5BaseExpMap[pokemon.id], 2) : [0, 0],
+    0,
+    0,
     0,
     0,
     growthRatesMap[pokemon.growthRate].numericId,
