@@ -886,7 +886,7 @@ export const defaultAppViewModel = () => {
             id: "BANNED_ITEMS" as const,
             name: "Globally Banned Items",
             description: "A list of items to always exclude when choosing random items.",
-            options: itemIds.map((itemId) => {
+            options: holdableItemIds.map((itemId) => {
               return createSimpleSelectorOption({
                 id: itemId,
                 name: itemsMap[itemId].name,
