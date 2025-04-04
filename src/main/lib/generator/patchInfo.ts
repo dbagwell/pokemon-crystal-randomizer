@@ -99,7 +99,7 @@ export class PatchInfo {
       try {
         result[key] = parseTokens(value)
       } catch (error) {
-        throw `Error parsing value with name "${key}".\n\n${error}`
+        throw new Error(`Error parsing value with name "${key}".\n\n${error}`)
       }
     })
     
@@ -107,7 +107,7 @@ export class PatchInfo {
       try {
         return new ChangeInfo(change)
       } catch (error) {
-        throw `Error parsing change "${change.value}".\n\n${error}`
+        throw new Error(`Error parsing change "${change.value}".\n\n${error}`)
       }
     }) ?? []
     
