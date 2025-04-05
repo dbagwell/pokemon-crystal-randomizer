@@ -1,4 +1,4 @@
-description: "Changes the experience calculation to scale based on the level difference."
+description: "Updates the experience calculation to use new values for the base exp as provided."
 values:
   extraCalculations: "FA 06 D2 3D 5F 21 @parent.$gen5BaseExpTable 19 19 2A E0 B6 7E E0 B5 3E 0F 21 AA 4E CF 28 09 3E 02 E0 B7 06 04 CD 24 31 FA 2C D2 E0 B7 06 04 CD 24 31"
 changes:

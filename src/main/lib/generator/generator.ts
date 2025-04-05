@@ -789,6 +789,17 @@ const createPatches = (
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...changeBoxCallPatch.hunks]
   }
+  
+  // Move Stats
+    
+  if (settings.SHOW_MOVE_STATS_IN_BATTLE) {
+    const moveStatsPatch = Patch.fromYAML(
+      romInfo,
+      "movePowerAndAccuracyInBattle.yml",
+    )
+    
+    romInfo.patchHunks = [...romInfo.patchHunks, ...moveStatsPatch.hunks]
+  }
     
   // Scale Experience
     
