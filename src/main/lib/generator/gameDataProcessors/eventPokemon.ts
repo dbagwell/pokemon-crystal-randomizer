@@ -1,11 +1,12 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
+import type { Random } from "@lib/generator/random"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
 
 export const updateEventPokemon = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
-  randomInt: (min: number, max: number) => number,
+  random: Random,
 ) => {
   if (!settings.RANDOMIZE_EVENT_POKEMON.VALUE) { return }
   
@@ -16,14 +17,19 @@ export const updateEventPokemon = (
   })
     
   const getRandomPokemonId = () => {
-    const index = randomInt(0, availablePokemonIds.length - 1)
-    const pokemonId = availablePokemonIds[index]
-      
-    if (eventPokemonSettings.UNIQUE) {
-      availablePokemonIds.splice(index, 1)
-    }
-      
-    return pokemonId
+    return random.element({
+      array: availablePokemonIds,
+      errorInfo: {
+        elementName: "Pokémon",
+        mainSettingName: "RANDOMIZE_EVENT_POKEMON",
+        conflictingSettings: [
+          "RANDOMIZE_EVENT_POKEMON.SETTINGS.UNIQUE",
+          "RANDOMIZE_EVENT_POKEMON.SETTINGS.BAN",
+          "BANNED_POKEMON",
+        ],
+      },
+      remove: eventPokemonSettings.UNIQUE,
+    })
   }
     
   const randomizedOddEggIds = [getRandomPokemonId()]

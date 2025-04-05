@@ -1,12 +1,12 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
+import type { Random } from "@lib/generator/random"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
 import { type Move, movesMap } from "@shared/gameData/moves"
-import { isNullish } from "@shared/utils"
 
 export const updateTeachableMoves = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
-  randomInt: (min: number, max: number) => number
+  random: Random,
 ) => {
   if (!settings.RANDOMIZE_TM_MOVES.VALUE && !settings.RANDOMIZE_MOVE_TUTOR_MOVES.VALUE) { return }
   
@@ -18,7 +18,7 @@ export const updateTeachableMoves = (
     })
       
     let nonBannedMoves = Object.values(movesMap).filter((move) => {
-      return !tmsSettings.BAN.includes(move.id)
+      return !settings.BANNED_MOVES.includes(move.id) && !tmsSettings.BAN.includes(move.id)
     })
       
     const indicesOfForcedGoodMoves: number[] = []
@@ -26,10 +26,9 @@ export const updateTeachableMoves = (
       
     if (tmsSettings.GOOD_DAMAGING_MOVES.VALUE) {
       const guaranteedNumberOfGoodMoves = Math.ceil(tms.length * tmsSettings.GOOD_DAMAGING_MOVES.SETTINGS.PERCENTAGE / 100)
-      const indicesOfAllMoves = Array(tms.length).map((_, index) => { return index })
+      const indicesOfAllMoves = Array(tms.length).fill(0).map((_, index) => { return index })
       for (let i = 0; i < guaranteedNumberOfGoodMoves; i++) {
-        const index = indicesOfAllMoves.splice(randomInt(0, indicesOfAllMoves.length - 1), 1)[0]
-        indicesOfForcedGoodMoves.push(index)
+        indicesOfForcedGoodMoves.push(random.element({ array: indicesOfAllMoves, remove: true }))
       }
     }
       
@@ -61,15 +60,20 @@ export const updateTeachableMoves = (
           }
         })
           
-        const chosenMove = primaryChoices[randomInt(0, primaryChoices.length - 1)]
-            ?? secondaryChoices[randomInt(0, secondaryChoices.length - 1)]
-            ?? tertiaryChoices[randomInt(0, tertiaryChoices.length - 1)]
-      
-        if (isNullish(chosenMove)) {
-          throw new Error("Unable to satisfy settings for randomized tm moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
-        }
-          
-        tm.moveId = chosenMove.id
+        tm.moveId = random.element({ array: primaryChoices, allowUndefined: true }).id
+          ?? random.element({ array: secondaryChoices, allowUndefined: true }).id
+          ?? random.element({
+            array: tertiaryChoices,
+            errorInfo: {
+              elementName: "move",
+              mainSettingName: "RANDOMIZE_TM_MOVES",
+              conflictingSettings: [
+                "RANDOMIZE_TM_MOVES.SETTINGS.UNIQUE",
+                "RANDOMIZE_TM_MOVES.SETTINGS.BAN",
+                "BANNED_MOVES",
+              ],
+            },
+          }).id
       }
         
       if (tmsSettings.UNIQUE) {
@@ -88,7 +92,7 @@ export const updateTeachableMoves = (
     })
       
     let nonBannedMoves = Object.values(movesMap).filter((move) => {
-      return !moveTutorSettings.BAN.includes(move.id)
+      return !settings.BANNED_MOVES.includes(move.id) && !moveTutorSettings.BAN.includes(move.id)
     })
       
     const indicesOfForcedGoodMoves: number[] = []
@@ -96,10 +100,9 @@ export const updateTeachableMoves = (
       
     if (moveTutorSettings.GOOD_DAMAGING_MOVES.VALUE) {
       const guaranteedNumberOfGoodMoves = Math.ceil(moveTutorMoves.length * moveTutorSettings.GOOD_DAMAGING_MOVES.SETTINGS.PERCENTAGE / 100)
-      const indicesOfAllMoves = Array(moveTutorMoves.length).map((_, index) => { return index })
+      const indicesOfAllMoves = Array(moveTutorMoves.length).fill(0).map((_, index) => { return index })
       for (let i = 0; i < guaranteedNumberOfGoodMoves; i++) {
-        const index = indicesOfAllMoves.splice(randomInt(0, indicesOfAllMoves.length - 1), 1)[0]
-        indicesOfForcedGoodMoves.push(index)
+        indicesOfForcedGoodMoves.push(random.element({ array: indicesOfAllMoves, remove: true }))
       }
     }
       
@@ -112,11 +115,6 @@ export const updateTeachableMoves = (
     }
       
     moveTutorMoves.forEach((moveTutorMove, index) => {
-      const choices = nonBannedMoves.filter((move) => {
-        return (!moveTutorSettings.PREFER_SAME_TYPE || move.type === movesMap[moveTutorMove.moveId].type)
-            && matchesForcedGoodMovesConditions(move, index)
-      })
-        
       const primaryChoices: Move[] = []
       const secondaryChoices: Move[] = []
       const tertiaryChoices: Move[] = []
@@ -134,16 +132,21 @@ export const updateTeachableMoves = (
           tertiaryChoices.push(move)
         }
       })
-        
-      const chosenMove = primaryChoices[randomInt(0, primaryChoices.length - 1)]
-          ?? secondaryChoices[randomInt(0, secondaryChoices.length - 1)]
-          ?? tertiaryChoices[randomInt(0, tertiaryChoices.length - 1)]
-    
-      if (isNullish(chosenMove)) {
-        throw new Error("Unable to satisfy settings for randomized move tutor moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
-      }
       
-      moveTutorMove.moveId = choices[randomInt(0, choices.length - 1)].id
+      moveTutorMove.moveId = random.element({ array: primaryChoices, allowUndefined: true }).id
+        ?? random.element({ array: secondaryChoices, allowUndefined: true }).id
+        ?? random.element({
+          array: tertiaryChoices,
+          errorInfo: {
+            elementName: "move",
+            mainSettingName: "RANDOMIZE_MOVE_TUTOR_MOVES",
+            conflictingSettings: [
+              "RANDOMIZE_MOVE_TUTOR_MOVES.SETTINGS.UNIQUE",
+              "RANDOMIZE_MOVE_TUTOR_MOVES.SETTINGS.BAN",
+              "BANNED_MOVES",
+            ],
+          },
+        }).id
         
       if (moveTutorSettings.UNIQUE) {
         nonBannedMoves = nonBannedMoves.filter((move) => {

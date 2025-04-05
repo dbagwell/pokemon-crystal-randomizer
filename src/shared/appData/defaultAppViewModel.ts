@@ -390,6 +390,11 @@ export const defaultAppViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_POKEMON_ENCOUNTER_RATIOS
+          createSimpleToggleViewModel({
+            id: "PREVENT_WILD_POKEMON_FLEEING" as const,
+            name: "Prevent Wild Pokémon from Fleeing",
+            description: "Makes it so that all Pokémon cannot flee from wild battles without the use of a fleeing move.",
+          }),
           createConfigurableToggleViewModel({
             id: "INCREASE_POKEMON_CATCH_RATES" as const,
             name: "Increase Pokémon Catch Rates",
@@ -437,6 +442,12 @@ export const defaultAppViewModel = () => {
               }), // END EXCLUDE
             ] as const,
           }), // END STANDARDIZE_POKEMON_GROWTH_RATES
+          createSimpleToggleViewModel({
+            id: "USE_UPDATED_BASE_EXP" as const,
+            name: "Use Updated Base Experience",
+            description: "Changes the base experience that Pokémon give out when they are defeated "
+              + "to the new amounts that have been used in official Pokémon games since Pokémon Black Version and Pokémon White Version.",
+          }),
           createSimpleToggleViewModel({
             id: "FAST_BREEDING" as const,
             name: "Fast Breeding",
@@ -632,6 +643,17 @@ export const defaultAppViewModel = () => {
               }),
             ] as const,
           }), // END RANDOMIZE_HM_COMPATIBILITY
+          createSimpleMultiSelectorViewModel({
+            id: "BANNED_MOVES" as const,
+            name: "Globally Banned Moves",
+            description: "A list of moves to always exclude when choosing random moves.",
+            options: moveIds.map((moveId) => {
+              return createSimpleSelectorOption({
+                id: moveId,
+                name: movesMap[moveId].name,
+              })
+            }),
+          }), // END BANNED_MOVES
         ] as const,
       }), // END MOVES
       createTabViewModel({
@@ -864,7 +886,7 @@ export const defaultAppViewModel = () => {
             id: "BANNED_ITEMS" as const,
             name: "Globally Banned Items",
             description: "A list of items to always exclude when choosing random items.",
-            options: itemIds.map((itemId) => {
+            options: holdableItemIds.map((itemId) => {
               return createSimpleSelectorOption({
                 id: itemId,
                 name: itemsMap[itemId].name,

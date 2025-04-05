@@ -11,7 +11,7 @@ import { tradesMap } from "@shared/gameData/trades"
 import { trainers } from "@shared/gameData/trainers"
 import { eventPokemonMap } from "@shared/types/gameData/eventPokemon"
 import type { GameData } from "@shared/types/gameData/gameData"
-import { bytesFrom } from "@utils"
+import { bytesFrom, compact } from "@utils"
 
 export class ROMInfo {
   
@@ -174,13 +174,53 @@ export class ROMInfo {
     ])
   }
   
-  static readonly displayCharacterBytesFrom = (string: string): number[] => {
-    return [...string].map((character: string) => {
+  static readonly bytesFromTextScript = (string: string): number[] => {
+    return [...string].flatMap((character: string) => {
+      if (character === "\0") { // Starts a text script and starts a paragraph
+        return 0x00
+      } else if (character === "\r") { // starts a new paragraph in the same text script
+        return 0x51
+      } else if (character === "\n") { // starts a new line in the same paragraph
+        return 0x4F
+      } else if (character === "\t") { // continues a line in the same paragraph
+        return 0x55
+      } else if (character === "\f") { // Ends a text script
+        return 0x57
+      } else {
+        return ROMInfo.bytesFromText(character)
+      }
+    })
+  }
+  
+  static readonly bytesFromText = (string: string): number[] => {
+    const appostropheLetters = "dlmrstv"
+    
+    return compact([...string].map((character: string, index: number) => {
       const number = parseInt(character)
       if (!isNaN(number)) {
         return 0xF6 + number
+      } else if (character === "…") {
+        return 0x75
       } else if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(character)) {
         return 0x80 + character.charCodeAt(0) - 65
+      } else if (appostropheLetters.includes(character) && [...string][index - 1] === "'") {
+        if (character === "d") {
+          return 0xD0
+        } else if (character === "l") {
+          return 0xD1
+        } else if (character === "m") {
+          return 0xD2
+        } else if (character === "r") {
+          return 0xD3
+        } else if (character === "s") {
+          return 0xD4
+        } else if (character === "t") {
+          return 0xD5
+        } else if (character === "v") {
+          return 0xD6
+        } else {
+          return undefined // Should never happen
+        }
       } else if ("abcdefghijklmnopqrstuvwxyz".includes(character)) {
         return 0xA0 + character.charCodeAt(0) - 97
       } else if (character === "(") {
@@ -195,6 +235,12 @@ export class ROMInfo {
         return 0x9E
       } else if (character === "]") {
         return 0x9F
+      } else if (character === "'") {
+        if (!appostropheLetters.includes([...string][index + 1])) {
+          return 0xE0
+        } else {
+          return undefined // Skip this so that we can encode it with the letter as a combo
+        }
       } else if (character === "<") { // PK
         return 0xE1
       } else if (character === ">") { // MN
@@ -207,6 +253,8 @@ export class ROMInfo {
         return 0xE7
       } else if (character === ".") {
         return 0xE8
+      } else if (character === "&") {
+        return 0xE9
       } else if (character === "×") {
         return 0xF1
       } else if (character === "/") {
@@ -218,7 +266,7 @@ export class ROMInfo {
       } else {
         return 0x7F // Treat unmapped characters as spaces.
       }
-    })
+    }))
   }
   
   static readonly returnInstruction = () => {

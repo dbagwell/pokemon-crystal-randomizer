@@ -1,4 +1,5 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
+import type { Random } from "@lib/generator/random"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
 import { hiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { ballItemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
@@ -6,7 +7,7 @@ import { ballItemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataId
 export const updateItems = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
-  randomInt: (min: number, max: number) => number
+  random: Random,
 ) => {
   if (settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE) {
     const availableItemIds = [
@@ -17,7 +18,17 @@ export const updateItems = (
     })
     
     regularItemBallLocationIds.forEach((locationId) => {
-      romInfo.gameData.itemLocations[locationId].itemId = availableItemIds[randomInt(0, availableItemIds.length - 1)]
+      romInfo.gameData.itemLocations[locationId].itemId = random.element({
+        array: availableItemIds,
+        errorInfo: {
+          elementName: "item",
+          mainSettingName: "RANDOMIZE_REGULAR_ITEM_BALLS",
+          conflictingSettings: [
+            "RANDOMIZE_REGULAR_ITEM_BALLS.SETTINGS.BAN",
+            "BANNED_ITEMS",
+          ],
+        },
+      })
     })
     
     romInfo.gameData.mapObjectEvents.find((event) => {
@@ -31,7 +42,17 @@ export const updateItems = (
     })
     
     tmItemBallLocationIds.forEach((locationId) => {
-      romInfo.gameData.itemLocations[locationId].itemId = availableItemIds[randomInt(0, availableItemIds.length - 1)]
+      romInfo.gameData.itemLocations[locationId].itemId = random.element({
+        array: availableItemIds,
+        errorInfo: {
+          elementName: "item",
+          mainSettingName: "RANDOMIZE_TM_ITEM_BALLS",
+          conflictingSettings: [
+            "RANDOMIZE_TM_ITEM_BALLS.SETTINGS.BAN",
+            "BANNED_ITEMS",
+          ],
+        },
+      })
     })
   }
   
@@ -44,7 +65,17 @@ export const updateItems = (
     })
     
     hiddenItemLocationIds.forEach((locationId) => {
-      romInfo.gameData.itemLocations[locationId].itemId = availableItemIds[randomInt(0, availableItemIds.length - 1)]
+      romInfo.gameData.itemLocations[locationId].itemId = random.element({
+        array: availableItemIds,
+        errorInfo: {
+          elementName: "item",
+          mainSettingName: "RANDOMIZE_HIDDEN_ITEMS",
+          conflictingSettings: [
+            "RANDOMIZE_HIDDEN_ITEMS.SETTINGS.BAN",
+            "BANNED_ITEMS",
+          ],
+        },
+      })
     })
   }
 }
@@ -52,7 +83,7 @@ export const updateItems = (
 export const shuffleItems = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
-  randomInt: (min: number, max: number) => number
+  random: Random,
 ) => {
   settings.SHUFFLED_ITEM_GROUPS.forEach((group) => {
     const itemLocations = Object.values(romInfo.gameData.itemLocations).filter((location) => {
@@ -64,9 +95,7 @@ export const shuffleItems = (
     })
     
     itemLocations.forEach((location) => {
-      const itemIndex = randomInt(0, itemIds.length - 1)
-      location.itemId = itemIds[itemIndex]
-      itemIds.splice(itemIndex, 1)
+      location.itemId = random.element({ array: itemIds, remove: true })
     })
   })
 }

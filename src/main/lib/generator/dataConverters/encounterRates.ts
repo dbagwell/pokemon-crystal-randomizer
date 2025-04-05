@@ -29,8 +29,15 @@ export const getAdjustedEncounterRates = (rates: number[], max: number) => {
   return adjustedRates
 }
 
-export const bytesFromLandAndWaterEncounterRates = (landRates: number[], waterRates: number[]) => {
-  return getAdjustedEncounterRates([...landRates, ...waterRates], 100).flatMap((rate, index) => {
+const bytesFromLandOrWaterEncounterRates = (rates: number[]) => {
+  return getAdjustedEncounterRates(rates, 100).flatMap((rate, index) => {
     return [rate, index * 2]
   })
+}
+
+export const bytesFromLandAndWaterEncounterRates = (landRates: number[], waterRates: number[]) => {
+  return [
+    ...bytesFromLandOrWaterEncounterRates(landRates),
+    ...bytesFromLandOrWaterEncounterRates(waterRates),
+  ]
 }

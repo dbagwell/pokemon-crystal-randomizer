@@ -1,11 +1,12 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
+import type { Random } from "@lib/generator/random"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
 
 export const updateTrades = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
-  randomInt: (min: number, max: number) => number,
+  random: Random,
 ) => {
   if (!settings.RANDOMIZE_TRADES.VALUE) { return }
   
@@ -16,14 +17,19 @@ export const updateTrades = (
   })
       
   const getRandomTradePokemonId = () => {
-    const index = randomInt(0, availableTradePokemonIds.length - 1)
-    const pokemonId = availableTradePokemonIds[index]
-      
-    if (tradesSettings.UNIQUE) {
-      availableTradePokemonIds.splice(index, 1)
-    }
-      
-    return pokemonId
+    return random.element({
+      array: availableTradePokemonIds,
+      errorInfo: {
+        elementName: "Pokémon",
+        mainSettingName: "RANDOMIZE_TRADES",
+        conflictingSettings: [
+          "RANDOMIZE_TRADES.SETTINGS.UNIQUE",
+          "RANDOMIZE_TRADES.SETTINGS.BAN",
+          "BANNED_POKEMON",
+        ],
+      },
+      remove: tradesSettings.UNIQUE,
+    })
   }
     
   if (tradesSettings.METHOD === "ASK_ONLY" || tradesSettings.METHOD === "BOTH") {

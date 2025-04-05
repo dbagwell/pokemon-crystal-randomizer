@@ -5,29 +5,22 @@ values:
   title: "87 8E 8B 83 7F 93 8E 7F 8C 80 92 87 9C"
   wramAddress: "CC CF"
   bitIndex: "[1]{3}"
-  checkHoldToMash: "FA CC CF CB 5F F0 A8 20 02 F0 A7 E6 03 C9"
+  checkHoldToMash1: "FA CC CF CB 5F F0 A8 20 02 F0 A7 E6 03 C9"
+  checkHoldToMash2: "FA CC CF CB 5F F0 A8 20 02 F0 A9 E6 03 C9"
 changes:
 - description: Adds a helper function to support hold to mash
   locations:
     - bank: 0
-  value: "$checkHoldToMash"
+  value: "$checkHoldToMash1 $checkHoldToMash2"
 - description: Removes requirement to re press a or b to advance the text in most scenarios.
   locations:
     - bank: 0
       address: 0x0A3C
     - bank: 0
       address: 0x0ADF
-  value: "CD @$checkHoldToMash 00"
-- description: Removes requirement to re press a or b to advance the text in certain scenarios.
+  value: "CD @$checkHoldToMash1 00"
+- description: Removes requirement to re press a or b to advance the text in most scenarios.
   locations:
     - bank: 0
-      address: 0x373E
-    - bank: 3
-      address: 0x4C14
-    - bank: 15
-      address: 0x707B
-    - bank: 62
-      address: 0x78A1
-    - bank: 62
-      address: 0x78AF
-  value: "@$checkHoldToMash"
+      address: 0x0A98
+  value: "CD @$checkHoldToMash2 00"

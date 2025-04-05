@@ -1,0 +1,13 @@
+description: "Fixes an issue with finding the unown sprite for the intro Pokémon."
+values:
+  unownFrontPicFix: "FA 34 D2 A7 C2 EA 50 3E $unownLetter C3 EA 50"
+changes:
+- description: "Code to fix an issue finding the front pic of an unown if no letter was previously selected."
+  locations:
+  - bank: 20
+  value: "$unownFrontPicFix"
+- description: "Calls the new code."
+  locations:
+  - bank: 20
+    address: 0x50E5
+  value: "16 49 C3 @$unownFrontPicFix"

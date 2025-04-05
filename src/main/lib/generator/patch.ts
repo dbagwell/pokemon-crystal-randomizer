@@ -15,7 +15,7 @@ export class Patch {
       const patchInfo = new PatchInfo(filePath, extraIncludes, extraValues)
       return new Patch(patchInfo.hunks(romInfo))
     } catch (error) {
-      throw `Error creating patch from file at ${filePath}.\n\n${error}`
+      throw new Error(`Error creating patch from file at ${filePath}.\n\n${error}`)
     }
   }
   

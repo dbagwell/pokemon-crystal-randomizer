@@ -147,7 +147,7 @@ export const bytesFromFishingEncounters = (fishingEncounters: FishingEncounter[]
         })
       })
     }),
-    ...Array(22).flatMap((_, index) => {
+    ...Array(22).fill(undefined).flatMap((_, index) => {
       return ["DAY", "NIGHT"].flatMap((time) => {
         return fishingTimeGroupEncounters.filter((encounter) => {
           return encounter.timeGroupIndex === index

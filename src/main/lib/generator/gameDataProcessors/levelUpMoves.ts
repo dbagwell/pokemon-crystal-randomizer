@@ -1,20 +1,20 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
+import type { Random } from "@lib/generator/random"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
 import { type Move, movesMap } from "@shared/gameData/moves"
 import { moveIds } from "@shared/types/gameDataIds/moves"
-import { isNullish } from "@shared/utils"
 
 export const updateLevelUpMoves = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
-  randomInt: (min: number, max: number) => number,
+  random: Random,
 ) => {
   if (!settings.RANDOMIZE_LEVEL_UP_MOVES.VALUE) { return }
   
   const levelUpMovesSettings = settings.RANDOMIZE_LEVEL_UP_MOVES.SETTINGS
     
   const nonBannedMoveIds = moveIds.filter((moveId) => {
-    return !levelUpMovesSettings.BAN.includes(moveId)
+    return !settings.BANNED_MOVES.includes(moveId) && !levelUpMovesSettings.BAN.includes(moveId)
   })
     
   Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {
@@ -29,10 +29,9 @@ export const updateLevelUpMoves = (
       
     if (levelUpMovesSettings.GOOD_DAMAGING_MOVES.VALUE) {
       const guaranteedNumberOfGoodMoves = Math.ceil(totalNumberOfMoves * levelUpMovesSettings.GOOD_DAMAGING_MOVES.SETTINGS.PERCENTAGE / 100)
-      const indicesOfAllMoves = Array(totalNumberOfMoves).map((_, index) => { return index })
+      const indicesOfAllMoves = Array(totalNumberOfMoves).fill(0).map((_, index) => { return index })
       for (let i = 0; i < guaranteedNumberOfGoodMoves; i++) {
-        const index = indicesOfAllMoves.splice(randomInt(0, indicesOfAllMoves.length - 1), 1)[0]
-        indicesOfForcedGoodMoves.push(index)
+        indicesOfForcedGoodMoves.push(random.element({ array: indicesOfAllMoves, remove: true }))
       }
     }
       
@@ -65,13 +64,21 @@ export const updateLevelUpMoves = (
         }
       })
         
-      const chosenMove = primaryChoices[randomInt(0, primaryChoices.length - 1)]
-          ?? secondaryChoices[randomInt(0, secondaryChoices.length - 1)]
-          ?? tertiaryChoices[randomInt(0, tertiaryChoices.length - 1)]
-        
-      if (isNullish(chosenMove)) {
-        throw new Error("Unable to satisfy settings for randomized level up moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
-      }
+      const chosenMove = random.element({ array: primaryChoices, allowUndefined: true })
+        ?? random.element({ array: secondaryChoices, allowUndefined: true })
+        ?? random.element({
+          array: tertiaryChoices,
+          errorInfo: {
+            elementName: "move",
+            mainSettingName: "RANDOMIZE_LEVEL_UP_MOVES",
+            conflictingSettings: [
+              "RANDOMIZE_LEVEL_UP_MOVES.SETTINGS.UNIQUE",
+              "RANDOMIZE_LEVEL_UP_MOVES.SETTINGS.GUARANTEE_LEVEL_ONE_MOVES",
+              "RANDOMIZE_LEVEL_UP_MOVES.SETTINGS.BAN",
+              "BANNED_MOVES",
+            ],
+          },
+        })
         
       levelUpMove.moveId = chosenMove.id
         
@@ -94,12 +101,18 @@ export const updateLevelUpMoves = (
         }
       })
         
-      const chosenMove = primaryChoices[randomInt(0, primaryChoices.length - 1)]
-          ?? secondaryChoices[randomInt(0, secondaryChoices.length - 1)]
-        
-      if (isNullish(chosenMove)) {
-        throw new Error("Unable to satisfy settings for randomized level up moves. Possible reason: too many banned moves. You could try again with a different seed, but different settings might be required.")
-      }
+      const chosenMove = random.element({ array: primaryChoices, allowUndefined: true }) ?? random.element({
+        array: secondaryChoices,
+        errorInfo: {
+          elementName: "move",
+          mainSettingName: "RANDOMIZE_LEVEL_UP_MOVES",
+          conflictingSettings: [
+            "RANDOMIZE_LEVEL_UP_MOVES.SETTINGS.UNIQUE",
+            "RANDOMIZE_LEVEL_UP_MOVES.SETTINGS.BAN",
+            "BANNED_MOVES",
+          ],
+        },
+      })
         
       pokemon.levelUpMoves.push({
         moveId: chosenMove.id,

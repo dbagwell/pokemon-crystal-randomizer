@@ -1,0 +1,19 @@
+description: "Changes the experience calculation to scale based on the level difference."
+values:
+  extraCalculations: "FA 06 D2 3D 5F 21 @parent.$gen5BaseExpTable 19 19 2A E0 B6 7E E0 B5 3E 0F 21 AA 4E CF 28 09 3E 02 E0 B7 06 04 CD 24 31 FA 2C D2 E0 B7 06 04 CD 24 31"
+changes:
+- description: "Store number of battle participants into memory."
+  locations:
+  - bank: 15
+    address: 0x70E6
+  value: "EA 2C D2 D8"
+- description: "Store number of battle participants into memory."
+  locations:
+  - bank: 15
+    address: 0x70F6
+  value: "2C"
+- description: "Change loop to only divide stats and not base exp."
+  locations:
+  - bank: 15
+    address: 0x70EE
+  value: "06"

@@ -1,0 +1,13 @@
+description: "Changes the experience calculation to use the updated base exp values."
+values:
+  loadUpdatedExp: "FA 49 D2 E0 B5 FA 48 D2 C9"
+changes:
+- description: "Code to load the updated base exp value when calculating experience."
+  locations:
+  - bank: 15
+  value: "$loadUpdatedExp"
+- description: "Call the new code."
+  locations:
+  - bank: 15
+    address: 0x6EB3
+  value: "CD @$loadUpdatedExp"

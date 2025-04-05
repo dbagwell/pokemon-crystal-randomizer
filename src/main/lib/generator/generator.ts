@@ -19,7 +19,9 @@ import { updateTeachableMoves } from "@lib/generator/gameDataProcessors/teachabl
 import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { DataHunk, Patch } from "@lib/generator/patch"
+import { Random } from "@lib/generator/random"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import { gen5BaseExpMap } from "@shared/gameData/gen5BaseExp"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
 import { movesMap } from "@shared/gameData/moves"
@@ -31,12 +33,12 @@ import type { Trade } from "@shared/types/gameData/trade"
 import type { EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
 import { type ItemId } from "@shared/types/gameDataIds/items"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
+import type { TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
 import { trainerGroupIds } from "@shared/types/gameDataIds/trainerGroups"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish } from "@utils"
 import crypto from "crypto"
 import { app } from "electron"
 import hash from "object-hash"
-import seedrandom from "seedrandom"
 
 export const generateROM = (data: Buffer, customSeed: string | undefined, settings: SettingsFromAppViewModel): {
   seed: string,
@@ -44,34 +46,38 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
 } => {
   const romInfo = ROMInfo.vanilla()
   const seed = customSeed ?? crypto.randomUUID()
-  const rng = seedrandom(seed)
-  const randomInt = (min: number, max: number): number => {
-    return Math.floor(rng() * (max + 1 - min)) + min
-  }
+  const random = new Random(seed)
   
   // Update game data based on settings
   
-  updateGameData(settings, romInfo, randomInt)
+  updateGameData(settings, romInfo, random)
   
   // Create patch hunks based on settings and updated game data
   
   createPatches(settings, romInfo)
   
+  // Create player specific patches so that the settings can still be used to affect the CV
+  // but use static values so that the effect on the CV is the same for all players
+  const staticPlayerSpecificHunks = createPlayerSpecificPatches(settings, romInfo, true)
+  
   // Base Patch
   
-  const checkValue = romInfo.patchHunks.length > 0 ? hash(romInfo.patchHunks).slice(0, 8).toUpperCase() : "00000000"
+  const checkValue = romInfo.patchHunks.length > 0 ? hash([...romInfo.patchHunks, ...staticPlayerSpecificHunks]).slice(0, 8).toUpperCase() : "00000000"
   
   const basePatch = Patch.fromYAML(
     romInfo,
     "randomizerBase.yml",
     {},
     {
-      versionNumber: hexStringFrom(ROMInfo.displayCharacterBytesFrom(app.getVersion())),
-      checkValue: hexStringFrom(ROMInfo.displayCharacterBytesFrom(checkValue)),
+      versionNumber: hexStringFrom(ROMInfo.bytesFromText(app.getVersion())),
+      checkValue: hexStringFrom(ROMInfo.bytesFromText(checkValue)),
     },
   )
-      
+  
   romInfo.patchHunks = [...romInfo.patchHunks, ...basePatch.hunks]
+  
+  // Now create the actual player specific patches
+  romInfo.patchHunks = [...romInfo.patchHunks, ...createPlayerSpecificPatches(settings, romInfo, false)]
   
   romInfo.patchHunks.forEach((hunk) => {
     data.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
@@ -86,24 +92,24 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
 const updateGameData = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
-  randomInt: (min: number, max: number) => number,
+  random: Random,
 ) => {
-  updateIntroPokemon(settings, romInfo, randomInt)
-  updateStarters(settings, romInfo, randomInt)
-  updateStarterItems(settings, romInfo, randomInt)
-  updateEventPokemon(settings, romInfo, randomInt)
-  updateRandomEncounters(settings, romInfo, randomInt)
+  updateIntroPokemon(settings, romInfo, random)
+  updateStarters(settings, romInfo, random)
+  updateStarterItems(settings, romInfo, random)
+  updateEventPokemon(settings, romInfo, random)
+  updateRandomEncounters(settings, romInfo, random)
   updateEncounterRates(settings, romInfo)
-  updateTrades(settings, romInfo, randomInt)
+  updateTrades(settings, romInfo, random)
   updateEvolutionMethods(settings, romInfo)
-  updateLevelUpMoves(settings, romInfo, randomInt)
-  updateTeachableMoves(settings, romInfo, randomInt)
-  updatePokemonInfo(settings, romInfo, randomInt)
+  updateLevelUpMoves(settings, romInfo, random)
+  updateTeachableMoves(settings, romInfo, random)
+  updatePokemonInfo(settings, romInfo, random)
   updateMarts(settings, romInfo)
-  updateTrainers(settings, romInfo, randomInt)
+  updateTrainers(settings, romInfo, random)
   updateMapObjectEvents(settings, romInfo)
-  updateItems(settings, romInfo, randomInt)
-  shuffleItems(settings, romInfo, randomInt)
+  updateItems(settings, romInfo, random)
+  shuffleItems(settings, romInfo, random)
 }
 
 const createPatches = (
@@ -112,8 +118,8 @@ const createPatches = (
 ) => {
   // Intro Pokemon
   
-  if (isNotNullish(romInfo.gameData.introPokemonId)) {
-    const numericId = pokemonMap[romInfo.gameData.introPokemonId].numericId
+  if (isNotNullish(romInfo.gameData.introPokemonInfo)) {
+    const numericId = pokemonMap[romInfo.gameData.introPokemonInfo.pokemonId].numericId
     
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
@@ -126,6 +132,20 @@ const createPatches = (
         [numericId],
       ),
     ]
+    
+    if (romInfo.gameData.introPokemonInfo.pokemonId === "UNOWN") {
+      romInfo.patchHunks = [
+        ...romInfo.patchHunks,
+        ...Patch.fromYAML(
+          romInfo,
+          "unownInIntro.yml",
+          {},
+          {
+            unownLetter: hexStringFrom([romInfo.gameData.introPokemonInfo.unownId]),
+          },
+        ).hunks,
+      ]
+    }
   }
   
   // Starter Pokemon
@@ -145,7 +165,7 @@ const createPatches = (
         {},
         {
           pokemonId: hexStringFrom(bytesFrom(pokemon.numericId, 1)),
-          pokemonName: hexStringFrom(ROMInfo.displayCharacterBytesFrom(pokemon.name.toUpperCase())),
+          pokemonName: hexStringFrom(ROMInfo.bytesFromText(pokemon.name.toUpperCase())),
         },
       ).hunks,
     ]
@@ -212,25 +232,35 @@ const createPatches = (
       spearowPokemonId: hexStringFromEventPokemonId("SPEAROW"),
       shucklePokemonId: hexStringFromEventPokemonId("SHUCKLE"),
       eeveePokemonId: hexStringFromEventPokemonId("EEVEE"),
-      eeveePokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("EEVEE")}.`.padEnd(11, " "))),
-      eeveePokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("EEVEE")}`.padEnd(10, " "))),
+      eeveePokemonNameText1: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("EEVEE")}.`.padEnd(11, " "))),
+      eeveePokemonNameText2: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("EEVEE")}`.padEnd(10, " "))),
       dratiniPokemonId: hexStringFromEventPokemonId("DRATINI"),
-      dratiniPokemonNameText1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("DRATINI")}`.padEnd(12, " "))),
-      dratiniPokemonNameText2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("DRATINI")}`.padEnd(10, " "))),
+      dratiniPokemonNameText1: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("DRATINI")}`.padEnd(12, " "))),
+      dratiniPokemonNameText2: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("DRATINI")}`.padEnd(10, " "))),
       tyroguePokemonId: hexStringFromEventPokemonId("TYROGUE"),
-      tyroguePokemonNameText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("TYROGUE")}`.padEnd(10, " "))),
+      tyroguePokemonNameText: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("TYROGUE")}`.padEnd(10, " "))),
       abraPokemonId: hexStringFromEventPokemonId("ABRA"),
       cubonePokemonId: hexStringFromEventPokemonId("CUBONE"),
       wobbuffetPokemonId: hexStringFromEventPokemonId("WOBBUFFET"),
-      goldenrodGameCornerPokemonMenuText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("ABRA").padEnd(10, " ")}  100@${nameStringFromEventPokemonId("CUBONE").padEnd(10, " ")}  800@${nameStringFromEventPokemonId("WOBBUFFET").padEnd(10, " ")} 1500@`)),
+      goldenrodGameCornerPokemonMenuText: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("ABRA").padEnd(10, " ")}  100@${nameStringFromEventPokemonId("CUBONE").padEnd(10, " ")}  800@${nameStringFromEventPokemonId("WOBBUFFET").padEnd(10, " ")} 1500@`)),
       pikachuPokemonId: hexStringFromEventPokemonId("PIKACHU"),
       porygonPokemonId: hexStringFromEventPokemonId("PORYGON"),
       larvitarPokemonId: hexStringFromEventPokemonId("LARVITAR"),
-      celadonGameCornerPokemonMenuText: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${nameStringFromEventPokemonId("PIKACHU").padEnd(10, " ")} 2222@${nameStringFromEventPokemonId("PORYGON").padEnd(10, " ")} 5555@${nameStringFromEventPokemonId("LARVITAR").padEnd(10, " ")} 8888@`)),
+      celadonGameCornerPokemonMenuText: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("PIKACHU").padEnd(10, " ")} 2222@${nameStringFromEventPokemonId("PORYGON").padEnd(10, " ")} 5555@${nameStringFromEventPokemonId("LARVITAR").padEnd(10, " ")} 8888@`)),
     },
   )
-    
+  
   romInfo.patchHunks = [...romInfo.patchHunks, ...eventPokemonPatch.hunks]
+  
+  if (settings.RANDOMIZE_EVENT_POKEMON || settings.RANDOMIZE_RANDOM_ENCOUNTERS) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "unownsInWildBattles.yml",
+      ).hunks,
+    ]
+  }
     
   // Eggs
     
@@ -316,6 +346,15 @@ const createPatches = (
       bytesFromContestEncounters(groupedEncounters.contestEncounters),
     ),
   ]
+  
+  if (settings.PREVENT_WILD_POKEMON_FLEEING) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      new DataHunk(ROMOffset.fromBankAddress(15, 0x459A), [0xFF]),
+      new DataHunk(ROMOffset.fromBankAddress(15, 0x45A8), [0xFF]),
+      new DataHunk(ROMOffset.fromBankAddress(15, 0x45B1), [0xFF]),
+    ]
+  }
     
   // Trades
     
@@ -390,27 +429,55 @@ const createPatches = (
   romInfo.patchHunks = [...romInfo.patchHunks, ...pokemonInfoPatch.hunks]
     
   // Teachable Moves
+  
+  if (settings.RANDOMIZE_TM_MOVES.VALUE || settings.RANDOMIZE_MOVE_TUTOR_MOVES.VALUE) {
+    const hex = hexStringFrom(Object.values(romInfo.gameData.teachableMoves).map((move) => {
+      return movesMap[move.moveId].numericId
+    }))
     
-  const hex = hexStringFrom(Object.values(romInfo.gameData.teachableMoves).map((move) => {
-    return movesMap[move.moveId].numericId
-  }))
-    
-  const teachableMovesPatch = Patch.fromYAML(
-    romInfo,
-    "teachableMoves.yml",
-    {},
-    {
-      teachableMoves: hex,
-      moveTutorMoveId1: hexStringFrom([movesMap[romInfo.gameData.teachableMoves.MOVE_TUTOR_1.moveId].numericId]),
-      moveTutorMoveId2: hexStringFrom([movesMap[romInfo.gameData.teachableMoves.MOVE_TUTOR_2.moveId].numericId]),
-      moveTutorMoveId3: hexStringFrom([movesMap[romInfo.gameData.teachableMoves.MOVE_TUTOR_3.moveId].numericId]),
-      moveTutorMoveName1: hexStringFrom(ROMInfo.displayCharacterBytesFrom(movesMap[romInfo.gameData.teachableMoves.MOVE_TUTOR_1.moveId].name.toUpperCase())),
-      moveTutorMoveName2: hexStringFrom(ROMInfo.displayCharacterBytesFrom(movesMap[romInfo.gameData.teachableMoves.MOVE_TUTOR_2.moveId].name.toUpperCase())),
-      moveTutorMoveName3: hexStringFrom(ROMInfo.displayCharacterBytesFrom(movesMap[romInfo.gameData.teachableMoves.MOVE_TUTOR_3.moveId].name.toUpperCase())),
+    const updatedTeachableMove = (id: TeachableMoveId) => {
+      return movesMap[romInfo.gameData.teachableMoves[id].moveId]
     }
-  )
-      
-  romInfo.patchHunks = [...romInfo.patchHunks, ...teachableMovesPatch.hunks]
+    
+    const teachableMovesPatch = Patch.fromYAML(
+      romInfo,
+      "teachableMoves.yml",
+      {},
+      {
+        teachableMoves: hex,
+        moveTutorMoveId1: hexStringFrom([updatedTeachableMove("MOVE_TUTOR_1").numericId]),
+        moveTutorMoveId2: hexStringFrom([updatedTeachableMove("MOVE_TUTOR_2").numericId]),
+        moveTutorMoveId3: hexStringFrom([updatedTeachableMove("MOVE_TUTOR_3").numericId]),
+        moveTutorMoveName1: hexStringFrom(ROMInfo.bytesFromText(updatedTeachableMove("MOVE_TUTOR_1").name.toUpperCase())),
+        moveTutorMoveName2: hexStringFrom(ROMInfo.bytesFromText(updatedTeachableMove("MOVE_TUTOR_2").name.toUpperCase())),
+        moveTutorMoveName3: hexStringFrom(ROMInfo.bytesFromText(updatedTeachableMove("MOVE_TUTOR_3").name.toUpperCase())),
+        tm31Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\n${updatedTeachableMove("TM31").name.toUpperCase()}.\f`)),
+        tm49Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\n${updatedTeachableMove("TM49").name.toUpperCase()}.\rIsn't that great?\nI discovered it!\f`)),
+        tm45Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM45 is\n${updatedTeachableMove("TM45").name.toUpperCase()}!\rIsn't it just per-\nfect for a cutie\tlike me?\f`)),
+        tm30Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM30 is\n${updatedTeachableMove("TM30").name.toUpperCase()}.\rUse it if it\nappeals to you.\f`)),
+        tm01Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM01 is\n${updatedTeachableMove("TM01").name.toUpperCase()}.\f`)),
+        tm23Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0…TM23 teaches\n${updatedTeachableMove("TM23").name.toUpperCase()}.\f`)),
+        tm16Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM16 contains\n${updatedTeachableMove("TM16").name.toUpperCase()}.\rIt demonstrates\nthe harshness of\twinter.\f`)),
+        tm24Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM24 contains\n${updatedTeachableMove("TM24").name.toUpperCase()}.\rIf you don't want\nit, you don't have\tto take it.\f`)),
+        tm19Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\rTM19 is\n${updatedTeachableMove("TM19").name.toUpperCase()}.\rPlease use it if\nit pleases you…\f`)),
+        tm06Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\rTM06 is\n${updatedTeachableMove("TM06").name.toUpperCase()}.\f`)),
+        tm03Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM03 is\n${updatedTeachableMove("TM03").name.toUpperCase()}.\rIt's a terrifying\nmove.\f`)),
+        tm05Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\nTM05 is\n${updatedTeachableMove("TM05").name.toUpperCase()}!\f`)),
+        tm07Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\nmy ${updatedTeachableMove("TM07").name.toUpperCase()}.\rIt's a powerful\ntechnique!\f`)),
+        tm08Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM08 happens to be\n${updatedTeachableMove("TM08").name.toUpperCase()}.\rIf any rocks are\nin your way, just\tsmash 'em up\twith ROCK SMASH!\f`)),
+        tm10Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\nTM10 is\t${updatedTeachableMove("TM10").name.toUpperCase()}!\f`)),
+        tm11Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM11 is\n${updatedTeachableMove("TM11").name.toUpperCase()}.\f`)),
+        tm12Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM12 is\n${updatedTeachableMove("TM12").name.toUpperCase()}.\f`)),
+        tm13Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM13 is\n${updatedTeachableMove("TM13").name.toUpperCase()}.\rIt's a rare move.\f`)),
+        tm29Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM29 is\n${updatedTeachableMove("TM29").name.toUpperCase()}.\f`)),
+        tm37Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\n${updatedTeachableMove("TM37").name.toUpperCase()}.\rIt's for advanced\ntrainers only.\rUse it if you\ndare. Good luck!\f`)),
+        tm42Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\n${updatedTeachableMove("TM42").name.toUpperCase()}…\r…Zzzz…\f`)),
+        tm50Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM50 is\n${updatedTeachableMove("TM50").name.toUpperCase()}.\rIt's a wicked move.\rOoooh…\nThat's scary…\rI don't want to\nhave bad dreams.\f`)),
+      }
+    )
+    
+    romInfo.patchHunks = [...romInfo.patchHunks, ...teachableMovesPatch.hunks]
+  }
   
   // Items
   
@@ -670,7 +737,7 @@ const createPatches = (
                 path: "trainerNameAndPokemon.yml",
                 extraIncludes: {},
                 extraValues: {
-                  name: hexStringFrom(ROMInfo.displayCharacterBytesFrom(`${trainer.name}@`)),
+                  name: hexStringFrom(ROMInfo.bytesFromText(`${trainer.name}@`)),
                   trainerType: hexStringFrom([trainerType]),
                   pokemon: hexStringFrom(compact(trainer.pokemon.flatMap((pokemon) => {
                     return [
@@ -711,59 +778,38 @@ const createPatches = (
   )
   
   romInfo.patchHunks = [...romInfo.patchHunks, ...trainerMovementSpeedPatch.hunks]
-    
-  // Skip Gender
-    
-  if (settings.SKIP_GENDER.VALUE) {
-    const genderId = playerSpriteMap[settings.SKIP_GENDER.SETTINGS.GENDER].numericId
-    const skipGenderPatch = Patch.fromYAML(
-      romInfo,
-      "skipGender.yml",
-      {},
-      {
-        genderId: hexStringFrom(bytesFrom(genderId, 1)),
-      }
-    )
-    
-    romInfo.patchHunks = [...romInfo.patchHunks, ...skipGenderPatch.hunks]
-  }
-    
-  // Skip Name
-    
-  if (settings.SKIP_NAME.VALUE) {
-    const nameBytes = ROMInfo.displayCharacterBytesFrom(settings.SKIP_NAME.SETTINGS.PLAYER_NAME)
-    const skipNamePatch = Patch.fromYAML(
-      romInfo,
-      "skipName.yml",
-      {},
-      {
-        name: hexStringFrom(nameBytes),
-      }
-    )
-    
-    romInfo.patchHunks = [...romInfo.patchHunks, ...skipNamePatch.hunks]
-  }
-    
+  
   // Change Box Phone Call
     
   if (settings.CHANGE_BOX_PHONE_CALL) {
-    const scaleExperiencePatch = Patch.fromYAML(
+    const changeBoxCallPatch = Patch.fromYAML(
       romInfo,
       "changeBoxCall.yml",
     )
     
-    romInfo.patchHunks = [...romInfo.patchHunks, ...scaleExperiencePatch.hunks]
+    romInfo.patchHunks = [...romInfo.patchHunks, ...changeBoxCallPatch.hunks]
   }
     
   // Scale Experience
     
-  if (settings.SCALE_EXPERIENCE) {
-    const scaleExperiencePatch = Patch.fromYAML(
+  if (settings.SCALE_EXPERIENCE || settings.USE_UPDATED_BASE_EXP) {
+    const experiencePatch = Patch.fromYAML(
       romInfo,
-      "scaleExperience.yml",
+      "experienceCalculation.yml",
+      {
+        options: compact([
+          settings.USE_UPDATED_BASE_EXP ? "updatedBaseExperience.yml" : undefined,
+          settings.SCALE_EXPERIENCE ? "scaleExperience.yml" : undefined,
+        ]),
+      },
+      {
+        gen5BaseExpTable: settings.USE_UPDATED_BASE_EXP ? hexStringFrom(Object.values(gen5BaseExpMap).flatMap((value) => {
+          return bytesFrom(value, 2)
+        })) : "",
+      }
     )
     
-    romInfo.patchHunks = [...romInfo.patchHunks, ...scaleExperiencePatch.hunks]
+    romInfo.patchHunks = [...romInfo.patchHunks, ...experiencePatch.hunks]
   }
   
   // Skip Rockets
@@ -847,4 +893,42 @@ const createPatches = (
       
     romInfo.patchHunks = [...romInfo.patchHunks, ...additionalOptionsPatch.hunks]
   }
+}
+
+const createPlayerSpecificPatches = (settings: SettingsFromAppViewModel, romInfo: ROMInfo, useDefaults: boolean): DataHunk[] => {
+  let hunks: DataHunk[] = []
+  
+  // Skip Gender
+    
+  if (settings.SKIP_GENDER.VALUE) {
+    const genderId = playerSpriteMap[useDefaults ? "GIRL" : settings.SKIP_GENDER.SETTINGS.GENDER].numericId
+    const skipGenderPatch = Patch.fromYAML(
+      romInfo,
+      "skipGender.yml",
+      {},
+      {
+        genderId: hexStringFrom(bytesFrom(genderId, 1)),
+      }
+    )
+    
+    hunks = [...hunks, ...skipGenderPatch.hunks]
+  }
+    
+  // Skip Name
+    
+  if (settings.SKIP_NAME.VALUE) {
+    const nameBytes = ROMInfo.bytesFromText(useDefaults ? "KRIS" : settings.SKIP_NAME.SETTINGS.PLAYER_NAME)
+    const skipNamePatch = Patch.fromYAML(
+      romInfo,
+      "skipName.yml",
+      {},
+      {
+        name: hexStringFrom(nameBytes),
+      }
+    )
+    
+    hunks = [...hunks, ...skipNamePatch.hunks]
+  }
+  
+  return hunks
 }

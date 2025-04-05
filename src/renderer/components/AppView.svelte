@@ -134,7 +134,7 @@
   import { colors } from "@scripts/colors"
   import { applySettingsToAppViewModel } from "@shared/appData/applySettingsToAppViewModel"
   import { defaultAppViewModel } from "@shared/appData/defaultAppViewModel"
-  import { settingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+  import { type SettingsFromAppViewModel, settingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
   import { onMount } from "svelte"
   
   type Props = {
@@ -167,9 +167,44 @@
   })
   
   const generateROMButtonClicked = async () => {
+    const settings = settingsFromAppViewModel($state.snapshot(viewModel) as typeof viewModel)
+    
+    let recommendation = ""
+    
+    if (
+      settings.RANDOMIZE_RANDOM_ENCOUNTERS.VALUE && (
+        !settings.RANDOMIZE_HM_COMPATIBILITY.VALUE ||
+        settings.RANDOMIZE_HM_COMPATIBILITY.SETTINGS.PERCENTAGE !== 100
+      )
+    ) {
+      recommendation = "It is recommended to enable the 'Randomize HM Compatibility' setting and set the 'Percentage' to '100' if the 'Randomize Random Encounters' setting is enabled."
+    } else if (
+      settings.RANDOMIZE_HM_COMPATIBILITY.VALUE &&
+      settings.RANDOMIZE_HM_COMPATIBILITY.SETTINGS.PERCENTAGE !== 100
+    ) {
+      recommendation = "It is recommended to set the 'Randomize HM Compatibility Percentage' to '100' if the 'Randomize HM Compatibility' setting is enabled."
+    }
+    
+    if (recommendation !== "") {
+      showDialog({
+        title: "WARNING!",
+        message: "Using the current settings could result in a game that is impossible to progress.\n"
+          + `${recommendation}\nThis is so that you don't end up in a situation where you are unable to catch any Pokémon that can learn the HM's required to progress the game.`,
+        submitButtonLabel: "Continue Anyways",
+        hasCancelButton: true,
+        onSubmit: () => {
+          generateROM(settings)
+        },
+      })
+    } else {
+      generateROM(settings)
+    }
+  }
+  
+  const generateROM = async (settings: SettingsFromAppViewModel) => {
     try {
       showProgressIndicator()
-      const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, settingsFromAppViewModel($state.snapshot(viewModel) as typeof viewModel))
+      const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, settings)
       showSuccessDialog(response.message)
     } catch (error) {
       showErrorDialog(error)

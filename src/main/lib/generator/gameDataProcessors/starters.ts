@@ -1,4 +1,5 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
+import type { Random } from "@lib/generator/random"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { baseStatTotal, hasPreEvolution, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
@@ -12,7 +13,7 @@ import { isNotNullish, isNullish } from "@shared/utils"
 export const updateStarters = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
-  randomInt: (min: number, max: number) => number,
+  random: Random,
 ) => {
   if (!settings.CHANGE_STARTERS.VALUE) { return }
   
@@ -64,12 +65,23 @@ export const updateStarters = (
           && (!randomStartersSettings.MATCH_SIMILAR_BST.VALUE || baseStatDifference(pokemon) <= randomStartersSettings.MATCH_SIMILAR_BST.SETTINGS.THRESHOLD)
       })
       
-      if (choices.length < 1) {
-        throw new Error("Unable to satisfy settings for randomized starter Pokémon. Possible reasons: BST threshold too small or too many banned Pokémon. You could try again with a different seed, but different settings might be required.")
-      }
-      
-      const index = randomInt(0, choices.length - 1)
-      romInfo.gameData.starters[locationId] = choices[index].id
+      romInfo.gameData.starters[locationId] = random.element({
+        array: choices,
+        errorInfo: {
+          elementName: "Pokémon",
+          mainSettingName: "CHANGE_STARTERS",
+          conflictingSettings: [
+            "CHANGE_STARTERS.SETTINGS.METHOD.SETTINGS.RANDOM.UNIQUE",
+            "CHANGE_STARTERS.SETTINGS.METHOD.SETTINGS.RANDOM.MATCH_TYPE",
+            "CHANGE_STARTERS.SETTINGS.METHOD.SETTINGS.RANDOM.MATCH_STAGE",
+            "CHANGE_STARTERS.SETTINGS.METHOD.SETTINGS.RANDOM.MATCH_EVOLUTIONS",
+            "CHANGE_STARTERS.SETTINGS.METHOD.SETTINGS.RANDOM.MATCH_SIMILAR_BST",
+            "CHANGE_STARTERS.SETTINGS.METHOD.SETTINGS.RANDOM.BAN",
+            "BANNED_POKEMON",
+          ],
+        },
+        remove: randomStartersSettings.UNIQUE,
+      }).id
     })
   }
   
@@ -152,7 +164,7 @@ export const updateStarters = (
 export const updateStarterItems = (
   settings: SettingsFromAppViewModel,
   romInfo: ROMInfo,
-  randomInt: (min: number, max: number) => number,
+  random: Random,
 ) => {
   if (settings.CHANGE_STARTER_HELD_ITEMS.VALUE) {
     const starterHeldItemsMethod = settings.CHANGE_STARTER_HELD_ITEMS.SETTINGS.METHOD
@@ -166,7 +178,17 @@ export const updateStarterItems = (
       })
       
       starterLocationIds.forEach((locationId) => {
-        romInfo.gameData.starterItems[locationId] = availableItemIds[randomInt(0, availableItemIds.length - 1)]
+        romInfo.gameData.starterItems[locationId] = random.element({
+          array: availableItemIds,
+          errorInfo: {
+            elementName: "item",
+            mainSettingName: "CHANGE_STARTER_HELD_ITEMS",
+            conflictingSettings: [
+              "CHANGE_STARTER_HELD_ITEMS.SETTINGS.METHOD.SETTINGS.RANDOM.BAN",
+              "BANNED_ITEMS",
+            ],
+          },
+        })
       })
     }
   }

@@ -1,0 +1,13 @@
+description: "Fixes issue where the game will hang when trying to enter a battle with a wild Unown."
+values:
+  lockedUnownLettersFix: "FA 30 D2 FE 00 28 02 A7 C9 FA F3 DE C3 78 6B"
+changes:
+- description: "Code to allow any unown letter if the battle type is not normal."
+  locations:
+  - bank: 15
+  value: "$lockedUnownLettersFix"
+- description: "Calls the new code."
+  locations:
+  - bank: 15
+    address: 0x6B75
+  value: "C3 @$lockedUnownLettersFix"

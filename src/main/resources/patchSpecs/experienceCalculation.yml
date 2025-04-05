@@ -1,0 +1,9 @@
+description: "Changes the experience calculation to scale based on the level difference."
+values:
+changes:
+- description: "Changes the experience calculation"
+  locations:
+  - bank: 15
+    address: 0x6EAE
+    maxSize: 10
+  value: "AF E0 B3 E0 B4 E0 B5 57 FA 2C D2 E0 B6 #options.$extraCalculations C9 $gen5BaseExpTable"

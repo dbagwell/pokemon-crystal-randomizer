@@ -39,6 +39,6 @@ export const bytesFromOddEgg = (oddEgg: OddEgg) => {
     ...bytesFrom(oddEgg.stats.speed, 2, true),
     ...bytesFrom(oddEgg.stats.specialAttack, 2, true),
     ...bytesFrom(oddEgg.stats.specialDefence, 2, true),
-    ...ROMInfo.displayCharacterBytesFrom(oddEgg.name),
+    ...ROMInfo.bytesFromText(oddEgg.name),
   ]
 }
