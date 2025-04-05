@@ -1,4 +1,4 @@
-description: "Changes the experience calculation to scale based on the level difference."
+description: "Changes the experience calculation based on the provided options."
 values:
 changes:
 - description: "Changes the experience calculation"

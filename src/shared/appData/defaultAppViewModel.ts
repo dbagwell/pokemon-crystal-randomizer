@@ -12,7 +12,7 @@ import { additionalOptionIds } from "@shared/types/gameDataIds/additionalOptions
 import { growthRateIds } from "@shared/types/gameDataIds/growthRates"
 import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
 import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGroups"
-import { ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
+import { ballItemIds, holdableItemIds, type ItemId, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
@@ -1013,6 +1013,11 @@ export const defaultAppViewModel = () => {
             id: "CHANGE_BOX_PHONE_CALL" as const,
             name: "Change Box Phone Call",
             description: "Adds the option to change the PC box when Bill calls the player to tell them that their current box is full.",
+          }),
+          createSimpleToggleViewModel({
+            id: "SHOW_MOVE_STATS_IN_BATTLE" as const,
+            name: "Show Move Stats in Battle",
+            description: "Shows the Power and Accuracy of a move while it is selected in the Fight menu of a battle.",
           }),
           createSimpleToggleViewModel({
             id: "SCALE_EXPERIENCE" as const,

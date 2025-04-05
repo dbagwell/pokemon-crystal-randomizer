@@ -1,0 +1,26 @@
+description: "Changes the experience calculation to scale based on the level difference."
+values:
+  printPowerAndAccuracy: "CD 83 2D 21 41 C5 11 @$accuracyText CD 78 10 FA 13 C6 FE 02 30 0B 21 48 C5 11 @$noneText CD 78 10 18 2C E0 B6 AF E0 B4 E0 B5 3E 64 E0 B7 CD 19 31 3E FF E0 B7 06 04 CD 24 31 F0 B7 FE 80 21 B6 FF 38 01 34 54 5D 01 03 01 21 47 C5 CD 98 31 21 2D C5 11 @$powerText CD 78 10 FA 11 C6 FE 02 30 0B 21 34 C5 11 @$noneText CD 78 10 18 0C 11 11 C6 01 03 01 21 33 C5 CD 98 31 C9"
+  accuracyText: "80 82 82 F3 7F 50"
+  powerText: "8F 8E 96 F3 7F 50"
+  noneText: "E3 E3 50"
+changes:
+- description: "Code to print the power and accuracy."
+  locations:
+  - bank: 15
+  value: "$printPowerAndAccuracy $accuracyText $powerText $noneText"
+- description: "Calls the code to print the power and accuracy."
+  locations:
+  - bank: 15
+    address: 0x674C
+  value: "@$printPowerAndAccuracy"
+- description: "Changes y coordinate of the move info box"
+  locations:
+  - bank: 15
+    address: 0x66CC
+  value: "18"
+- description: "Changes height of the move info box"
+  locations:
+  - bank: 15
+    address: 0x66CF
+  value: "05"
