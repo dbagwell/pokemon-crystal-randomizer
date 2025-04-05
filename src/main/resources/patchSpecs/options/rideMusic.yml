@@ -1,7 +1,6 @@
 description: "Code for handling the ride music option in the options menu."
 extends: "options/option.yml"
 values:
-  secondaryDefault: "[1]{0b00000000}"
   title: "91 88 83 84 7F 8C 94 92 88 82 7F 7F 9C"
   noneText: "8D 8E 8D 84 50"
   surfText: "92 94 91 85 50"

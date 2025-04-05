@@ -147,10 +147,12 @@ export const createSimpleToggleViewModel = <IdType extends string>(params: {
   id: IdType
   name: string
   description?: string
+  isOn?: boolean
 }) => {
+  const { isOn: _, ...props } = params
   return {
-    isOn: false,
-    ...params,
+    isOn: params.isOn ?? false,
+    ...props,
     type: "TOGGLE" as const,
   }
 }
@@ -160,11 +162,13 @@ export const createConfigurableToggleViewModel = <IdType extends string, ViewMod
   id: IdType
   name: string
   description?: string
+  isOn?: boolean
   viewModels: ViewModelsType
 }) => {
+  const { isOn: _, ...props } = params
   return {
-    isOn: false,
-    ...params,
+    isOn: params.isOn ?? false,
+    ...props,
     type: "TOGGLE" as const,
   }
 }

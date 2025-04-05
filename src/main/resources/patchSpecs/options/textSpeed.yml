@@ -1,7 +1,6 @@
 description: Code for handling the text speed option in the options menu.
 extends: options/option.yml
 values:
-  primaryDefault: "[1]{0b00000011}"
   title: "93 84 97 93 7F 92 8F 84 84 83 7F 7F 9C"
   fastText: "85 80 92 93 50"
   mediumText: "7F 8C 88 83 50"

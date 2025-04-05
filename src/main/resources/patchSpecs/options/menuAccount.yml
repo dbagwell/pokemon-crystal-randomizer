@@ -1,7 +1,6 @@
 description: Code for handling the menu account option in the options menu.
 extends: options/binaryOption.yml
 values:
-  secondaryDefault: "[1]{0b00000001}"
   title: "8C 84 8D 94 7F 80 82 82 8E 94 8D 93 9C"
   wramAddress: "D1 CF"
   bitIndex: "[1]{0}"
