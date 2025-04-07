@@ -878,12 +878,12 @@ const createPatches = (
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...performanceImprovementsPatch.hunks]
   }
-    
+  
   // Additional Options
-    
+  
   const selectedAdditionalOptions = settings.ADDITIONAL_OPTIONS
   const selectedAdditionalOptionIds = Object.keys(selectedAdditionalOptions) as (keyof typeof selectedAdditionalOptions)[]
-    
+  
   if (selectedAdditionalOptionIds.length > 0) {
     const additionalOptionsPatch = Patch.fromYAML(
       romInfo,
@@ -906,34 +906,6 @@ const createPatches = (
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...additionalOptionsPatch.hunks]
   }
-  
-  const selectedDefaults = settings.CHANGE_DEFAULT_OPTIONS.VALUE ? settings.CHANGE_DEFAULT_OPTIONS.SETTINGS : undefined
-  
-  romInfo.patchHunks = [
-    ...romInfo.patchHunks,
-    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7C), [
-      primaryOptionsValue(
-        {
-          instantTextEnabled: selectedAdditionalOptions.INSTANT_TEXT?.MAKE_DEFAULT,
-          textSpeed: selectedDefaults?.TEXT_SPEED,
-          holdToMashEnabled: selectedAdditionalOptions.HOLD_TO_MASH?.DEFAULT_VALUE,
-          battleSceneEnabled: selectedDefaults?.BATTLE_SCENE,
-          battleStyle: selectedDefaults?.BATTLE_STYLE,
-          sound: selectedDefaults?.SOUND,
-        },
-        selectedAdditionalOptionIds.length > 0,
-      ),
-    ]),
-    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F81), [
-      secondaryOptionsValue({
-        nicknamesEnabled: selectedAdditionalOptions.NICKNAMES?.DEFAULT_VALUE,
-        rideMusic: selectedAdditionalOptions.RIDE_MUSIC?.DEFAULT_VALUE,
-        menuAccountEnabled: selectedDefaults?.MENU_ACCOUNT,
-      }),
-    ]),
-    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7E), [frameTypeValue(selectedDefaults?.FRAME_TYPE)]),
-    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F80), [printToneValue(selectedDefaults?.PRINT_TONE)]),
-  ]
 }
 
 const createPlayerSpecificPatches = (settings: SettingsFromAppViewModel, romInfo: ROMInfo, useDefaults: boolean): DataHunk[] => {
@@ -970,6 +942,38 @@ const createPlayerSpecificPatches = (settings: SettingsFromAppViewModel, romInfo
     
     hunks = [...hunks, ...skipNamePatch.hunks]
   }
+  
+  // Default Options
+  
+  const selectedAdditionalOptions = settings.ADDITIONAL_OPTIONS
+  const selectedAdditionalOptionIds = Object.keys(selectedAdditionalOptions) as (keyof typeof selectedAdditionalOptions)[]
+  const selectedDefaults = settings.CHANGE_DEFAULT_OPTIONS.VALUE ? settings.CHANGE_DEFAULT_OPTIONS.SETTINGS : undefined
+  
+  romInfo.patchHunks = [
+    ...romInfo.patchHunks,
+    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7C), [
+      primaryOptionsValue(
+        {
+          instantTextEnabled: selectedAdditionalOptions.INSTANT_TEXT?.MAKE_DEFAULT,
+          textSpeed: selectedDefaults?.TEXT_SPEED,
+          holdToMashEnabled: selectedAdditionalOptions.HOLD_TO_MASH?.DEFAULT_VALUE,
+          battleSceneEnabled: selectedDefaults?.BATTLE_SCENE,
+          battleStyle: selectedDefaults?.BATTLE_STYLE,
+          sound: selectedDefaults?.SOUND,
+        },
+        selectedAdditionalOptionIds.length > 0,
+      ),
+    ]),
+    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F81), [
+      secondaryOptionsValue({
+        nicknamesEnabled: selectedAdditionalOptions.NICKNAMES?.DEFAULT_VALUE,
+        rideMusic: selectedAdditionalOptions.RIDE_MUSIC?.DEFAULT_VALUE,
+        menuAccountEnabled: selectedDefaults?.MENU_ACCOUNT,
+      }),
+    ]),
+    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7E), [frameTypeValue(selectedDefaults?.FRAME_TYPE)]),
+    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F80), [printToneValue(selectedDefaults?.PRINT_TONE)]),
+  ]
   
   return hunks
 }
