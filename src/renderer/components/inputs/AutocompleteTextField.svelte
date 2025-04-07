@@ -77,6 +77,18 @@
     value: any
   }
   
+  export const optionFrom = (value: {
+    id: string
+    name: string
+    description?: string
+  }): Option => {
+    return {
+      ...value,
+      keywords: value.name,
+      value: value.id,
+    }
+  }
+  
 </script>
 
 <script lang="ts">

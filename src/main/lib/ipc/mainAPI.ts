@@ -1,7 +1,8 @@
 import { generateROM } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
-import { getPreviousSettings, setPreviousSettings } from "@lib/userData/userData"
+import { getPreviousPresetId, getSettingsForPresetId, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
+import { type PresetId } from "@shared/appData/presets"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
 import { isNullish } from "@shared/utils"
 import { dialog } from "electron"
@@ -10,13 +11,28 @@ import fs from "fs"
 
 export class MainAPI implements ElectronMainApi<MainAPI> {
   
-  readonly getPreviousSettings = async (): Promise<Response<unknown | undefined>> => {
+  readonly getPresetSettings = async (presetId: string): Promise<APIResponse<unknown | undefined>> => {
     return {
-      result: getPreviousSettings(),
+      result: getSettingsForPresetId(presetId),
     }
   }
   
-  readonly generateROM = async (seed: string | undefined, settings: SettingsFromAppViewModel): Promise<Response<void>> => {
+  readonly getPreviousSettings = async (): Promise<APIResponse<{ presetId: PresetId, settings: unknown | undefined }>> => {
+    const lastPrestId = getPreviousPresetId()
+    
+    return {
+      result: {
+        presetId: lastPrestId,
+        settings: getSettingsForPresetId(lastPrestId),
+      },
+    }
+  }
+  
+  readonly generateROM = async (
+    seed: string | undefined,
+    settings: SettingsFromAppViewModel,
+    presetId: PresetId
+  ): Promise<VoidAPIResponse> => {
     try {
       const vanillaData = await getVanillaROM()
         
@@ -50,6 +66,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
       fs.writeFileSync(filePath, generatorResult.data)
       
       setPreviousSettings(settings)
+      setPreviousPresetId(presetId)
       
       return {
         message: "ROM Generated!",
@@ -67,9 +84,11 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
   
 }
 
-export type Response<Result> = Result extends void ? {
+export type VoidAPIResponse = {
   message?: string,
-} : {
+}
+
+export type APIResponse<Result> = {
   message?: string,
   result: Result,
 }

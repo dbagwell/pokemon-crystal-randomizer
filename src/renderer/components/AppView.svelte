@@ -99,14 +99,29 @@
         alignment="center"
         direction="horizontal"
         distribution="fill"
-        minSpacing={3}
+        minSpacing={10}
         padding={20}
       >
+        <AutocompleteTextField
+          clearOnFocus={true}
+          clearOnSelect={false}
+          filter={currentPresetName}
+          onSelect={(presetId) => { presetSelected(presetId as PresetId ?? "VANILLA") }}
+          options={Object.values(presetsMap).filter((preset) => {
+            return preset.id !== "CUSTOM"
+          }).map((preset) => {
+            return optionFrom(preset)
+          })}
+          previousSelection={optionFrom(currentPreset)}
+          restoreOnBlur={true}
+          title="Choose Preset"
+        />
         <TextField
           title="Custom Seed"
           type="text"
           bind:value={seed}
         />
+        <div style:flex-grow="2"></div>
         <Button
           style="fill"
           onClick={generateROMButtonClicked}
@@ -126,6 +141,7 @@
 <script lang="ts">
   import Button from "@components/buttons/Button.svelte"
   import DialogContainer, { showDialog, showErrorDialog, showSuccessDialog } from "@components/dialogs/DialogContainer.svelte"
+  import AutocompleteTextField, { optionFrom } from "@components/inputs/AutocompleteTextField.svelte"
   import TextField from "@components/inputs/TextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
   import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
@@ -134,24 +150,46 @@
   import { colors } from "@scripts/colors"
   import { applySettingsToAppViewModel } from "@shared/appData/applySettingsToAppViewModel"
   import { defaultAppViewModel } from "@shared/appData/defaultAppViewModel"
+  import { type PresetId, presetsMap } from "@shared/appData/presets"
   import { type SettingsFromAppViewModel, settingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
   import { onMount } from "svelte"
   
   type Props = {
-    initialSettings: unknown | undefined,
+    lastSelectedPresetId: PresetId
+    lastSelectedSettings: unknown | undefined,
   }
   
-  const { initialSettings }: Props = $props()
+  /* eslint-disable prefer-const */
+  let {
+    lastSelectedPresetId,
+    lastSelectedSettings,
+  }: Props = $props()
+  /* eslint-enable prefer-const */
   
   let mainContentContainer: HTMLElement
   let seed = $state("")
   let viewModel = $state(defaultAppViewModel())
   
+  const currentPreset = $derived.by(() => { viewModel; return _currentPreset() })
+  const _currentPreset = () => {
+    if (JSON.stringify(lastSelectedSettings) === JSON.stringify(settingsFromAppViewModel($state.snapshot(viewModel) as typeof viewModel))) {
+      return presetsMap[lastSelectedPresetId]
+    } else {
+      return presetsMap.CUSTOM
+    }
+  }
+  
+  const currentPresetName = $derived(currentPreset.name)
+  
   onMount(() => {
+    applyNewSettings(lastSelectedSettings)
+  })
+  
+  const applyNewSettings = (settings: unknown | undefined) => {
     try {
       const warnings: string[] = []
       const newViewModel = defaultAppViewModel()
-      applySettingsToAppViewModel(initialSettings, newViewModel, warnings)
+      applySettingsToAppViewModel(settings, newViewModel, warnings)
       viewModel = newViewModel
       
       if (warnings.length > 0) {
@@ -164,7 +202,19 @@
     } catch (error) {
       showErrorDialog(error)
     }
-  })
+  }
+  
+  const presetSelected = async (presetId: PresetId) => {
+    if (presetId === lastSelectedPresetId || presetId === "CUSTOM") {
+      return
+    }
+    
+    showProgressIndicator()
+    lastSelectedPresetId = presetId
+    lastSelectedSettings = (await window.mainAPI.getPresetSettings(lastSelectedPresetId)).result
+    applyNewSettings(lastSelectedSettings)
+    hideProgressIndicator()
+  }
   
   const generateROMButtonClicked = async () => {
     const settings = settingsFromAppViewModel($state.snapshot(viewModel) as typeof viewModel)
@@ -204,7 +254,7 @@
   const generateROM = async (settings: SettingsFromAppViewModel) => {
     try {
       showProgressIndicator()
-      const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, settings)
+      const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, settings, currentPreset.id)
       showSuccessDialog(response.message)
     } catch (error) {
       showErrorDialog(error)

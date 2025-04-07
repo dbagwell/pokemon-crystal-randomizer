@@ -1330,7 +1330,7 @@ const createGoodDamagingMovesToggleViewModel = (distinguisher: string = "") => {
         isRequired: true as const,
         min: 1,
         max: 100,
-        value: 20,
+        value: 25,
       }),
       createIntegerInputViewModel({
         id: "POWER" as const,
