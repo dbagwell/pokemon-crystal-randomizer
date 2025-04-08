@@ -98,3 +98,8 @@ export const getSavedSettingsNames = () => {
     return fileName.replace(/\.yml$/, "")
   })
 }
+
+export const removeSavedSettings = (name: string) => {
+  const fileName = `${name}.yml`
+  fs.rmSync(path.resolve(settingsPath, fileName), { force: true })
+}

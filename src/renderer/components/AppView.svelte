@@ -112,6 +112,7 @@
             clearOnFocus={true}
             clearOnSelect={false}
             filter={currentPresetName}
+            onRemove={showRemovePresetConfirmation}
             onSelect={(presetId) => { presetSelected(presetId as PresetId ?? "VANILLA") }}
             options={presetOptions}
             previousSelection={optionFrom(currentPreset)}
@@ -227,6 +228,7 @@
         return optionFrom({
           id: name,
           name: name,
+          isRemovable: true,
         })
       }),
     ]
@@ -269,6 +271,35 @@
     lastSelectedSettings = (await window.mainAPI.getPresetSettings(lastSelectedPresetId)).result
     applyNewSettings(lastSelectedSettings)
     hideProgressIndicator()
+  }
+  
+  const showRemovePresetConfirmation = (id: string) => {
+    showDialog({
+      title: "Remove Preset?",
+      message: `Are you sure you would like to remove the '${id}' preset?\nThis action cannot be undone.`,
+      submitButtonLabel: "Remove",
+      hasCancelButton: true,
+      onSubmit: async () => {
+        try {
+          showProgressIndicator()
+          const response = await window.mainAPI.removeSavedSettings(id)
+          
+          customPresetNames = customPresetNames.filter((name) => {
+            return name !== id
+          })
+          
+          if (lastSelectedPresetId === id) {
+            lastSelectedPresetId = "CUSTOM"
+          }
+          
+          showSuccessDialog(response.message)
+        } catch (error) {
+          showErrorDialog(error)
+        } finally {
+          hideProgressIndicator()
+        }
+      },
+    })
   }
   
   const createNewPresetButtonClicked = () => {

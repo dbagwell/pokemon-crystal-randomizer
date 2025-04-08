@@ -80,6 +80,7 @@
   
   const handleClickEvent = (event: Event) => {
     event.preventDefault()
+    event.stopPropagation()
     
     if (!isDisabled) {
       onClick()

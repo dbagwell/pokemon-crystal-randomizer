@@ -1,6 +1,6 @@
 import { generateROM } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
-import { getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, saveSettings, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
+import { getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import { type PresetId } from "@shared/appData/presets"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
@@ -52,6 +52,18 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
   readonly getSavedSettings = async (name: string): Promise<APIResponse<unknown | undefined>> => {
     return {
       result: getSavedSettings(name),
+    }
+  }
+  
+  readonly removeSavedSettings = async (name: string): Promise<VoidAPIResponse> => {
+    try {
+      removeSavedSettings(name)
+      return {
+        message: `Preset '${name}' removed.`,
+      }
+    } catch (error: any) {
+      console.log(error.stack)
+      throw new RelayedError(`${error}`)
     }
   }
   
