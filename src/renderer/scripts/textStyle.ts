@@ -4,6 +4,7 @@ const textStyles = [
   "title",
   "content",
   "item",
+  "error",
 ] as const
 
 export const textStyle = (element: HTMLElement, style: typeof textStyles[number]) => {
@@ -21,6 +22,11 @@ export const textStyle = (element: HTMLElement, style: typeof textStyles[number]
   case "item": {
     element.style.color = colors.text
     element.style.fontSize = "16px"
+    break
+  }
+  case "error": {
+    element.style.color = colors.destructiveTint
+    element.style.fontSize = "14px"
     break
   }
   }

@@ -1,6 +1,6 @@
 import { generateROM } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
-import { getPreviousPresetId, getSettingsForPresetId, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
+import { getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, saveSettings, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import { type PresetId } from "@shared/appData/presets"
 import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
@@ -17,14 +17,41 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     }
   }
   
-  readonly getPreviousSettings = async (): Promise<APIResponse<{ presetId: PresetId, settings: unknown | undefined }>> => {
+  readonly getInitialAppData = async (): Promise<APIResponse<{
+    presetId: PresetId,
+    settings: unknown | undefined
+    customPresetNames: string[]
+  }>> => {
     const lastPrestId = getPreviousPresetId()
     
     return {
       result: {
         presetId: lastPrestId,
         settings: getSettingsForPresetId(lastPrestId),
+        customPresetNames: getSavedSettingsNames(),
       },
+    }
+  }
+  
+  readonly saveSettings = async (settings: SettingsFromAppViewModel, name: string): Promise<VoidAPIResponse> => {
+    try {
+      saveSettings(settings, name)
+      return {
+        message: `Preset '${name}' created.`,
+      }
+    } catch (error: any) {
+      console.log(error.stack)
+      if (error.message.includes("EEXIST")) {
+        throw new RelayedError(`Preset name '${name}' already exists.`)
+      } else {
+        throw new RelayedError(`${error}`)
+      }
+    }
+  }
+  
+  readonly getSavedSettings = async (name: string): Promise<APIResponse<unknown | undefined>> => {
+    return {
+      result: getSavedSettings(name),
     }
   }
   

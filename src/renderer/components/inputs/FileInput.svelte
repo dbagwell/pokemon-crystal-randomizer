@@ -9,6 +9,7 @@
     bind:files={files}
   />
   <button
+    style:background-color="transparent"
     style:border="3px dashed {colors.inactiveTint}"
     style:width="100%"
     ondragover={handleDragOverEvent}
@@ -67,7 +68,7 @@
             {files[0].name}
           </div>
           <Button
-            style="text"
+            style="deemphasized-text"
             icon="cancel"
             isDestructive={true}
             onClick={() => { files = undefined; value = "" }}

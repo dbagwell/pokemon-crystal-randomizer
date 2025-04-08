@@ -56,12 +56,25 @@
     {/if}
   
     {#if isNotNullish(inputInfo)}
-      <FileInput
-        allowedFileTypes={inputInfo.fileExtension}
-        title={inputInfo.title}
-        bind:value={selectedFileName}
-        bind:files={files}
-      />
+      {#if inputInfo.type === "file"}
+        <FileInput
+          allowedFileTypes={inputInfo.fileExtension}
+          title={inputInfo.title}
+          bind:value={selectedFileName}
+          bind:files={files}
+        />
+      {:else if inputInfo.type === "text"}
+        <TextField
+          title={inputInfo.title}
+          type="text"
+          bind:value={textValue}
+        />
+        {#if isNotNullish(validationError)}
+          <div use:textStyle={"error"}>
+            {validationError}
+          </div>
+        {/if}
+      {/if}
     {/if}
     <Stack
       alignment="fill"
@@ -78,21 +91,29 @@
           title="Cancel"
         />
       {/if}
-  
-      <Button
-        style="fill"
-        flexGrow={true}
-        onClick={submitButtonClicked}
-        title={submitButtonLabel}
-        bind:isDisabled={isSubmitButtonDisabled}
-      />
+      {#await isSubmitButtonDisabled}
+        {@render submitButton(true)}
+      {:then isDisabled}
+        {@render submitButton(isDisabled)}
+      {/await}
     </Stack>
   </Stack>
 </div>
 
+{#snippet submitButton(isDisabled: boolean)}
+  <Button
+    style="fill"
+    flexGrow={true}
+    isDisabled={isDisabled}
+    onClick={submitButtonClicked}
+    title={submitButtonLabel}
+  />
+{/snippet}
+
 <script lang="ts">
   import Button from "@components/buttons/Button.svelte"
   import FileInput from "@components/inputs/FileInput.svelte"
+  import TextField from "@components/inputs/TextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
   import { colors } from "@scripts/colors"
   import { zIndexes } from "@scripts/constants"
@@ -125,7 +146,36 @@
   let selectedFileName: string | undefined = $state()
   let files: FileList | undefined = $state()
   let open = $state(true)
-  let isSubmitButtonDisabled = $state(false)
+  let textValue = $state("")
+  
+  const isSubmitButtonDisabled = $derived.by(async () => { files; selectedFileName; return await _isSubmitButtonDisabled() })
+  const _isSubmitButtonDisabled = async () => {
+    if (isNotNullish(inputInfo)) {
+      if (inputInfo.type === "file") {
+        return isNullish(await inputValue())
+      } else if (inputInfo.type === "text") {
+        return isNotNullish(inputInfo.validator?.(textValue))
+      } else {
+        return true // Should never happen
+      }
+    } else {
+      return false
+    }
+  }
+  
+  const validationError = $derived.by(() => {
+    if (inputInfo?.type !== "text") {
+      return undefined
+    }
+    
+    const error = inputInfo?.validator?.(textValue)
+    
+    if (error === "") {
+      return undefined
+    } else {
+      return error
+    }
+  })
   
   const selectedFile = (): File | undefined => {
     if (isNotNullish(files) && files.length !== 0) {
@@ -139,6 +189,8 @@
       if (isNotNullish(file)) {
         return new DataView(await file.arrayBuffer())
       }
+    } else if (inputInfo?.type === "text") {
+      return textValue
     }
   }
   
@@ -161,13 +213,6 @@
     }
     
     open = false
-  }
-  
-  $effect(() => { files; selectedFileName; filesChanged() })
-  const filesChanged = async () => {
-    if (isNotNullish(inputInfo)) {
-      isSubmitButtonDisabled = isNullish(await inputValue())
-    }
   }
   
   $effect(() => { open; openListener() })

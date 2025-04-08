@@ -52,7 +52,8 @@ export const getSettingsForPresetId = (id: string): unknown | undefined => {
   } else {
     try {
       const presetPath = path.resolve(__dirname, "presets", `${id}.yml`)
-      return getYAML([presetPath])
+      const customPresetPath = path.resolve(settingsPath, `${id}.yml`)
+      return getYAML([presetPath, customPresetPath])
     } catch {
       return undefined
     }
@@ -74,4 +75,26 @@ export const setPreviousSettings = (settings: SettingsFromAppViewModel) => {
   } catch {
     // Do nothing
   }
+}
+
+export const getSavedSettings = (name: string) => {
+  try {
+    return getYAML([path.resolve(settingsPath, `${name}.yml`)])
+  } catch {
+    return undefined
+  }
+}
+
+export const saveSettings = (settings: SettingsFromAppViewModel, name: string) => {
+  const fileName = `${name}.yml`
+  fs.mkdirSync(settingsPath, { recursive: true })
+  fs.writeFileSync(path.resolve(settingsPath, fileName), yaml.stringify(settings), { flag: "wx" })
+}
+
+export const getSavedSettingsNames = () => {
+  return fs.readdirSync(settingsPath).filter((fileName) => {
+    return !fileName.startsWith(".") && fileName.endsWith(".yml")
+  }).map((fileName) => {
+    return fileName.replace(/\.yml$/, "")
+  })
 }

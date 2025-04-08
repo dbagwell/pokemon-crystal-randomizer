@@ -96,37 +96,60 @@
       style:box-shadow="0 -2px 5px #00000070"
     >
       <Stack
-        alignment="center"
+        alignment="fill"
         direction="horizontal"
         distribution="fill"
-        minSpacing={10}
-        padding={20}
+        minSpacing={20}
+        padding={[5, 20, 20, 20]}
       >
-        <AutocompleteTextField
-          clearOnFocus={true}
-          clearOnSelect={false}
-          filter={currentPresetName}
-          onSelect={(presetId) => { presetSelected(presetId as PresetId ?? "VANILLA") }}
-          options={Object.values(presetsMap).filter((preset) => {
-            return preset.id !== "CUSTOM"
-          }).map((preset) => {
-            return optionFrom(preset)
-          })}
-          previousSelection={optionFrom(currentPreset)}
-          restoreOnBlur={true}
-          title="Choose Preset"
-        />
-        <TextField
-          title="Custom Seed"
-          type="text"
-          bind:value={seed}
-        />
+        <Stack
+          alignment="start"
+          direction="vertical"
+          distribution="end"
+          minSpacing={10}
+        >
+          <AutocompleteTextField
+            clearOnFocus={true}
+            clearOnSelect={false}
+            filter={currentPresetName}
+            onSelect={(presetId) => { presetSelected(presetId as PresetId ?? "VANILLA") }}
+            options={presetOptions}
+            previousSelection={optionFrom(currentPreset)}
+            restoreOnBlur={true}
+            title="Choose Preset"
+          />
+        </Stack>
+        <Stack
+          alignment="start"
+          direction="vertical"
+          distribution="end"
+          minSpacing={10}
+        >
+          <Button
+            style="text"
+            isDisabled={currentPreset.id !== "CUSTOM"}
+            onClick={createNewPresetButtonClicked}
+            title="Create New Preset"
+          />
+        </Stack>
         <div style:flex-grow="2"></div>
-        <Button
-          style="fill"
-          onClick={generateROMButtonClicked}
-          title="GENERATE"
-        />
+        <Stack
+          alignment="center"
+          direction="vertical"
+          distribution="fill"
+          minSpacing={10}
+        >
+          <TextField
+            title="Custom Seed"
+            type="text"
+            bind:value={seed}
+          />
+          <Button
+            style="fill"
+            onClick={generateROMButtonClicked}
+            title="GENERATE"
+          />
+        </Stack>
       </Stack>
     </div>
   </Stack>
@@ -145,6 +168,7 @@
   import TextField from "@components/inputs/TextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
   import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
+  import ToggleView from "@components/settingsInputViews/ToggleView.svelte"
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/utility/ProgressIndicator.svelte"
   import Tooltip from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
@@ -157,12 +181,14 @@
   type Props = {
     lastSelectedPresetId: PresetId
     lastSelectedSettings: unknown | undefined,
+    customPresetNames: string[]
   }
   
   /* eslint-disable prefer-const */
   let {
     lastSelectedPresetId,
     lastSelectedSettings,
+    customPresetNames,
   }: Props = $props()
   /* eslint-enable prefer-const */
   
@@ -170,16 +196,45 @@
   let seed = $state("")
   let viewModel = $state(defaultAppViewModel())
   
-  const currentPreset = $derived.by(() => { viewModel; return _currentPreset() })
+  const currentPreset = $derived.by(() => {
+    lastSelectedPresetId
+    lastSelectedSettings
+    viewModel
+    return _currentPreset()
+  })
   const _currentPreset = () => {
-    if (JSON.stringify(lastSelectedSettings) === JSON.stringify(settingsFromAppViewModel($state.snapshot(viewModel) as typeof viewModel))) {
-      return presetsMap[lastSelectedPresetId]
+    if (JSON.stringify(lastSelectedSettings) === JSON.stringify(currentSettings())) {
+      return presetsMap[lastSelectedPresetId] ?? {
+        id: lastSelectedPresetId,
+        name: lastSelectedPresetId,
+      }
     } else {
       return presetsMap.CUSTOM
     }
   }
   
   const currentPresetName = $derived(currentPreset.name)
+  
+  const presetOptions = $derived.by(() => { customPresetNames; return _presetOptions() })
+  const _presetOptions = () => {
+    return [
+      ...Object.values(presetsMap).filter((preset) => {
+        return preset.id !== "CUSTOM"
+      }).map((preset) => {
+        return optionFrom(preset)
+      }),
+      ...customPresetNames.map((name) => {
+        return optionFrom({
+          id: name,
+          name: name,
+        })
+      }),
+    ]
+  }
+  
+  const currentSettings = () => {
+    return settingsFromAppViewModel($state.snapshot(viewModel) as typeof viewModel)
+  }
   
   onMount(() => {
     applyNewSettings(lastSelectedSettings)
@@ -216,8 +271,54 @@
     hideProgressIndicator()
   }
   
+  const createNewPresetButtonClicked = () => {
+    showDialog({
+      title: "Create New Preset",
+      message: "Save the current settings as a preset that can be reused in the future.",
+      submitButtonLabel: "Create",
+      hasCancelButton: true,
+      inputInfo: {
+        title: "Preset Name",
+        type: "text",
+        validator: (text) => {
+          const nameExists = presetOptions.find((option) => {
+            return option.id === text
+          })
+          
+          if (nameExists) {
+            return "Preset name already exists."
+          } else if (text === "") {
+            return ""
+          } else {
+            return undefined
+          }
+        },
+      },
+      onSubmit: async (name) => {
+        try {
+          showProgressIndicator()
+          const response = await window.mainAPI.saveSettings(currentSettings(), name)
+          
+          customPresetNames = [
+            ...customPresetNames,
+            name,
+          ]
+          
+          lastSelectedPresetId = name
+          lastSelectedSettings = settingsFromAppViewModel(viewModel)
+          
+          showSuccessDialog(response.message)
+        } catch (error) {
+          showErrorDialog(error)
+        } finally {
+          hideProgressIndicator()
+        }
+      },
+    })
+  }
+  
   const generateROMButtonClicked = async () => {
-    const settings = settingsFromAppViewModel($state.snapshot(viewModel) as typeof viewModel)
+    const settings = currentSettings()
     
     let recommendation = ""
     

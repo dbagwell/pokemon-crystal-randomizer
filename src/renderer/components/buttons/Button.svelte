@@ -50,7 +50,7 @@
   import { onMount } from "svelte"
   
   type Props = {
-    style: "fill" | "text"
+    style: "fill" | "deemphasized-text" | "text"
     isDestructive?: boolean
     title?: string
     icon?: string
@@ -126,7 +126,7 @@
       container.style.boxShadow = "2px 2px 5px #00000070"
       textContainer.style.fontSize = "20px"
       textContainer.style.color = colors.buttonText
-      return
+      break
     }
     case "text": {
       container.style.backgroundColor = "transparent"
@@ -138,8 +138,23 @@
       container.style.boxShadow = ""
       textContainer.style.fontSize = "16px"
       textContainer.style.color = isHovered && !isDisabled
+        ? isDestructive ? colors.destructiveTint : colors.secondaryTint
+        : colors.primaryTint
+      break
+    }
+    case "deemphasized-text": {
+      container.style.backgroundColor = "transparent"
+      container.style.borderStyle = "none"
+      container.style.borderWidth = "0px"
+      container.style.borderColor = "transparent"
+      container.style.height = ""
+      container.style.borderRadius = ""
+      container.style.boxShadow = ""
+      textContainer.style.fontSize = "16px"
+      textContainer.style.color = isHovered && !isDisabled
         ? isDestructive ? colors.destructiveTint : colors.primaryTint
         : colors.inactiveTint
+      break
     }
     }
   }

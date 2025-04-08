@@ -33,7 +33,7 @@
 </div>
 
 <script lang="ts">
-  import { arrow, autoUpdate, computePosition, flip, offset, size } from "@floating-ui/dom"
+  import { arrow, autoUpdate, computePosition, flip, offset, shift, size } from "@floating-ui/dom"
   import { colors } from "@scripts/colors"
   import { isNotNullish, isNullish } from "@shared/utils"
   import type { Snippet } from "svelte"
@@ -55,6 +55,7 @@
       middleware: [
         offset({ mainAxis: 15 }),
         flip(),
+        shift(),
         size({
           apply({ availableWidth, availableHeight, elements }) {
             elements.floating.style.maxWidth = `${Math.min(availableWidth, 300)}px`
