@@ -1,5 +1,6 @@
 <label style:cursor="pointer">
   <input
+    bind:this={inputElement}
     style:position="absolute"
     style:width="0"
     style:height="0"
@@ -9,11 +10,17 @@
     bind:files={files}
   />
   <button
+    bind:this={buttonElement}
+    style:cursor="pointer"
     style:background-color="transparent"
     style:border="3px dashed {colors.inactiveTint}"
     style:width="100%"
+    onclick={handleClickEvent}
+    ondragleave={handleDragLeaveEvent}
     ondragover={handleDragOverEvent}
     ondrop={handleDropEvent}
+    onmouseenter={handleMouseEnterEvent}
+    onmouseleave={handleMouseLeaveEvent}
   >
     <Stack
       alignment="fill"
@@ -101,6 +108,9 @@
   }: Props = $props()
   /* eslint-enable prefer-const */
   
+  let inputElement: HTMLElement
+  let buttonElement: HTMLElement
+  
   const handleDragOverEvent = (event: DragEvent) => {
     event.preventDefault()
     event.stopPropagation()
@@ -108,6 +118,12 @@
     if (isNotNullish(event.dataTransfer)) {
       event.dataTransfer.dropEffect = "copy"
     }
+    
+    updateStyle(true)
+  }
+  
+  const handleDragLeaveEvent = () => {
+    updateStyle(false)
   }
   
   const handleDropEvent = (event: DragEvent) => {
@@ -117,5 +133,23 @@
     if (isNotNullish(event.dataTransfer)) {
       files = event.dataTransfer.files
     }
+  }
+  
+  const handleClickEvent = (event: MouseEvent) => {
+    event.preventDefault()
+    event.stopPropagation()
+    inputElement.click()
+  }
+  
+  const handleMouseEnterEvent = () => {
+    updateStyle(true)
+  }
+  
+  const handleMouseLeaveEvent = () => {
+    updateStyle(false)
+  }
+  
+  const updateStyle = (isHovered: boolean) => {
+    buttonElement.style.borderColor = isHovered ? colors.primaryTint : colors.inactiveTint
   }
 </script>
