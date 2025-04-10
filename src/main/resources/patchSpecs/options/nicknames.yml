@@ -1,7 +1,6 @@
 description: "Code for handling the nicknames option in the options menu."
 extends: "options/binaryOption.yml"
 values:
-  primaryDefault: "[1]{0b00000000}"
   title: "8D 88 82 8A 8D 80 8C 84 92 7F 7F 7F 9C"
   wramAddress: "D1 CF"
   bitIndex: "[1]{1}"

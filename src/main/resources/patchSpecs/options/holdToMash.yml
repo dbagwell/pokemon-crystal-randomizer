@@ -1,7 +1,6 @@
 description: Code for handling the hold to mash option in the options menu.
 extends: options/binaryOption.yml
 values:
-  primaryDefault: "[1]{0b00001000}"
   title: "87 8E 8B 83 7F 93 8E 7F 8C 80 92 87 9C"
   wramAddress: "CC CF"
   bitIndex: "[1]{3}"

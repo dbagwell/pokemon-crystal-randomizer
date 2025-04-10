@@ -1,7 +1,6 @@
 description: Code for handling the battle shift option in the options menu.
 extends: options/binaryOption.yml
 values:
-  primaryDefault: "[1]{0b01000000}"
   title: "81 80 93 93 8B 84 7F 92 87 88 85 93 9C"
   wramAddress: "CC CF"
   bitIndex: "[1]{6}"

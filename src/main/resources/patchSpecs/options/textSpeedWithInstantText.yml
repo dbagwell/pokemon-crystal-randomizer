@@ -1,7 +1,6 @@
 description: Code for handling the text speed option in the options menu with the additional option of instant text speed.
 extends: options/textSpeed.yml
 values:
-  primaryDefault: "[1]{0b00000000}"
   instantText: "88 8D 92 93 50"
   data: "F0 A7 CB 6F 20 3F CB 67 20 2A 21 $coord FA CC CF E6 07 FE 05 28 17 FE 03 28 0E FE 01 28 05 11 @$instantText 18 0D 11 @$fastText 18 08 11 @$mediumText 18 03 11 @$slowText CD 78 10 C9 FA CC CF E6 07 3C FE 01 28 05 3C FE 07 28 FB 18 0D FA CC CF E6 07 3D 28 05 3D FE FE 28 FB E6 07 47 FA CC CF E6 F8 B0 EA CC CF 18 AA $instantText $fastText $mediumText $slowText"
   checkInstantText: "FA CC CF E6 07 FE 00 C9"

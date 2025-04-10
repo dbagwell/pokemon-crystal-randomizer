@@ -7,8 +7,6 @@ values:
   onText: "7F 8E 8D 50"
   offText: "8E 85 85 50"
   binaryOptionHandler: "F5 F0 A7 E6 30 28 0D F1 FE 01 28 05 F5 78 12 18 03 F5 79 12 F1 FE 01 20 05 11 @$onText 18 03 11 @$offText CD 78 10 C9"
-  primaryDefault: "sum(#options.$primaryDefault, 1)"
-  secondaryDefault: "sum(#options.$secondaryDefault, 1)"
   jumpTable: "@#options.$data"
 changes:
   - description: Changes the options menu to accomodate additional the additional options.
@@ -18,14 +16,3 @@ changes:
         maxSize: 937
         freeUnused: true
     value: "$menu $changeOption $update $jumpToOption $onText $offText $binaryOptionHandler split(#options.$title, 22) 50 #options.$data $jumpTable"
-  - description: Sets the primary options default values for each of the provided options.
-    locations:
-      - bank: 5
-        address: 0x4F7C
-    value: "$primaryDefault"
-  - description: Sets the secondary options default values for each of the provided options.
-    locations:
-      - bank: 5
-        address: 0x4F81
-    value: "$secondaryDefault"
-        

@@ -37,11 +37,10 @@
         padding={[5, 0, 10, 20]}
       >
         {#if viewModel.selectedOptionIds.length > 0}
-          <Stack
-            alignment="fill"
-            direction="vertical"
-            distribution="start"
-            minSpacing={5}
+          <div
+            style:display="grid"
+            style:grid-template-columns="1fr 2fr"
+            style:gap="10px"
           >
             {#each selectedOptions as selectedOption, index (selectedOption.id)}
               {#snippet optionDescriptionTooltip()}
@@ -69,21 +68,21 @@
                 >
                   {selectedOption.name}
                 </div>
-                <Stack
-                  alignment="start"
-                  direction="vertical"
-                  distribution="start"
-                  minSpacing={15}
-                  padding={[10, 0, 0, 20]}
-                  wrap={true}
-                >
-                  {#each selectedOption.viewModels as subViewModel, index (subViewModel.id)}
-                    <SettingsInputView viewModel={selectedOption.viewModels[index]}/>
-                  {/each}
-                </Stack>
+              </Stack>
+              <Stack
+                alignment="start"
+                direction="vertical"
+                distribution="start"
+                minSpacing={15}
+                padding={[0, 0, 0, 20]}
+                wrap={true}
+              >
+                {#each selectedOption.viewModels as subViewModel, index (subViewModel.id)}
+                  <SettingsInputView viewModel={selectedOption.viewModels[index]}/>
+                {/each}
               </Stack>
             {/each}
-          </Stack>
+          </div>
         {/if}
         {#if availableOptions.length > 0}
           <AutocompleteTextField
