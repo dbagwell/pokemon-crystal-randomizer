@@ -1,4 +1,4 @@
-{#each dialogs as dialog}
+{#each dialogs as dialog (dialog.id)}
 
   <Dialog
     extraContent={dialog.params.extraContent}
