@@ -228,7 +228,7 @@ export const defaultSettingsViewModel = () => {
           createConfigurableToggleViewModel({
             id: "RANDOMIZE_TRADES" as const,
             name: "Randomize Trades",
-            description: "Randomize the Pokémon asked for and offered in the in-game trades.",
+            description: "Randomize the Pokémon requested and offered in the in-game trades.",
             viewModels: [
               createSingleSelectorViewModel({
                 id: "METHOD" as const,
@@ -237,12 +237,12 @@ export const defaultSettingsViewModel = () => {
                   createSimpleSelectorOption({
                     id: "BOTH" as const,
                     name: "Both",
-                    description: "Randomize both the Pokémon being asked for and the Pokémon being offered in the trade.",
+                    description: "Randomize both the Pokémon being requested and the Pokémon being offered in the trade.",
                   }),
                   createSimpleSelectorOption({
-                    id: "ASK_ONLY" as const,
-                    name: "Ask Only",
-                    description: "Randomize only the Pokémon being asked for in the trade.",
+                    id: "REQUEST_ONLY" as const,
+                    name: "Request Only",
+                    description: "Randomize only the Pokémon being requested in the trade.",
                   }),
                   createSimpleSelectorOption({
                     id: "OFFER_ONLY" as const,
@@ -252,6 +252,39 @@ export const defaultSettingsViewModel = () => {
                 ] as const,
               }), // END METHOD
               createUniquePokemonSelectorViewModel(),
+              createConfigurableToggleViewModel({
+                id: "CHANGE_REQUESTED_GENDERS" as const,
+                name: "Change Requested Genders",
+                description: "Changes the preferred gender of requested trade Pokémon.",
+                viewModels: [
+                  createSingleSelectorViewModel({
+                    id: "METHOD" as const,
+                    selectedOptionId: "NONE",
+                    options: [
+                      createSimpleSelectorOption({
+                        id: "NONE" as const,
+                        name: "None",
+                        description: "Makes it so all trade requests have no gender preferences.",
+                      }),
+                      createSimpleSelectorOption({
+                        id: "MALE" as const,
+                        name: "Male",
+                        description: "Makes it so all requested trade Pokémon are male.",
+                      }),
+                      createSimpleSelectorOption({
+                        id: "FEMALE" as const,
+                        name: "Female",
+                        description: "Makes it so all requested trade Pokémon are female.",
+                      }),
+                      createSimpleSelectorOption({
+                        id: "RANDOM" as const,
+                        name: "Random",
+                        description: "Makes it so the preferred gender of each requested trade Pokémon is random.",
+                      }),
+                    ] as const,
+                  }),
+                ] as const,
+              }),
               createBannedPokemonSelectorViewModel(),
             ] as const,
           }), // END RANDOMIZE_TRADES
@@ -860,6 +893,25 @@ export const defaultSettingsViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_STARTER_HELD_ITEMS
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_TRADE_HELD_ITEMS" as const,
+            name: "Randomize Trade Held Items",
+            description: "Randomizes the items held by Pokémon offered in the in-game trades.",
+            viewModels: [
+              createSimpleMultiSelectorViewModel({
+                id: "BAN" as const,
+                name: "Ban",
+                description: "A list of items to exclude when choosing the random items "
+                  + "(in addition to the default list of banned items).",
+                options: holdableItemIds.map((itemId) => {
+                  return createSimpleSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                  })
+                }),
+              }), // END BAN
+            ] as const,
+          }),
           createGroupMultiSelectorViewModel({
             id: "SHUFFLED_ITEM_GROUPS" as const,
             name: "Shuffle Items",
