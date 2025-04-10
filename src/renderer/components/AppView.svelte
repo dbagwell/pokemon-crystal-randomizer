@@ -128,6 +128,11 @@
         >
           <Button
             style="text"
+            onClick={importSettingsButtonClicked}
+            title="Import Settings"
+          />
+          <Button
+            style="text"
             onClick={exportSettingsButtonClicked}
             title="Export Settings"
           />
@@ -210,7 +215,9 @@
   import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
   import { type PresetId, presetsMap } from "@shared/appData/presets"
   import { type PlayerOptions, playerOptionsFromViewModel, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
+  import { isNullish } from "@shared/utils"
   import { onMount } from "svelte"
+  import yaml from "yaml"
   
   type Props = {
     lastSelectedPresetId: PresetId
@@ -354,6 +361,30 @@
         } finally {
           hideProgressIndicator()
         }
+      },
+    })
+  }
+  
+  const importSettingsButtonClicked = () => {
+    showDialog({
+      title: "Import Settings",
+      submitButtonLabel: "Import",
+      hasCancelButton: true,
+      inputInfo: {
+        title: "YAML Settings File",
+        type: "file",
+        fileExtension: ".yml, .yaml",
+      },
+      onSubmit: async (inputValue) => {
+        if (isNullish(inputValue)) {
+          showErrorDialog("Unable to read selected file.")
+        } else if (!(inputValue instanceof DataView)) {
+          showErrorDialog(`Received invalid input type from input dialog. Expected a file but got input type of '${typeof inputValue}'.`)
+        }
+        
+        const fileData = inputValue as DataView
+        const settings = yaml.parse(new TextDecoder().decode(fileData.buffer))
+        applyNewSettings(settings)
       },
     })
   }
