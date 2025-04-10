@@ -1,9 +1,9 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
-import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import type { Settings } from "@shared/appData/settingsFromViewModel"
 import type { ItemId } from "@shared/types/gameDataIds/items"
 
 export const updateMarts = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
 ) => {
   if (settings.CHERRYGROVE_MART_REPELS) {

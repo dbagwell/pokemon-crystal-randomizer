@@ -1,6 +1,6 @@
 import { getYAML } from "@lib/utils/yamlUtils"
 import { type PresetId, presetIds } from "@shared/appData/presets"
-import type { SettingsFromAppViewModel, SettingsFromPlayerOptionsViewModels } from "@shared/appData/settingsFromAppViewModel"
+import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import { isString } from "@shared/utils"
 import { app } from "electron"
 import fs from "fs"
@@ -69,7 +69,7 @@ export const getPreviousSettings = (): unknown | undefined => {
   }
 }
 
-export const setPreviousSettings = (settings: SettingsFromAppViewModel) => {
+export const setPreviousSettings = (settings: Settings) => {
   try {
     fs.mkdirSync(settingsPath, { recursive: true })
     fs.writeFileSync(previousSettingsPath, yaml.stringify(settings))
@@ -86,7 +86,7 @@ export const getPreviousPlayerOptions = (): unknown | undefined => {
   }
 }
 
-export const setPreviousPlayerOptions = (playerOptions: SettingsFromPlayerOptionsViewModels) => {
+export const setPreviousPlayerOptions = (playerOptions: PlayerOptions) => {
   try {
     fs.mkdirSync(settingsPath, { recursive: true })
     fs.writeFileSync(previousPlayerOptionsPath, yaml.stringify(playerOptions))
@@ -103,7 +103,7 @@ export const getSavedSettings = (name: string) => {
   }
 }
 
-export const saveSettings = (settings: SettingsFromAppViewModel, name: string) => {
+export const saveSettings = (settings: Settings, name: string) => {
   const fileName = `${name}.yml`
   fs.mkdirSync(settingsPath, { recursive: true })
   fs.writeFileSync(path.resolve(settingsPath, fileName), yaml.stringify(settings), { flag: "wx" })

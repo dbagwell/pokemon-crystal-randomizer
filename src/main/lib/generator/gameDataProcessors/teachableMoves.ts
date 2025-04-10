@@ -1,10 +1,10 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
-import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import type { Settings } from "@shared/appData/settingsFromViewModel"
 import { type Move, movesMap } from "@shared/gameData/moves"
 
 export const updateTeachableMoves = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
   random: Random,
 ) => {

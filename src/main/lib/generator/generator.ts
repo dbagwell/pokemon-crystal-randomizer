@@ -21,7 +21,7 @@ import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { Random } from "@lib/generator/random"
-import type { SettingsFromAppViewModel, SettingsFromPlayerOptionsViewModels } from "@shared/appData/settingsFromAppViewModel"
+import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import { gen5BaseExpMap } from "@shared/gameData/gen5BaseExp"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
@@ -44,8 +44,8 @@ import hash from "object-hash"
 export const generateROM = (
   data: Buffer,
   customSeed: string | undefined,
-  settings: SettingsFromAppViewModel,
-  playerOptions: SettingsFromPlayerOptionsViewModels,
+  settings: Settings,
+  playerOptions: PlayerOptions,
 ): {
   seed: string,
   data: Buffer,
@@ -96,7 +96,7 @@ export const generateROM = (
 }
 
 const updateGameData = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
   random: Random,
 ) => {
@@ -119,7 +119,7 @@ const updateGameData = (
 }
 
 const createPatches = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
 ) => {
   // Intro Pokemon
@@ -913,8 +913,8 @@ const createPatches = (
 }
 
 const createPlayerSpecificPatches = (
-  settings: SettingsFromAppViewModel,
-  playerOptions: SettingsFromPlayerOptionsViewModels,
+  settings: Settings,
+  playerOptions: PlayerOptions,
   romInfo: ROMInfo,
   useDefaults: boolean
 ): DataHunk[] => {

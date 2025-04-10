@@ -21,19 +21,19 @@
           minWidth="570px"
           padding={[5, 5, 0, 5]}
         >
-          {#each viewModel.tabViewModels as tabViewModel (tabViewModel.id)}
+          {#each settingsViewModel.tabViewModels as tabViewModel (tabViewModel.id)}
             <button
               style:display="flex"
-              style:width="{100 / viewModel.tabViewModels.length}%"
+              style:width="{100 / settingsViewModel.tabViewModels.length}%"
               style:height="auto"
               style:border-radius="15px 15px 0 0"
               style:align-items="center"
-              style:background-color={viewModel.selectedTabId === tabViewModel.id ? colors.primarySurface : colors.secondarySurface}
+              style:background-color={settingsViewModel.selectedTabId === tabViewModel.id ? colors.primarySurface : colors.secondarySurface}
               style:border="0px none transparent"
-              style:cursor={viewModel.selectedTabId === tabViewModel.id ? "inherit" : "pointer"}
-              style:z-index={viewModel.selectedTabId === tabViewModel.id ? "1" : "auto"}
+              style:cursor={settingsViewModel.selectedTabId === tabViewModel.id ? "inherit" : "pointer"}
+              style:z-index={settingsViewModel.selectedTabId === tabViewModel.id ? "1" : "auto"}
               onclick={() => {
-                viewModel.selectedTabId = tabViewModel.id
+                settingsViewModel.selectedTabId = tabViewModel.id
                 mainContentContainer.scrollTo(0, 0)
               }}
             >
@@ -49,12 +49,12 @@
                 <div
                   style:text-align="center"
                   style:font-size="16px"
-                  style:color={viewModel.selectedTabId === tabViewModel.id ? colors.primaryTint : colors.subtleText}
+                  style:color={settingsViewModel.selectedTabId === tabViewModel.id ? colors.primaryTint : colors.subtleText}
                 >
                   {tabViewModel.name}
                 </div>
                 <div
-                  style:background-color={viewModel.selectedTabId === tabViewModel.id ? colors.primaryTint : "inherit"}
+                  style:background-color={settingsViewModel.selectedTabId === tabViewModel.id ? colors.primaryTint : "inherit"}
                   style:height="3px"
                   style:width="90%"
                 >
@@ -74,8 +74,8 @@
       style:height="auto"
       style:overflow="scroll"
     >
-      {#each viewModel.tabViewModels as tabViewModel (tabViewModel.id)}
-        {#if viewModel.selectedTabId === tabViewModel.id}
+      {#each settingsViewModel.tabViewModels as tabViewModel (tabViewModel.id)}
+        {#if settingsViewModel.selectedTabId === tabViewModel.id}
           <Stack
             alignment="start"
             direction="vertical"
@@ -183,8 +183,8 @@
     padding={20}
     width="100%"
   >
-    {#each playerOptionsViewModels as viewModel, index (viewModel.id)}
-      <SettingsInputView bind:viewModel={playerOptionsViewModels[index]}/>
+    {#each playerOptionsViewModel.viewModels as subViewModel, index (subViewModel.id)}
+      <SettingsInputView bind:viewModel={playerOptionsViewModel.viewModels[index]}/>
     {/each}
   </Stack>
 {/snippet}
@@ -200,11 +200,11 @@
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/utility/ProgressIndicator.svelte"
   import Tooltip from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
-  import { applySettingsToAppViewModel, applySettingsToPlayerOptionsViewModels } from "@shared/appData/applySettingsToAppViewModel"
-  import { defaultAppViewModel } from "@shared/appData/defaultAppViewModel"
-  import { defaultPlayerOptionsViewModels } from "@shared/appData/defaultPlayerOptionsViewModels"
+  import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
+  import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
+  import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
   import { type PresetId, presetsMap } from "@shared/appData/presets"
-  import { type SettingsFromAppViewModel, settingsFromAppViewModel, settingsFromPlayerOptionsModels, type SettingsFromPlayerOptionsViewModels } from "@shared/appData/settingsFromAppViewModel"
+  import { type PlayerOptions, playerOptionsFromViewModel, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
   import { onMount } from "svelte"
   
   type Props = {
@@ -225,13 +225,13 @@
   
   let mainContentContainer: HTMLElement
   let seed = $state("")
-  let viewModel = $state(defaultAppViewModel())
-  let playerOptionsViewModels = $state(defaultPlayerOptionsViewModels())
+  let settingsViewModel = $state(defaultSettingsViewModel())
+  let playerOptionsViewModel = $state(defaultPlayerOptionsViewModel())
   
   const currentPreset = $derived.by(() => {
     lastSelectedPresetId
     lastSelectedSettings
-    viewModel
+    settingsViewModel
     return _currentPreset()
   })
   const _currentPreset = () => {
@@ -266,7 +266,7 @@
   }
   
   const currentSettings = () => {
-    return settingsFromAppViewModel($state.snapshot(viewModel) as typeof viewModel)
+    return settingsFromViewModel($state.snapshot(settingsViewModel) as typeof settingsViewModel)
   }
   
   onMount(() => {
@@ -277,9 +277,9 @@
   const applyNewSettings = (settings: unknown | undefined) => {
     try {
       const warnings: string[] = []
-      const newViewModel = defaultAppViewModel()
-      applySettingsToAppViewModel(settings, newViewModel, warnings)
-      viewModel = newViewModel
+      const newViewModel = defaultSettingsViewModel()
+      applySettingsToViewModel(settings, newViewModel, warnings)
+      settingsViewModel = newViewModel
       
       if (warnings.length > 0) {
         showDialog({
@@ -296,9 +296,9 @@
   const initPlayerOptions = () => {
     try {
       const warnings: string[] = []
-      const newViewModels = defaultPlayerOptionsViewModels()
-      applySettingsToPlayerOptionsViewModels(lastSelectedPlayerOptions, newViewModels, warnings)
-      playerOptionsViewModels = newViewModels
+      const newViewModel = defaultPlayerOptionsViewModel()
+      applyPlayerOptionsToViewModel(lastSelectedPlayerOptions, newViewModel, warnings)
+      playerOptionsViewModel = newViewModel
       
       if (warnings.length > 0) {
         showDialog({
@@ -396,7 +396,7 @@
           ]
           
           lastSelectedPresetId = name
-          lastSelectedSettings = settingsFromAppViewModel(viewModel)
+          lastSelectedSettings = settingsFromViewModel(settingsViewModel)
           
           showSuccessDialog(response.message)
         } catch (error) {
@@ -410,7 +410,7 @@
   
   const generateROMButtonClicked = async () => {
     const settings = currentSettings()
-    const playerOptions = settingsFromPlayerOptionsModels(playerOptionsViewModels)
+    const playerOptions = playerOptionsFromViewModel(playerOptionsViewModel)
     
     let recommendation = ""
     
@@ -444,7 +444,7 @@
     }
   }
   
-  const generateROM = async (settings: SettingsFromAppViewModel, playerOptions: SettingsFromPlayerOptionsViewModels) => {
+  const generateROM = async (settings: Settings, playerOptions: PlayerOptions) => {
     try {
       showProgressIndicator()
       const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, settings, playerOptions, currentPreset.id)

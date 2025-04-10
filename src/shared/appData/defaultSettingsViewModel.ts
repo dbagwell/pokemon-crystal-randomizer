@@ -26,7 +26,7 @@ import {
   createTabViewModel,
 } from "@shared/types/viewModels"
 
-export const defaultAppViewModel = () => {
+export const defaultSettingsViewModel = () => {
   return {
     selectedTabId: "POKEMON",
     tabViewModels: [

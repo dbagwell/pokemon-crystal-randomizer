@@ -1,9 +1,9 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
-import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import type { Settings } from "@shared/appData/settingsFromViewModel"
 import { hasPreEvolution } from "@shared/gameData/pokemonHelpers"
 
 export const updateEvolutionMethods = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
 ) => {
   Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {

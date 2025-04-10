@@ -1,6 +1,6 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
-import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import type { Settings } from "@shared/appData/settingsFromViewModel"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { trainerGroupsMap } from "@shared/gameData/trainerGroups"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
@@ -8,7 +8,7 @@ import { pokemonTypeIds } from "@shared/types/gameDataIds/pokemonTypes"
 import { isNullish } from "@shared/utils"
 
 export const updateTrainers = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
   random: Random,
 ) => {

@@ -3,11 +3,12 @@ import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
 import { getPreviousPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setPreviousPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import { type PresetId } from "@shared/appData/presets"
-import type { SettingsFromAppViewModel, SettingsFromPlayerOptionsViewModels } from "@shared/appData/settingsFromAppViewModel"
+import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import { isNullish } from "@shared/utils"
 import { dialog } from "electron"
 import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
 import fs from "fs"
+import yaml from "yaml"
 
 export class MainAPI implements ElectronMainApi<MainAPI> {
   
@@ -35,7 +36,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     }
   }
   
-  readonly saveSettings = async (settings: SettingsFromAppViewModel, name: string): Promise<VoidAPIResponse> => {
+  readonly saveSettings = async (settings: Settings, name: string): Promise<VoidAPIResponse> => {
     try {
       saveSettings(settings, name)
       return {
@@ -71,8 +72,8 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
   
   readonly generateROM = async (
     seed: string | undefined,
-    settings: SettingsFromAppViewModel,
-    playerOptions: SettingsFromPlayerOptionsViewModels,
+    settings: Settings,
+    playerOptions: PlayerOptions,
     presetId: PresetId
   ): Promise<VoidAPIResponse> => {
     try {

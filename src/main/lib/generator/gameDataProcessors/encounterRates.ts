@@ -1,9 +1,9 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import { getAdjustedEncounterRates } from "@lib/generator/dataConverters/encounterRates"
-import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import type { Settings } from "@shared/appData/settingsFromViewModel"
 
 export const updateEncounterRates = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
 ) => {
   if (!settings.CHANGE_POKEMON_ENCOUNTER_RATIOS.VALUE) { return }

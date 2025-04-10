@@ -1,13 +1,13 @@
 import type {
-  AppViewModel,
   ConfigurableMultiSelectorViewModel,
   ConfigurableSelectorOption,
   GroupMultiSelectorViewModel,
   InputViewModel,
   IntegerInputGroupViewModel,
   IntegerInputViewModel,
-  PlayerOptionsViewModels,
+  PlayerOptionsViewModel,
   SelectorOption,
+  SettingsViewModel,
   SimpleMultiSelectorViewModel,
   SingleSelectorViewModel,
   TabViewModel,
@@ -20,16 +20,16 @@ type ArrayOfSettingsFromArrayOfTabViewModels<ArrayType extends TabViewModel[]> =
   [I in keyof ArrayType]: SettingsFromTabViewModel<ArrayType[I]>
 }
 
-export type SettingsFromPlayerOptionsViewModels = SettingsFromArrayOfToggleViewModels<PlayerOptionsViewModels>
-export const settingsFromPlayerOptionsModels = (viewModels: PlayerOptionsViewModels): SettingsFromPlayerOptionsViewModels => {
-  return settingsFromArrayOfToggleViewModels(viewModels) as SettingsFromPlayerOptionsViewModels
+export type PlayerOptions = SettingsFromArrayOfToggleViewModels<PlayerOptionsViewModel["viewModels"]>
+export const playerOptionsFromViewModel = (viewModel: PlayerOptionsViewModel): PlayerOptions => {
+  return settingsFromArrayOfToggleViewModels(viewModel.viewModels) as PlayerOptions
 }
 
-export type SettingsFromAppViewModel = ObjectFromIntersectionOfArrayValues<ArrayOfSettingsFromArrayOfTabViewModels<AppViewModel["tabViewModels"]>>
-export const settingsFromAppViewModel = (appViewModel: AppViewModel): SettingsFromAppViewModel => {
+export type Settings = ObjectFromIntersectionOfArrayValues<ArrayOfSettingsFromArrayOfTabViewModels<SettingsViewModel["tabViewModels"]>>
+export const settingsFromViewModel = (appViewModel: SettingsViewModel): Settings => {
   return Object.assign({}, ...appViewModel.tabViewModels.map((tabViewModel) => {
     return settingsFromTabViewModel(tabViewModel)
-  })) as SettingsFromAppViewModel
+  })) as Settings
 }
 
 type SettingsFromTabViewModel<ViewModelType extends TabViewModel> = SettingsFromArrayOfToggleViewModels<ViewModelType["viewModels"]>

@@ -1,12 +1,12 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
-import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import type { Settings } from "@shared/appData/settingsFromViewModel"
 import { teachableMovesMap } from "@shared/gameData/teachableMoves"
 import { type HMItemId, hmItemIds, holdableItemIds, type TMItemId, tmItemIds } from "@shared/types/gameDataIds/items"
 import { type MoveTutorId, moveTutorIds } from "@shared/types/gameDataIds/teachableMoves"
 
 export const updatePokemonInfo = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
   random: Random,
 ) => {

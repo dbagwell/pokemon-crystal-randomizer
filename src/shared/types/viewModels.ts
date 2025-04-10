@@ -1,5 +1,5 @@
-import type { defaultAppViewModel } from "@shared/appData/defaultAppViewModel"
-import type { defaultPlayerOptionsViewModels } from "@shared/appData/defaultPlayerOptionsViewModels"
+import type { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
+import type { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
 
 // Integer Input View Model
 
@@ -200,5 +200,5 @@ export const createTabViewModel = <ViewModelType extends InputViewModel>(params:
 
 // App View Model
 
-export type AppViewModel = ReturnType<typeof defaultAppViewModel>
-export type PlayerOptionsViewModels = ReturnType<typeof defaultPlayerOptionsViewModels>
+export type SettingsViewModel = ReturnType<typeof defaultSettingsViewModel>
+export type PlayerOptionsViewModel = ReturnType<typeof defaultPlayerOptionsViewModel>

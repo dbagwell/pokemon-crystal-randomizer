@@ -2,21 +2,23 @@ import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
 import { createIntegerInputViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createSingleSelectorViewModel, createTextInputViewModel } from "@shared/types/viewModels"
 
-export const defaultPlayerOptionsViewModels = () => {
-  return [
-    playerGenderOption(),
-    playerNameOption(),
-    textSpeedOption(),
-    holdToMashOption(),
-    battleSceneOption(),
-    battleStyleOption(),
-    nicknamesOption(),
-    soundOption(),
-    rideMusicOption(),
-    menuAccountOption(),
-    printerToneOption(),
-    frameTypeOption(),
-  ]
+export const defaultPlayerOptionsViewModel = () => {
+  return {
+    viewModels: [
+      playerGenderOption(),
+      playerNameOption(),
+      textSpeedOption(),
+      holdToMashOption(),
+      battleSceneOption(),
+      battleStyleOption(),
+      nicknamesOption(),
+      soundOption(),
+      rideMusicOption(),
+      menuAccountOption(),
+      printerToneOption(),
+      frameTypeOption(),
+    ],
+  }
 }
 
 const playerGenderOption = () => {
