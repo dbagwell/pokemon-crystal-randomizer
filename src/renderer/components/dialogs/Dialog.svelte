@@ -20,6 +20,8 @@
   style:border-radius="20px"
   style:top="50%"
   style:left="50%"
+  style:max-width="95%"
+  style:max-height="95%"
   style:transform="translate(-50%, -50%)"
   style:z-index={zIndexes.dialogLayer}
 >
