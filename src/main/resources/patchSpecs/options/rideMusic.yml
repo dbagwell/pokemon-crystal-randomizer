@@ -14,6 +14,11 @@ changes:
   - bank: 3
     address: 0x50DA
   value: "FA D1 CF E6 08 28 13 11 13 00 7B EA C0 C2 CD 97 3B 3E 01 C9"
+- description: "Force map music to play whenever we call play map music even if it was the previously map music."
+  locations:
+  - bank: 0
+    address: 0x3CE9
+  value: "00 00 00"
 - description: "Adds code to check the ride music options before playing ride music."
   locations: 
   - bank: 0
