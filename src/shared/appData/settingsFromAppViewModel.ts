@@ -6,6 +6,7 @@ import type {
   InputViewModel,
   IntegerInputGroupViewModel,
   IntegerInputViewModel,
+  PlayerOptionsViewModels,
   SelectorOption,
   SimpleMultiSelectorViewModel,
   SingleSelectorViewModel,
@@ -17,6 +18,11 @@ import { reduceArrayIntoRecord } from "@shared/utils"
 
 type ArrayOfSettingsFromArrayOfTabViewModels<ArrayType extends TabViewModel[]> = {
   [I in keyof ArrayType]: SettingsFromTabViewModel<ArrayType[I]>
+}
+
+export type SettingsFromPlayerOptionsViewModels = SettingsFromArrayOfToggleViewModels<PlayerOptionsViewModels>
+export const settingsFromPlayerOptionsModels = (viewModels: PlayerOptionsViewModels): SettingsFromPlayerOptionsViewModels => {
+  return settingsFromArrayOfToggleViewModels(viewModels) as SettingsFromPlayerOptionsViewModels
 }
 
 export type SettingsFromAppViewModel = ObjectFromIntersectionOfArrayValues<ArrayOfSettingsFromArrayOfTabViewModels<AppViewModel["tabViewModels"]>>

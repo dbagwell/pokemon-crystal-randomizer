@@ -20,6 +20,7 @@ const init = async () => {
     props: {
       lastSelectedPresetId: initialAppData.presetId,
       lastSelectedSettings: initialAppData.settings,
+      lastSelectedPlayerOptions: initialAppData.playerOptions,
       customPresetNames: initialAppData.customPresetNames,
     },
   })

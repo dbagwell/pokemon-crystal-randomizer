@@ -135,15 +135,27 @@
         </Stack>
         <div style:flex-grow="2"></div>
         <Stack
-          alignment="center"
+          alignment="start"
           direction="vertical"
-          distribution="fill"
+          distribution="end"
           minSpacing={10}
         >
           <TextField
             title="Custom Seed"
             type="text"
             bind:value={seed}
+          />
+        </Stack>
+        <Stack
+          alignment="center"
+          direction="vertical"
+          distribution="end"
+          minSpacing={20}
+        >
+          <Button
+            style="text"
+            onClick={playerOptionsButtonClicked}
+            title="Player Options"
           />
           <Button
             style="fill"
@@ -162,6 +174,21 @@
 
 <Tooltip/>
 
+{#snippet playerOptionsView()}
+  <Stack
+    alignment="start"
+    direction="vertical"
+    distribution="start"
+    minSpacing={20}
+    padding={20}
+    width="100%"
+  >
+    {#each playerOptionsViewModels as viewModel, index (viewModel.id)}
+      <SettingsInputView bind:viewModel={playerOptionsViewModels[index]}/>
+    {/each}
+  </Stack>
+{/snippet}
+
 <script lang="ts">
   import Button from "@components/buttons/Button.svelte"
   import DialogContainer, { showDialog, showErrorDialog, showSuccessDialog } from "@components/dialogs/DialogContainer.svelte"
@@ -173,15 +200,17 @@
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/utility/ProgressIndicator.svelte"
   import Tooltip from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
-  import { applySettingsToAppViewModel } from "@shared/appData/applySettingsToAppViewModel"
+  import { applySettingsToAppViewModel, applySettingsToPlayerOptionsViewModels } from "@shared/appData/applySettingsToAppViewModel"
   import { defaultAppViewModel } from "@shared/appData/defaultAppViewModel"
+  import { defaultPlayerOptionsViewModels } from "@shared/appData/defaultPlayerOptionsViewModels"
   import { type PresetId, presetsMap } from "@shared/appData/presets"
-  import { type SettingsFromAppViewModel, settingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+  import { type SettingsFromAppViewModel, settingsFromAppViewModel, settingsFromPlayerOptionsModels, type SettingsFromPlayerOptionsViewModels } from "@shared/appData/settingsFromAppViewModel"
   import { onMount } from "svelte"
   
   type Props = {
     lastSelectedPresetId: PresetId
-    lastSelectedSettings: unknown | undefined,
+    lastSelectedSettings: unknown | undefined
+    lastSelectedPlayerOptions: unknown | undefined
     customPresetNames: string[]
   }
   
@@ -189,6 +218,7 @@
   let {
     lastSelectedPresetId,
     lastSelectedSettings,
+    lastSelectedPlayerOptions,
     customPresetNames,
   }: Props = $props()
   /* eslint-enable prefer-const */
@@ -196,6 +226,7 @@
   let mainContentContainer: HTMLElement
   let seed = $state("")
   let viewModel = $state(defaultAppViewModel())
+  let playerOptionsViewModels = $state(defaultPlayerOptionsViewModels())
   
   const currentPreset = $derived.by(() => {
     lastSelectedPresetId
@@ -240,6 +271,7 @@
   
   onMount(() => {
     applyNewSettings(lastSelectedSettings)
+    initPlayerOptions()
   })
   
   const applyNewSettings = (settings: unknown | undefined) => {
@@ -252,7 +284,26 @@
       if (warnings.length > 0) {
         showDialog({
           title: "Warning",
-          message: `Found invalid data while loading previous settings.\n\n${warnings.join("\n\n")}`,
+          message: `Found invalid data while loading settings.\n\n${warnings.join("\n\n")}`,
+          submitButtonLabel: "OK",
+        })
+      }
+    } catch (error) {
+      showErrorDialog(error)
+    }
+  }
+  
+  const initPlayerOptions = () => {
+    try {
+      const warnings: string[] = []
+      const newViewModels = defaultPlayerOptionsViewModels()
+      applySettingsToPlayerOptionsViewModels(lastSelectedPlayerOptions, newViewModels, warnings)
+      playerOptionsViewModels = newViewModels
+      
+      if (warnings.length > 0) {
+        showDialog({
+          title: "Warning",
+          message: `Found invalid data while loading previous player options.\n\n${warnings.join("\n\n")}`,
           submitButtonLabel: "OK",
         })
       }
@@ -299,6 +350,15 @@
           hideProgressIndicator()
         }
       },
+    })
+  }
+  
+  const playerOptionsButtonClicked = () => {
+    showDialog({
+      title: "Player Options",
+      message: "The following options are meant to be customized on a per player basis and are not included when exporting settings or sharing patches with others.",
+      extraContent: playerOptionsView,
+      submitButtonLabel: "Done",
     })
   }
   
@@ -350,6 +410,7 @@
   
   const generateROMButtonClicked = async () => {
     const settings = currentSettings()
+    const playerOptions = settingsFromPlayerOptionsModels(playerOptionsViewModels)
     
     let recommendation = ""
     
@@ -375,18 +436,18 @@
         submitButtonLabel: "Continue Anyways",
         hasCancelButton: true,
         onSubmit: () => {
-          generateROM(settings)
+          generateROM(settings, playerOptions)
         },
       })
     } else {
-      generateROM(settings)
+      generateROM(settings, playerOptions)
     }
   }
   
-  const generateROM = async (settings: SettingsFromAppViewModel) => {
+  const generateROM = async (settings: SettingsFromAppViewModel, playerOptions: SettingsFromPlayerOptionsViewModels) => {
     try {
       showProgressIndicator()
-      const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, settings, currentPreset.id)
+      const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, settings, playerOptions, currentPreset.id)
       showSuccessDialog(response.message)
     } catch (error) {
       showErrorDialog(error)

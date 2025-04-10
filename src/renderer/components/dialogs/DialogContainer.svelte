@@ -1,6 +1,7 @@
 {#each dialogs as dialog}
 
   <Dialog
+    extraContent={dialog.params.extraContent}
     hasCancelButton={dialog.params.hasCancelButton}
     inputInfo={dialog.params.inputInfo}
     message={dialog.params.message}
@@ -49,10 +50,12 @@
   module
 >
   import type { DialogInputInfo } from "@shared/types/dialog"
+  import type { Snippet } from "svelte"
 
   type ShowDialogParams = {
     title?: string,
     message?: string,
+    extraContent?: Snippet,
     inputInfo?: DialogInputInfo,
     submitButtonLabel?: string,
     hasCancelButton?: boolean,

@@ -1,5 +1,19 @@
-import type { AppViewModel, ConfigurableMultiSelectorViewModel, GroupMultiSelectorViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
+import type { AppViewModel, ConfigurableMultiSelectorViewModel, GroupMultiSelectorViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, PlayerOptionsViewModels, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
 import { compact, isBoolean, isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
+
+export const applySettingsToPlayerOptionsViewModels = (settings: any, viewModels: PlayerOptionsViewModels, warnings: string[]) => {
+  if (isNullish(settings)) {
+    return
+  }
+  
+  try {
+    viewModels.forEach((viewModel) => {
+      applySettingsToInputViewModel(settings[viewModel.id], viewModel, viewModel.id, warnings)
+    })
+  } catch (error) {
+    throw new Error(`Unable to apply player options: ${error}`)
+  }
+}
 
 export const applySettingsToAppViewModel = (settings: any, viewModel: AppViewModel, warnings: string[]) => {
   if (isNullish(settings)) {

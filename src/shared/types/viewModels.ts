@@ -1,4 +1,5 @@
 import type { defaultAppViewModel } from "@shared/appData/defaultAppViewModel"
+import type { defaultPlayerOptionsViewModels } from "@shared/appData/defaultPlayerOptionsViewModels"
 
 // Integer Input View Model
 
@@ -200,3 +201,4 @@ export const createTabViewModel = <ViewModelType extends InputViewModel>(params:
 // App View Model
 
 export type AppViewModel = ReturnType<typeof defaultAppViewModel>
+export type PlayerOptionsViewModels = ReturnType<typeof defaultPlayerOptionsViewModels>

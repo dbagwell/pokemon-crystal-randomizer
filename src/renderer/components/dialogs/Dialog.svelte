@@ -37,7 +37,7 @@
       </div>
     {/if}
   
-    {#if isNotNullish(message)}
+    {#if isNotNullish(message) || isNotNullish(extraContent)}
       <div
         style:min-height="20px"
         style:overflow="scroll"
@@ -48,9 +48,16 @@
           distribution="fill"
           minSpacing={10}
         >
-          {#each message.split("\n") as paragraph}
-            <div use:textStyle={"content"}>{paragraph}</div>
-          {/each}
+        
+          {#if isNotNullish(message)}
+            {#each message.split("\n") as paragraph}
+              <div use:textStyle={"content"}>{paragraph}</div>
+            {/each}
+          {/if}
+    
+          {#if isNotNullish(extraContent)}
+            {@render extraContent()}
+          {/if}
         </Stack>
       </div>
     {/if}
@@ -120,10 +127,12 @@
   import { textStyle } from "@scripts/textStyle"
   import type { DialogInputInfo } from "@shared/types/dialog"
   import { isNotNullish, isNullish } from "@utils"
+  import type { Snippet } from "svelte"
   
   type Props = {
     title?: string
     message?: string
+    extraContent: Snippet | undefined
     inputInfo?: DialogInputInfo
     hasCancelButton?: boolean
     submitButtonLabel?: string
@@ -135,6 +144,7 @@
   const {
     title,
     message,
+    extraContent,
     inputInfo,
     hasCancelButton = false,
     submitButtonLabel = "Submit",

@@ -21,7 +21,7 @@ import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { Random } from "@lib/generator/random"
-import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import type { SettingsFromAppViewModel, SettingsFromPlayerOptionsViewModels } from "@shared/appData/settingsFromAppViewModel"
 import { gen5BaseExpMap } from "@shared/gameData/gen5BaseExp"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
@@ -41,7 +41,12 @@ import crypto from "crypto"
 import { app } from "electron"
 import hash from "object-hash"
 
-export const generateROM = (data: Buffer, customSeed: string | undefined, settings: SettingsFromAppViewModel): {
+export const generateROM = (
+  data: Buffer,
+  customSeed: string | undefined,
+  settings: SettingsFromAppViewModel,
+  playerOptions: SettingsFromPlayerOptionsViewModels,
+): {
   seed: string,
   data: Buffer,
 } => {
@@ -59,7 +64,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   
   // Create player specific patches so that the settings can still be used to affect the CV
   // but use static values so that the effect on the CV is the same for all players
-  const staticPlayerSpecificHunks = createPlayerSpecificPatches(settings, romInfo, true)
+  const staticPlayerSpecificHunks = createPlayerSpecificPatches(settings, playerOptions, romInfo, true)
   
   // Base Patch
   
@@ -78,7 +83,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   romInfo.patchHunks = [...romInfo.patchHunks, ...basePatch.hunks]
   
   // Now create the actual player specific patches
-  romInfo.patchHunks = [...romInfo.patchHunks, ...createPlayerSpecificPatches(settings, romInfo, false)]
+  romInfo.patchHunks = [...romInfo.patchHunks, ...createPlayerSpecificPatches(settings, playerOptions, romInfo, false)]
   
   romInfo.patchHunks.forEach((hunk) => {
     data.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
@@ -881,8 +886,7 @@ const createPatches = (
   
   // Additional Options
   
-  const selectedAdditionalOptions = settings.ADDITIONAL_OPTIONS
-  const selectedAdditionalOptionIds = Object.keys(selectedAdditionalOptions) as (keyof typeof selectedAdditionalOptions)[]
+  const selectedAdditionalOptionIds = settings.ADDITIONAL_OPTIONS
   
   if (selectedAdditionalOptionIds.length > 0) {
     const additionalOptionsPatch = Patch.fromYAML(
@@ -908,13 +912,18 @@ const createPatches = (
   }
 }
 
-const createPlayerSpecificPatches = (settings: SettingsFromAppViewModel, romInfo: ROMInfo, useDefaults: boolean): DataHunk[] => {
+const createPlayerSpecificPatches = (
+  settings: SettingsFromAppViewModel,
+  playerOptions: SettingsFromPlayerOptionsViewModels,
+  romInfo: ROMInfo,
+  useDefaults: boolean
+): DataHunk[] => {
   let hunks: DataHunk[] = []
   
   // Skip Gender
     
-  if (settings.SKIP_GENDER.VALUE) {
-    const genderId = playerSpriteMap[useDefaults ? "GIRL" : settings.SKIP_GENDER.SETTINGS.GENDER].numericId
+  if (settings.SKIP_GENDER) {
+    const genderId = playerSpriteMap[useDefaults ? "GIRL" : playerOptions.PLAYER_GENDER].numericId
     const skipGenderPatch = Patch.fromYAML(
       romInfo,
       "skipGender.yml",
@@ -929,8 +938,8 @@ const createPlayerSpecificPatches = (settings: SettingsFromAppViewModel, romInfo
     
   // Skip Name
     
-  if (settings.SKIP_NAME.VALUE) {
-    const nameBytes = ROMInfo.bytesFromText(useDefaults ? "KRIS" : settings.SKIP_NAME.SETTINGS.PLAYER_NAME)
+  if (settings.SKIP_NAME) {
+    const nameBytes = ROMInfo.bytesFromText(useDefaults ? "KRIS" : playerOptions.PLAYER_NAME)
     const skipNamePatch = Patch.fromYAML(
       romInfo,
       "skipName.yml",
@@ -945,35 +954,35 @@ const createPlayerSpecificPatches = (settings: SettingsFromAppViewModel, romInfo
   
   // Default Options
   
-  const selectedAdditionalOptions = settings.ADDITIONAL_OPTIONS
-  const selectedAdditionalOptionIds = Object.keys(selectedAdditionalOptions) as (keyof typeof selectedAdditionalOptions)[]
-  const selectedDefaults = settings.CHANGE_DEFAULT_OPTIONS.VALUE ? settings.CHANGE_DEFAULT_OPTIONS.SETTINGS : undefined
-  
-  romInfo.patchHunks = [
-    ...romInfo.patchHunks,
-    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7C), [
-      primaryOptionsValue(
-        {
-          instantTextEnabled: selectedAdditionalOptions.INSTANT_TEXT?.MAKE_DEFAULT,
-          textSpeed: selectedDefaults?.TEXT_SPEED,
-          holdToMashEnabled: selectedAdditionalOptions.HOLD_TO_MASH?.DEFAULT_VALUE,
-          battleSceneEnabled: selectedDefaults?.BATTLE_SCENE,
-          battleStyle: selectedDefaults?.BATTLE_STYLE,
-          sound: selectedDefaults?.SOUND,
-        },
-        selectedAdditionalOptionIds.length > 0,
-      ),
-    ]),
-    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F81), [
-      secondaryOptionsValue({
-        nicknamesEnabled: selectedAdditionalOptions.NICKNAMES?.DEFAULT_VALUE,
-        rideMusic: selectedAdditionalOptions.RIDE_MUSIC?.DEFAULT_VALUE,
-        menuAccountEnabled: selectedDefaults?.MENU_ACCOUNT,
-      }),
-    ]),
-    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7E), [frameTypeValue(selectedDefaults?.FRAME_TYPE)]),
-    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F80), [printToneValue(selectedDefaults?.PRINT_TONE)]),
-  ]
+  if (!useDefaults) {
+    const selectedAdditionalOptionIds = settings.ADDITIONAL_OPTIONS
+    
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7C), [
+        primaryOptionsValue(
+          {
+            textSpeed: playerOptions.TEXT_SPEED,
+            holdToMashEnabled: playerOptions.HOLD_TO_MASH,
+            battleSceneEnabled: playerOptions.BATTLE_SCENE,
+            battleStyle: playerOptions.BATTLE_STYLE,
+            sound: playerOptions.SOUND,
+          },
+          selectedAdditionalOptionIds.includes("INSTANT_TEXT"),
+          selectedAdditionalOptionIds.length > 0,
+        ),
+      ]),
+      new DataHunk(ROMOffset.fromBankAddress(5, 0x4F81), [
+        secondaryOptionsValue({
+          nicknamesEnabled: playerOptions.NICKNAMES,
+          rideMusic: playerOptions.RIDE_MUSIC,
+          menuAccountEnabled: playerOptions.MENU_ACCOUNT,
+        }),
+      ]),
+      new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7E), [frameTypeValue(playerOptions.FRAME_TYPE)]),
+      new DataHunk(ROMOffset.fromBankAddress(5, 0x4F80), [printToneValue(playerOptions.PRINT_TONE)]),
+    ]
+  }
   
   return hunks
 }
