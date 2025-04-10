@@ -62,13 +62,9 @@ export const generateROM = (
   
   createPatches(settings, romInfo)
   
-  // Create player specific patches so that the settings can still be used to affect the CV
-  // but use static values so that the effect on the CV is the same for all players
-  const staticPlayerSpecificHunks = createPlayerSpecificPatches(settings, playerOptions, romInfo, true)
-  
   // Base Patch
   
-  const checkValue = romInfo.patchHunks.length > 0 ? hash([...romInfo.patchHunks, ...staticPlayerSpecificHunks]).slice(0, 8).toUpperCase() : "00000000"
+  const checkValue = romInfo.patchHunks.length > 0 ? hash([...romInfo.patchHunks]).slice(0, 8).toUpperCase() : "00000000"
   
   const basePatch = Patch.fromYAML(
     romInfo,
@@ -82,8 +78,7 @@ export const generateROM = (
   
   romInfo.patchHunks = [...romInfo.patchHunks, ...basePatch.hunks]
   
-  // Now create the actual player specific patches
-  romInfo.patchHunks = [...romInfo.patchHunks, ...createPlayerSpecificPatches(settings, playerOptions, romInfo, false)]
+  createPlayerOptionsPatches(settings, playerOptions, romInfo)
   
   romInfo.patchHunks.forEach((hunk) => {
     data.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
@@ -707,6 +702,34 @@ const createPatches = (
 
     romInfo.patchHunks = [...romInfo.patchHunks, ...martsPatch.hunks]
   }
+  
+  // Skip Gender
+  
+  if (settings.SKIP_GENDER) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipGender.yml",
+        {},
+        {
+          genderId: hexStringFrom(bytesFrom(playerSpriteMap.GIRL.numericId, 1)),
+        }
+      ).hunks,
+    ]
+  }
+    
+  // Skip Name
+    
+  if (settings.SKIP_NAME) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipName.yml",
+      ).hunks,
+    ]
+  }
     
   // Trainers
     
@@ -912,77 +935,78 @@ const createPatches = (
   }
 }
 
-const createPlayerSpecificPatches = (
+const createPlayerOptionsPatches = (
   settings: Settings,
   playerOptions: PlayerOptions,
   romInfo: ROMInfo,
-  useDefaults: boolean
-): DataHunk[] => {
-  let hunks: DataHunk[] = []
-  
+) => {
   // Skip Gender
-    
+  
+  const genderId = playerSpriteMap[playerOptions.PLAYER_GENDER].numericId
+  
   if (settings.SKIP_GENDER) {
-    const genderId = playerSpriteMap[useDefaults ? "GIRL" : playerOptions.PLAYER_GENDER].numericId
-    const skipGenderPatch = Patch.fromYAML(
-      romInfo,
-      "skipGender.yml",
-      {},
-      {
-        genderId: hexStringFrom(bytesFrom(genderId, 1)),
-      }
-    )
-    
-    hunks = [...hunks, ...skipGenderPatch.hunks]
-  }
-    
-  // Skip Name
-    
-  if (settings.SKIP_NAME) {
-    const nameBytes = ROMInfo.bytesFromText(useDefaults ? "KRIS" : playerOptions.PLAYER_NAME)
-    const skipNamePatch = Patch.fromYAML(
-      romInfo,
-      "skipName.yml",
-      {},
-      {
-        name: hexStringFrom(nameBytes),
-      }
-    )
-    
-    hunks = [...hunks, ...skipNamePatch.hunks]
-  }
-  
-  // Default Options
-  
-  if (!useDefaults) {
-    const selectedAdditionalOptionIds = settings.ADDITIONAL_OPTIONS
-    
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
-      new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7C), [
-        primaryOptionsValue(
-          {
-            textSpeed: playerOptions.TEXT_SPEED,
-            holdToMashEnabled: playerOptions.HOLD_TO_MASH,
-            battleSceneEnabled: playerOptions.BATTLE_SCENE,
-            battleStyle: playerOptions.BATTLE_STYLE,
-            sound: playerOptions.SOUND,
-          },
-          selectedAdditionalOptionIds.includes("INSTANT_TEXT"),
-          selectedAdditionalOptionIds.length > 0,
-        ),
-      ]),
-      new DataHunk(ROMOffset.fromBankAddress(5, 0x4F81), [
-        secondaryOptionsValue({
-          nicknamesEnabled: playerOptions.NICKNAMES,
-          rideMusic: playerOptions.RIDE_MUSIC,
-          menuAccountEnabled: playerOptions.MENU_ACCOUNT,
-        }),
-      ]),
-      new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7E), [frameTypeValue(playerOptions.FRAME_TYPE)]),
-      new DataHunk(ROMOffset.fromBankAddress(5, 0x4F80), [printToneValue(playerOptions.PRINT_TONE)]),
+      ...Patch.fromYAML(
+        romInfo,
+        "skipGender.yml",
+        {},
+        {
+          genderId: hexStringFrom(bytesFrom(genderId, 1)),
+        }
+      ).hunks,
     ]
   }
   
-  return hunks
+  romInfo.patchHunks = [
+    ...romInfo.patchHunks,
+    new DataHunk(
+      ROMOffset.fromBankAddress(18, 0x4E03),
+      bytesFrom(genderId + 1, 1),
+    ),
+  ]
+  
+  // Player Name
+  
+  romInfo.patchHunks = [
+    ...romInfo.patchHunks,
+    new DataHunk(
+      ROMOffset.fromBankAddress(1, 0x60D3),
+      ROMInfo.bytesFromText(`${playerOptions.PLAYER_NAME}@`),
+    ),
+    new DataHunk(
+      ROMOffset.fromBankAddress(1, 0x60DE),
+      ROMInfo.bytesFromText(`${playerOptions.PLAYER_NAME}@`),
+    ),
+  ]
+  
+  // Default Options
+  
+  const selectedAdditionalOptionIds = settings.ADDITIONAL_OPTIONS
+    
+  romInfo.patchHunks = [
+    ...romInfo.patchHunks,
+    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7C), [
+      primaryOptionsValue(
+        {
+          textSpeed: playerOptions.TEXT_SPEED,
+          holdToMashEnabled: playerOptions.HOLD_TO_MASH,
+          battleSceneEnabled: playerOptions.BATTLE_SCENE,
+          battleStyle: playerOptions.BATTLE_STYLE,
+          sound: playerOptions.SOUND,
+        },
+        selectedAdditionalOptionIds.includes("INSTANT_TEXT"),
+        selectedAdditionalOptionIds.length > 0,
+      ),
+    ]),
+    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F81), [
+      secondaryOptionsValue({
+        nicknamesEnabled: playerOptions.NICKNAMES,
+        rideMusic: playerOptions.RIDE_MUSIC,
+        menuAccountEnabled: playerOptions.MENU_ACCOUNT,
+      }),
+    ]),
+    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7E), [frameTypeValue(playerOptions.FRAME_TYPE)]),
+    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F80), [printToneValue(playerOptions.PRINT_TONE)]),
+  ]
 }

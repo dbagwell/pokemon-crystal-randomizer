@@ -25,7 +25,8 @@ const playerGenderOption = () => {
   return createSingleSelectorViewModel({
     id: "PLAYER_GENDER" as const,
     name: "Player Gender",
-    description: "Determines the player's gender when the 'Skip Gender' setting is enabled.",
+    description: "Sets the gender hightlighted by default when starting a new game. "
+      + "Also used as the player's gender if the 'Skip Gender Selection' setting is enabled.",
     selectedOptionId: "GIRL",
     options: playerSpriteIds.map((spriteId) => {
       return createSimpleSelectorOption({
@@ -40,7 +41,9 @@ const playerNameOption = () => {
   return createTextInputViewModel({
     id: "PLAYER_NAME" as const,
     name: "Player Name",
-    description: "Determines the player's name when the 'Skip Name' setting is enabled.\nUnsupported characters will be replaced with spaces.",
+    description: "Sets the default player name used if no name is entered when starting a new game. "
+      + "Also used as the player's name if the 'Skip Name Selection' setting is enabled.\n"
+      + "Unsupported characters will be replaced with spaces.",
     maxCharacters: 7,
     isRequired: true as const,
     value: "KRIS",
@@ -72,7 +75,8 @@ const textSpeedOption = () => {
       createSimpleSelectorOption({
         id: "INST" as const,
         name: "INST",
-        description: "All dialog text appears on screen instantly without any animation.\nRequires 'Instant Text' to be included in the additional options, other wise 'FAST' speed is used.",
+        description: "All dialog text appears on screen instantly without any animation.\n"
+          + "Requires 'Instant Text' to be included in the additional options, otherwise 'FAST' speed is used.",
       }),
     ],
   })

@@ -966,15 +966,15 @@ export const defaultSettingsViewModel = () => {
         viewModels: [
           createSimpleToggleViewModel({
             id: "SKIP_GENDER" as const,
-            name: "Use Preset Gender",
-            description: "Skips the gender selection prompt when starting a new game, "
-              + "setting the player's gender to the provided value instead.",
+            name: "Skip Gender Selection",
+            description: "Skips the gender selection prompt when starting a new game.\n"
+              + "The player's gender will be set to value provided in the 'Player Options'.",
           }), // END SKIP_GENDER
           createSimpleToggleViewModel({
             id: "SKIP_NAME" as const,
-            name: "Use Preset Name",
-            description: "Skips the name selection prompt when starting a new game, "
-              + "setting the player's name to the provided value instead.",
+            name: "Skip Name Selection",
+            description: "Skips the name selection prompt when starting a new game.\n"
+              + "The player's name will be set to the value provided in the 'Player Options'.",
           }), // END SKIP_NAME
           createSimpleToggleViewModel({
             id: "CHANGE_BOX_PHONE_CALL" as const,
