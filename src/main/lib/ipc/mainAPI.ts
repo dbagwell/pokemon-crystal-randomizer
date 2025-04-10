@@ -121,6 +121,41 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     }
   }
   
+  readonly exportSettings = async (settings: Settings): Promise<VoidAPIResponse> => {
+    try {
+      const filePath = dialog.showSaveDialogSync({
+        title: "Save Exported Settings to:",
+        defaultPath: undefined,
+        filters: [
+          {
+            name: "YAML",
+            extensions: [
+              ".yml",
+              ".yaml",
+            ],
+          },
+        ],
+        buttonLabel: "Export",
+        properties: [
+          "showOverwriteConfirmation",
+        ],
+      })
+        
+      if (isNullish(filePath)) {
+        throw new Error("A save location must be specified.")
+      }
+      
+      fs.writeFileSync(filePath, yaml.stringify(settings))
+      
+      return {
+        message: "Settings exported!",
+      }
+    } catch (error: any) {
+      console.log(error.stack)
+      throw new RelayedError(`${error}`)
+    }
+  }
+  
   readonly processInput = async (params: ProcessInputRequestParams): Promise<void> => {
     rendererAPIResponseListeners[params.requestId]?.(params.inputValue)
     delete rendererAPIResponseListeners[params.requestId]

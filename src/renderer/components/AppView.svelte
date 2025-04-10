@@ -128,6 +128,11 @@
         >
           <Button
             style="text"
+            onClick={exportSettingsButtonClicked}
+            title="Export Settings"
+          />
+          <Button
+            style="text"
             isDisabled={currentPreset.id !== "CUSTOM"}
             onClick={createNewPresetButtonClicked}
             title="Create New Preset"
@@ -351,6 +356,18 @@
         }
       },
     })
+  }
+  
+  const exportSettingsButtonClicked = async () => {
+    try {
+      showProgressIndicator()
+      const response = await window.mainAPI.exportSettings(currentSettings())
+      showSuccessDialog(response.message)
+    } catch (error) {
+      showErrorDialog(error)
+    } finally {
+      hideProgressIndicator()
+    }
   }
   
   const playerOptionsButtonClicked = () => {
