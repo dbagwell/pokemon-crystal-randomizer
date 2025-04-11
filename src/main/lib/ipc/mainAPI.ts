@@ -2,7 +2,6 @@ import { generateROM } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
 import { getPreviousPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setPreviousPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
-import { type PresetId } from "@shared/appData/presets"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import { isNullish } from "@shared/utils"
 import { dialog } from "electron"
@@ -19,10 +18,11 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
   }
   
   readonly getInitialAppData = async (): Promise<APIResponse<{
-    presetId: PresetId,
+    presetId: string,
     settings: unknown | undefined
     playerOptions: unknown | undefined
     customPresetNames: string[]
+    logPreference: boolean
   }>> => {
     const lastPrestId = getPreviousPresetId()
     
@@ -74,7 +74,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     seed: string | undefined,
     settings: Settings,
     playerOptions: PlayerOptions,
-    presetId: PresetId
+    presetId: string,
   ): Promise<VoidAPIResponse> => {
     try {
       const vanillaData = await getVanillaROM()

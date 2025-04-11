@@ -1,5 +1,4 @@
 import { getYAML } from "@lib/utils/yamlUtils"
-import { type PresetId, presetIds } from "@shared/appData/presets"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import { isString } from "@shared/utils"
 import { app } from "electron"
@@ -30,18 +29,18 @@ export const setPreferences = (preferences: unknown) => {
   }
 }
 
-export const getPreviousPresetId = (): PresetId => {
+export const getPreviousPresetId = (): string => {
   const preferences = getPreferences()
   const lastPresetId = preferences?.lastPresetId
   
-  if (isString(lastPresetId) && (presetIds as readonly string[]).includes(lastPresetId)) {
-    return lastPresetId as PresetId
+  if (isString(lastPresetId)) {
+    return lastPresetId
   } else {
     return "VANILLA"
   }
 }
 
-export const setPreviousPresetId = (presetId: PresetId) => {
+export const setPreviousPresetId = (presetId: string) => {
   const preferences = getPreferences() ?? {}
   preferences.lastPresetId = presetId
   setPreferences(preferences)
