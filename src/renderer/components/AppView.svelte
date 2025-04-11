@@ -247,7 +247,10 @@
     return _currentPreset()
   })
   const _currentPreset = () => {
-    if (JSON.stringify(lastSelectedSettings) === JSON.stringify(currentSettings())) {
+    // Normalize the last selected settings and compare
+    const lastSettingsViewModel = defaultSettingsViewModel()
+    applySettingsToViewModel(lastSelectedSettings, lastSettingsViewModel, [])
+    if (lastSettingsViewModel === settingsViewModel) {
       return presetsMap[lastSelectedPresetId] ?? {
         id: lastSelectedPresetId,
         name: lastSelectedPresetId,
