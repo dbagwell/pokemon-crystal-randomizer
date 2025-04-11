@@ -145,7 +145,7 @@ RANDOMIZE_LEVEL_UP_MOVES:
       VALUE: false
       SETTINGS:
         PERCENTAGE: 20
-        POWER: 60
+        POWER: 50
     GUARANTEE_LEVEL_ONE_MOVES:
       VALUE: false
       SETTINGS:
@@ -161,7 +161,7 @@ RANDOMIZE_TM_MOVES:
       VALUE: false
       SETTINGS:
         PERCENTAGE: 20
-        POWER: 60
+        POWER: 50
     BAN: []
 RANDOMIZE_MOVE_TUTOR_MOVES:
   VALUE: false
@@ -172,7 +172,7 @@ RANDOMIZE_MOVE_TUTOR_MOVES:
       VALUE: false
       SETTINGS:
         PERCENTAGE: 20
-        POWER: 60
+        POWER: 50
     BAN: []
 RANDOMIZE_HM_COMPATIBILITY:
   VALUE: false
@@ -199,14 +199,10 @@ RANDOMIZE_HIDDEN_ITEMS:
 RANDOMIZE_WILD_HELD_ITEMS:
   VALUE: false
   SETTINGS:
-    CHANGE_NUMBER_OF_ITEMS_PER_POKEMON:
+    CHANGE_DISTRIBUTION:
       VALUE: false
       SETTINGS:
-        NUMBER:
-          VALUE: RANDOM
-          SETTINGS:
-            SHUFFLED:
-              KEEP_RATIOS: false
+        DISTRIBUTION: RANDOM
     BAN: []
 CHANGE_STARTER_HELD_ITEMS:
   VALUE: false
