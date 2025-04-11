@@ -150,7 +150,7 @@ const applySettingsToToggleViewModel = (settings: any, viewModel: ToggleViewMode
     warnings.push(invalidValueWarning(`${path}.VALUE`, "boolean", value))
   }
   
-  if (isNullish(settings)) {
+  if (isNullish(settings) || !value) {
     return
   }
   

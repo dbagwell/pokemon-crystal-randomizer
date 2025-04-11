@@ -9,15 +9,8 @@ CHANGE_STARTERS:
           MATCH_TYPE: false
           MATCH_STAGE: false
           MATCH_EVOLUTIONS: false
-          MATCH_SIMILAR_BST:
-            VALUE: false
-            SETTINGS:
-              THRESHOLD: 0
+          MATCH_SIMILAR_BST: false
           BAN: []
-        CUSTOM:
-          LEFT: CYNDAQUIL
-          MIDDLE: TOTODILE
-          RIGHT: CHIKORITA
     CHANGE_RIVALS_STARTER: true
 RANDOMIZE_EVENT_POKEMON:
   VALUE: true
@@ -49,10 +42,7 @@ RANDOMIZE_TRAINER_POKEMON:
   VALUE: true
   SETTINGS:
     TYPE_THEME_TEAMS: false
-    FORCE_FULLY_EVOLVED_ABOVE_LEVEL:
-      VALUE: false
-      SETTINGS:
-        THRESHOLD: 49
+    FORCE_FULLY_EVOLVED_ABOVE_LEVEL: false
     INGORE_RIVALS_STARTER: true
     BAN: []
 RANDOMIZE_INTRO_POKEMON: true
@@ -152,11 +142,7 @@ RANDOMIZE_LEVEL_UP_MOVES:
     UNIQUE: true
     PREFER_SAME_TYPE: false
     PROGRESSIVE: false
-    GOOD_DAMAGING_MOVES:
-      VALUE: false
-      SETTINGS:
-        PERCENTAGE: 25
-        POWER: 50
+    GOOD_DAMAGING_MOVES: false
     GUARANTEE_LEVEL_ONE_MOVES:
       VALUE: true
       SETTINGS:
@@ -216,10 +202,7 @@ RANDOMIZE_REGULAR_ITEM_BALLS:
   VALUE: true
   SETTINGS:
     BAN: []
-RANDOMIZE_TM_ITEM_BALLS:
-  VALUE: false
-  SETTINGS:
-    BAN: []
+RANDOMIZE_TM_ITEM_BALLS: false
 RANDOMIZE_HIDDEN_ITEMS:
   VALUE: true
   SETTINGS:
@@ -240,10 +223,6 @@ CHANGE_STARTER_HELD_ITEMS:
       SETTINGS:
         RANDOM:
           BAN: []
-        CUSTOM:
-          LEFT: BERRY
-          MIDDLE: BERRY
-          RIGHT: BERRY
 RANDOMIZE_TRADE_HELD_ITEMS:
   VALUE: true
   SETTINGS:
