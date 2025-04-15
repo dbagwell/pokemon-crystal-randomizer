@@ -4,7 +4,7 @@ import { getPreviousPlayerOptions, getPreviousPresetId, getSavedSettings, getSav
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import { isNullish } from "@shared/utils"
-import { dialog } from "electron"
+import { app, dialog } from "electron"
 import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
 import fs from "fs"
 import yaml from "yaml"
@@ -18,6 +18,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
   }
   
   readonly getInitialAppData = async (): Promise<APIResponse<{
+    appVersion: string,
     presetId: string,
     settings: unknown | undefined
     playerOptions: unknown | undefined
@@ -28,6 +29,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     
     return {
       result: {
+        appVersion: app.getVersion(),
         presetId: lastPrestId,
         settings: getSettingsForPresetId(lastPrestId),
         playerOptions: getPreviousPlayerOptions(),
@@ -145,7 +147,9 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
         throw new Error("A save location must be specified.")
       }
       
-      fs.writeFileSync(filePath, yaml.stringify(settings))
+      const exportedSettings = `VERSION: "${app.getVersion()}"\n${yaml.stringify(settings)}`
+      
+      fs.writeFileSync(filePath, exportedSettings)
       
       return {
         message: "Settings exported!",

@@ -220,6 +220,7 @@
   import yaml from "yaml"
   
   type Props = {
+    appVersion: string
     lastSelectedPresetId: string
     lastSelectedSettings: unknown | undefined
     lastSelectedPlayerOptions: unknown | undefined
@@ -228,6 +229,7 @@
   
   /* eslint-disable prefer-const */
   let {
+    appVersion,
     lastSelectedPresetId,
     lastSelectedSettings,
     lastSelectedPlayerOptions,
@@ -387,7 +389,17 @@
         
         const fileData = inputValue as DataView
         const settings = yaml.parse(new TextDecoder().decode(fileData.buffer))
+        
         applyNewSettings(settings)
+        
+        if (settings.VERSION !== appVersion) {
+          showDialog({
+            title: "Unexpected Version",
+            message: "The imported settings were exported from a different version of the app and may not behave as expected.\n"
+              + `App Version: ${appVersion}\nImported Settings Version: ${settings.VERSION}`,
+            submitButtonLabel: "OK",
+          })
+        }
       },
     })
   }
