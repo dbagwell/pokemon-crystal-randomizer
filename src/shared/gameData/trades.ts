@@ -4,6 +4,7 @@ import type { TradeId } from "@shared/types/gameDataIds/trades"
 export const tradesMap: IdMap<TradeId, Trade> = {
   MIKE: {
     id: "MIKE",
+    mapId: "GOLDENROD_DEPT_STORE_1F",
     dialogSetId: "COLLECTOR",
     requestedPokémonId: "ABRA",
     offeredPokemonId: "MACHOP",
@@ -16,6 +17,7 @@ export const tradesMap: IdMap<TradeId, Trade> = {
   },
   KYLE: {
     id: "KYLE",
+    mapId: "VIOLET_KYLES_HOUSE",
     dialogSetId: "COLLECTOR",
     requestedPokémonId: "BELLSPROUT",
     offeredPokemonId: "ONIX",
@@ -28,6 +30,7 @@ export const tradesMap: IdMap<TradeId, Trade> = {
   },
   TIM: {
     id: "TIM",
+    mapId: "OLIVINE_TIMS_HOUSE",
     dialogSetId: "HAPPY",
     requestedPokémonId: "KRABBY",
     offeredPokemonId: "VOLTORB",
@@ -40,6 +43,7 @@ export const tradesMap: IdMap<TradeId, Trade> = {
   },
   EMY: {
     id: "EMY",
+    mapId: "BLACKTHORN_EMYS_HOUSE",
     dialogSetId: "GIRL",
     requestedPokémonId: "DRAGONAIR",
     offeredPokemonId: "DODRIO",
@@ -52,6 +56,7 @@ export const tradesMap: IdMap<TradeId, Trade> = {
   },
   CHRIS: {
     id: "CHRIS",
+    mapId: "PEWTER_POKECENTER_1F",
     dialogSetId: "NEWBIE",
     requestedPokémonId: "HAUNTER",
     offeredPokemonId: "XATU",
@@ -64,6 +69,7 @@ export const tradesMap: IdMap<TradeId, Trade> = {
   },
   KIM: {
     id: "KIM",
+    mapId: "ROUTE_14",
     dialogSetId: "GIRL",
     requestedPokémonId: "CHANSEY",
     offeredPokemonId: "AERODACTYL",
@@ -76,6 +82,7 @@ export const tradesMap: IdMap<TradeId, Trade> = {
   },
   FOREST: {
     id: "FOREST",
+    mapId: "POWER_PLANT",
     dialogSetId: "COLLECTOR",
     requestedPokémonId: "DUGTRIO",
     offeredPokemonId: "MAGNETON",

@@ -1,3 +1,4 @@
+import type { GameMapId } from "@shared/types/gameDataIds/gameMaps"
 import type { HoldableItemId } from "@shared/types/gameDataIds/items"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import type { TradeId } from "@shared/types/gameDataIds/trades"
@@ -23,6 +24,7 @@ export type TradeGenderId = keyof typeof tradeGenders
 
 export type Trade = {
   id: TradeId
+  mapId: GameMapId
   dialogSetId: TradeDialogSetId
   requestedPokémonId: PokemonId
   offeredPokemonId: PokemonId
