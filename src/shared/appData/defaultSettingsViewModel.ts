@@ -975,6 +975,13 @@ export const defaultSettingsViewModel = () => {
             name: "Remove Poké Ball Bounce Animation",
             description: "Removes the bounce animation after throwing a Poké Ball.",
           }),
+          createSimpleToggleViewModel({
+            id: "FASTER_ITEM_PICKUP_SFX" as const,
+            name: "Faster Item Pickup SFX",
+            description: "Changes the sound effect that plays when picking up an item off the ground "
+              + "or when receiving a non-TM/HM item from an NPC "
+              + "to the sound effect that is normally plays when a Pokémon gains a level.",
+          }),
         ] as const,
       }), // END ITEM_PROPERTIES
       createTabViewModel({
