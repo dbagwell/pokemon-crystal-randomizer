@@ -2798,7 +2798,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
   NIDORAN_F: {
     id: "NIDORAN_F",
     numericId: 29,
-    name: "Nidoran♀︎",
+    name: "Nidoran♀",
     baseStats: {
       hp: 55,
       attack: 47,
@@ -3104,7 +3104,7 @@ export const pokemonMap: IdMap<PokemonId, Pokemon> = {
   NIDORAN_M: {
     id: "NIDORAN_M",
     numericId: 32,
-    name: "Nidoran♂︎",
+    name: "Nidoran♂",
     baseStats: {
       hp: 46,
       attack: 57,
