@@ -34,11 +34,13 @@ const trainers = [...trainerPartiesFileText.matchAll(/(\S+)Group([\s\S]*?)((?=\n
     classId: classId,
   }
   
+  let rivalsFound = 0
+  
   return [...groupMatch[2].matchAll(/;.*\n\s*db\s+"(.+)@"\s*,\s*TRAINERTYPE_(\S+)\s*\n([\s\S]*?)\n.*-1/g)].map((trainerMatch) => {
     const trainerType = trainerMatch[2]
   
     const trainer: Trainer = {
-      name: trainerMatch[1],
+      name: trainerMatch[1] === "?" ? `??? (${rivalsFound / 3 + 1})` : trainerMatch[1],
       groupId: groupId as TrainerGroupId,
       pokemon: trainerMatch[3].split("\n").map((pokemonLine) => {
         const lineMatches = pokemonLine.match(/db\s+(\S+)\s*,\s*(\S+)(?:\s*,\s*|$)(.*)/)!
@@ -64,6 +66,10 @@ const trainers = [...trainerPartiesFileText.matchAll(/(\S+)Group([\s\S]*?)((?=\n
           }) : [] as MoveId[],
         }
       }),
+    }
+    
+    if (trainerMatch[1] === "?") {
+      rivalsFound++
     }
   
     return trainer

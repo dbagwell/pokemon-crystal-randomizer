@@ -756,12 +756,14 @@ const createPatches = (
               } else if (hasItems) {
                 trainerType = 2
               }
+              
+              const trainerName = trainer.groupId === "RIVAL_1" || trainer.groupId === "RIVAL_2" ? "?" : trainer.name
                 
               return {
                 path: "trainerNameAndPokemon.yml",
                 extraIncludes: {},
                 extraValues: {
-                  name: hexStringFrom(ROMInfo.bytesFromText(`${trainer.name}@`)),
+                  name: hexStringFrom(ROMInfo.bytesFromText(`${trainerName}@`)),
                   trainerType: hexStringFrom([trainerType]),
                   pokemon: hexStringFrom(compact(trainer.pokemon.flatMap((pokemon) => {
                     return [
