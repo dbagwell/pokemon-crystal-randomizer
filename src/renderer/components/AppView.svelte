@@ -328,7 +328,7 @@
   }
   
   const presetSelected = async (presetId: string) => {
-    if (presetId === lastSelectedPresetId || presetId === "CUSTOM") {
+    if (currentPreset.id !== "CUSTOM" && presetId === lastSelectedPresetId) {
       return
     }
     
