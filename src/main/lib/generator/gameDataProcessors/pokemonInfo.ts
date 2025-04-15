@@ -35,9 +35,9 @@ export const updatePokemonInfo = (
         return move.type === "TM"
       })
         
-      pokemon.tmMoves = Array(tmItemIds.length * (settings.RANDOMIZE_TM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? random.int(0, 100)) / 100).fill(undefined).map(() => {
+      pokemon.tmMoves = Array(Math.round(tmItemIds.length * (settings.RANDOMIZE_TM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? random.int(0, 100)) / 100)).fill(undefined).map(() => {
         return random.element({ array: availableTMS, remove: true }).id as TMItemId
-      })
+      }).toSorted()
     })
   }
     
@@ -47,9 +47,9 @@ export const updatePokemonInfo = (
         return move.type === "HM"
       })
         
-      pokemon.hmMoves = Array(hmItemIds.length * (settings.RANDOMIZE_HM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? random.int(0, 100)) / 100).fill(undefined).map(() => {
+      pokemon.hmMoves = Array(Math.round(hmItemIds.length * (settings.RANDOMIZE_HM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? random.int(0, 100)) / 100)).fill(undefined).map(() => {
         return random.element({ array: availableHMS, remove: true }).id as HMItemId
-      })
+      }).toSorted()
     })
   }
     
@@ -59,9 +59,9 @@ export const updatePokemonInfo = (
         return move.type === "MOVE_TUTOR"
       })
         
-      pokemon.moveTutorMoves = Array(moveTutorIds.length * (settings.RANDOMIZE_TM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? random.int(0, 100)) / 100).fill(undefined).map(() => {
+      pokemon.moveTutorMoves = Array(Math.round(moveTutorIds.length * (settings.RANDOMIZE_TM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? random.int(0, 100)) / 100)).fill(undefined).map(() => {
         return random.element({ array: availableMoveTutorMoves, remove: true }).id as MoveTutorId
-      })
+      }).toSorted()
     })
   }
   
