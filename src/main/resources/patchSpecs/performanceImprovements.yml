@@ -35,6 +35,11 @@ changes:
   - bank: 3
     address: 0x5151
   value: "0F 38 00 91 00"
+- description: "Fixes a bug that causes slow/glitchy hp bar animtation for high hp values."
+  locations:
+  - bank: 3
+    address: 0x5723
+  value: "7B C1 D1 E1"
 - description: "Removes lag when getting off the bike using the register funtion."
   locations:
   - bank: 3
