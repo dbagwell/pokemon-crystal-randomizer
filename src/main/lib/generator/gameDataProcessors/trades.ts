@@ -1,6 +1,7 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
 import type { Settings } from "@shared/appData/settingsFromViewModel"
+import { pokemonMap } from "@shared/gameData/pokemon"
 import { tradeGenderIds } from "@shared/types/gameData/trade"
 import { holdableItemIds } from "@shared/types/gameDataIds/items"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
@@ -44,22 +45,32 @@ export const updateTrades = (
     }
     
     if (tradesSettings.CHANGE_REQUESTED_GENDERS.VALUE) {
-      switch (tradesSettings.CHANGE_REQUESTED_GENDERS.SETTINGS.METHOD) {
-      case "NONE": {
-        trade.genderId = "ANY"
+      switch (pokemonMap[trade.requestedPokémonId].genderRatio) {
+      case 0:
+      case 255:
+      case 254: {
+        trade.genderId === "ANY"
         break
       }
-      case "MALE": {
-        trade.genderId = "MALE"
-        break
-      }
-      case "FEMALE": {
-        trade.genderId = "FEMALE"
-        break
-      }
-      case "RANDOM": {
-        trade.genderId = random.element({ array: tradeGenderIds })
-        break
+      default: {
+        switch (tradesSettings.CHANGE_REQUESTED_GENDERS.SETTINGS.METHOD) {
+        case "NONE": {
+          trade.genderId = "ANY"
+          break
+        }
+        case "MALE": {
+          trade.genderId = "MALE"
+          break
+        }
+        case "FEMALE": {
+          trade.genderId = "FEMALE"
+          break
+        }
+        case "RANDOM": {
+          trade.genderId = random.element({ array: tradeGenderIds })
+          break
+        }
+        }
       }
       }
     }
