@@ -1,9 +1,9 @@
 import { generateROM } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
-import { getPreviousPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setPreviousPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
+import { getLogPreference, getPreviousPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setLogPreference, setPreviousPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
-import { isNullish } from "@shared/utils"
+import { isNotNullish, isNullish } from "@shared/utils"
 import { app, dialog } from "electron"
 import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
 import fs from "fs"
@@ -34,6 +34,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
         settings: getSettingsForPresetId(lastPrestId),
         playerOptions: getPreviousPlayerOptions(),
         customPresetNames: getSavedSettingsNames(),
+        logPreference: getLogPreference(),
       },
     }
   }
@@ -77,6 +78,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     settings: Settings,
     playerOptions: PlayerOptions,
     presetId: string,
+    generateLog: boolean,
   ): Promise<VoidAPIResponse> => {
     try {
       const vanillaData = await getVanillaROM()
@@ -89,7 +91,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
       
       const filePath = dialog.showSaveDialogSync({
         title: "Save Generated ROM to:",
-        defaultPath: undefined,
+        defaultPath: generatorResult.seed,
         filters: [
           {
             name: "Game Boy Colour ROM",
@@ -113,6 +115,35 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
       setPreviousSettings(settings)
       setPreviousPresetId(presetId)
       setPreviousPlayerOptions(playerOptions)
+      setLogPreference(generateLog)
+      
+      if (generateLog) {
+        const defaultLogFilePath = filePath.replace(/\.gbc$/, ".log.txt")
+        try {
+          fs.writeFileSync(defaultLogFilePath, generatorResult.log, { flag: "wx" })
+        } catch {
+          const logFilePath = dialog.showSaveDialogSync({
+            title: "Save log to:",
+            defaultPath: defaultLogFilePath,
+            filters: [
+              {
+                name: "Text File",
+                extensions: [
+                  ".txt",
+                ],
+              },
+            ],
+            buttonLabel: "Save",
+            properties: [
+              "showOverwriteConfirmation",
+            ],
+          })
+        
+          if (isNotNullish(logFilePath)) {
+            fs.writeFileSync(logFilePath, generatorResult.log)
+          }
+        }
+      }
       
       return {
         message: "ROM Generated!",

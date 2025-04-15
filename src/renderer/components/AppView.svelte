@@ -155,6 +155,7 @@
             type="text"
             bind:value={seed}
           />
+          <ToggleView bind:viewModel={generateLogToggleViewModel}/>
         </Stack>
         <Stack
           alignment="center"
@@ -215,6 +216,7 @@
   import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
   import { presetsMap } from "@shared/appData/presets"
   import { type PlayerOptions, playerOptionsFromViewModel, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
+  import { createSimpleToggleViewModel } from "@shared/types/viewModels"
   import { isNullish } from "@shared/utils"
   import { onMount } from "svelte"
   import yaml from "yaml"
@@ -225,6 +227,7 @@
     lastSelectedSettings: unknown | undefined
     lastSelectedPlayerOptions: unknown | undefined
     customPresetNames: string[]
+    logPreference: boolean
   }
   
   /* eslint-disable prefer-const */
@@ -234,6 +237,7 @@
     lastSelectedSettings,
     lastSelectedPlayerOptions,
     customPresetNames,
+    logPreference,
   }: Props = $props()
   /* eslint-enable prefer-const */
   
@@ -241,6 +245,12 @@
   let seed = $state("")
   let settingsViewModel = $state(defaultSettingsViewModel())
   let playerOptionsViewModel = $state(defaultPlayerOptionsViewModel())
+  let generateLogToggleViewModel = $state(createSimpleToggleViewModel({
+    id: "CREATE_LOG" as const,
+    name: "Generate Log File",
+    description: "Creates a file that contains a record of all the settings that were used and all the random assignments that were made when generating the game.",
+    isOn: logPreference,
+  }))
   
   const currentPreset = $derived.by(() => {
     lastSelectedPresetId
@@ -510,7 +520,13 @@
   const generateROM = async (settings: Settings, playerOptions: PlayerOptions) => {
     try {
       showProgressIndicator()
-      const response = await window.mainAPI.generateROM(seed === "" ? undefined : seed, settings, playerOptions, currentPreset.id)
+      const response = await window.mainAPI.generateROM(
+        seed === "" ? undefined : seed,
+        settings,
+        playerOptions,
+        currentPreset.id,
+        generateLogToggleViewModel.isOn,
+      )
       showSuccessDialog(response.message)
     } catch (error) {
       showErrorDialog(error)
