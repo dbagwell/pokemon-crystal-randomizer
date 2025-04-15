@@ -3,7 +3,6 @@ import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemLocationGroupsMap } from "@shared/gameData/itemLocationGroups"
 import { itemsMap } from "@shared/gameData/items"
 import { movesMap } from "@shared/gameData/moves"
-import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
 import type { ItemCategory } from "@shared/types/gameData/itemCategory"
@@ -12,7 +11,6 @@ import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
 import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGroups"
 import { ballItemIds, holdableItemIds, type ItemId, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { moveIds } from "@shared/types/gameDataIds/moves"
-import { playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import {
   createConfigurableMultiSelectorViewModel,
@@ -26,10 +24,9 @@ import {
   createSimpleToggleViewModel,
   createSingleSelectorViewModel,
   createTabViewModel,
-  createTextInputViewModel,
 } from "@shared/types/viewModels"
 
-export const defaultAppViewModel = () => {
+export const defaultSettingsViewModel = () => {
   return {
     selectedTabId: "POKEMON",
     tabViewModels: [
@@ -974,41 +971,17 @@ export const defaultAppViewModel = () => {
         id: "OTHER" as const,
         name: "Other",
         viewModels: [
-          createConfigurableToggleViewModel({
+          createSimpleToggleViewModel({
             id: "SKIP_GENDER" as const,
-            name: "Use Preset Gender",
-            description: "Skips the gender selection prompt when starting a new game, "
-              + "setting the player's gender to the provided value instead.",
-            viewModels: [
-              createSingleSelectorViewModel({
-                id: "GENDER" as const,
-                name: "Gender",
-                description: "Value is excluded when exporting settings/seeds to share with others.",
-                selectedOptionId: "GIRL",
-                options: playerSpriteIds.map((spriteId) => {
-                  return createSimpleSelectorOption({
-                    id: spriteId,
-                    name: playerSpriteMap[spriteId].label,
-                  })
-                }),
-              }), // END GENDER
-            ] as const,
+            name: "Skip Gender Selection",
+            description: "Skips the gender selection prompt when starting a new game.\n"
+              + "The player's gender will be set to value provided in the 'Player Options'.",
           }), // END SKIP_GENDER
-          createConfigurableToggleViewModel({
+          createSimpleToggleViewModel({
             id: "SKIP_NAME" as const,
-            name: "Use Preset Name",
-            description: "Skips the name selection prompt when starting a new game, "
-              + "setting the player's name to the provided value instead.",
-            viewModels: [
-              createTextInputViewModel({
-                id: "PLAYER_NAME" as const,
-                name: "Player Name",
-                description: "Value is excluded when exporting settings/seeds to share with others.\nUnsupported characters will be turned into spaces.",
-                maxCharacters: 7,
-                isRequired: true as const,
-                value: "KRIS",
-              }),
-            ] as const,
+            name: "Skip Name Selection",
+            description: "Skips the name selection prompt when starting a new game.\n"
+              + "The player's name will be set to the value provided in the 'Player Options'.",
           }), // END SKIP_NAME
           createSimpleToggleViewModel({
             id: "CHANGE_BOX_PHONE_CALL" as const,
@@ -1101,179 +1074,30 @@ export const defaultAppViewModel = () => {
             name: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",
           }),
-          createConfigurableMultiSelectorViewModel({
+          createSimpleMultiSelectorViewModel({
             id: "ADDITIONAL_OPTIONS" as const,
             name: "Additional Options",
             description: "Extra settings that are added to the in game options menu.",
             options: [
-              createConfigurableSelectorOption({
+              createSimpleSelectorOption({
                 id: "INSTANT_TEXT" as const,
                 name: "Instant Text",
                 description: "A new option for the text speed setting that makes all the text in a single text box appear immediately.",
-                viewModels: [
-                  createSimpleToggleViewModel({
-                    id: "MAKE_DEFAULT" as const,
-                    name: "Make Default",
-                    description: "Automatically sets the default value of the text speed option to the new INST value that is added instead of the default MID.\nValue is excluded when exporting settings/seeds to share with others.",
-                  }),
-                ] as const,
               }),
-              createConfigurableSelectorOption({
+              createSimpleSelectorOption({
                 id: "HOLD_TO_MASH" as const,
                 name: "Hold To Mash",
                 description: "A toggle that allows holding down the A or B buttons to mash through text when enabled.",
-                viewModels: [
-                  createSimpleToggleViewModel({
-                    id: "DEFAULT_VALUE" as const,
-                    name: "Default Value",
-                    description: "Automatically enables this in game option by default when first starting the game.\nValue is excluded when exporting settings/seeds to share with others.",
-                  }),
-                ] as const,
               }),
-              createConfigurableSelectorOption({
+              createSimpleSelectorOption({
                 id: "NICKNAMES" as const,
                 name: "Nicknames",
                 description: "A toggle that controls whether the game prompts to nickname newly captured/recieved Pokémon.",
-                viewModels: [
-                  createSimpleToggleViewModel({
-                    id: "DEFAULT_VALUE" as const,
-                    name: "Default Value",
-                    description: "Automatically enables this in game option by default when first starting the game.\nValue is excluded when exporting settings/seeds to share with others.",
-                  }),
-                ] as const,
               }),
-              createConfigurableSelectorOption({
+              createSimpleSelectorOption({
                 id: "RIDE_MUSIC" as const,
                 name: "Ride Music",
                 description: "An option that controls whether the surf and/or bike music will play.",
-                viewModels: [
-                  createSingleSelectorViewModel({
-                    id: "DEFAULT_VALUE" as const,
-                    name: "Default Value",
-                    description: "Automatically sets the default value of this in game option when first starting the game.\nValue is excluded when exporting settings/seeds to share with others.",
-                    selectedOptionId: "BOTH",
-                    options: [
-                      createSimpleSelectorOption({
-                        id: "NONE" as const,
-                        name: "None",
-                      }),
-                      createSimpleSelectorOption({
-                        id: "BIKE_ONLY" as const,
-                        name: "Bike Only",
-                      }),
-                      createSimpleSelectorOption({
-                        id: "SURF_ONLY" as const,
-                        name: "Surf Only",
-                      }),
-                      createSimpleSelectorOption({
-                        id: "BOTH" as const,
-                        name: "Both",
-                      }),
-                    ] as const,
-                  }),
-                ] as const,
-              }),
-            ] as const,
-          }), // END ADDITIONAL_OPTIONS
-          createConfigurableToggleViewModel({
-            id: "CHANGE_DEFAULT_OPTIONS" as const,
-            name: "Change Default Options",
-            description: "Updates the default values of the in game options.\nValues are excluded when exporting settings/seeds to share with others.",
-            viewModels: [
-              createSingleSelectorViewModel({
-                id: "TEXT_SPEED" as const,
-                name: "Text Speed",
-                description: "Ignored if the Instant Text option has been added and made the default.",
-                selectedOptionId: "MID",
-                options: [
-                  createSimpleSelectorOption({
-                    id: "SLOW" as const,
-                    name: "SLOW",
-                  }),
-                  createSimpleSelectorOption({
-                    id: "MID" as const,
-                    name: "MID",
-                  }),
-                  createSimpleSelectorOption({
-                    id: "FAST" as const,
-                    name: "FAST",
-                  }),
-                ] as const,
-              }),
-              createSimpleToggleViewModel({
-                id: "BATTLE_SCENE" as const,
-                name: "Battle Scene",
-                isOn: true,
-              }),
-              createSingleSelectorViewModel({
-                id: "BATTLE_STYLE" as const,
-                name: "Battle Style",
-                selectedOptionId: "SHIFT",
-                options: [
-                  createSimpleSelectorOption({
-                    id: "SHIFT" as const,
-                    name: "SHIFT",
-                  }),
-                  createSimpleSelectorOption({
-                    id: "SET" as const,
-                    name: "SET",
-                  }),
-                ] as const,
-              }),
-              createSingleSelectorViewModel({
-                id: "SOUND" as const,
-                name: "Sound",
-                selectedOptionId: "STEREO",
-                options: [
-                  createSimpleSelectorOption({
-                    id: "STEREO" as const,
-                    name: "STEREO",
-                  }),
-                  createSimpleSelectorOption({
-                    id: "MONO" as const,
-                    name: "MONO",
-                  }),
-                ] as const,
-              }),
-              createSimpleToggleViewModel({
-                id: "MENU_ACCOUNT" as const,
-                name: "Menu Account",
-                isOn: true,
-              }),
-              createSingleSelectorViewModel({
-                id: "PRINT_TONE" as const,
-                name: "Print Tone",
-                selectedOptionId: "NORMAL",
-                options: [
-                  createSimpleSelectorOption({
-                    id: "LIGHTEST" as const,
-                    name: "LIGHTEST",
-                  }),
-                  createSimpleSelectorOption({
-                    id: "LIGHTER" as const,
-                    name: "LIGHTER",
-                  }),
-                  createSimpleSelectorOption({
-                    id: "NORMAL" as const,
-                    name: "NORMAL",
-                  }),
-                  createSimpleSelectorOption({
-                    id: "DARKER" as const,
-                    name: "DARKEST",
-                  }),
-                  createSimpleSelectorOption({
-                    id: "DARKEST" as const,
-                    name: "DARKEST",
-                  }),
-                ] as const,
-              }),
-              createIntegerInputViewModel({
-                id: "FRAME_TYPE" as const,
-                name: "Frame Type",
-                min: 1,
-                max: 8,
-                isRequired: true,
-                value: 1,
               }),
             ] as const,
           }), // END ADDITIONAL_OPTIONS
@@ -1337,7 +1161,7 @@ const createGoodDamagingMovesToggleViewModel = (distinguisher: string = "") => {
         isRequired: true as const,
         min: 1,
         max: 100,
-        value: 20,
+        value: 25,
       }),
       createIntegerInputViewModel({
         id: "POWER" as const,

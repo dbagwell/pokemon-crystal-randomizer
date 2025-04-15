@@ -1,6 +1,6 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
-import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import type { Settings } from "@shared/appData/settingsFromViewModel"
 import { gameMapsMap } from "@shared/gameData/gameMaps"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import type { Encounter } from "@shared/types/gameData/encounter"
@@ -8,7 +8,7 @@ import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { isNotNullish, isNullish } from "@shared/utils"
 
 export const updateRandomEncounters = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
   random: Random,
 ) => {

@@ -1,9 +1,9 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
-import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import type { Settings } from "@shared/appData/settingsFromViewModel"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
 
 export const updateMapObjectEvents = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
 ) => {
   if (!settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.VALUE) { return }

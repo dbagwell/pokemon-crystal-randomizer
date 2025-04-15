@@ -1,6 +1,8 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
   bind:this={container}
+  onclick={handleClickEvent}
   onmouseenter={handleMouseEnterEvent}
   onmouseleave={handleMouseLeaveEvent}
 >
@@ -180,6 +182,12 @@
   
   const handleKeyPressEvent = (event: Event) => {
     onKeyPress?.(event)
+  }
+  
+  const handleClickEvent = (event: Event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    input.focus()
   }
   
   $effect(() => { value; valueListener() })

@@ -1,7 +1,21 @@
-import type { AppViewModel, ConfigurableMultiSelectorViewModel, GroupMultiSelectorViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
+import type { ConfigurableMultiSelectorViewModel, GroupMultiSelectorViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, PlayerOptionsViewModel, SettingsViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
 import { compact, isBoolean, isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
 
-export const applySettingsToAppViewModel = (settings: any, viewModel: AppViewModel, warnings: string[]) => {
+export const applyPlayerOptionsToViewModel = (settings: any, viewModel: PlayerOptionsViewModel, warnings: string[]) => {
+  if (isNullish(settings)) {
+    return
+  }
+  
+  try {
+    viewModel.viewModels.forEach((subViewModel) => {
+      applySettingsToInputViewModel(settings[subViewModel.id], subViewModel, subViewModel.id, warnings)
+    })
+  } catch (error) {
+    throw new Error(`Unable to apply player options: ${error}`)
+  }
+}
+
+export const applySettingsToViewModel = (settings: any, viewModel: SettingsViewModel, warnings: string[]) => {
   if (isNullish(settings)) {
     return
   }
@@ -185,7 +199,7 @@ const applySettingsToSingleSelectorViewModel = (settings: any, viewModel: Single
   const expectedValueType = `one of [${optionIds[0]}, ${optionIds[1]}, ${optionIds[2]}, ${elipsis}${optionIds[optionIds.length - 1]}]`
   const expectedSettingsType = `${expectedValueType}${hasConfigurableOptions ? "or a dictionary with a 'VALUE' and 'SETTINGS'" : ""}`
   
-  const selectedOptionId = isString(settings) ? settings : settings.VALUE
+  const selectedOptionId = isString(settings) ? settings : settings?.VALUE
   
   if (!hasConfigurableOptions && isObject(settings)) {
     warnings.push(invalidValueWarning(path, expectedSettingsType, selectedOptionId))

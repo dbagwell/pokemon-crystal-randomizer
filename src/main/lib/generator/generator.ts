@@ -21,7 +21,7 @@ import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { Random } from "@lib/generator/random"
-import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import { gen5BaseExpMap } from "@shared/gameData/gen5BaseExp"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
@@ -41,7 +41,12 @@ import crypto from "crypto"
 import { app } from "electron"
 import hash from "object-hash"
 
-export const generateROM = (data: Buffer, customSeed: string | undefined, settings: SettingsFromAppViewModel): {
+export const generateROM = (
+  data: Buffer,
+  customSeed: string | undefined,
+  settings: Settings,
+  playerOptions: PlayerOptions,
+): {
   seed: string,
   data: Buffer,
 } => {
@@ -57,13 +62,9 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   
   createPatches(settings, romInfo)
   
-  // Create player specific patches so that the settings can still be used to affect the CV
-  // but use static values so that the effect on the CV is the same for all players
-  const staticPlayerSpecificHunks = createPlayerSpecificPatches(settings, romInfo, true)
-  
   // Base Patch
   
-  const checkValue = romInfo.patchHunks.length > 0 ? hash([...romInfo.patchHunks, ...staticPlayerSpecificHunks]).slice(0, 8).toUpperCase() : "00000000"
+  const checkValue = romInfo.patchHunks.length > 0 ? hash([...romInfo.patchHunks]).slice(0, 8).toUpperCase() : "00000000"
   
   const basePatch = Patch.fromYAML(
     romInfo,
@@ -77,8 +78,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
   
   romInfo.patchHunks = [...romInfo.patchHunks, ...basePatch.hunks]
   
-  // Now create the actual player specific patches
-  romInfo.patchHunks = [...romInfo.patchHunks, ...createPlayerSpecificPatches(settings, romInfo, false)]
+  createPlayerOptionsPatches(settings, playerOptions, romInfo)
   
   romInfo.patchHunks.forEach((hunk) => {
     data.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
@@ -91,7 +91,7 @@ export const generateROM = (data: Buffer, customSeed: string | undefined, settin
 }
 
 const updateGameData = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
   random: Random,
 ) => {
@@ -114,7 +114,7 @@ const updateGameData = (
 }
 
 const createPatches = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
 ) => {
   // Intro Pokemon
@@ -711,6 +711,34 @@ const createPatches = (
 
     romInfo.patchHunks = [...romInfo.patchHunks, ...martsPatch.hunks]
   }
+  
+  // Skip Gender
+  
+  if (settings.SKIP_GENDER) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipGender.yml",
+        {},
+        {
+          genderId: hexStringFrom(bytesFrom(playerSpriteMap.GIRL.numericId, 1)),
+        }
+      ).hunks,
+    ]
+  }
+    
+  // Skip Name
+    
+  if (settings.SKIP_NAME) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipName.yml",
+      ).hunks,
+    ]
+  }
     
   // Trainers
     
@@ -890,8 +918,7 @@ const createPatches = (
   
   // Additional Options
   
-  const selectedAdditionalOptions = settings.ADDITIONAL_OPTIONS
-  const selectedAdditionalOptionIds = Object.keys(selectedAdditionalOptions) as (keyof typeof selectedAdditionalOptions)[]
+  const selectedAdditionalOptionIds = settings.ADDITIONAL_OPTIONS
   
   if (selectedAdditionalOptionIds.length > 0) {
     const additionalOptionsPatch = Patch.fromYAML(
@@ -917,72 +944,78 @@ const createPatches = (
   }
 }
 
-const createPlayerSpecificPatches = (settings: SettingsFromAppViewModel, romInfo: ROMInfo, useDefaults: boolean): DataHunk[] => {
-  let hunks: DataHunk[] = []
-  
+const createPlayerOptionsPatches = (
+  settings: Settings,
+  playerOptions: PlayerOptions,
+  romInfo: ROMInfo,
+) => {
   // Skip Gender
-    
-  if (settings.SKIP_GENDER.VALUE) {
-    const genderId = playerSpriteMap[useDefaults ? "GIRL" : settings.SKIP_GENDER.SETTINGS.GENDER].numericId
-    const skipGenderPatch = Patch.fromYAML(
-      romInfo,
-      "skipGender.yml",
-      {},
-      {
-        genderId: hexStringFrom(bytesFrom(genderId, 1)),
-      }
-    )
-    
-    hunks = [...hunks, ...skipGenderPatch.hunks]
+  
+  const genderId = playerSpriteMap[playerOptions.PLAYER_GENDER].numericId
+  
+  if (settings.SKIP_GENDER) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipGender.yml",
+        {},
+        {
+          genderId: hexStringFrom(bytesFrom(genderId, 1)),
+        }
+      ).hunks,
+    ]
   }
-    
-  // Skip Name
-    
-  if (settings.SKIP_NAME.VALUE) {
-    const nameBytes = ROMInfo.bytesFromText(useDefaults ? "KRIS" : settings.SKIP_NAME.SETTINGS.PLAYER_NAME)
-    const skipNamePatch = Patch.fromYAML(
-      romInfo,
-      "skipName.yml",
-      {},
-      {
-        name: hexStringFrom(nameBytes),
-      }
-    )
-    
-    hunks = [...hunks, ...skipNamePatch.hunks]
-  }
+  
+  romInfo.patchHunks = [
+    ...romInfo.patchHunks,
+    new DataHunk(
+      ROMOffset.fromBankAddress(18, 0x4E03),
+      bytesFrom(genderId + 1, 1),
+    ),
+  ]
+  
+  // Player Name
+  
+  romInfo.patchHunks = [
+    ...romInfo.patchHunks,
+    new DataHunk(
+      ROMOffset.fromBankAddress(1, 0x60D3),
+      ROMInfo.bytesFromText(`${playerOptions.PLAYER_NAME}@`),
+    ),
+    new DataHunk(
+      ROMOffset.fromBankAddress(1, 0x60DE),
+      ROMInfo.bytesFromText(`${playerOptions.PLAYER_NAME}@`),
+    ),
+  ]
   
   // Default Options
   
-  const selectedAdditionalOptions = settings.ADDITIONAL_OPTIONS
-  const selectedAdditionalOptionIds = Object.keys(selectedAdditionalOptions) as (keyof typeof selectedAdditionalOptions)[]
-  const selectedDefaults = settings.CHANGE_DEFAULT_OPTIONS.VALUE ? settings.CHANGE_DEFAULT_OPTIONS.SETTINGS : undefined
-  
+  const selectedAdditionalOptionIds = settings.ADDITIONAL_OPTIONS
+    
   romInfo.patchHunks = [
     ...romInfo.patchHunks,
     new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7C), [
       primaryOptionsValue(
         {
-          instantTextEnabled: selectedAdditionalOptions.INSTANT_TEXT?.MAKE_DEFAULT,
-          textSpeed: selectedDefaults?.TEXT_SPEED,
-          holdToMashEnabled: selectedAdditionalOptions.HOLD_TO_MASH?.DEFAULT_VALUE,
-          battleSceneEnabled: selectedDefaults?.BATTLE_SCENE,
-          battleStyle: selectedDefaults?.BATTLE_STYLE,
-          sound: selectedDefaults?.SOUND,
+          textSpeed: playerOptions.TEXT_SPEED,
+          holdToMashEnabled: playerOptions.HOLD_TO_MASH,
+          battleSceneEnabled: playerOptions.BATTLE_SCENE,
+          battleStyle: playerOptions.BATTLE_STYLE,
+          sound: playerOptions.SOUND,
         },
+        selectedAdditionalOptionIds.includes("INSTANT_TEXT"),
         selectedAdditionalOptionIds.length > 0,
       ),
     ]),
     new DataHunk(ROMOffset.fromBankAddress(5, 0x4F81), [
       secondaryOptionsValue({
-        nicknamesEnabled: selectedAdditionalOptions.NICKNAMES?.DEFAULT_VALUE,
-        rideMusic: selectedAdditionalOptions.RIDE_MUSIC?.DEFAULT_VALUE,
-        menuAccountEnabled: selectedDefaults?.MENU_ACCOUNT,
+        nicknamesEnabled: playerOptions.NICKNAMES,
+        rideMusic: playerOptions.RIDE_MUSIC,
+        menuAccountEnabled: playerOptions.MENU_ACCOUNT,
       }),
     ]),
-    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7E), [frameTypeValue(selectedDefaults?.FRAME_TYPE)]),
-    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F80), [printToneValue(selectedDefaults?.PRINT_TONE)]),
+    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7E), [frameTypeValue(playerOptions.FRAME_TYPE)]),
+    new DataHunk(ROMOffset.fromBankAddress(5, 0x4F80), [printToneValue(playerOptions.PRINT_TONE)]),
   ]
-  
-  return hunks
 }

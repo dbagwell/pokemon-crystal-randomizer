@@ -3,7 +3,7 @@
   bind:this={tooltipContainer}
   style:position="absolute"
   style:display="none"
-  style:z-index="1"
+  style:z-index={zIndexes.tooltipLayer}
   style:box-shadow="0px 5px 5px -3px rgba(0, 0, 0, 0.3), 0px 8px 10px 1px rgba(0, 0, 0, 0.3), 0px 3px 14px 2px rgba(0, 0, 0, 0.3)"
   onmouseleave={handleMouseLeaveEvent}
 >
@@ -33,8 +33,9 @@
 </div>
 
 <script lang="ts">
-  import { arrow, autoUpdate, computePosition, flip, offset, size } from "@floating-ui/dom"
+  import { arrow, autoUpdate, computePosition, flip, offset, shift, size } from "@floating-ui/dom"
   import { colors } from "@scripts/colors"
+  import { zIndexes } from "@scripts/constants"
   import { isNotNullish, isNullish } from "@shared/utils"
   import type { Snippet } from "svelte"
 
@@ -55,6 +56,7 @@
       middleware: [
         offset({ mainAxis: 15 }),
         flip(),
+        shift(),
         size({
           apply({ availableWidth, availableHeight, elements }) {
             elements.floating.style.maxWidth = `${Math.min(availableWidth, 300)}px`

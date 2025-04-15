@@ -31,7 +31,6 @@
       <div
         bind:this={optionElements[option.id]}
         style:cursor="pointer"
-        style:color={index === highlightedOptionIndex ? colors.primaryTint : colors.text}
         style:background-color={index === highlightedOptionIndex ? colors.secondarySurface : colors.primarySurface}
         data-index={index}
         onclick={handleOptionElementEvent}
@@ -47,7 +46,21 @@
           distribution="fill"
           padding={10}
         >
-          {option.name}
+          <div
+            style:text-wrap="nowrap"
+            style:flex-grow="1"
+            style:color={index === highlightedOptionIndex ? colors.primaryTint : colors.text}
+          >
+            {option.name}
+          </div>
+          {#if option.isRemovable ?? false}
+            <Button
+              style="deemphasized-text"
+              icon="cancel"
+              isDestructive={true}
+              onClick={() => { removeOption(index) }}
+            />
+          {/if}
         </Stack>
       </div>
     {:else}
@@ -75,11 +88,26 @@
     description?: string
     keywords: string
     value: any
+    isRemovable?: boolean
+  }
+  
+  export const optionFrom = (value: {
+    id: string
+    name: string
+    description?: string
+    isRemovable?: boolean
+  }): Option => {
+    return {
+      ...value,
+      keywords: value.name,
+      value: value.id,
+    }
   }
   
 </script>
 
 <script lang="ts">
+  import Button from "@components/buttons/Button.svelte"
   import TextField from "@components/inputs/TextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
   import TextTooltip from "@components/utility/TextTooltip.svelte"
@@ -99,6 +127,7 @@
     filter?: string
     previousSelection?: Option
     onSelect: (optionId: string | undefined) => void
+    onRemove?: (optionId: string) => void
   }
   
   /* eslint-disable prefer-const */
@@ -111,6 +140,7 @@
     filter = $bindable(""),
     previousSelection = $bindable(),
     onSelect,
+    onRemove,
   }: Props = $props()
   /* eslint-enable prefer-const */
   
@@ -219,13 +249,7 @@
         || event.relatedTarget instanceof HTMLDivElement && Object.values(optionElements).indexOf(event.relatedTarget) === -1
       )
     ) {
-      hideOptions()
-      
-      if (restoreOnBlur && isNotNullish(previousSelection)) {
-        selectOption(previousSelection)
-      } else {
-        selectOption(options.find((option) => { return option.keywords.toLowerCase() === filter.toLowerCase() }))
-      }
+      blur()
     } else if (event.type === "keydown" && event instanceof KeyboardEvent) {
       if (event.key === "ArrowDown") {
         event.preventDefault()
@@ -257,6 +281,16 @@
     }
   }
   
+  const blur = () => {
+    hideOptions()
+      
+    if (restoreOnBlur && isNotNullish(previousSelection)) {
+      selectOption(previousSelection)
+    } else {
+      selectOption(options.find((option) => { return option.keywords.toLowerCase() === filter.toLowerCase() }))
+    }
+  }
+  
   const handleOptionElementEvent = (event: Event) => {
     if (!(event.currentTarget instanceof HTMLElement) || isNullish(event.currentTarget.dataset.index)) {
       return
@@ -275,6 +309,12 @@
     } else if (event.type === "click") {
       selectOption(filteredOptions[index])
     }
+  }
+  
+  const removeOption = (index: number) => {
+    const optionId = filteredOptions[index].id
+    blur()
+    onRemove?.(optionId)
   }
   
   $effect(() => { filter; filterListener() })

@@ -1,6 +1,6 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
-import type { SettingsFromAppViewModel } from "@shared/appData/settingsFromAppViewModel"
+import type { Settings } from "@shared/appData/settingsFromViewModel"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { baseStatTotal, hasPreEvolution, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
@@ -11,7 +11,7 @@ import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import { isNotNullish, isNullish } from "@shared/utils"
 
 export const updateStarters = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
   random: Random,
 ) => {
@@ -162,7 +162,7 @@ export const updateStarters = (
 }
 
 export const updateStarterItems = (
-  settings: SettingsFromAppViewModel,
+  settings: Settings,
   romInfo: ROMInfo,
   random: Random,
 ) => {

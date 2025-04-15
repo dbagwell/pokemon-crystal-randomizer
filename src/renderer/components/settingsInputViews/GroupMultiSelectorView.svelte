@@ -98,7 +98,7 @@
                       minSpacing={5}
                     >
                       <Button
-                        style="text"
+                        style="deemphasized-text"
                         icon="cancel"
                         isDestructive={true}
                         onClick={() => { removeSelectedValue(groupIndex, idIndex) }}

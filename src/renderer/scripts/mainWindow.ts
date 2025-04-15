@@ -13,10 +13,15 @@ const init = async () => {
   
   updateColors()
   
+  const initialAppData = (await window.mainAPI.getInitialAppData()).result
+  
   mount(AppView, {
     target: document.getElementById("mainWindow")!,
     props: {
-      initialSettings: (await window.mainAPI.getPreviousSettings()).result,
+      lastSelectedPresetId: initialAppData.presetId,
+      lastSelectedSettings: initialAppData.settings,
+      lastSelectedPlayerOptions: initialAppData.playerOptions,
+      customPresetNames: initialAppData.customPresetNames,
     },
   })
 }
