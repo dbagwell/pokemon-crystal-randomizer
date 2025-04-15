@@ -253,3 +253,7 @@ export const moveIds = [
 ] as const
 
 export type MoveId = typeof moveIds[number]
+
+export const isMoveId = (value: string): value is MoveId => {
+  return moveIds.includes(value as any)
+}
