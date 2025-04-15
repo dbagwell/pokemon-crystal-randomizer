@@ -645,6 +645,15 @@ const createPatches = (
     romInfo.patchHunks = [...romInfo.patchHunks, ...rodsAlwaysWorkPatch.hunks]
   }
   
+  if (settings.FASTER_ITEM_PICKUP_SFX) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      new DataHunk(ROMOffset.fromBankAddress(4, 0x62DC), [0x90, 0x00, 0x86, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(37, 0x6FF5), [0x90]),
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x4DBF), [0x90]),
+    ]
+  }
+  
   // Marts
   
   if (settings.EARLY_CHARRGROVE_MART_POKE_BALLS) {
