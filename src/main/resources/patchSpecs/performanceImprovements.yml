@@ -45,7 +45,7 @@ changes:
   - bank: 3
     address: 0x516F
   value: "64"
-- description: "Makes the game use the GameBoy Color's fatster clock speed."
+- description: "Makes the game use the Game Boy Color's fatster clock speed."
   locations:
   - bank: 0
     address: 0x0229

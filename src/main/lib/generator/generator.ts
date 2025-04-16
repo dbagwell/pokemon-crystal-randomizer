@@ -23,6 +23,8 @@ import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { generatorLog } from "@lib/generator/log"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { Random } from "@lib/generator/random"
+import { getVanillaROM } from "@lib/userData/vanillaROM"
+import { attemptWriteFile, getFilePathFromUserInput } from "@lib/utils/dialogUtils"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import { gen5BaseExpMap } from "@shared/gameData/gen5BaseExp"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
@@ -40,9 +42,57 @@ import { trainerGroupIds } from "@shared/types/gameDataIds/trainerGroups"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish } from "@utils"
 import crypto from "crypto"
 import { app } from "electron"
+import fs from "fs"
 import hash from "object-hash"
 
-export const generateROM = (
+export const generateROM = async (
+  customSeed: string | undefined,
+  settings: Settings,
+  playerOptions: PlayerOptions,
+  showInputInRenderer: boolean,
+  defaultFileName?: string,
+) => {
+  const vanillaData = await getVanillaROM(showInputInRenderer)
+  
+  if (isNullish(vanillaData)) {
+    throw new Error("A Pokémon Crystal Version 1.1 ROM is required.")
+  }
+  
+  const generatorResult = generateROMData(vanillaData, customSeed, settings, playerOptions)
+  
+  const dialogParams = {
+    title: "Save Generated ROM to:",
+    buttonLabel: "Generate",
+    fileType: "gbc" as const,
+    defaultFilePath: defaultFileName ?? generatorResult.seed,
+  }
+  
+  let filePath: string | undefined
+  
+  if (defaultFileName) {
+    filePath = attemptWriteFile({
+      ...dialogParams,
+      data: generatorResult.data,
+    })
+  } else {
+    filePath = getFilePathFromUserInput(dialogParams)
+    
+    if (isNotNullish(filePath)) {
+      fs.writeFileSync(filePath, generatorResult.data)
+    }
+  }
+  
+  if (isNullish(filePath)) {
+    throw new Error("A save location must be specified.")
+  }
+  
+  return {
+    ...generatorResult,
+    outputFilePath: filePath,
+  }
+}
+
+const generateROMData = (
   data: Buffer,
   customSeed: string | undefined,
   settings: Settings,

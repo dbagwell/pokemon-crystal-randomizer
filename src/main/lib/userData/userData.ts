@@ -57,6 +57,17 @@ export const setLogPreference = (preference: boolean) => {
   setPreferences(preferences)
 }
 
+export const getCreatePatchPreference = () => {
+  const preferences = getPreferences()
+  return preferences?.createPatch === true
+}
+
+export const setCreatePatchPreference = (preference: boolean) => {
+  const preferences = getPreferences() ?? {}
+  preferences.createPatch = preference
+  setPreferences(preferences)
+}
+
 export const getSettingsForPresetId = (id: string): unknown | undefined => {
   if (id === "CUSTOM") {
     return getPreviousSettings()

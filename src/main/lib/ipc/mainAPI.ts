@@ -1,9 +1,10 @@
 import { generateROM } from "@lib/generator/generator"
+import { createPCRP } from "@lib/generator/pcrpProcessor"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
-import { getLogPreference, getPreviousPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setLogPreference, setPreviousPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
-import { getVanillaROM } from "@lib/userData/vanillaROM"
+import { getCreatePatchPreference, getLogPreference, getPreviousPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setCreatePatchPreference, setLogPreference, setPreviousPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
+import { attemptWriteFile } from "@lib/utils/dialogUtils"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
-import { isNotNullish, isNullish } from "@shared/utils"
+import { isNullish } from "@shared/utils"
 import { app, dialog } from "electron"
 import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
 import fs from "fs"
@@ -24,6 +25,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     playerOptions: unknown | undefined
     customPresetNames: string[]
     logPreference: boolean
+    createPatchPreference: boolean
   }>> => {
     const lastPrestId = getPreviousPresetId()
     
@@ -35,6 +37,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
         playerOptions: getPreviousPlayerOptions(),
         customPresetNames: getSavedSettingsNames(),
         logPreference: getLogPreference(),
+        createPatchPreference: getCreatePatchPreference(),
       },
     }
   }
@@ -79,70 +82,38 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     playerOptions: PlayerOptions,
     presetId: string,
     generateLog: boolean,
+    createPatch: boolean,
   ): Promise<VoidAPIResponse> => {
     try {
-      const vanillaData = await getVanillaROM()
-        
-      if (isNullish(vanillaData)) {
-        throw new Error("A Pokémon Crystal Version 1.1 ROM is required.")
-      }
-      
-      const generatorResult = generateROM(vanillaData, seed, settings, playerOptions)
-      
-      const filePath = dialog.showSaveDialogSync({
-        title: "Save Generated ROM to:",
-        defaultPath: generatorResult.seed,
-        filters: [
-          {
-            name: "Game Boy Colour ROM",
-            extensions: [
-              ".gbc",
-            ],
-          },
-        ],
-        buttonLabel: "Generate",
-        properties: [
-          "showOverwriteConfirmation",
-        ],
-      })
-      
-      if (isNullish(filePath)) {
-        throw new Error("A save location must be specified.")
-      }
-      
-      fs.writeFileSync(filePath, generatorResult.data)
+      const generatorResult = await generateROM(seed, settings, playerOptions, true)
       
       setPreviousSettings(settings)
       setPreviousPresetId(presetId)
       setPreviousPlayerOptions(playerOptions)
       setLogPreference(generateLog)
+      setCreatePatchPreference(createPatch)
       
       if (generateLog) {
-        const defaultLogFilePath = filePath.replace(/\.gbc$/, ".log.txt")
-        try {
-          fs.writeFileSync(defaultLogFilePath, generatorResult.log, { flag: "wx" })
-        } catch {
-          const logFilePath = dialog.showSaveDialogSync({
-            title: "Save log to:",
-            defaultPath: defaultLogFilePath,
-            filters: [
-              {
-                name: "Text File",
-                extensions: [
-                  ".txt",
-                ],
-              },
-            ],
-            buttonLabel: "Save",
-            properties: [
-              "showOverwriteConfirmation",
-            ],
-          })
-        
-          if (isNotNullish(logFilePath)) {
-            fs.writeFileSync(logFilePath, generatorResult.log)
-          }
-        }
+        attemptWriteFile({
+          dialogTitle: "Save log to:",
+          fileType: "text",
+          defaultFilePath: generatorResult.outputFilePath.replace(/\.gbc$/, ".log.txt"),
+          data: generatorResult.log,
+        })
+      }
+      
+      if (createPatch) {
+        const pcrpData = createPCRP({
+          seed: generatorResult.seed,
+          settings: settings,
+        })
+          
+        attemptWriteFile({
+          dialogTitle: "Save patch to:",
+          fileType: "pcrp",
+          defaultFilePath: generatorResult.outputFilePath.replace(/\.gbc$/, ".pcrp"),
+          data: pcrpData,
+        })
       }
       
       return {

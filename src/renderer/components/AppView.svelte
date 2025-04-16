@@ -156,6 +156,7 @@
             bind:value={seed}
           />
           <ToggleView bind:viewModel={generateLogToggleViewModel}/>
+          <ToggleView bind:viewModel={generatePatchFileToggleViewModel}/>
         </Stack>
         <Stack
           alignment="center"
@@ -228,6 +229,7 @@
     lastSelectedPlayerOptions: unknown | undefined
     customPresetNames: string[]
     logPreference: boolean
+    createPatchPreference: boolean
   }
   
   /* eslint-disable prefer-const */
@@ -238,6 +240,7 @@
     lastSelectedPlayerOptions,
     customPresetNames,
     logPreference,
+    createPatchPreference,
   }: Props = $props()
   /* eslint-enable prefer-const */
   
@@ -250,6 +253,13 @@
     name: "Generate Log File",
     description: "Creates a file that contains a record of all the settings that were used and all the random assignments that were made when generating the game.",
     isOn: logPreference,
+  }))
+  
+  let generatePatchFileToggleViewModel = $state(createSimpleToggleViewModel({
+    id: "CREATE_PATCH",
+    name: "Generate Patch File",
+    description: "Creates a '.pcrp' file that can be shared with others to generate the same game with the same settings and randomization.",
+    isOn: createPatchPreference,
   }))
   
   const currentPreset = $derived.by(() => {
@@ -526,6 +536,7 @@
         playerOptions,
         currentPreset.id,
         generateLogToggleViewModel.isOn,
+        generatePatchFileToggleViewModel.isOn,
       )
       showSuccessDialog(response.message)
     } catch (error) {
