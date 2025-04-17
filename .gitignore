@@ -90,6 +90,9 @@ typings/
 # Electron-Forge
 out/
 
+# electron-builder
+dist/
+
 # Generated Source files
 build/
 
