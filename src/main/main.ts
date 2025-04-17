@@ -111,15 +111,10 @@ app.applicationMenu = Menu.buildFromTemplate(compact([
       { type: "separator" },
       { role: "quit" },
     ],
-  } : {
+  } : undefined,
+  {
     label: "File",
-    submenu: [
-      { role: "quit" },
-    ],
-  },
-  isMac ? {
-    label: "File",
-    submenu: [
+    submenu: compact([
       {
         label: "Apply Patch",
         click: async () => {
@@ -140,8 +135,9 @@ app.applicationMenu = Menu.buildFromTemplate(compact([
           }
         },
       },
-    ],
-  } : undefined,
+      isMac ? undefined : { role: "quit" },
+    ]),
+  },
   {
     label: "Edit",
     submenu: [
