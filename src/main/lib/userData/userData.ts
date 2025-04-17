@@ -131,6 +131,7 @@ export const saveSettings = (settings: Settings, name: string) => {
 }
 
 export const getSavedSettingsNames = () => {
+  fs.mkdirSync(settingsPath, { recursive: true })
   return fs.readdirSync(settingsPath).filter((fileName) => {
     return !fileName.startsWith(".") && fileName.endsWith(".yml")
   }).map((fileName) => {
