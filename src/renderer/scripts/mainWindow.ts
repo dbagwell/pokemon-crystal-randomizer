@@ -23,6 +23,7 @@ const init = async () => {
       lastSelectedSettings: initialAppData.settings,
       lastSelectedPlayerOptions: initialAppData.playerOptions,
       customPresetNames: initialAppData.customPresetNames,
+      logPreference: initialAppData.logPreference,
     },
   })
 }

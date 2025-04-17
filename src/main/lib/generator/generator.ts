@@ -20,6 +20,7 @@ import { updateStarterItems, updateStarters } from "@lib/generator/gameDataProce
 import { updateTeachableMoves } from "@lib/generator/gameDataProcessors/teachableMoves"
 import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
+import { generatorLog } from "@lib/generator/log"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { Random } from "@lib/generator/random"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
@@ -31,7 +32,7 @@ import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
-import type { EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
+import { type EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
 import { type ItemId } from "@shared/types/gameDataIds/items"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import type { TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
@@ -47,8 +48,9 @@ export const generateROM = (
   settings: Settings,
   playerOptions: PlayerOptions,
 ): {
-  seed: string,
-  data: Buffer,
+  seed: string
+  data: Buffer
+  log: string
 } => {
   const romInfo = ROMInfo.vanilla()
   const seed = customSeed ?? crypto.randomUUID()
@@ -84,9 +86,17 @@ export const generateROM = (
     data.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
   })
   
+  const log = generatorLog({
+    seed: seed,
+    checkValue: checkValue,
+    settings: settings,
+    gameData: romInfo.gameData,
+  })
+  
   return {
-    seed: "",
+    seed: seed,
     data: data,
+    log: log,
   }
 }
 

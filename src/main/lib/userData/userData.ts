@@ -46,6 +46,17 @@ export const setPreviousPresetId = (presetId: string) => {
   setPreferences(preferences)
 }
 
+export const getLogPreference = () => {
+  const preferences = getPreferences()
+  return preferences?.logPreference === true
+}
+
+export const setLogPreference = (preference: boolean) => {
+  const preferences = getPreferences() ?? {}
+  preferences.logPreference = preference
+  setPreferences(preferences)
+}
+
 export const getSettingsForPresetId = (id: string): unknown | undefined => {
   if (id === "CUSTOM") {
     return getPreviousSettings()
