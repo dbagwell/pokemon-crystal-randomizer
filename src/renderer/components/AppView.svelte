@@ -12,7 +12,7 @@
     width="100%"
   >
     <div>
-      <div style:overflow-x="scroll">
+      <div style:overflow-x="auto">
         <Stack
           alignment="fill"
           direction="horizontal"
@@ -72,7 +72,7 @@
       style:background-color={colors.primarySurface}
       style:box-shadow="0 -2px 5px #00000070"
       style:height="auto"
-      style:overflow="scroll"
+      style:overflow="auto"
     >
       {#each settingsViewModel.tabViewModels as tabViewModel (tabViewModel.id)}
         {#if settingsViewModel.selectedTabId === tabViewModel.id}
@@ -94,6 +94,7 @@
     <div
       style:background-color={colors.primarySurface}
       style:box-shadow="0 -2px 5px #00000070"
+      style:overflow="auto"
     >
       <Stack
         alignment="fill"

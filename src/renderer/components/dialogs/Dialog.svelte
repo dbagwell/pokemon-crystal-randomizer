@@ -42,7 +42,7 @@
     {#if isNotNullish(message) || isNotNullish(extraContent)}
       <div
         style:min-height="20px"
-        style:overflow="scroll"
+        style:overflow="auto"
       >
         <Stack
           alignment="start"
