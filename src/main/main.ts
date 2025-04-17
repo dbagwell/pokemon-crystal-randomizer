@@ -67,7 +67,12 @@ app.on("ready", async () => {
   ready = true
   
   if (!quitAfterGenerating) {
-    await createWindow()
+    if (isNotNullish(process.argv[1])) {
+      await handlePCRPFile(process.argv[1])
+      app.quit()
+    } else {
+      await createWindow()
+    }
   }
   
   if (isNotNullish(filePathToOpen)) {
