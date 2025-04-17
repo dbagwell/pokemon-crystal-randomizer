@@ -1,6 +1,14 @@
 appId: "com.electron.pokemon-crystal-randomizer"
 files:
-  - ".vite/**/*"
-  - "package.json"
+- ".vite/**/*"
+- "package.json"
 mac:
   identity: null
+  icon: "src/main/resources/icons/icon.icns"
+win:
+  icon: "src/main/resources/icons/icon.ico"
+fileAssociations:
+- name: "Pokemon Crystal Randomizer Patch"
+  ext: "pcrp"
+  icon: "src/main/resources/icons/icon.ico"
+  role: "Editor"

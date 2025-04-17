@@ -17,7 +17,8 @@
     "lint": "eslint --fix .",
     "dev": "electron-forge start",
     "build": "electron-forge package --platform darwin --arch arm64",
-    "package": "electron-builder build --win nsis"
+    "package:nonwin": "electron-builder build --arm64",
+    "package:win": "electron-builder build --win msi"
   },
   "devDependencies": {
     "@electron-forge/cli": "7.1.0",
