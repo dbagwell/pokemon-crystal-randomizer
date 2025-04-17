@@ -75,7 +75,7 @@ export const getVanillaROM = async (showInputInRenderer: boolean): Promise<Buffe
         {
           name: "Game Boy Color ROM",
           extensions: [
-            ".gbc",
+            "gbc",
           ],
         },
       ],

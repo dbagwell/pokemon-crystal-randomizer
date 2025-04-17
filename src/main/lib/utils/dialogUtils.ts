@@ -56,23 +56,23 @@ export const getFilePathFromUserInput = (params: {
       fileType === "text" ? {
         name: "Text File",
         extensions: [
-          ".txt",
+          "txt",
         ],
       } : fileType === "yaml" ? {
         name: "YAML",
         extensions: [
-          ".yml",
-          ".yaml",
+          "yml",
+          "yaml",
         ],
       } : fileType === "gbc" ? {
         name: "Game Boy Color ROM",
         extensions: [
-          ".gbc",
+          "gbc",
         ],
       } : {
         name: "Pokémon Crystal Randomizer Patch",
         extensions: [
-          ".pcrp",
+          "pcrp",
         ],
       },
     ],

@@ -134,8 +134,8 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
           {
             name: "YAML",
             extensions: [
-              ".yml",
-              ".yaml",
+              "yml",
+              "yaml",
             ],
           },
         ],

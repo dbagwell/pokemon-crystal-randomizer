@@ -123,7 +123,7 @@ app.applicationMenu = Menu.buildFromTemplate(compact([
               {
                 name: "Pokémon Crystal Randomizer Patch",
                 extensions: [
-                  ".pcrp",
+                  "pcrp",
                 ],
               },
             ],
