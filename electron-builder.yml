@@ -1,0 +1,6 @@
+appId: "com.electron.pokemon-crystal-randomizer"
+files:
+  - ".vite/**/*"
+  - "package.json"
+mac:
+  identity: null
