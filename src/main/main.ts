@@ -71,7 +71,7 @@ app.on("ready", async () => {
   }
   
   if (isNotNullish(filePathToOpen)) {
-    handlePCRPFile(filePathToOpen)
+    await handlePCRPFile(filePathToOpen)
     filePathToOpen = undefined
     
     if (quitAfterGenerating) {
@@ -86,11 +86,11 @@ app.on("activate", () => {
   }
 })
 
-app.on("open-file", (_, path) => {
+app.on("open-file", async (_, path) => {
   quitAfterGenerating = !ready
   
   if (ready) {
-    handlePCRPFile(path)
+    await handlePCRPFile(path)
   } else {
     filePathToOpen = path
   }
