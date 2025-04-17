@@ -5,6 +5,7 @@ import { dataHunkFromMapObjectEvent } from "@lib/generator/dataConverters/mapObj
 import { bytesFromOddEgg } from "@lib/generator/dataConverters/oddEgg"
 import { frameTypeValue, primaryOptionsValue, printToneValue, secondaryOptionsValue } from "@lib/generator/dataConverters/options"
 import { bytesForEvolutionsAndLevelUpMovesFromPokemon, bytesForInfoFromPokemon } from "@lib/generator/dataConverters/pokemon"
+import { bytesFromTrade } from "@lib/generator/dataConverters/trades"
 import { updateEncounterRates } from "@lib/generator/gameDataProcessors/encounterRates"
 import { updateRandomEncounters } from "@lib/generator/gameDataProcessors/encounters"
 import { updateEventPokemon } from "@lib/generator/gameDataProcessors/eventPokemon"
@@ -30,7 +31,6 @@ import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
-import type { Trade } from "@shared/types/gameData/trade"
 import type { EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
 import { type ItemId } from "@shared/types/gameDataIds/items"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
@@ -358,31 +358,17 @@ const createPatches = (
   }
     
   // Trades
-    
-  const tradePokemonIdsHexString = (trade: Trade) => {
-    return hexStringFrom([
-      pokemonMap[trade.askPokemonId].numericId,
-      pokemonMap[trade.offerPokemonId].numericId,
-    ])
-  }
-      
-  const tradesPatch = Patch.fromYAML(
-    romInfo,
-    "trades.yml",
-    {},
-    {
-      mikeTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.MIKE),
-      kyleTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.KYLE),
-      timTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.TIM),
-      emyTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.EMY),
-      chirsTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.CHRIS),
-      kimTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.KIM),
-      forestTradePokemonIds: tradePokemonIdsHexString(romInfo.gameData.trades.FOREST),
-    },
-  )
-    
-  romInfo.patchHunks = [...romInfo.patchHunks, ...tradesPatch.hunks]
-    
+  
+  romInfo.patchHunks = [
+    ...romInfo.patchHunks,
+    new DataHunk(
+      ROMOffset.fromBankAddress(63, 0x4E58),
+      Object.values(romInfo.gameData.trades).flatMap((trade) => {
+        return bytesFromTrade(trade)
+      }),
+    ),
+  ]
+  
   // Evolutions
     
   if (settings.CHANGE_HAPPINESS_EVOLUTION_REQUIREMENT.VALUE) {
@@ -770,12 +756,14 @@ const createPatches = (
               } else if (hasItems) {
                 trainerType = 2
               }
+              
+              const trainerName = trainer.groupId === "RIVAL_1" || trainer.groupId === "RIVAL_2" ? "?" : trainer.name
                 
               return {
                 path: "trainerNameAndPokemon.yml",
                 extraIncludes: {},
                 extraValues: {
-                  name: hexStringFrom(ROMInfo.bytesFromText(`${trainer.name}@`)),
+                  name: hexStringFrom(ROMInfo.bytesFromText(`${trainerName}@`)),
                   trainerType: hexStringFrom([trainerType]),
                   pokemon: hexStringFrom(compact(trainer.pokemon.flatMap((pokemon) => {
                     return [

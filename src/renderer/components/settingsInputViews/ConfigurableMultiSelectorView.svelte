@@ -78,7 +78,7 @@
                 wrap={true}
               >
                 {#each selectedOption.viewModels as subViewModel, index (subViewModel.id)}
-                  <SettingsInputView viewModel={selectedOption.viewModels[index]}/>
+                  <SettingsInputView bind:viewModel={selectedOption.viewModels[index]}/>
                 {/each}
               </Stack>
             {/each}

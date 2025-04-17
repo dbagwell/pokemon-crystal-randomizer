@@ -253,3 +253,7 @@ export const pokemonIds = [
 ] as const
 
 export type PokemonId = typeof pokemonIds[number]
+
+export const isPokemonId = (value: string): value is PokemonId => {
+  return pokemonIds.includes(value as any)
+}

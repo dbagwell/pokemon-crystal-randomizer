@@ -4,6 +4,7 @@ import type { Settings } from "@shared/appData/settingsFromViewModel"
 import { teachableMovesMap } from "@shared/gameData/teachableMoves"
 import { type HMItemId, hmItemIds, holdableItemIds, type TMItemId, tmItemIds } from "@shared/types/gameDataIds/items"
 import { type MoveTutorId, moveTutorIds } from "@shared/types/gameDataIds/teachableMoves"
+import { isNotNullish } from "@shared/utils"
 
 export const updatePokemonInfo = (
   settings: Settings,
@@ -34,9 +35,9 @@ export const updatePokemonInfo = (
         return move.type === "TM"
       })
         
-      pokemon.tmMoves = Array(tmItemIds.length * (settings.RANDOMIZE_TM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? random.int(0, 100)) / 100).fill(undefined).map(() => {
+      pokemon.tmMoves = Array(Math.round(tmItemIds.length * (settings.RANDOMIZE_TM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? random.int(0, 100)) / 100)).fill(undefined).map(() => {
         return random.element({ array: availableTMS, remove: true }).id as TMItemId
-      })
+      }).toSorted()
     })
   }
     
@@ -46,9 +47,9 @@ export const updatePokemonInfo = (
         return move.type === "HM"
       })
         
-      pokemon.hmMoves = Array(hmItemIds.length * (settings.RANDOMIZE_HM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? random.int(0, 100)) / 100).fill(undefined).map(() => {
+      pokemon.hmMoves = Array(Math.round(hmItemIds.length * (settings.RANDOMIZE_HM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? random.int(0, 100)) / 100)).fill(undefined).map(() => {
         return random.element({ array: availableHMS, remove: true }).id as HMItemId
-      })
+      }).toSorted()
     })
   }
     
@@ -58,9 +59,9 @@ export const updatePokemonInfo = (
         return move.type === "MOVE_TUTOR"
       })
         
-      pokemon.moveTutorMoves = Array(moveTutorIds.length * (settings.RANDOMIZE_TM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? random.int(0, 100)) / 100).fill(undefined).map(() => {
+      pokemon.moveTutorMoves = Array(Math.round(moveTutorIds.length * (settings.RANDOMIZE_TM_COMPATIBILITY.SETTINGS.PERCENTAGE ?? random.int(0, 100)) / 100)).fill(undefined).map(() => {
         return random.element({ array: availableMoveTutorMoves, remove: true }).id as MoveTutorId
-      })
+      }).toSorted()
     })
   }
   
@@ -84,67 +85,53 @@ export const updatePokemonInfo = (
     }
     
     const wildHeldItemsSettings = settings.RANDOMIZE_WILD_HELD_ITEMS.SETTINGS
-    if (wildHeldItemsSettings.CHANGE_NUMBER_OF_ITEMS_PER_POKEMON.VALUE) {
-      const itemsPerPokemonSettings = wildHeldItemsSettings.CHANGE_NUMBER_OF_ITEMS_PER_POKEMON.SETTINGS
-      switch (itemsPerPokemonSettings.NUMBER.VALUE) {
+    if (wildHeldItemsSettings.CHANGE_DISTRIBUTION.VALUE) {
+      const itemsPerPokemonSettings = wildHeldItemsSettings.CHANGE_DISTRIBUTION.SETTINGS
+      switch (itemsPerPokemonSettings.DISTRIBUTION) {
       case "RANDOM": {
         Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {
-          pokemon.items = []
-          for (let i = 0; i < random.int(0, 2); i++) {
-            pokemon.items[i] = randomItemId()
-          }
+          pokemon.items = [
+            random.boolean() ? randomItemId() : undefined,
+            random.boolean() ? randomItemId() : undefined,
+          ]
         })
         break
       }
       case "SHUFFLED": {
-        if (itemsPerPokemonSettings.NUMBER.SETTINGS.SHUFFLED.KEEP_RATIOS) {
-          const itemGroups = Object.values(romInfo.gameData.pokemon).map((pokemon) => {
-            for (let i = 0; i < pokemon.items.length; i++) {
+        const itemGroups = Object.values(romInfo.gameData.pokemon).map((pokemon) => {
+          for (let i = 0; i < pokemon.items.length; i++) {
+            if (isNotNullish(pokemon.items[i])) {
               pokemon.items[i] = randomItemId()
             }
-            
-            return pokemon.items
-          })
+          }
           
-          const pokemonArray = Object.values(romInfo.gameData.pokemon).map((pokemon) => {
-            pokemon.items = []
-            return pokemon
-          })
-          
-          itemGroups.forEach((group) => {
-            random.element({ array: pokemonArray, remove: true }).items = group
-          })
-        } else {
-          const itemIds = Object.values(romInfo.gameData.pokemon).flatMap((pokemon) => {
-            return pokemon.items.map((_) => {
-              return randomItemId()
-            })
-          })
-          
-          const pokemonArray = Object.values(romInfo.gameData.pokemon).flatMap((pokemon) => {
-            pokemon.items = []
-            return [pokemon, pokemon]
-          })
-          
-          itemIds.forEach((itemId) => {
-            random.element({ array: pokemonArray, remove: true }).items.push(itemId)
-          })
-        }
+          return pokemon.items
+        })
+        
+        Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {
+          pokemon.items = random.element({ array: itemGroups, remove: true })
+        })
         break
       }
       case "NONE": {
         Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {
-          pokemon.items = []
+          pokemon.items = [undefined, undefined]
         })
         break
       }
-      case "ONE": {
+      case "COMMON_ONLY": {
         Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {
-          pokemon.items = [randomItemId()]
+          pokemon.items = [randomItemId(), undefined]
         })
         break
       }
-      case "TWO": {
+      case "RARE_ONLY": {
+        Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {
+          pokemon.items = [undefined, randomItemId()]
+        })
+        break
+      }
+      case "FULL": {
         Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {
           pokemon.items = [randomItemId(), randomItemId()]
         })

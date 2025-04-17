@@ -96,7 +96,7 @@ export const updateRandomEncounters = (
         }
       }
         
-      return choices
+      return choices.flat()
     }
       
     const carryOverSet = nonBannedFullyEvolvedPokemonIds.map((pokemonId) => { return pokemonId })

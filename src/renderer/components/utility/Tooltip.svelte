@@ -47,7 +47,10 @@
   let removeTooltipAutoUpdates: (() => void) | undefined
   
   const updateTooltipLayout = async () => {
-    if (isNullish(anchorElement)) {
+    if (isNullish(anchorElement) || isNullish(anchorElement.offsetParent)) {
+      if (isNotNullish(currentTooltipId)) {
+        hideTooltip(currentTooltipId)
+      }
       return
     }
     

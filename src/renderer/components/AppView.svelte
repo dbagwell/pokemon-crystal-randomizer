@@ -113,7 +113,7 @@
             clearOnSelect={false}
             filter={currentPresetName}
             onRemove={showRemovePresetConfirmation}
-            onSelect={(presetId) => { presetSelected(presetId as PresetId ?? "VANILLA") }}
+            onSelect={(presetId) => { presetSelected(presetId ?? "VANILLA") }}
             options={presetOptions}
             previousSelection={optionFrom(currentPreset)}
             restoreOnBlur={true}
@@ -213,14 +213,15 @@
   import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
   import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
   import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
-  import { type PresetId, presetsMap } from "@shared/appData/presets"
+  import { presetsMap } from "@shared/appData/presets"
   import { type PlayerOptions, playerOptionsFromViewModel, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
   import { isNullish } from "@shared/utils"
   import { onMount } from "svelte"
   import yaml from "yaml"
   
   type Props = {
-    lastSelectedPresetId: PresetId
+    appVersion: string
+    lastSelectedPresetId: string
     lastSelectedSettings: unknown | undefined
     lastSelectedPlayerOptions: unknown | undefined
     customPresetNames: string[]
@@ -228,6 +229,7 @@
   
   /* eslint-disable prefer-const */
   let {
+    appVersion,
     lastSelectedPresetId,
     lastSelectedSettings,
     lastSelectedPlayerOptions,
@@ -247,8 +249,11 @@
     return _currentPreset()
   })
   const _currentPreset = () => {
-    if (JSON.stringify(lastSelectedSettings) === JSON.stringify(currentSettings())) {
-      return presetsMap[lastSelectedPresetId] ?? {
+    // Normalize the last selected settings and compare
+    const lastSettingsViewModel = defaultSettingsViewModel()
+    applySettingsToViewModel(lastSelectedSettings, lastSettingsViewModel, [])
+    if (JSON.stringify(settingsFromViewModel(lastSettingsViewModel)) === JSON.stringify(currentSettings())) {
+      return (presetsMap as any)[lastSelectedPresetId] ?? {
         id: lastSelectedPresetId,
         name: lastSelectedPresetId,
       }
@@ -324,8 +329,8 @@
     }
   }
   
-  const presetSelected = async (presetId: PresetId) => {
-    if (presetId === lastSelectedPresetId || presetId === "CUSTOM") {
+  const presetSelected = async (presetId: string) => {
+    if (currentPreset.id !== "CUSTOM" && presetId === lastSelectedPresetId) {
       return
     }
     
@@ -384,7 +389,17 @@
         
         const fileData = inputValue as DataView
         const settings = yaml.parse(new TextDecoder().decode(fileData.buffer))
+        
         applyNewSettings(settings)
+        
+        if (settings.VERSION !== appVersion) {
+          showDialog({
+            title: "Unexpected Version",
+            message: "The imported settings were exported from a different version of the app and may not behave as expected.\n"
+              + `App Version: ${appVersion}\nImported Settings Version: ${settings.VERSION}`,
+            submitButtonLabel: "OK",
+          })
+        }
       },
     })
   }

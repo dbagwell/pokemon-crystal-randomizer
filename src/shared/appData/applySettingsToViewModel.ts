@@ -135,13 +135,10 @@ const applySettingsToTextInputViewModel = (settings: any, viewModel: TextInputVi
 const applySettingsToToggleViewModel = (settings: any, viewModel: ToggleViewModel, path: string, warnings: string[]) => {
   const expectedSettingsType = "boolean or a dictionary of with a 'VALUE' and 'SETTINGS'"
   const hasConfigurableSettings = "viewModels" in viewModel
-  const value = isBoolean(settings) ? settings : settings?.VALUE ?? false
+  const value = isObject(settings) ? settings?.VALUE ?? false : settings ?? false
   
   if (isBoolean(value)) {
     viewModel.isOn = value
-  } else if (isNullish(settings)) {
-    warnings.push(missingValueWarning(path, expectedSettingsType))
-    return
   } else if (!hasConfigurableSettings || !isObject(settings)) {
     warnings.push(invalidValueWarning(path, expectedSettingsType, value))
   } else if (isNullish(settings.VALUE)) {
@@ -150,7 +147,7 @@ const applySettingsToToggleViewModel = (settings: any, viewModel: ToggleViewMode
     warnings.push(invalidValueWarning(`${path}.VALUE`, "boolean", value))
   }
   
-  if (isNullish(settings)) {
+  if (isNullish(settings) || !value) {
     return
   }
   

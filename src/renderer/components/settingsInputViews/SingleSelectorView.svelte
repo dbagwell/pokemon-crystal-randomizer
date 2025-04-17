@@ -37,8 +37,8 @@
           padding={[10, 0, 10, 20]}
           wrap={true}
         >
-          {#each option.viewModels as subViewModel (subViewModel.id)}
-            <SettingsInputView viewModel={subViewModel}/>
+          {#each option.viewModels as subViewModel, index (subViewModel.id)}
+            <SettingsInputView bind:viewModel={option.viewModels[index]}/>
           {/each}
         </Stack>
       </div>

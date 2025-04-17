@@ -22,7 +22,7 @@ export type Pokemon = {
   types: [PokemonTypeId, PokemonTypeId?]
   catchRate: number
   baseExperience: number
-  items: [HoldableItemId?, HoldableItemId?]
+  items: [HoldableItemId | undefined, HoldableItemId | undefined]
   genderRatio: number
   eggCycles: number
   growthRate: GrowthRateId

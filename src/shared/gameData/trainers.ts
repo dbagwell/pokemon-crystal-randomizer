@@ -274,7 +274,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (1)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -285,7 +285,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (1)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -296,7 +296,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (1)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -307,7 +307,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (2)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -328,7 +328,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (2)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -349,7 +349,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (2)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -370,7 +370,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (3)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -416,7 +416,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (3)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -462,7 +462,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (3)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -508,7 +508,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (4)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -564,7 +564,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (4)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -620,7 +620,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (4)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -676,7 +676,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (5)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -742,7 +742,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (5)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -808,7 +808,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (5)",
     groupId: "RIVAL_1",
     pokemon: [
       {
@@ -7054,7 +7054,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (6)",
     groupId: "RIVAL_2",
     pokemon: [
       {
@@ -7120,7 +7120,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (6)",
     groupId: "RIVAL_2",
     pokemon: [
       {
@@ -7186,7 +7186,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (6)",
     groupId: "RIVAL_2",
     pokemon: [
       {
@@ -7252,7 +7252,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (7)",
     groupId: "RIVAL_2",
     pokemon: [
       {
@@ -7318,7 +7318,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (7)",
     groupId: "RIVAL_2",
     pokemon: [
       {
@@ -7384,7 +7384,7 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "?",
+    name: "??? (7)",
     groupId: "RIVAL_2",
     pokemon: [
       {

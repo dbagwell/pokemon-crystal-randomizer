@@ -18,6 +18,7 @@ const init = async () => {
   mount(AppView, {
     target: document.getElementById("mainWindow")!,
     props: {
+      appVersion: initialAppData.appVersion,
       lastSelectedPresetId: initialAppData.presetId,
       lastSelectedSettings: initialAppData.settings,
       lastSelectedPlayerOptions: initialAppData.playerOptions,

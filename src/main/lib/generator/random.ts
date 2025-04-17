@@ -12,6 +12,10 @@ export class Random {
   
   readonly int: (min: number, max: number) => number
   
+  readonly boolean = (): boolean => {
+    return this.int(0, 1) === 1
+  }
+  
   readonly element = <Element>(
     params: {
       array: Element[]

@@ -228,7 +228,7 @@ export const defaultSettingsViewModel = () => {
           createConfigurableToggleViewModel({
             id: "RANDOMIZE_TRADES" as const,
             name: "Randomize Trades",
-            description: "Randomize the Pokémon asked for and offered in the in-game trades.",
+            description: "Randomize the Pokémon requested and offered in the in-game trades.",
             viewModels: [
               createSingleSelectorViewModel({
                 id: "METHOD" as const,
@@ -237,12 +237,12 @@ export const defaultSettingsViewModel = () => {
                   createSimpleSelectorOption({
                     id: "BOTH" as const,
                     name: "Both",
-                    description: "Randomize both the Pokémon being asked for and the Pokémon being offered in the trade.",
+                    description: "Randomize both the Pokémon being requested and the Pokémon being offered in the trade.",
                   }),
                   createSimpleSelectorOption({
-                    id: "ASK_ONLY" as const,
-                    name: "Ask Only",
-                    description: "Randomize only the Pokémon being asked for in the trade.",
+                    id: "REQUEST_ONLY" as const,
+                    name: "Request Only",
+                    description: "Randomize only the Pokémon being requested in the trade.",
                   }),
                   createSimpleSelectorOption({
                     id: "OFFER_ONLY" as const,
@@ -252,6 +252,39 @@ export const defaultSettingsViewModel = () => {
                 ] as const,
               }), // END METHOD
               createUniquePokemonSelectorViewModel(),
+              createConfigurableToggleViewModel({
+                id: "CHANGE_REQUESTED_GENDERS" as const,
+                name: "Change Requested Genders",
+                description: "Changes the preferred gender of requested trade Pokémon.",
+                viewModels: [
+                  createSingleSelectorViewModel({
+                    id: "METHOD" as const,
+                    selectedOptionId: "NONE",
+                    options: [
+                      createSimpleSelectorOption({
+                        id: "NONE" as const,
+                        name: "None",
+                        description: "Makes it so all trade requests have no gender preferences.",
+                      }),
+                      createSimpleSelectorOption({
+                        id: "MALE" as const,
+                        name: "Male",
+                        description: "Makes it so all requested trade Pokémon are male.",
+                      }),
+                      createSimpleSelectorOption({
+                        id: "FEMALE" as const,
+                        name: "Female",
+                        description: "Makes it so all requested trade Pokémon are female.",
+                      }),
+                      createSimpleSelectorOption({
+                        id: "RANDOM" as const,
+                        name: "Random",
+                        description: "Makes it so the preferred gender of each requested trade Pokémon is random.",
+                      }),
+                    ] as const,
+                  }),
+                ] as const,
+              }),
               createBannedPokemonSelectorViewModel(),
             ] as const,
           }), // END RANDOMIZE_TRADES
@@ -726,12 +759,12 @@ export const defaultSettingsViewModel = () => {
             description: "Change the items that wild Pokémon can hold.",
             viewModels: [
               createConfigurableToggleViewModel({
-                id: "CHANGE_NUMBER_OF_ITEMS_PER_POKEMON" as const,
-                name: "Change Number of Items per Pokémon",
-                description: "Change the number of different kinds of items each species of Pokémon can hold in the wild.",
+                id: "CHANGE_DISTRIBUTION" as const,
+                name: "Change Distribution",
+                description: "Change the distribution of which Pokémon can be found holding items in the wild.",
                 viewModels: [
                   createSingleSelectorViewModel({
-                    id: "NUMBER" as const,
+                    id: "DISTRIBUTION" as const,
                     selectedOptionId: "RANDOM",
                     options: [
                       createSimpleSelectorOption({
@@ -739,38 +772,36 @@ export const defaultSettingsViewModel = () => {
                         name: "Random",
                         description: "Each species of Pokémon is assigned a random number (from 0 to 2) of items that they can hold in the wild.",
                       }),
-                      createConfigurableSelectorOption({
+                      createSimpleSelectorOption({
                         id: "SHUFFLED" as const,
                         name: "Shuffled",
-                        description: "The total number of items that can be held by wild Pokémon remains unchanged, "
-                          + "but the Pokémon that can hold each of those items is randomized.",
-                        viewModels: [
-                          createSimpleToggleViewModel({
-                            id: "KEEP_RATIOS" as const,
-                            name: "Keep Ratios",
-                            description: "Make sure that the number of Pokémon that can hold 0, 1, and 2 items respectively remains unchanged.",
-                          }),
-                        ] as const,
+                        description: "The species of Pokémon that can commonly and rarely be found holding items are shuffled.",
                       }),
                       createSimpleSelectorOption({
                         id: "NONE" as const,
-                        name: "0 Items",
+                        name: "None",
                         description: "No wild Pokémon can hold items.",
                       }),
                       createSimpleSelectorOption({
-                        id: "ONE" as const,
-                        name: "1 Item",
-                        description: "Each species of Pokémon is assigned 1 of kind of item that they can hold in the wild.",
+                        id: "COMMON_ONLY" as const,
+                        name: "Common Only",
+                        description: "Each species of Pokémon is assigned 1 of kind of item that they can commonly be found holding in the wild.",
                       }),
                       createSimpleSelectorOption({
-                        id: "TWO" as const,
-                        name: "2 Items",
-                        description: "Each species of Pokémon is assigned 2 of kinds of items that they can hold in the wild.",
+                        id: "RARE_ONLY" as const,
+                        name: "Rare Only",
+                        description: "Each species of Pokémon is assigned 1 of kind of item that they can rarely be found holding in the wild.",
+                      }),
+                      createSimpleSelectorOption({
+                        id: "FULL" as const,
+                        name: "FULL",
+                        description: "Each species of Pokémon is assigned 2 of kinds of items that they can hold in the wild. "
+                          + "One they can commonly be found holding and one they can rarely be found holding.",
                       }),
                     ] as const,
-                  }), // END NUMBER
+                  }), // END DISTRIBUTION
                 ] as const,
-              }), // END CHANGE_NUMBER_OF_ITEMS_PER_POKEMON
+              }), // END RANDOMIZE_WILD_HELD_ITEMS
               createSimpleMultiSelectorViewModel({
                 id: "BAN" as const,
                 name: "Ban",
@@ -860,6 +891,25 @@ export const defaultSettingsViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_STARTER_HELD_ITEMS
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_TRADE_HELD_ITEMS" as const,
+            name: "Randomize Trade Held Items",
+            description: "Randomizes the items held by Pokémon offered in the in-game trades.",
+            viewModels: [
+              createSimpleMultiSelectorViewModel({
+                id: "BAN" as const,
+                name: "Ban",
+                description: "A list of items to exclude when choosing the random items "
+                  + "(in addition to the default list of banned items).",
+                options: holdableItemIds.map((itemId) => {
+                  return createSimpleSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                  })
+                }),
+              }), // END BAN
+            ] as const,
+          }),
           createGroupMultiSelectorViewModel({
             id: "SHUFFLED_ITEM_GROUPS" as const,
             name: "Shuffle Items",
@@ -1169,7 +1219,7 @@ const createGoodDamagingMovesToggleViewModel = (distinguisher: string = "") => {
         isRequired: true as const,
         min: 1,
         max: 250,
-        value: 60,
+        value: 50,
       }),
     ] as const,
   })

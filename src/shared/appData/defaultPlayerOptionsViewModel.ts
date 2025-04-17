@@ -138,15 +138,15 @@ const soundOption = () => {
     id: "SOUND" as const,
     name: "Sound",
     description: "Sets the default value of the 'Sound' option.",
-    selectedOptionId: "STEREO",
+    selectedOptionId: "MONO",
     options: [
-      createSimpleSelectorOption({
-        id: "STEREO" as const,
-        name: "STEREO",
-      }),
       createSimpleSelectorOption({
         id: "MONO" as const,
         name: "MONO",
+      }),
+      createSimpleSelectorOption({
+        id: "STEREO" as const,
+        name: "STEREO",
       }),
     ] as const,
   })

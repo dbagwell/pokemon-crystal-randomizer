@@ -108,9 +108,9 @@ const allPokemon: Pokemon[] = evosAttacksLinesGroups.map(({ codeName, evosLines,
     }, []) as [PokemonTypeId, PokemonTypeId?],
     catchRate: parseInt(baseStatsFile.match(/db\s*(\S*)\s*;\s*catch/)![1]),
     baseExperience: parseInt(baseStatsFile.match(/db\s*(\S*)\s*;\s*base/)![1]),
-    items: compact(baseStatsFile.match(/db\s*(\S*),\s*(\S*)\s*;\s*items/)!.slice(1).map((item) => {
+    items: baseStatsFile.match(/db\s*(\S*),\s*(\S*)\s*;\s*items/)!.slice(1).map((item) => {
       return item === "NO_ITEM" ? undefined : item
-    })) as [HoldableItemId?, HoldableItemId?],
+    }) as [HoldableItemId | undefined, HoldableItemId | undefined],
     genderRatio: isNotNullish(genderRatioNumberMatches) ? Math.ceil(254 * parseFloat(genderRatioNumberMatches[1]) / 100) : 255,
     eggCycles: parseInt(baseStatsFile.match(/db\s*(\S*)\s*;\s*step/)![1]),
     growthRate: baseStatsFile.match(/db\s*GROWTH_(\S*)\s*;\s*growth/)![1] as GrowthRateId,
