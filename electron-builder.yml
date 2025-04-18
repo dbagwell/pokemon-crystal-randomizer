@@ -1,14 +1,15 @@
-appId: "com.electron.pokemon-crystal-randomizer"
+appId: com.dbagwell.pokemon-crystal-randomizer
 files:
-- ".vite/**/*"
-- "package.json"
-mac:
-  identity: null
-  icon: "src/main/resources/icons/icon.icns"
-win:
-  icon: "src/main/resources/icons/icon.ico"
+- .vite/**/*
+- package.json
 fileAssociations:
-- name: "Pokemon Crystal Randomizer Patch"
-  ext: "pcrp"
-  icon: "src/main/resources/icons/icon.ico"
-  role: "Editor"
+- name: Pokemon Crystal Randomizer Patch
+  ext: pcrp
+  icon: src/main/resources/icons/icon.ico
+  role: Editor
+mac:
+  icon: src/main/resources/icons/icon.icns
+win:
+  icon: src/main/resources/icons/icon.ico
+linux:
+  icon: src/main/resources/icons/icon.png
