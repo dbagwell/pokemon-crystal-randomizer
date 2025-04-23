@@ -4,7 +4,7 @@ import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
 import { getCreatePatchPreference, getLogPreference, getPreviousPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setCreatePatchPreference, setLogPreference, setPreviousPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
 import { attemptWriteFile } from "@lib/utils/dialogUtils"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
-import { isNullish } from "@shared/utils"
+import { isNotNullish, isNullish } from "@shared/utils"
 import { app, dialog } from "electron"
 import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
 import fs from "fs"
@@ -85,7 +85,13 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     createPatch: boolean,
   ): Promise<VoidAPIResponse> => {
     try {
-      const generatorResult = await generateROM(seed, settings, playerOptions, true)
+      const generatorResult = await generateROM({
+        customSeed: seed,
+        settings: settings,
+        playerOptions: playerOptions,
+        showInputInRenderer: true,
+        generateLog: generateLog,
+      })
       
       setPreviousSettings(settings)
       setPreviousPresetId(presetId)
@@ -93,7 +99,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
       setLogPreference(generateLog)
       setCreatePatchPreference(createPatch)
       
-      if (generateLog) {
+      if (generateLog && isNotNullish(generatorResult.log)) {
         attemptWriteFile({
           dialogTitle: "Save log to:",
           fileType: "text",

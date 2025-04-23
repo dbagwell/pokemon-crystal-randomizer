@@ -57,13 +57,14 @@ export const handlePCRPFile = async (filePath: string) => {
     const playerOptionsViewModel = defaultPlayerOptionsViewModel()
     applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
     
-    const generatorResult = await generateROM(
-      info.seed,
-      settingsFromViewModel(settingsViewModel),
-      playerOptionsFromViewModel(playerOptionsViewModel),
-      false,
-      filePath.replace(new RegExp(`${path.basename(filePath)}$`), path.basename(filePath, ".pcrp")) + ".gbc",
-    )
+    const generatorResult = await generateROM({
+      customSeed: info.seed,
+      settings: settingsFromViewModel(settingsViewModel),
+      playerOptions: playerOptionsFromViewModel(playerOptionsViewModel),
+      showInputInRenderer: false,
+      defaultFileName: filePath.replace(new RegExp(`${path.basename(filePath)}$`), path.basename(filePath, ".pcrp")) + ".gbc",
+      generateLog: false,
+    })
     
     shell.openPath(generatorResult.outputFilePath)
   } catch (error) {
