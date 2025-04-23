@@ -13,9 +13,10 @@
     "lint": "eslint --fix .",
     "dev": "electron-forge start",
     "build": "electron-forge package --platform darwin --arch arm64; rm -rf out",
-    "package:mac": "npm run build && electron-builder build --mac dmg --x64 --arm64 --universal",
-    "package:linux": "npm run build && electron-builder build --linux appimage --x64 --armv7l --arm64",
-    "package:win": "npm run build && electron-builder build --win msi --ia32 --x64 --arm64"
+    "package:mac": "npm run build && electron-builder -m",
+    "package:win": "npm run build && electron-builder -w",
+    "package:linux": "npm run build && electron-builder -l",
+    "package": "npm run build && electron-builder -mwl"
   },
   "devDependencies": {
     "@electron-forge/cli": "7.1.0",
