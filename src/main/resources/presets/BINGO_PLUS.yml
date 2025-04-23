@@ -159,7 +159,11 @@ RANDOMIZE_TM_MOVES:
       SETTINGS:
         PERCENTAGE: 25
         POWER: 50
-    BAN: []
+    BAN:
+      - HEADBUTT
+      - ROCK_SMASH
+      - SWEET_SCENT
+      - DIG 
 RANDOMIZE_MOVE_TUTOR_MOVES:
   VALUE: true
   SETTINGS:
