@@ -149,7 +149,10 @@
       if (Number.isNaN(input.value) || isNullish(input.value)) {
         value = undefined
       } else {
-        value = parseInt(input.value) as ValueType
+        value = input.value as ValueType
+        setTimeout(() => {
+          value = parseInt(input.value) as ValueType
+        }, 1)
       }
     } else {
       value = input.value as ValueType
