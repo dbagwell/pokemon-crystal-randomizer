@@ -6,7 +6,6 @@ import { bindRendererAPI } from "@lib/ipc/rendererAPIUtils"
 import { compact, isNotNullish } from "@shared/utils"
 import { app, BrowserWindow, dialog, Menu, type MenuItemConstructorOptions, nativeTheme } from "electron"
 import { exposeMainApi } from "electron-affinity/main"
-import squirrel from "electron-squirrel-startup"
 import path from "path"
 
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string
@@ -15,10 +14,6 @@ declare const MAIN_WINDOW_VITE_NAME: string
 let ready = false
 let quitAfterGenerating = false
 let filePathToOpen: string | undefined
-
-if (squirrel) {
-  app.quit()
-}
 
 app.on("window-all-closed", () => {
   app.quit()

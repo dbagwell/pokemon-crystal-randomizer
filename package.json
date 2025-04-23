@@ -50,8 +50,5 @@
     "vite-node": "^1.6.0",
     "vite-tsconfig-paths": "^4.2.1",
     "yaml": "^2.3.4"
-  },
-  "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
   }
 }
