@@ -67,7 +67,7 @@ app.on("ready", async () => {
   ready = true
   
   if (!quitAfterGenerating) {
-    if (isNotNullish(process.argv[1])) {
+    if (!import.meta.env.DEV && isNotNullish(process.argv[1])) {
       await handlePCRPFile(process.argv[1])
       app.quit()
     } else {
