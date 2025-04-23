@@ -110,7 +110,7 @@
   }
   
   const updateStyle = () => {
-    container.style.opacity = isActive || isDisabled ? "0.2" : "1"
+    container.style.opacity = isActive || isDisabled ? "0.4" : "1"
     container.style.cursor = isDisabled ? "default" : "pointer"
     container.style.padding = "0"
       
