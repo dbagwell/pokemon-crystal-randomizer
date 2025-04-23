@@ -443,7 +443,12 @@
       title: "Player Options",
       message: "The following options are meant to be customized on a per player basis and are not included when exporting settings or sharing patches with others.",
       extraContent: playerOptionsView,
-      submitButtonLabel: "Done",
+      submitButtonLabel: "Save",
+      onSubmit: async () => {
+        showProgressIndicator()
+        await window.mainAPI.savePlayerOptions(playerOptionsFromViewModel(playerOptionsViewModel))
+        hideProgressIndicator()
+      },
     })
   }
   

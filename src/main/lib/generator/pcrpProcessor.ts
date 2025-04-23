@@ -1,5 +1,5 @@
 import { generateROM } from "@lib/generator/generator"
-import { getPreviousPlayerOptions } from "@lib/userData/userData"
+import { getPlayerOptions } from "@lib/userData/userData"
 import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
 import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
 import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
@@ -53,7 +53,7 @@ export const handlePCRPFile = async (filePath: string) => {
       throw new Error(`Unable to patch ROM. Found one or more issues with settings decoded from the patch file '${filePath}'.`)
     }
     
-    const playerOptions = getPreviousPlayerOptions()
+    const playerOptions = getPlayerOptions()
     const playerOptionsViewModel = defaultPlayerOptionsViewModel()
     applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
     

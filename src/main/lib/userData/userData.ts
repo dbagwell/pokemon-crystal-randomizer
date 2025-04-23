@@ -11,7 +11,7 @@ export const userDataPath = path.resolve(app.getPath("userData"), "userData")
 const preferencesPath = path.resolve(userDataPath, "preferences.yml")
 const settingsPath = path.resolve(userDataPath, "settings")
 const previousSettingsPath = path.resolve(settingsPath, ".previousSettings.yml")
-const previousPlayerOptionsPath = path.resolve(settingsPath, ".previousPlayerOptions.yml")
+const playerOptionsPath = path.resolve(settingsPath, ".playerOptions.yml")
 
 export const getPreferences = (): any | undefined => {
   try {
@@ -99,18 +99,18 @@ export const setPreviousSettings = (settings: Settings) => {
   }
 }
 
-export const getPreviousPlayerOptions = (): unknown | undefined => {
+export const getPlayerOptions = (): unknown | undefined => {
   try {
-    return getYAML([previousPlayerOptionsPath])
+    return getYAML([playerOptionsPath])
   } catch {
     return undefined
   }
 }
 
-export const setPreviousPlayerOptions = (playerOptions: PlayerOptions) => {
+export const setPlayerOptions = (playerOptions: PlayerOptions) => {
   try {
     fs.mkdirSync(settingsPath, { recursive: true })
-    fs.writeFileSync(previousPlayerOptionsPath, yaml.stringify(playerOptions))
+    fs.writeFileSync(playerOptionsPath, yaml.stringify(playerOptions))
   } catch {
     // Do nothing
   }

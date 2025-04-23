@@ -1,7 +1,7 @@
 import { generateROM } from "@lib/generator/generator"
 import { createPCRP } from "@lib/generator/pcrpProcessor"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
-import { getCreatePatchPreference, getLogPreference, getPreviousPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setCreatePatchPreference, setLogPreference, setPreviousPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
+import { getCreatePatchPreference, getLogPreference, getPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setCreatePatchPreference, setLogPreference, setPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
 import { attemptWriteFile } from "@lib/utils/dialogUtils"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import { isNotNullish, isNullish } from "@shared/utils"
@@ -34,7 +34,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
         appVersion: app.getVersion(),
         presetId: lastPrestId,
         settings: getSettingsForPresetId(lastPrestId),
-        playerOptions: getPreviousPlayerOptions(),
+        playerOptions: getPlayerOptions(),
         customPresetNames: getSavedSettingsNames(),
         logPreference: getLogPreference(),
         createPatchPreference: getCreatePatchPreference(),
@@ -62,6 +62,11 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     return {
       result: getSavedSettings(name),
     }
+  }
+  
+  readonly savePlayerOptions = async (playerOptions: PlayerOptions): Promise<VoidAPIResponse> => {
+    setPlayerOptions(playerOptions)
+    return {}
   }
   
   readonly removeSavedSettings = async (name: string): Promise<VoidAPIResponse> => {
@@ -95,7 +100,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
       
       setPreviousSettings(settings)
       setPreviousPresetId(presetId)
-      setPreviousPlayerOptions(playerOptions)
+      setPlayerOptions(playerOptions)
       setLogPreference(generateLog)
       setCreatePatchPreference(createPatch)
       
