@@ -88,6 +88,9 @@ export const shuffleItems = (
   settings.SHUFFLED_ITEM_GROUPS.forEach((group) => {
     const itemLocations = Object.values(romInfo.gameData.itemLocations).filter((location) => {
       return group.includes(location.groupId)
+        && location.id !== "NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL"
+        && location.id !== "NATIONAL_PARK_BUG_CONTEST_WEST_ITEM_BALL"
+        && location.id !== "NATIONAL_PARK_BUG_CONTEST_HIDDEN_ITEM"
     })
     
     const itemIds = itemLocations.map((location) => {
@@ -98,4 +101,10 @@ export const shuffleItems = (
       location.itemId = random.element({ array: itemIds, remove: true })
     })
   })
+}
+
+export const syncContestItems = (romInfo: ROMInfo) => {
+  romInfo.gameData.itemLocations["NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL"].itemId = romInfo.gameData.itemLocations["NATIONAL_PARK_EAST_ITEM_BALL"].itemId
+  romInfo.gameData.itemLocations["NATIONAL_PARK_BUG_CONTEST_WEST_ITEM_BALL"].itemId = romInfo.gameData.itemLocations["NATIONAL_PARK_WEST_ITEM_BALL"].itemId
+  romInfo.gameData.itemLocations["NATIONAL_PARK_BUG_CONTEST_HIDDEN_ITEM"].itemId = romInfo.gameData.itemLocations["NATIONAL_PARK_HIDDEN_ITEM"].itemId
 }
