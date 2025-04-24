@@ -188,19 +188,12 @@
 
 <Tooltip/>
 
-{#snippet playerOptionsView()}
-  <Stack
-    alignment="start"
-    direction="vertical"
-    distribution="start"
-    minSpacing={20}
-    padding={20}
-    width="100%"
-  >
-    {#each playerOptionsViewModel.viewModels as subViewModel, index (subViewModel.id)}
-      <SettingsInputView bind:viewModel={playerOptionsViewModel.viewModels[index]}/>
-    {/each}
-  </Stack>
+{#snippet playerOptionsView(inputAccessor: { getInput?: () => PlayerOptions })}
+  <PlayerOptionsView
+    initialPlayerOptions={playerOptions}
+    inputAccessor={inputAccessor}
+    onPlayerOptionsUpdated={onPlayerOptionsUpdated}
+  />
 {/snippet}
 
 <script lang="ts">
@@ -209,16 +202,16 @@
   import AutocompleteTextField, { optionFrom } from "@components/inputs/AutocompleteTextField.svelte"
   import TextField from "@components/inputs/TextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
+  import PlayerOptionsView from "@components/PlayerOptionsView.svelte"
   import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
   import ToggleView from "@components/settingsInputViews/ToggleView.svelte"
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/utility/ProgressIndicator.svelte"
   import Tooltip from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
-  import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
-  import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
+  import { applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
   import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
   import { presetsMap } from "@shared/appData/presets"
-  import { type PlayerOptions, playerOptionsFromViewModel, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
+  import { type PlayerOptions, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
   import { createSimpleToggleViewModel } from "@shared/types/viewModels"
   import { isNullish } from "@shared/utils"
   import { onMount } from "svelte"
@@ -228,7 +221,7 @@
     appVersion: string
     lastSelectedPresetId: string
     lastSelectedSettings: unknown | undefined
-    lastSelectedPlayerOptions: unknown | undefined
+    initialPlayerOptions: unknown | undefined
     customPresetNames: string[]
     logPreference: boolean
     createPatchPreference: boolean
@@ -239,7 +232,7 @@
     appVersion,
     lastSelectedPresetId,
     lastSelectedSettings,
-    lastSelectedPlayerOptions,
+    initialPlayerOptions,
     customPresetNames,
     logPreference,
     createPatchPreference,
@@ -249,7 +242,7 @@
   let mainContentContainer: HTMLElement
   let seed = $state("")
   let settingsViewModel = $state(defaultSettingsViewModel())
-  let playerOptionsViewModel = $state(defaultPlayerOptionsViewModel())
+  let playerOptions = $state(initialPlayerOptions as PlayerOptions)
   let generateLogToggleViewModel = $state(createSimpleToggleViewModel({
     id: "CREATE_LOG" as const,
     name: "Generate Log File",
@@ -310,8 +303,11 @@
   
   onMount(() => {
     applyNewSettings(lastSelectedSettings)
-    initPlayerOptions()
   })
+  
+  const onPlayerOptionsUpdated = (updatedPlayerOptons: PlayerOptions) => {
+    playerOptions = updatedPlayerOptons
+  }
   
   const applyNewSettings = (settings: unknown | undefined) => {
     try {
@@ -324,25 +320,6 @@
         showDialog({
           title: "Warning",
           message: `Found invalid data while loading settings.\n\n${warnings.join("\n\n")}`,
-          submitButtonLabel: "OK",
-        })
-      }
-    } catch (error) {
-      showErrorDialog(error)
-    }
-  }
-  
-  const initPlayerOptions = () => {
-    try {
-      const warnings: string[] = []
-      const newViewModel = defaultPlayerOptionsViewModel()
-      applyPlayerOptionsToViewModel(lastSelectedPlayerOptions, newViewModel, warnings)
-      playerOptionsViewModel = newViewModel
-      
-      if (warnings.length > 0) {
-        showDialog({
-          title: "Warning",
-          message: `Found invalid data while loading previous player options.\n\n${warnings.join("\n\n")}`,
           submitButtonLabel: "OK",
         })
       }
@@ -439,16 +416,19 @@
   }
   
   const playerOptionsButtonClicked = () => {
+    const savePlayerOptions = async () => {
+      showProgressIndicator()
+      await window.mainAPI.savePlayerOptions($state.snapshot(playerOptions))
+      hideProgressIndicator()
+    }
+    
     showDialog({
       title: "Player Options",
       message: "The following options are meant to be customized on a per player basis and are not included when exporting settings or sharing patches with others.",
       extraContent: playerOptionsView,
-      submitButtonLabel: "Save",
-      onSubmit: async () => {
-        showProgressIndicator()
-        await window.mainAPI.savePlayerOptions(playerOptionsFromViewModel(playerOptionsViewModel))
-        hideProgressIndicator()
-      },
+      submitButtonLabel: "Done",
+      onSubmit: savePlayerOptions,
+      onCancel: savePlayerOptions,
     })
   }
   
@@ -500,7 +480,6 @@
   
   const generateROMButtonClicked = async () => {
     const settings = currentSettings()
-    const playerOptions = playerOptionsFromViewModel(playerOptionsViewModel)
     
     let recommendation = ""
     
@@ -526,21 +505,21 @@
         submitButtonLabel: "Continue Anyways",
         hasCancelButton: true,
         onSubmit: () => {
-          generateROM(settings, playerOptions)
+          generateROM(settings)
         },
       })
     } else {
-      generateROM(settings, playerOptions)
+      generateROM(settings)
     }
   }
   
-  const generateROM = async (settings: Settings, playerOptions: PlayerOptions) => {
+  const generateROM = async (settings: Settings) => {
     try {
       showProgressIndicator()
       const response = await window.mainAPI.generateROM(
         seed === "" ? undefined : seed,
         settings,
-        playerOptions,
+        $state.snapshot(playerOptions),
         currentPreset.id,
         generateLogToggleViewModel.isOn,
         generatePatchFileToggleViewModel.isOn,

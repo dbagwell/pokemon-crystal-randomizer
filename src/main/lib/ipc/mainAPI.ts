@@ -18,6 +18,12 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     }
   }
   
+  readonly getPlayerOptions = async (): Promise<APIResponse<unknown | undefined>> => {
+    return {
+      result: getPlayerOptions(),
+    }
+  }
+  
   readonly getInitialAppData = async (): Promise<APIResponse<{
     appVersion: string,
     presetId: string,

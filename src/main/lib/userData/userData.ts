@@ -1,6 +1,7 @@
 import { getYAML } from "@lib/utils/yamlUtils"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import { isString } from "@shared/utils"
+import crypto from "crypto"
 import { app } from "electron"
 import fs from "fs"
 import path from "path"
@@ -12,6 +13,8 @@ const preferencesPath = path.resolve(userDataPath, "preferences.yml")
 const settingsPath = path.resolve(userDataPath, "settings")
 const previousSettingsPath = path.resolve(settingsPath, ".previousSettings.yml")
 const playerOptionsPath = path.resolve(settingsPath, ".playerOptions.yml")
+
+// Preferences
 
 export const getPreferences = (): any | undefined => {
   try {
@@ -28,6 +31,34 @@ export const setPreferences = (preferences: unknown) => {
     // Do nothing
   }
 }
+
+// Log Preference
+
+export const getLogPreference = () => {
+  const preferences = getPreferences()
+  return preferences?.logPreference === true
+}
+
+export const setLogPreference = (preference: boolean) => {
+  const preferences = getPreferences() ?? {}
+  preferences.logPreference = preference
+  setPreferences(preferences)
+}
+
+// Create Patch Preference
+
+export const getCreatePatchPreference = () => {
+  const preferences = getPreferences()
+  return preferences?.createPatch === true
+}
+
+export const setCreatePatchPreference = (preference: boolean) => {
+  const preferences = getPreferences() ?? {}
+  preferences.createPatch = preference
+  setPreferences(preferences)
+}
+
+// Preset Ids
 
 export const getPreviousPresetId = (): string => {
   const preferences = getPreferences()
@@ -46,28 +77,6 @@ export const setPreviousPresetId = (presetId: string) => {
   setPreferences(preferences)
 }
 
-export const getLogPreference = () => {
-  const preferences = getPreferences()
-  return preferences?.logPreference === true
-}
-
-export const setLogPreference = (preference: boolean) => {
-  const preferences = getPreferences() ?? {}
-  preferences.logPreference = preference
-  setPreferences(preferences)
-}
-
-export const getCreatePatchPreference = () => {
-  const preferences = getPreferences()
-  return preferences?.createPatch === true
-}
-
-export const setCreatePatchPreference = (preference: boolean) => {
-  const preferences = getPreferences() ?? {}
-  preferences.createPatch = preference
-  setPreferences(preferences)
-}
-
 export const getSettingsForPresetId = (id: string): unknown | undefined => {
   if (id === "CUSTOM") {
     return getPreviousSettings()
@@ -81,6 +90,8 @@ export const getSettingsForPresetId = (id: string): unknown | undefined => {
     }
   }
 }
+
+// Previous Settings
 
 export const getPreviousSettings = (): unknown | undefined => {
   try {
@@ -99,6 +110,8 @@ export const setPreviousSettings = (settings: Settings) => {
   }
 }
 
+// Player Options
+
 export const getPlayerOptions = (): unknown | undefined => {
   try {
     return getYAML([playerOptionsPath])
@@ -113,8 +126,27 @@ export const setPlayerOptions = (playerOptions: PlayerOptions) => {
     fs.writeFileSync(playerOptionsPath, yaml.stringify(playerOptions))
   } catch {
     // Do nothing
+  } finally {
+    Object.values(playerOptionsListeners).forEach((listener) => {
+      listener(playerOptions)
+    })
   }
 }
+
+export const playerOptionsListeners: Dictionary<(playerOptions: PlayerOptions) => void> = {}
+
+export const listenForPlayerOptions = async (): Promise<PlayerOptions> => {
+  return await new Promise<PlayerOptions>((resolve) => {
+    const listenerId = crypto.randomUUID()
+    
+    playerOptionsListeners[listenerId] = (playerOptions: PlayerOptions) => {
+      resolve(playerOptions)
+      delete playerOptionsListeners[listenerId]
+    }
+  })
+}
+
+// Saved Settings
 
 export const getSavedSettings = (name: string) => {
   try {
