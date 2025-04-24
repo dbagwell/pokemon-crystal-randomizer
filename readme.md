@@ -35,7 +35,7 @@ The back end portion and the main entry point of the app. Responsible for creati
 
 The user interface. Behaves like a web page. It runs on a completely separate process from *main* and does not have access to the lower level functions of the OS.
 
-`mainWindow.html` acts as the root for all the UI of the main application window and loads all the necessary resources for displaying the UI. The UI is created using Svelte components and attached to the window using the `mainWindow.ts` script.
+`window.html` acts as the root for all the UI of the main application window and loads all the necessary resources for displaying the UI. The UI is created using Svelte components and attached to the window using the `window.ts` script.
 
 The components are styled motly with inline styles which colors being dynamically being determined using the `colors` object exported from `scripts/colors.ts`. There are also a few global styles written in [Sass](https://sass-lang.com/). Whenever the sass files are changed, they need to be compiled into their CSS. This can be done by running `npm run gen:styles`.
 

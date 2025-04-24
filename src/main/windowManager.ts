@@ -22,7 +22,7 @@ export const showWindow = async (params: {
     height: height,
     show: false,
     webPreferences: {
-      preload: path.join(__dirname, "preloadMainWindow.js"),
+      preload: path.join(__dirname, "preloadWindow.js"),
       devTools: import.meta.env.DEV,
     },
     backgroundColor: nativeTheme.shouldUseDarkColors ? "#000000" : "#FFFFFF",
@@ -30,9 +30,9 @@ export const showWindow = async (params: {
   })
   
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
-    window.loadURL(`${MAIN_WINDOW_VITE_DEV_SERVER_URL}/mainWindow.html?windowType=${windowType}`)
+    window.loadURL(`${MAIN_WINDOW_VITE_DEV_SERVER_URL}/window.html?windowType=${windowType}`)
   } else {
-    window.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/mainWindow.html`), {
+    window.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/window.html`), {
       query: {
         windowType: windowType,
       },

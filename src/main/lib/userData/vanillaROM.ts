@@ -36,7 +36,7 @@ export const getVanillaROM = async (showInputInRenderer: boolean): Promise<Buffe
   if (showInputInRenderer) {
     fileData = await makeRendererAPIRequest(
       (requestId: string) => {
-        rendererAPIS["mainWindow"]?.showInputDialog({
+        rendererAPIS.generatorWindow?.showInputDialog({
           requestId: requestId,
           title: "ROM Required",
           message: "Please provide a Pokémon Crystal Version 1.1 ROM.",

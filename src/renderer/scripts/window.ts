@@ -16,7 +16,7 @@ const init = async () => {
   updateColors()
   
   const windowType = new URLSearchParams(window.location.search).get("windowType") as WindowType
-  const containerDiv = document.getElementById("mainWindow")!
+  const containerDiv = document.getElementById("contentContainer")!
   
   containerDiv.style.width = "100vw"
   containerDiv.style.height = "100vh"
