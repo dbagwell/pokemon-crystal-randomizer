@@ -1124,6 +1124,11 @@ export const defaultSettingsViewModel = () => {
             name: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",
           }),
+          createSimpleToggleViewModel({
+            id: "FAST_BATTLE_CRIES" as const,
+            name: "Fast Battle Cries",
+            description: "Makes it so the Pokémon cries that are heard during battles don't prevent the game from continuing until they are finished.",
+          }),
           createSimpleMultiSelectorViewModel({
             id: "ADDITIONAL_OPTIONS" as const,
             name: "Additional Options",

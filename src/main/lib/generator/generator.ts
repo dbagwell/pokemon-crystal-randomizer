@@ -987,6 +987,16 @@ const createPatches = (
     romInfo.patchHunks = [...romInfo.patchHunks, ...performanceImprovementsPatch.hunks]
   }
   
+  if (settings.FAST_BATTLE_CRIES) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "fastBattleCries.yml",
+      ).hunks,
+    ]
+  }
+  
   // Additional Options
   
   const selectedAdditionalOptionIds = settings.ADDITIONAL_OPTIONS
