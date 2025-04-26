@@ -506,9 +506,9 @@ export const generatorLog = (params: {
         "ITEM",
       ],
       sections: [
-        regularItemBallLocationIds,
-        tmItemBallLocationIds,
-        hiddenItemLocationIds,
+        regularItemBallLocationIds.filter((id) => { return id !== "NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL" }),
+        tmItemBallLocationIds.filter((id) => { return id !== "NATIONAL_PARK_BUG_CONTEST_WEST_ITEM_BALL" }),
+        hiddenItemLocationIds.filter((id) => { return id !== "NATIONAL_PARK_BUG_CONTEST_HIDDEN_ITEM" }),
       ].map((group) => {
         return {
           rows: group.map((id) => {

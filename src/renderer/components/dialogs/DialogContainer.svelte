@@ -55,7 +55,7 @@
   type ShowDialogParams = {
     title?: string,
     message?: string,
-    extraContent?: Snippet,
+    extraContent?: Snippet<[{ getInput?: () => any }]>,
     inputInfo?: DialogInputInfo,
     submitButtonLabel?: string,
     hasCancelButton?: boolean,

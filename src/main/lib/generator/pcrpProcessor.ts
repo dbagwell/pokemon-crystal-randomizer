@@ -1,15 +1,17 @@
 import { generateROM } from "@lib/generator/generator"
-import { getPreviousPlayerOptions } from "@lib/userData/userData"
+import { getPlayerOptions, listenForPlayerOptions } from "@lib/userData/userData"
 import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
 import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
 import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
 import { playerOptionsFromViewModel, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
-import { isObject, isString } from "@shared/utils"
+import { isNullish, isObject, isString } from "@shared/utils"
 import { app, shell } from "electron"
 import fs from "fs"
 import { compressToUint8Array, decompressFromUint8Array } from "lz-string"
 import path from "path"
 import yaml from "yaml"
+
+import { showWindow } from "../../windowManager"
 
 export const createPCRP = (params: {
   seed: string,
@@ -53,17 +55,74 @@ export const handlePCRPFile = async (filePath: string) => {
       throw new Error(`Unable to patch ROM. Found one or more issues with settings decoded from the patch file '${filePath}'.`)
     }
     
-    const playerOptions = getPreviousPlayerOptions()
+    let playerOptions = getPlayerOptions()
     const playerOptionsViewModel = defaultPlayerOptionsViewModel()
+    
+    if (isNullish(playerOptions)) {
+      const window = await showWindow({
+        windowType: "PLAYER_OPTIONS",
+        width: 350,
+        height: 700,
+      })
+      
+      let isWindowClosed = false
+      
+      const forceCloseWindow = async () => {
+        if (!isWindowClosed) {
+          // Close the window
+          // window.close() doesn't work for some reason, so we use window.destroy() instead
+          // window.destroy() has a delay, so we hide the window first
+          // window.hide() also has a delay unless we listen and wait for the hide event
+          
+          const hidePromise = new Promise<void>((resolve) => {
+            window.once("hide", async () => {
+              resolve()
+            })
+          })
+          
+          window.hide()
+          await hidePromise
+          window.destroy()
+        }
+      }
+      
+      window.once("close", () => {
+        // For some reason, when the window is closed with a keyboard shortcut, there is a delay before it disappears
+        // so when we get the notification that it's about to close, we do our workaround to hide and force close it
+        forceCloseWindow()
+      })
+      
+      const closedPromise = new Promise((resolve) => {
+        window.once("closed", async () => {
+          isWindowClosed = true
+          
+          // For some reason, the window hasn't fully closed yet, and without this delay there is undefined behaviour that can lead to the app crashing
+          setTimeout(() => {
+            resolve(undefined)
+          }, 1)
+        })
+      })
+      
+      const playerOptionsPromise = listenForPlayerOptions()
+      
+      playerOptions = await Promise.race([
+        closedPromise, // The user closed the window without saving, just use the default player options.
+        playerOptionsPromise, // Use the new playerOptions set by the user.
+      ])
+      
+      await forceCloseWindow()
+    }
+    
     applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
     
-    const generatorResult = await generateROM(
-      info.seed,
-      settingsFromViewModel(settingsViewModel),
-      playerOptionsFromViewModel(playerOptionsViewModel),
-      false,
-      filePath.replace(new RegExp(`${path.basename(filePath)}$`), path.basename(filePath, ".pcrp")) + ".gbc",
-    )
+    const generatorResult = await generateROM({
+      customSeed: info.seed,
+      settings: settingsFromViewModel(settingsViewModel),
+      playerOptions: playerOptionsFromViewModel(playerOptionsViewModel),
+      showInputInRenderer: false,
+      defaultFileName: filePath.replace(new RegExp(`${path.basename(filePath)}$`), path.basename(filePath, ".pcrp")) + ".gbc",
+      generateLog: false,
+    })
     
     shell.openPath(generatorResult.outputFilePath)
   } catch (error) {

@@ -11,7 +11,7 @@ import { updateRandomEncounters } from "@lib/generator/gameDataProcessors/encoun
 import { updateEventPokemon } from "@lib/generator/gameDataProcessors/eventPokemon"
 import { updateEvolutionMethods } from "@lib/generator/gameDataProcessors/evolutionMethods"
 import { updateIntroPokemon } from "@lib/generator/gameDataProcessors/introPokemon"
-import { shuffleItems, updateItems } from "@lib/generator/gameDataProcessors/itemLocations"
+import { shuffleItems, syncContestItems, updateItems } from "@lib/generator/gameDataProcessors/itemLocations"
 import { updateLevelUpMoves } from "@lib/generator/gameDataProcessors/levelUpMoves"
 import { updateMapObjectEvents } from "@lib/generator/gameDataProcessors/mapObjectEvents"
 import { updateMarts } from "@lib/generator/gameDataProcessors/marts"
@@ -45,20 +45,36 @@ import { app } from "electron"
 import fs from "fs"
 import hash from "object-hash"
 
-export const generateROM = async (
-  customSeed: string | undefined,
-  settings: Settings,
-  playerOptions: PlayerOptions,
-  showInputInRenderer: boolean,
-  defaultFileName?: string,
-) => {
+export const generateROM = async (params: {
+  customSeed: string | undefined
+  settings: Settings
+  playerOptions: PlayerOptions
+  showInputInRenderer: boolean
+  defaultFileName?: string
+  generateLog: boolean
+}) => {
+  const {
+    customSeed,
+    settings,
+    playerOptions,
+    showInputInRenderer,
+    defaultFileName,
+    generateLog,
+  } = params
+  
   const vanillaData = await getVanillaROM(showInputInRenderer)
   
   if (isNullish(vanillaData)) {
     throw new Error("A Pokémon Crystal Version 1.1 ROM is required.")
   }
   
-  const generatorResult = generateROMData(vanillaData, customSeed, settings, playerOptions)
+  const generatorResult = generateROMData({
+    data: vanillaData,
+    customSeed: customSeed,
+    settings: settings,
+    playerOptions: playerOptions,
+    generateLog: generateLog,
+  })
   
   const dialogParams = {
     title: "Save Generated ROM to:",
@@ -92,16 +108,25 @@ export const generateROM = async (
   }
 }
 
-const generateROMData = (
+const generateROMData = (params: {
   data: Buffer,
   customSeed: string | undefined,
   settings: Settings,
   playerOptions: PlayerOptions,
-): {
+  generateLog: boolean
+}): {
   seed: string
   data: Buffer
-  log: string
+  log: string | undefined
 } => {
+  const {
+    data,
+    customSeed,
+    settings,
+    playerOptions,
+    generateLog,
+  } = params
+  
   const romInfo = ROMInfo.vanilla()
   const seed = customSeed ?? crypto.randomUUID()
   const random = new Random(seed)
@@ -136,12 +161,12 @@ const generateROMData = (
     data.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
   })
   
-  const log = generatorLog({
+  const log = generateLog ? generatorLog({
     seed: seed,
     checkValue: checkValue,
     settings: settings,
     gameData: romInfo.gameData,
-  })
+  }) : undefined
   
   return {
     seed: seed,
@@ -171,6 +196,7 @@ const updateGameData = (
   updateMapObjectEvents(settings, romInfo)
   updateItems(settings, romInfo, random)
   shuffleItems(settings, romInfo, random)
+  syncContestItems(romInfo)
 }
 
 const createPatches = (

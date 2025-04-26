@@ -8,7 +8,7 @@ values:
   bothText: "81 8E 93 87 50"
   valueTextLength: "[1]{5}"
   data: "F0 A7 CB 6F 20 2C CB 67 20 30 21 $coord FA D1 CF E6 0C 28 17 FE 04 28 0E FE 08 28 05 11 @$bothText 18 0D 11 @$bikeText 18 08 11 @$surfText 18 03 11 @$noneText CD 78 10 C9 FA D1 CF E6 0C 3D 18 06 FA D1 CF F6 03 3C E6 0C 47 FA D1 CF E6 F3 B0 EA D1 CF 18 BC $bothText $bikeText $surfText $noneText"
-  checkBikeMusic: "FA D1 CF E6 08 28 08 FA 5D D9 FE 01 20 01 37 C9"
+  checkBikeMusic: "FA D1 CF E6 08 28 09 FA 5D D9 D6 01 A7 20 01 37 C9"
   checkSurfMusic: "FA D1 CF E6 04 C9"
   getOnBikeMusicCheck: "EA A7 C2 11 00 00 FA D1 CF E6 08 C9"
 changes:

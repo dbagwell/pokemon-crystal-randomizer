@@ -2,71 +2,57 @@ import "source-map-support/register"
 
 import { handlePCRPFile as processPCRPFile } from "@lib/generator/pcrpProcessor"
 import { MainAPI } from "@lib/ipc/mainAPI"
-import { bindRendererAPI } from "@lib/ipc/rendererAPIUtils"
 import { compact, isNotNullish } from "@shared/utils"
-import { app, BrowserWindow, dialog, Menu, type MenuItemConstructorOptions, nativeTheme } from "electron"
+import { app, BrowserWindow, dialog, Menu, type MenuItemConstructorOptions } from "electron"
 import { exposeMainApi } from "electron-affinity/main"
-import path from "path"
 
-declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string
-declare const MAIN_WINDOW_VITE_NAME: string
+import { showWindow } from "./windowManager"
 
 let ready = false
 let quitAfterGenerating = false
 let filePathToOpen: string | undefined
+let isProcessingPCRP = false
 
 app.on("window-all-closed", () => {
-  app.quit()
+  if (!isProcessingPCRP) {
+    app.quit()
+  }
 })
 
-const createWindow = async () => {
-  const mainAPI = new MainAPI()
-  exposeMainApi(mainAPI)
-  
-  const mainWindow = new BrowserWindow({
+const showSettingsWindow = () => {
+  showWindow({
+    windowType: "GENERATOR",
     width: 800,
     height: 600,
-    show: false,
-    webPreferences: {
-      preload: path.join(__dirname, "preloadMainWindow.js"),
-      devTools: import.meta.env.DEV,
-    },
-    backgroundColor: nativeTheme.shouldUseDarkColors ? "#000000" : "#FFFFFF",
-    icon: path.join(__dirname, "icons/icon.png"),
-  })
-
-  if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
-    mainWindow.loadURL(`${MAIN_WINDOW_VITE_DEV_SERVER_URL}/mainWindow.html`)
-  } else {
-    mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/mainWindow.html`))
-  }
-
-  mainWindow.once("ready-to-show", async () => {
-    mainWindow.show()
-    bindRendererAPI(mainWindow, "mainWindow")
   })
 }
 
 const handlePCRPFile = async (filePath: string) => {
   try {
+    isProcessingPCRP = true
     await processPCRPFile(filePath)
   } catch (error: any) {
     dialog.showErrorBox(
       "Error",
       error.message,
     )
+  } finally {
+    isProcessingPCRP = false
   }
 }
 
 app.on("ready", async () => {
   ready = true
   
+  const mainAPI = new MainAPI()
+  exposeMainApi(mainAPI)
+  
   if (!quitAfterGenerating) {
     if (!import.meta.env.DEV && isNotNullish(process.argv[1])) {
       await handlePCRPFile(process.argv[1])
       app.quit()
     } else {
-      await createWindow()
+      await showSettingsWindow()
     }
   }
   
@@ -82,7 +68,7 @@ app.on("ready", async () => {
 
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0 && !quitAfterGenerating) {
-    createWindow()
+    showSettingsWindow()
   }
 })
 
@@ -135,7 +121,8 @@ app.applicationMenu = Menu.buildFromTemplate(compact([
           }
         },
       },
-      isMac ? undefined : { role: "quit" },
+      { type: "separator" },
+      isMac ? { role: "close" } : { role: "quit" },
     ]),
   },
   {

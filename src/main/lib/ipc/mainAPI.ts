@@ -1,10 +1,10 @@
 import { generateROM } from "@lib/generator/generator"
 import { createPCRP } from "@lib/generator/pcrpProcessor"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
-import { getCreatePatchPreference, getLogPreference, getPreviousPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setCreatePatchPreference, setLogPreference, setPreviousPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
+import { getCreatePatchPreference, getLogPreference, getPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setCreatePatchPreference, setLogPreference, setPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
 import { attemptWriteFile } from "@lib/utils/dialogUtils"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
-import { isNullish } from "@shared/utils"
+import { isNotNullish, isNullish } from "@shared/utils"
 import { app, dialog } from "electron"
 import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
 import fs from "fs"
@@ -15,6 +15,12 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
   readonly getPresetSettings = async (presetId: string): Promise<APIResponse<unknown | undefined>> => {
     return {
       result: getSettingsForPresetId(presetId),
+    }
+  }
+  
+  readonly getPlayerOptions = async (): Promise<APIResponse<unknown | undefined>> => {
+    return {
+      result: getPlayerOptions(),
     }
   }
   
@@ -34,7 +40,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
         appVersion: app.getVersion(),
         presetId: lastPrestId,
         settings: getSettingsForPresetId(lastPrestId),
-        playerOptions: getPreviousPlayerOptions(),
+        playerOptions: getPlayerOptions(),
         customPresetNames: getSavedSettingsNames(),
         logPreference: getLogPreference(),
         createPatchPreference: getCreatePatchPreference(),
@@ -64,6 +70,11 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     }
   }
   
+  readonly savePlayerOptions = async (playerOptions: PlayerOptions): Promise<VoidAPIResponse> => {
+    setPlayerOptions(playerOptions)
+    return {}
+  }
+  
   readonly removeSavedSettings = async (name: string): Promise<VoidAPIResponse> => {
     try {
       removeSavedSettings(name)
@@ -85,15 +96,21 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     createPatch: boolean,
   ): Promise<VoidAPIResponse> => {
     try {
-      const generatorResult = await generateROM(seed, settings, playerOptions, true)
+      const generatorResult = await generateROM({
+        customSeed: seed,
+        settings: settings,
+        playerOptions: playerOptions,
+        showInputInRenderer: true,
+        generateLog: generateLog,
+      })
       
       setPreviousSettings(settings)
       setPreviousPresetId(presetId)
-      setPreviousPlayerOptions(playerOptions)
+      setPlayerOptions(playerOptions)
       setLogPreference(generateLog)
       setCreatePatchPreference(createPatch)
       
-      if (generateLog) {
+      if (generateLog && isNotNullish(generatorResult.log)) {
         attemptWriteFile({
           dialogTitle: "Save log to:",
           fileType: "text",

@@ -35,7 +35,7 @@ module.exports = {
             config: "vite.main.config.mjs",
           },
           {
-            entry: "src/preload/preloadMainWindow.ts",
+            entry: "src/preload/preloadWindow.ts",
             config: "vite.preload.config.mjs",
           },
         ],

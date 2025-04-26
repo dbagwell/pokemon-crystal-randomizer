@@ -49,6 +49,19 @@
       >
         Click to choose a file or drag it here.
       </div>
+      {#if isNotNullish(errorMessage)}
+        <div
+          style:height="1px"
+          style:background-color={colors.inactiveTint}
+        >
+        </div>
+        <div
+          style:text-align="center"
+          style:color={colors.destructiveTint}
+        >
+          {errorMessage}
+        </div>
+      {/if}
       {#if isNotNullish(files?.[0]?.name)}
         <div
           style:height="1px"
@@ -111,6 +124,8 @@
   let inputElement: HTMLElement
   let buttonElement: HTMLElement
   
+  let errorMessage: string | undefined = $state(undefined)
+  
   const handleDragOverEvent = (event: DragEvent) => {
     event.preventDefault()
     event.stopPropagation()
@@ -131,7 +146,24 @@
     event.stopPropagation()
     
     if (isNotNullish(event.dataTransfer)) {
-      files = event.dataTransfer.files
+      const allowedExtensions = allowedFileTypes?.split(",").map((value) => {
+        return value.trim().replace(/^\./, "")
+      }) ?? []
+      
+      const filteredFilesTransfer = new DataTransfer()
+      
+      ;[...event.dataTransfer.files].forEach((file) => {
+        if (allowedExtensions.includes(file.path.split(".").toReversed()[0])) {
+          filteredFilesTransfer.items.add(file)
+        }
+      })
+      
+      if (filteredFilesTransfer.files.length > 0) {
+        files = filteredFilesTransfer.files
+        errorMessage = undefined
+      } else {
+        errorMessage = "Invalid File Type"
+      }
     }
   }
   

@@ -97,7 +97,7 @@ changes:
   - bank: 22
     address: 0x6321
   - bank: 22
-    address: 0x6323
+    address: 0x6324
   value: "$laprasPokemonId"
 - description: "Changes the Pokémon for the Snorlax encounter."
   locations:

@@ -6,7 +6,7 @@ export default viteCommonConfig({
   root: "src/renderer",
   rollupOptions: {
     input: {
-      mainWindow: "src/renderer/mainWindow.html",
+      mainWindow: "src/renderer/window.html",
     },
   },
   plugins: [
