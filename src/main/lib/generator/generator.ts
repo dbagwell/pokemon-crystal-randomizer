@@ -80,7 +80,7 @@ export const generateROM = async (params: {
     title: "Save Generated ROM to:",
     buttonLabel: "Generate",
     fileType: "gbc" as const,
-    defaultFilePath: defaultFileName ?? generatorResult.seed,
+    defaultFilePath: defaultFileName ?? customSeed ?? generatorResult.checkValue,
   }
   
   let filePath: string | undefined
@@ -114,11 +114,7 @@ const generateROMData = (params: {
   settings: Settings,
   playerOptions: PlayerOptions,
   generateLog: boolean
-}): {
-  seed: string
-  data: Buffer
-  log: string | undefined
-} => {
+}) => {
   const {
     data,
     customSeed,
@@ -172,6 +168,7 @@ const generateROMData = (params: {
     seed: seed,
     data: data,
     log: log,
+    checkValue: checkValue,
   }
 }
 
