@@ -2,9 +2,11 @@ import "source-map-support/register"
 
 import { handlePCRPFile as processPCRPFile } from "@lib/generator/pcrpProcessor"
 import { MainAPI } from "@lib/ipc/mainAPI"
+import { getIgnoredUpdateVersions, ignoreUpdateVersion } from "@lib/userData/userData"
 import { compact, isNotNullish } from "@shared/utils"
 import { app, BrowserWindow, dialog, Menu, type MenuItemConstructorOptions } from "electron"
 import { exposeMainApi } from "electron-affinity/main"
+import { autoUpdater } from "electron-updater"
 
 import { showWindow } from "./windowManager"
 
@@ -19,12 +21,46 @@ app.on("window-all-closed", () => {
   }
 })
 
-const showSettingsWindow = () => {
+const showGeneratorWindow = async () => {
   showWindow({
     windowType: "GENERATOR",
     width: 800,
     height: 600,
   })
+  
+  checkForUpdates()
+}
+
+const checkForUpdates = async () => {
+  autoUpdater.autoInstallOnAppQuit = false
+  autoUpdater.autoDownload = false
+  const updateInfo = await autoUpdater.checkForUpdates()
+  
+  if (isNotNullish(updateInfo) && updateInfo.isUpdateAvailable && !getIgnoredUpdateVersions().includes(updateInfo.updateInfo.version)) {
+    const result = dialog.showMessageBoxSync({
+      message: `A newer version of Pokémon Crystal Randomizer is available.\n\nWould you like to update to version ${updateInfo.updateInfo.version}?`,
+      buttons: [
+        "Update and Restart",
+        "Ask Again Later",
+        "Skip Update",
+      ],
+    })
+    
+    if (result === 0) {
+      try {
+        autoUpdater.autoRunAppAfterInstall = true
+        await autoUpdater.downloadUpdate()
+        autoUpdater.quitAndInstall()
+      } catch (error: any) {
+        dialog.showErrorBox(
+          "Error",
+          error.message,
+        )
+      }
+    } else if (result === 2) {
+      ignoreUpdateVersion(updateInfo.updateInfo.version)
+    }
+  }
 }
 
 const handlePCRPFile = async (filePath: string) => {
@@ -52,7 +88,7 @@ app.on("ready", async () => {
       await handlePCRPFile(process.argv[1])
       app.quit()
     } else {
-      await showSettingsWindow()
+      await showGeneratorWindow()
     }
   }
   
@@ -68,7 +104,7 @@ app.on("ready", async () => {
 
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0 && !quitAfterGenerating) {
-    showSettingsWindow()
+    showGeneratorWindow()
   }
 })
 

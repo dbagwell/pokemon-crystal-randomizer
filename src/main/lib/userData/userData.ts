@@ -175,3 +175,19 @@ export const removeSavedSettings = (name: string) => {
   const fileName = `${name}.yml`
   fs.rmSync(path.resolve(settingsPath, fileName), { force: true })
 }
+
+// Updates
+
+export const getIgnoredUpdateVersions = (): string[] => {
+  return getPreferences()?.ignoredUpdateVersions
+}
+
+export const ignoreUpdateVersion = (version: string) => {
+  const preferences = getPreferences()
+  preferences.ignoredUpdateVersions = [
+    ...preferences.ignoredUpdateVersions ?? [],
+    version,
+  ]
+  
+  setPreferences(preferences)
+}

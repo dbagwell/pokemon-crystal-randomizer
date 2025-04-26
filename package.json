@@ -36,6 +36,7 @@
     "electron": "27.1.2",
     "electron-affinity": "^1.2.4",
     "electron-builder": "^26.0.12",
+    "electron-updater": "^6.6.2",
     "eslint": "^8.54.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-svelte": "^2.46.0",
