@@ -1,0 +1,9 @@
+description: "Skips the run sound effect when running from a wild Pokémon."
+changes:
+- description: "Skips code that plays the run sound effect."
+  locations:
+  - bank: 15
+    address: 0x59D9
+  value: "18 0C"
+  maxSize: 14
+  freeUnused: true

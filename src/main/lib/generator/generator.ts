@@ -1007,6 +1007,16 @@ const createPatches = (
     ]
   }
   
+  if (settings.SKIP_RUN_SFX) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipRunSFX.yml",
+      ).hunks,
+    ]
+  }
+  
   // Additional Options
   
   const selectedAdditionalOptionIds = settings.ADDITIONAL_OPTIONS

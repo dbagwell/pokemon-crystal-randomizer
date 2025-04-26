@@ -1134,6 +1134,11 @@ export const defaultSettingsViewModel = () => {
             name: "Skip HP/XP Animations",
             description: "HP and experience animations are skipped during battle.",
           }),
+          createSimpleToggleViewModel({
+            id: "SKIP_RUN_SFX" as const,
+            name: "Skip Run Sound Effect",
+            description: "Skips the run sound effect when running from a wild Pokémon, allowing you to exit the battle faster.",
+          }),
           createSimpleMultiSelectorViewModel({
             id: "ADDITIONAL_OPTIONS" as const,
             name: "Additional Options",
