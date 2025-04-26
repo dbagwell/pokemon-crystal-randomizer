@@ -1129,6 +1129,11 @@ export const defaultSettingsViewModel = () => {
             name: "Fast Battle Cries",
             description: "Makes it so the Pokémon cries that are heard during battles don't prevent the game from continuing until they are finished.",
           }),
+          createSimpleToggleViewModel({
+            id: "SKIP_HP_XP_ANIMATIONS" as const,
+            name: "Skip HP/XP Animations",
+            description: "HP and experience animations are skipped during battle.",
+          }),
           createSimpleMultiSelectorViewModel({
             id: "ADDITIONAL_OPTIONS" as const,
             name: "Additional Options",

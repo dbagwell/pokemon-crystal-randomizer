@@ -997,6 +997,16 @@ const createPatches = (
     ]
   }
   
+  if (settings.SKIP_HP_XP_ANIMATIONS) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipHPXPAnimations.yml",
+      ).hunks,
+    ]
+  }
+  
   // Additional Options
   
   const selectedAdditionalOptionIds = settings.ADDITIONAL_OPTIONS
