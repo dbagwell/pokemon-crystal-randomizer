@@ -24,6 +24,7 @@ const init = async () => {
       lastSelectedPlayerOptions: initialAppData.playerOptions,
       customPresetNames: initialAppData.customPresetNames,
       logPreference: initialAppData.logPreference,
+      createPatchPreference: initialAppData.createPatchPreference,
     },
   })
 }

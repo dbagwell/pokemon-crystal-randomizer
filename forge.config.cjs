@@ -7,6 +7,17 @@ module.exports = {
       "(?!^/package\\.json$|^/\\.vite$|^/\\.vite/.*$)^.+$",
     ],
     icon: "src/main/resources/icons/icon",
+    extendInfo: {
+      CFBundleDocumentTypes: [
+        {
+          CFBundleTypeName: "Pokémon Crystal Randomizer Patch",
+          CFBundleTypeRole: "Editor",
+          LSTypeIsPackage: true,
+          LSHandlerRank: "Default",
+          CFBundleTypeExtensions: ["pcrp"],
+        },
+      ],
+    },
   },
   makers: [
     {

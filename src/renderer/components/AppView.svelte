@@ -12,7 +12,7 @@
     width="100%"
   >
     <div>
-      <div style:overflow-x="scroll">
+      <div style:overflow-x="auto">
         <Stack
           alignment="fill"
           direction="horizontal"
@@ -72,7 +72,7 @@
       style:background-color={colors.primarySurface}
       style:box-shadow="0 -2px 5px #00000070"
       style:height="auto"
-      style:overflow="scroll"
+      style:overflow="auto"
     >
       {#each settingsViewModel.tabViewModels as tabViewModel (tabViewModel.id)}
         {#if settingsViewModel.selectedTabId === tabViewModel.id}
@@ -95,86 +95,89 @@
       style:background-color={colors.primarySurface}
       style:box-shadow="0 -2px 5px #00000070"
     >
-      <Stack
-        alignment="fill"
-        direction="horizontal"
-        distribution="fill"
-        minSpacing={20}
-        padding={[5, 20, 20, 20]}
-      >
+      <div style:overflow-x="auto">
         <Stack
-          alignment="start"
-          direction="vertical"
-          distribution="end"
-          minSpacing={10}
-        >
-          <AutocompleteTextField
-            clearOnFocus={true}
-            clearOnSelect={false}
-            filter={currentPresetName}
-            onRemove={showRemovePresetConfirmation}
-            onSelect={(presetId) => { presetSelected(presetId ?? "VANILLA") }}
-            options={presetOptions}
-            previousSelection={optionFrom(currentPreset)}
-            restoreOnBlur={true}
-            title="Choose Preset"
-          />
-        </Stack>
-        <Stack
-          alignment="start"
-          direction="vertical"
-          distribution="end"
-          minSpacing={10}
-        >
-          <Button
-            style="text"
-            onClick={importSettingsButtonClicked}
-            title="Import Settings"
-          />
-          <Button
-            style="text"
-            onClick={exportSettingsButtonClicked}
-            title="Export Settings"
-          />
-          <Button
-            style="text"
-            isDisabled={currentPreset.id !== "CUSTOM"}
-            onClick={createNewPresetButtonClicked}
-            title="Create New Preset"
-          />
-        </Stack>
-        <div style:flex-grow="2"></div>
-        <Stack
-          alignment="start"
-          direction="vertical"
-          distribution="end"
-          minSpacing={10}
-        >
-          <TextField
-            title="Custom Seed"
-            type="text"
-            bind:value={seed}
-          />
-          <ToggleView bind:viewModel={generateLogToggleViewModel}/>
-        </Stack>
-        <Stack
-          alignment="center"
-          direction="vertical"
-          distribution="end"
+          alignment="fill"
+          direction="horizontal"
+          distribution="fill"
           minSpacing={20}
+          padding={[5, 20, 20, 20]}
         >
-          <Button
-            style="text"
-            onClick={playerOptionsButtonClicked}
-            title="Player Options"
-          />
-          <Button
-            style="fill"
-            onClick={generateROMButtonClicked}
-            title="GENERATE"
-          />
+          <Stack
+            alignment="start"
+            direction="vertical"
+            distribution="end"
+            minSpacing={10}
+          >
+            <AutocompleteTextField
+              clearOnFocus={true}
+              clearOnSelect={false}
+              filter={currentPresetName}
+              onRemove={showRemovePresetConfirmation}
+              onSelect={(presetId) => { presetSelected(presetId ?? "VANILLA") }}
+              options={presetOptions}
+              previousSelection={optionFrom(currentPreset)}
+              restoreOnBlur={true}
+              title="Choose Preset"
+            />
+          </Stack>
+          <Stack
+            alignment="start"
+            direction="vertical"
+            distribution="end"
+            minSpacing={10}
+          >
+            <Button
+              style="text"
+              onClick={importSettingsButtonClicked}
+              title="Import Settings"
+            />
+            <Button
+              style="text"
+              onClick={exportSettingsButtonClicked}
+              title="Export Settings"
+            />
+            <Button
+              style="text"
+              isDisabled={currentPreset.id !== "CUSTOM"}
+              onClick={createNewPresetButtonClicked}
+              title="Create New Preset"
+            />
+          </Stack>
+          <div style:flex-grow="2"></div>
+          <Stack
+            alignment="start"
+            direction="vertical"
+            distribution="end"
+            minSpacing={10}
+          >
+            <TextField
+              title="Custom Seed"
+              type="text"
+              bind:value={seed}
+            />
+            <ToggleView bind:viewModel={generateLogToggleViewModel}/>
+            <ToggleView bind:viewModel={generatePatchFileToggleViewModel}/>
+          </Stack>
+          <Stack
+            alignment="center"
+            direction="vertical"
+            distribution="end"
+            minSpacing={20}
+          >
+            <Button
+              style="text"
+              onClick={playerOptionsButtonClicked}
+              title="Player Options"
+            />
+            <Button
+              style="fill"
+              onClick={generateROMButtonClicked}
+              title="GENERATE"
+            />
+          </Stack>
         </Stack>
-      </Stack>
+      </div>
     </div>
   </Stack>
 </div>
@@ -228,6 +231,7 @@
     lastSelectedPlayerOptions: unknown | undefined
     customPresetNames: string[]
     logPreference: boolean
+    createPatchPreference: boolean
   }
   
   /* eslint-disable prefer-const */
@@ -238,6 +242,7 @@
     lastSelectedPlayerOptions,
     customPresetNames,
     logPreference,
+    createPatchPreference,
   }: Props = $props()
   /* eslint-enable prefer-const */
   
@@ -250,6 +255,13 @@
     name: "Generate Log File",
     description: "Creates a file that contains a record of all the settings that were used and all the random assignments that were made when generating the game.",
     isOn: logPreference,
+  }))
+  
+  let generatePatchFileToggleViewModel = $state(createSimpleToggleViewModel({
+    id: "CREATE_PATCH",
+    name: "Generate Patch File",
+    description: "Creates a '.pcrp' file that can be shared with others to generate the same game with the same settings and randomization.",
+    isOn: createPatchPreference,
   }))
   
   const currentPreset = $derived.by(() => {
@@ -526,6 +538,7 @@
         playerOptions,
         currentPreset.id,
         generateLogToggleViewModel.isOn,
+        generatePatchFileToggleViewModel.isOn,
       )
       showSuccessDialog(response.message)
     } catch (error) {

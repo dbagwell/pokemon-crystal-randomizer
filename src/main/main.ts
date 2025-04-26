@@ -1,18 +1,19 @@
 import "source-map-support/register"
 
+import { handlePCRPFile as processPCRPFile } from "@lib/generator/pcrpProcessor"
 import { MainAPI } from "@lib/ipc/mainAPI"
 import { bindRendererAPI } from "@lib/ipc/rendererAPIUtils"
-import { app, BrowserWindow, Menu, type MenuItemConstructorOptions, nativeTheme } from "electron"
+import { compact, isNotNullish } from "@shared/utils"
+import { app, BrowserWindow, dialog, Menu, type MenuItemConstructorOptions, nativeTheme } from "electron"
 import { exposeMainApi } from "electron-affinity/main"
-import squirrel from "electron-squirrel-startup"
 import path from "path"
 
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string
 declare const MAIN_WINDOW_VITE_NAME: string
 
-if (squirrel) {
-  app.quit()
-}
+let ready = false
+let quitAfterGenerating = false
+let filePathToOpen: string | undefined
 
 app.on("window-all-closed", () => {
   app.quit()
@@ -46,16 +47,57 @@ const createWindow = async () => {
   })
 }
 
-app.on("ready", createWindow)
+const handlePCRPFile = async (filePath: string) => {
+  try {
+    await processPCRPFile(filePath)
+  } catch (error: any) {
+    dialog.showErrorBox(
+      "Error",
+      error.message,
+    )
+  }
+}
+
+app.on("ready", async () => {
+  ready = true
+  
+  if (!quitAfterGenerating) {
+    if (!import.meta.env.DEV && isNotNullish(process.argv[1])) {
+      await handlePCRPFile(process.argv[1])
+      app.quit()
+    } else {
+      await createWindow()
+    }
+  }
+  
+  if (isNotNullish(filePathToOpen)) {
+    await handlePCRPFile(filePathToOpen)
+    filePathToOpen = undefined
+    
+    if (quitAfterGenerating) {
+      app.quit()
+    }
+  }
+})
 
 app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
+  if (BrowserWindow.getAllWindows().length === 0 && !quitAfterGenerating) {
     createWindow()
   }
 })
 
+app.on("open-file", async (_, path) => {
+  quitAfterGenerating = !ready
+  
+  if (ready) {
+    await handlePCRPFile(path)
+  } else {
+    filePathToOpen = path
+  }
+})
+
 const isMac = process.platform === "darwin"
-app.applicationMenu = Menu.buildFromTemplate([
+app.applicationMenu = Menu.buildFromTemplate(compact([
   isMac ? {
     label: app.name,
     submenu: [
@@ -69,11 +111,32 @@ app.applicationMenu = Menu.buildFromTemplate([
       { type: "separator" },
       { role: "quit" },
     ],
-  } : {
+  } : undefined,
+  {
     label: "File",
-    submenu: [
-      { role: "quit" },
-    ],
+    submenu: compact([
+      {
+        label: "Apply Patch",
+        click: async () => {
+          const filePath = dialog.showOpenDialogSync({
+            filters: [
+              {
+                name: "Pokémon Crystal Randomizer Patch",
+                extensions: [
+                  "pcrp",
+                ],
+              },
+            ],
+            buttonLabel: "Apply Patch",
+          })
+          
+          if (isNotNullish(filePath)) {
+            await handlePCRPFile(filePath[0])
+          }
+        },
+      },
+      isMac ? undefined : { role: "quit" },
+    ]),
   },
   {
     label: "Edit",
@@ -118,4 +181,4 @@ app.applicationMenu = Menu.buildFromTemplate([
       ] as MenuItemConstructorOptions[] : [],
     ],
   },
-])
+]))

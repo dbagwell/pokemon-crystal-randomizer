@@ -24,7 +24,7 @@
     style:left="0px"
     style:width="100%"
     style:height="100%"
-    style:overflow="scroll"
+    style:overflow="auto"
   >
     {#if isNotNullish(tooltipContent)}
       {@render tooltipContent()}
