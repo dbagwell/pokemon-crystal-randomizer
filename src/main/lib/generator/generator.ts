@@ -713,6 +713,16 @@ const createPatches = (
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...rodsAlwaysWorkPatch.hunks]
   }
+    
+  if (settings.HEADBUTT_ALWAYS_WORKS) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "headbuttAlwaysWorks.yml",
+      ).hunks,
+    ]
+  }
   
   if (settings.FASTER_ITEM_PICKUP_SFX) {
     romInfo.patchHunks = [
