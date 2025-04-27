@@ -1,0 +1,3 @@
+description: "Checks the repel status."
+values:
+  data: "3E 0A 21 DF 61 CF D2 @parent.$clearEncounter"

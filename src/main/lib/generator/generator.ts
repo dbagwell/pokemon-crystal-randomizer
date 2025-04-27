@@ -723,6 +723,23 @@ const createPatches = (
       ).hunks,
     ]
   }
+    
+  if (settings.ROCK_SMASH_ALWAYS_WORKS || settings.REPEL_ROCKS) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "rockSmashChanges.yml",
+        {
+          options: compact([
+            settings.ROCK_SMASH_ALWAYS_WORKS ? undefined : "rockSmashOptions/encounterChance.yml",
+            "rockSmashOptions/getEncounter.yml",
+            settings.REPEL_ROCKS ? "rockSmashOptions/repel.yml" : undefined,
+          ]),
+        },
+      ).hunks,
+    ]
+  }
   
   if (settings.FASTER_ITEM_PICKUP_SFX) {
     romInfo.patchHunks = [

@@ -1,0 +1,16 @@
+description: "Changes to how rock smash encounters work."
+values:
+  clearEncounter: "AF EA 2E D2 EA 43 D1 C9"
+  newCode: "#options.$data C9 $clearEncounter"
+changes:
+- description: "Calls new code to determine if there's a rock smash encounter after getting the encounter set."
+  locations:
+  - bank: 46
+    address: 0x422D
+  value: "C3 @$newCode"
+  maxSize: 15
+  freeUnused: true
+- description: "New code for determining if there should be a rock smash encounter."
+  locations:
+  - bank: 46
+  value: "$newCode"

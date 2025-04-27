@@ -1,0 +1,3 @@
+description: "40% chance of continuing on to select a rock encounter."
+values:
+  data: "3E 0A CD B1 2F FE 04 D2 @parent.$clearEncounter"

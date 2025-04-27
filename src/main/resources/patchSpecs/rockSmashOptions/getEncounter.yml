@@ -1,0 +1,3 @@
+description: "Gets the an encounter from the current rock encounter table."
+values:
+  data: "CD 1F 44 D2 @parent.$clearEncounter"
