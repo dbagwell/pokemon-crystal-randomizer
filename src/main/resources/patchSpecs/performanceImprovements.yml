@@ -1,4 +1,4 @@
-description: "Adds general performance improvements to the game."
+description: "Adds general performance improvements to the game. Uses New WRAM Addresses 0xCFD8 and 0xCFD9 in WRAM Bank 0."
 values:
   lcd1: "F5 E5 C3 @$lcd4 $lcd2 $lcd3"
   lcd2: "F0 44 4F 06 D1 0A 47 F0 C6 4F 78 E2"

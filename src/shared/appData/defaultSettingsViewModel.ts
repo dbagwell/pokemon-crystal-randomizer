@@ -976,6 +976,11 @@ export const defaultSettingsViewModel = () => {
             description: "Makes it so that repels will also affect rock smash encounters.",
           }),
           createSimpleToggleViewModel({
+            id: "REPEL_REFRESH" as const,
+            name: "Prompt to Refresh Repels",
+            description: "Shows a prompt to use another repel (if you have one of the same type) when a repel runs out.",
+          }),
+          createSimpleToggleViewModel({
             id: "POKE_BALLS_NEVER_FAIL" as const,
             name: "Poké Balls Never Fail",
             description: "All Poké Balls are always guaranteed to capture the Pokémon they are use on.",
