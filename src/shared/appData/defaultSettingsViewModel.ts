@@ -961,6 +961,21 @@ export const defaultSettingsViewModel = () => {
             description: "Allows makes it so fishing rods will trigger a Pokémon encounter every time they are used.",
           }),
           createSimpleToggleViewModel({
+            id: "HEADBUTT_ALWAYS_WORKS" as const,
+            name: "Headbutt Always Works",
+            description: "Makes it so that headbutting trees in locations that have tree encounters will always trigger a Pokémon encounter.",
+          }),
+          createSimpleToggleViewModel({
+            id: "ROCK_SMASH_ALWAYS_WORKS" as const,
+            name: "Change Box Phone Call",
+            description: "Makes it so that smashing rocks in locations that have rock encounters will always trigger a Pokémon encounter.",
+          }),
+          createSimpleToggleViewModel({
+            id: "REPEL_ROCKS" as const,
+            name: "Repel Rocks",
+            description: "Makes it so that repels will also affect rock smash encounters.",
+          }),
+          createSimpleToggleViewModel({
             id: "POKE_BALLS_NEVER_FAIL" as const,
             name: "Poké Balls Never Fail",
             description: "All Poké Balls are always guaranteed to capture the Pokémon they are use on.",
