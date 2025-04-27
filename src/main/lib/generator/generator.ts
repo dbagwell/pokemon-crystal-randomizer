@@ -987,6 +987,36 @@ const createPatches = (
     romInfo.patchHunks = [...romInfo.patchHunks, ...performanceImprovementsPatch.hunks]
   }
   
+  if (settings.FAST_BATTLE_CRIES) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "fastBattleCries.yml",
+      ).hunks,
+    ]
+  }
+  
+  if (settings.SKIP_HP_XP_ANIMATIONS) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipHPXPAnimations.yml",
+      ).hunks,
+    ]
+  }
+  
+  if (settings.SKIP_RUN_SFX) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipRunSFX.yml",
+      ).hunks,
+    ]
+  }
+  
   // Additional Options
   
   const selectedAdditionalOptionIds = settings.ADDITIONAL_OPTIONS

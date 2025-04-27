@@ -1124,6 +1124,21 @@ export const defaultSettingsViewModel = () => {
             name: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",
           }),
+          createSimpleToggleViewModel({
+            id: "FAST_BATTLE_CRIES" as const,
+            name: "Fast Battle Cries",
+            description: "Makes it so the Pokémon cries that are heard during battles don't prevent the game from continuing until they are finished.",
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_HP_XP_ANIMATIONS" as const,
+            name: "Skip HP/XP Animations",
+            description: "HP and experience animations are skipped during battle.",
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_RUN_SFX" as const,
+            name: "Skip Run Sound Effect",
+            description: "Skips the run sound effect when running from a wild Pokémon, allowing you to exit the battle faster.",
+          }),
           createSimpleMultiSelectorViewModel({
             id: "ADDITIONAL_OPTIONS" as const,
             name: "Additional Options",
