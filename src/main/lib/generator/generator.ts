@@ -740,6 +740,16 @@ const createPatches = (
       ).hunks,
     ]
   }
+    
+  if (settings.REPEL_REFRESH) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "repelRefresh.yml",
+      ).hunks,
+    ]
+  }
   
   if (settings.FASTER_ITEM_PICKUP_SFX) {
     romInfo.patchHunks = [
