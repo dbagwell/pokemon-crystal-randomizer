@@ -981,6 +981,11 @@ export const defaultSettingsViewModel = () => {
             description: "Shows a prompt to use another repel (if you have one of the same type) when a repel runs out.",
           }),
           createSimpleToggleViewModel({
+            id: "ESCAPE_ALL_BUILDINGS" as const,
+            name: "Escape from all Buildings",
+            description: "Enables using Escape Ropes and Dig to escape from the inside of all buildings instead of just caves and dungeons.",
+          }),
+          createSimpleToggleViewModel({
             id: "POKE_BALLS_NEVER_FAIL" as const,
             name: "Poké Balls Never Fail",
             description: "All Poké Balls are always guaranteed to capture the Pokémon they are use on.",

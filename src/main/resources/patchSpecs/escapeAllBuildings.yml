@@ -1,0 +1,7 @@
+description: "Allows the player to use escape ropes and dig in all indoor environments."
+changes:
+- description: "Changes escape rope/dig effect to check if the player not on a route or in a town."
+  locations:
+  - bank: 3
+    address: 0x4BBC
+  value: "02 28 04 FE 01 20"
