@@ -750,6 +750,16 @@ const createPatches = (
       ).hunks,
     ]
   }
+    
+  if (settings.ESCAPE_ALL_BUILDINGS) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "escapeAllBuildings.yml",
+      ).hunks,
+    ]
+  }
   
   if (settings.FASTER_ITEM_PICKUP_SFX) {
     romInfo.patchHunks = [
