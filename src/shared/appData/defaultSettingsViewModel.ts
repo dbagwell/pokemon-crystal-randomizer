@@ -1007,6 +1007,11 @@ export const defaultSettingsViewModel = () => {
               + "or when receiving a non-TM/HM item from an NPC "
               + "to the sound effect that is normally plays when a Pokémon gains a level.",
           }),
+          createSimpleToggleViewModel({
+            id: "SHOW_RECEIVED_TM_HM_MOVE_NAMES" as const,
+            name: "Show Received TM/HM Move Names",
+            description: "When a TM or HM is received, the name of the move it contains is shown.",
+          }),
         ] as const,
       }), // END ITEM_PROPERTIES
       createTabViewModel({
