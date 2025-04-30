@@ -34,6 +34,7 @@ export class ROMInfo {
       trainers: JSON.parse(JSON.stringify(trainers)),
       mapObjectEvents: JSON.parse(JSON.stringify(mapObjectEvents)),
       marts: JSON.parse(JSON.stringify(martsMap)),
+      moveTutorCost: 4000,
       itemLocations: JSON.parse(JSON.stringify(itemLocationsMap)),
     }
   }

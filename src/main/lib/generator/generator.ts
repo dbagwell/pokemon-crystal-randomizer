@@ -15,6 +15,7 @@ import { shuffleItems, syncContestItems, updateItems } from "@lib/generator/game
 import { updateLevelUpMoves } from "@lib/generator/gameDataProcessors/levelUpMoves"
 import { updateMapObjectEvents } from "@lib/generator/gameDataProcessors/mapObjectEvents"
 import { updateMarts } from "@lib/generator/gameDataProcessors/marts"
+import { updateMoveTutorCost } from "@lib/generator/gameDataProcessors/moveTutorCost"
 import { updatePokemonInfo } from "@lib/generator/gameDataProcessors/pokemonInfo"
 import { updateStarterItems, updateStarters } from "@lib/generator/gameDataProcessors/starters"
 import { updateTeachableMoves } from "@lib/generator/gameDataProcessors/teachableMoves"
@@ -189,6 +190,7 @@ const updateGameData = (
   updateTeachableMoves(settings, romInfo, random)
   updatePokemonInfo(settings, romInfo, random)
   updateMarts(settings, romInfo)
+  updateMoveTutorCost(settings, romInfo, random)
   updateTrainers(settings, romInfo, random)
   updateMapObjectEvents(settings, romInfo)
   updateItems(settings, romInfo, random)
@@ -836,6 +838,20 @@ const createPatches = (
     )
 
     romInfo.patchHunks = [...romInfo.patchHunks, ...martsPatch.hunks]
+  }
+  
+  if (settings.RANDOMIZE_MOVE_TUTOR_COST.VALUE) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks, ...Patch.fromYAML(
+        romInfo,
+        "moveTutorCost.yml",
+        {},
+        {
+          cost: hexStringFrom(bytesFrom(romInfo.gameData.moveTutorCost, 2)),
+          costText: hexStringFrom(ROMInfo.bytesFromText(`${romInfo.gameData.moveTutorCost} coins. Okay?`.padEnd(17, " "))),
+        }
+      ).hunks,
+    ]
   }
   
   // Skip Gender

@@ -426,6 +426,7 @@ export const generatorLog = (params: {
       headers: [
         "MOVE TUTOR MOVE",
         "MOVE",
+        "COST",
       ],
       sections: [
         {
@@ -433,6 +434,7 @@ export const generatorLog = (params: {
             return [
               moveTutorId,
               gameData.teachableMoves[moveTutorId].moveId,
+              `${gameData.moveTutorCost}`,
             ]
           }),
         },
