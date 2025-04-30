@@ -840,6 +840,15 @@ const createPatches = (
     romInfo.patchHunks = [...romInfo.patchHunks, ...martsPatch.hunks]
   }
   
+  if (settings.MOVE_TUTOR_ALWAYS_AVAILABLE) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks, ...Patch.fromYAML(
+        romInfo,
+        "moveTutorAlwaysAvailable.yml",
+      ).hunks,
+    ]
+  }
+  
   if (settings.RANDOMIZE_MOVE_TUTOR_COST.VALUE) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks, ...Patch.fromYAML(

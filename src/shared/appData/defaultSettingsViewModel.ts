@@ -1046,6 +1046,12 @@ export const defaultSettingsViewModel = () => {
             description: "Add TM12 (Sweet Scent) to the Goledenrod City Mart on the 5th floor "
               + "after obtaining the item from the lady in the gate north of Ilex Forest.",
           }),
+          createSimpleToggleViewModel({
+            id: "MOVE_TUTOR_ALWAYS_AVAILABLE" as const,
+            name: "Move Tutor Always Available",
+            description: "Makes it so the move tutor is always available in Goldenrod City "
+              + "and doesn't walk away after teaching a move.",
+          }),
           createConfigurableToggleViewModel({
             id: "RANDOMIZE_MOVE_TUTOR_COST" as const,
             name: "Randomize Move Tutor Cost",
