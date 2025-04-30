@@ -5,6 +5,7 @@ import type {
   InputViewModel,
   IntegerInputGroupViewModel,
   IntegerInputViewModel,
+  IntegerRangeInputViewModel,
   PlayerOptionsViewModel,
   SelectorOption,
   SettingsViewModel,
@@ -82,6 +83,14 @@ const settingsFromIntegerInputGroupViewModel = <ViewModelType extends IntegerInp
   return viewModel.values as SettingsFromIntegerInputGroupViewModel
 }
 
+type SettingsFromIntegerRangeInputViewModel = { MIN: number, MAX: number }
+const settingsFromIntegerRangeInputViewModel = <ViewModelType extends IntegerRangeInputViewModel>(viewModel: ViewModelType): SettingsFromIntegerRangeInputViewModel => {
+  return {
+    MIN: viewModel.selectedMinValue,
+    MAX: viewModel.selectedMaxValue,
+  } as SettingsFromIntegerRangeInputViewModel
+}
+
 type SettingsFromTextInputViewModel<ViewModelType extends TextInputViewModel> = ViewModelType extends { isRequired: true } ? string : string | undefined
 const settingsFromTextInputViewModel = <ViewModelType extends TextInputViewModel>(viewModel: ViewModelType): SettingsFromTextInputViewModel<ViewModelType> => {
   return viewModel.value as SettingsFromTextInputViewModel<ViewModelType>
@@ -157,6 +166,7 @@ const settingsFromConfigurableSelectorOption = <OptionType extends ConfigurableS
 type SettingsFromInputViewModel<ViewModelType extends InputViewModel> =
   ViewModelType extends IntegerInputViewModel ? SettingsFromIntegerInputViewModel<ViewModelType>
   : ViewModelType extends IntegerInputGroupViewModel ? SettingsFromIntegerInputGroupViewModel
+  : ViewModelType extends IntegerRangeInputViewModel ? SettingsFromIntegerRangeInputViewModel
   : ViewModelType extends TextInputViewModel ? SettingsFromTextInputViewModel<ViewModelType>
   : ViewModelType extends SingleSelectorViewModel ? SettingsFromSelectorViewModel<ViewModelType>
   : ViewModelType extends SimpleMultiSelectorViewModel ? SettingsFromSimpleMultiSelectorViewModel<ViewModelType>
@@ -171,6 +181,9 @@ const settingsFromInputViewModel = <ViewModelType extends InputViewModel>(viewMo
   }
   case "INTEGER_INPUT_GROUP": {
     return settingsFromIntegerInputGroupViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
+  }
+  case "INTEGER_RANGE_INPUT": {
+    return settingsFromIntegerRangeInputViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
   case "TEXT_INPUT": {
     return settingsFromTextInputViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>

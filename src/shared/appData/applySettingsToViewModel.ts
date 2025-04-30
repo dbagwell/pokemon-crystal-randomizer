@@ -1,4 +1,4 @@
-import type { ConfigurableMultiSelectorViewModel, GroupMultiSelectorViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, PlayerOptionsViewModel, SettingsViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
+import type { ConfigurableMultiSelectorViewModel, GroupMultiSelectorViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, IntegerRangeInputViewModel, PlayerOptionsViewModel, SettingsViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
 import { compact, isBoolean, isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
 
 export const applyPlayerOptionsToViewModel = (playerOptions: any, viewModel: PlayerOptionsViewModel, warnings: string[]) => {
@@ -39,6 +39,10 @@ const applySettingsToInputViewModel = (settings: any, viewModel: InputViewModel,
   }
   case "INTEGER_INPUT_GROUP": {
     applySettingsToIntegerInputGroupViewModel(settings, viewModel, path, warnings)
+    break
+  }
+  case "INTEGER_RANGE_INPUT": {
+    applySettingsToIntegerRangeInputViewModel(settings, viewModel, path, warnings)
     break
   }
   case "TEXT_INPUT": {
@@ -127,6 +131,54 @@ const applySettingsToIntegerInputGroupViewModel = (settings: any, viewModel: Int
     warnings.push(invalidValueWarning(path, `array of integers adding up to ${sum}`, settings))
   } else {
     viewModel.values = values
+  }
+}
+
+const applySettingsToIntegerRangeInputViewModel = (settings: any, viewModel: IntegerRangeInputViewModel, path: string, warnings: string[]) => {
+  if (isNullish(settings)) {
+    warnings.push(missingValueWarning(path, "integer range"))
+    return
+  } else if (!isObject(settings)) {
+    warnings.push(invalidValueWarning(path, "integer range", settings))
+    return
+  }
+  
+  const minPath = `${path}.MIN`
+  const maxPath = `${path}.MAX`
+  const minValue = settings.MIN
+  const maxValue = settings.MAX
+  let minValueIsDefault = true
+  
+  if (isNullish(minValue)) {
+    warnings.push(missingValueWarning(minPath, "integer"))
+  } else if (!isNumber(minValue) || !Number.isInteger(minValue)) {
+    warnings.push(invalidValueWarning(minPath, "integer", minValue, true))
+  } else if (minValue < viewModel.min || minValue > viewModel.max) {
+    warnings.push(outOfRangeWarning(minPath, viewModel.min, viewModel.max, minValue))
+    viewModel.selectedMaxValue = minValue < viewModel.min ? viewModel.min : viewModel.max
+    minValueIsDefault = false
+  } else {
+    minValueIsDefault = false
+    viewModel.selectedMinValue = minValue
+  }
+  
+  if (isNullish(maxValue)) {
+    warnings.push(missingValueWarning(maxPath, "integer"))
+  } else if (!isNumber(maxValue) || !Number.isInteger(maxValue)) {
+    warnings.push(invalidValueWarning(maxPath, "integer", maxValue))
+  } else if (maxValue < viewModel.min || maxValue > viewModel.max) {
+    warnings.push(outOfRangeWarning(maxPath, viewModel.min, viewModel.max, maxValue))
+    viewModel.selectedMaxValue = maxValue < viewModel.min ? viewModel.min : viewModel.max
+  } else if (viewModel.selectedMinValue > maxValue) {
+    const baseWarning = `Invalid value at path '${maxPath}'. '${maxPath}' must be greater than or equal to '${minPath}'.`
+    if (!minValueIsDefault) {
+      viewModel.selectedMaxValue = viewModel.selectedMinValue
+      warnings.push(`${baseWarning} Using value from ${minPath} instead.`)
+    } else {
+      warnings.push(`${baseWarning} Using default instead.`)
+    }
+  } else {
+    viewModel.selectedMaxValue = maxValue
   }
 }
 

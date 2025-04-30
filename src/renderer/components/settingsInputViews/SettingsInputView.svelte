@@ -2,6 +2,8 @@
   <IntegerInputView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "INTEGER_INPUT_GROUP"}
   <IntegerInputGroupView bind:viewModel={viewModel}/>
+{:else if viewModel.type === "INTEGER_RANGE_INPUT"}
+  <IntegerRangeInputView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "TEXT_INPUT"}
   <TextInputView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "SINGLE_SELECTOR"}
@@ -23,6 +25,7 @@
   import GroupMultiSelectorView from "@components/settingsInputViews/GroupMultiSelectorView.svelte"
   import IntegerInputGroupView from "@components/settingsInputViews/IntegerInputGroupView.svelte"
   import IntegerInputView from "@components/settingsInputViews/IntegerInputView.svelte"
+  import IntegerRangeInputView from "@components/settingsInputViews/IntegerRangeInputView.svelte"
   import SimpleMultiSelectorView from "@components/settingsInputViews/SimpleMultiSelectorView.svelte"
   import SingleSelectorView from "@components/settingsInputViews/SingleSelectorView.svelte"
   import TextInputView from "@components/settingsInputViews/TextInputView.svelte"
