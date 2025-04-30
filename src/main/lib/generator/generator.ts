@@ -769,6 +769,16 @@ const createPatches = (
       new DataHunk(ROMOffset.fromBankAddress(47, 0x4DBF), [0x90]),
     ]
   }
+    
+  if (settings.SHOW_RECEIVED_TM_HM_MOVE_NAMES) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "showTMHMMoveNames.yml",
+      ).hunks,
+    ]
+  }
   
   // Marts
   

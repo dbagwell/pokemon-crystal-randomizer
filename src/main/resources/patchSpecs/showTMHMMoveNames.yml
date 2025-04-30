@@ -1,0 +1,36 @@
+description: "Shows the tm/hm move names when they are received."
+values:
+  hiddenItemsCode: "4C 45 76 0E 04 @$sharedCode 91"
+  itemBallsCode: "CD D9 30"
+  sharedCode: "11 9D D0 3E 25 21 @$appendTMHMMoveName CF C9"
+  verboseCode: "CD C8 76 11 B0 D0"
+  appendTMHMMoveName: "FA 65 D2 FE BF D8 D5 4F 3E 03 21 07 54 CF 79 EA 65 D2 3E 0F CD 83 2D FA 65 D2 EA 65 D2 CD F8 34 E1 36 7F 23 11 73 D0 C3 D9 30"
+changes:
+- description: "Adds code"
+  locations:
+  - bank: 4
+  value: "$hiddenItemsCode $itemBallsCode $sharedCode"
+- description: "Calls new code when picking up an item ball"
+  locations:
+  - bank: 4
+    address: 0x6309
+  value: "@$itemBallsCode"
+- description: "Calls new code when picking up a hidden item"
+  locations:
+  - bank: 4
+    address: 0x762C
+  value: "00 @$hiddenItemsCode"
+- description: "Adds code"
+  locations:
+  - bank: 37
+  value: "$verboseCode $appendTMHMMoveName"
+- description: "Calls new code when getting a verbose item"
+  locations:
+  - bank: 37
+    address: 0x6F6C
+  value: "@$verboseCode"
+- description: "Calls new code when getting a variable verbose item"
+  locations:
+  - bank: 37
+    address: 0x6FBC
+  value: "@$verboseCode"
