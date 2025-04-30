@@ -1,14 +1,14 @@
 import type { ConfigurableMultiSelectorViewModel, GroupMultiSelectorViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, PlayerOptionsViewModel, SettingsViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
 import { compact, isBoolean, isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
 
-export const applyPlayerOptionsToViewModel = (settings: any, viewModel: PlayerOptionsViewModel, warnings: string[]) => {
-  if (isNullish(settings)) {
+export const applyPlayerOptionsToViewModel = (playerOptions: any, viewModel: PlayerOptionsViewModel, warnings: string[]) => {
+  if (isNullish(playerOptions)) {
     return
   }
   
   try {
     viewModel.viewModels.forEach((subViewModel) => {
-      applySettingsToInputViewModel(settings[subViewModel.id], subViewModel, subViewModel.id, warnings)
+      applySettingsToInputViewModel(playerOptions[subViewModel.id], subViewModel, subViewModel.id, warnings)
     })
   } catch (error) {
     throw new Error(`Unable to apply player options: ${error}`)
@@ -80,7 +80,16 @@ const applySettingsToIntegerInputViewModel = (settings: any, viewModel: IntegerI
       viewModel.value = undefined
     }
   } else if (isNumber(settings) && Number.isInteger(settings)) {
-    viewModel.value = settings
+    if (isNotNullish(viewModel.min) && isNotNullish(viewModel.max) && (settings < viewModel.min || settings > viewModel.max)) {
+      warnings.push(outOfRangeWarning(path, viewModel.min, viewModel.max, settings))
+      viewModel.value = settings < viewModel.min ? viewModel.min : viewModel.max
+    } else if (isNotNullish(viewModel.min) && settings < viewModel.min) {
+      warnings.push(`Invalid value at path '${path}'. Expected integer greater than '${viewModel.min}' but found ${settings}. Using default instead.`)
+    } else if (isNotNullish(viewModel.max) && settings > viewModel.max) {
+      warnings.push(`Invalid value at path '${path}'. Expected integer less than '${viewModel.max}' but found ${settings}. Using default instead.`)
+    } else {
+      viewModel.value = settings
+    }
   } else {
     warnings.push(invalidValueWarning(path, "integer", settings))
   }
@@ -101,9 +110,12 @@ const applySettingsToIntegerInputGroupViewModel = (settings: any, viewModel: Int
   
   const values = viewModel.values.map((value) => { return value })
   
-  settings.map((value, index) => {
+  settings.forEach((value, index) => {
     if (isNumber(value) && Number.isInteger(value)) {
       values[index] = value
+    } else if (value < viewModel.min || value > viewModel.max) {
+      warnings.push(outOfRangeWarning(`${path}.${index}`, viewModel.min, viewModel.max, value))
+      value[index] = value < viewModel.min ? viewModel.min : viewModel.max
     } else {
       warnings.push(invalidValueWarning(`${path}.${index}`, "integer", value))
     }
@@ -399,4 +411,8 @@ const tooManySelectionsWarning = (path: string) => {
 
 const duplicateValueWarning = (path: string, value: any) => {
   return `Duplicate value '${value}' at path '${path}'. Removing the extra.`
+}
+
+const outOfRangeWarning = (path: string, min: number, max: number, foundValue: number) => {
+  return `Invalid value at path '${path}'. Expected integer between '${min}' and '${max}' but found '${foundValue}'. Using '${foundValue < min ? min : max}' instead.`
 }
