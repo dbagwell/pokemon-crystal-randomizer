@@ -248,3 +248,8 @@ changes:
   - bank: 28
     address: 0x6881
   value: "$celadonGameCornerPokemonMenuText"
+- description: "Changes the moves known by the Dratini gift."
+  locations:
+  - bank: 34
+    address: 0x71C4
+  value: "$dratiniMoves"
