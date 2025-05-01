@@ -8,7 +8,7 @@ import { bytesForEvolutionsAndLevelUpMovesFromPokemon, bytesForInfoFromPokemon }
 import { bytesFromTrade } from "@lib/generator/dataConverters/trades"
 import { updateEncounterRates } from "@lib/generator/gameDataProcessors/encounterRates"
 import { updateRandomEncounters } from "@lib/generator/gameDataProcessors/encounters"
-import { updateEventPokemon } from "@lib/generator/gameDataProcessors/eventPokemon"
+import { updateEventPokemon, updateEventPokemonMoves } from "@lib/generator/gameDataProcessors/eventPokemon"
 import { updateEvolutionMethods } from "@lib/generator/gameDataProcessors/evolutionMethods"
 import { updateIntroPokemon } from "@lib/generator/gameDataProcessors/introPokemon"
 import { shuffleItems, syncContestItems, updateItems } from "@lib/generator/gameDataProcessors/itemLocations"
@@ -187,6 +187,7 @@ const updateGameData = (
   updateTrades(settings, romInfo, random)
   updateEvolutionMethods(settings, romInfo)
   updateLevelUpMoves(settings, romInfo, random)
+  updateEventPokemonMoves(settings, romInfo) // Must be after updateEventPokemon and updateLevelUpMoves
   updateTeachableMoves(settings, romInfo, random)
   updatePokemonInfo(settings, romInfo, random)
   updateMarts(settings, romInfo)
@@ -195,7 +196,7 @@ const updateGameData = (
   updateMapObjectEvents(settings, romInfo)
   updateItems(settings, romInfo, random)
   shuffleItems(settings, romInfo, random)
-  syncContestItems(romInfo)
+  syncContestItems(romInfo) // Must be after updateItems and shuffleItems
 }
 
 const createPatches = (
@@ -333,6 +334,14 @@ const createPatches = (
       porygonPokemonId: hexStringFromEventPokemonId("PORYGON"),
       larvitarPokemonId: hexStringFromEventPokemonId("LARVITAR"),
       celadonGameCornerPokemonMenuText: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("PIKACHU").padEnd(10, " ")} 2222@${nameStringFromEventPokemonId("PORYGON").padEnd(10, " ")} 5555@${nameStringFromEventPokemonId("LARVITAR").padEnd(10, " ")} 8888@`)),
+      dratiniMoves: hexStringFrom(Object.values(romInfo.gameData.dratiniMoves).flatMap((moveList) => {
+        return [
+          ...moveList.map((moveId) => {
+            return movesMap[moveId].numericId
+          }),
+          0,
+        ]
+      })),
     },
   )
   

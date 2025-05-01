@@ -11,6 +11,7 @@ import type { EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
 import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
 import type { HoldableItemId } from "@shared/types/gameDataIds/items"
 import type { MartId } from "@shared/types/gameDataIds/marts"
+import type { MoveId } from "@shared/types/gameDataIds/moves"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import type { StarterLocationId } from "@shared/types/gameDataIds/starterLocations"
 import type { TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
@@ -29,6 +30,10 @@ export type GameData = {
   encounters: Encounter[]
   oddEggs: OddEgg[]
   eventPokemon: Record<EventPokemonId, PokemonId>
+  dratiniMoves: {
+    regular: MoveId[]
+    special: MoveId[]
+  }
   trades: IdMap<TradeId, Trade>
   teachableMoves: IdMap<TeachableMoveId, TeachableMove>
   trainers: Trainer[]
