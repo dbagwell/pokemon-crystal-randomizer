@@ -29,7 +29,12 @@ export type Trade = {
   requestedPokémonId: PokemonId
   offeredPokemonId: PokemonId
   nickname: string
-  dvs: number
+  dvs: {
+    attack: number
+    defence: number
+    speed: number
+    special: number
+  }
   heldItemId: HoldableItemId
   originalTrainerId: number
   originalTrainerName: string

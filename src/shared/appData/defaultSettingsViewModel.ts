@@ -420,6 +420,11 @@ export const defaultSettingsViewModel = () => {
             ] as const,
           }), // END CHANGE_POKEMON_ENCOUNTER_RATIOS
           createSimpleToggleViewModel({
+            id: "RANDOMIZE_TRADE_POKEMON_STATS" as const,
+            name: "Randomize Trade Pokémon Stats",
+            description: "Changes the Determinant Values (DVs) of the Pokémon received from trades to random ones.",
+          }),
+          createSimpleToggleViewModel({
             id: "PREVENT_WILD_POKEMON_FLEEING" as const,
             name: "Prevent Wild Pokémon from Fleeing",
             description: "Makes it so that all Pokémon cannot flee from wild battles without the use of a fleeing move.",
