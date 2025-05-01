@@ -1,7 +1,8 @@
 import { generateROM } from "@lib/generator/generator"
 import { createPCRP } from "@lib/generator/pcrpProcessor"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
-import { getCreatePatchPreference, getLogPreference, getPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setCreatePatchPreference, setLogPreference, setPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
+import { getPreference, setPreference } from "@lib/userData/preferences"
+import { getPlayerOptions, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setPlayerOptions, setPreviousSettings } from "@lib/userData/userData"
 import { attemptWriteFile } from "@lib/utils/dialogUtils"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import { isNotNullish, isNullish } from "@shared/utils"
@@ -33,7 +34,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     logPreference: boolean
     createPatchPreference: boolean
   }>> => {
-    const lastPrestId = getPreviousPresetId()
+    const lastPrestId = getPreference("lastPresetId")
     
     return {
       result: {
@@ -42,8 +43,8 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
         settings: getSettingsForPresetId(lastPrestId),
         playerOptions: getPlayerOptions(),
         customPresetNames: getSavedSettingsNames(),
-        logPreference: getLogPreference(),
-        createPatchPreference: getCreatePatchPreference(),
+        logPreference: getPreference("logPreference"),
+        createPatchPreference: getPreference("createPatch"),
       },
     }
   }
@@ -105,10 +106,10 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
       })
       
       setPreviousSettings(settings)
-      setPreviousPresetId(presetId)
+      setPreference("lastPresetId", presetId)
       setPlayerOptions(playerOptions)
-      setLogPreference(generateLog)
-      setCreatePatchPreference(createPatch)
+      setPreference("logPreference", generateLog)
+      setPreference("createPatch", createPatch)
       
       if (generateLog && isNotNullish(generatorResult.log)) {
         attemptWriteFile({

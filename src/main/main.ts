@@ -2,7 +2,7 @@ import "source-map-support/register"
 
 import { handlePCRPFile as processPCRPFile } from "@lib/generator/pcrpProcessor"
 import { MainAPI } from "@lib/ipc/mainAPI"
-import { getIgnoredUpdateVersions, ignoreUpdateVersion } from "@lib/userData/userData"
+import { getPreference, ignoreUpdateVersion } from "@lib/userData/preferences"
 import { compact, isNotNullish } from "@shared/utils"
 import { app, BrowserWindow, dialog, Menu, type MenuItemConstructorOptions } from "electron"
 import { exposeMainApi } from "electron-affinity/main"
@@ -36,7 +36,7 @@ const checkForUpdates = async () => {
   autoUpdater.autoDownload = false
   const updateInfo = await autoUpdater.checkForUpdates()
   
-  if (isNotNullish(updateInfo) && updateInfo.isUpdateAvailable && !getIgnoredUpdateVersions().includes(updateInfo.updateInfo.version)) {
+  if (isNotNullish(updateInfo) && updateInfo.isUpdateAvailable && !getPreference("ignoredUpdateVersions").includes(updateInfo.updateInfo.version)) {
     const result = dialog.showMessageBoxSync({
       message: `A newer version of Pokémon Crystal Randomizer is available.\n\nWould you like to update to version ${updateInfo.updateInfo.version}?`,
       buttons: [

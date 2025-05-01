@@ -1,6 +1,5 @@
 import { getYAML } from "@lib/utils/yamlUtils"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
-import { isString } from "@shared/utils"
 import crypto from "crypto"
 import { app } from "electron"
 import fs from "fs"
@@ -9,73 +8,11 @@ import yaml from "yaml"
 
 export const userDataPath = path.resolve(app.getPath("userData"), "userData")
 
-const preferencesPath = path.resolve(userDataPath, "preferences.yml")
 const settingsPath = path.resolve(userDataPath, "settings")
 const previousSettingsPath = path.resolve(settingsPath, ".previousSettings.yml")
 const playerOptionsPath = path.resolve(settingsPath, ".playerOptions.yml")
 
-// Preferences
-
-export const getPreferences = (): any | undefined => {
-  try {
-    return getYAML([preferencesPath])
-  } catch {
-    return undefined
-  }
-}
-
-export const setPreferences = (preferences: unknown) => {
-  try {
-    fs.writeFileSync(preferencesPath, yaml.stringify(preferences))
-  } catch {
-    // Do nothing
-  }
-}
-
-// Log Preference
-
-export const getLogPreference = () => {
-  const preferences = getPreferences()
-  return preferences?.logPreference === true
-}
-
-export const setLogPreference = (preference: boolean) => {
-  const preferences = getPreferences() ?? {}
-  preferences.logPreference = preference
-  setPreferences(preferences)
-}
-
-// Create Patch Preference
-
-export const getCreatePatchPreference = () => {
-  const preferences = getPreferences()
-  return preferences?.createPatch === true
-}
-
-export const setCreatePatchPreference = (preference: boolean) => {
-  const preferences = getPreferences() ?? {}
-  preferences.createPatch = preference
-  setPreferences(preferences)
-}
-
 // Preset Ids
-
-export const getPreviousPresetId = (): string => {
-  const preferences = getPreferences()
-  const lastPresetId = preferences?.lastPresetId
-  
-  if (isString(lastPresetId)) {
-    return lastPresetId
-  } else {
-    return "VANILLA"
-  }
-}
-
-export const setPreviousPresetId = (presetId: string) => {
-  const preferences = getPreferences() ?? {}
-  preferences.lastPresetId = presetId
-  setPreferences(preferences)
-}
 
 export const getSettingsForPresetId = (id: string): unknown | undefined => {
   if (id === "CUSTOM") {
@@ -174,20 +111,4 @@ export const getSavedSettingsNames = () => {
 export const removeSavedSettings = (name: string) => {
   const fileName = `${name}.yml`
   fs.rmSync(path.resolve(settingsPath, fileName), { force: true })
-}
-
-// Updates
-
-export const getIgnoredUpdateVersions = (): string[] => {
-  return getPreferences()?.ignoredUpdateVersions
-}
-
-export const ignoreUpdateVersion = (version: string) => {
-  const preferences = getPreferences()
-  preferences.ignoredUpdateVersions = [
-    ...preferences.ignoredUpdateVersions ?? [],
-    version,
-  ]
-  
-  setPreferences(preferences)
 }
