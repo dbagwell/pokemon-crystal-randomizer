@@ -347,6 +347,16 @@ const createPatches = (
   
   romInfo.patchHunks = [...romInfo.patchHunks, ...eventPokemonPatch.hunks]
   
+  if (settings.RANDOM_SHINY_ENCOUNTER_ATTACK_STAT) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "randomShinyAttackDV.yml",
+      ).hunks,
+    ]
+  }
+  
   if (settings.RANDOMIZE_EVENT_POKEMON || settings.RANDOMIZE_RANDOM_ENCOUNTERS) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,

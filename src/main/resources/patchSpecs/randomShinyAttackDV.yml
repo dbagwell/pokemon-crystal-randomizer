@@ -1,0 +1,13 @@
+description: "Makes it so the lake of rage shiny attack dv is randomly generated."
+values:
+  generateDVs: "CD 9F 2F E6 FA F6 2A 47 0E AA C9"
+changes:
+- description: "Adds code to randomly generate shiny compatible dvs"
+  locations:
+  - bank: 15
+  value: "$generateDVs"
+- description: "Calls the new code."
+  locations:
+  - bank: 15
+    address: 0x699A
+  value: "CD @$generateDVs 00"
