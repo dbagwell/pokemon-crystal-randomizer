@@ -34,5 +34,6 @@ export type GameData = {
   trainers: Trainer[]
   mapObjectEvents: [MapObjectEvent]
   marts: IdMap<MartId, Mart>
+  moveTutorCost: number
   itemLocations: IdMap<ItemLocationId, ItemLocation>
 }

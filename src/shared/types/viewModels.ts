@@ -37,6 +37,24 @@ export const createIntegerInputGroupViewModel = <IdType extends string>(params: 
   }
 }
 
+// Integer Range Input View Model
+
+export type IntegerRangeInputViewModel = ReturnType<typeof createIntegerRangeInputViewModel>
+export const createIntegerRangeInputViewModel = <IdType extends string>(params: {
+  id: IdType
+  name?: string
+  description?: string
+  min: number
+  max: number
+  selectedMinValue: number
+  selectedMaxValue: number
+}) => {
+  return {
+    ...params,
+    type: "INTEGER_RANGE_INPUT" as const,
+  }
+}
+
 // Text Input View Model
 
 export type TextInputViewModel = ReturnType<typeof createTextInputViewModel>
@@ -179,6 +197,7 @@ export const createConfigurableToggleViewModel = <IdType extends string, ViewMod
 export type InputViewModel =
   IntegerInputViewModel
   | IntegerInputGroupViewModel
+  | IntegerRangeInputViewModel
   | TextInputViewModel
   | SingleSelectorViewModel
   | SimpleMultiSelectorViewModel
