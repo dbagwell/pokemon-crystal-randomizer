@@ -2,7 +2,8 @@ import "source-map-support/register"
 
 import { handlePCRPFile as processPCRPFile } from "@lib/generator/pcrpProcessor"
 import { MainAPI } from "@lib/ipc/mainAPI"
-import { getIgnoredUpdateVersions, ignoreUpdateVersion } from "@lib/userData/userData"
+import { getPreference, ignoreUpdateVersion, setPreference } from "@lib/userData/preferences"
+import { debounce } from "@lib/utils/commonUtils"
 import { compact, isNotNullish } from "@shared/utils"
 import { app, BrowserWindow, dialog, Menu, type MenuItemConstructorOptions } from "electron"
 import { exposeMainApi } from "electron-affinity/main"
@@ -22,13 +23,34 @@ app.on("window-all-closed", () => {
 })
 
 const showGeneratorWindow = async () => {
-  showWindow({
+  checkForUpdates()
+  
+  const windowSize = getPreference("generatorWindowSize")
+  
+  const window = await showWindow({
     windowType: "GENERATOR",
-    width: 800,
-    height: 600,
+    position: getPreference("generatorWindowPosition"),
+    width: windowSize[0],
+    height: windowSize[1],
   })
   
-  checkForUpdates()
+  window.on("resized", () => {
+    const size = window.getSize()
+    setPreference("generatorWindowSize", [size[0], size[1]])
+  })
+  
+  const saveWindowPoistion = debounce(() => {
+    const position = window.getPosition()
+    setPreference("generatorWindowPosition", [position[0], position[1]])
+  }, 500)
+  
+  window.on("moved", () => {
+    saveWindowPoistion()
+  })
+  
+  window.once("closed", () => {
+    window.removeAllListeners()
+  })
 }
 
 const checkForUpdates = async () => {
@@ -36,7 +58,7 @@ const checkForUpdates = async () => {
   autoUpdater.autoDownload = false
   const updateInfo = await autoUpdater.checkForUpdates()
   
-  if (isNotNullish(updateInfo) && updateInfo.isUpdateAvailable && !getIgnoredUpdateVersions().includes(updateInfo.updateInfo.version)) {
+  if (isNotNullish(updateInfo) && updateInfo.isUpdateAvailable && !getPreference("ignoredUpdateVersions").includes(updateInfo.updateInfo.version)) {
     const result = dialog.showMessageBoxSync({
       message: `A newer version of Pokémon Crystal Randomizer is available.\n\nWould you like to update to version ${updateInfo.updateInfo.version}?`,
       buttons: [
