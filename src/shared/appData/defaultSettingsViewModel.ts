@@ -420,6 +420,18 @@ export const defaultSettingsViewModel = () => {
             ] as const,
           }), // END CHANGE_POKEMON_ENCOUNTER_RATIOS
           createSimpleToggleViewModel({
+            id: "RANDOM_SHINY_ENCOUNTER_ATTACK_STAT" as const,
+            name: "Random Shiny Encounter Attack Stat",
+            description: "Makes it so the Determinant Value (DV) of the Attack Stat of the Shiny Pokémon in the Lake of Rage "
+              + "is randomly selected when the battle starts instead of always being 14.\n"
+              + "The possible values are still limited to ones that allow the Pokémon to be shiny (2, 3, 6, 7, 10, 11, 14, 15).",
+          }),
+          createSimpleToggleViewModel({
+            id: "RANDOMIZE_TRADE_POKEMON_STATS" as const,
+            name: "Randomize Trade Pokémon Stats",
+            description: "Changes the Determinant Values (DVs) of the Pokémon received from trades to random ones.",
+          }),
+          createSimpleToggleViewModel({
             id: "PREVENT_WILD_POKEMON_FLEEING" as const,
             name: "Prevent Wild Pokémon from Fleeing",
             description: "Makes it so that all Pokémon cannot flee from wild battles without the use of a fleeing move.",
