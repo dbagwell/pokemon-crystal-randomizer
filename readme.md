@@ -45,6 +45,28 @@ Custom settings can also be exported as YAML files that can be imported by other
 
 The Player Options are a group of settings that can be customized individually by each player using a patch (.pcrp) file to generate a game with the same seed and settings. These settings are for things that can or would normally be customized by players in the game anyways (like their player name or their text speed).
 
+### CLI
+
+The app can also be used to generate ROMs, logs and patches without having to use the User Iterface if the app is launched from the command line with `generate` as its first argument. The following options are be used to 
+
+- `--rom`: **boolean flag (optional)** - Tells the generator to create a `.gbc` file in the specified `--outputDir` that contains the generated changes.
+- `--log`: **boolean flag (optional)** - Tells the generator to create a `.log.txt` file in the specified `--outputDir` that details all the changes included in the patch.
+- `--patch`: **boolean flag (optional)** - Tells the generator to create a `.pcrp` file in the specified `--outputDir` that can be used to create a patched ROM with the same changes.
+- `--preset`: **string (optional)** - The id of the settings preset to use when generating the changes. This can be one of the built in presets or one of the custom presets that were created using the app. The id of a custom preset is just its (case sensitive) name, and the following is a list of the built in preset ids:
+  - `VANILLA`
+  - `CLASSIC_BINGO`
+  - `BINGO_PLUS`
+- `--settings`: **string (optional)** - The path to a `.yml` file that contains the desired settings to used when generating the changes.
+- `--seed`: **string (optional)** - The seed to use for all the random choices when generating the changes. If not specified, a random seed will be used.
+- `--inputROM`: **string (optional)** - The path to a `.gbc` file that contains the vanilla Pokémon Crystal Version 1.1 ROM. Required if using the `--rom` option and no vanilla ROM has been provided to the app before.
+- `--outputDir`: **string (required)** - The path to a directory where all generated files will be saved.
+- `--name`: **string (optional)** - The name that will be given to the all the generated files. If not specified, the check value of the ROM will be used instead.
+- `--force`: **boolean flag (optional)** - Tells the generator to save the generated files even if files with the same names already exist in the `--outputDir`.
+
+##### Important Notes: 
+- At least one of the `--rom`, `--log` and `--patch` options must be specified.
+- Only one of `--preset` and `--settings` can be used at a time, if neither are specified, `VANILLA` preset will be used.
+
 ## Feature Requests and Bug Reports
 
 Please submit all feature requests and bug reports in the issues section of this repository and label them with the `enhancement` and `bug` labels respectively.
