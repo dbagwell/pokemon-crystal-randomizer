@@ -1,6 +1,6 @@
 import { userDataPath } from "@lib/userData/userData"
 import { getYAML } from "@lib/utils/yamlUtils"
-import { isBoolean, isString } from "@shared/utils"
+import { isBoolean, isNullish, isNumber, isString } from "@shared/utils"
 import fs from "fs"
 import path from "path"
 import yaml from "yaml"
@@ -12,6 +12,8 @@ export type UserPreferences = {
   logPreference: boolean
   createPatch: boolean
   ignoredUpdateVersions: string[]
+  generatorWindowPosition: [number, number] | undefined
+  generatorWindowSize: [number, number]
 }
 
 const getPreferences = (): UserPreferences => {
@@ -20,6 +22,8 @@ const getPreferences = (): UserPreferences => {
     logPreference: false,
     createPatch: false,
     ignoredUpdateVersions: [],
+    generatorWindowPosition: undefined,
+    generatorWindowSize: [800, 600],
   }
   
   try {
@@ -38,6 +42,8 @@ const getPreferences = (): UserPreferences => {
       ...get("logPreference", (value) => { return isBoolean(value) }),
       ...get("createPatch", (value) => { return isBoolean(value) }),
       ...get("ignoredUpdateVersions", (value) => { return Array.isArray(value) && value.reduce((result, value) => { return result && isString(value) }, true) }),
+      ...get("generatorWindowPosition", (value) => { return isNullish(value) || Array.isArray(value) && value.reduce((result, value) => { return result && isNumber(value) }, true) }),
+      ...get("generatorWindowSize", (value) => { return Array.isArray(value) && value.reduce((result, value) => { return result && isNumber(value) }, true) }),
     }
   } catch {
     return defaultPreferences
