@@ -1,5 +1,6 @@
 import "source-map-support/register"
 
+import { generateFromCLI } from "@lib/generator/cli"
 import { handlePCRPFile as processPCRPFile } from "@lib/generator/pcrpProcessor"
 import { MainAPI } from "@lib/ipc/mainAPI"
 import { getPreference, ignoreUpdateVersion, setPreference } from "@lib/userData/preferences"
@@ -106,7 +107,10 @@ app.on("ready", async () => {
   exposeMainApi(mainAPI)
   
   if (!quitAfterGenerating) {
-    if (!import.meta.env.DEV && isNotNullish(process.argv[1])) {
+    if (process.argv[import.meta.env.DEV ? 2 : 1] === "generate") {
+      await generateFromCLI(process.argv)
+      app.quit()
+    } else if (!import.meta.env.DEV && isNotNullish(process.argv[1])) {
       await handlePCRPFile(process.argv[1])
       app.quit()
     } else {
