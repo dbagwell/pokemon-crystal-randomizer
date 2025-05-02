@@ -23,10 +23,12 @@ import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { generatorLog } from "@lib/generator/log"
 import { DataHunk, Patch } from "@lib/generator/patch"
+import { createPCRP } from "@lib/generator/pcrpProcessor"
 import { Random } from "@lib/generator/random"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import { attemptWriteFile, getFilePathFromUserInput } from "@lib/utils/dialogUtils"
-import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
+import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
+import { type PlayerOptions, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
 import { gen5BaseExpMap } from "@shared/gameData/gen5BaseExp"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
@@ -46,56 +48,100 @@ import { app } from "electron"
 import fs from "fs"
 import hash from "object-hash"
 
-export const generateROM = async (params: {
+export const generatorDataFrom = (params: {
   customSeed: string | undefined
   settings: Settings
-  playerOptions: PlayerOptions
-  showInputInRenderer: boolean
-  defaultFileName?: string
-  generateLog: boolean
 }) => {
   const {
     customSeed,
     settings,
+  } = params
+  
+  const romInfo = ROMInfo.vanilla()
+  const seed = customSeed ?? crypto.randomUUID()
+  const random = new Random(seed)
+  
+  const isDefaultSettings = JSON.stringify(settings) === JSON.stringify(settingsFromViewModel(defaultSettingsViewModel()))
+  
+  if (!isDefaultSettings) {
+    updateGameData(settings, romInfo, random)
+    createPatches(settings, romInfo)
+  }
+  
+  const checkValue: string = isDefaultSettings ? "00000000" : hash([...romInfo.patchHunks]).slice(0, 8).toUpperCase()
+  
+  return {
+    romInfo: romInfo,
+    settings: settings,
+    seed: seed,
+    checkValue: checkValue,
+  }
+}
+
+export const generateROM = async (params: {
+  data: ReturnType<typeof generatorDataFrom>
+  playerOptions: PlayerOptions
+  showInputInRenderer: boolean
+  defaultFileName?: string
+  inputROM?: Buffer
+  forceOverwrite?: boolean
+  throwErrorOnWriteFailure?: boolean
+}) => {
+  const {
+    data,
     playerOptions,
     showInputInRenderer,
     defaultFileName,
-    generateLog,
+    inputROM,
+    forceOverwrite,
+    throwErrorOnWriteFailure,
   } = params
   
-  const vanillaData = await getVanillaROM(showInputInRenderer)
+  const fileData = inputROM ?? await getVanillaROM(showInputInRenderer)
   
-  if (isNullish(vanillaData)) {
+  if (isNullish(fileData)) {
     throw new Error("A Pokémon Crystal Version 1.1 ROM is required.")
   }
   
-  const generatorResult = generateROMData({
-    data: vanillaData,
-    customSeed: customSeed,
-    settings: settings,
-    playerOptions: playerOptions,
-    generateLog: generateLog,
+  const basePatch = Patch.fromYAML(
+    data.romInfo,
+    "randomizerBase.yml",
+    {},
+    {
+      versionNumber: hexStringFrom(ROMInfo.bytesFromText(app.getVersion())),
+      checkValue: hexStringFrom(ROMInfo.bytesFromText(data.checkValue)),
+    },
+  )
+  
+  data.romInfo.patchHunks = [...data.romInfo.patchHunks, ...basePatch.hunks]
+  
+  createPlayerOptionsPatches(data.settings, playerOptions, data.romInfo)
+  
+  data.romInfo.patchHunks.forEach((hunk) => {
+    fileData.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
   })
+  
+  let filePath: string | undefined
   
   const dialogParams = {
     title: "Save Generated ROM to:",
     buttonLabel: "Generate",
     fileType: "gbc" as const,
-    defaultFilePath: defaultFileName ?? customSeed ?? generatorResult.checkValue,
+    defaultFilePath: `${defaultFileName ?? data.checkValue}.gbc`,
   }
-  
-  let filePath: string | undefined
-  
+    
   if (defaultFileName) {
     filePath = attemptWriteFile({
       ...dialogParams,
-      data: generatorResult.data,
+      data: fileData,
+      forceOverwrite: forceOverwrite,
+      throwErrorOnWriteFailure: throwErrorOnWriteFailure,
     })
   } else {
     filePath = getFilePathFromUserInput(dialogParams)
-    
+      
     if (isNotNullish(filePath)) {
-      fs.writeFileSync(filePath, generatorResult.data)
+      fs.writeFileSync(filePath, fileData)
     }
   }
   
@@ -104,73 +150,67 @@ export const generateROM = async (params: {
   }
   
   return {
-    ...generatorResult,
-    outputFilePath: filePath,
+    full: filePath,
+    withoutExtension: filePath.replace(/\.gbc$/, ""),
   }
 }
 
-const generateROMData = (params: {
-  data: Buffer,
-  customSeed: string | undefined,
-  settings: Settings,
-  playerOptions: PlayerOptions,
-  generateLog: boolean
+export const generateLog = (params: {
+  data: ReturnType<typeof generatorDataFrom>
+  defaultFileName?: string
+  forceOverwrite?: boolean
+  throwErrorOnWriteFailure?: boolean
 }) => {
   const {
     data,
-    customSeed,
-    settings,
-    playerOptions,
-    generateLog,
+    defaultFileName,
+    forceOverwrite,
+    throwErrorOnWriteFailure,
   } = params
   
-  const romInfo = ROMInfo.vanilla()
-  const seed = customSeed ?? crypto.randomUUID()
-  const random = new Random(seed)
-  
-  // Update game data based on settings
-  
-  updateGameData(settings, romInfo, random)
-  
-  // Create patch hunks based on settings and updated game data
-  
-  createPatches(settings, romInfo)
-  
-  // Base Patch
-  
-  const checkValue = romInfo.patchHunks.length > 0 ? hash([...romInfo.patchHunks]).slice(0, 8).toUpperCase() : "00000000"
-  
-  const basePatch = Patch.fromYAML(
-    romInfo,
-    "randomizerBase.yml",
-    {},
-    {
-      versionNumber: hexStringFrom(ROMInfo.bytesFromText(app.getVersion())),
-      checkValue: hexStringFrom(ROMInfo.bytesFromText(checkValue)),
-    },
-  )
-  
-  romInfo.patchHunks = [...romInfo.patchHunks, ...basePatch.hunks]
-  
-  createPlayerOptionsPatches(settings, playerOptions, romInfo)
-  
-  romInfo.patchHunks.forEach((hunk) => {
-    data.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
+  const log = generatorLog({
+    seed: data.seed,
+    checkValue: data.checkValue,
+    settings: data.settings,
+    gameData: data.romInfo.gameData,
   })
   
-  const log = generateLog ? generatorLog({
-    seed: seed,
-    checkValue: checkValue,
-    settings: settings,
-    gameData: romInfo.gameData,
-  }) : undefined
+  attemptWriteFile({
+    dialogTitle: "Save log to:",
+    fileType: "text",
+    defaultFilePath: `${defaultFileName}.log.txt`,
+    data: log,
+    forceOverwrite: forceOverwrite,
+    throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+  })
+}
+
+export const generatePatch = (params: {
+  data: ReturnType<typeof generatorDataFrom>
+  defaultFileName?: string
+  forceOverwrite?: boolean
+  throwErrorOnWriteFailure?: boolean
+}) => {
+  const {
+    data,
+    defaultFileName,
+    forceOverwrite,
+    throwErrorOnWriteFailure,
+  } = params
   
-  return {
-    seed: seed,
-    data: data,
-    log: log,
-    checkValue: checkValue,
-  }
+  const pcrpData = createPCRP({
+    seed: data.seed,
+    settings: data.settings,
+  })
+            
+  attemptWriteFile({
+    dialogTitle: "Save patch to:",
+    fileType: "pcrp",
+    defaultFilePath: `${defaultFileName}.pcrp`,
+    data: pcrpData,
+    forceOverwrite: forceOverwrite,
+    throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+  })
 }
 
 const updateGameData = (
