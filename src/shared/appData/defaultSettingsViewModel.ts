@@ -1050,12 +1050,12 @@ export const defaultSettingsViewModel = () => {
           createSimpleToggleViewModel({
             id: "BUYABLE_EVOLUTION_STONES" as const,
             name: "Buyable Evolution Stones",
-            description: "Add Evolution Stones to the Goledenrod City Mart on the 4th floor.",
+            description: "Add Evolution Stones to the Goldenrod City Mart on the 4th floor.",
           }),
           createSimpleToggleViewModel({
             id: "BUYABLE_TM12" as const,
             name: "Buyable TM12 (Sweet Scent)",
-            description: "Add TM12 (Sweet Scent) to the Goledenrod City Mart on the 5th floor "
+            description: "Add TM12 (Sweet Scent) to the Goldenrod City Mart on the 5th floor "
               + "after obtaining the item from the lady in the gate north of Ilex Forest.",
           }),
           createSimpleToggleViewModel({
