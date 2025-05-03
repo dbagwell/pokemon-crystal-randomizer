@@ -10,7 +10,7 @@ Download and run the appropriate Windows Executable (.exe) installer for your sy
 
 ### macOS
 
-Download the appropriate Disk Image (.dmg) for your system from here [here](https://github.com/dbagwell/pokemon-crystal-randomizer/releases/latest), open it up, and drag the application to your Applications folder.
+Download the appropriate Zip file (.zip) for your system from here [here](https://github.com/dbagwell/pokemon-crystal-randomizer/releases/latest) and decompress/unzip it to extract the App from it.
 
 ### Linux
 
