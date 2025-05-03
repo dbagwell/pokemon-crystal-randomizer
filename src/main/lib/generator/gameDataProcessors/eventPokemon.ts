@@ -1,7 +1,8 @@
 import { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
 import type { Settings } from "@shared/appData/settingsFromViewModel"
-import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
+import { movesMap } from "@shared/gameData/moves"
+import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 
 export const updateEventPokemon = (
   settings: Settings,
@@ -81,4 +82,49 @@ export const updateEventPokemon = (
   romInfo.gameData.eventPokemon.PIKACHU = getRandomPokemonId()
   romInfo.gameData.eventPokemon.PORYGON = getRandomPokemonId()
   romInfo.gameData.eventPokemon.LARVITAR = getRandomPokemonId()
+}
+
+export const updateEventPokemonMoves = (
+  settings: Settings,
+  romInfo: ROMInfo,
+) => {
+  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE || settings.RANDOMIZE_LEVEL_UP_MOVES.VALUE) {
+    const getEligibleMoves = (pokemonId: PokemonId, level: number) => {
+      const allLevelUpMoves = romInfo.gameData.pokemon[pokemonId].levelUpMoves
+      const indexOfLastMove = allLevelUpMoves.map((move) => {
+        return move.level
+      }).lastIndexOf(level)
+      
+      return allLevelUpMoves.slice(indexOfLastMove < 3 ? 0 : indexOfLastMove - 3, indexOfLastMove + 1).map((move) => {
+        return move.moveId
+      })
+    }
+    
+    romInfo.gameData.oddEggs.forEach((egg) => {
+      const eligibleMoves = getEligibleMoves(egg.pokemonId, egg.level)
+      
+      if (!settings.BANNED_MOVES.includes("DIZZY_PUNCH")) {
+        eligibleMoves.push("DIZZY_PUNCH")
+      }
+      
+      egg.moves = eligibleMoves.slice(-4).map((moveId) => {
+        return {
+          id: moveId,
+          pp: movesMap[moveId].pp,
+        }
+      })
+    })
+    
+    const eligibleDratiniMoves = getEligibleMoves(romInfo.gameData.eventPokemon.DRATINI, 15)
+    romInfo.gameData.dratiniMoves.regular = eligibleDratiniMoves.slice(-4)
+    
+    if (!settings.BANNED_MOVES.includes("EXTREMESPEED")) {
+      eligibleDratiniMoves.push("EXTREMESPEED")
+      if (eligibleDratiniMoves.length > 4) {
+        eligibleDratiniMoves.splice(-4, 1)
+      }
+    }
+    
+    romInfo.gameData.dratiniMoves.special = eligibleDratiniMoves.slice(-4)
+  }
 }

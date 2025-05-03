@@ -7,7 +7,9 @@ export const attemptWriteFile = (params: {
   buttonLabel?: string
   fileType: "text" | "yaml" | "gbc" | "pcrp"
   defaultFilePath: string
-  data: string | NodeJS.ArrayBufferView,
+  data: string | NodeJS.ArrayBufferView
+  forceOverwrite?: boolean
+  throwErrorOnWriteFailure?: boolean
 }) => {
   const {
     dialogTitle,
@@ -15,12 +17,18 @@ export const attemptWriteFile = (params: {
     fileType,
     defaultFilePath,
     data,
+    forceOverwrite,
+    throwErrorOnWriteFailure,
   } = params
   
   try {
-    fs.writeFileSync(defaultFilePath, data, { flag: "wx" })
+    fs.writeFileSync(defaultFilePath, data, forceOverwrite ?? false ? {} : { flag: "wx" })
     return defaultFilePath
-  } catch {
+  } catch (error) {
+    if (throwErrorOnWriteFailure ?? false) {
+      throw error
+    }
+    
     const filePath = getFilePathFromUserInput({
       dialogTitle: dialogTitle,
       buttonLabel: buttonLabel,

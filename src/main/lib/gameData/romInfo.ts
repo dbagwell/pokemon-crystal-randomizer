@@ -29,11 +29,26 @@ export class ROMInfo {
       encounters: JSON.parse(JSON.stringify(encounters)),
       oddEggs: JSON.parse(JSON.stringify(oddEggs)),
       eventPokemon: JSON.parse(JSON.stringify(eventPokemonMap)),
+      dratiniMoves: {
+        regular: [
+          "WRAP",
+          "LEER",
+          "THUNDER_WAVE",
+          "TWISTER",
+        ],
+        special: [
+          "WRAP",
+          "THUNDER_WAVE",
+          "TWISTER",
+          "EXTREMESPEED",
+        ],
+      },
       trades: JSON.parse(JSON.stringify(tradesMap)),
       teachableMoves: JSON.parse(JSON.stringify(teachableMovesMap)),
       trainers: JSON.parse(JSON.stringify(trainers)),
       mapObjectEvents: JSON.parse(JSON.stringify(mapObjectEvents)),
       marts: JSON.parse(JSON.stringify(martsMap)),
+      moveTutorCost: 4000,
       itemLocations: JSON.parse(JSON.stringify(itemLocationsMap)),
     }
   }

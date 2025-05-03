@@ -8,13 +8,14 @@ import { bytesForEvolutionsAndLevelUpMovesFromPokemon, bytesForInfoFromPokemon }
 import { bytesFromTrade } from "@lib/generator/dataConverters/trades"
 import { updateEncounterRates } from "@lib/generator/gameDataProcessors/encounterRates"
 import { updateRandomEncounters } from "@lib/generator/gameDataProcessors/encounters"
-import { updateEventPokemon } from "@lib/generator/gameDataProcessors/eventPokemon"
+import { updateEventPokemon, updateEventPokemonMoves } from "@lib/generator/gameDataProcessors/eventPokemon"
 import { updateEvolutionMethods } from "@lib/generator/gameDataProcessors/evolutionMethods"
 import { updateIntroPokemon } from "@lib/generator/gameDataProcessors/introPokemon"
 import { shuffleItems, syncContestItems, updateItems } from "@lib/generator/gameDataProcessors/itemLocations"
 import { updateLevelUpMoves } from "@lib/generator/gameDataProcessors/levelUpMoves"
 import { updateMapObjectEvents } from "@lib/generator/gameDataProcessors/mapObjectEvents"
 import { updateMarts } from "@lib/generator/gameDataProcessors/marts"
+import { updateMoveTutorCost } from "@lib/generator/gameDataProcessors/moveTutorCost"
 import { updatePokemonInfo } from "@lib/generator/gameDataProcessors/pokemonInfo"
 import { updateStarterItems, updateStarters } from "@lib/generator/gameDataProcessors/starters"
 import { updateTeachableMoves } from "@lib/generator/gameDataProcessors/teachableMoves"
@@ -22,10 +23,12 @@ import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { generatorLog } from "@lib/generator/log"
 import { DataHunk, Patch } from "@lib/generator/patch"
+import { createPCRP } from "@lib/generator/pcrpProcessor"
 import { Random } from "@lib/generator/random"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import { attemptWriteFile, getFilePathFromUserInput } from "@lib/utils/dialogUtils"
-import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
+import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
+import { type PlayerOptions, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
 import { gen5BaseExpMap } from "@shared/gameData/gen5BaseExp"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
@@ -45,56 +48,100 @@ import { app } from "electron"
 import fs from "fs"
 import hash from "object-hash"
 
-export const generateROM = async (params: {
+export const generatorDataFrom = (params: {
   customSeed: string | undefined
   settings: Settings
-  playerOptions: PlayerOptions
-  showInputInRenderer: boolean
-  defaultFileName?: string
-  generateLog: boolean
 }) => {
   const {
     customSeed,
     settings,
+  } = params
+  
+  const romInfo = ROMInfo.vanilla()
+  const seed = customSeed ?? crypto.randomUUID()
+  const random = new Random(seed)
+  
+  const isDefaultSettings = JSON.stringify(settings) === JSON.stringify(settingsFromViewModel(defaultSettingsViewModel()))
+  
+  if (!isDefaultSettings) {
+    updateGameData(settings, romInfo, random)
+    createPatches(settings, romInfo)
+  }
+  
+  const checkValue: string = isDefaultSettings ? "00000000" : hash([...romInfo.patchHunks]).slice(0, 8).toUpperCase()
+  
+  return {
+    romInfo: romInfo,
+    settings: settings,
+    seed: seed,
+    checkValue: checkValue,
+  }
+}
+
+export const generateROM = async (params: {
+  data: ReturnType<typeof generatorDataFrom>
+  playerOptions: PlayerOptions
+  showInputInRenderer: boolean
+  defaultFileName?: string
+  inputROM?: Buffer
+  forceOverwrite?: boolean
+  throwErrorOnWriteFailure?: boolean
+}) => {
+  const {
+    data,
     playerOptions,
     showInputInRenderer,
     defaultFileName,
-    generateLog,
+    inputROM,
+    forceOverwrite,
+    throwErrorOnWriteFailure,
   } = params
   
-  const vanillaData = await getVanillaROM(showInputInRenderer)
+  const fileData = inputROM ?? await getVanillaROM(showInputInRenderer)
   
-  if (isNullish(vanillaData)) {
+  if (isNullish(fileData)) {
     throw new Error("A Pokémon Crystal Version 1.1 ROM is required.")
   }
   
-  const generatorResult = generateROMData({
-    data: vanillaData,
-    customSeed: customSeed,
-    settings: settings,
-    playerOptions: playerOptions,
-    generateLog: generateLog,
+  const basePatch = Patch.fromYAML(
+    data.romInfo,
+    "randomizerBase.yml",
+    {},
+    {
+      versionNumber: hexStringFrom(ROMInfo.bytesFromText(app.getVersion())),
+      checkValue: hexStringFrom(ROMInfo.bytesFromText(data.checkValue)),
+    },
+  )
+  
+  data.romInfo.patchHunks = [...data.romInfo.patchHunks, ...basePatch.hunks]
+  
+  createPlayerOptionsPatches(data.settings, playerOptions, data.romInfo)
+  
+  data.romInfo.patchHunks.forEach((hunk) => {
+    fileData.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
   })
+  
+  let filePath: string | undefined
   
   const dialogParams = {
     title: "Save Generated ROM to:",
     buttonLabel: "Generate",
     fileType: "gbc" as const,
-    defaultFilePath: defaultFileName ?? customSeed ?? generatorResult.checkValue,
+    defaultFilePath: `${defaultFileName ?? data.checkValue}.gbc`,
   }
-  
-  let filePath: string | undefined
-  
+    
   if (defaultFileName) {
     filePath = attemptWriteFile({
       ...dialogParams,
-      data: generatorResult.data,
+      data: fileData,
+      forceOverwrite: forceOverwrite,
+      throwErrorOnWriteFailure: throwErrorOnWriteFailure,
     })
   } else {
     filePath = getFilePathFromUserInput(dialogParams)
-    
+      
     if (isNotNullish(filePath)) {
-      fs.writeFileSync(filePath, generatorResult.data)
+      fs.writeFileSync(filePath, fileData)
     }
   }
   
@@ -103,73 +150,67 @@ export const generateROM = async (params: {
   }
   
   return {
-    ...generatorResult,
-    outputFilePath: filePath,
+    full: filePath,
+    withoutExtension: filePath.replace(/\.gbc$/, ""),
   }
 }
 
-const generateROMData = (params: {
-  data: Buffer,
-  customSeed: string | undefined,
-  settings: Settings,
-  playerOptions: PlayerOptions,
-  generateLog: boolean
+export const generateLog = (params: {
+  data: ReturnType<typeof generatorDataFrom>
+  defaultFileName?: string
+  forceOverwrite?: boolean
+  throwErrorOnWriteFailure?: boolean
 }) => {
   const {
     data,
-    customSeed,
-    settings,
-    playerOptions,
-    generateLog,
+    defaultFileName,
+    forceOverwrite,
+    throwErrorOnWriteFailure,
   } = params
   
-  const romInfo = ROMInfo.vanilla()
-  const seed = customSeed ?? crypto.randomUUID()
-  const random = new Random(seed)
-  
-  // Update game data based on settings
-  
-  updateGameData(settings, romInfo, random)
-  
-  // Create patch hunks based on settings and updated game data
-  
-  createPatches(settings, romInfo)
-  
-  // Base Patch
-  
-  const checkValue = romInfo.patchHunks.length > 0 ? hash([...romInfo.patchHunks]).slice(0, 8).toUpperCase() : "00000000"
-  
-  const basePatch = Patch.fromYAML(
-    romInfo,
-    "randomizerBase.yml",
-    {},
-    {
-      versionNumber: hexStringFrom(ROMInfo.bytesFromText(app.getVersion())),
-      checkValue: hexStringFrom(ROMInfo.bytesFromText(checkValue)),
-    },
-  )
-  
-  romInfo.patchHunks = [...romInfo.patchHunks, ...basePatch.hunks]
-  
-  createPlayerOptionsPatches(settings, playerOptions, romInfo)
-  
-  romInfo.patchHunks.forEach((hunk) => {
-    data.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
+  const log = generatorLog({
+    seed: data.seed,
+    checkValue: data.checkValue,
+    settings: data.settings,
+    gameData: data.romInfo.gameData,
   })
   
-  const log = generateLog ? generatorLog({
-    seed: seed,
-    checkValue: checkValue,
-    settings: settings,
-    gameData: romInfo.gameData,
-  }) : undefined
+  attemptWriteFile({
+    dialogTitle: "Save log to:",
+    fileType: "text",
+    defaultFilePath: `${defaultFileName}.log.txt`,
+    data: log,
+    forceOverwrite: forceOverwrite,
+    throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+  })
+}
+
+export const generatePatch = (params: {
+  data: ReturnType<typeof generatorDataFrom>
+  defaultFileName?: string
+  forceOverwrite?: boolean
+  throwErrorOnWriteFailure?: boolean
+}) => {
+  const {
+    data,
+    defaultFileName,
+    forceOverwrite,
+    throwErrorOnWriteFailure,
+  } = params
   
-  return {
-    seed: seed,
-    data: data,
-    log: log,
-    checkValue: checkValue,
-  }
+  const pcrpData = createPCRP({
+    seed: data.seed,
+    settings: data.settings,
+  })
+            
+  attemptWriteFile({
+    dialogTitle: "Save patch to:",
+    fileType: "pcrp",
+    defaultFilePath: `${defaultFileName}.pcrp`,
+    data: pcrpData,
+    forceOverwrite: forceOverwrite,
+    throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+  })
 }
 
 const updateGameData = (
@@ -186,14 +227,16 @@ const updateGameData = (
   updateTrades(settings, romInfo, random)
   updateEvolutionMethods(settings, romInfo)
   updateLevelUpMoves(settings, romInfo, random)
+  updateEventPokemonMoves(settings, romInfo) // Must be after updateEventPokemon and updateLevelUpMoves
   updateTeachableMoves(settings, romInfo, random)
   updatePokemonInfo(settings, romInfo, random)
   updateMarts(settings, romInfo)
+  updateMoveTutorCost(settings, romInfo, random)
   updateTrainers(settings, romInfo, random)
   updateMapObjectEvents(settings, romInfo)
   updateItems(settings, romInfo, random)
   shuffleItems(settings, romInfo, random)
-  syncContestItems(romInfo)
+  syncContestItems(romInfo) // Must be after updateItems and shuffleItems
 }
 
 const createPatches = (
@@ -331,10 +374,28 @@ const createPatches = (
       porygonPokemonId: hexStringFromEventPokemonId("PORYGON"),
       larvitarPokemonId: hexStringFromEventPokemonId("LARVITAR"),
       celadonGameCornerPokemonMenuText: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("PIKACHU").padEnd(10, " ")} 2222@${nameStringFromEventPokemonId("PORYGON").padEnd(10, " ")} 5555@${nameStringFromEventPokemonId("LARVITAR").padEnd(10, " ")} 8888@`)),
+      dratiniMoves: hexStringFrom(Object.values(romInfo.gameData.dratiniMoves).flatMap((moveList) => {
+        return [
+          ...moveList.map((moveId) => {
+            return movesMap[moveId].numericId
+          }),
+          0,
+        ]
+      })),
     },
   )
   
   romInfo.patchHunks = [...romInfo.patchHunks, ...eventPokemonPatch.hunks]
+  
+  if (settings.RANDOM_SHINY_ENCOUNTER_ATTACK_STAT) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "randomShinyAttackDV.yml",
+      ).hunks,
+    ]
+  }
   
   if (settings.RANDOMIZE_EVENT_POKEMON || settings.RANDOMIZE_RANDOM_ENCOUNTERS) {
     romInfo.patchHunks = [
@@ -713,6 +774,53 @@ const createPatches = (
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...rodsAlwaysWorkPatch.hunks]
   }
+    
+  if (settings.HEADBUTT_ALWAYS_WORKS) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "headbuttAlwaysWorks.yml",
+      ).hunks,
+    ]
+  }
+    
+  if (settings.ROCK_SMASH_ALWAYS_WORKS || settings.REPEL_ROCKS) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "rockSmashChanges.yml",
+        {
+          options: compact([
+            settings.ROCK_SMASH_ALWAYS_WORKS ? undefined : "rockSmashOptions/encounterChance.yml",
+            "rockSmashOptions/getEncounter.yml",
+            settings.REPEL_ROCKS ? "rockSmashOptions/repel.yml" : undefined,
+          ]),
+        },
+      ).hunks,
+    ]
+  }
+    
+  if (settings.REPEL_REFRESH) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "repelRefresh.yml",
+      ).hunks,
+    ]
+  }
+    
+  if (settings.ESCAPE_ALL_BUILDINGS) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "escapeAllBuildings.yml",
+      ).hunks,
+    ]
+  }
   
   if (settings.FASTER_ITEM_PICKUP_SFX) {
     romInfo.patchHunks = [
@@ -720,6 +828,16 @@ const createPatches = (
       new DataHunk(ROMOffset.fromBankAddress(4, 0x62DC), [0x90, 0x00, 0x86, 0x18]),
       new DataHunk(ROMOffset.fromBankAddress(37, 0x6FF5), [0x90]),
       new DataHunk(ROMOffset.fromBankAddress(47, 0x4DBF), [0x90]),
+    ]
+  }
+    
+  if (settings.SHOW_RECEIVED_TM_HM_MOVE_NAMES) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "showTMHMMoveNames.yml",
+      ).hunks,
     ]
   }
   
@@ -779,6 +897,29 @@ const createPatches = (
     )
 
     romInfo.patchHunks = [...romInfo.patchHunks, ...martsPatch.hunks]
+  }
+  
+  if (settings.MOVE_TUTOR_ALWAYS_AVAILABLE) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks, ...Patch.fromYAML(
+        romInfo,
+        "moveTutorAlwaysAvailable.yml",
+      ).hunks,
+    ]
+  }
+  
+  if (settings.RANDOMIZE_MOVE_TUTOR_COST.VALUE) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks, ...Patch.fromYAML(
+        romInfo,
+        "moveTutorCost.yml",
+        {},
+        {
+          cost: hexStringFrom(bytesFrom(romInfo.gameData.moveTutorCost, 2)),
+          costText: hexStringFrom(ROMInfo.bytesFromText(`${romInfo.gameData.moveTutorCost} coins. Okay?`.padEnd(17, " "))),
+        }
+      ).hunks,
+    ]
   }
   
   // Skip Gender
@@ -985,6 +1126,36 @@ const createPatches = (
     )
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...performanceImprovementsPatch.hunks]
+  }
+  
+  if (settings.FAST_BATTLE_CRIES) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "fastBattleCries.yml",
+      ).hunks,
+    ]
+  }
+  
+  if (settings.SKIP_HP_XP_ANIMATIONS) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipHPXPAnimations.yml",
+      ).hunks,
+    ]
+  }
+  
+  if (settings.SKIP_RUN_SFX) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "skipRunSFX.yml",
+      ).hunks,
+    ]
   }
   
   // Additional Options

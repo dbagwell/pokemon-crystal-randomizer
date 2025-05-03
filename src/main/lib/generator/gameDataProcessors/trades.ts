@@ -11,14 +11,12 @@ export const updateTrades = (
   romInfo: ROMInfo,
   random: Random,
 ) => {
-  if (!settings.RANDOMIZE_TRADES.VALUE) { return }
-  
   const tradesSettings = settings.RANDOMIZE_TRADES.SETTINGS
-    
+      
   const availableTradePokemonIds = pokemonIds.filter((pokemonId) => {
     return !settings.BANNED_POKEMON.includes(pokemonId) && !tradesSettings.BAN.includes(pokemonId)
   })
-      
+        
   const getRandomTradePokemonId = () => {
     return random.element({
       array: availableTradePokemonIds,
@@ -34,52 +32,54 @@ export const updateTrades = (
       remove: tradesSettings.UNIQUE,
     })
   }
-  
+    
   Object.values(romInfo.gameData.trades).forEach((trade) => {
-    if (tradesSettings.METHOD === "REQUEST_ONLY" || tradesSettings.METHOD === "BOTH") {
-      trade.requestedPokémonId = getRandomTradePokemonId()
-    }
-    
-    if (tradesSettings.METHOD === "OFFER_ONLY" || tradesSettings.METHOD === "BOTH") {
-      trade.offeredPokemonId = getRandomTradePokemonId()
-    }
-    
-    if (tradesSettings.CHANGE_REQUESTED_GENDERS.VALUE) {
-      switch (pokemonMap[trade.requestedPokémonId].genderRatio) {
-      case 0:
-      case 255:
-      case 254: {
-        trade.genderId === "ANY"
-        break
+    if (settings.RANDOMIZE_TRADES.VALUE) {
+      if (tradesSettings.METHOD === "REQUEST_ONLY" || tradesSettings.METHOD === "BOTH") {
+        trade.requestedPokémonId = getRandomTradePokemonId()
       }
-      default: {
-        switch (tradesSettings.CHANGE_REQUESTED_GENDERS.SETTINGS.METHOD) {
-        case "NONE": {
-          trade.genderId = "ANY"
-          break
-        }
-        case "MALE": {
-          trade.genderId = "MALE"
-          break
-        }
-        case "FEMALE": {
-          trade.genderId = "FEMALE"
-          break
-        }
-        case "RANDOM": {
-          trade.genderId = random.element({ array: tradeGenderIds })
-          break
-        }
-        }
+      
+      if (tradesSettings.METHOD === "OFFER_ONLY" || tradesSettings.METHOD === "BOTH") {
+        trade.offeredPokemonId = getRandomTradePokemonId()
       }
+      
+      if (tradesSettings.CHANGE_REQUESTED_GENDERS.VALUE) {
+        switch (pokemonMap[trade.requestedPokémonId].genderRatio) {
+        case 0:
+        case 255:
+        case 254: {
+          trade.genderId === "ANY"
+          break
+        }
+        default: {
+          switch (tradesSettings.CHANGE_REQUESTED_GENDERS.SETTINGS.METHOD) {
+          case "NONE": {
+            trade.genderId = "ANY"
+            break
+          }
+          case "MALE": {
+            trade.genderId = "MALE"
+            break
+          }
+          case "FEMALE": {
+            trade.genderId = "FEMALE"
+            break
+          }
+          case "RANDOM": {
+            trade.genderId = random.element({ array: tradeGenderIds })
+            break
+          }
+          }
+        }
+        }
       }
     }
-    
+      
     if (settings.RANDOMIZE_TRADE_HELD_ITEMS.VALUE) {
       const availableItemIds = holdableItemIds.filter((itemId) => {
         return !settings.BANNED_ITEMS.includes(itemId) && !settings.RANDOMIZE_TRADE_HELD_ITEMS.SETTINGS.BAN.includes(itemId)
       })
-      
+        
       trade.heldItemId = random.element({
         array: availableItemIds,
         errorInfo: {
@@ -91,6 +91,15 @@ export const updateTrades = (
           ],
         },
       })
+    }
+  
+    if (settings.RANDOMIZE_TRADE_POKEMON_STATS) {
+      trade.dvs = {
+        attack: random.int(0, 15),
+        defence: random.int(0, 15),
+        speed: random.int(0, 15),
+        special: random.int(0, 15),
+      }
     }
   })
 }

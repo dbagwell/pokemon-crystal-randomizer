@@ -1,4 +1,4 @@
-import { generateROM } from "@lib/generator/generator"
+import { generateROM, generatorDataFrom } from "@lib/generator/generator"
 import { getPlayerOptions, listenForPlayerOptions } from "@lib/userData/userData"
 import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
 import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
@@ -115,16 +115,19 @@ export const handlePCRPFile = async (filePath: string) => {
     
     applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
     
-    const generatorResult = await generateROM({
+    const generatorData = generatorDataFrom({
       customSeed: info.seed,
       settings: settingsFromViewModel(settingsViewModel),
+    })
+    
+    const filePathInfo = await generateROM({
+      data: generatorData,
       playerOptions: playerOptionsFromViewModel(playerOptionsViewModel),
       showInputInRenderer: false,
       defaultFileName: filePath.replace(new RegExp(`${path.basename(filePath)}$`), path.basename(filePath, ".pcrp")) + ".gbc",
-      generateLog: false,
     })
     
-    shell.openPath(generatorResult.outputFilePath)
+    shell.openPath(filePathInfo.full)
   } catch (error) {
     throw new Error(`Error patching ROM:\n\n${error}`)
   }

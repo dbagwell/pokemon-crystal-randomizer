@@ -1,0 +1,14 @@
+description: "Changes the cost of teaching a move from the move tutor."
+changes:
+- description: "Changes the cost of the move tutor moves."
+  locations:
+  - bank: 102
+    address: 0x491D
+  - bank: 102
+    address: 0x49AB
+  value: "$cost"
+- description: "Changes the text showing the cost of the move tutor moves."
+  locations:
+  - bank: 102
+    address: 0x50A2
+  value: "$costText"

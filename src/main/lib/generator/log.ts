@@ -334,6 +334,10 @@ export const generatorLog = (params: {
         "REQUESTED",
         settings.RANDOMIZE_TRADES.SETTINGS.CHANGE_REQUESTED_GENDERS.SETTINGS.METHOD !== "NONE" ? "GENDER" : undefined,
         "OFFERED",
+        "ATTACK DV",
+        "DEFENCE DV",
+        "SPEED DV",
+        "SPECIAL DV",
         "ITEM",
       ]),
       sections: [
@@ -344,6 +348,10 @@ export const generatorLog = (params: {
               trade.requestedPokémonId,
               settings.RANDOMIZE_TRADES.SETTINGS.CHANGE_REQUESTED_GENDERS.SETTINGS.METHOD !== "NONE" ? trade.genderId : undefined,
               trade.offeredPokemonId,
+              `${trade.dvs.attack}`,
+              `${trade.dvs.defence}`,
+              `${trade.dvs.speed}`,
+              `${trade.dvs.special}`,
               trade.heldItemId,
             ])
           }),
@@ -426,6 +434,7 @@ export const generatorLog = (params: {
       headers: [
         "MOVE TUTOR MOVE",
         "MOVE",
+        "COST",
       ],
       sections: [
         {
@@ -433,6 +442,7 @@ export const generatorLog = (params: {
             return [
               moveTutorId,
               gameData.teachableMoves[moveTutorId].moveId,
+              `${gameData.moveTutorCost}`,
             ]
           }),
         },

@@ -1,10 +1,9 @@
-import { generateROM } from "@lib/generator/generator"
-import { createPCRP } from "@lib/generator/pcrpProcessor"
+import { generateLog, generatePatch, generateROM, generatorDataFrom } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
-import { getCreatePatchPreference, getLogPreference, getPlayerOptions, getPreviousPresetId, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setCreatePatchPreference, setLogPreference, setPlayerOptions, setPreviousPresetId, setPreviousSettings } from "@lib/userData/userData"
-import { attemptWriteFile } from "@lib/utils/dialogUtils"
+import { getPreference, setPreference } from "@lib/userData/preferences"
+import { getPlayerOptions, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setPlayerOptions, setPreviousSettings } from "@lib/userData/userData"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
-import { isNotNullish, isNullish } from "@shared/utils"
+import { isNullish } from "@shared/utils"
 import { app, dialog } from "electron"
 import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
 import fs from "fs"
@@ -33,7 +32,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     logPreference: boolean
     createPatchPreference: boolean
   }>> => {
-    const lastPrestId = getPreviousPresetId()
+    const lastPrestId = getPreference("lastPresetId")
     
     return {
       result: {
@@ -42,8 +41,8 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
         settings: getSettingsForPresetId(lastPrestId),
         playerOptions: getPlayerOptions(),
         customPresetNames: getSavedSettingsNames(),
-        logPreference: getLogPreference(),
-        createPatchPreference: getCreatePatchPreference(),
+        logPreference: getPreference("logPreference"),
+        createPatchPreference: getPreference("createPatch"),
       },
     }
   }
@@ -92,44 +91,38 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     settings: Settings,
     playerOptions: PlayerOptions,
     presetId: string,
-    generateLog: boolean,
+    shouldGenerateLog: boolean,
     createPatch: boolean,
   ): Promise<VoidAPIResponse> => {
     try {
-      const generatorResult = await generateROM({
+      setPreviousSettings(settings)
+      setPreference("lastPresetId", presetId)
+      setPlayerOptions(playerOptions)
+      setPreference("logPreference", shouldGenerateLog)
+      setPreference("createPatch", createPatch)
+      
+      const data = generatorDataFrom({
         customSeed: seed,
         settings: settings,
-        playerOptions: playerOptions,
-        showInputInRenderer: true,
-        generateLog: generateLog,
       })
       
-      setPreviousSettings(settings)
-      setPreviousPresetId(presetId)
-      setPlayerOptions(playerOptions)
-      setLogPreference(generateLog)
-      setCreatePatchPreference(createPatch)
+      const filePathInfo = await generateROM({
+        data: data,
+        playerOptions: playerOptions,
+        showInputInRenderer: true,
+      })
       
-      if (generateLog && isNotNullish(generatorResult.log)) {
-        attemptWriteFile({
-          dialogTitle: "Save log to:",
-          fileType: "text",
-          defaultFilePath: generatorResult.outputFilePath.replace(/\.gbc$/, ".log.txt"),
-          data: generatorResult.log,
+      if (shouldGenerateLog) {
+        generateLog({
+          data: data,
+          defaultFileName: filePathInfo.withoutExtension,
         })
       }
       
       if (createPatch) {
-        const pcrpData = createPCRP({
-          seed: generatorResult.seed,
-          settings: settings,
-        })
-          
-        attemptWriteFile({
-          dialogTitle: "Save patch to:",
-          fileType: "pcrp",
-          defaultFilePath: generatorResult.outputFilePath.replace(/\.gbc$/, ".pcrp"),
-          data: pcrpData,
+        generatePatch({
+          data: data,
+          defaultFileName: filePathInfo.withoutExtension,
         })
       }
       

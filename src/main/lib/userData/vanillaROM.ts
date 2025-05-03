@@ -20,18 +20,26 @@ const storedVanillaROM = (): Buffer | undefined => {
 }
 
 export const setVanillaROM = async (data: Buffer) => {
+  if (crypto.createHash("md5").update(data).digest("hex") !== ROMInfo.vanillaMD5Hash) {
+    throw new Error("The provided file is not a valid ROM of Pokémon Crystal Version 1.1.")
+  }
+  
   fs.mkdirSync(romsPath, { recursive: true })
   fs.writeFileSync(vanilla11ROMPath, data)
 }
 
-export const getVanillaROM = async (showInputInRenderer: boolean): Promise<Buffer | nullish> => {
+export const hasVanillaROM = () => {
+  return fs.existsSync(vanilla11ROMPath)
+}
+
+export const getVanillaROM = async (showInputInRenderer: boolean): Promise<Buffer | undefined> => {
   const existingVanillaROM = storedVanillaROM()
   
   if (isNotNullish(existingVanillaROM)) {
     return existingVanillaROM
   }
   
-  let fileData: DataView | nullish
+  let fileData: Buffer | undefined
   
   if (showInputInRenderer) {
     fileData = await makeRendererAPIRequest(
@@ -50,16 +58,24 @@ export const getVanillaROM = async (showInputInRenderer: boolean): Promise<Buffe
       },
       (
         inputValue: any,
-        resolve: (result: DataView | nullish) => void,
+        resolve: (result: Buffer | undefined) => void,
         reject
       ) => {
-        if (isNullish(inputValue) || inputValue instanceof DataView) {
-          resolve(inputValue)
+        if (isNullish(inputValue)) {
+          resolve(undefined)
+        } else if (inputValue instanceof DataView) {
+          resolve(Buffer.from(inputValue.buffer))
         } else {
           reject(new Error(`Received invalid input type from input dialog. Expected a file but got input type of '${typeof inputValue}'.`))
         }
       }
     )
+  
+    if (isNullish(fileData)) {
+      return undefined
+    }
+  
+    setVanillaROM(fileData)
   } else {
     dialog.showMessageBoxSync({
       title: "ROM Required",
@@ -86,20 +102,14 @@ export const getVanillaROM = async (showInputInRenderer: boolean): Promise<Buffe
       throw new Error("Pokémon Crystal Version 1.1 ROM is required.")
     }
     
-    fileData = new DataView(fs.readFileSync(filePath[0]).buffer)
+    fileData = getVanillaROMData(filePath[0])
   }
   
-  if (isNullish(fileData)) {
-    return undefined
-  }
-  
-  const data = Buffer.from(fileData.buffer)
-  
-  if (crypto.createHash("md5").update(data).digest("hex") !== ROMInfo.vanillaMD5Hash) {
-    throw new Error("The provided file is not a valid ROM of Pokémon Crystal Version 1.1.")
-  }
-  
+  return fileData
+}
+
+export const getVanillaROMData = (filePath: string) => {
+  const data = fs.readFileSync(filePath)
   setVanillaROM(data)
-  
   return data
 }

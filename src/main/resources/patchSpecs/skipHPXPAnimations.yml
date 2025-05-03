@@ -1,0 +1,35 @@
+description: "Skips the HP and Experience animations during battle."
+changes:
+- description: "Removes calls to code that performs animations"
+  locations:
+  - bank: 13
+    address: 0x5D76
+  - bank: 13
+    address: 0x5DD8
+  value: "00 00 00 00 00"
+- description: "Skips code that performs animations"
+  locations:
+  - bank: 13
+    address: 0x5D08
+  - bank: 13
+    address: 0x7E47
+  - bank: 13
+    address: 0x7E54
+  value: "C9"
+- description: "Removes calls to code that performs animations"
+  locations:
+  - bank: 15
+    address: 0x71CF
+  - bank: 15
+    address: 0x720D
+  value: "00 00 00"
+freeSpaces:
+- bank: 15
+  address: 0x5D08
+  size: 19
+- bank: 13
+  address: 0x7E47
+  size: 12
+- bank: 13
+  address: 0x7E54
+  size: 30

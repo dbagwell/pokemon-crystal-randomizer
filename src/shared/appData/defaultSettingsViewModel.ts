@@ -19,6 +19,7 @@ import {
   createGroupMultiSelectorViewModel,
   createIntegerInputGroupViewModel,
   createIntegerInputViewModel,
+  createIntegerRangeInputViewModel,
   createSimpleMultiSelectorViewModel,
   createSimpleSelectorOption,
   createSimpleToggleViewModel,
@@ -418,6 +419,18 @@ export const defaultSettingsViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_POKEMON_ENCOUNTER_RATIOS
+          createSimpleToggleViewModel({
+            id: "RANDOM_SHINY_ENCOUNTER_ATTACK_STAT" as const,
+            name: "Random Shiny Encounter Attack Stat",
+            description: "Makes it so the Determinant Value (DV) of the Attack Stat of the Shiny Pokémon in the Lake of Rage "
+              + "is randomly selected when the battle starts instead of always being 14.\n"
+              + "The possible values are still limited to ones that allow the Pokémon to be shiny (2, 3, 6, 7, 10, 11, 14, 15).",
+          }),
+          createSimpleToggleViewModel({
+            id: "RANDOMIZE_TRADE_POKEMON_STATS" as const,
+            name: "Randomize Trade Pokémon Stats",
+            description: "Changes the Determinant Values (DVs) of the Pokémon received from trades to random ones.",
+          }),
           createSimpleToggleViewModel({
             id: "PREVENT_WILD_POKEMON_FLEEING" as const,
             name: "Prevent Wild Pokémon from Fleeing",
@@ -961,6 +974,31 @@ export const defaultSettingsViewModel = () => {
             description: "Allows makes it so fishing rods will trigger a Pokémon encounter every time they are used.",
           }),
           createSimpleToggleViewModel({
+            id: "HEADBUTT_ALWAYS_WORKS" as const,
+            name: "Headbutt Always Works",
+            description: "Makes it so that headbutting trees in locations that have tree encounters will always trigger a Pokémon encounter.",
+          }),
+          createSimpleToggleViewModel({
+            id: "ROCK_SMASH_ALWAYS_WORKS" as const,
+            name: "Change Box Phone Call",
+            description: "Makes it so that smashing rocks in locations that have rock encounters will always trigger a Pokémon encounter.",
+          }),
+          createSimpleToggleViewModel({
+            id: "REPEL_ROCKS" as const,
+            name: "Repel Rocks",
+            description: "Makes it so that repels will also affect rock smash encounters.",
+          }),
+          createSimpleToggleViewModel({
+            id: "REPEL_REFRESH" as const,
+            name: "Prompt to Refresh Repels",
+            description: "Shows a prompt to use another repel (if you have one of the same type) when a repel runs out.",
+          }),
+          createSimpleToggleViewModel({
+            id: "ESCAPE_ALL_BUILDINGS" as const,
+            name: "Escape from all Buildings",
+            description: "Enables using Escape Ropes and Dig to escape from the inside of all buildings instead of just caves and dungeons.",
+          }),
+          createSimpleToggleViewModel({
             id: "POKE_BALLS_NEVER_FAIL" as const,
             name: "Poké Balls Never Fail",
             description: "All Poké Balls are always guaranteed to capture the Pokémon they are use on.",
@@ -981,6 +1019,11 @@ export const defaultSettingsViewModel = () => {
             description: "Changes the sound effect that plays when picking up an item off the ground "
               + "or when receiving a non-TM/HM item from an NPC "
               + "to the sound effect that is normally plays when a Pokémon gains a level.",
+          }),
+          createSimpleToggleViewModel({
+            id: "SHOW_RECEIVED_TM_HM_MOVE_NAMES" as const,
+            name: "Show Received TM/HM Move Names",
+            description: "When a TM or HM is received, the name of the move it contains is shown.",
           }),
         ] as const,
       }), // END ITEM_PROPERTIES
@@ -1007,13 +1050,33 @@ export const defaultSettingsViewModel = () => {
           createSimpleToggleViewModel({
             id: "BUYABLE_EVOLUTION_STONES" as const,
             name: "Buyable Evolution Stones",
-            description: "Add Evolution Stones to the Goledenrod City Mart on the 4th floor.",
+            description: "Add Evolution Stones to the Goldenrod City Mart on the 4th floor.",
           }),
           createSimpleToggleViewModel({
             id: "BUYABLE_TM12" as const,
             name: "Buyable TM12 (Sweet Scent)",
-            description: "Add TM12 (Sweet Scent) to the Goledenrod City Mart on the 5th floor "
+            description: "Add TM12 (Sweet Scent) to the Goldenrod City Mart on the 5th floor "
               + "after obtaining the item from the lady in the gate north of Ilex Forest.",
+          }),
+          createSimpleToggleViewModel({
+            id: "MOVE_TUTOR_ALWAYS_AVAILABLE" as const,
+            name: "Move Tutor Always Available",
+            description: "Makes it so the move tutor is always available in Goldenrod City "
+              + "and doesn't walk away after teaching a move.",
+          }),
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_MOVE_TUTOR_COST" as const,
+            name: "Randomize Move Tutor Cost",
+            description: "Changes the number of coins required to pay to the move tutor when teaching a move to a random number in the chosen range.",
+            viewModels: [
+              createIntegerRangeInputViewModel({
+                id: "RANGE" as const,
+                min: 0,
+                max: 0xFFFF,
+                selectedMinValue: 0,
+                selectedMaxValue: 9999,
+              }),
+            ] as const,
           }),
         ] as const,
       }), // END MARTS
@@ -1123,6 +1186,21 @@ export const defaultSettingsViewModel = () => {
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",
+          }),
+          createSimpleToggleViewModel({
+            id: "FAST_BATTLE_CRIES" as const,
+            name: "Fast Battle Cries",
+            description: "Makes it so the Pokémon cries that are heard during battles don't prevent the game from continuing until they are finished.",
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_HP_XP_ANIMATIONS" as const,
+            name: "Skip HP/XP Animations",
+            description: "HP and experience animations are skipped during battle.",
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_RUN_SFX" as const,
+            name: "Skip Run Sound Effect",
+            description: "Skips the run sound effect when running from a wild Pokémon, allowing you to exit the battle faster.",
           }),
           createSimpleMultiSelectorViewModel({
             id: "ADDITIONAL_OPTIONS" as const,

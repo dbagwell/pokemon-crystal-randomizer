@@ -8,16 +8,20 @@ declare const MAIN_WINDOW_VITE_NAME: string
 
 export const showWindow = async (params: {
   windowType: WindowType
+  position?: [number, number]
   width: number
   height: number
 }) => {
   const {
     windowType,
+    position,
     width,
     height,
   } = params
   
   const window = new BrowserWindow({
+    x: position?.[0],
+    y: position?.[1],
     width: width,
     height: height,
     show: false,

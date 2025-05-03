@@ -1,0 +1,15 @@
+description: "Makes it so that the Pokémon cries in battles don't make the whole game wait."
+changes:
+- description: "Changes the function called when playing Pokémon cries in battle."
+  locations:
+  - bank: 15
+    address: 0x4F00
+  - bank: 15
+    address: 0x582A
+  - bank: 15
+    address: 0x5BD4
+  - bank: 15
+    address: 0x5CA8
+  - bank: 15
+    address: 0x7CE9
+  value: "C4"

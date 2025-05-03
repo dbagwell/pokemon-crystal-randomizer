@@ -1,0 +1,16 @@
+description: "Makes it so the move tutor in Goldenrod city is always available."
+changes:
+- description: "Makes it so the move tutor always appears in Goldenrod City"
+  locations:
+  - bank: 102
+    address: 0x48E8
+  value: "6F 10 90"
+  maxSize: 33
+  freeUnused: true
+- description: "Makes it so the move tutor doesn't walk away after teaching a move."
+  locations:
+  - bank: 102
+    address: 0x49B4
+  value: "49 91"
+  maxSize: 35
+  freeUnused: true

@@ -1,0 +1,9 @@
+description: "Makes it so headbutting trees in valid locations always trigger an enctounter."
+changes:
+- description: "Makes it so headbutting trees in valid locations always trigger an enctounter."
+  locations:
+  - bank: 46
+    address: 0x43EA
+  value: "FE 02 20 31 2A FE FF 20 FB 18 2A"
+  maxSize: 42
+  freeUnused: true
