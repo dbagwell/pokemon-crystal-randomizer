@@ -1,17 +1,8 @@
 description: "Changes the experience calculation to scale based on the level difference."
 values:
-  getOwnLevel: "FA 09 D1 11 00 00 FE 00 28 09 47 7B C6 30 5F 78 3D 18 F3 21 FE DC 19 7E E0 A1 CD 3B 6E C9"
-  extraCalculations: "FA 13 D2 E0 B7 CD 19 31 F0 A1 47 FA 13 D2 80 C6 0A 16 00 5F 3E 04 21 87 7B CF 78 E0 B7 06 04 CD 24 31 FA 13 D2 47 80 C6 0A E0 B7 F5 CD 19 31 7B E0 B7 06 04 CD 24 31 F1 E0 B7 F5 CD 19 31 7B E0 B7 06 04 CD 24 31 F1 16 00 5F 3E 04 21 87 7B CF 78 E0 B7 CD 19 31 3E 05 E0 B7 06 04 CD 24 31"
+  getOwnLevel: "FA 09 D1 11 00 00 FE 00 28 09 47 7B C6 30 5F 78 3D 18 F3 21 FE DC 19 7E"
+  extraCalculations: "FA 13 D2 E0 B7 CD 19 31 $getOwnLevel 47 FA 13 D2 80 C6 0A 16 00 5F 3E 04 21 87 7B CF 78 E0 B7 06 04 CD 24 31 FA 13 D2 47 80 C6 0A E0 B7 F5 CD 19 31 7B E0 B7 06 04 CD 24 31 F1 E0 B7 F5 CD 19 31 7B E0 B7 06 04 CD 24 31 F1 16 00 5F 3E 04 21 87 7B CF 78 E0 B7 CD 19 31 3E 05 E0 B7 06 04 CD 24 31"
 changes:
-- description: "Code to get the current Pokémon's level and store it into RAM for later calculations and then calls code to calculate experience."
-  locations:
-  - bank: 15
-  value: "$getOwnLevel"
-- description: "Replaces a call to calculate experience."
-  locations:
-  - bank: 15
-    address: 0x4E83
-  value: "@$getOwnLevel"
 - description: "Changes the experience calculation"
   locations:
   - bank: 15
