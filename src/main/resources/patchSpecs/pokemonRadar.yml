@@ -1,8 +1,8 @@
 description: "Adds a sound effect to the Pokédex area page if the Pokémon is located in the grass or water of the player's current area."
 values:
   intermediate: "CD 1E 5E 3E 0A 21 @$checkAreaCode1 CF C9"
-  checkAreaCode1: "CD 05 62 30 0B 01 05 00 09 0E 15 CD @$checkAreaCode2 38 17 CD 1D 62 D0 23 23 23 0E 03 $checkAreaCode2"
-  checkAreaCode2: "23 2A 47 FA 65 D2 B8 28 05 0D 28 17 18 F2 11 22 00 CD 23 3C CD 55 3C CD 23 3C CD 55 3C CD 23 3C CD 55 3C C9"
+  checkAreaCode1: "CD 05 62 30 0A 01 05 00 09 0E 15 CD @$checkAreaCode2 C0 CD 1D 62 D0 23 23 23 0E 03 $checkAreaCode2"
+  checkAreaCode2: "23 2A 47 FA 65 D2 B8 28 05 0D 28 1A 18 F2 11 22 00 CD 23 3C CD 55 3C CD 23 3C CD 55 3C CD 23 3C CD 55 3C 3E 01 A7 C9"
 changes:
 - description: "Adds code to check if the Pokémon is in the area and play the sound effect."
   locations:

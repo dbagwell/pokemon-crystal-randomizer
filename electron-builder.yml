@@ -11,7 +11,7 @@ fileAssociations:
 mac:
   artifactName: ${productName} Installer ${version}-${arch}.${ext}
   target:
-  - target: dmg
+  - target: zip
     arch:
     - x64
     - universal
@@ -32,8 +32,6 @@ linux:
     - x64
     - arm64
     - armv7l
-dmg:
-  icon: src/main/resources/icons/installerIcon.icns
 nsis:
   buildUniversalInstaller: false
   oneClick: false

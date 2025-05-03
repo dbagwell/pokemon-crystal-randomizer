@@ -124,7 +124,7 @@ export const handlePCRPFile = async (filePath: string) => {
       data: generatorData,
       playerOptions: playerOptionsFromViewModel(playerOptionsViewModel),
       showInputInRenderer: false,
-      defaultFileName: filePath.replace(new RegExp(`${path.basename(filePath)}$`), path.basename(filePath, ".pcrp")) + ".gbc",
+      defaultFileName: filePath.replace(new RegExp(`${path.basename(filePath)}$`), path.basename(filePath, ".pcrp")),
     })
     
     shell.openPath(filePathInfo.full)
