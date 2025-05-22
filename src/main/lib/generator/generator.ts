@@ -666,19 +666,19 @@ const createPatches = (
               
         switch (item.type) {
         case "POKEDEX_PART": {
-          pokedexPartsValue |= item.numericId
+          pokedexPartsValue |= item.associatedValue
           break
         }
         case "POKEGEAR_PART": {
-          pokegearPartsValue |= item.numericId
+          pokegearPartsValue |= item.associatedValue
           break
         }
         case "JOHTO_BADGE": {
-          johtoBadgesValue |= item.numericId
+          johtoBadgesValue |= item.associatedValue
           break
         }
         case "KANTO_BADGE": {
-          kantoBadgesValue |= item.numericId
+          kantoBadgesValue |= item.associatedValue
           break
         }
         case "BAG_ITEM": {
