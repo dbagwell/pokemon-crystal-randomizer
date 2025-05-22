@@ -44,7 +44,7 @@ export class Random {
       }
     }
     
-    if (params.array.length > 1 && params.remove) {
+    if (params.array.length > 0 && params.remove) {
       params.array.splice(index, 1)
     }
     
