@@ -63,6 +63,7 @@ export const createTextInputViewModel = <IdType extends string, IsRequiredType e
   name: string
   description?: string
   maxCharacters?: number
+  maxInGameCharacters?: number
   isRequired: IsRequiredType
   value: IsRequiredType extends true ? string : string | undefined
 }) => {
