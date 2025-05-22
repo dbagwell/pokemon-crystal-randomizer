@@ -1,5 +1,5 @@
 import type { ItemLocation } from "@shared/types/gameData/itemLocation"
-import type { HiddenItemLocationId, RegularItemBallLocationId, TMItemBallLocationId } from "@shared/types/gameDataIds/itemLocations"
+import type { RegularHiddenItemLocationId, RegularItemBallLocationId, TMItemBallLocationId } from "@shared/types/gameDataIds/itemLocations"
 
 export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemLocation> = {
   ROUTE_2_SE_AREA_ITEM_BALL: {
@@ -1777,7 +1777,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
   },
 }
 
-export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> = {
+export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, ItemLocation> = {
   ROUTE_2_FOREST_AREA_HIDDEN_ITEM_BY_VIRIDIAN_ENTRANCE: {
     id: "ROUTE_2_FOREST_AREA_HIDDEN_ITEM_BY_VIRIDIAN_ENTRANCE",
     type: "HIDDEN_ITEM",
@@ -2623,5 +2623,5 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
 export const itemLocationsMap = {
   ...regularItemBallLocationsMap,
   ...tmItemBallLocationsMap,
-  ...hiddenItemLocationsMap,
+  ...regularHiddenItemLocationsMap,
 }

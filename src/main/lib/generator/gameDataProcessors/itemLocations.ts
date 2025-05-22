@@ -1,7 +1,7 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
 import type { Settings } from "@shared/appData/settingsFromViewModel"
-import { hiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
+import { regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { ballItemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 
 export const updateItems = (
@@ -56,22 +56,22 @@ export const updateItems = (
     })
   }
   
-  if (settings.RANDOMIZE_HIDDEN_ITEMS.VALUE) {
+  if (settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.VALUE) {
     const availableItemIds = [
       ...regularItemIds,
       ...ballItemIds,
     ].filter((itemId) => {
-      return !settings.BANNED_ITEMS.includes(itemId) && !settings.RANDOMIZE_HIDDEN_ITEMS.SETTINGS.BAN.includes(itemId)
+      return !settings.BANNED_ITEMS.includes(itemId) && !settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.SETTINGS.BAN.includes(itemId)
     })
     
-    hiddenItemLocationIds.forEach((locationId) => {
+    regularHiddenItemLocationIds.forEach((locationId) => {
       romInfo.gameData.itemLocations[locationId].itemId = random.element({
         array: availableItemIds,
         errorInfo: {
           elementName: "item",
-          mainSettingName: "RANDOMIZE_HIDDEN_ITEMS",
+          mainSettingName: "RANDOMIZE_REGULAR_HIDDEN_ITEMS",
           conflictingSettings: [
-            "RANDOMIZE_HIDDEN_ITEMS.SETTINGS.BAN",
+            "RANDOMIZE_REGULAR_HIDDEN_ITEMS.SETTINGS.BAN",
             "BANNED_ITEMS",
           ],
         },

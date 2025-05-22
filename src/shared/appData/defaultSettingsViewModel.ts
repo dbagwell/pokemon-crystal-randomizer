@@ -744,8 +744,8 @@ export const defaultSettingsViewModel = () => {
             ] as const,
           }), // END RANDOMIZE_TM_ITEM_BALLS
           createConfigurableToggleViewModel({
-            id: "RANDOMIZE_HIDDEN_ITEMS" as const,
-            name: "Randomize Hidden Items",
+            id: "RANDOMIZE_REGULAR_HIDDEN_ITEMS" as const,
+            name: "Randomize Regular Hidden Items",
             description: "Change the items received from hidden items to random ones. "
               + "Doesn't include hidden items that give key items or the items in trash cans.",
             viewModels: [
@@ -765,7 +765,7 @@ export const defaultSettingsViewModel = () => {
                 }),
               }), // END BAN
             ] as const,
-          }), // END RANDOMIZE_HIDDEN_ITEMS
+          }), // END RANDOMIZE_REGULAR_HIDDEN_ITEMS
           createConfigurableToggleViewModel({
             id: "RANDOMIZE_WILD_HELD_ITEMS" as const,
             name: "Randomize Items Held by Wild Pokémon",

@@ -612,7 +612,7 @@ const createPatches = (
   
   // Items
   
-  if (settings.RANDOMIZE_REGULAR_ITEM_BALLS || settings.RANDOMIZE_TM_ITEM_BALLS || settings.RANDOMIZE_HIDDEN_ITEMS) {
+  if (settings.RANDOMIZE_REGULAR_ITEM_BALLS || settings.RANDOMIZE_TM_ITEM_BALLS || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       ...Object.values(romInfo.gameData.itemLocations).map((itemLocation) => {

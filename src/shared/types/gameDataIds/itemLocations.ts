@@ -181,7 +181,7 @@ export const tmItemBallLocationIds = [
   "ROCK_TUNNEL_1F_LAVENDER_SIDE_ITEM_BALL_ON_PLATEAU",
 ] as const
 
-export const hiddenItemLocationIds = [
+export const regularHiddenItemLocationIds = [
   "ROUTE_2_FOREST_AREA_HIDDEN_ITEM_BY_VIRIDIAN_ENTRANCE",
   "ROUTE_2_FOREST_AREA_HIDDEN_ITEM_IN_SE_CORNER",
   "ROUTE_2_FOREST_AREA_HIDDEN_ITEM_IN_CENTER",
@@ -275,11 +275,11 @@ export const itemBallLocationIds = [
 
 export const itemLocationIds = [
   ...itemBallLocationIds,
-  ...hiddenItemLocationIds,
+  ...regularHiddenItemLocationIds,
 ] as const
 
 export type RegularItemBallLocationId = typeof regularItemBallLocationIds[number]
 export type TMItemBallLocationId = typeof tmItemBallLocationIds[number]
-export type HiddenItemLocationId = typeof hiddenItemLocationIds[number]
+export type RegularHiddenItemLocationId = typeof regularHiddenItemLocationIds[number]
 export type ItemBallLocationId = typeof itemBallLocationIds[number]
 export type ItemLocationId = typeof itemLocationIds[number]
