@@ -42,8 +42,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4300,
     ],
   },
-  ROUTE_4_MOUNT_MOON_AREA_ITEM_BALL: {
-    id: "ROUTE_4_MOUNT_MOON_AREA_ITEM_BALL",
+  ROUTE_4_WEST_AREA_ITEM_BALL: {
+    id: "ROUTE_4_WEST_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "HP_UP",
@@ -152,8 +152,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x55FD,
     ],
   },
-  ROUTE_32_ITEM_BALL_IN_NORTH_GRASS: {
-    id: "ROUTE_32_ITEM_BALL_IN_NORTH_GRASS",
+  ROUTE_32_SOUTH_AREA_ITEM_BALL_IN_NORTH_GRASS: {
+    id: "ROUTE_32_SOUTH_AREA_ITEM_BALL_IN_NORTH_GRASS",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "REPEL",
@@ -162,8 +162,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4775,
     ],
   },
-  ROUTE_32_ITEM_BALL_IN_SOUTH_GRASS: {
-    id: "ROUTE_32_ITEM_BALL_IN_SOUTH_GRASS",
+  ROUTE_32_SOUTH_AREA_ITEM_BALL_IN_SOUTH_GRASS: {
+    id: "ROUTE_32_SOUTH_AREA_ITEM_BALL_IN_SOUTH_GRASS",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "GREAT_BALL",
@@ -282,8 +282,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x6298,
     ],
   },
-  ROUTE_46_DARK_CAVE_SIDE_ITEM_BALL: {
-    id: "ROUTE_46_DARK_CAVE_SIDE_ITEM_BALL",
+  ROUTE_46_NORTH_AREA_DARK_CAVE_SIDE_ITEM_BALL: {
+    id: "ROUTE_46_NORTH_AREA_DARK_CAVE_SIDE_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "X_SPEED",
@@ -292,8 +292,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x578D,
     ],
   },
-  DARK_CAVE_VIOLET_ENTRANCE_VIOLET_SIDE_ITEM_BALL: {
-    id: "DARK_CAVE_VIOLET_ENTRANCE_VIOLET_SIDE_ITEM_BALL",
+  DARK_CAVE_VIOLET_ENTRANCE_WEST_AREA_ITEM_BALL: {
+    id: "DARK_CAVE_VIOLET_ENTRANCE_WEST_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "POTION",
@@ -302,8 +302,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x468E,
     ],
   },
-  DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_1: {
-    id: "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_1",
+  DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_1: {
+    id: "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_1",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "HYPER_POTION",
@@ -312,8 +312,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4692,
     ],
   },
-  DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_2: {
-    id: "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_2",
+  DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_2: {
+    id: "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_2",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "FULL_HEAL",
@@ -322,8 +322,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4690,
     ],
   },
-  DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_3: {
-    id: "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_3",
+  DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_3: {
+    id: "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_3",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "DIRE_HIT",
@@ -342,8 +342,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x473B,
     ],
   },
-  VIOLET_CITY_EAST_SURF_AREA_ITEM_BALL: {
-    id: "VIOLET_CITY_EAST_SURF_AREA_ITEM_BALL",
+  VIOLET_CITY_SURF_AREA_EAST_ITEM_BALL: {
+    id: "VIOLET_CITY_SURF_AREA_EAST_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "RARE_CANDY",
@@ -352,8 +352,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4423,
     ],
   },
-  VIOLET_CITY_WEST_SURF_AREA_ITEM_BALL: {
-    id: "VIOLET_CITY_WEST_SURF_AREA_ITEM_BALL",
+  VIOLET_CITY_SURF_AREA_WEST_ITEM_BALL: {
+    id: "VIOLET_CITY_SURF_AREA_WEST_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "PP_UP",
@@ -382,8 +382,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x47A7,
     ],
   },
-  SPROUT_TOWER_3F_ITEM_SW_BALL: {
-    id: "SPROUT_TOWER_3F_ITEM_SW_BALL",
+  SPROUT_TOWER_3F_SW_ITEM_BALL: {
+    id: "SPROUT_TOWER_3F_SW_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "POTION",
@@ -392,8 +392,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4A19,
     ],
   },
-  SPROUT_TOWER_3F_ITEM_NE_BALL: {
-    id: "SPROUT_TOWER_3F_ITEM_NE_BALL",
+  SPROUT_TOWER_3F_NE_ITEM_BALL: {
+    id: "SPROUT_TOWER_3F_NE_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ESCAPE_ROPE",
@@ -602,8 +602,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x5C08,
     ],
   },
-  UNION_CAVE_B1F_UNION_SIDE_EAST_ITEM_BALL: {
-    id: "UNION_CAVE_B1F_UNION_SIDE_EAST_ITEM_BALL",
+  UNION_CAVE_B1F_MIDDLE_AREA_EAST_ITEM_BALL: {
+    id: "UNION_CAVE_B1F_MIDDLE_AREA_EAST_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "X_DEFEND",
@@ -632,8 +632,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x636C,
     ],
   },
-  SLOWPOKE_WELL_B1F_AZALEA_SIDE_ITEM_BALL: {
-    id: "SLOWPOKE_WELL_B1F_AZALEA_SIDE_ITEM_BALL",
+  SLOWPOKE_WELL_B1F_EAST_AREA_ITEM_BALL: {
+    id: "SLOWPOKE_WELL_B1F_EAST_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "SUPER_POTION",
@@ -642,8 +642,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x66A3,
     ],
   },
-  ILEX_FOREST_AZALEA_SIDE_ITEM_BALL: {
-    id: "ILEX_FOREST_AZALEA_SIDE_ITEM_BALL",
+  ILEX_FOREST_SOUTH_AREA_ITEM_BALL: {
+    id: "ILEX_FOREST_SOUTH_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "REVIVE",
@@ -652,8 +652,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x6E10,
     ],
   },
-  ILEX_FOREST_ROUTE_34_SIDE_ITEM_BALL_1: {
-    id: "ILEX_FOREST_ROUTE_34_SIDE_ITEM_BALL_1",
+  ILEX_FOREST_NORTH_AREA_ITEM_BALL_1: {
+    id: "ILEX_FOREST_NORTH_AREA_ITEM_BALL_1",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "X_ATTACK",
@@ -662,8 +662,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x6E12,
     ],
   },
-  ILEX_FOREST_ROUTE_34_SIDE_ITEM_BALL_2: {
-    id: "ILEX_FOREST_ROUTE_34_SIDE_ITEM_BALL_2",
+  ILEX_FOREST_NORTH_AREA_ITEM_BALL_2: {
+    id: "ILEX_FOREST_NORTH_AREA_ITEM_BALL_2",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ANTIDOTE",
@@ -672,8 +672,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x6E14,
     ],
   },
-  ILEX_FOREST_ROUTE_34_SIDE_ITEM_BALL_3: {
-    id: "ILEX_FOREST_ROUTE_34_SIDE_ITEM_BALL_3",
+  ILEX_FOREST_NORTH_AREA_ITEM_BALL_3: {
+    id: "ILEX_FOREST_NORTH_AREA_ITEM_BALL_3",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ETHER",
@@ -872,8 +872,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4396,
     ],
   },
-  WHIRL_ISLAND_SW_EAST_SIDE_ITEM_BALL: {
-    id: "WHIRL_ISLAND_SW_EAST_SIDE_ITEM_BALL",
+  WHIRL_ISLAND_SW_ENTRANCE_EAST_AREA_ITEM_BALL: {
+    id: "WHIRL_ISLAND_SW_ENTRANCE_EAST_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ULTRA_BALL",
@@ -932,8 +932,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4414,
     ],
   },
-  WHIRL_ISLAND_B2F_WATERFALL_AREA_ITEM_BALL: {
-    id: "WHIRL_ISLAND_B2F_WATERFALL_AREA_ITEM_BALL",
+  WHIRL_ISLAND_B2F_ABOVE_WATERFALL_AREA_ITEM_BALL: {
+    id: "WHIRL_ISLAND_B2F_ABOVE_WATERFALL_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "MAX_REVIVE",
@@ -962,8 +962,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x44BC,
     ],
   },
-  MOUNT_MORTAR_1F_OUTSIDE_EAST_LADDER_AREA_ITEM_BALL: {
-    id: "MOUNT_MORTAR_1F_OUTSIDE_EAST_LADDER_AREA_ITEM_BALL",
+  MOUNT_MORTAR_FRONT_EAST_LADDER_AREA_ITEM_BALL: {
+    id: "MOUNT_MORTAR_FRONT_EAST_LADDER_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "REVIVE",
@@ -972,8 +972,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x5DF8,
     ],
   },
-  MOUNT_MORTAR_1F_OUTSIDE_WEST_LADDER_AREA_ITEM_BALL: {
-    id: "MOUNT_MORTAR_1F_OUTSIDE_WEST_LADDER_AREA_ITEM_BALL",
+  MOUNT_MORTAR_FRONT_WEST_LADDER_AREA_ITEM_BALL: {
+    id: "MOUNT_MORTAR_FRONT_WEST_LADDER_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ETHER",
@@ -982,8 +982,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x5DF6,
     ],
   },
-  MOUNT_MORTAR_1F_INSIDE_STRENGTH_AREA_ITEM_BALL_1: {
-    id: "MOUNT_MORTAR_1F_INSIDE_STRENGTH_AREA_ITEM_BALL_1",
+  MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_1: {
+    id: "MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_1",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "HYPER_POTION",
@@ -992,8 +992,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x5E80,
     ],
   },
-  MOUNT_MORTAR_1F_INSIDE_STRENGTH_AREA_ITEM_BALL_2: {
-    id: "MOUNT_MORTAR_1F_INSIDE_STRENGTH_AREA_ITEM_BALL_2",
+  MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_2: {
+    id: "MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_2",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ULTRA_BALL",
@@ -1002,8 +1002,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x5E88,
     ],
   },
-  MOUNT_MORTAR_1F_INSIDE_STRENGTH_AREA_ITEM_BALL_3: {
-    id: "MOUNT_MORTAR_1F_INSIDE_STRENGTH_AREA_ITEM_BALL_3",
+  MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_3: {
+    id: "MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_3",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "NUGGET",
@@ -1012,8 +1012,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x5E84,
     ],
   },
-  MOUNT_MORTAR_1F_INSIDE_STRENGTH_AREA_ITEM_BALL_4: {
-    id: "MOUNT_MORTAR_1F_INSIDE_STRENGTH_AREA_ITEM_BALL_4",
+  MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_4: {
+    id: "MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_4",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ESCAPE_ROPE",
@@ -1022,8 +1022,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x5E7C,
     ],
   },
-  MOUNT_MORTAR_1F_INSIDE_NORTH_AREA_ITEM_BALL_ON_PLATEAU: {
-    id: "MOUNT_MORTAR_1F_INSIDE_NORTH_AREA_ITEM_BALL_ON_PLATEAU",
+  MOUNT_MORTAR_BACK_1F_NORTH_AREA_ITEM_BALL_ON_PLATEAU: {
+    id: "MOUNT_MORTAR_BACK_1F_NORTH_AREA_ITEM_BALL_ON_PLATEAU",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "IRON",
@@ -1032,8 +1032,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x5E86,
     ],
   },
-  MOUNT_MORTAR_1F_INSIDE_NORTH_AREA_ITEM_BALL_SOUTH_OF_PLATEAU: {
-    id: "MOUNT_MORTAR_1F_INSIDE_NORTH_AREA_ITEM_BALL_SOUTH_OF_PLATEAU",
+  MOUNT_MORTAR_BACK_1F_NORTH_AREA_ITEM_BALL_SOUTH_OF_PLATEAU: {
+    id: "MOUNT_MORTAR_BACK_1F_NORTH_AREA_ITEM_BALL_SOUTH_OF_PLATEAU",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "MAX_POTION",
@@ -1042,8 +1042,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x5E82,
     ],
   },
-  MOUNT_MORTAR_1F_INSIDE_NORTH_AREA_ITEM_BALL_NORTH_OF_PLATEAU: {
-    id: "MOUNT_MORTAR_1F_INSIDE_NORTH_AREA_ITEM_BALL_NORTH_OF_PLATEAU",
+  MOUNT_MORTAR_BACK_1F_NORTH_AREA_ITEM_BALL_NORTH_OF_PLATEAU: {
+    id: "MOUNT_MORTAR_BACK_1F_NORTH_AREA_ITEM_BALL_NORTH_OF_PLATEAU",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "MAX_REVIVE",
@@ -1052,8 +1052,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x5E7E,
     ],
   },
-  MOUNT_MORTAR_2F_INSIDE_NW_SURF_AREA_ITEM_BALL: {
-    id: "MOUNT_MORTAR_2F_INSIDE_NW_SURF_AREA_ITEM_BALL",
+  MOUNT_MORTAR_BACK_2F_SURF_AREA_NW_ITEM_BALL: {
+    id: "MOUNT_MORTAR_BACK_2F_SURF_AREA_NW_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ELIXER",
@@ -1062,8 +1062,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x60E6,
     ],
   },
-  MOUNT_MORTAR_2F_INSIDE_SE_SURF_AREA_ITEM_BALL: {
-    id: "MOUNT_MORTAR_2F_INSIDE_SE_SURF_AREA_ITEM_BALL",
+  MOUNT_MORTAR_BACK_2F_SURF_AREA_SE_ITEM_BALL: {
+    id: "MOUNT_MORTAR_BACK_2F_SURF_AREA_SE_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "MAX_POTION",
@@ -1072,8 +1072,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x60DE,
     ],
   },
-  MOUNT_MORTAR_2F_INSIDE_SW_SURF_AREA_ITEM_BALL: {
-    id: "MOUNT_MORTAR_2F_INSIDE_SW_SURF_AREA_ITEM_BALL",
+  MOUNT_MORTAR_BACK_2F_SURF_AREA_SW_ITEM_BALL: {
+    id: "MOUNT_MORTAR_BACK_2F_SURF_AREA_SW_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "RARE_CANDY",
@@ -1082,8 +1082,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x60E0,
     ],
   },
-  MOUNT_MORTAR_2F_INSIDE_NORTH_AREA_ITEM_BALL_ON_EAST_PLATEAU: {
-    id: "MOUNT_MORTAR_2F_INSIDE_NORTH_AREA_ITEM_BALL_ON_EAST_PLATEAU",
+  MOUNT_MORTAR_BACK_2F_NORTH_AREA_ITEM_BALL_ON_EAST_PLATEAU: {
+    id: "MOUNT_MORTAR_BACK_2F_NORTH_AREA_ITEM_BALL_ON_EAST_PLATEAU",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ESCAPE_ROPE",
@@ -1092,8 +1092,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x60E8,
     ],
   },
-  MOUNT_MORTAR_2F_INSIDE_NORTH_AREA_ITEM_BALL_ON_WEST_PLATEAU: {
-    id: "MOUNT_MORTAR_2F_INSIDE_NORTH_AREA_ITEM_BALL_ON_WEST_PLATEAU",
+  MOUNT_MORTAR_BACK_2F_NORTH_AREA_ITEM_BALL_ON_WEST_PLATEAU: {
+    id: "MOUNT_MORTAR_BACK_2F_NORTH_AREA_ITEM_BALL_ON_WEST_PLATEAU",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "DRAGON_SCALE",
@@ -1162,8 +1162,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4148,
     ],
   },
-  GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_NW_ITEM_BALL: {
-    id: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_NW_ITEM_BALL",
+  GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_NW_ITEM_BALL: {
+    id: "GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_NW_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "BURN_HEAL",
@@ -1172,8 +1172,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x57C7,
     ],
   },
-  GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SW_ITEM_BALL: {
-    id: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SW_ITEM_BALL",
+  GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_SW_ITEM_BALL: {
+    id: "GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_SW_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ETHER",
@@ -1182,8 +1182,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x57C3,
     ],
   },
-  GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SE_ITEM_BALL: {
-    id: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SE_ITEM_BALL",
+  GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_SE_ITEM_BALL: {
+    id: "GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_SE_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ULTRA_BALL",
@@ -1202,8 +1202,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x57C5,
     ],
   },
-  GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES_TOP_RIGHT_ITEM_BALL: {
-    id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES_TOP_RIGHT_ITEM_BALL",
+  GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_RIGHT_ITEM_BALL: {
+    id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_RIGHT_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "FULL_HEAL",
@@ -1212,8 +1212,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4E7F,
     ],
   },
-  GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES_BOTTOM_LEFT_ITEM_BALL: {
-    id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES_BOTTOM_LEFT_ITEM_BALL",
+  GOLDENROD_UNDERGROUND_SWITCH_ROOM_BOTTOM_LEFT_ITEM_BALL: {
+    id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_BOTTOM_LEFT_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "SMOKE_BALL",
@@ -1242,8 +1242,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x59E4,
     ],
   },
-  RADIO_TOWER_5F_ITEM_BALL: {
-    id: "RADIO_TOWER_5F_ITEM_BALL",
+  RADIO_TOWER_5F_EAST_AREA_ITEM_BALL: {
+    id: "RADIO_TOWER_5F_EAST_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ULTRA_BALL",
@@ -1422,8 +1422,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x495A,
     ],
   },
-  TOHJO_FALLS_WEST_SIDE_ITEM_BALL: {
-    id: "TOHJO_FALLS_WEST_SIDE_ITEM_BALL",
+  TOHJO_FALLS_WEST_SURF_AREA_ITEM_BALL: {
+    id: "TOHJO_FALLS_WEST_SURF_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "MOON_STONE",
@@ -1562,8 +1562,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4558,
     ],
   },
-  SILVER_CAVE_ROOM_2_NE_WATERFALL_AREA_ITEM_BALL: {
-    id: "SILVER_CAVE_ROOM_2_NE_WATERFALL_AREA_ITEM_BALL",
+  SILVER_CAVE_ROOM_2_ABOVE_NE_WATERFALL_AREA_ITEM_BALL: {
+    id: "SILVER_CAVE_ROOM_2_ABOVE_NE_WATERFALL_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "PP_UP",
@@ -1572,8 +1572,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x45B6,
     ],
   },
-  SILVER_CAVE_ROOM_2_SW_WATERFALL_AREA_ITEM_BALL: {
-    id: "SILVER_CAVE_ROOM_2_SW_WATERFALL_AREA_ITEM_BALL",
+  SILVER_CAVE_ROOM_2_ABOVE_SW_WATERFALL_SURF_AREA_ITEM_BALL: {
+    id: "SILVER_CAVE_ROOM_2_ABOVE_SW_WATERFALL_SURF_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ULTRA_BALL",
@@ -1592,8 +1592,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x45B2,
     ],
   },
-  SILVER_CAVE_ITEM_ROOMS_EAST_ITEM_BALL: {
-    id: "SILVER_CAVE_ITEM_ROOMS_EAST_ITEM_BALL",
+  SILVER_CAVE_ITEM_ROOMS_NE_AREA_ITEM_BALL: {
+    id: "SILVER_CAVE_ITEM_ROOMS_NE_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "FULL_RESTORE",
@@ -1602,8 +1602,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4660,
     ],
   },
-  SILVER_CAVE_ITEM_ROOMS_WEST_ITEM_BALL: {
-    id: "SILVER_CAVE_ITEM_ROOMS_WEST_ITEM_BALL",
+  SILVER_CAVE_ITEM_ROOMS_SW_AREA_ITEM_BALL: {
+    id: "SILVER_CAVE_ITEM_ROOMS_SW_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "MAX_REVIVE",
@@ -1625,8 +1625,8 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       0x4A62,
     ],
   },
-  ROUTE_35_MAIN_AREA_ITEM_BALL: {
-    id: "ROUTE_35_MAIN_AREA_ITEM_BALL",
+  ROUTE_35_ITEM_BALL: {
+    id: "ROUTE_35_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "TM_ITEM_BALLS",
     itemId: "TM04",
@@ -1645,8 +1645,8 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       0x473D,
     ],
   },
-  UNION_CAVE_B1F_UNION_SIDE_WEST_ITEM_BALL: {
-    id: "UNION_CAVE_B1F_UNION_SIDE_WEST_ITEM_BALL",
+  UNION_CAVE_B1F_MIDDLE_AREA_WEST_ITEM_BALL: {
+    id: "UNION_CAVE_B1F_MIDDLE_AREA_WEST_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "TM_ITEM_BALLS",
     itemId: "TM39",
@@ -1705,8 +1705,8 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       0x49AE,
     ],
   },
-  MOUNT_MORTAR_2F_INSIDE_CENTRAL_SURF_AREA_ITEM_BALL: {
-    id: "MOUNT_MORTAR_2F_INSIDE_CENTRAL_SURF_AREA_ITEM_BALL",
+  MOUNT_MORTAR_BACK_2F_SURF_AREA_CENTRAL_ITEM_BALL: {
+    id: "MOUNT_MORTAR_BACK_2F_SURF_AREA_CENTRAL_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "TM_ITEM_BALLS",
     itemId: "TM40",
@@ -1818,8 +1818,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x430D,
     ],
   },
-  ROUTE_4_MOUNT_MOON_SIDE_HIDDEN_ITEM: {
-    id: "ROUTE_4_MOUNT_MOON_SIDE_HIDDEN_ITEM",
+  ROUTE_4_WEST_AREA_HIDDEN_ITEM: {
+    id: "ROUTE_4_WEST_AREA_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "ULTRA_BALL",
@@ -1898,8 +1898,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x6FE7,
     ],
   },
-  ROUTE_28_CUT_AREA_HIDDEN_ITEM: {
-    id: "ROUTE_28_CUT_AREA_HIDDEN_ITEM",
+  ROUTE_28_NORTH_AREA_HIDDEN_ITEM: {
+    id: "ROUTE_28_NORTH_AREA_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "RARE_CANDY",
@@ -1918,8 +1918,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x57FD,
     ],
   },
-  ROUTE_32_HIDDEN_ITEM_NORTH_OF_PIER: {
-    id: "ROUTE_32_HIDDEN_ITEM_NORTH_OF_PIER",
+  ROUTE_32_SOUTH_AREA_HIDDEN_ITEM_NORTH_OF_PIER: {
+    id: "ROUTE_32_SOUTH_AREA_HIDDEN_ITEM_NORTH_OF_PIER",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "SUPER_POTION",
@@ -1928,8 +1928,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x4788,
     ],
   },
-  ROUTE_32_HIDDEN_ITEM_BEHIND_POKECENTER: {
-    id: "ROUTE_32_HIDDEN_ITEM_BEHIND_POKECENTER",
+  ROUTE_32_SOUTH_AREA_HIDDEN_ITEM_BEHIND_POKECENTER: {
+    id: "ROUTE_32_SOUTH_AREA_HIDDEN_ITEM_BEHIND_POKECENTER",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "GREAT_BALL",
@@ -1988,8 +1988,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x621B,
     ],
   },
-  ROUTE_41_SW_WHIRLPOOL_AREA_HIDDEN_ITEM: {
-    id: "ROUTE_41_SW_WHIRLPOOL_AREA_HIDDEN_ITEM",
+  ROUTE_41_SW_ISLAND_SURF_AREA_HIDDEN_ITEM: {
+    id: "ROUTE_41_SW_ISLAND_SURF_AREA_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "MAX_ETHER",
@@ -2058,8 +2058,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x4133,
     ],
   },
-  ILEX_FOREST_ROUTE_34_SIDE_HIDDEN_ITEM_BY_SIGN: {
-    id: "ILEX_FOREST_ROUTE_34_SIDE_HIDDEN_ITEM_BY_SIGN",
+  ILEX_FOREST_NORTH_AREA_HIDDEN_ITEM_BY_SIGN: {
+    id: "ILEX_FOREST_NORTH_AREA_HIDDEN_ITEM_BY_SIGN",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "FULL_HEAL",
@@ -2068,8 +2068,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x6E20,
     ],
   },
-  ILEX_FOREST_ROUTE_34_SIDE_HIDDEN_ITEM_BY_HEADBUTT_GUY: {
-    id: "ILEX_FOREST_ROUTE_34_SIDE_HIDDEN_ITEM_BY_HEADBUTT_GUY",
+  ILEX_FOREST_NORTH_AREA_HIDDEN_ITEM_BY_HEADBUTT_GUY: {
+    id: "ILEX_FOREST_NORTH_AREA_HIDDEN_ITEM_BY_HEADBUTT_GUY",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "SUPER_POTION",
@@ -2078,8 +2078,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x6E1D,
     ],
   },
-  ILEX_FOREST_ROUTE_34_SIDE_HIDDEN_ITEM_BY_EXIT: {
-    id: "ILEX_FOREST_ROUTE_34_SIDE_HIDDEN_ITEM_BY_EXIT",
+  ILEX_FOREST_NORTH_AREA_HIDDEN_ITEM_BY_EXIT: {
+    id: "ILEX_FOREST_NORTH_AREA_HIDDEN_ITEM_BY_EXIT",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "ETHER",
@@ -2118,8 +2118,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x4313,
     ],
   },
-  GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES_TOP_LEFT_HIDDEN_ITEM: {
-    id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES_TOP_LEFT_HIDDEN_ITEM",
+  GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_LEFT_HIDDEN_ITEM: {
+    id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_LEFT_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "REVIVE",
@@ -2128,8 +2128,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x4E86,
     ],
   },
-  GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES_TOP_MIDDLE_HIDDEN_ITEM: {
-    id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES_TOP_MIDDLE_HIDDEN_ITEM",
+  GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_MIDDLE_HIDDEN_ITEM: {
+    id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_MIDDLE_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "MAX_POTION",
@@ -2278,8 +2278,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x40D9,
     ],
   },
-  MOUNT_MORTAR_1F_OUTSIDE_MAHOGANY_SIDE_HIDDEN_ITEM: {
-    id: "MOUNT_MORTAR_1F_OUTSIDE_MAHOGANY_SIDE_HIDDEN_ITEM",
+  MOUNT_MORTAR_FRONT_MAHOGANY_SIDE_HIDDEN_ITEM: {
+    id: "MOUNT_MORTAR_FRONT_MAHOGANY_SIDE_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "HYPER_POTION",
@@ -2288,8 +2288,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x5DFC,
     ],
   },
-  MOUNT_MORTAR_1F_INSIDE_NORTH_AREA_HIDDEN_ITEM: {
-    id: "MOUNT_MORTAR_1F_INSIDE_NORTH_AREA_HIDDEN_ITEM",
+  MOUNT_MORTAR_BACK_1F_NORTH_AREA_HIDDEN_ITEM: {
+    id: "MOUNT_MORTAR_BACK_1F_NORTH_AREA_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "MAX_REPEL",
@@ -2298,8 +2298,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x5E8C,
     ],
   },
-  MOUNT_MORTAR_2F_INSIDE_NORTH_AREA_HIDDEN_ITEM: {
-    id: "MOUNT_MORTAR_2F_INSIDE_NORTH_AREA_HIDDEN_ITEM",
+  MOUNT_MORTAR_BACK_2F_NORTH_AREA_HIDDEN_ITEM: {
+    id: "MOUNT_MORTAR_BACK_2F_NORTH_AREA_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "FULL_RESTORE",
@@ -2348,8 +2348,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x4154,
     ],
   },
-  ROCKET_BASE_B1F_HIDDEN_ITEM: {
-    id: "ROCKET_BASE_B1F_HIDDEN_ITEM",
+  TEAM_ROCKET_BASE_B1F_HIDDEN_ITEM: {
+    id: "TEAM_ROCKET_BASE_B1F_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "REVIVE",
@@ -2358,8 +2358,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x4ACC,
     ],
   },
-  ROCKET_BASE_B2F_NORTH_AREA_HIDDEN_ITEM: {
-    id: "ROCKET_BASE_B2F_NORTH_AREA_HIDDEN_ITEM",
+  TEAM_ROCKET_BASE_B2F_NORTH_AREA_HIDDEN_ITEM: {
+    id: "TEAM_ROCKET_BASE_B2F_NORTH_AREA_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "FULL_HEAL",
@@ -2398,8 +2398,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x6511,
     ],
   },
-  DRAGONS_DEN_NORTH_SURF_AREA_HIDDEN_ITEM: {
-    id: "DRAGONS_DEN_NORTH_SURF_AREA_HIDDEN_ITEM",
+  DRAGONS_DEN_B1F_NORTH_SURF_AREA_HIDDEN_ITEM: {
+    id: "DRAGONS_DEN_B1F_NORTH_SURF_AREA_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "MAX_POTION",
@@ -2428,8 +2428,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x49A7,
     ],
   },
-  OLIVINE_PORT_SURF_AREA_HIDDEN_ITEM: {
-    id: "OLIVINE_PORT_SURF_AREA_HIDDEN_ITEM",
+  OLIVINE_PORT_SOUTH_SURF_AREA_HIDDEN_ITEM: {
+    id: "OLIVINE_PORT_SOUTH_SURF_AREA_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "PROTEIN",
@@ -2438,8 +2438,8 @@ export const hiddenItemLocationsMap: IdMap<HiddenItemLocationId, ItemLocation> =
       0x4A2F,
     ],
   },
-  VERMILION_PORT_SURF_AREA_HIDDEN_ITEM: {
-    id: "VERMILION_PORT_SURF_AREA_HIDDEN_ITEM",
+  VERMILION_PORT_SOUTH_SURF_AREA_HIDDEN_ITEM: {
+    id: "VERMILION_PORT_SOUTH_SURF_AREA_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "HIDDEN_ITEMS",
     itemId: "IRON",

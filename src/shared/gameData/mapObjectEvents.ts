@@ -7240,7 +7240,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 20093,
-    flagId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES_SMOKE_BALL",
+    flagId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_SMOKE_BALL",
   },
   {
     romOffset: [
@@ -7261,7 +7261,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 20095,
-    flagId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES_FULL_HEAL",
+    flagId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_FULL_HEAL",
   },
   {
     romOffset: [
@@ -7618,7 +7618,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24054,
-    flagId: "MOUNT_MORTAR_1F_OUTSIDE_ETHER",
+    flagId: "MOUNT_MORTAR_FRONT_ETHER",
   },
   {
     romOffset: [
@@ -7639,7 +7639,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24056,
-    flagId: "MOUNT_MORTAR_1F_OUTSIDE_REVIVE",
+    flagId: "MOUNT_MORTAR_FRONT_REVIVE",
   },
   {
     romOffset: [
@@ -7680,7 +7680,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24188,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_ESCAPE_ROPE",
+    flagId: "MOUNT_MORTAR_BACK_1F_ESCAPE_ROPE",
   },
   {
     romOffset: [
@@ -7701,7 +7701,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24190,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_MAX_REVIVE",
+    flagId: "MOUNT_MORTAR_BACK_1F_MAX_REVIVE",
   },
   {
     romOffset: [
@@ -7722,7 +7722,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24192,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_HYPER_POTION",
+    flagId: "MOUNT_MORTAR_BACK_1F_HYPER_POTION",
   },
   {
     romOffset: [
@@ -7743,7 +7743,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24194,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_MAX_POTION",
+    flagId: "MOUNT_MORTAR_BACK_1F_MAX_POTION",
   },
   {
     romOffset: [
@@ -7764,7 +7764,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24196,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_NUGGET",
+    flagId: "MOUNT_MORTAR_BACK_1F_NUGGET",
   },
   {
     romOffset: [
@@ -7827,7 +7827,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24198,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_IRON",
+    flagId: "MOUNT_MORTAR_BACK_1F_IRON",
   },
   {
     romOffset: [
@@ -7848,7 +7848,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24200,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_ULTRA_BALL",
+    flagId: "MOUNT_MORTAR_BACK_1F_ULTRA_BALL",
   },
   {
     romOffset: [
@@ -7869,7 +7869,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24798,
-    flagId: "MOUNT_MORTAR_2F_INSIDE_MAX_POTION",
+    flagId: "MOUNT_MORTAR_BACK_2F_MAX_POTION",
   },
   {
     romOffset: [
@@ -7890,7 +7890,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24800,
-    flagId: "MOUNT_MORTAR_2F_INSIDE_RARE_CANDY",
+    flagId: "MOUNT_MORTAR_BACK_2F_RARE_CANDY",
   },
   {
     romOffset: [
@@ -7911,7 +7911,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24802,
-    flagId: "MOUNT_MORTAR_2F_INSIDE_TM_DEFENSE_CURL",
+    flagId: "MOUNT_MORTAR_BACK_2F_TM_DEFENSE_CURL",
   },
   {
     romOffset: [
@@ -7932,7 +7932,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24804,
-    flagId: "MOUNT_MORTAR_2F_INSIDE_DRAGON_SCALE",
+    flagId: "MOUNT_MORTAR_BACK_2F_DRAGON_SCALE",
   },
   {
     romOffset: [
@@ -7953,7 +7953,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24806,
-    flagId: "MOUNT_MORTAR_2F_INSIDE_ELIXER",
+    flagId: "MOUNT_MORTAR_BACK_2F_ELIXER",
   },
   {
     romOffset: [
@@ -7974,7 +7974,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24808,
-    flagId: "MOUNT_MORTAR_2F_INSIDE_ESCAPE_ROPE",
+    flagId: "MOUNT_MORTAR_BACK_2F_ESCAPE_ROPE",
   },
   {
     romOffset: [
@@ -9817,7 +9817,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "SCRIPT",
     sightRange: 0,
     scriptPointer: 16560,
-    flagId: "ECRUTEAK_TIN_TOWER_ENTRANCE_WANDERING_SAGE",
+    flagId: "ECRUTEAK_TIN_TOWER_GATE_WANDERING_SAGE",
   },
   {
     romOffset: [
@@ -9838,7 +9838,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "SCRIPT",
     sightRange: 0,
     scriptPointer: 16580,
-    flagId: "ECRUTEAK_TIN_TOWER_ENTRANCE_WANDERING_SAGE",
+    flagId: "ECRUTEAK_TIN_TOWER_GATE_WANDERING_SAGE",
   },
   {
     romOffset: [
