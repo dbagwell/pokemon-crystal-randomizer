@@ -37,6 +37,7 @@ import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
+import { itemHoldEffectsMap, itemMenuActionsMap } from "@shared/types/gameData/item"
 import { type EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
 import { type ItemId } from "@shared/types/gameDataIds/items"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
@@ -616,6 +617,63 @@ const createPatches = (
   if (settings.RANDOMIZE_REGULAR_ITEM_BALLS || settings.RANDOMIZE_TM_ITEM_BALLS || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS || settings.SHUFFLED_ITEM_GROUPS.length > 0) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "receiveItemChanges.yml",
+        {},
+        {
+          regularItemPickupSound: "90 00",
+        },
+      ).hunks,
+      new DataHunk(
+        ROMOffset.fromBankAddress(1, 0x67C1),
+        Array(0xF9).fill(undefined).flatMap((_, index) => {
+          const item = Object.values(itemsMap).find((item) => {
+            return item.numericId === index + 1
+          })
+        
+          if (isNotNullish(item)) {
+            return [
+              ...bytesFrom(item.price, 2),
+              itemHoldEffectsMap[item.holdEffectId],
+              item.associatedValue,
+              item.isRegisterable && item.isTossable ? 0b00000000
+                : item.isRegisterable ? 0b10000000
+                  : item.isTossable ? 0b01000000
+                    : 0b11000000,
+              item.category === "REGULAR_ITEMS" ? 1
+                : item.category === "KEY_ITEMS" ? 2
+                  : item.category === "BALLS" ? 3
+                    : item.category === "TMS" || item.category === "HMS" ? 4
+                      : item.type === "POKEDEX_PART" ? 5
+                        : item.type === "POKEGEAR_PART" ? 6
+                          : item.type === "JOHTO_BADGE" ? 7
+                            : 8,
+              itemMenuActionsMap[item.fieldMenuAction] << 4 | itemMenuActionsMap[item.battleMenuAction],
+            ]
+          } else {
+            return Array(7).fill(0)
+          }
+        }),
+      ),
+      new DataHunk(
+        ROMOffset.fromBankAddress(114, 0x4000),
+        Array(0xF9).fill(undefined).flatMap((_, index) => {
+          const item = Object.values(itemsMap).find((item) => {
+            return item.numericId === index + 1
+          })
+        
+          if (isNotNullish(item)) {
+            return bytesFromTextData(`${item.inGameName}@`)
+          } else {
+            return bytesFromTextData("@")
+          }
+        }),
+      ),
+    ]
+  
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
       ...Object.values(romInfo.gameData.itemLocations).map((itemLocation) => {
         return new DataHunk(
           ROMOffset.fromBankAddress(
@@ -823,7 +881,7 @@ const createPatches = (
     ]
   }
   
-  if (settings.FASTER_ITEM_PICKUP_SFX) {
+  if (settings.FASTER_ITEM_PICKUP_SFX && settings.SHUFFLED_ITEM_GROUPS.length === 0) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       new DataHunk(ROMOffset.fromBankAddress(4, 0x62DC), [0x90, 0x00, 0x86, 0x18]),
