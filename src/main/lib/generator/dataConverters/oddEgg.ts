@@ -1,9 +1,9 @@
-import { ROMInfo } from "@lib/gameData/romInfo"
 import { itemsMap } from "@shared/gameData/items"
 import { movesMap } from "@shared/gameData/moves"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import type { OddEgg } from "@shared/types/gameData/oddEgg"
 import { bytesFrom, isNotNullish } from "@shared/utils"
+import { bytesFromTextData } from "@shared/utils/textConverters"
 
 export const bytesFromOddEgg = (oddEgg: OddEgg) => {
   return [
@@ -39,6 +39,6 @@ export const bytesFromOddEgg = (oddEgg: OddEgg) => {
     ...bytesFrom(oddEgg.stats.speed, 2, true),
     ...bytesFrom(oddEgg.stats.specialAttack, 2, true),
     ...bytesFrom(oddEgg.stats.specialDefence, 2, true),
-    ...ROMInfo.bytesFromText(oddEgg.name),
+    ...bytesFromTextData(oddEgg.name),
   ]
 }

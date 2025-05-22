@@ -42,6 +42,7 @@ import { type ItemId } from "@shared/types/gameDataIds/items"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import type { TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
 import { trainerGroupIds } from "@shared/types/gameDataIds/trainerGroups"
+import { bytesFromTextData, bytesFromTextScript } from "@shared/utils/textConverters"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish } from "@utils"
 import crypto from "crypto"
 import { app } from "electron"
@@ -108,8 +109,8 @@ export const generateROM = async (params: {
     "randomizerBase.yml",
     {},
     {
-      versionNumber: hexStringFrom(ROMInfo.bytesFromText(app.getVersion())),
-      checkValue: hexStringFrom(ROMInfo.bytesFromText(data.checkValue)),
+      versionNumber: hexStringFrom(bytesFromTextData(app.getVersion())),
+      checkValue: hexStringFrom(bytesFromTextData(data.checkValue)),
     },
   )
   
@@ -292,7 +293,7 @@ const createPatches = (
         {},
         {
           pokemonId: hexStringFrom(bytesFrom(pokemon.numericId, 1)),
-          pokemonName: hexStringFrom(ROMInfo.bytesFromText(pokemon.name.toUpperCase())),
+          pokemonName: hexStringFrom(bytesFromTextData(pokemon.name.toUpperCase())),
         },
       ).hunks,
     ]
@@ -359,21 +360,21 @@ const createPatches = (
       spearowPokemonId: hexStringFromEventPokemonId("SPEAROW"),
       shucklePokemonId: hexStringFromEventPokemonId("SHUCKLE"),
       eeveePokemonId: hexStringFromEventPokemonId("EEVEE"),
-      eeveePokemonNameText1: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("EEVEE")}.`.padEnd(11, " "))),
-      eeveePokemonNameText2: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("EEVEE")}`.padEnd(10, " "))),
+      eeveePokemonNameText1: hexStringFrom(bytesFromTextData(`${nameStringFromEventPokemonId("EEVEE")}.`.padEnd(11, " "))),
+      eeveePokemonNameText2: hexStringFrom(bytesFromTextData(`${nameStringFromEventPokemonId("EEVEE")}`.padEnd(10, " "))),
       dratiniPokemonId: hexStringFromEventPokemonId("DRATINI"),
-      dratiniPokemonNameText1: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("DRATINI")}`.padEnd(12, " "))),
-      dratiniPokemonNameText2: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("DRATINI")}`.padEnd(10, " "))),
+      dratiniPokemonNameText1: hexStringFrom(bytesFromTextData(`${nameStringFromEventPokemonId("DRATINI")}`.padEnd(12, " "))),
+      dratiniPokemonNameText2: hexStringFrom(bytesFromTextData(`${nameStringFromEventPokemonId("DRATINI")}`.padEnd(10, " "))),
       tyroguePokemonId: hexStringFromEventPokemonId("TYROGUE"),
-      tyroguePokemonNameText: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("TYROGUE")}`.padEnd(10, " "))),
+      tyroguePokemonNameText: hexStringFrom(bytesFromTextData(`${nameStringFromEventPokemonId("TYROGUE")}`.padEnd(10, " "))),
       abraPokemonId: hexStringFromEventPokemonId("ABRA"),
       cubonePokemonId: hexStringFromEventPokemonId("CUBONE"),
       wobbuffetPokemonId: hexStringFromEventPokemonId("WOBBUFFET"),
-      goldenrodGameCornerPokemonMenuText: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("ABRA").padEnd(10, " ")}  100@${nameStringFromEventPokemonId("CUBONE").padEnd(10, " ")}  800@${nameStringFromEventPokemonId("WOBBUFFET").padEnd(10, " ")} 1500@`)),
+      goldenrodGameCornerPokemonMenuText: hexStringFrom(bytesFromTextData(`${nameStringFromEventPokemonId("ABRA").padEnd(10, " ")}  100@${nameStringFromEventPokemonId("CUBONE").padEnd(10, " ")}  800@${nameStringFromEventPokemonId("WOBBUFFET").padEnd(10, " ")} 1500@`)),
       pikachuPokemonId: hexStringFromEventPokemonId("PIKACHU"),
       porygonPokemonId: hexStringFromEventPokemonId("PORYGON"),
       larvitarPokemonId: hexStringFromEventPokemonId("LARVITAR"),
-      celadonGameCornerPokemonMenuText: hexStringFrom(ROMInfo.bytesFromText(`${nameStringFromEventPokemonId("PIKACHU").padEnd(10, " ")} 2222@${nameStringFromEventPokemonId("PORYGON").padEnd(10, " ")} 5555@${nameStringFromEventPokemonId("LARVITAR").padEnd(10, " ")} 8888@`)),
+      celadonGameCornerPokemonMenuText: hexStringFrom(bytesFromTextData(`${nameStringFromEventPokemonId("PIKACHU").padEnd(10, " ")} 2222@${nameStringFromEventPokemonId("PORYGON").padEnd(10, " ")} 5555@${nameStringFromEventPokemonId("LARVITAR").padEnd(10, " ")} 8888@`)),
       dratiniMoves: hexStringFrom(Object.values(romInfo.gameData.dratiniMoves).flatMap((moveList) => {
         return [
           ...moveList.map((moveId) => {
@@ -579,31 +580,31 @@ const createPatches = (
         moveTutorMoveId1: hexStringFrom([updatedTeachableMove("MOVE_TUTOR_1").numericId]),
         moveTutorMoveId2: hexStringFrom([updatedTeachableMove("MOVE_TUTOR_2").numericId]),
         moveTutorMoveId3: hexStringFrom([updatedTeachableMove("MOVE_TUTOR_3").numericId]),
-        moveTutorMoveName1: hexStringFrom(ROMInfo.bytesFromText(updatedTeachableMove("MOVE_TUTOR_1").name.toUpperCase())),
-        moveTutorMoveName2: hexStringFrom(ROMInfo.bytesFromText(updatedTeachableMove("MOVE_TUTOR_2").name.toUpperCase())),
-        moveTutorMoveName3: hexStringFrom(ROMInfo.bytesFromText(updatedTeachableMove("MOVE_TUTOR_3").name.toUpperCase())),
-        tm31Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\n${updatedTeachableMove("TM31").name.toUpperCase()}.\f`)),
-        tm49Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\n${updatedTeachableMove("TM49").name.toUpperCase()}.\rIsn't that great?\nI discovered it!\f`)),
-        tm45Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM45 is\n${updatedTeachableMove("TM45").name.toUpperCase()}!\rIsn't it just per-\nfect for a cutie\tlike me?\f`)),
-        tm30Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM30 is\n${updatedTeachableMove("TM30").name.toUpperCase()}.\rUse it if it\nappeals to you.\f`)),
-        tm01Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM01 is\n${updatedTeachableMove("TM01").name.toUpperCase()}.\f`)),
-        tm23Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0…TM23 teaches\n${updatedTeachableMove("TM23").name.toUpperCase()}.\f`)),
-        tm16Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM16 contains\n${updatedTeachableMove("TM16").name.toUpperCase()}.\rIt demonstrates\nthe harshness of\twinter.\f`)),
-        tm24Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM24 contains\n${updatedTeachableMove("TM24").name.toUpperCase()}.\rIf you don't want\nit, you don't have\tto take it.\f`)),
-        tm19Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\rTM19 is\n${updatedTeachableMove("TM19").name.toUpperCase()}.\rPlease use it if\nit pleases you…\f`)),
-        tm06Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\rTM06 is\n${updatedTeachableMove("TM06").name.toUpperCase()}.\f`)),
-        tm03Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM03 is\n${updatedTeachableMove("TM03").name.toUpperCase()}.\rIt's a terrifying\nmove.\f`)),
-        tm05Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\nTM05 is\n${updatedTeachableMove("TM05").name.toUpperCase()}!\f`)),
-        tm07Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\nmy ${updatedTeachableMove("TM07").name.toUpperCase()}.\rIt's a powerful\ntechnique!\f`)),
-        tm08Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM08 happens to be\n${updatedTeachableMove("TM08").name.toUpperCase()}.\rIf any rocks are\nin your way, just\tsmash 'em up\twith ROCK SMASH!\f`)),
-        tm10Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\nTM10 is\t${updatedTeachableMove("TM10").name.toUpperCase()}!\f`)),
-        tm11Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM11 is\n${updatedTeachableMove("TM11").name.toUpperCase()}.\f`)),
-        tm12Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM12 is\n${updatedTeachableMove("TM12").name.toUpperCase()}.\f`)),
-        tm13Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM13 is\n${updatedTeachableMove("TM13").name.toUpperCase()}.\rIt's a rare move.\f`)),
-        tm29Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM29 is\n${updatedTeachableMove("TM29").name.toUpperCase()}.\f`)),
-        tm37Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\n${updatedTeachableMove("TM37").name.toUpperCase()}.\rIt's for advanced\ntrainers only.\rUse it if you\ndare. Good luck!\f`)),
-        tm42Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\n${updatedTeachableMove("TM42").name.toUpperCase()}…\r…Zzzz…\f`)),
-        tm50Text: hexStringFrom(ROMInfo.bytesFromTextScript(`\0TM50 is\n${updatedTeachableMove("TM50").name.toUpperCase()}.\rIt's a wicked move.\rOoooh…\nThat's scary…\rI don't want to\nhave bad dreams.\f`)),
+        moveTutorMoveName1: hexStringFrom(bytesFromTextData(updatedTeachableMove("MOVE_TUTOR_1").name.toUpperCase())),
+        moveTutorMoveName2: hexStringFrom(bytesFromTextData(updatedTeachableMove("MOVE_TUTOR_2").name.toUpperCase())),
+        moveTutorMoveName3: hexStringFrom(bytesFromTextData(updatedTeachableMove("MOVE_TUTOR_3").name.toUpperCase())),
+        tm31Text: hexStringFrom(bytesFromTextScript(`\n${updatedTeachableMove("TM31").name.toUpperCase()}.\f`)),
+        tm49Text: hexStringFrom(bytesFromTextScript(`\n${updatedTeachableMove("TM49").name.toUpperCase()}.\rIsn<'t> that great?\nI discovered it!\f`)),
+        tm45Text: hexStringFrom(bytesFromTextScript(`\0TM45 is\n${updatedTeachableMove("TM45").name.toUpperCase()}!\rIsn<'t> it just per-\nfect for a cutie\tlike me?\f`)),
+        tm30Text: hexStringFrom(bytesFromTextScript(`\0TM30 is\n${updatedTeachableMove("TM30").name.toUpperCase()}.\rUse it if it\nappeals to you.\f`)),
+        tm01Text: hexStringFrom(bytesFromTextScript(`\0TM01 is\n${updatedTeachableMove("TM01").name.toUpperCase()}.\f`)),
+        tm23Text: hexStringFrom(bytesFromTextScript(`\0…TM23 teaches\n${updatedTeachableMove("TM23").name.toUpperCase()}.\f`)),
+        tm16Text: hexStringFrom(bytesFromTextScript(`\0TM16 contains\n${updatedTeachableMove("TM16").name.toUpperCase()}.\rIt demonstrates\nthe harshness of\twinter.\f`)),
+        tm24Text: hexStringFrom(bytesFromTextScript(`\0TM24 contains\n${updatedTeachableMove("TM24").name.toUpperCase()}.\rIf you don't want\nit, you don<'t> have\tto take it.\f`)),
+        tm19Text: hexStringFrom(bytesFromTextScript(`\rTM19 is\n${updatedTeachableMove("TM19").name.toUpperCase()}.\rPlease use it if\nit pleases you…\f`)),
+        tm06Text: hexStringFrom(bytesFromTextScript(`\rTM06 is\n${updatedTeachableMove("TM06").name.toUpperCase()}.\f`)),
+        tm03Text: hexStringFrom(bytesFromTextScript(`\0TM03 is\n${updatedTeachableMove("TM03").name.toUpperCase()}.\rIt<'s> a terrifying\nmove.\f`)),
+        tm05Text: hexStringFrom(bytesFromTextScript(`\nTM05 is\n${updatedTeachableMove("TM05").name.toUpperCase()}!\f`)),
+        tm07Text: hexStringFrom(bytesFromTextScript(`\nmy ${updatedTeachableMove("TM07").name.toUpperCase()}.\rIt<'s> a powerful\ntechnique!\f`)),
+        tm08Text: hexStringFrom(bytesFromTextScript(`\0TM08 happens to be\n${updatedTeachableMove("TM08").name.toUpperCase()}.\rIf any rocks are\nin your way, just\tsmash 'em up\twith ROCK SMASH!\f`)),
+        tm10Text: hexStringFrom(bytesFromTextScript(`\nTM10 is\t${updatedTeachableMove("TM10").name.toUpperCase()}!\f`)),
+        tm11Text: hexStringFrom(bytesFromTextScript(`\0TM11 is\n${updatedTeachableMove("TM11").name.toUpperCase()}.\f`)),
+        tm12Text: hexStringFrom(bytesFromTextScript(`\0TM12 is\n${updatedTeachableMove("TM12").name.toUpperCase()}.\f`)),
+        tm13Text: hexStringFrom(bytesFromTextScript(`\0TM13 is\n${updatedTeachableMove("TM13").name.toUpperCase()}.\rIt<'s> a rare move.\f`)),
+        tm29Text: hexStringFrom(bytesFromTextScript(`\0TM29 is\n${updatedTeachableMove("TM29").name.toUpperCase()}.\f`)),
+        tm37Text: hexStringFrom(bytesFromTextScript(`\n${updatedTeachableMove("TM37").name.toUpperCase()}.\rIt<'s> for advanced\ntrainers only.\rUse it if you\ndare. Good luck!\f`)),
+        tm42Text: hexStringFrom(bytesFromTextScript(`\n${updatedTeachableMove("TM42").name.toUpperCase()}…\r…Zzzz…\f`)),
+        tm50Text: hexStringFrom(bytesFromTextScript(`\0TM50 is\n${updatedTeachableMove("TM50").name.toUpperCase()}.\rIt<'s> a wicked move.\rOoooh…\nThat<'s> scary…\rI don<'t> want to\nhave bad dreams.\f`)),
       }
     )
     
@@ -916,7 +917,7 @@ const createPatches = (
         {},
         {
           cost: hexStringFrom(bytesFrom(romInfo.gameData.moveTutorCost, 2)),
-          costText: hexStringFrom(ROMInfo.bytesFromText(`${romInfo.gameData.moveTutorCost} coins. Okay?`.padEnd(17, " "))),
+          costText: hexStringFrom(bytesFromTextScript(`${romInfo.gameData.moveTutorCost} coins. Okay?`.padEnd(17, " "))),
         }
       ).hunks,
     ]
@@ -987,7 +988,7 @@ const createPatches = (
                 path: "trainerNameAndPokemon.yml",
                 extraIncludes: {},
                 extraValues: {
-                  name: hexStringFrom(ROMInfo.bytesFromText(`${trainerName}@`)),
+                  name: hexStringFrom(bytesFromTextData(`${trainerName}@`)),
                   trainerType: hexStringFrom([trainerType]),
                   pokemon: hexStringFrom(compact(trainer.pokemon.flatMap((pokemon) => {
                     return [
@@ -1223,11 +1224,11 @@ const createPlayerOptionsPatches = (
     ...romInfo.patchHunks,
     new DataHunk(
       ROMOffset.fromBankAddress(1, 0x60D3),
-      ROMInfo.bytesFromText(`${playerOptions.PLAYER_NAME}@`),
+      bytesFromTextData(`${playerOptions.PLAYER_NAME}@`),
     ),
     new DataHunk(
       ROMOffset.fromBankAddress(1, 0x60DE),
-      ROMInfo.bytesFromText(`${playerOptions.PLAYER_NAME}@`),
+      bytesFromTextData(`${playerOptions.PLAYER_NAME}@`),
     ),
   ]
   
