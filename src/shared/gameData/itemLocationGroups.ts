@@ -14,4 +14,20 @@ export const itemLocationGroupsMap: IdMap<ItemLocationGroupId, ItemLocationGroup
     id: "HIDDEN_ITEMS",
     name: "Hidden Items",
   },
+  HMS: {
+    id: "HMS",
+    name: "HMs",
+  },
+  KEY_ITEMS: {
+    id: "KEY_ITEMS",
+    name: "Key Items",
+  },
+  MENU_ITEMS: {
+    id: "MENU_ITEMS",
+    name: "Menu Items",
+  },
+  BADGES: {
+    id: "BADGES",
+    name: "Badges",
+  },
 }

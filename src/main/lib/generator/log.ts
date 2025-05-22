@@ -13,7 +13,7 @@ import type { GameData } from "@shared/types/gameData/gameData"
 import { eventPokemonIds } from "@shared/types/gameDataIds/eventPokemon"
 import { fishingGroupIds } from "@shared/types/gameDataIds/fishingGroups"
 import { fishingRodIds } from "@shared/types/gameDataIds/fishingRods"
-import { regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
+import { badgeLocationIds, hmGiftLocationIds, hmItemBallLocationIds, keyItemGiftLocationIds, keyItemHiddenItemLocationIds, keyItemItemBallLocationIds, menuItemGiftLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { isItemId, tmItemIds } from "@shared/types/gameDataIds/items"
 import { isMoveId } from "@shared/types/gameDataIds/moves"
 import { isPokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
@@ -509,13 +509,20 @@ export const generatorLog = (params: {
   })
   
   addSection({
-    header: "OVERWORLD ITEMS",
+    header: "ITEMS",
     content: logTable({
       headers: [
         "LOCATION",
         "ITEM",
       ],
       sections: [
+        badgeLocationIds,
+        menuItemGiftLocationIds,
+        keyItemItemBallLocationIds,
+        keyItemHiddenItemLocationIds,
+        keyItemGiftLocationIds,
+        hmItemBallLocationIds,
+        hmGiftLocationIds,
         regularItemBallLocationIds.filter((id) => { return id !== "NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL" }),
         tmItemBallLocationIds.filter((id) => { return id !== "NATIONAL_PARK_BUG_CONTEST_WEST_ITEM_BALL" }),
         regularHiddenItemLocationIds.filter((id) => { return id !== "NATIONAL_PARK_BUG_CONTEST_HIDDEN_ITEM" }),

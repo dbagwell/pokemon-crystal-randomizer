@@ -623,7 +623,7 @@ const createPatches = (
           ),
           compact([
             itemsMap[itemLocation.itemId].numericId,
-            itemLocation.type === "ITEM_BALL" ? 1 : null,
+            itemLocation.type !== "HIDDEN_ITEM" ? 1 : null,
           ]),
         )
       }),

@@ -181,6 +181,14 @@ export const tmItemBallLocationIds = [
   "ROCK_TUNNEL_1F_LAVENDER_SIDE_ITEM_BALL_ON_PLATEAU",
 ] as const
 
+export const hmItemBallLocationIds = [
+  "ICE_PATH_1F_MAHOGANY_SIDE_ITEM_BALL",
+] as const
+
+export const keyItemItemBallLocationIds = [
+  "GOLDENROD_UNDERGROUND_ITEM_BALL",
+] as const
+
 export const regularHiddenItemLocationIds = [
   "ROUTE_2_FOREST_AREA_HIDDEN_ITEM_BY_VIRIDIAN_ENTRANCE",
   "ROUTE_2_FOREST_AREA_HIDDEN_ITEM_IN_SE_CORNER",
@@ -268,18 +276,104 @@ export const regularHiddenItemLocationIds = [
   "SILVER_CAVE_ROOM_2_MAIN_AREA_HIDDEN_ITEM",
 ] as const
 
+export const keyItemHiddenItemLocationIds = [
+  "CERULEAN_GYM_HIDDEN_ITEM",
+] as const
+
+export const hmGiftLocationIds = [
+  "ILEX_FOREST_SOUTH_AREA_CHARCOAL_BROTHERS_GIFT",
+  "CIANWOOD_CITY_CHUCKS_WIFES_GIFT",
+  "DANCE_THEATER_MANS_GIFT",
+  "OLIVINE_CAFE_SAILORS_GIFT",
+  "SPROUT_TOWER_3F_SAGE_LIS_GIFT",
+  "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+] as const
+
+export const keyItemGiftLocationIds = [
+  "ELMS_LAB_ELMS_GIFT_TO_CHAMPION",
+  "MR_POKEMONS_HOUSE_MR_POKEMONS_FREE_GIFT",
+  "ROUTE_32_POKECENTER_1F_MANS_GIFT",
+  "GOLDENROD_BIKE_SHOP_OWNERS_GIFT",
+  "RADIO_TOWER_2F_BUENAS_GIFT",
+  "GOLDENROD_FLOWER_SHOP_OWNERS_GIFT",
+  "RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT",
+  "GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT",
+  "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+  "ECRUTEAK_ITEMFINDER_HOUSE_MANS_GIFT",
+  "TIN_TOWER_1F_NORTH_SAGES_GIFT",
+  "OLIVINE_GOOD_ROD_HOUSE_MANS_GIFT",
+  "CIANWOOD_PHARMACY_OWNERS_GIFT",
+  "LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT",
+  "POKEMON_FAN_CLUB_MEMBERS_GIFT",
+  "COPYCATS_HOUSE_2F_COPYCATS_GIFT",
+  "ROUTE_12_SUPER_ROD_HOUSE_MANS_GIFT",
+  "PEWTER_CITY_OLD_MANS_GIFT",
+] as const
+
+export const menuItemGiftLocationIds = [
+  "PLAYERS_HOUSE_1F_MOMS_GIFT",
+  "MR_POKEMONS_HOUSE_OAKS_GIFT",
+  "CHERRYGROVE_CITY_GUIDE_GENTS_GIFT",
+  "RUINS_OF_ALPH_OUTSIDE_MAIN_AREA_RESEARCHERS_GIFT",
+  "RADIO_TOWER_1F_QUIZ_PRIZE",
+  "LAV_RADIO_TOWER_1F_DIRECTORS_GIFT",
+] as const
+
+export const badgeLocationIds = [
+  "VIOLET_GYM_BADGE",
+  "AZALEA_GYM_BADGE",
+  "GOLDENROD_GYM_BADGE",
+  "ECRUTEAK_GYM_BADGE",
+  "CIANWOOD_GYM_BADGE",
+  "OLIVINE_GYM_BADGE",
+  "MAHOGANY_GYM_BADGE",
+  "DRAGON_SHRINE_BADGE",
+  "PEWTER_GYM_BADGE",
+  "CERULEAN_GYM_BADGE",
+  "VERMILION_GYM_BADGE",
+  "CELADON_GYM_BADGE",
+  "FUCHSIA_GYM_BADGE",
+  "SAFFRON_GYM_BADGE",
+  "SEAFOAM_GYM_BADGE",
+  "VIRIDIAN_GYM_BADGE",
+] as const
+
 export const itemBallLocationIds = [
   ...regularItemBallLocationIds,
   ...tmItemBallLocationIds,
+  ...hmItemBallLocationIds,
+  ...keyItemItemBallLocationIds,
+] as const
+
+export const hiddenItemLocationIds = [
+  ...regularHiddenItemLocationIds,
+  ...keyItemHiddenItemLocationIds,
+] as const
+
+export const giftLocationIds = [
+  ...hmGiftLocationIds,
+  ...keyItemGiftLocationIds,
+  ...menuItemGiftLocationIds,
+  ...badgeLocationIds,
 ] as const
 
 export const itemLocationIds = [
   ...itemBallLocationIds,
-  ...regularHiddenItemLocationIds,
+  ...hiddenItemLocationIds,
+  ...giftLocationIds,
 ] as const
 
 export type RegularItemBallLocationId = typeof regularItemBallLocationIds[number]
 export type TMItemBallLocationId = typeof tmItemBallLocationIds[number]
+export type HMItemBallLocationId = typeof hmItemBallLocationIds[number]
+export type KeyItemItemBallLocationId = typeof keyItemItemBallLocationIds[number]
 export type RegularHiddenItemLocationId = typeof regularHiddenItemLocationIds[number]
+export type KeyItemHiddenItemLocationId = typeof keyItemHiddenItemLocationIds[number]
+export type HMGiftLocationId = typeof hmGiftLocationIds[number]
+export type MenuItemGiftLocationId = typeof menuItemGiftLocationIds[number]
+export type KeyItemGiftLocationId = typeof keyItemGiftLocationIds[number]
+export type BadgeLocationId = typeof badgeLocationIds[number]
 export type ItemBallLocationId = typeof itemBallLocationIds[number]
+export type HiddenItemLocationId = typeof hiddenItemLocationIds[number]
+export type GiftLocationId = typeof giftLocationIds[number]
 export type ItemLocationId = typeof itemLocationIds[number]
