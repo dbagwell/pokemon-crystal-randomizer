@@ -3241,14 +3241,15 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_OUTSIDE_MAIN_AREA_HOUSE_DOOR_IN",
   },
-  RUINS_OF_ALPH_HO_OH_ITEM_ROOM_HOLE_LEFT: {
-    id: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_HOLE_LEFT",
+  RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_LEFT: {
+    id: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_LEFT",
     mapId: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM",
     index: 1,
     areaId: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM",
-    type: "HOLE",
+    type: "CAVE",
+    polarity: "OUT",
     distinguisher: "LEFT",
-    direction: "ANY",
+    direction: "DOWN",
     coordinate: [
       3,
       9,
@@ -3259,14 +3260,15 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_HO_OH_CHAMBER_TOP_CAVE_IN",
   },
-  RUINS_OF_ALPH_HO_OH_ITEM_ROOM_HOLE_RIGHT: {
-    id: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_HOLE_RIGHT",
+  RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_RIGHT: {
+    id: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_RIGHT",
     mapId: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM",
     index: 2,
     areaId: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM",
-    type: "HOLE",
+    type: "CAVE",
+    polarity: "OUT",
     distinguisher: "RIGHT",
-    direction: "ANY",
+    direction: "DOWN",
     coordinate: [
       4,
       9,
@@ -3277,15 +3279,14 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_HO_OH_CHAMBER_TOP_CAVE_IN",
   },
-  RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_LEFT: {
-    id: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_LEFT",
+  RUINS_OF_ALPH_HO_OH_ITEM_ROOM_HOLE_LEFT: {
+    id: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_HOLE_LEFT",
     mapId: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM",
     index: 3,
     areaId: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM",
-    type: "CAVE",
-    polarity: "OUT",
+    type: "HOLE",
     distinguisher: "LEFT",
-    direction: "DOWN",
+    direction: "ANY",
     coordinate: [
       3,
       1,
@@ -3296,15 +3297,14 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_HO_OH_WORD_ROOM_NONE_LEFT",
   },
-  RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_RIGHT: {
-    id: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_RIGHT",
+  RUINS_OF_ALPH_HO_OH_ITEM_ROOM_HOLE_RIGHT: {
+    id: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_HOLE_RIGHT",
     mapId: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM",
     index: 4,
     areaId: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM",
-    type: "CAVE",
-    polarity: "OUT",
+    type: "HOLE",
     distinguisher: "RIGHT",
-    direction: "DOWN",
+    direction: "ANY",
     coordinate: [
       4,
       1,
@@ -3315,14 +3315,15 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_HO_OH_WORD_ROOM_NONE_RIGHT",
   },
-  RUINS_OF_ALPH_KABUTO_ITEM_ROOM_HOLE_LEFT: {
-    id: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_HOLE_LEFT",
+  RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_LEFT: {
+    id: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_LEFT",
     mapId: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM",
     index: 1,
     areaId: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM",
-    type: "HOLE",
+    type: "CAVE",
+    polarity: "OUT",
     distinguisher: "LEFT",
-    direction: "ANY",
+    direction: "DOWN",
     coordinate: [
       3,
       9,
@@ -3333,14 +3334,15 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_KABUTO_CHAMBER_TOP_CAVE_IN",
   },
-  RUINS_OF_ALPH_KABUTO_ITEM_ROOM_HOLE_RIGHT: {
-    id: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_HOLE_RIGHT",
+  RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_RIGHT: {
+    id: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_RIGHT",
     mapId: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM",
     index: 2,
     areaId: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM",
-    type: "HOLE",
+    type: "CAVE",
+    polarity: "OUT",
     distinguisher: "RIGHT",
-    direction: "ANY",
+    direction: "DOWN",
     coordinate: [
       4,
       9,
@@ -3351,15 +3353,14 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_KABUTO_CHAMBER_TOP_CAVE_IN",
   },
-  RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_LEFT: {
-    id: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_LEFT",
+  RUINS_OF_ALPH_KABUTO_ITEM_ROOM_HOLE_LEFT: {
+    id: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_HOLE_LEFT",
     mapId: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM",
     index: 3,
     areaId: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM",
-    type: "CAVE",
-    polarity: "OUT",
+    type: "HOLE",
     distinguisher: "LEFT",
-    direction: "DOWN",
+    direction: "ANY",
     coordinate: [
       3,
       1,
@@ -3370,15 +3371,14 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_KABUTO_WORD_ROOM_NONE_LEFT",
   },
-  RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_RIGHT: {
-    id: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_RIGHT",
+  RUINS_OF_ALPH_KABUTO_ITEM_ROOM_HOLE_RIGHT: {
+    id: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_HOLE_RIGHT",
     mapId: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM",
     index: 4,
     areaId: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM",
-    type: "CAVE",
-    polarity: "OUT",
+    type: "HOLE",
     distinguisher: "RIGHT",
-    direction: "DOWN",
+    direction: "ANY",
     coordinate: [
       4,
       1,
@@ -3389,14 +3389,15 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_KABUTO_WORD_ROOM_NONE_RIGHT",
   },
-  RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_HOLE_LEFT: {
-    id: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_HOLE_LEFT",
+  RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_LEFT: {
+    id: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_LEFT",
     mapId: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM",
     index: 1,
     areaId: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM",
-    type: "HOLE",
+    type: "CAVE",
+    polarity: "OUT",
     distinguisher: "LEFT",
-    direction: "ANY",
+    direction: "DOWN",
     coordinate: [
       3,
       9,
@@ -3407,14 +3408,15 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_OMANYTE_CHAMBER_TOP_CAVE_IN",
   },
-  RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_HOLE_RIGHT: {
-    id: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_HOLE_RIGHT",
+  RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_RIGHT: {
+    id: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_RIGHT",
     mapId: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM",
     index: 2,
     areaId: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM",
-    type: "HOLE",
+    type: "CAVE",
+    polarity: "OUT",
     distinguisher: "RIGHT",
-    direction: "ANY",
+    direction: "DOWN",
     coordinate: [
       4,
       9,
@@ -3425,15 +3427,14 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_OMANYTE_CHAMBER_TOP_CAVE_IN",
   },
-  RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_LEFT: {
-    id: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_LEFT",
+  RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_HOLE_LEFT: {
+    id: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_HOLE_LEFT",
     mapId: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM",
     index: 3,
     areaId: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM",
-    type: "CAVE",
-    polarity: "OUT",
+    type: "HOLE",
     distinguisher: "LEFT",
-    direction: "DOWN",
+    direction: "ANY",
     coordinate: [
       3,
       1,
@@ -3444,15 +3445,14 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_OMANYTE_WORD_ROOM_NONE_LEFT",
   },
-  RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_RIGHT: {
-    id: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_RIGHT",
+  RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_HOLE_RIGHT: {
+    id: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_HOLE_RIGHT",
     mapId: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM",
     index: 4,
     areaId: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM",
-    type: "CAVE",
-    polarity: "OUT",
+    type: "HOLE",
     distinguisher: "RIGHT",
-    direction: "DOWN",
+    direction: "ANY",
     coordinate: [
       4,
       1,
@@ -3463,14 +3463,15 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_OMANYTE_WORD_ROOM_NONE_RIGHT",
   },
-  RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_HOLE_LEFT: {
-    id: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_HOLE_LEFT",
+  RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_LEFT: {
+    id: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_LEFT",
     mapId: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM",
     index: 1,
     areaId: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM",
-    type: "HOLE",
+    type: "CAVE",
+    polarity: "OUT",
     distinguisher: "LEFT",
-    direction: "ANY",
+    direction: "DOWN",
     coordinate: [
       3,
       9,
@@ -3481,14 +3482,15 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_AERODACTYL_CHAMBER_TOP_CAVE_IN",
   },
-  RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_HOLE_RIGHT: {
-    id: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_HOLE_RIGHT",
+  RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_RIGHT: {
+    id: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_RIGHT",
     mapId: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM",
     index: 2,
     areaId: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM",
-    type: "HOLE",
+    type: "CAVE",
+    polarity: "OUT",
     distinguisher: "RIGHT",
-    direction: "ANY",
+    direction: "DOWN",
     coordinate: [
       4,
       9,
@@ -3499,15 +3501,14 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_AERODACTYL_CHAMBER_TOP_CAVE_IN",
   },
-  RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_LEFT: {
-    id: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_LEFT",
+  RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_HOLE_LEFT: {
+    id: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_HOLE_LEFT",
     mapId: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM",
     index: 3,
     areaId: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM",
-    type: "CAVE",
-    polarity: "OUT",
+    type: "HOLE",
     distinguisher: "LEFT",
-    direction: "DOWN",
+    direction: "ANY",
     coordinate: [
       3,
       1,
@@ -3518,15 +3519,14 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_AERODACTYL_WORD_ROOM_NONE_LEFT",
   },
-  RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_RIGHT: {
-    id: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_RIGHT",
+  RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_HOLE_RIGHT: {
+    id: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_HOLE_RIGHT",
     mapId: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM",
     index: 4,
     areaId: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM",
-    type: "CAVE",
-    polarity: "OUT",
+    type: "HOLE",
     distinguisher: "RIGHT",
-    direction: "DOWN",
+    direction: "ANY",
     coordinate: [
       4,
       1,
