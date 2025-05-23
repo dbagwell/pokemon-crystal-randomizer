@@ -3584,9 +3584,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   OLIVINE_PORT_SOUTH_AREA: {
     id: "OLIVINE_PORT_SOUTH_AREA",
     accessOptions: [
-      "OLIVINE_PORT_SOUTH_AREA_SHIP_DOOR_IN",
       [
-        "OLIVINE_PORT_NORTH_AREA",
+        "VERMILION_PORT_NORTH_AREA",
         "S_S_TICKET",
       ],
     ],
@@ -3621,9 +3620,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   VERMILION_PORT_SOUTH_AREA: {
     id: "VERMILION_PORT_SOUTH_AREA",
     accessOptions: [
-      "VERMILION_PORT_SOUTH_AREA_SHIP_DOOR_IN",
       [
-        "VERMILION_PORT_NORTH_AREA",
+        "OLIVINE_PORT_NORTH_AREA",
         "S_S_TICKET",
       ],
     ],
@@ -3638,15 +3636,17 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       ],
     ],
   },
-  FAST_SHIP_1F: {
-    id: "FAST_SHIP_1F",
-    accessOptions: [
-      "FAST_SHIP_1F_DOOR_OUT",
-    ],
-  },
   FAST_SHIP_1F_MAIN_AREA: {
     id: "FAST_SHIP_1F_MAIN_AREA",
     accessOptions: [
+      [
+        "VERMILION_PORT_NORTH_AREA",
+        "S_S_TICKET",
+      ],
+      [
+        "OLIVINE_PORT_NORTH_AREA",
+        "S_S_TICKET",
+      ],
       "FAST_SHIP_1F_MAIN_AREA_NE_DOOR_IN",
       "FAST_SHIP_1F_MAIN_AREA_NNE_DOOR_IN",
       "FAST_SHIP_1F_MAIN_AREA_NNW_DOOR_IN",

@@ -15044,27 +15044,6 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "OLIVINE_PORT_PASSAGE_TUNNEL_AREA_SOUTH_STAIRS_UP",
   },
-  OLIVINE_PORT_SOUTH_AREA_SHIP_DOOR_IN: {
-    id: "OLIVINE_PORT_SOUTH_AREA_SHIP_DOOR_IN",
-    mapId: "OLIVINE_PORT",
-    index: 2,
-    areaId: "OLIVINE_PORT_SOUTH_AREA",
-    type: "DOOR",
-    polarity: "IN",
-    direction: "DOWN",
-    accessRequirements: [
-      "S_S_TICKET",
-    ],
-    coordinate: [
-      7,
-      23,
-    ],
-    romOffset: [
-      29,
-      19743,
-    ],
-    linkedWarpId: "FAST_SHIP_1F_DOOR_OUT",
-  },
   VERMILION_PORT_NORTH_AREA_PASSAGE_STAIRS_DOWN: {
     id: "VERMILION_PORT_NORTH_AREA_PASSAGE_STAIRS_DOWN",
     mapId: "VERMILION_PORT",
@@ -15082,44 +15061,6 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       20710,
     ],
     linkedWarpId: "VERMILION_PORT_PASSAGE_TUNNEL_AREA_SOUTH_STAIRS_UP",
-  },
-  VERMILION_PORT_SOUTH_AREA_SHIP_DOOR_IN: {
-    id: "VERMILION_PORT_SOUTH_AREA_SHIP_DOOR_IN",
-    mapId: "VERMILION_PORT",
-    index: 2,
-    areaId: "VERMILION_PORT_SOUTH_AREA",
-    type: "DOOR",
-    polarity: "IN",
-    direction: "DOWN",
-    accessRequirements: [
-      "S_S_TICKET",
-    ],
-    coordinate: [
-      7,
-      17,
-    ],
-    romOffset: [
-      29,
-      20714,
-    ],
-    linkedWarpId: "FAST_SHIP_1F_DOOR_OUT",
-  },
-  FAST_SHIP_1F_DOOR_OUT: {
-    id: "FAST_SHIP_1F_DOOR_OUT",
-    mapId: "FAST_SHIP_1F",
-    index: 1,
-    areaId: "FAST_SHIP_1F",
-    type: "DOOR",
-    polarity: "OUT",
-    direction: "UP",
-    coordinate: [
-      25,
-      1,
-    ],
-    romOffset: [
-      29,
-      21748,
-    ],
   },
   FAST_SHIP_1F_MAIN_AREA_NE_DOOR_IN: {
     id: "FAST_SHIP_1F_MAIN_AREA_NE_DOOR_IN",
