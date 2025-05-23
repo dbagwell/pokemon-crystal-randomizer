@@ -1,11 +1,9 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
 import type { Settings } from "@shared/appData/settingsFromViewModel"
-import { logicalAccessAreasMap } from "@shared/gameData/logicalAccessAreas"
-import { warpsMap } from "@shared/gameData/warps"
 import type { ItemLocation } from "@shared/types/gameData/itemLocation"
-import type { LogicalAreaAccessOption } from "@shared/types/gameData/logicalAccessArea"
-import type { AccessRequirement } from "@shared/types/gameData/warp"
+import type { LogicalAccessArea, LogicalAreaAccessOption } from "@shared/types/gameData/logicalAccessArea"
+import type { AccessRequirement, Warp } from "@shared/types/gameData/warp"
 import { type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { type BadgeItemId, badgeItemIds, ballItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
@@ -94,7 +92,6 @@ export const shuffleItems = (
   romInfo: ROMInfo,
   random: Random,
 ) => {
-  const unshuffledItemLocations: ItemLocationId[] = []
   const locationsToShuffle: { locationId: ItemLocationId, shuffleGroupIndex: number }[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   
@@ -127,14 +124,12 @@ export const shuffleItems = (
       })
       
       location.itemId = undefined as unknown as ItemId
-    } else {
-      unshuffledItemLocations.push(location.id)
     }
   })
   
   const progressionItemIds = new Set<ItemId>(badgeItemIds)
   
-  Object.values(logicalAccessAreasMap).forEach((area) => {
+  Object.values(romInfo.gameData.areas).forEach((area) => {
     area.accessOptions.forEach((accessOption) => {
       if (Array.isArray(accessOption)) {
         accessOption.forEach((requirement) => {
@@ -146,7 +141,7 @@ export const shuffleItems = (
     })
   })
   
-  Object.values(warpsMap).forEach((warp) => {
+  Object.values(romInfo.gameData.warps).forEach((warp) => {
     warp.accessRequirements?.forEach((accessRequirement) => {
       if (itemIds.includes(accessRequirement as ItemId)) {
         progressionItemIds.add(accessRequirement as ItemId)
@@ -181,6 +176,8 @@ export const shuffleItems = (
     while (!foundLocation) {
       const accessibleItemLocationsWithoutSelectedItem = getAccessibleItemLocations({
         itemLocationsMap: romInfo.gameData.itemLocations,
+        warpsMap: romInfo.gameData.warps,
+        areasMap: romInfo.gameData.areas,
         usableItems: remainingProgressionItems.map((itemInfo) => {
           return itemInfo.itemId
         }),
@@ -192,6 +189,8 @@ export const shuffleItems = (
       
       const accessibleItemLocationsWithoutOtherItems = getAccessibleItemLocations({
         itemLocationsMap: romInfo.gameData.itemLocations,
+        warpsMap: romInfo.gameData.warps,
+        areasMap: romInfo.gameData.areas,
         usableItems: [],
       })
       
@@ -231,10 +230,14 @@ export const syncContestItems = (romInfo: ROMInfo) => {
 
 const getAccessibleItemLocations = (params: {
   itemLocationsMap: IdMap<ItemLocationId, ItemLocation>
+  warpsMap: IdMap<WarpId, Warp>
+  areasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea>
   usableItems: ItemId[]
 }): ItemLocationId[] => {
   const {
     itemLocationsMap,
+    warpsMap,
+    areasMap,
     usableItems,
   } = params
   
@@ -260,6 +263,8 @@ const getAccessibleItemLocations = (params: {
       return accessibleWarps.includes(requirement as WarpId)
     } else if (logicalAccessAreaIds.includes(requirement as LogicalAccessAreaId)) {
       return accessibleAreas.includes(requirement as LogicalAccessAreaId)
+    } else if (itemLocationIds.includes(requirement as ItemLocationId)) {
+      return accessibleItemLocations.includes(requirement as ItemLocationId)
     } else if (itemIds.includes(requirement as ItemId)) {
       return accessibleItems.includes(requirement as ItemId)
     } else if (pokemonIds.includes(requirement as PokemonId)) {
@@ -291,7 +296,7 @@ const getAccessibleItemLocations = (params: {
     logicalAccessAreaIds.filter((areaId) => {
       return !accessibleAreas.includes(areaId)
     }).forEach((areaId) => {
-      if (logicalAccessAreasMap[areaId].accessOptions.reduce((result, accessOption) => {
+      if (areasMap[areaId].accessOptions.reduce((result, accessOption) => {
         return result || isAccessRequirementSatisfied(accessOption)
       }, false)) {
         accessibleAreas.push(areaId)

@@ -2,6 +2,7 @@ import type { DataHunk } from "@lib/generator/patch"
 import { DataFormat } from "@lib/generator/patchInfo"
 import { encounters } from "@shared/gameData/encounters"
 import { itemLocationsMap } from "@shared/gameData/itemLocations"
+import { logicalAccessAreasMap } from "@shared/gameData/logicalAccessAreas"
 import { mapObjectEvents } from "@shared/gameData/mapObjectEvents"
 import { martsMap } from "@shared/gameData/marts"
 import { oddEggs } from "@shared/gameData/oddEggs"
@@ -9,6 +10,7 @@ import { pokemonMap } from "@shared/gameData/pokemon"
 import { teachableMovesMap } from "@shared/gameData/teachableMoves"
 import { tradesMap } from "@shared/gameData/trades"
 import { trainers } from "@shared/gameData/trainers"
+import { warpsMap } from "@shared/gameData/warps"
 import { eventPokemonMap } from "@shared/types/gameData/eventPokemon"
 import type { GameData } from "@shared/types/gameData/gameData"
 import { bytesFrom } from "@utils"
@@ -50,6 +52,8 @@ export class ROMInfo {
       marts: JSON.parse(JSON.stringify(martsMap)),
       moveTutorCost: 4000,
       itemLocations: JSON.parse(JSON.stringify(itemLocationsMap)),
+      warps: JSON.parse(JSON.stringify(warpsMap)),
+      areas: JSON.parse(JSON.stringify(logicalAccessAreasMap)),
     }
   }
   

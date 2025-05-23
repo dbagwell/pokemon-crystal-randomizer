@@ -1,4 +1,5 @@
 import type { GameMapId } from "@shared/types/gameDataIds/gameMaps"
+import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
 import type { ItemId } from "@shared/types/gameDataIds/items"
 import type { LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
@@ -22,6 +23,7 @@ export type Warp = {
 export type AccessRequirement =
   | WarpId
   | LogicalAccessAreaId
+  | ItemLocationId
   | PokemonId
   | ItemId
   | number

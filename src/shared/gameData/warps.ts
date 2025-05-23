@@ -1370,10 +1370,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "UP",
     direction: "ANY",
     accessRequirements: [
-      "HALL_OF_FAME",
-      "SUICUNE",
-      "ENTEI",
-      "RAIKOU",
+      "TIN_TOWER_1F_NORTH_SAGES_GIFT",
     ],
     coordinate: [
       10,
