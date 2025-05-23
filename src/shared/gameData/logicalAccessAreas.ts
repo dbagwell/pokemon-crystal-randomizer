@@ -22,9 +22,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   },
   OLIVINE_HOUSE_BETA: {
     id: "OLIVINE_HOUSE_BETA",
-    accessOptions: [
-      "OLIVINE_CITY_BETA_HOUSE_DOOR_IN",
-    ],
+    accessOptions: [],
   },
   OLIVINE_PUNISHMENT_SPEECH_HOUSE: {
     id: "OLIVINE_PUNISHMENT_SPEECH_HOUSE",
@@ -2209,9 +2207,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   },
   CINNABAR_POKECENTER_2F_BETA: {
     id: "CINNABAR_POKECENTER_2F_BETA",
-    accessOptions: [
-      "CINNABAR_POKECENTER_1F_STAIRS_UP",
-    ],
+    accessOptions: [],
   },
   ROUTE_19_FUCHSIA_GATE: {
     id: "ROUTE_19_FUCHSIA_GATE",
@@ -2327,9 +2323,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   },
   CERULEAN_POKECENTER_2F_BETA: {
     id: "CERULEAN_POKECENTER_2F_BETA",
-    accessOptions: [
-      "CERULEAN_POKECENTER_1F_DOOR_OUT_LEFT",
-    ],
+    accessOptions: [],
   },
   CERULEAN_GYM: {
     id: "CERULEAN_GYM",
@@ -2351,9 +2345,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   },
   ROUTE_10_POKECENTER_2F_BETA: {
     id: "ROUTE_10_POKECENTER_2F_BETA",
-    accessOptions: [
-      "ROUTE_10_POKECENTER_1F_STAIRS_UP",
-    ],
+    accessOptions: [],
   },
   POWER_PLANT: {
     id: "POWER_PLANT",
@@ -2998,8 +2990,10 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "GOLDENROD_MAGNET_TRAIN_STATION",
     accessOptions: [
       "GOLDENROD_CITY_MAIN_AREA_TRAIN_STATION_DOOR_IN",
-      "SAFFRON_MAGNET_TRAIN_STATION_TRAIN_RIGHT_DOOR_IN",
-      "SAFFRON_MAGNET_TRAIN_STATION_TRAIN_LEFT_DOOR_IN",
+      [
+        "SAFFRON_MAGNET_TRAIN_STATION",
+        "PASS",
+      ],
     ],
   },
   GOLDENROD_FLOWER_SHOP: {
@@ -3233,9 +3227,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   },
   VERMILION_POKECENTER_2F_BETA: {
     id: "VERMILION_POKECENTER_2F_BETA",
-    accessOptions: [
-      "VERMILION_POKECENTER_1F_STAIRS_UP",
-    ],
+    accessOptions: [],
   },
   POKEMON_FAN_CLUB: {
     id: "POKEMON_FAN_CLUB",
@@ -3385,9 +3377,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   },
   PEWTER_POKECENTER_2F_BETA: {
     id: "PEWTER_POKECENTER_2F_BETA",
-    accessOptions: [
-      "PEWTER_POKECENTER_1F_STAIRS_UP",
-    ],
+    accessOptions: [],
   },
   PEWTER_SNOOZE_SPEECH_HOUSE: {
     id: "PEWTER_SNOOZE_SPEECH_HOUSE",
@@ -3752,9 +3742,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   },
   FUCHSIA_POKECENTER_2F_BETA: {
     id: "FUCHSIA_POKECENTER_2F_BETA",
-    accessOptions: [
-      "FUCHSIA_POKECENTER_1F_STAIRS_UP",
-    ],
+    accessOptions: [],
   },
   SAFARI_ZONE_WARDENS_HOME: {
     id: "SAFARI_ZONE_WARDENS_HOME",
@@ -3848,9 +3836,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   },
   LAVENDER_POKECENTER_2F_BETA: {
     id: "LAVENDER_POKECENTER_2F_BETA",
-    accessOptions: [
-      "LAVENDER_POKECENTER_1F_STAIRS_UP",
-    ],
+    accessOptions: [],
   },
   MR_FUJIS_HOUSE: {
     id: "MR_FUJIS_HOUSE",
@@ -4211,9 +4197,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   },
   CELADON_POKECENTER_2F_BETA: {
     id: "CELADON_POKECENTER_2F_BETA",
-    accessOptions: [
-      "CELADON_POKECENTER_1F_STAIRS_UP",
-    ],
+    accessOptions: [],
   },
   CELADON_GAME_CORNER: {
     id: "CELADON_GAME_CORNER",
@@ -4656,9 +4640,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   },
   VIRIDIAN_POKECENTER_2F_BETA: {
     id: "VIRIDIAN_POKECENTER_2F_BETA",
-    accessOptions: [
-      "VIRIDIAN_POKECENTER_1F_STAIRS_UP",
-    ],
+    accessOptions: [],
   },
   ROUTE_2_NUGGET_HOUSE: {
     id: "ROUTE_2_NUGGET_HOUSE",
@@ -5015,9 +4997,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   },
   SAFFRON_POKECENTER_2F_BETA: {
     id: "SAFFRON_POKECENTER_2F_BETA",
-    accessOptions: [
-      "SAFFRON_POKECENTER_1F_STAIRS_UP",
-    ],
+    accessOptions: [],
   },
   MR_PSYCHICS_HOUSE: {
     id: "MR_PSYCHICS_HOUSE",
@@ -5029,8 +5009,10 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "SAFFRON_MAGNET_TRAIN_STATION",
     accessOptions: [
       "SAFFRON_CITY_TRAIN_STATION_DOOR_IN",
-      "GOLDENROD_MAGNET_TRAIN_STATION_TRAIN_RIGHT_DOOR_IN",
-      "GOLDENROD_MAGNET_TRAIN_STATION_TRAIN_LEFT_DOOR_IN",
+      [
+        "GOLDENROD_MAGNET_TRAIN_STATION",
+        "PASS",
+      ],
     ],
   },
   SILPH_CO_1F: {

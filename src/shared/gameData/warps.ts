@@ -151,7 +151,6 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       39,
       17924,
     ],
-    linkedWarpId: "OLIVINE_CITY_BETA_HOUSE_DOOR_IN",
   },
   OLIVINE_HOUSE_BETA_DOOR_OUT_RIGHT: {
     id: "OLIVINE_HOUSE_BETA_DOOR_OUT_RIGHT",
@@ -170,7 +169,6 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       39,
       17928,
     ],
-    linkedWarpId: "OLIVINE_CITY_BETA_HOUSE_DOOR_IN",
   },
   OLIVINE_PUNISHMENT_SPEECH_HOUSE_DOOR_OUT_LEFT: {
     id: "OLIVINE_PUNISHMENT_SPEECH_HOUSE_DOOR_OUT_LEFT",
@@ -603,24 +601,6 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       19673,
     ],
     linkedWarpId: "OLIVINE_TIMS_HOUSE_DOOR_OUT_LEFT",
-  },
-  OLIVINE_CITY_BETA_HOUSE_DOOR_IN: {
-    id: "OLIVINE_CITY_BETA_HOUSE_DOOR_IN",
-    mapId: "OLIVINE_CITY",
-    index: 4,
-    areaId: "OLIVINE_CITY",
-    type: "DOOR",
-    polarity: "IN",
-    direction: "UP",
-    coordinate: [
-      0,
-      0,
-    ],
-    romOffset: [
-      106,
-      19677,
-    ],
-    linkedWarpId: "OLIVINE_HOUSE_BETA_DOOR_OUT_LEFT",
   },
   OLIVINE_CITY_RIGHT_NORTH_EAST_HOUSE_DOOR_IN: {
     id: "OLIVINE_CITY_RIGHT_NORTH_EAST_HOUSE_DOOR_IN",
@@ -12920,48 +12900,6 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "GOLDENROD_CITY_MAIN_AREA_TRAIN_STATION_DOOR_IN",
   },
-  GOLDENROD_MAGNET_TRAIN_STATION_TRAIN_LEFT_DOOR_IN: {
-    id: "GOLDENROD_MAGNET_TRAIN_STATION_TRAIN_LEFT_DOOR_IN",
-    mapId: "GOLDENROD_MAGNET_TRAIN_STATION",
-    index: 3,
-    areaId: "GOLDENROD_MAGNET_TRAIN_STATION",
-    type: "DOOR",
-    polarity: "IN",
-    direction: "UP",
-    accessRequirements: [
-      "PASS",
-    ],
-    coordinate: [
-      6,
-      5,
-    ],
-    romOffset: [
-      21,
-      21290,
-    ],
-    linkedWarpId: "SAFFRON_MAGNET_TRAIN_STATION_TRAIN_RIGHT_DOOR_IN",
-  },
-  GOLDENROD_MAGNET_TRAIN_STATION_TRAIN_RIGHT_DOOR_IN: {
-    id: "GOLDENROD_MAGNET_TRAIN_STATION_TRAIN_RIGHT_DOOR_IN",
-    mapId: "GOLDENROD_MAGNET_TRAIN_STATION",
-    index: 4,
-    areaId: "GOLDENROD_MAGNET_TRAIN_STATION",
-    type: "DOOR",
-    polarity: "IN",
-    direction: "UP",
-    accessRequirements: [
-      "PASS",
-    ],
-    coordinate: [
-      11,
-      5,
-    ],
-    romOffset: [
-      21,
-      21294,
-    ],
-    linkedWarpId: "SAFFRON_MAGNET_TRAIN_STATION_TRAIN_LEFT_DOOR_IN",
-  },
   GOLDENROD_FLOWER_SHOP_DOOR_OUT_LEFT: {
     id: "GOLDENROD_FLOWER_SHOP_DOOR_OUT_LEFT",
     mapId: "GOLDENROD_FLOWER_SHOP",
@@ -22878,48 +22816,6 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       27540,
     ],
     linkedWarpId: "SAFFRON_CITY_TRAIN_STATION_DOOR_IN",
-  },
-  SAFFRON_MAGNET_TRAIN_STATION_TRAIN_LEFT_DOOR_IN: {
-    id: "SAFFRON_MAGNET_TRAIN_STATION_TRAIN_LEFT_DOOR_IN",
-    mapId: "SAFFRON_MAGNET_TRAIN_STATION",
-    index: 3,
-    areaId: "SAFFRON_MAGNET_TRAIN_STATION",
-    type: "DOOR",
-    polarity: "IN",
-    direction: "UP",
-    accessRequirements: [
-      "PASS",
-    ],
-    coordinate: [
-      6,
-      5,
-    ],
-    romOffset: [
-      98,
-      27544,
-    ],
-    linkedWarpId: "GOLDENROD_MAGNET_TRAIN_STATION_TRAIN_RIGHT_DOOR_IN",
-  },
-  SAFFRON_MAGNET_TRAIN_STATION_TRAIN_RIGHT_DOOR_IN: {
-    id: "SAFFRON_MAGNET_TRAIN_STATION_TRAIN_RIGHT_DOOR_IN",
-    mapId: "SAFFRON_MAGNET_TRAIN_STATION",
-    index: 4,
-    areaId: "SAFFRON_MAGNET_TRAIN_STATION",
-    type: "DOOR",
-    polarity: "IN",
-    direction: "UP",
-    accessRequirements: [
-      "PASS",
-    ],
-    coordinate: [
-      11,
-      5,
-    ],
-    romOffset: [
-      98,
-      27548,
-    ],
-    linkedWarpId: "GOLDENROD_MAGNET_TRAIN_STATION_TRAIN_LEFT_DOOR_IN",
   },
   SILPH_CO_1F_DOOR_OUT_LEFT: {
     id: "SILPH_CO_1F_DOOR_OUT_LEFT",
