@@ -1887,7 +1887,6 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "SAFARI_ZONE_BETA_GATE_DOOR_IN_LEFT",
       "SAFARI_ZONE_BETA_GATE_DOOR_IN_RIGHT",
-      "FUCHSIA_CITY_EAST_GATE_DOOR_IN_UPPER",
     ],
   },
   SAFARI_ZONE_BETA: {
@@ -4705,6 +4704,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "BATTLE_TOWER_ELEVATOR",
     accessOptions: [
       "BATTLE_TOWER_HALLWAY_ELEVATOR_DOOR_IN",
+      "BATTLE_TOWER_1F",
     ],
   },
   BATTLE_TOWER_HALLWAY: {
