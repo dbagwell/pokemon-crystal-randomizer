@@ -2021,7 +2021,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   BURNED_TOWER_1F_LADDER_DOWN: {
     id: "BURNED_TOWER_1F_LADDER_DOWN",
     mapId: "BURNED_TOWER_1F",
-    index: 4,
+    index: 14,
     areaId: "BURNED_TOWER_1F",
     type: "LADDER",
     polarity: "DOWN",
@@ -2037,6 +2037,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       97,
       24809,
     ],
+    linkedWarpId: "BURNED_TOWER_B1F_LADDER_UP",
   },
   BURNED_TOWER_B1F_NONE: {
     id: "BURNED_TOWER_B1F_NONE",
@@ -2058,7 +2059,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   BURNED_TOWER_B1F_LADDER_UP: {
     id: "BURNED_TOWER_B1F_LADDER_UP",
     mapId: "BURNED_TOWER_B1F",
-    index: 2,
+    index: 6,
     areaId: "BURNED_TOWER_B1F",
     type: "LADDER",
     polarity: "UP",
@@ -2071,6 +2072,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       97,
       25589,
     ],
+    linkedWarpId: "BURNED_TOWER_1F_LADDER_DOWN",
   },
   NATIONAL_PARK_EAST_GATE_DOOR_IN_UPPER: {
     id: "NATIONAL_PARK_EAST_GATE_DOOR_IN_UPPER",
@@ -8375,7 +8377,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_1_6: {
     id: "ECRUTEAK_GYM_HOLE_1_6",
     mapId: "ECRUTEAK_GYM",
-    index: 8,
+    index: 9,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "1_6",
@@ -8393,7 +8395,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_3_2: {
     id: "ECRUTEAK_GYM_HOLE_3_2",
     mapId: "ECRUTEAK_GYM",
-    index: 9,
+    index: 11,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "3_2",
@@ -8411,7 +8413,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_3_3: {
     id: "ECRUTEAK_GYM_HOLE_3_3",
     mapId: "ECRUTEAK_GYM",
-    index: 10,
+    index: 12,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "3_3",
@@ -8429,7 +8431,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_3_4: {
     id: "ECRUTEAK_GYM_HOLE_3_4",
     mapId: "ECRUTEAK_GYM",
-    index: 11,
+    index: 13,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "3_4",
@@ -8447,7 +8449,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_3_6: {
     id: "ECRUTEAK_GYM_HOLE_3_6",
     mapId: "ECRUTEAK_GYM",
-    index: 12,
+    index: 14,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "3_6",
@@ -8465,7 +8467,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_4_6: {
     id: "ECRUTEAK_GYM_HOLE_4_6",
     mapId: "ECRUTEAK_GYM",
-    index: 13,
+    index: 15,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "4_6",
@@ -8483,7 +8485,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_5_3: {
     id: "ECRUTEAK_GYM_HOLE_5_3",
     mapId: "ECRUTEAK_GYM",
-    index: 14,
+    index: 16,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "5_3",
@@ -8501,7 +8503,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_5_4: {
     id: "ECRUTEAK_GYM_HOLE_5_4",
     mapId: "ECRUTEAK_GYM",
-    index: 15,
+    index: 17,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "5_4",
@@ -8519,7 +8521,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_5_5: {
     id: "ECRUTEAK_GYM_HOLE_5_5",
     mapId: "ECRUTEAK_GYM",
-    index: 16,
+    index: 18,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "5_5",
@@ -8537,7 +8539,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_5_1: {
     id: "ECRUTEAK_GYM_HOLE_5_1",
     mapId: "ECRUTEAK_GYM",
-    index: 17,
+    index: 20,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "5_1",
@@ -8555,7 +8557,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_6_1: {
     id: "ECRUTEAK_GYM_HOLE_6_1",
     mapId: "ECRUTEAK_GYM",
-    index: 18,
+    index: 21,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "6_1",
@@ -8573,7 +8575,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_7_1: {
     id: "ECRUTEAK_GYM_HOLE_7_1",
     mapId: "ECRUTEAK_GYM",
-    index: 19,
+    index: 22,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "7_1",
@@ -8591,7 +8593,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_8_1: {
     id: "ECRUTEAK_GYM_HOLE_8_1",
     mapId: "ECRUTEAK_GYM",
-    index: 20,
+    index: 23,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "8_1",
@@ -8609,7 +8611,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_7_3: {
     id: "ECRUTEAK_GYM_HOLE_7_3",
     mapId: "ECRUTEAK_GYM",
-    index: 21,
+    index: 24,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "7_3",
@@ -8627,7 +8629,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_7_4: {
     id: "ECRUTEAK_GYM_HOLE_7_4",
     mapId: "ECRUTEAK_GYM",
-    index: 22,
+    index: 25,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "7_4",
@@ -8645,7 +8647,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_9_1: {
     id: "ECRUTEAK_GYM_HOLE_9_1",
     mapId: "ECRUTEAK_GYM",
-    index: 23,
+    index: 26,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "9_1",
@@ -8663,7 +8665,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_9_2: {
     id: "ECRUTEAK_GYM_HOLE_9_2",
     mapId: "ECRUTEAK_GYM",
-    index: 24,
+    index: 27,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "9_2",
@@ -8681,7 +8683,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_9_3: {
     id: "ECRUTEAK_GYM_HOLE_9_3",
     mapId: "ECRUTEAK_GYM",
-    index: 25,
+    index: 28,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "9_3",
@@ -8699,7 +8701,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_9_4: {
     id: "ECRUTEAK_GYM_HOLE_9_4",
     mapId: "ECRUTEAK_GYM",
-    index: 26,
+    index: 29,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "9_4",
@@ -8717,7 +8719,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_7_6: {
     id: "ECRUTEAK_GYM_HOLE_7_6",
     mapId: "ECRUTEAK_GYM",
-    index: 27,
+    index: 30,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "7_6",
@@ -8735,7 +8737,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_8_6: {
     id: "ECRUTEAK_GYM_HOLE_8_6",
     mapId: "ECRUTEAK_GYM",
-    index: 28,
+    index: 31,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "8_6",
@@ -8753,7 +8755,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_9_6: {
     id: "ECRUTEAK_GYM_HOLE_9_6",
     mapId: "ECRUTEAK_GYM",
-    index: 29,
+    index: 32,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "9_6",
@@ -8771,7 +8773,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
   ECRUTEAK_GYM_HOLE_10_6: {
     id: "ECRUTEAK_GYM_HOLE_10_6",
     mapId: "ECRUTEAK_GYM",
-    index: 30,
+    index: 33,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
     distinguisher: "10_6",
