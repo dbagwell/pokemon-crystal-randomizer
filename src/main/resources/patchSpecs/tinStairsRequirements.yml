@@ -1,0 +1,18 @@
+description: "Changes the tin tower stairs requirement to having Rainbow Wing."
+values:
+  animateStairs: "48 00 78 48 86 85 1B 00 91"
+changes:
+- description: "Reveals the stairs when the map is loaded if the player has the rainbow wing."
+  locations:
+  - bank: 97
+    address: 0x5084
+  value: "21 B2 00"
+- description: "Script that animates the stairs appearing."
+  locations:
+  - bank: 97
+  value: "$animateStairs"
+- description: "Checks the new rainbow wing requirement then calls the script to animate the stairs."
+  locations:
+  - bank: 97
+    address: 0x519E
+  value: "21 B2 08 B5 51 00 @$animateStairs"

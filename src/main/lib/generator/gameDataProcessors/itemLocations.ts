@@ -95,6 +95,28 @@ export const shuffleItems = (
   const locationsToShuffle: { locationId: ItemLocationId, shuffleGroupIndex: number }[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   
+  if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("SKIP_BEASTS")) {
+    romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements = romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements?.filter((requirement) => {
+      return requirement !== "SUICUNE" && requirement !== "RAIKOU" && requirement !== "ENTEI"
+    })
+  }
+  
+  if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("SKIP_E4")) {
+    romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements = romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements?.filter((requirement) => {
+      return requirement !== "HALL_OF_FAME"
+    })
+  }
+  
+  if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("OPEN_STAIRS_WITH_RAINBOW_WING")) {
+    romInfo.gameData.warps["TIN_TOWER_1F_STAIRS_UP"].accessRequirements = romInfo.gameData.warps["TIN_TOWER_1F_STAIRS_UP"].accessRequirements?.map((requirement) => {
+      if (requirement === "TIN_TOWER_1F_NORTH_SAGES_GIFT") {
+        return "RAINBOW_WING"
+      } else {
+        return requirement
+      }
+    })
+  }
+  
   Object.values(romInfo.gameData.itemLocations).forEach((location) => {
     if (
       location.id === "NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL"

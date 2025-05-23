@@ -1161,18 +1161,23 @@ export const defaultSettingsViewModel = () => {
           createSimpleMultiSelectorViewModel({
             id: "CHANGE_TIN_TOWER_REQUIREMENTS" as const,
             name: "Change Tin Tower Requirements",
-            description: "Changes the requirements to be able to get the Rainbow Wing "
-              + "and reveal the staircase to the 2nd floor of Tin Tower.",
+            description: "Changes the requirements for getting the item (Rainbow Wing) from the Sage by the staircase on the first floor of Tin Tower "
+              + "and revealing the staircase to the 2nd floor of Tin Tower.",
             options: [
               createSimpleSelectorOption({
                 id: "SKIP_E4" as const,
                 name: "Change E4 Requirement",
-                description: "Instead of having to defeat Champion Lance, you just need to have the Clear Bell.",
+                description: "Changes the requirements for getting the item so that instead of having to defeat Champion Lance, you just need to have the Clear Bell.",
               }),
               createSimpleSelectorOption({
                 id: "SKIP_BEASTS" as const,
                 name: "Remove Beasts Requirement",
-                description: "Removes the requirement of needing to have a Suicune, an Entei and a Raikou from your game in your party or PC.",
+                description: "Changes the requirements for getting the item so that you no longer need to have a Suicune, an Entei and a Raikou from your game in your party or PC.",
+              }),
+              createSimpleSelectorOption({
+                id: "OPEN_STAIRS_WITH_RAINBOW_WING" as const,
+                name: "Open Stairs with Rainbow Wing",
+                description: "Changes the trigger for reveaing the staircase so that instead of having to have received the item from the Sage, you just need to have the Rainbow Wing.",
               }),
             ] as const,
           }),
