@@ -81,7 +81,9 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_39",
     accessOptions: [
       "ROUTE_39_BARN_DOOR_OUT_LEFT",
+      "ROUTE_39_BARN_DOOR_OUT_RIGHT",
       "ROUTE_39_FARMHOUSE_DOOR_OUT_LEFT",
+      "ROUTE_39_FARMHOUSE_DOOR_OUT_RIGHT",
       "ROUTE_38",
       "OLIVINE_CITY",
     ],
@@ -90,15 +92,24 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "OLIVINE_CITY",
     accessOptions: [
       "OLIVINE_POKECENTER_1F_DOOR_OUT_LEFT",
+      "OLIVINE_POKECENTER_1F_DOOR_OUT_RIGHT",
       "OLIVINE_GYM_DOOR_OUT_LEFT",
+      "OLIVINE_GYM_DOOR_OUT_RIGHT",
       "OLIVINE_TIMS_HOUSE_DOOR_OUT_LEFT",
+      "OLIVINE_TIMS_HOUSE_DOOR_OUT_RIGHT",
       "OLIVINE_HOUSE_BETA_DOOR_OUT_LEFT",
+      "OLIVINE_HOUSE_BETA_DOOR_OUT_RIGHT",
       "OLIVINE_PUNISHMENT_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "OLIVINE_PUNISHMENT_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "OLIVINE_GOOD_ROD_HOUSE_DOOR_OUT_LEFT",
+      "OLIVINE_GOOD_ROD_HOUSE_DOOR_OUT_RIGHT",
       "OLIVINE_CAFE_DOOR_OUT_LEFT",
+      "OLIVINE_CAFE_DOOR_OUT_RIGHT",
       "OLIVINE_MART_DOOR_OUT_RIGHT",
       "OLIVINE_LIGHTHOUSE_1F_DOOR_OUT_LEFT",
+      "OLIVINE_LIGHTHOUSE_1F_DOOR_OUT_RIGHT",
       "OLIVINE_PORT_PASSAGE_ENTRANCE_AREA_DOOR_OUT_LEFT",
+      "OLIVINE_PORT_PASSAGE_ENTRANCE_AREA_DOOR_OUT_RIGHT",
       "OLIVINE_PORT_PASSAGE_ENTRANCE_AREA_DOOR_OUT_RIGHT",
       "ROUTE_39",
       "ROUTE_40",
@@ -209,10 +220,15 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "MAHOGANY_TOWN",
     accessOptions: [
       "MAHOGANY_MART_1F_DOOR_OUT_LEFT",
+      "MAHOGANY_MART_1F_DOOR_OUT_RIGHT",
       "MAHOGANY_RED_GYARADOS_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "MAHOGANY_RED_GYARADOS_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "MAHOGANY_GYM_DOOR_OUT_LEFT",
+      "MAHOGANY_GYM_DOOR_OUT_RIGHT",
       "MAHOGANY_POKECENTER_1F_DOOR_OUT_LEFT",
+      "MAHOGANY_POKECENTER_1F_DOOR_OUT_RIGHT",
       "ROUTE_43_MAHOGANY_GATE_SOUTH_DOOR_OUT_LEFT",
+      "ROUTE_43_MAHOGANY_GATE_SOUTH_DOOR_OUT_RIGHT",
       "ROUTE_42_MAHOGANY_SIDE",
       "ROUTE_44",
     ],
@@ -419,6 +435,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_36_NATIONAL_PARK_GATE_WEST_DOOR_OUT_LOWER",
       "ROUTE_35_NATIONAL_PARK_GATE_NORTH_DOOR_OUT_LEFT",
       "ROUTE_35_NATIONAL_PARK_GATE_NORTH_DOOR_OUT_RIGHT",
+      "ROUTE_35_NATIONAL_PARK_GATE_NORTH_DOOR_OUT_RIGHT",
     ],
   },
   NATIONAL_PARK_BUG_CONTEST: {
@@ -426,6 +443,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_36_NATIONAL_PARK_GATE_WEST_DOOR_OUT_UPPER",
       "ROUTE_35_NATIONAL_PARK_GATE_NORTH_DOOR_OUT_LEFT",
+      "ROUTE_35_NATIONAL_PARK_GATE_NORTH_DOOR_OUT_RIGHT",
     ],
   },
   RADIO_TOWER_1F: {
@@ -489,6 +507,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "RUINS_OF_ALPH_OUTSIDE_GRASS_AREA",
     accessOptions: [
       "RUINS_OF_ALPH_HO_OH_CHAMBER_BOTTOM_CAVE_OUT_LEFT",
+      "RUINS_OF_ALPH_HO_OH_CHAMBER_BOTTOM_CAVE_OUT_RIGHT",
       "UNION_CAVE_B1F_NORTH_AREA_CAVE_OUT",
     ],
   },
@@ -496,9 +515,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "RUINS_OF_ALPH_OUTSIDE_MAIN_AREA",
     accessOptions: [
       "RUINS_OF_ALPH_KABUTO_CHAMBER_BOTTOM_CAVE_OUT_LEFT",
+      "RUINS_OF_ALPH_KABUTO_CHAMBER_BOTTOM_CAVE_OUT_RIGHT",
       "RUINS_OF_ALPH_INNER_CHAMBER_LADDER_UP",
       "RUINS_OF_ALPH_RESEARCH_CENTER_DOOR_OUT_LEFT",
+      "RUINS_OF_ALPH_RESEARCH_CENTER_DOOR_OUT_RIGHT",
       "ROUTE_36_RUINS_OF_ALPH_GATE_SOUTH_DOOR_OUT_LEFT",
+      "ROUTE_36_RUINS_OF_ALPH_GATE_SOUTH_DOOR_OUT_RIGHT",
       "ROUTE_32_RUINS_OF_ALPH_GATE_WEST_DOOR_OUT_UPPER",
       "ROUTE_32_RUINS_OF_ALPH_GATE_WEST_DOOR_OUT_LOWER",
       [
@@ -512,6 +534,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "RUINS_OF_ALPH_OUTSIDE_MIDDLE_LEDGE_AREA",
     accessOptions: [
       "RUINS_OF_ALPH_OMANYTE_CHAMBER_BOTTOM_CAVE_OUT_LEFT",
+      "RUINS_OF_ALPH_OMANYTE_CHAMBER_BOTTOM_CAVE_OUT_RIGHT",
       "RUINS_OF_ALPH_OUTSIDE_TOP_LEDGE_AREA",
     ],
   },
@@ -519,6 +542,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "RUINS_OF_ALPH_OUTSIDE_BOTTOM_LEDGE_AREA",
     accessOptions: [
       "RUINS_OF_ALPH_AERODACTYL_CHAMBER_BOTTOM_CAVE_OUT_LEFT",
+      "RUINS_OF_ALPH_AERODACTYL_CHAMBER_BOTTOM_CAVE_OUT_RIGHT",
       "RUINS_OF_ALPH_OUTSIDE_MIDDLE_LEDGE_AREA",
     ],
   },
@@ -532,28 +556,32 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "RUINS_OF_ALPH_HO_OH_CHAMBER",
     accessOptions: [
       "RUINS_OF_ALPH_OUTSIDE_GRASS_AREA_LEFT_CAVE_IN",
-      "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_HOLE_LEFT",
+      "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_LEFT",
+      "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_RIGHT",
     ],
   },
   RUINS_OF_ALPH_KABUTO_CHAMBER: {
     id: "RUINS_OF_ALPH_KABUTO_CHAMBER",
     accessOptions: [
       "RUINS_OF_ALPH_OUTSIDE_MAIN_AREA_TOP_CAVE_IN",
-      "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_HOLE_LEFT",
+      "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_LEFT",
+      "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_RIGHT",
     ],
   },
   RUINS_OF_ALPH_OMANYTE_CHAMBER: {
     id: "RUINS_OF_ALPH_OMANYTE_CHAMBER",
     accessOptions: [
       "RUINS_OF_ALPH_OUTSIDE_MIDDLE_LEDGE_AREA_CAVE_IN",
-      "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_HOLE_LEFT",
+      "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_LEFT",
+      "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_RIGHT",
     ],
   },
   RUINS_OF_ALPH_AERODACTYL_CHAMBER: {
     id: "RUINS_OF_ALPH_AERODACTYL_CHAMBER",
     accessOptions: [
       "RUINS_OF_ALPH_OUTSIDE_BOTTOM_LEDGE_AREA_CAVE_IN",
-      "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_HOLE_LEFT",
+      "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_LEFT",
+      "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_RIGHT",
     ],
   },
   RUINS_OF_ALPH_INNER_CHAMBER: {
@@ -605,12 +633,14 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_LEFT",
       "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_RIGHT",
+      "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_CAVE_OUT_RIGHT",
     ],
   },
   RUINS_OF_ALPH_KABUTO_WORD_ROOM: {
     id: "RUINS_OF_ALPH_KABUTO_WORD_ROOM",
     accessOptions: [
       "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_LEFT",
+      "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_RIGHT",
       "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_CAVE_OUT_RIGHT",
     ],
   },
@@ -619,12 +649,14 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_LEFT",
       "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_RIGHT",
+      "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_CAVE_OUT_RIGHT",
     ],
   },
   RUINS_OF_ALPH_AERODACTYL_WORD_ROOM: {
     id: "RUINS_OF_ALPH_AERODACTYL_WORD_ROOM",
     accessOptions: [
       "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_LEFT",
+      "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_RIGHT",
       "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_RIGHT",
     ],
   },
@@ -915,6 +947,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ILEX_FOREST_NORTH_AREA",
     accessOptions: [
       "ROUTE_34_ILEX_FOREST_GATE_SOUTH_DOOR_OUT_LEFT",
+      "ROUTE_34_ILEX_FOREST_GATE_SOUTH_DOOR_OUT_RIGHT",
       [
         "ILEX_FOREST_SOUTH_AREA",
         "HIVEBADGE",
@@ -940,6 +973,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "GOLDENROD_UNDERGOUND_SOUTH_ENTRANCE_STAIRS_DOWN",
       "GOLDENROD_UNDERGOUND_NORTH_ENTRANCE_STAIRS_DOWN",
       "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCE_DOOR_OUT_LEFT",
+      "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCE_DOOR_OUT_RIGHT",
       "GOLDENROD_UNDERGROUND_DOOR_IN",
       "GOLDENROD_UNDERGROUND_SWITCH_ROOM_STAIRS_UP",
     ],
@@ -949,6 +983,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCE_STAIRS_DOWN",
       "GOLDENROD_UNDERGROUND_WAREHOUSE_DOOR_OUT_LEFT",
+      "GOLDENROD_UNDERGROUND_WAREHOUSE_DOOR_OUT_RIGHT",
       "GOLDENROD_UNDERGROUND_WAREHOUSE_DOOR_OUT_RIGHT",
       "GOLDENROD_UNDERGROUND_SOUTH_STAIRS_UP",
       "GOLDENROD_CITY_SW_AREA_UNDERGROUND_ENTRANCE_DOOR_IN",
@@ -1646,6 +1681,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "DRAGONS_DEN_B1F_SOUTH_AREA",
     accessOptions: [
       "DRAGON_SHRINE_DOOR_OUT_LEFT",
+      "DRAGON_SHRINE_DOOR_OUT_RIGHT",
       "DRAGONS_DEN_B1F_SOUTH_SURF_AREA",
     ],
   },
@@ -1859,12 +1895,14 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "SAFARI_ZONE_FUCHSIA_GATE_BETA_TOP_DOOR_OUT_LEFT",
       "SAFARI_ZONE_FUCHSIA_GATE_BETA_TOP_DOOR_OUT_RIGHT",
+      "SAFARI_ZONE_FUCHSIA_GATE_BETA_TOP_DOOR_OUT_RIGHT",
     ],
   },
   VICTORY_ROAD_1F: {
     id: "VICTORY_ROAD_1F",
     accessOptions: [
       "VICTORY_ROAD_GATE_NORTH_AREA_DOOR_OUT_LEFT",
+      "VICTORY_ROAD_GATE_NORTH_AREA_DOOR_OUT_RIGHT",
       "VICTORY_ROAD_2F_SOUTH_AREA_LADDER_DOWN",
     ],
   },
@@ -2020,13 +2058,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_42_ECRUTEAK_GATE_WEST_DOOR_OUT_UPPER",
       "ROUTE_42_ECRUTEAK_GATE_WEST_DOOR_OUT_LOWER",
       "ECRUTEAK_TIN_TOWER_GATE_FRONT_AREA_DOOR_OUT_LEFT",
+      "ECRUTEAK_TIN_TOWER_GATE_FRONT_AREA_DOOR_OUT_RIGHT",
       "ECRUTEAK_POKECENTER_1F_DOOR_OUT_LEFT",
+      "ECRUTEAK_POKECENTER_1F_DOOR_OUT_RIGHT",
       "ECRUTEAK_LUGIA_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "ECRUTEAK_LUGIA_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "DANCE_THEATER_DOOR_OUT_LEFT",
+      "DANCE_THEATER_DOOR_OUT_RIGHT",
       "ECRUTEAK_MART_DOOR_OUT_RIGHT",
       "ECRUTEAK_GYM_DOOR_OUT_LEFT",
+      "ECRUTEAK_GYM_DOOR_OUT_RIGHT",
       "ECRUTEAK_ITEMFINDER_HOUSE_DOOR_OUT_LEFT",
+      "ECRUTEAK_ITEMFINDER_HOUSE_DOOR_OUT_RIGHT",
       "BURNED_TOWER_1F_DOOR_OUT_LEFT",
+      "BURNED_TOWER_1F_DOOR_OUT_RIGHT",
       "ROUTE_38_ECRUTEAK_GATE_EAST_DOOR_OUT_UPPER",
       "ROUTE_38_ECRUTEAK_GATE_EAST_DOOR_OUT_LOWER",
       "ROUTE_37",
@@ -2043,6 +2088,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "WISE_TRIOS_ROOM_DOOR_OUT_UPPER",
       "WISE_TRIOS_ROOM_DOOR_OUT_LOWER",
       "TIN_TOWER_1F_DOOR_OUT_LEFT",
+      "TIN_TOWER_1F_DOOR_OUT_RIGHT",
     ],
   },
   ROUTE_37: {
@@ -2155,6 +2201,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_29_ROUTE_46_GATE_NORTH_DOOR_OUT_LEFT",
       "ROUTE_29_ROUTE_46_GATE_NORTH_DOOR_OUT_RIGHT",
+      "ROUTE_29_ROUTE_46_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_46_NORTH_AREA",
     ],
   },
@@ -2169,11 +2216,16 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "BLACKTHORN_CITY",
     accessOptions: [
       "BLACKTHORN_GYM_1F_FRONT_AREA_DOOR_OUT_LEFT",
+      "BLACKTHORN_GYM_1F_FRONT_AREA_DOOR_OUT_RIGHT",
       "BLACKTHORN_DRAGON_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "BLACKTHORN_DRAGON_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "BLACKTHORN_EMYS_HOUSE_DOOR_OUT_LEFT",
+      "BLACKTHORN_EMYS_HOUSE_DOOR_OUT_RIGHT",
       "BLACKTHORN_MART_DOOR_OUT_RIGHT",
       "BLACKTHORN_POKECENTER_1F_DOOR_OUT_LEFT",
+      "BLACKTHORN_POKECENTER_1F_DOOR_OUT_RIGHT",
       "MOVE_DELETERS_HOUSE_DOOR_OUT_LEFT",
+      "MOVE_DELETERS_HOUSE_DOOR_OUT_RIGHT",
       "ICE_PATH_1F_BLACKTHORN_SIDE_CAVE_OUT",
       "ROUTE_45",
       [
@@ -2227,6 +2279,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_19",
     accessOptions: [
       "ROUTE_19_FUCHSIA_GATE_SOUTH_DOOR_OUT_LEFT",
+      "ROUTE_19_FUCHSIA_GATE_SOUTH_DOOR_OUT_RIGHT",
       "ROUTE_19_SURF_AREA",
     ],
   },
@@ -2271,6 +2324,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "CINNABAR_ISLAND",
     accessOptions: [
       "CINNABAR_POKECENTER_1F_DOOR_OUT_LEFT",
+      "CINNABAR_POKECENTER_1F_DOOR_OUT_RIGHT",
       "CINNABAR_ISLAND_SURF_AREA",
     ],
   },
@@ -2393,6 +2447,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_10_NORTH_MAIN_AREA",
     accessOptions: [
       "ROUTE_10_POKECENTER_1F_DOOR_OUT_LEFT",
+      "ROUTE_10_POKECENTER_1F_DOOR_OUT_RIGHT",
       "ROUTE_9",
     ],
   },
@@ -2400,6 +2455,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_10_NORTH_POWER_PLANT_AREA",
     accessOptions: [
       "POWER_PLANT_DOOR_OUT_LEFT",
+      "POWER_PLANT_DOOR_OUT_RIGHT",
       [
         "ROUTE_9",
         "FOGBADGE",
@@ -2430,6 +2486,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_25",
     accessOptions: [
       "BILLS_HOUSE_DOOR_OUT_LEFT",
+      "BILLS_HOUSE_DOOR_OUT_RIGHT",
       "ROUTE_24",
     ],
   },
@@ -2447,10 +2504,15 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "CERULEAN_CITY",
     accessOptions: [
       "CERULEAN_GYM_BADGE_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "CERULEAN_GYM_BADGE_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "CERULEAN_POLICE_STATION_DOOR_OUT_LEFT",
+      "CERULEAN_POLICE_STATION_DOOR_OUT_RIGHT",
       "CERULEAN_TRADE_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "CERULEAN_TRADE_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "CERULEAN_POKECENTER_1F_DOOR_OUT_LEFT",
+      "CERULEAN_POKECENTER_1F_DOOR_OUT_RIGHT",
       "CERULEAN_GYM_DOOR_OUT_LEFT",
+      "CERULEAN_GYM_DOOR_OUT_RIGHT",
       "CERULEAN_MART_DOOR_OUT_RIGHT",
       "ROUTE_24",
       "ROUTE_5",
@@ -2509,10 +2571,14 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "AZALEA_TOWN",
     accessOptions: [
       "AZALEA_POKECENTER_1F_DOOR_OUT_LEFT",
+      "AZALEA_POKECENTER_1F_DOOR_OUT_RIGHT",
       "CHARCOAL_KILN_DOOR_OUT_LEFT",
+      "CHARCOAL_KILN_DOOR_OUT_RIGHT",
       "AZALEA_MART_DOOR_OUT_RIGHT",
       "KURTS_HOUSE_DOOR_OUT_LEFT",
+      "KURTS_HOUSE_DOOR_OUT_RIGHT",
       "AZALEA_GYM_DOOR_OUT_LEFT",
+      "AZALEA_GYM_DOOR_OUT_RIGHT",
       "ILEX_FOREST_AZALEA_GATE_EAST_DOOR_OUT_UPPER",
       "ILEX_FOREST_AZALEA_GATE_EAST_DOOR_OUT_LOWER",
       "ROUTE_33",
@@ -2570,8 +2636,11 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_43_MAHOGANY_GATE_NORTH_DOOR_OUT_LEFT",
       "ROUTE_43_MAHOGANY_GATE_NORTH_DOOR_OUT_RIGHT",
+      "ROUTE_43_MAHOGANY_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_43_GATE_SOUTH_DOOR_OUT_LEFT",
+      "ROUTE_43_GATE_SOUTH_DOOR_OUT_RIGHT",
       "ROUTE_43_GATE_NORTH_DOOR_OUT_LEFT",
+      "ROUTE_43_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_43_GATE_NORTH_DOOR_OUT_RIGHT",
       "LAKE_OF_RAGE_MAIN_AREA",
     ],
@@ -2592,6 +2661,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "LAKE_OF_RAGE_NW_AREA",
     accessOptions: [
       "LAKE_OF_RAGE_HIDDEN_POWER_HOUSE_DOOR_OUT_LEFT",
+      "LAKE_OF_RAGE_HIDDEN_POWER_HOUSE_DOOR_OUT_RIGHT",
       "LAKE_OF_RAGE_CUT_AREA",
     ],
   },
@@ -2599,6 +2669,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "LAKE_OF_RAGE_MAIN_AREA",
     accessOptions: [
       "LAKE_OF_RAGE_MAGIKARP_HOUSE_DOOR_OUT_LEFT",
+      "LAKE_OF_RAGE_MAGIKARP_HOUSE_DOOR_OUT_RIGHT",
       "LAKE_OF_RAGE_CUT_AREA",
       "ROUTE_43",
       [
@@ -2645,6 +2716,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_32_SOUTH_AREA",
     accessOptions: [
       "ROUTE_32_POKECENTER_1F_DOOR_OUT_LEFT",
+      "ROUTE_32_POKECENTER_1F_DOOR_OUT_RIGHT",
       "UNION_CAVE_1F_NORTH_CAVE_OUT",
       "ROUTE_32_CUT_AREA",
       [
@@ -2668,7 +2740,9 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_35_GOLDENROD_GATE_NORTH_DOOR_OUT_LEFT",
       "ROUTE_35_GOLDENROD_GATE_NORTH_DOOR_OUT_RIGHT",
+      "ROUTE_35_GOLDENROD_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_35_NATIONAL_PARK_GATE_SOUTH_DOOR_OUT_LEFT",
+      "ROUTE_35_NATIONAL_PARK_GATE_SOUTH_DOOR_OUT_RIGHT",
       [
         "ROUTE_36_WEST_AREA",
         "HIVEBADGE",
@@ -2707,6 +2781,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_36_RUINS_OF_ALPH_GATE_NORTH_DOOR_OUT_LEFT",
       "ROUTE_36_RUINS_OF_ALPH_GATE_NORTH_DOOR_OUT_RIGHT",
+      "ROUTE_36_RUINS_OF_ALPH_GATE_NORTH_DOOR_OUT_RIGHT",
       "VIOLET_CITY",
       [
         "ROUTE_36_WEST_AREA",
@@ -2719,11 +2794,17 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "VIOLET_MART_DOOR_OUT_RIGHT",
       "VIOLET_GYM_DOOR_OUT_LEFT",
+      "VIOLET_GYM_DOOR_OUT_RIGHT",
       "EARLS_POKEMON_ACADEMY_DOOR_OUT_LEFT",
+      "EARLS_POKEMON_ACADEMY_DOOR_OUT_RIGHT",
       "VIOLET_NICKNAME_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "VIOLET_NICKNAME_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "VIOLET_POKECENTER_1F_DOOR_OUT_LEFT",
+      "VIOLET_POKECENTER_1F_DOOR_OUT_RIGHT",
       "VIOLET_KYLES_HOUSE_DOOR_OUT_LEFT",
+      "VIOLET_KYLES_HOUSE_DOOR_OUT_RIGHT",
       "SPROUT_TOWER_1F_CENTRAL_AREA_DOOR_OUT_LEFT",
+      "SPROUT_TOWER_1F_CENTRAL_AREA_DOOR_OUT_RIGHT",
       "ROUTE_31_VIOLET_GATE_WEST_DOOR_OUT_UPPER",
       "ROUTE_31_VIOLET_GATE_WEST_DOOR_OUT_LOWER",
       "ROUTE_32_NORTH_AREA",
@@ -2831,13 +2912,14 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "NATIONAL_PARK_EAST_GATE_DOOR_IN_UPPER",
       "NATIONAL_PARK_EAST_GATE_DOOR_IN_LOWER",
       "ROUTE_36_WEST_AREA_GATE_DOOR_IN_UPPER",
-      "ROUTE_36_WEST_AREA_GATE_DOOR_IN_LEFT",
+      "ROUTE_36_WEST_AREA_GATE_DOOR_IN_LOWER",
     ],
   },
   ROUTE_34_MAIN_AREA: {
     id: "ROUTE_34_MAIN_AREA",
     accessOptions: [
       "ROUTE_34_ILEX_FOREST_GATE_NORTH_DOOR_OUT_LEFT",
+      "ROUTE_34_ILEX_FOREST_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_34_ILEX_FOREST_GATE_NORTH_DOOR_OUT_RIGHT",
       "DAY_CARE_DOOR_OUT_UPPER",
       "DAY_CARE_DOOR_OUT_LOWER",
@@ -2849,6 +2931,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_34_DAY_CARE_AREA",
     accessOptions: [
       "DAY_CARE_DOOR_OUT_LEFT",
+      "DAY_CARE_DOOR_OUT_RIGHT",
     ],
   },
   ROUTE_34_SURF_AREA: {
@@ -2865,13 +2948,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "GOLDENROD_CITY_MAIN_AREA",
     accessOptions: [
       "GOLDENROD_GYM_DOOR_OUT_LEFT",
+      "GOLDENROD_GYM_DOOR_OUT_RIGHT",
       "GOLDENROD_MAGNET_TRAIN_STATION_DOOR_OUT_RIGHT",
       "GOLDENROD_NAME_RATER_DOOR_OUT_LEFT",
+      "GOLDENROD_NAME_RATER_DOOR_OUT_RIGHT",
       "GOLDENROD_DEPT_STORE_1F_DOOR_OUT_LEFT",
+      "GOLDENROD_DEPT_STORE_1F_DOOR_OUT_RIGHT",
       "RADIO_TOWER_1F_DOOR_OUT_LEFT",
+      "RADIO_TOWER_1F_DOOR_OUT_RIGHT",
       "ROUTE_35_GOLDENROD_GATE_SOUTH_DOOR_OUT_LEFT",
+      "ROUTE_35_GOLDENROD_GATE_SOUTH_DOOR_OUT_RIGHT",
       "GOLDENROD_POKECENTER_1F_DOOR_OUT_LEFT",
-      "GOLDENROD_UNDERGOUND_NORTH_ENTRANCE_DOOR_OUT_LEFT",
+      "GOLDENROD_POKECENTER_1F_DOOR_OUT_RIGHT",
+      "GOLDENROD_UNDERGROUND_NORTH_ENTRANCE_DOOR_OUT_LEFT",
+      "GOLDENROD_UNDERGROUND_NORTH_ENTRANCE_DOOR_OUT_RIGHT",
       "ROUTE_34_MAIN_AREA",
       [
         "GOLDENROD_CITY_EAST_AREA",
@@ -2919,7 +3009,9 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "GOLDENROD_CITY_EAST_AREA",
     accessOptions: [
       "GOLDENROD_BIKE_SHOP_DOOR_OUT_LEFT",
+      "GOLDENROD_BIKE_SHOP_DOOR_OUT_RIGHT",
       "GOLDENROD_HAPPINESS_RATER_DOOR_OUT_LEFT",
+      "GOLDENROD_HAPPINESS_RATER_DOOR_OUT_RIGHT",
       [
         "GOLDENROD_CITY_MAIN_AREA",
         "RADIO_TOWER_5F_WEST_AREA",
@@ -2931,8 +3023,11 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "GOLDENROD_CITY_SW_AREA",
     accessOptions: [
       "BILLS_FAMILYS_HOUSE_DOOR_OUT_LEFT",
+      "BILLS_FAMILYS_HOUSE_DOOR_OUT_RIGHT",
       "GOLDENROD_GAME_CORNER_DOOR_OUT_LEFT",
+      "GOLDENROD_GAME_CORNER_DOOR_OUT_RIGHT",
       "GOLDENROD_UNDERGOUND_SOUTH_ENTRANCE_DOOR_OUT_LEFT",
+      "GOLDENROD_UNDERGOUND_SOUTH_ENTRANCE_DOOR_OUT_RIGHT",
       [
         "GOLDENROD_CITY_MAIN_AREA",
         "RADIO_TOWER_5F_WEST_AREA",
@@ -2944,6 +3039,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "GOLDENROD_CITY_FLOWER_SHOP_AREA",
     accessOptions: [
       "GOLDENROD_FLOWER_SHOP_DOOR_OUT_LEFT",
+      "GOLDENROD_FLOWER_SHOP_DOOR_OUT_RIGHT",
       [
         "GOLDENROD_CITY_MAIN_AREA",
         "RADIO_TOWER_5F_WEST_AREA",
@@ -2955,6 +3051,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "GOLDENROD_CITY_NE_HOUSE_AREA",
     accessOptions: [
       "GOLDENROD_PP_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "GOLDENROD_PP_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       [
         "GOLDENROD_CITY_MAIN_AREA",
         "RADIO_TOWER_5F_WEST_AREA",
@@ -3097,7 +3194,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ILEX_FOREST_SOUTH_AREA_GATE_DOOR_IN_UPPER",
       "ILEX_FOREST_SOUTH_AREA_GATE_DOOR_IN_LOWER",
       "AZALEA_TOWN_GATE_DOOR_IN_UPPER",
-      "AZALEA_TOWN_GATE_DOOR_IN_LEFT",
+      "AZALEA_TOWN_GATE_DOOR_IN_LOWER",
     ],
   },
   ROUTE_34_ILEX_FOREST_GATE: {
@@ -3120,7 +3217,9 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_6",
     accessOptions: [
       "ROUTE_6_UNDERGROUND_PATH_ENTRANCE_DOOR_OUT_LEFT",
+      "ROUTE_6_UNDERGROUND_PATH_ENTRANCE_DOOR_OUT_RIGHT",
       "ROUTE_6_SAFFRON_GATE_SOUTH_DOOR_OUT_LEFT",
+      "ROUTE_6_SAFFRON_GATE_SOUTH_DOOR_OUT_RIGHT",
       "VERMILION_CITY",
     ],
   },
@@ -3128,12 +3227,18 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "VERMILION_CITY",
     accessOptions: [
       "VERMILION_FISHING_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "VERMILION_FISHING_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "VERMILION_POKECENTER_1F_DOOR_OUT_LEFT",
+      "VERMILION_POKECENTER_1F_DOOR_OUT_RIGHT",
       "POKEMON_FAN_CLUB_DOOR_OUT_LEFT",
+      "POKEMON_FAN_CLUB_DOOR_OUT_RIGHT",
       "VERMILION_MAGNET_TRAIN_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "VERMILION_MAGNET_TRAIN_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "VERMILION_MART_DOOR_OUT_RIGHT",
       "VERMILION_DIGLETTS_CAVE_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "VERMILION_DIGLETTS_CAVE_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "VERMILION_PORT_PASSAGE_ENTRANCE_AREA_DOOR_OUT_LEFT",
+      "VERMILION_PORT_PASSAGE_ENTRANCE_AREA_DOOR_OUT_RIGHT",
       "VERMILION_PORT_PASSAGE_ENTRANCE_AREA_DOOR_OUT_RIGHT",
       "ROUTE_6",
       [
@@ -3183,6 +3288,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "VERMILION_CITY_GYM_AREA",
     accessOptions: [
       "VERMILION_GYM_DOOR_OUT_LEFT",
+      "VERMILION_GYM_DOOR_OUT_RIGHT",
       [
         "VERMILION_CITY",
         "FOGBADGE",
@@ -3297,8 +3403,11 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "PALLET_TOWN",
     accessOptions: [
       "REDS_HOUSE_1F_DOOR_OUT_LEFT",
+      "REDS_HOUSE_1F_DOOR_OUT_RIGHT",
       "BLUES_HOUSE_DOOR_OUT_LEFT",
+      "BLUES_HOUSE_DOOR_OUT_RIGHT",
       "OAKS_LAB_DOOR_OUT_LEFT",
+      "OAKS_LAB_DOOR_OUT_RIGHT",
       "ROUTE_1",
       [
         "ROUTE_21",
@@ -3343,10 +3452,14 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "PEWTER_CITY",
     accessOptions: [
       "PEWTER_NIDORAN_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "PEWTER_NIDORAN_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "PEWTER_GYM_DOOR_OUT_LEFT",
+      "PEWTER_GYM_DOOR_OUT_RIGHT",
       "PEWTER_MART_DOOR_OUT_RIGHT",
       "PEWTER_POKECENTER_1F_DOOR_OUT_LEFT",
+      "PEWTER_POKECENTER_1F_DOOR_OUT_RIGHT",
       "PEWTER_SNOOZE_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "PEWTER_SNOOZE_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "ROUTE_3",
       "ROUTE_2_FOREST_AREA",
     ],
@@ -3473,9 +3586,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "FAST_SHIP_CABINS_NNW_DOOR_OUT",
       "FAST_SHIP_CABINS_NW_DOOR_OUT",
       "FAST_SHIP_CABINS_SW_DOOR_OUT_LEFT",
+      "FAST_SHIP_CABINS_SW_DOOR_OUT_RIGHT",
       "FAST_SHIP_CABINS_SSW_DOOR_OUT_LEFT",
+      "FAST_SHIP_CABINS_SSW_DOOR_OUT_RIGHT",
       "FAST_SHIP_CABINS_SSE_DOOR_OUT_LEFT",
+      "FAST_SHIP_CABINS_SSE_DOOR_OUT_RIGHT",
       "FAST_SHIP_CABINS_SE_DOOR_OUT_LEFT",
+      "FAST_SHIP_CABINS_SE_DOOR_OUT_RIGHT",
       "FAST_SHIP_B1F_WEST_AREA_STAIRS_DOWN",
     ],
   },
@@ -3483,6 +3600,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "FAST_SHIP_1F_ISOLATED_AREA",
     accessOptions: [
       "FAST_SHIP_CABINS_CAPTAINS_CABIN_DOOR_OUT_LEFT",
+      "FAST_SHIP_CABINS_CAPTAINS_CABIN_DOOR_OUT_RIGHT",
       "FAST_SHIP_B1F_EAST_AREA_STAIRS_DOWN",
     ],
   },
@@ -3592,6 +3710,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "MOUNT_MOON_2F_NORTH_AREA_CAVE_OUT",
       "MOUNT_MOON_2F_SOUTH_AREA_CAVE_OUT",
       "MOUNT_MOON_GIFT_SHOP_DOOR_OUT_LEFT",
+      "MOUNT_MOON_GIFT_SHOP_DOOR_OUT_RIGHT",
     ],
   },
   MOUNT_MOON_GIFT_SHOP: {
@@ -3611,6 +3730,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "INDIGO_PLATEAU_POKECENTER_1F_DOOR_OUT_LEFT",
       "INDIGO_PLATEAU_POKECENTER_1F_DOOR_OUT_RIGHT",
+      "INDIGO_PLATEAU_POKECENTER_1F_DOOR_OUT_RIGHT",
       "VICTORY_ROAD_3F_NORTH_AREA_CAVE_OUT",
     ],
   },
@@ -3628,6 +3748,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "INDIGO_PLATEAU_POKECENTER_1F_NE_STAIRS_UP",
       "KOGAS_ROOM_SOUTH_DOOR_OUT_LEFT",
       "KOGAS_ROOM_SOUTH_DOOR_OUT_RIGHT",
+      "KOGAS_ROOM_SOUTH_DOOR_OUT_RIGHT",
     ],
   },
   KOGAS_ROOM: {
@@ -3635,7 +3756,9 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "WILLS_ROOM_DOOR_OUT_LEFT",
       "WILLS_ROOM_DOOR_OUT_RIGHT",
+      "WILLS_ROOM_DOOR_OUT_RIGHT",
       "BRUNOS_ROOM_SOUTH_DOOR_OUT_LEFT",
+      "BRUNOS_ROOM_SOUTH_DOOR_OUT_RIGHT",
       "BRUNOS_ROOM_SOUTH_DOOR_OUT_RIGHT",
     ],
   },
@@ -3644,7 +3767,9 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "KOGAS_ROOM_NORTH_DOOR_OUT_LEFT",
       "KOGAS_ROOM_NORTH_DOOR_OUT_RIGHT",
+      "KOGAS_ROOM_NORTH_DOOR_OUT_RIGHT",
       "KARENS_ROOM_SOUTH_DOOR_OUT_LEFT",
+      "KARENS_ROOM_SOUTH_DOOR_OUT_RIGHT",
       "KARENS_ROOM_SOUTH_DOOR_OUT_RIGHT",
     ],
   },
@@ -3653,7 +3778,9 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "BRUNOS_ROOM_NORTH_DOOR_OUT_LEFT",
       "BRUNOS_ROOM_NORTH_DOOR_OUT_RIGHT",
+      "BRUNOS_ROOM_NORTH_DOOR_OUT_RIGHT",
       "LANCES_ROOM_SOUTH_DOOR_OUT_LEFT",
+      "LANCES_ROOM_SOUTH_DOOR_OUT_RIGHT",
       "LANCES_ROOM_SOUTH_DOOR_OUT_RIGHT",
     ],
   },
@@ -3662,7 +3789,9 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "KARENS_ROOM_NORTH_DOOR_OUT_LEFT",
       "KARENS_ROOM_NORTH_DOOR_OUT_RIGHT",
+      "KARENS_ROOM_NORTH_DOOR_OUT_RIGHT",
       "HALL_OF_FAME_DOOR_OUT_LEFT",
+      "HALL_OF_FAME_DOOR_OUT_RIGHT",
       "HALL_OF_FAME_DOOR_OUT_RIGHT",
     ],
   },
@@ -3670,6 +3799,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "HALL_OF_FAME",
     accessOptions: [
       "LANCES_ROOM_NORTH_DOOR_OUT_LEFT",
+      "LANCES_ROOM_NORTH_DOOR_OUT_RIGHT",
       "LANCES_ROOM_NORTH_DOOR_OUT_RIGHT",
     ],
   },
@@ -3717,13 +3847,19 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "FUCHSIA_CITY",
     accessOptions: [
       "SAFARI_ZONE_MAIN_OFFICE_DOOR_OUT_LEFT",
+      "SAFARI_ZONE_MAIN_OFFICE_DOOR_OUT_RIGHT",
       "FUCHSIA_GYM_DOOR_OUT_LEFT",
+      "FUCHSIA_GYM_DOOR_OUT_RIGHT",
       "BILLS_BROTHERS_HOUSE_DOOR_OUT_LEFT",
+      "BILLS_BROTHERS_HOUSE_DOOR_OUT_RIGHT",
       "FUCHSIA_POKECENTER_1F_DOOR_OUT_LEFT",
+      "FUCHSIA_POKECENTER_1F_DOOR_OUT_RIGHT",
       "SAFARI_ZONE_WARDENS_HOME_DOOR_OUT_LEFT",
+      "SAFARI_ZONE_WARDENS_HOME_DOOR_OUT_RIGHT",
       "ROUTE_15_FUCHSIA_GATE_WEST_DOOR_OUT_UPPER",
       "ROUTE_15_FUCHSIA_GATE_WEST_DOOR_OUT_LOWER",
       "ROUTE_19_FUCHSIA_GATE_NORTH_DOOR_OUT_LEFT",
+      "ROUTE_19_FUCHSIA_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_19_FUCHSIA_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_18",
       [
@@ -3790,7 +3926,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "FUCHSIA_CITY_EAST_GATE_DOOR_IN_UPPER",
       "FUCHSIA_CITY_EAST_GATE_DOOR_IN_LOWER",
       "ROUTE_15_GATE_DOOR_IN_UPPER",
-      "ROUTE_15_GATE_DOOR_IN_LEFT",
+      "ROUTE_15_GATE_DOOR_IN_LOWER",
     ],
   },
   ROUTE_8: {
@@ -3805,6 +3941,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_12",
     accessOptions: [
       "ROUTE_12_SUPER_ROD_HOUSE_DOOR_OUT_LEFT",
+      "ROUTE_12_SUPER_ROD_HOUSE_DOOR_OUT_RIGHT",
       "LAVENDER_TOWN",
       "ROUTE_11",
       "ROUTE_13",
@@ -3851,12 +3988,18 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "LAVENDER_TOWN",
     accessOptions: [
       "LAVENDER_POKECENTER_1F_DOOR_OUT_LEFT",
+      "LAVENDER_POKECENTER_1F_DOOR_OUT_RIGHT",
       "MR_FUJIS_HOUSE_DOOR_OUT_LEFT",
+      "MR_FUJIS_HOUSE_DOOR_OUT_RIGHT",
       "LAVENDER_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "LAVENDER_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "LAVENDER_NAME_RATER_DOOR_OUT_LEFT",
+      "LAVENDER_NAME_RATER_DOOR_OUT_RIGHT",
       "LAVENDER_MART_DOOR_OUT_RIGHT",
       "SOUL_HOUSE_DOOR_OUT_LEFT",
+      "SOUL_HOUSE_DOOR_OUT_RIGHT",
       "LAV_RADIO_TOWER_1F_DOOR_OUT_LEFT",
+      "LAV_RADIO_TOWER_1F_DOOR_OUT_RIGHT",
       "ROUTE_8",
       "ROUTE_10_SOUTH",
       "ROUTE_12",
@@ -3914,7 +4057,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "SAFFRON_CITY_EAST_GATE_DOOR_IN_UPPER",
       "SAFFRON_CITY_EAST_GATE_DOOR_IN_LOWER",
       "ROUTE_8_GATE_DOOR_IN_UPPER",
-      "ROUTE_8_GATE_DOOR_IN_LEFT",
+      "ROUTE_8_GATE_DOOR_IN_LOWER",
     ],
   },
   ROUTE_12_SUPER_ROD_HOUSE: {
@@ -3927,6 +4070,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_28_SOUTH_AREA",
     accessOptions: [
       "VICTORY_ROAD_GATE_WEST_AREA_DOOR_OUT_LEFT",
+      "VICTORY_ROAD_GATE_WEST_AREA_DOOR_OUT_RIGHT",
       "SILVER_CAVE_OUTSIDE",
     ],
   },
@@ -3934,6 +4078,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_28_NORTH_AREA",
     accessOptions: [
       "ROUTE_28_STEEL_WING_HOUSE_DOOR_OUT_LEFT",
+      "ROUTE_28_STEEL_WING_HOUSE_DOOR_OUT_RIGHT",
       [
         "SILVER_CAVE_OUTSIDE",
         "HIVEBADGE",
@@ -3945,6 +4090,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "SILVER_CAVE_OUTSIDE",
     accessOptions: [
       "SILVER_CAVE_POKECENTER_1F_DOOR_OUT_LEFT",
+      "SILVER_CAVE_POKECENTER_1F_DOOR_OUT_RIGHT",
       "SILVER_CAVE_ROOM_1_SOUTH_CAVE_OUT",
       "ROUTE_28_SOUTH_AREA",
       [
@@ -3980,8 +4126,11 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "POKECENTER_2F",
     accessOptions: [
       "TRADE_CENTER_DOOR_OUT_LEFT",
+      "TRADE_CENTER_DOOR_OUT_RIGHT",
       "COLOSSEUM_DOOR_OUT_LEFT",
+      "COLOSSEUM_DOOR_OUT_RIGHT",
       "TIME_CAPSULE_DOOR_OUT_LEFT",
+      "TIME_CAPSULE_DOOR_OUT_RIGHT",
       "CHERRYGROVE_POKECENTER_1F_STAIRS_UP",
       "VIOLET_POKECENTER_1F_STAIRS_UP",
       "ROUTE_32_POKECENTER_1F_STAIRS_UP",
@@ -4044,6 +4193,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_16_NORTH_AREA",
     accessOptions: [
       "ROUTE_16_FUCHSIA_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "ROUTE_16_FUCHSIA_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       [
         "ROUTE_16_EAST_AREA",
         "HIVEBADGE",
@@ -4084,12 +4234,18 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "CELADON_CITY",
     accessOptions: [
       "CELADON_DEPT_STORE_1F_DOOR_OUT_LEFT",
+      "CELADON_DEPT_STORE_1F_DOOR_OUT_RIGHT",
       "CELADON_MANSION_1F_FRONT_AREA_DOOR_OUT_LEFT",
+      "CELADON_MANSION_1F_FRONT_AREA_DOOR_OUT_RIGHT",
       "CELADON_MANSION_1F_BACK_AREA_DOOR_OUT",
       "CELADON_POKECENTER_1F_DOOR_OUT_LEFT",
+      "CELADON_POKECENTER_1F_DOOR_OUT_RIGHT",
       "CELADON_GAME_CORNER_DOOR_OUT_LEFT",
+      "CELADON_GAME_CORNER_DOOR_OUT_RIGHT",
       "CELADON_GAME_CORNER_PRIZE_ROOM_DOOR_OUT_LEFT",
+      "CELADON_GAME_CORNER_PRIZE_ROOM_DOOR_OUT_RIGHT",
       "CELADON_CAFE_DOOR_OUT_LEFT",
+      "CELADON_CAFE_DOOR_OUT_RIGHT",
       "ROUTE_7",
       "ROUTE_16_EAST_AREA",
       [
@@ -4103,6 +4259,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "CELADON_CITY_SOUTH_AREA",
     accessOptions: [
       "CELADON_GYM_DOOR_OUT_LEFT",
+      "CELADON_GYM_DOOR_OUT_RIGHT",
       [
         "CELADON_CITY",
         "HIVEBADGE",
@@ -4173,6 +4330,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "CELADON_MANSION_1F_BACK_AREA",
     accessOptions: [
       "CELADON_CITY_MANSION_FRONT_DOOR_IN_LEFT",
+      "CELADON_CITY_MANSION_FRONT_DOOR_IN_RIGHT",
       "CELADON_MANSION_2F_BACK_AREA_STAIRS_DOWN",
     ],
   },
@@ -4209,6 +4367,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "CELADON_MANSION_3F_BACK_AREA_STAIRS_UP",
       "CELADON_MANSION_ROOF_HOUSE_DOOR_OUT_LEFT",
+      "CELADON_MANSION_ROOF_HOUSE_DOOR_OUT_RIGHT",
     ],
   },
   CELADON_MANSION_ROOF_FRONT_AREA: {
@@ -4278,7 +4437,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_16_GATE_EAST_AREA",
     accessOptions: [
       "ROUTE_16_EAST_AREA_GATE_DOOR_IN_UPPER",
-      "ROUTE_16_EAST_AREA_GATE_DOOR_IN_LEFT",
+      "ROUTE_16_EAST_AREA_GATE_DOOR_IN_LOWER",
       "ROUTE_16_GATE_WEST_AREA",
     ],
   },
@@ -4306,7 +4465,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_17_ROUTE_18_GATE_EAST_AREA",
     accessOptions: [
       "ROUTE_18_GATE_DOOR_IN_UPPER",
-      "ROUTE_18_GATE_DOOR_IN_LEFT",
+      "ROUTE_18_GATE_DOOR_IN_LOWER",
       "ROUTE_17_ROUTE_18_GATE_WEST_AREA",
     ],
   },
@@ -4314,6 +4473,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_40",
     accessOptions: [
       "ROUTE_40_BATTLE_TOWER_GATE_SOUTH_DOOR_OUT_LEFT",
+      "ROUTE_40_BATTLE_TOWER_GATE_SOUTH_DOOR_OUT_RIGHT",
       "OLIVINE_CITY",
       "ROUTE_40_SURF_AREA",
     ],
@@ -4447,12 +4607,19 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "CIANWOOD_CITY",
     accessOptions: [
       "MANIAS_HOUSE_DOOR_OUT_LEFT",
+      "MANIAS_HOUSE_DOOR_OUT_RIGHT",
       "CIANWOOD_GYM_DOOR_OUT_LEFT",
+      "CIANWOOD_GYM_DOOR_OUT_RIGHT",
       "CIANWOOD_POKECENTER_1F_DOOR_OUT_LEFT",
+      "CIANWOOD_POKECENTER_1F_DOOR_OUT_RIGHT",
       "CIANWOOD_PHARMACY_DOOR_OUT_LEFT",
+      "CIANWOOD_PHARMACY_DOOR_OUT_RIGHT",
       "CIANWOOD_PHOTO_STUDIO_DOOR_OUT_LEFT",
+      "CIANWOOD_PHOTO_STUDIO_DOOR_OUT_RIGHT",
       "CIANWOOD_LUGIA_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "CIANWOOD_LUGIA_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "POKE_SEERS_HOUSE_DOOR_OUT_LEFT",
+      "POKE_SEERS_HOUSE_DOOR_OUT_RIGHT",
       "ROUTE_41_OUTER_AREA",
     ],
   },
@@ -4525,6 +4692,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "BATTLE_TOWER_OUTSIDE_BATTLE_TOWER_DOOR_IN_LEFT",
       "BATTLE_TOWER_OUTSIDE_BATTLE_TOWER_DOOR_IN_RIGHT",
       "BATTLE_TOWER_ELEVATOR_DOOR_OUT_LEFT",
+      "BATTLE_TOWER_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   BATTLE_TOWER_BATTLE_ROOM: {
@@ -4543,7 +4711,9 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "BATTLE_TOWER_HALLWAY",
     accessOptions: [
       "BATTLE_TOWER_ELEVATOR_DOOR_OUT_LEFT",
+      "BATTLE_TOWER_ELEVATOR_DOOR_OUT_RIGHT",
       "BATTLE_TOWER_BATTLE_ROOM_DOOR_OUT_LEFT",
+      "BATTLE_TOWER_BATTLE_ROOM_DOOR_OUT_RIGHT",
     ],
   },
   ROUTE_40_BATTLE_TOWER_GATE: {
@@ -4559,7 +4729,9 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_40_BATTLE_TOWER_GATE_NORTH_DOOR_OUT_LEFT",
       "ROUTE_40_BATTLE_TOWER_GATE_NORTH_DOOR_OUT_RIGHT",
+      "ROUTE_40_BATTLE_TOWER_GATE_NORTH_DOOR_OUT_RIGHT",
       "BATTLE_TOWER_1F_DOOR_OUT_LEFT",
+      "BATTLE_TOWER_1F_DOOR_OUT_RIGHT",
       "BATTLE_TOWER_1F_DOOR_OUT_RIGHT",
     ],
   },
@@ -4579,6 +4751,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_2_DIGLETTS_CAVE_AREA",
     accessOptions: [
       "ROUTE_2_NUGGET_HOUSE_DOOR_OUT_LEFT",
+      "ROUTE_2_NUGGET_HOUSE_DOOR_OUT_RIGHT",
       "DIGLETTS_CAVE_ROUTE_2_ENTRANCE_AREA_CAVE_OUT",
       [
         "ROUTE_2_FOREST_AREA",
@@ -4596,6 +4769,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_2_SE_AREA",
     accessOptions: [
       "ROUTE_2_GATE_SOUTH_DOOR_OUT_LEFT",
+      "ROUTE_2_GATE_SOUTH_DOOR_OUT_RIGHT",
       [
         "ROUTE_2_FOREST_AREA",
         "HIVEBADGE",
@@ -4608,6 +4782,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_2_GATE_NORTH_DOOR_OUT_LEFT",
       "ROUTE_2_GATE_NORTH_DOOR_OUT_RIGHT",
+      "ROUTE_2_GATE_NORTH_DOOR_OUT_RIGHT",
       [
         "ROUTE_2_DIGLETTS_CAVE_AREA",
         "HIVEBADGE",
@@ -4619,6 +4794,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_22",
     accessOptions: [
       "VICTORY_ROAD_GATE_EAST_AREA_DOOR_OUT_LEFT",
+      "VICTORY_ROAD_GATE_EAST_AREA_DOOR_OUT_RIGHT",
       "VIRIDIAN_CITY",
     ],
   },
@@ -4626,10 +4802,14 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "VIRIDIAN_CITY",
     accessOptions: [
       "VIRIDIAN_GYM_DOOR_OUT_LEFT",
+      "VIRIDIAN_GYM_DOOR_OUT_RIGHT",
       "VIRIDIAN_NICKNAME_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "VIRIDIAN_NICKNAME_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "TRAINER_HOUSE_1F_DOOR_OUT_LEFT",
+      "TRAINER_HOUSE_1F_DOOR_OUT_RIGHT",
       "VIRIDIAN_MART_DOOR_OUT_RIGHT",
       "VIRIDIAN_POKECENTER_1F_DOOR_OUT_LEFT",
+      "VIRIDIAN_POKECENTER_1F_DOOR_OUT_RIGHT",
       "ROUTE_1",
       "ROUTE_2_FOREST_AREA",
       "ROUTE_22",
@@ -4749,8 +4929,11 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_26",
     accessOptions: [
       "VICTORY_ROAD_GATE_SOUTH_AREA_DOOR_OUT_LEFT",
+      "VICTORY_ROAD_GATE_SOUTH_AREA_DOOR_OUT_RIGHT",
       "ROUTE_26_HEAL_HOUSE_DOOR_OUT_LEFT",
+      "ROUTE_26_HEAL_HOUSE_DOOR_OUT_RIGHT",
       "DAY_OF_WEEK_SIBLINGS_HOUSE_DOOR_OUT_LEFT",
+      "DAY_OF_WEEK_SIBLINGS_HOUSE_DOOR_OUT_RIGHT",
       "ROUTE_27_EAST_AREA",
     ],
   },
@@ -4758,6 +4941,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_27_CENTRAL_AREA",
     accessOptions: [
       "ROUTE_27_SANDSTORM_HOUSE_DOOR_OUT_LEFT",
+      "ROUTE_27_SANDSTORM_HOUSE_DOOR_OUT_RIGHT",
       "TOHJO_FALLS_EAST_AREA_CAVE_OUT",
       "ROUTE_27_EAST_SURF_AREA",
     ],
@@ -4818,6 +5002,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_29",
     accessOptions: [
       "ROUTE_29_ROUTE_46_GATE_SOUTH_DOOR_OUT_LEFT",
+      "ROUTE_29_ROUTE_46_GATE_SOUTH_DOOR_OUT_RIGHT",
       "CHERRYGROVE_CITY",
       [
         "NEW_BARK_TOWN",
@@ -4829,9 +5014,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "NEW_BARK_TOWN",
     accessOptions: [
       "ELMS_LAB_DOOR_OUT_LEFT",
+      "ELMS_LAB_DOOR_OUT_RIGHT",
       "PLAYERS_HOUSE_1F_DOOR_OUT_LEFT",
+      "PLAYERS_HOUSE_1F_DOOR_OUT_RIGHT",
       "PLAYERS_NEIGHBORS_HOUSE_DOOR_OUT_LEFT",
+      "PLAYERS_NEIGHBORS_HOUSE_DOOR_OUT_RIGHT",
       "ELMS_HOUSE_DOOR_OUT_LEFT",
+      "ELMS_HOUSE_DOOR_OUT_RIGHT",
       "NEW_BARK_TOWN_SURF_AREA",
       "ROUTE_29",
     ],
@@ -4909,9 +5098,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_5",
     accessOptions: [
       "ROUTE_5_UNDERGROUND_PATH_ENTRANCE_DOOR_OUT_LEFT",
+      "ROUTE_5_UNDERGROUND_PATH_ENTRANCE_DOOR_OUT_RIGHT",
       "ROUTE_5_SAFFRON_GATE_NORTH_DOOR_OUT_LEFT",
       "ROUTE_5_SAFFRON_GATE_NORTH_DOOR_OUT_RIGHT",
+      "ROUTE_5_SAFFRON_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_5_CLEANSE_TAG_HOUSE_DOOR_OUT_LEFT",
+      "ROUTE_5_CLEANSE_TAG_HOUSE_DOOR_OUT_RIGHT",
       "CERULEAN_CITY",
     ],
   },
@@ -4919,17 +5111,25 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "SAFFRON_CITY",
     accessOptions: [
       "FIGHTING_DOJO_DOOR_OUT_LEFT",
+      "FIGHTING_DOJO_DOOR_OUT_RIGHT",
       "SAFFRON_GYM_SOUTH_AREA_DOOR_OUT_LEFT",
+      "SAFFRON_GYM_SOUTH_AREA_DOOR_OUT_RIGHT",
       "SAFFRON_MART_DOOR_OUT_RIGHT",
       "SAFFRON_POKECENTER_1F_DOOR_OUT_LEFT",
+      "SAFFRON_POKECENTER_1F_DOOR_OUT_RIGHT",
       "MR_PSYCHICS_HOUSE_DOOR_OUT_LEFT",
+      "MR_PSYCHICS_HOUSE_DOOR_OUT_RIGHT",
       "SAFFRON_MAGNET_TRAIN_STATION_DOOR_OUT_RIGHT",
       "SILPH_CO_1F_DOOR_OUT_LEFT",
+      "SILPH_CO_1F_DOOR_OUT_RIGHT",
       "COPYCATS_HOUSE_1F_DOOR_OUT_LEFT",
+      "COPYCATS_HOUSE_1F_DOOR_OUT_RIGHT",
       "ROUTE_5_SAFFRON_GATE_SOUTH_DOOR_OUT_LEFT",
+      "ROUTE_5_SAFFRON_GATE_SOUTH_DOOR_OUT_RIGHT",
       "ROUTE_7_SAFFRON_GATE_EAST_DOOR_OUT_UPPER",
       "ROUTE_7_SAFFRON_GATE_EAST_DOOR_OUT_LOWER",
       "ROUTE_6_SAFFRON_GATE_NORTH_DOOR_OUT_LEFT",
+      "ROUTE_6_SAFFRON_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_6_SAFFRON_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_8_SAFFRON_GATE_WEST_DOOR_OUT_UPPER",
       "ROUTE_8_SAFFRON_GATE_WEST_DOOR_OUT_LOWER",
@@ -5093,7 +5293,9 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_30_CHERRYGROVE_SIDE",
     accessOptions: [
       "ROUTE_30_BERRY_HOUSE_DOOR_OUT_LEFT",
+      "ROUTE_30_BERRY_HOUSE_DOOR_OUT_RIGHT",
       "MR_POKEMONS_HOUSE_DOOR_OUT_LEFT",
+      "MR_POKEMONS_HOUSE_DOOR_OUT_RIGHT",
       "CHERRYGROVE_CITY",
       [
         "ROUTE_30_VIOLET_SIDE",
@@ -5137,9 +5339,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "CHERRYGROVE_MART_DOOR_OUT_RIGHT",
       "CHERRYGROVE_POKECENTER_1F_DOOR_OUT_LEFT",
+      "CHERRYGROVE_POKECENTER_1F_DOOR_OUT_RIGHT",
       "CHERRYGROVE_GYM_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "CHERRYGROVE_GYM_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "GUIDE_GENTS_HOUSE_DOOR_OUT_LEFT",
+      "GUIDE_GENTS_HOUSE_DOOR_OUT_RIGHT",
       "CHERRYGROVE_EVOLUTION_SPEECH_HOUSE_DOOR_OUT_LEFT",
+      "CHERRYGROVE_EVOLUTION_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "ROUTE_29",
       "ROUTE_30_CHERRYGROVE_SIDE",
     ],
@@ -5202,7 +5408,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "VIOLET_CITY_GATE_DOOR_IN_LEFT",
       "VIOLET_CITY_GATE_DOOR_IN_RIGHT",
       "ROUTE_31_GATE_DOOR_IN_UPPER",
-      "ROUTE_31_GATE_DOOR_IN_LEFT",
+      "ROUTE_31_GATE_DOOR_IN_LOWER",
     ],
   },
 } as const

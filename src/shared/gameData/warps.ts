@@ -3222,13 +3222,13 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "RUINS_OF_ALPH_OUTSIDE_MAIN_AREA_HOUSE_DOOR_IN",
   },
-  RUINS_OF_ALPH_RESEARCH_CENTER_DOOR_IN_RIGHT: {
-    id: "RUINS_OF_ALPH_RESEARCH_CENTER_DOOR_IN_RIGHT",
+  RUINS_OF_ALPH_RESEARCH_CENTER_DOOR_OUT_RIGHT: {
+    id: "RUINS_OF_ALPH_RESEARCH_CENTER_DOOR_OUT_RIGHT",
     mapId: "RUINS_OF_ALPH_RESEARCH_CENTER",
     index: 2,
     areaId: "RUINS_OF_ALPH_RESEARCH_CENTER",
     type: "DOOR",
-    polarity: "IN",
+    polarity: "OUT",
     distinguisher: "RIGHT",
     direction: "DOWN",
     coordinate: [
@@ -5295,8 +5295,8 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "GOLDENROD_UNDERGROUND_NORTH_STAIRS_UP",
   },
-  GOLDENROD_UNDERGOUND_NORTH_ENTRANCE_DOOR_OUT_LEFT: {
-    id: "GOLDENROD_UNDERGOUND_NORTH_ENTRANCE_DOOR_OUT_LEFT",
+  GOLDENROD_UNDERGROUND_NORTH_ENTRANCE_DOOR_OUT_LEFT: {
+    id: "GOLDENROD_UNDERGROUND_NORTH_ENTRANCE_DOOR_OUT_LEFT",
     mapId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM",
     index: 8,
     areaId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM",
@@ -10917,8 +10917,8 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "ILEX_FOREST_AZALEA_GATE_EAST_DOOR_OUT_UPPER",
   },
-  AZALEA_TOWN_GATE_DOOR_IN_LEFT: {
-    id: "AZALEA_TOWN_GATE_DOOR_IN_LEFT",
+  AZALEA_TOWN_GATE_DOOR_IN_LOWER: {
+    id: "AZALEA_TOWN_GATE_DOOR_IN_LOWER",
     mapId: "AZALEA_TOWN",
     index: 8,
     areaId: "AZALEA_TOWN",
@@ -11443,8 +11443,8 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "ROUTE_36_NATIONAL_PARK_GATE_EAST_DOOR_OUT_UPPER",
   },
-  ROUTE_36_WEST_AREA_GATE_DOOR_IN_LEFT: {
-    id: "ROUTE_36_WEST_AREA_GATE_DOOR_IN_LEFT",
+  ROUTE_36_WEST_AREA_GATE_DOOR_IN_LOWER: {
+    id: "ROUTE_36_WEST_AREA_GATE_DOOR_IN_LOWER",
     mapId: "ROUTE_36",
     index: 2,
     areaId: "ROUTE_36_WEST_AREA",
@@ -12344,7 +12344,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       26,
       31163,
     ],
-    linkedWarpId: "ROUTE_36_WEST_AREA_GATE_DOOR_IN_LEFT",
+    linkedWarpId: "ROUTE_36_WEST_AREA_GATE_DOOR_IN_LOWER",
   },
   ROUTE_34_MAIN_AREA_GATE_DOOR_IN_LEFT: {
     id: "ROUTE_34_MAIN_AREA_GATE_DOOR_IN_LEFT",
@@ -12672,7 +12672,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       102,
       20996,
     ],
-    linkedWarpId: "GOLDENROD_UNDERGOUND_NORTH_ENTRANCE_DOOR_OUT_LEFT",
+    linkedWarpId: "GOLDENROD_UNDERGROUND_NORTH_ENTRANCE_DOOR_OUT_LEFT",
   },
   GOLDENROD_CITY_SW_AREA_UNDERGROUND_ENTRANCE_DOOR_IN: {
     id: "GOLDENROD_CITY_SW_AREA_UNDERGROUND_ENTRANCE_DOOR_IN",
@@ -13616,7 +13616,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       24,
       27907,
     ],
-    linkedWarpId: "AZALEA_TOWN_GATE_DOOR_IN_LEFT",
+    linkedWarpId: "AZALEA_TOWN_GATE_DOOR_IN_LOWER",
   },
   ROUTE_34_ILEX_FOREST_GATE_NORTH_DOOR_OUT_LEFT: {
     id: "ROUTE_34_ILEX_FOREST_GATE_NORTH_DOOR_OUT_LEFT",
@@ -16357,8 +16357,8 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "ROUTE_15_FUCHSIA_GATE_EAST_DOOR_OUT_UPPER",
   },
-  ROUTE_15_GATE_DOOR_IN_LEFT: {
-    id: "ROUTE_15_GATE_DOOR_IN_LEFT",
+  ROUTE_15_GATE_DOOR_IN_LOWER: {
+    id: "ROUTE_15_GATE_DOOR_IN_LOWER",
     mapId: "ROUTE_15",
     index: 2,
     areaId: "ROUTE_15",
@@ -16395,8 +16395,8 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "ROUTE_17_ROUTE_18_GATE_EAST_AREA_DOOR_OUT_UPPER",
   },
-  ROUTE_18_GATE_DOOR_IN_LEFT: {
-    id: "ROUTE_18_GATE_DOOR_IN_LEFT",
+  ROUTE_18_GATE_DOOR_IN_LOWER: {
+    id: "ROUTE_18_GATE_DOOR_IN_LOWER",
     mapId: "ROUTE_18",
     index: 2,
     areaId: "ROUTE_18",
@@ -16936,7 +16936,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       101,
       26608,
     ],
-    linkedWarpId: "ROUTE_15_GATE_DOOR_IN_LEFT",
+    linkedWarpId: "ROUTE_15_GATE_DOOR_IN_LOWER",
   },
   ROUTE_8_GATE_DOOR_IN_UPPER: {
     id: "ROUTE_8_GATE_DOOR_IN_UPPER",
@@ -16957,8 +16957,8 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "ROUTE_8_SAFFRON_GATE_EAST_DOOR_OUT_UPPER",
   },
-  ROUTE_8_GATE_DOOR_IN_LEFT: {
-    id: "ROUTE_8_GATE_DOOR_IN_LEFT",
+  ROUTE_8_GATE_DOOR_IN_LOWER: {
+    id: "ROUTE_8_GATE_DOOR_IN_LOWER",
     mapId: "ROUTE_8",
     index: 2,
     areaId: "ROUTE_8",
@@ -17514,7 +17514,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       31,
       29802,
     ],
-    linkedWarpId: "ROUTE_8_GATE_DOOR_IN_LEFT",
+    linkedWarpId: "ROUTE_8_GATE_DOOR_IN_LOWER",
   },
   ROUTE_12_SUPER_ROD_HOUSE_DOOR_OUT_LEFT: {
     id: "ROUTE_12_SUPER_ROD_HOUSE_DOOR_OUT_LEFT",
@@ -18052,8 +18052,8 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "ROUTE_16_GATE_EAST_AREA_DOOR_OUT_UPPER",
   },
-  ROUTE_16_EAST_AREA_GATE_DOOR_IN_LEFT: {
-    id: "ROUTE_16_EAST_AREA_GATE_DOOR_IN_LEFT",
+  ROUTE_16_EAST_AREA_GATE_DOOR_IN_LOWER: {
+    id: "ROUTE_16_EAST_AREA_GATE_DOOR_IN_LOWER",
     mapId: "ROUTE_16",
     index: 3,
     areaId: "ROUTE_16_EAST_AREA",
@@ -19339,7 +19339,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       28,
       29934,
     ],
-    linkedWarpId: "ROUTE_16_EAST_AREA_GATE_DOOR_IN_LEFT",
+    linkedWarpId: "ROUTE_16_EAST_AREA_GATE_DOOR_IN_LOWER",
   },
   ROUTE_7_SAFFRON_GATE_WEST_DOOR_OUT_UPPER: {
     id: "ROUTE_7_SAFFRON_GATE_WEST_DOOR_OUT_UPPER",
@@ -19491,7 +19491,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       28,
       30405,
     ],
-    linkedWarpId: "ROUTE_18_GATE_DOOR_IN_LEFT",
+    linkedWarpId: "ROUTE_18_GATE_DOOR_IN_LOWER",
   },
   ROUTE_40_GATE_DOOR_IN: {
     id: "ROUTE_40_GATE_DOOR_IN",
@@ -23154,8 +23154,8 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "ROUTE_31_VIOLET_GATE_EAST_DOOR_OUT_UPPER",
   },
-  ROUTE_31_GATE_DOOR_IN_LEFT: {
-    id: "ROUTE_31_GATE_DOOR_IN_LEFT",
+  ROUTE_31_GATE_DOOR_IN_LOWER: {
+    id: "ROUTE_31_GATE_DOOR_IN_LOWER",
     mapId: "ROUTE_31",
     index: 2,
     areaId: "ROUTE_31",
@@ -23639,6 +23639,6 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       101,
       30363,
     ],
-    linkedWarpId: "ROUTE_31_GATE_DOOR_IN_LEFT",
+    linkedWarpId: "ROUTE_31_GATE_DOOR_IN_LOWER",
   },
 } as const
