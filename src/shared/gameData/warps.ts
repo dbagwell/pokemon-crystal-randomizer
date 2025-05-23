@@ -15178,7 +15178,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       29,
       21788,
     ],
-    linkedWarpId: "FAST_SHIP_B1F_EAST_AREA_STAIRS_DOWN",
+    linkedWarpId: "FAST_SHIP_B1F_WEST_AREA_STAIRS_DOWN",
   },
   FAST_SHIP_1F_MAIN_AREA_STAIRS_DOWN: {
     id: "FAST_SHIP_1F_MAIN_AREA_STAIRS_DOWN",
@@ -15196,7 +15196,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       29,
       21792,
     ],
-    linkedWarpId: "FAST_SHIP_B1F_WEST_AREA_STAIRS_DOWN",
+    linkedWarpId: "FAST_SHIP_B1F_EAST_AREA_STAIRS_DOWN",
   },
   FAST_SHIP_CABINS_NE_DOOR_OUT: {
     id: "FAST_SHIP_CABINS_NE_DOOR_OUT",
@@ -15460,11 +15460,11 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "FAST_SHIP_1F_ISOLATED_AREA_DOOR_IN",
   },
-  FAST_SHIP_B1F_EAST_AREA_STAIRS_DOWN: {
-    id: "FAST_SHIP_B1F_EAST_AREA_STAIRS_DOWN",
+  FAST_SHIP_B1F_WEST_AREA_STAIRS_DOWN: {
+    id: "FAST_SHIP_B1F_WEST_AREA_STAIRS_DOWN",
     mapId: "FAST_SHIP_B1F",
     index: 1,
-    areaId: "FAST_SHIP_B1F_EAST_AREA",
+    areaId: "FAST_SHIP_B1F_WEST_AREA",
     type: "STAIRS",
     polarity: "DOWN",
     direction: "ANY",
@@ -15478,11 +15478,11 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "FAST_SHIP_1F_ISOLATED_AREA_STAIRS_DOWN",
   },
-  FAST_SHIP_B1F_WEST_AREA_STAIRS_DOWN: {
-    id: "FAST_SHIP_B1F_WEST_AREA_STAIRS_DOWN",
+  FAST_SHIP_B1F_EAST_AREA_STAIRS_DOWN: {
+    id: "FAST_SHIP_B1F_EAST_AREA_STAIRS_DOWN",
     mapId: "FAST_SHIP_B1F",
     index: 2,
-    areaId: "FAST_SHIP_B1F_WEST_AREA",
+    areaId: "FAST_SHIP_B1F_EAST_AREA",
     type: "STAIRS",
     polarity: "DOWN",
     direction: "ANY",

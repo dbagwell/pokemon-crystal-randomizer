@@ -3661,13 +3661,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   FAST_SHIP_B1F_EAST_AREA: {
     id: "FAST_SHIP_B1F_EAST_AREA",
     accessOptions: [
-      "FAST_SHIP_1F_ISOLATED_AREA_STAIRS_DOWN",
+      "FAST_SHIP_1F_MAIN_AREA_STAIRS_DOWN",
     ],
   },
   FAST_SHIP_B1F_WEST_AREA: {
     id: "FAST_SHIP_B1F_WEST_AREA",
     accessOptions: [
-      "FAST_SHIP_1F_MAIN_AREA_STAIRS_DOWN",
+      "FAST_SHIP_1F_ISOLATED_AREA_STAIRS_DOWN",
       [
         "FAST_SHIP_B1F_EAST_AREA",
         "FAST_SHIP_CABINS_NNW",
