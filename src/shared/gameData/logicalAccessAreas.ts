@@ -3486,27 +3486,57 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "FAST_SHIP_B1F_EAST_AREA_STAIRS_DOWN",
     ],
   },
-  FAST_SHIP_CABINS_NNW_NNE_NE: {
-    id: "FAST_SHIP_CABINS_NNW_NNE_NE",
+  FAST_SHIP_CABINS_NNW: {
+    id: "FAST_SHIP_CABINS_NNW",
     accessOptions: [
-      "FAST_SHIP_1F_MAIN_AREA_NE_DOOR_IN",
-      "FAST_SHIP_1F_MAIN_AREA_NNE_DOOR_IN",
       "FAST_SHIP_1F_MAIN_AREA_NNW_DOOR_IN",
     ],
   },
-  FAST_SHIP_CABINS_SW_SSW_NW: {
-    id: "FAST_SHIP_CABINS_SW_SSW_NW",
+  FAST_SHIP_CABINS_NNE: {
+    id: "FAST_SHIP_CABINS_NNE",
     accessOptions: [
-      "FAST_SHIP_1F_MAIN_AREA_NW_DOOR_IN",
+      "FAST_SHIP_1F_MAIN_AREA_NNE_DOOR_IN",
+    ],
+  },
+  FAST_SHIP_CABINS_NE: {
+    id: "FAST_SHIP_CABINS_NE",
+    accessOptions: [
+      "FAST_SHIP_1F_MAIN_AREA_NE_DOOR_IN",
+    ],
+  },
+  FAST_SHIP_CABINS_SW: {
+    id: "FAST_SHIP_CABINS_SW",
+    accessOptions: [
       "FAST_SHIP_1F_MAIN_AREA_SW_DOOR_IN",
+    ],
+  },
+  FAST_SHIP_CABINS_SSW: {
+    id: "FAST_SHIP_CABINS_SSW",
+    accessOptions: [
       "FAST_SHIP_1F_MAIN_AREA_SSW_DOOR_IN",
     ],
   },
-  FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN: {
-    id: "FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN",
+  FAST_SHIP_CABINS_NW: {
+    id: "FAST_SHIP_CABINS_NW",
+    accessOptions: [
+      "FAST_SHIP_1F_MAIN_AREA_NW_DOOR_IN",
+    ],
+  },
+  FAST_SHIP_CABINS_SE: {
+    id: "FAST_SHIP_CABINS_SE",
+    accessOptions: [
+      "FAST_SHIP_1F_MAIN_AREA_SE_DOOR_IN",
+    ],
+  },
+  FAST_SHIP_CABINS_SSE: {
+    id: "FAST_SHIP_CABINS_SSE",
     accessOptions: [
       "FAST_SHIP_1F_MAIN_AREA_SSE_DOOR_IN",
-      "FAST_SHIP_1F_MAIN_AREA_SW_DOOR_IN",
+    ],
+  },
+  FAST_SHIP_CABINS_CAPTAINS_CABIN: {
+    id: "FAST_SHIP_CABINS_CAPTAINS_CABIN",
+    accessOptions: [
       "FAST_SHIP_1F_ISOLATED_AREA_DOOR_IN",
     ],
   },
@@ -3520,6 +3550,10 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "FAST_SHIP_B1F_WEST_AREA",
     accessOptions: [
       "FAST_SHIP_1F_MAIN_AREA_STAIRS_DOWN",
+      [
+        "FAST_SHIP_B1F_EAST_AREA",
+        "FAST_SHIP_CABINS_NNW",
+      ],
     ],
   },
   OLIVINE_PORT_PASSAGE_ENTRANCE_AREA: {
