@@ -282,7 +282,7 @@ const getAccessibleItemLocations = (params: {
       const warp = warpsMap[warpId]
       if (accessibleAreas.includes(warp.areaId) && (warp.accessRequirements ?? []).reduce((result, accessRequirement) => {
         return result && isAccessRequirementSatisfied(accessRequirement)
-      }, true) || isNotNullish(warp.linkedWarpId) && warpsMap[warp.linkedWarpId].type !== "NONE" && accessibleWarps.includes(warp.linkedWarpId)) {
+      }, true)) {
         accessibleWarps.push(warpId)
         didUpdate = true
       }

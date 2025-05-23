@@ -8302,13 +8302,13 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "ECRUTEAK_GYM_HOLE_1_2",
   },
-  ECRUTEAK_GYM_HOLE_1_2: {
-    id: "ECRUTEAK_GYM_HOLE_1_2",
+  ECRUTEAK_GYM_HOLE_1_1: {
+    id: "ECRUTEAK_GYM_HOLE_1_1",
     mapId: "ECRUTEAK_GYM",
     index: 4,
     areaId: "ECRUTEAK_GYM",
     type: "HOLE",
-    distinguisher: "1_2",
+    distinguisher: "1_1",
     direction: "ANY",
     coordinate: [
       2,
@@ -8320,8 +8320,8 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "ECRUTEAK_GYM_NONE",
   },
-  ECRUTEAK_GYM_HOLE_1_1: {
-    id: "ECRUTEAK_GYM_HOLE_1_1",
+  ECRUTEAK_GYM_HOLE_1_2: {
+    id: "ECRUTEAK_GYM_HOLE_1_2",
     mapId: "ECRUTEAK_GYM",
     index: 5,
     areaId: "ECRUTEAK_GYM",
