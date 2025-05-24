@@ -529,8 +529,40 @@ export const generatorLog = (params: {
       ].map((group) => {
         return {
           rows: group.map((id) => {
+            let displayId: string = id
+            
+            if (settings.SKIP_MAHOGANY_ROCKETS && id === "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT") {
+              if (settings.SKIP_GOLDENROD_ROCKETS) {
+                displayId = "LAKE_OF_RAGE_LANCES_GIFT_1"
+              } else {
+                displayId = "LAKE_OF_RAGE_LANCES_GIFT"
+              }
+            }
+            
+            if (settings.SKIP_GOLDENROD_ROCKETS) {
+              if (id === "RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT") {
+                if (settings.SKIP_MAHOGANY_ROCKETS) {
+                  displayId = "LAKE_OF_RAGE_LANCES_GIFT_2"
+                } else {
+                  displayId = "LAKE_OF_RAGE_LANCES_GIFT_1"
+                }
+              } else if (id === "GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT") {
+                if (settings.SKIP_MAHOGANY_ROCKETS) {
+                  displayId = "LAKE_OF_RAGE_LANCES_GIFT_3"
+                } else {
+                  displayId = "LAKE_OF_RAGE_LANCES_GIFT_2"
+                }
+              } else if (id === "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT") {
+                if (settings.SKIP_MAHOGANY_ROCKETS) {
+                  displayId = "LAKE_OF_RAGE_LANCES_GIFT_4"
+                } else {
+                  displayId = "LAKE_OF_RAGE_LANCES_GIFT_3"
+                }
+              }
+            }
+            
             return [
-              id,
+              displayId,
               gameData.itemLocations[id].itemId,
             ]
           }),

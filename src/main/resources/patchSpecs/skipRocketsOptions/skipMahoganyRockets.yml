@@ -1,6 +1,6 @@
 description: "Gives HM06 and skips the Mahogany rockets."
 values:
-  giveItemsAndSetFlags: "9E F8 01 33 60 00 33 15 00 33 E2 02 33 E3 02 33 E4 02 33 E5 02 33 E6 02 33 E7 02 33 E8 02 33 D6 06 33 4C 00 33 D7 06 33 C0 06 33 03 03 33 DB 06 33 DD 06 33 DE 06 33 70 05 33 00 03 33 DA 06 33 22 00 33 57 07 33 56 07 33 DC 06 32 35 07 35 17 00 35 0E 00 12 03 33 03 12 03 32 03 12 02 07 01"
+  giveItemsAndSetFlags: "9E parent.$whirlpoolItem 01 33 60 00 33 15 00 33 E2 02 33 E3 02 33 E4 02 33 E5 02 33 E6 02 33 E7 02 33 E8 02 33 D6 06 33 4C 00 33 D7 06 33 C0 06 33 03 03 33 DB 06 33 DD 06 33 DE 06 33 70 05 33 00 03 33 DA 06 33 22 00 33 57 07 33 56 07 33 DC 06 32 35 07 35 17 00 35 0E 00 12 03 33 03 12 03 32 03 12 02 07 01"
 changes:
 - description: "Skips the cutscene after defeating all the electrodes."
   locations:

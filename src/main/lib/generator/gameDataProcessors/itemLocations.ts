@@ -97,6 +97,30 @@ export const shuffleItems = (
   const locationsToShuffle: { locationId: ItemLocationId, shuffleGroupIndex: number }[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   
+  if (settings.SKIP_MAHOGANY_ROCKETS) {
+    const itemLocation = romInfo.gameData.itemLocations["TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT"]
+    itemLocation.areaId = "LAKE_OF_RAGE_MAIN_AREA"
+    itemLocation.accessRequirements = [
+      "LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT",
+    ]
+  }
+  
+  if (settings.SKIP_GOLDENROD_ROCKETS) {
+    const locationsToChange: ItemLocationId[] = [
+      "RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT",
+      "GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+    ]
+    
+    locationsToChange.forEach((locationId) => {
+      const itemLocation = romInfo.gameData.itemLocations[locationId]
+      itemLocation.areaId = "LAKE_OF_RAGE_MAIN_AREA"
+      itemLocation.accessRequirements = [
+        "LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT",
+      ]
+    })
+  }
+  
   if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("SKIP_BEASTS")) {
     romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements = romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements?.filter((requirement) => {
       return requirement !== "SUICUNE" && requirement !== "RAIKOU" && requirement !== "ENTEI"

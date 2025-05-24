@@ -1144,6 +1144,12 @@ const createPatches = (
           settings.SKIP_GOLDENROD_ROCKETS ? "skipRocketsOptions/skipGoldenrodRockets.yml" : null,
         ]),
       },
+      {
+        whirlpoolItem: hexStringFrom([itemsMap[romInfo.gameData.itemLocations.TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT.itemId].numericId]),
+        basementKeyItem: hexStringFrom([itemsMap[romInfo.gameData.itemLocations.RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT.itemId].numericId]),
+        cardKeyItem: hexStringFrom([itemsMap[romInfo.gameData.itemLocations.GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT.itemId].numericId]),
+        clearBellItem: hexStringFrom([itemsMap[romInfo.gameData.itemLocations.RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT.itemId].numericId]),
+      }
     )
       
     romInfo.patchHunks = [...romInfo.patchHunks, ...additionalOptionsPatch.hunks]
