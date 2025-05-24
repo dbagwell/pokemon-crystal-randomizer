@@ -3,10 +3,12 @@ import type { Random } from "@lib/generator/random"
 import type { Settings } from "@shared/appData/settingsFromViewModel"
 import type { ItemLocation } from "@shared/types/gameData/itemLocation"
 import type { LogicalAccessArea, LogicalAreaAccessOption } from "@shared/types/gameData/logicalAccessArea"
+import type { Mart } from "@shared/types/gameData/mart"
 import type { AccessRequirement, Warp } from "@shared/types/gameData/warp"
 import { type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { type BadgeItemId, badgeItemIds, ballItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
+import { type MartId, martIds } from "@shared/types/gameDataIds/marts"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { type WarpId, warpIds } from "@shared/types/gameDataIds/warps"
 import { isNotNullish, isNullish, isNumber } from "@shared/utils"
@@ -200,6 +202,7 @@ export const shuffleItems = (
         itemLocationsMap: romInfo.gameData.itemLocations,
         warpsMap: romInfo.gameData.warps,
         areasMap: romInfo.gameData.areas,
+        martsMap: romInfo.gameData.marts,
         usableItems: remainingProgressionItems.map((itemInfo) => {
           return itemInfo.itemId
         }),
@@ -213,6 +216,7 @@ export const shuffleItems = (
         itemLocationsMap: romInfo.gameData.itemLocations,
         warpsMap: romInfo.gameData.warps,
         areasMap: romInfo.gameData.areas,
+        martsMap: romInfo.gameData.marts,
         usableItems: [],
       })
       
@@ -254,12 +258,14 @@ const getAccessibleItemLocations = (params: {
   itemLocationsMap: IdMap<ItemLocationId, ItemLocation>
   warpsMap: IdMap<WarpId, Warp>
   areasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea>
+  martsMap: IdMap<MartId, Mart>
   usableItems: ItemId[]
 }): ItemLocationId[] => {
   const {
     itemLocationsMap,
     warpsMap,
     areasMap,
+    martsMap,
     usableItems,
   } = params
   
@@ -267,6 +273,7 @@ const getAccessibleItemLocations = (params: {
   const accessibleAreas: LogicalAccessAreaId[] = ["PLAYERS_HOUSE_2F"]
   const accessibleItems: ItemId[] = [...usableItems]
   const accessibleItemLocations: ItemLocationId[] = []
+  const accessibleMarts: MartId[] = []
   
   const numberOfAccessibleBadges = accessibleItems.reduce((result, itemId) => {
     if (badgeItemIds.includes(itemId as BadgeItemId)) {
@@ -335,10 +342,28 @@ const getAccessibleItemLocations = (params: {
       }, true)) {
         accessibleItemLocations.push(locationId)
         
-        if (isNotNullish(itemLocationsMap[locationId].itemId)) {
-          accessibleItems.push(itemLocationsMap[locationId].itemId)
-          didUpdate = true
+        if (isNotNullish(location.itemId)) {
+          accessibleItems.push(location.itemId)
         }
+        
+        didUpdate = true
+      }
+    })
+    
+    martIds.filter((martId) => {
+      return !accessibleMarts.includes(martId)
+    }).forEach((martId) => {
+      const mart = martsMap[martId]
+      if (accessibleAreas.includes(mart.areaId) && (mart.accessRequirements ?? []).reduce((result, accessRequirement) => {
+        return result && isAccessRequirementSatisfied(accessRequirement)
+      }, true)) {
+        accessibleMarts.push(martId)
+        
+        mart.items.forEach((itemId) => {
+          accessibleItems.push(itemId)
+        })
+        
+        didUpdate = true
       }
     })
   }
