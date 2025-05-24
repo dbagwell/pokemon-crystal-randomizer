@@ -228,6 +228,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "POKE_BALL",
       "POTION",
     ],
+    accessRequirements: [
+      "INACCESSIBLE",
+    ],
   },
   MAHOGANY_2: {
     id: "MAHOGANY_2",

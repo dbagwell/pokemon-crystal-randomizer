@@ -27,6 +27,7 @@ export type AccessRequirement =
   | PokemonId
   | ItemId
   | number
+  | "INACCESSIBLE"
 
 export const warpTypes = [
   "DOOR",

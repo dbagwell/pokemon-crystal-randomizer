@@ -3109,7 +3109,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     itemId: "CARD_KEY",
     areaId: "GOLDENROD_UNDERGROUND_WAREHOUSE",
     accessRequirements: [
-      7,
+      "INACCESSIBLE",
     ],
     romOffset: [
       31,
