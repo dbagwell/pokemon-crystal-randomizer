@@ -121,7 +121,16 @@ export class PatchInfo {
       romInfo.freeSpace(location.offset, location.size)
     })
     
-    const hunkFormats = this.changes.flatMap((changeInfo) => { return this.hunkFormatFrom(romInfo, changeInfo) })
+    const hunkFormats = [
+      ...this.changes.flatMap((changeInfo) => {
+        return this.hunkFormatFrom(romInfo, changeInfo)
+      }),
+      ...Object.values(this.includes).flat().flatMap((include) => {
+        return include.changes.flatMap((changeInfo) => {
+          return include.hunkFormatFrom(romInfo, changeInfo)
+        })
+      }),
+    ]
     
     const referenceAddresses: Dictionary<number> = {}
     hunkFormats.forEach((hunkFormat) => {
@@ -130,15 +139,11 @@ export class PatchInfo {
       })
     })
     
-    const hunks = hunkFormats.flatMap((hunkFormat) => {
+    return hunkFormats.flatMap((hunkFormat) => {
       return hunkFormat.romOffsets.map((romOffset) => {
         return DataHunk.from(romOffset, hunkFormat.dataFormat, referenceAddresses)
       })
     })
-    
-    const includeHunks = Object.values(this.includes).flat().flatMap((include) => { return include.hunks(romInfo) })
-    
-    return [...hunks, ...includeHunks]
   }
   
   readonly hunkFormatFrom = (romInfo: ROMInfo, changeInfo: ChangeInfo): HunkFormat[] => {
