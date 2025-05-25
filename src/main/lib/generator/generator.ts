@@ -614,7 +614,7 @@ const createPatches = (
   
   // Items
   
-  if (settings.RANDOMIZE_REGULAR_ITEM_BALLS || settings.RANDOMIZE_TM_ITEM_BALLS || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS || settings.SHUFFLED_ITEM_GROUPS.length > 0) {
+  if (settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE || settings.RANDOMIZE_TM_ITEM_BALLS.VALUE || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.VALUE || settings.SHUFFLED_ITEM_GROUPS.length > 0) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       ...Patch.fromYAML(
@@ -881,7 +881,7 @@ const createPatches = (
     ]
   }
   
-  if (settings.FASTER_ITEM_PICKUP_SFX && settings.SHUFFLED_ITEM_GROUPS.length === 0) {
+  if (settings.FASTER_ITEM_PICKUP_SFX && (settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE || settings.RANDOMIZE_TM_ITEM_BALLS.VALUE || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.VALUE || settings.SHUFFLED_ITEM_GROUPS.length === 0)) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       new DataHunk(ROMOffset.fromBankAddress(4, 0x62DC), [0x90, 0x00, 0x86, 0x18]),
