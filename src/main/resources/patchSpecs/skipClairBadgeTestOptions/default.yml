@@ -1,0 +1,11 @@
+description: "Code for checking for and giving the rising badge"
+values:
+  badgeCheckScript: "34 22 00 08 69 4E"
+  giveBadgeScript: "4C @$giveBadgeText 86 85 9C 00 86 36 22 00 9C 08 00 91"
+  giveBadgeText: "00 52 7F B1 A4 A2 A4 A8 B5 A4 A3 4F 91 88 92 88 8D 86 81 80 83 86 84 E8 57"
+changes:
+- description: "Text saying the player received the risingbadge badge."
+  locations:
+  - bank: 101
+  value: "$giveBadgeText"
+  

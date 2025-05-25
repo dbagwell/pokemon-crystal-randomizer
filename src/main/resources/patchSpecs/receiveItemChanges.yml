@@ -127,16 +127,11 @@ changes:
   - bank: 102
     address: 0x5AB8
   value: "33 92 05 33 93 05 33 0E 04 33 0F 04 33 10 04 47 31 0B 01 09 D7 5A 9E 93 01 08 D7 5A 33 0B 01 31 0E 00 09 F0 5A"
-- description: "Changes some logic to check if Clair has been defeated instead of checking if the player has the Risingbadge."
-  locations:
-  - bank: 101
-    address: 0x4E26
-  value: "31 C4 04"
 - description: "Makes Clair give one of the unused items instead of a badge."
   locations:
   - bank: 99
     address: 0x5161
-  value: "9E 94 01 0F 3D 00 14 01 12 03 51 01 03 78 51"
+  value: "9E 94 01 33 0C 01 0F 3D 00 14 01 12 03 51 01 03 78 51"
 - description: "Changes some logic to check if Brock has been defeated instead of checking if the player has the Boulderbadge and changes a jump."
   locations:
   - bank: 104

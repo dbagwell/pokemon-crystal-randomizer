@@ -561,6 +561,10 @@ export const generatorLog = (params: {
               }
             }
             
+            if (settings.SKIP_CLAIR_BADGE_TEST && id === "DRAGON_SHRINE_BADGE") {
+              displayId = "BLACKTHORN_GYM_BADGE"
+            }
+            
             return [
               displayId,
               gameData.itemLocations[id].itemId,

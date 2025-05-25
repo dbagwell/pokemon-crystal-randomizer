@@ -143,6 +143,17 @@ export const shuffleItems = (
     })
   }
   
+  if (settings.SKIP_GOLDENROD_ROCKETS) {
+    const locationsToChange: ItemLocationId[] = [
+      "DRAGON_SHRINE_BADGE",
+    ]
+    
+    locationsToChange.forEach((locationId) => {
+      const itemLocation = romInfo.gameData.itemLocations[locationId]
+      itemLocation.areaId = "BLACKTHORN_GYM_1F_BACK_AREA"
+    })
+  }
+  
   Object.values(romInfo.gameData.itemLocations).forEach((location) => {
     if (
       location.id === "NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL"

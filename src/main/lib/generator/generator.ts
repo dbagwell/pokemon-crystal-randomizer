@@ -1186,7 +1186,7 @@ const createPatches = (
     ]
   }
   
-  // Early Tin Tower
+  // Skip Clair Badge Test
   
   if (settings.SKIP_CLAIR_BADGE_TEST) {
     romInfo.patchHunks = [
@@ -1194,7 +1194,21 @@ const createPatches = (
       ...Patch.fromYAML(
         romInfo,
         "skipClairBadgeTest.yml",
+        {
+          options: [
+            settings.SHUFFLED_ITEM_GROUPS.length > 0 ? "skipClairBadgeTestOptions/itemShuffle.yml" : "skipClairBadgeTestOptions/default.yml",
+          ],
+        },
+        {
+          risingbadgeItem: hexStringFrom([itemsMap[romInfo.gameData.itemLocations.DRAGON_SHRINE_BADGE.itemId].numericId]),
+          tm24Item: hexStringFrom([itemsMap.TM24.numericId]),
+        }
       ).hunks,
+    ]
+  } else if (settings.SHUFFLED_ITEM_GROUPS.length > 0) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      new DataHunk(ROMOffset.fromBankAddress(101, 0x4E26), [0x31, 0x0C, 0x01]),
     ]
   }
   
