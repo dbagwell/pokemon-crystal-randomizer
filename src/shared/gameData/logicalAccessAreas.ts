@@ -5304,7 +5304,6 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       ],
       [
         "ROUTE_30_VIOLET_SIDE",
-        "MR_POKEMONS_HOUSE_MR_POKEMONS_FREE_GIFT",
         "ELMS_LAB",
         "MYSTERY_EGG",
       ],
@@ -5321,7 +5320,6 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       ],
       [
         "ROUTE_30_CHERRYGROVE_SIDE",
-        "MR_POKEMONS_HOUSE_MR_POKEMONS_FREE_GIFT",
         "ELMS_LAB",
         "MYSTERY_EGG",
       ],
