@@ -133,16 +133,6 @@ export const shuffleItems = (
     })
   }
   
-  if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("OPEN_STAIRS_WITH_RAINBOW_WING")) {
-    romInfo.gameData.warps["TIN_TOWER_1F_STAIRS_UP"].accessRequirements = romInfo.gameData.warps["TIN_TOWER_1F_STAIRS_UP"].accessRequirements?.map((requirement) => {
-      if (requirement === "TIN_TOWER_1F_NORTH_SAGES_GIFT") {
-        return "RAINBOW_WING"
-      } else {
-        return requirement
-      }
-    })
-  }
-  
   if (settings.SKIP_GOLDENROD_ROCKETS) {
     const locationsToChange: ItemLocationId[] = [
       "DRAGON_SHRINE_BADGE",

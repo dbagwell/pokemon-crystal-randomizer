@@ -1167,21 +1167,19 @@ const createPatches = (
         new DataHunk(ROMOffset.fromBankAddress(97, 0x503B), [0x32, 0xC5, 0x07, 0x33, 0xB6, 0x07, 0x0F, 0x96, 0x00, 0x08, 0x50, 0x50]),
         new DataHunk(ROMOffset.fromBankAddress(97, 0x507D), [0x90]),
       ] : [],
-      ...settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("OPEN_STAIRS_WITH_RAINBOW_WING") ? [
-        ...Patch.fromYAML(
-          romInfo,
-          "tinStairsRequirements.yml",
-        ).hunks,
-      ] : [],
     ]
   }
   
-  if (settings.SHUFFLED_ITEM_GROUPS.length > 0 && settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("OPEN_STAIRS_WITH_RAINBOW_WING")) {
+  if (settings.SHUFFLED_ITEM_GROUPS.length > 0) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       ...Patch.fromYAML(
         romInfo,
         "tinSageItemRequirements.yml",
+      ).hunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "tinStairsRequirements.yml",
       ).hunks,
     ]
   }

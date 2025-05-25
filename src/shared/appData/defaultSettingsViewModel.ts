@@ -1174,11 +1174,6 @@ export const defaultSettingsViewModel = () => {
                 name: "Remove Beasts Requirement",
                 description: "Changes the requirements for getting the item so that you no longer need to have a Suicune, an Entei and a Raikou from your game in your party or PC.",
               }),
-              createSimpleSelectorOption({
-                id: "OPEN_STAIRS_WITH_RAINBOW_WING" as const,
-                name: "Open Stairs with Rainbow Wing",
-                description: "Changes the trigger for reveaing the staircase so that instead of having to have received the item from the Sage, you just need to have the Rainbow Wing.",
-              }),
             ] as const,
           }),
           createSimpleToggleViewModel({
