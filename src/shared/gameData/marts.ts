@@ -248,8 +248,7 @@ export const martsMap: IdMap<MartId, Mart> = {
       "FLOWER_MAIL",
     ],
     accessRequirements: [
-      "RADIO_TOWER_5F_WEST_AREA",
-      "RADIO_TOWER_5F_EAST_AREA",
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
     ],
   },
   BLACKTHORN: {

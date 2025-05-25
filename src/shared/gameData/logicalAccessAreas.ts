@@ -1958,8 +1958,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       ],
       [
         "ECRUTEAK_TIN_TOWER_GATE_FRONT_AREA",
-        "RADIO_TOWER_5F_WEST_AREA",
-        "RADIO_TOWER_5F_EAST_AREA",
+        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
         "CLEAR_BELL",
       ],
     ],
@@ -2964,23 +2963,19 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_34_MAIN_AREA",
       [
         "GOLDENROD_CITY_EAST_AREA",
-        "RADIO_TOWER_5F_WEST_AREA",
-        "RADIO_TOWER_5F_EAST_AREA",
+        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
       ],
       [
         "GOLDENROD_CITY_SW_AREA",
-        "RADIO_TOWER_5F_WEST_AREA",
-        "RADIO_TOWER_5F_EAST_AREA",
+        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
       ],
       [
         "GOLDENROD_CITY_FLOWER_SHOP_AREA",
-        "RADIO_TOWER_5F_WEST_AREA",
-        "RADIO_TOWER_5F_EAST_AREA",
+        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
       ],
       [
         "GOLDENROD_CITY_NE_HOUSE_AREA",
-        "RADIO_TOWER_5F_WEST_AREA",
-        "RADIO_TOWER_5F_EAST_AREA",
+        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
       ],
       [
         "GOLDENROD_CITY_EAST_AREA",
@@ -3013,8 +3008,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "GOLDENROD_HAPPINESS_RATER_DOOR_OUT_RIGHT",
       [
         "GOLDENROD_CITY_MAIN_AREA",
-        "RADIO_TOWER_5F_WEST_AREA",
-        "RADIO_TOWER_5F_EAST_AREA",
+        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
       ],
     ],
   },
@@ -3029,8 +3023,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "GOLDENROD_UNDERGOUND_SOUTH_ENTRANCE_DOOR_OUT_RIGHT",
       [
         "GOLDENROD_CITY_MAIN_AREA",
-        "RADIO_TOWER_5F_WEST_AREA",
-        "RADIO_TOWER_5F_EAST_AREA",
+        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
       ],
     ],
   },
@@ -3041,8 +3034,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "GOLDENROD_FLOWER_SHOP_DOOR_OUT_RIGHT",
       [
         "GOLDENROD_CITY_MAIN_AREA",
-        "RADIO_TOWER_5F_WEST_AREA",
-        "RADIO_TOWER_5F_EAST_AREA",
+        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
       ],
     ],
   },
@@ -3053,8 +3045,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "GOLDENROD_PP_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       [
         "GOLDENROD_CITY_MAIN_AREA",
-        "RADIO_TOWER_5F_WEST_AREA",
-        "RADIO_TOWER_5F_EAST_AREA",
+        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
       ],
     ],
   },

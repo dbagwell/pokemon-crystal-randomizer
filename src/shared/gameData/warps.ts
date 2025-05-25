@@ -9582,8 +9582,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "IN",
     direction: "UP",
     accessRequirements: [
-      "RADIO_TOWER_5F_WEST_AREA",
-      "RADIO_TOWER_5F_EAST_AREA",
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
     ],
     coordinate: [
       18,

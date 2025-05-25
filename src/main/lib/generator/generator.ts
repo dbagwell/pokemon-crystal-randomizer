@@ -1181,8 +1181,11 @@ const createPatches = (
         romInfo,
         "tinStairsRequirements.yml",
       ).hunks,
-      // Allow turning in mystery egg before talking to mr pokemon
-      new DataHunk(ROMOffset.fromBankAddress(30, 0x4C53), [0x18, 0x21, 0x45]),
+      new DataHunk(ROMOffset.fromBankAddress(30, 0x4C53), [0x18, 0x21, 0x45]), // Allow turning in mystery egg before talking to mr pokemon
+      ...Patch.fromYAML(
+        romInfo,
+        "radioTower5FCutsceneChanges.yml",
+      ).hunks,
     ]
   }
   

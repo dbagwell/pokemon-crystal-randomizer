@@ -3068,8 +3068,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     itemId: "BLUE_CARD",
     areaId: "RADIO_TOWER_2F",
     accessRequirements: [
-      "RADIO_TOWER_5F_WEST_AREA",
-      "RADIO_TOWER_5F_EAST_AREA",
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
     ],
     romOffset: [
       23,
@@ -3122,9 +3121,6 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     groupId: "KEY_ITEMS",
     itemId: "CLEAR_BELL",
     areaId: "RADIO_TOWER_5F_EAST_AREA",
-    accessRequirements: [
-      "RADIO_TOWER_5F_WEST_AREA",
-    ],
     romOffset: [
       24,
       0x40DB,
@@ -3302,8 +3298,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
     itemId: "RADIO_CARD",
     areaId: "RADIO_TOWER_1F",
     accessRequirements: [
-      "RADIO_TOWER_5F_WEST_AREA",
-      "RADIO_TOWER_5F_EAST_AREA",
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
     ],
     romOffset: [
       23,
