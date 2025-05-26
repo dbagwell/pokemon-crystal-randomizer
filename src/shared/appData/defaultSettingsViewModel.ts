@@ -1138,6 +1138,11 @@ export const defaultSettingsViewModel = () => {
             ] as const,
           }), // END CHANGE_OVERWORLD_TRAINER_MOVEMENT
           createSimpleToggleViewModel({
+            id: "REMOVE_ROUTE_30_ROADBLOCK" as const,
+            name: "Remove Route 30 Roadblock",
+            description: "Removes the battle between Mikey and Joey that blocks the path on Route 30 at the start of the game.",
+          }),
+          createSimpleToggleViewModel({
             id: "SKIP_MAHOGANY_ROCKETS" as const,
             name: "Skip Mahogany Rockets",
             description: "After talking to Lance at the Lake of Rage, he will give you HM06 (Whirlpool) "

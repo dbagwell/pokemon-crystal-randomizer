@@ -1132,6 +1132,15 @@ const createPatches = (
     romInfo.patchHunks = [...romInfo.patchHunks, ...experiencePatch.hunks]
   }
   
+  // Route 30 Roadblock
+  
+  if (settings.REMOVE_ROUTE_30_ROADBLOCK) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x4430), [0x14]),
+    ]
+  }
+  
   // Skip Rockets
   
   if (settings.SKIP_MAHOGANY_ROCKETS || settings.SKIP_GOLDENROD_ROCKETS) {

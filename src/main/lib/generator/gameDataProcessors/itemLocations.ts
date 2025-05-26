@@ -97,6 +97,32 @@ export const shuffleItems = (
   const locationsToShuffle: { locationId: ItemLocationId, shuffleGroupIndex: number }[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   
+  if (settings.REMOVE_ROUTE_30_ROADBLOCK) {
+    const areasToChange: LogicalAccessAreaId[] = [
+      "ROUTE_30_CHERRYGROVE_SIDE",
+      "ROUTE_30_VIOLET_SIDE",
+    ]
+    
+    areasToChange.forEach((areaId) => {
+      const area = romInfo.gameData.areas[areaId]
+      area.accessOptions = area.accessOptions.reduce((result, option) => {
+        if (Array.isArray(option)) {
+          result.push(option.reduce((result, option) => {
+            if (option !== "ELMS_LAB" && option !== "MYSTERY_EGG") {
+              result.push(option)
+            }
+            
+            return result
+          }, [] as AccessRequirement[]))
+        } else {
+          result.push(option)
+        }
+        
+        return result
+      }, [] as LogicalAreaAccessOption[])
+    })
+  }
+  
   if (settings.SKIP_MAHOGANY_ROCKETS) {
     const itemLocation = romInfo.gameData.itemLocations["TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT"]
     itemLocation.areaId = "LAKE_OF_RAGE_MAIN_AREA"
