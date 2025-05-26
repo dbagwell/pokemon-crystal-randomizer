@@ -1141,6 +1141,15 @@ const createPatches = (
     ]
   }
   
+  // Ilex Cut Tree
+  
+  if (settings.REMOVE_ILEX_CUT_TREE) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      new DataHunk(ROMOffset.fromBankAddress(44, 0x418F), [0x17]),
+    ]
+  }
+  
   // Skip Rockets
   
   if (settings.SKIP_MAHOGANY_ROCKETS || settings.SKIP_GOLDENROD_ROCKETS) {

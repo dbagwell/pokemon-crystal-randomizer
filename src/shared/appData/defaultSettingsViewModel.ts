@@ -1140,7 +1140,12 @@ export const defaultSettingsViewModel = () => {
           createSimpleToggleViewModel({
             id: "REMOVE_ROUTE_30_ROADBLOCK" as const,
             name: "Remove Route 30 Roadblock",
-            description: "Removes the battle between Mikey and Joey that blocks the path on Route 30 at the start of the game.",
+            description: "Removes the battle between Mikey and Joey that blocks the path on Route 30 at the start of the game allowing you to pass without turning in the Mystery Egg.",
+          }),
+          createSimpleToggleViewModel({
+            id: "REMOVE_ILEX_CUT_TREE" as const,
+            name: "Remove Ilex Cut Tree",
+            description: "Removes the tree in Ilex Forest that can be cut down allowing you to pass without HM01 (Cut) and/or Hivebadge.",
           }),
           createSimpleToggleViewModel({
             id: "SKIP_MAHOGANY_ROCKETS" as const,

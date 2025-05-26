@@ -123,6 +123,32 @@ export const shuffleItems = (
     })
   }
   
+  if (settings.REMOVE_ILEX_CUT_TREE) {
+    const areasToChange: LogicalAccessAreaId[] = [
+      "ILEX_FOREST_SOUTH_AREA",
+      "ILEX_FOREST_NORTH_AREA",
+    ]
+    
+    areasToChange.forEach((areaId) => {
+      const area = romInfo.gameData.areas[areaId]
+      area.accessOptions = area.accessOptions.reduce((result, option) => {
+        if (Array.isArray(option)) {
+          result.push(option.reduce((result, option) => {
+            if (option !== "HM01" && option !== "HIVEBADGE") {
+              result.push(option)
+            }
+            
+            return result
+          }, [] as AccessRequirement[]))
+        } else {
+          result.push(option)
+        }
+        
+        return result
+      }, [] as LogicalAreaAccessOption[])
+    })
+  }
+  
   if (settings.SKIP_MAHOGANY_ROCKETS) {
     const itemLocation = romInfo.gameData.itemLocations["TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT"]
     itemLocation.areaId = "LAKE_OF_RAGE_MAIN_AREA"
