@@ -1233,6 +1233,16 @@ const createPatches = (
     ]
   }
   
+  // Early Train
+  
+  if (settings.RIDE_TRAIN_WITHOUT_POWER) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x50EE), [0x18, 0x18, 0x18, 0x03]),
+      new DataHunk(ROMOffset.fromBankAddress(98, 0x6820), [0x18, 0x18, 0x18, 0x03]),
+    ]
+  }
+  
   // Performance Improvements
     
   if (settings.IMPROVE_PERFORMANCE) {

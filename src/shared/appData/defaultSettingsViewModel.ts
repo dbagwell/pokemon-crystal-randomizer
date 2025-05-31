@@ -1210,6 +1210,11 @@ export const defaultSettingsViewModel = () => {
               + "instead of after passing the test in the Dragon Shrine.",
           }),
           createSimpleToggleViewModel({
+            id: "RIDE_TRAIN_WITHOUT_POWER" as const,
+            name: "Ride Train Without Power",
+            description: "Allows riding the magnet train between Goldenrod and Saffron before fixing the Kanto Power plant.",
+          }),
+          createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",

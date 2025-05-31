@@ -256,6 +256,34 @@ export const shuffleItems = (
     })
   }
   
+  if (settings.RIDE_TRAIN_WITHOUT_POWER) {
+    const areasToChange: LogicalAccessAreaId[] = [
+      "GOLDENROD_MAGNET_TRAIN_STATION",
+      "SAFFRON_MAGNET_TRAIN_STATION",
+    ]
+    
+    areasToChange.forEach((areaId) => {
+      const area = romInfo.gameData.areas[areaId]
+      area.accessOptions = area.accessOptions.reduce((result, option) => {
+        if (Array.isArray(option) && option.some((option) => {
+          return areasToChange.includes(option as LogicalAccessAreaId)
+        })) {
+          result.push(option.reduce((result, option) => {
+            if (option !== "POWER_PLANT" && option !== "MACHINE_PART") {
+              result.push(option)
+            }
+            
+            return result
+          }, [] as AccessRequirement[]))
+        } else {
+          result.push(option)
+        }
+        
+        return result
+      }, [] as LogicalAreaAccessOption[])
+    })
+  }
+  
   Object.values(romInfo.gameData.itemLocations).forEach((location) => {
     if (
       location.id === "NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL"

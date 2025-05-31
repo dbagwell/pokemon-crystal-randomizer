@@ -3094,6 +3094,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       [
         "SAFFRON_MAGNET_TRAIN_STATION",
         "PASS",
+        "POWER_PLANT",
+        "MACHINE_PART",
       ],
     ],
   },
@@ -5251,6 +5253,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       [
         "GOLDENROD_MAGNET_TRAIN_STATION",
         "PASS",
+        "POWER_PLANT",
+        "MACHINE_PART",
       ],
     ],
   },
