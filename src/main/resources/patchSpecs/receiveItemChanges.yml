@@ -82,15 +82,10 @@ changes:
   - bank: 99
     address: 0x6C38
   value: "33 64 04 33 3C 05 33 3D 05 33 3E 05 47 31 06 01 09 54 6C 9E 88 01 08 54 6C 33 06 01 31 09 00 09 6D 6C"
-- description: "Changes a jump due to other changes."
-  locations:
-  - bank: 21
-    address: 0x404E
-  value: "5D"
 - description: "Makes Whitney give one of the unused items instead of a badge."
   locations:
   - bank: 21
-    address: 0x4054
+    address: 0x4045
   value: "07 01 09 5E 40 4C 22 42 55 9E 89 01 08 5E 40 33 07 01 18 18 18 18 18 18 18 31 0B 00 09 77"
 - description: "Changes a jump due to other changes."
   locations:
