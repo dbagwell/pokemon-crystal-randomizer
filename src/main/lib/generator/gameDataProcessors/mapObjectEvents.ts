@@ -28,13 +28,13 @@ export const updateMapObjectEvents = (
   
   if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_FLOWER_SHOP")) {
     romInfo.gameData.mapObjectEvents.find((object) => {
-      object.id === "GOLDENROD_FLOWER_SHOP_ROCKET_GRUNT"
+      return object.id === "GOLDENROD_FLOWER_SHOP_ROCKET_GRUNT"
     })!.flagId = "INITIALIZED_EVENTS"
   }
   
   if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_SE_AREA")) {
     romInfo.gameData.mapObjectEvents.find((object) => {
-      object.id === "GOLDENROD_SE_AREA_ROCKET_GRUNT"
+      return object.id === "GOLDENROD_SE_AREA_ROCKET_GRUNT"
     })!.flagId = "INITIALIZED_EVENTS"
   }
 }
