@@ -106,7 +106,9 @@ export const shuffleItems = (
     areasToChange.forEach((areaId) => {
       const area = romInfo.gameData.areas[areaId]
       area.accessOptions = area.accessOptions.reduce((result, option) => {
-        if (Array.isArray(option)) {
+        if (Array.isArray(option) && option.some((option) => {
+          return areasToChange.includes(option as LogicalAccessAreaId)
+        })) {
           result.push(option.reduce((result, option) => {
             if (option !== "ELMS_LAB" && option !== "MYSTERY_EGG") {
               result.push(option)
@@ -132,7 +134,9 @@ export const shuffleItems = (
     areasToChange.forEach((areaId) => {
       const area = romInfo.gameData.areas[areaId]
       area.accessOptions = area.accessOptions.reduce((result, option) => {
-        if (Array.isArray(option)) {
+        if (Array.isArray(option) && option.some((option) => {
+          return areasToChange.includes(option as LogicalAccessAreaId)
+        })) {
           result.push(option.reduce((result, option) => {
             if (option !== "HM01" && option !== "HIVEBADGE") {
               result.push(option)
@@ -170,6 +174,62 @@ export const shuffleItems = (
       itemLocation.accessRequirements = [
         "LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT",
       ]
+    })
+  }
+  
+  if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_FLOWER_SHOP")) {
+    const areasToChange: LogicalAccessAreaId[] = [
+      "GOLDENROD_CITY_FLOWER_SHOP_AREA",
+      "GOLDENROD_CITY_MAIN_AREA",
+    ]
+    
+    areasToChange.forEach((areaId) => {
+      const area = romInfo.gameData.areas[areaId]
+      area.accessOptions = area.accessOptions.reduce((result, option) => {
+        if (Array.isArray(option) && option.some((option) => {
+          return areasToChange.includes(option as LogicalAccessAreaId)
+        })) {
+          result.push(option.reduce((result, option) => {
+            if (option !== "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT") {
+              result.push(option)
+            }
+            
+            return result
+          }, [] as AccessRequirement[]))
+        } else {
+          result.push(option)
+        }
+        
+        return result
+      }, [] as LogicalAreaAccessOption[])
+    })
+  }
+  
+  if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_SE_AREA")) {
+    const areasToChange: LogicalAccessAreaId[] = [
+      "GOLDENROD_CITY_EAST_AREA",
+      "GOLDENROD_CITY_MAIN_AREA",
+    ]
+    
+    areasToChange.forEach((areaId) => {
+      const area = romInfo.gameData.areas[areaId]
+      area.accessOptions = area.accessOptions.reduce((result, option) => {
+        if (Array.isArray(option) && option.some((option) => {
+          return areasToChange.includes(option as LogicalAccessAreaId)
+        })) {
+          result.push(option.reduce((result, option) => {
+            if (option !== "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT") {
+              result.push(option)
+            }
+            
+            return result
+          }, [] as AccessRequirement[]))
+        } else {
+          result.push(option)
+        }
+        
+        return result
+      }, [] as LogicalAreaAccessOption[])
     })
   }
   

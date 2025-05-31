@@ -1169,6 +1169,23 @@ export const defaultSettingsViewModel = () => {
               + "- the shady shopkeeper in the Mahogany Town Mart will be replaced with the real one",
           }),
           createSimpleMultiSelectorViewModel({
+            id: "REMOVE_ROCKET_GRUNTS" as const,
+            name: "Remove Rocket Grunts",
+            description: "Makes it so the selected Rocket Grunt NPCs never show up in the overworld.",
+            options: [
+              createSimpleSelectorOption({
+                id: "GOLDENROD_FLOWER_SHOP" as const,
+                name: "Goldenrod Flower Shop",
+                description: "Removes the Rocket Grunt that blocks the entrance to the Goldenrod Flower Shop after the Rockets take over Goldenrod City.",
+              }),
+              createSimpleSelectorOption({
+                id: "GOLDENROD_SE_AREA" as const,
+                name: "Goldenrod South East Area",
+                description: "Removes the Rocket Grunt that blocks the entrance to the south eastern area of Goldenrod City (which contains the Bike Shop) after the Rockets take over Goldenrod City.",
+              }),
+            ] as const,
+          }),
+          createSimpleMultiSelectorViewModel({
             id: "CHANGE_TIN_TOWER_REQUIREMENTS" as const,
             name: "Change Tin Tower Requirements",
             description: "Changes the requirements for getting the item (Rainbow Wing) from the Sage by the staircase on the first floor of Tin Tower "

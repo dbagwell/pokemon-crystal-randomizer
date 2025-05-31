@@ -5,6 +5,7 @@ import type { OverworldSpritePalletId } from "@shared/types/gameDataIds/overworl
 import type { OverworldSpriteId } from "@shared/types/gameDataIds/overworldSprites"
 
 export type MapObjectEvent = {
+  id?: MapObjectEventId
   romOffset: [number, number]
   coordinate: [number, number]
   spriteId: OverworldSpriteId
@@ -17,3 +18,10 @@ export type MapObjectEvent = {
   scriptPointer: number
   flagId?: EventFlagId
 }
+
+const mapObjectEventIds = [
+  "GOLDENROD_FLOWER_SHOP_ROCKET_GRUNT",
+  "GOLDENROD_SE_AREA_ROCKET_GRUNT",
+] as const
+
+type MapObjectEventId = typeof mapObjectEventIds[number]

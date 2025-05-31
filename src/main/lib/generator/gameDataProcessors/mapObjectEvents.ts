@@ -6,14 +6,13 @@ export const updateMapObjectEvents = (
   settings: Settings,
   romInfo: ROMInfo,
 ) => {
-  if (!settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.VALUE) { return }
-  
-  const movementSettings = settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.SETTINGS
-  const behaviour = trainerMovementBehavioursMap[movementSettings.MOVEMENT]
+  if (settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.VALUE) {
+    const movementSettings = settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.SETTINGS
+    const behaviour = trainerMovementBehavioursMap[movementSettings.MOVEMENT]
     
-  romInfo.gameData.mapObjectEvents.forEach((event) => {
-    if (
-      event.typeId === "TRAINER"
+    romInfo.gameData.mapObjectEvents.forEach((event) => {
+      if (
+        event.typeId === "TRAINER"
           && (
             movementSettings.INCLUDE_STATIONARY
               || event.movementBehaviourId === "SPINCLOCKWISE"
@@ -21,8 +20,21 @@ export const updateMapObjectEvents = (
               || event.movementBehaviourId === "SPINRANDOM_SLOW"
               || event.movementBehaviourId === "SPINRANDOM_FAST"
           )
-    ) {
-      event.movementBehaviourId = behaviour.overworldMovementBehaviourId
-    }
-  })
+      ) {
+        event.movementBehaviourId = behaviour.overworldMovementBehaviourId
+      }
+    })
+  }
+  
+  if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_FLOWER_SHOP")) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      object.id === "GOLDENROD_FLOWER_SHOP_ROCKET_GRUNT"
+    })!.flagId = "INITIALIZED_EVENTS"
+  }
+  
+  if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_SE_AREA")) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      object.id === "GOLDENROD_SE_AREA_ROCKET_GRUNT"
+    })!.flagId = "INITIALIZED_EVENTS"
+  }
 }
