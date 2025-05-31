@@ -2056,7 +2056,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
     itemId: "REVIVE",
     areaId: "ROUTE_11",
     romOffset: [
-      25,
+      26,
       0x4059,
     ],
   },
@@ -2964,7 +2964,7 @@ export const hmGiftLocationsMap: IdMap<HMGiftLocationId, ItemLocation> = {
     ],
     romOffset: [
       104,
-      0x409D,
+      0x40A1,
     ],
   },
   DANCE_THEATER_MANS_GIFT: {
@@ -3348,8 +3348,8 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
     itemId: "PLAINBADGE",
     areaId: "GOLDENROD_GYM",
     romOffset: [
-      26,
-      0x4069,
+      21,
+      0x404F,
     ],
   },
   ECRUTEAK_GYM_BADGE: {
