@@ -97,193 +97,6 @@ export const shuffleItems = (
   const locationsToShuffle: { locationId: ItemLocationId, shuffleGroupIndex: number }[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   
-  if (settings.REMOVE_ROUTE_30_ROADBLOCK) {
-    const areasToChange: LogicalAccessAreaId[] = [
-      "ROUTE_30_CHERRYGROVE_SIDE",
-      "ROUTE_30_VIOLET_SIDE",
-    ]
-    
-    areasToChange.forEach((areaId) => {
-      const area = romInfo.gameData.areas[areaId]
-      area.accessOptions = area.accessOptions.reduce((result, option) => {
-        if (Array.isArray(option) && option.some((option) => {
-          return areasToChange.includes(option as LogicalAccessAreaId)
-        })) {
-          result.push(option.reduce((result, option) => {
-            if (option !== "ELMS_LAB" && option !== "MYSTERY_EGG") {
-              result.push(option)
-            }
-            
-            return result
-          }, [] as AccessRequirement[]))
-        } else {
-          result.push(option)
-        }
-        
-        return result
-      }, [] as LogicalAreaAccessOption[])
-    })
-  }
-  
-  if (settings.REMOVE_ILEX_CUT_TREE) {
-    const areasToChange: LogicalAccessAreaId[] = [
-      "ILEX_FOREST_SOUTH_AREA",
-      "ILEX_FOREST_NORTH_AREA",
-    ]
-    
-    areasToChange.forEach((areaId) => {
-      const area = romInfo.gameData.areas[areaId]
-      area.accessOptions = area.accessOptions.reduce((result, option) => {
-        if (Array.isArray(option) && option.some((option) => {
-          return areasToChange.includes(option as LogicalAccessAreaId)
-        })) {
-          result.push(option.reduce((result, option) => {
-            if (option !== "HM01" && option !== "HIVEBADGE") {
-              result.push(option)
-            }
-            
-            return result
-          }, [] as AccessRequirement[]))
-        } else {
-          result.push(option)
-        }
-        
-        return result
-      }, [] as LogicalAreaAccessOption[])
-    })
-  }
-  
-  if (settings.SKIP_MAHOGANY_ROCKETS) {
-    const itemLocation = romInfo.gameData.itemLocations["TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT"]
-    itemLocation.areaId = "LAKE_OF_RAGE_MAIN_AREA"
-    itemLocation.accessRequirements = [
-      "LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT",
-    ]
-  }
-  
-  if (settings.SKIP_GOLDENROD_ROCKETS) {
-    const locationsToChange: ItemLocationId[] = [
-      "RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT",
-      "GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT",
-      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
-    ]
-    
-    locationsToChange.forEach((locationId) => {
-      const itemLocation = romInfo.gameData.itemLocations[locationId]
-      itemLocation.areaId = "LAKE_OF_RAGE_MAIN_AREA"
-      itemLocation.accessRequirements = [
-        "LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT",
-      ]
-    })
-  }
-  
-  if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_FLOWER_SHOP")) {
-    const areasToChange: LogicalAccessAreaId[] = [
-      "GOLDENROD_CITY_FLOWER_SHOP_AREA",
-      "GOLDENROD_CITY_MAIN_AREA",
-    ]
-    
-    areasToChange.forEach((areaId) => {
-      const area = romInfo.gameData.areas[areaId]
-      area.accessOptions = area.accessOptions.reduce((result, option) => {
-        if (Array.isArray(option) && option.some((option) => {
-          return areasToChange.includes(option as LogicalAccessAreaId)
-        })) {
-          result.push(option.reduce((result, option) => {
-            if (option !== "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT") {
-              result.push(option)
-            }
-            
-            return result
-          }, [] as AccessRequirement[]))
-        } else {
-          result.push(option)
-        }
-        
-        return result
-      }, [] as LogicalAreaAccessOption[])
-    })
-  }
-  
-  if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_SE_AREA")) {
-    const areasToChange: LogicalAccessAreaId[] = [
-      "GOLDENROD_CITY_EAST_AREA",
-      "GOLDENROD_CITY_MAIN_AREA",
-    ]
-    
-    areasToChange.forEach((areaId) => {
-      const area = romInfo.gameData.areas[areaId]
-      area.accessOptions = area.accessOptions.reduce((result, option) => {
-        if (Array.isArray(option) && option.some((option) => {
-          return areasToChange.includes(option as LogicalAccessAreaId)
-        })) {
-          result.push(option.reduce((result, option) => {
-            if (option !== "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT") {
-              result.push(option)
-            }
-            
-            return result
-          }, [] as AccessRequirement[]))
-        } else {
-          result.push(option)
-        }
-        
-        return result
-      }, [] as LogicalAreaAccessOption[])
-    })
-  }
-  
-  if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("SKIP_BEASTS")) {
-    romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements = romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements?.filter((requirement) => {
-      return requirement !== "SUICUNE" && requirement !== "RAIKOU" && requirement !== "ENTEI"
-    })
-  }
-  
-  if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("SKIP_E4")) {
-    romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements = romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements?.filter((requirement) => {
-      return requirement !== "HALL_OF_FAME"
-    })
-  }
-  
-  if (settings.SKIP_GOLDENROD_ROCKETS) {
-    const locationsToChange: ItemLocationId[] = [
-      "DRAGON_SHRINE_BADGE",
-    ]
-    
-    locationsToChange.forEach((locationId) => {
-      const itemLocation = romInfo.gameData.itemLocations[locationId]
-      itemLocation.areaId = "BLACKTHORN_GYM_1F_BACK_AREA"
-    })
-  }
-  
-  if (settings.RIDE_TRAIN_WITHOUT_POWER) {
-    const areasToChange: LogicalAccessAreaId[] = [
-      "GOLDENROD_MAGNET_TRAIN_STATION",
-      "SAFFRON_MAGNET_TRAIN_STATION",
-    ]
-    
-    areasToChange.forEach((areaId) => {
-      const area = romInfo.gameData.areas[areaId]
-      area.accessOptions = area.accessOptions.reduce((result, option) => {
-        if (Array.isArray(option) && option.some((option) => {
-          return areasToChange.includes(option as LogicalAccessAreaId)
-        })) {
-          result.push(option.reduce((result, option) => {
-            if (option !== "POWER_PLANT" && option !== "MACHINE_PART") {
-              result.push(option)
-            }
-            
-            return result
-          }, [] as AccessRequirement[]))
-        } else {
-          result.push(option)
-        }
-        
-        return result
-      }, [] as LogicalAreaAccessOption[])
-    })
-  }
-  
   Object.values(romInfo.gameData.itemLocations).forEach((location) => {
     if (
       location.id === "NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL"
@@ -534,4 +347,153 @@ const getAccessibleItemLocations = (params: {
   }
   
   return accessibleItemLocations.filter((locationId) => { return isNullish(itemLocationsMap[locationId].itemId) })
+}
+
+export const updateAccessLogic = (
+  settings: Settings,
+  romInfo: ROMInfo,
+) => {
+  const removeAccessRequirements = (params: {
+    areaIds: LogicalAccessAreaId[]
+    requirements: AccessRequirement[]
+    matchingRequirements?: AccessRequirement[]
+    modifyMutualAccess?: boolean
+  }) => {
+    const {
+      areaIds,
+      requirements,
+      matchingRequirements,
+      modifyMutualAccess,
+    } = params
+  
+    areaIds.forEach((areaId) => {
+      const area = romInfo.gameData.areas[areaId]
+      area.accessOptions = area.accessOptions.map((option) => {
+        const optionArray = [option].flat()
+      
+        if (new Set(optionArray).isSupersetOf(new Set(matchingRequirements)) && (!(modifyMutualAccess ?? false) || new Set(optionArray).intersection(new Set(areaIds)).size > 0)) {
+          return optionArray.filter((requirement) => {
+            return requirements.includes(requirement)
+          })
+        } else {
+          return option
+        }
+      })
+    })
+  }
+  
+  if (settings.REMOVE_ROUTE_30_ROADBLOCK) {
+    removeAccessRequirements({
+      areaIds: [
+        "ROUTE_30_CHERRYGROVE_SIDE",
+        "ROUTE_30_VIOLET_SIDE",
+      ],
+      requirements: [
+        "ELMS_LAB",
+        "MYSTERY_EGG",
+      ],
+      modifyMutualAccess: true,
+    })
+  }
+  
+  if (settings.REMOVE_ILEX_CUT_TREE) {
+    removeAccessRequirements({
+      areaIds: [
+        "ILEX_FOREST_SOUTH_AREA",
+        "ILEX_FOREST_NORTH_AREA",
+      ],
+      requirements: [
+        "HIVEBADGE",
+        "HM01",
+      ],
+      modifyMutualAccess: true,
+    })
+  }
+  
+  if (settings.SKIP_MAHOGANY_ROCKETS) {
+    const itemLocation = romInfo.gameData.itemLocations["TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT"]
+    itemLocation.areaId = "LAKE_OF_RAGE_MAIN_AREA"
+    itemLocation.accessRequirements = [
+      "LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT",
+    ]
+  }
+  
+  if (settings.SKIP_GOLDENROD_ROCKETS) {
+    const locationsToChange: ItemLocationId[] = [
+      "RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT",
+      "GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+    ]
+    
+    locationsToChange.forEach((locationId) => {
+      const itemLocation = romInfo.gameData.itemLocations[locationId]
+      itemLocation.areaId = "LAKE_OF_RAGE_MAIN_AREA"
+      itemLocation.accessRequirements = [
+        "LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT",
+      ]
+    })
+  }
+  
+  if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_FLOWER_SHOP")) {
+    removeAccessRequirements({
+      areaIds: [
+        "GOLDENROD_CITY_FLOWER_SHOP_AREA",
+        "GOLDENROD_CITY_MAIN_AREA",
+      ],
+      requirements: [
+        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      ],
+      modifyMutualAccess: true,
+    })
+  }
+  
+  if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_SE_AREA")) {
+    removeAccessRequirements({
+      areaIds: [
+        "GOLDENROD_CITY_EAST_AREA",
+        "GOLDENROD_CITY_MAIN_AREA",
+      ],
+      requirements: [
+        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      ],
+      modifyMutualAccess: true,
+    })
+  }
+  
+  if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("SKIP_BEASTS")) {
+    romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements = romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements?.filter((requirement) => {
+      return requirement !== "SUICUNE" && requirement !== "RAIKOU" && requirement !== "ENTEI"
+    })
+  }
+  
+  if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("SKIP_E4")) {
+    romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements = romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements?.filter((requirement) => {
+      return requirement !== "HALL_OF_FAME"
+    })
+  }
+  
+  if (settings.SKIP_GOLDENROD_ROCKETS) {
+    const locationsToChange: ItemLocationId[] = [
+      "DRAGON_SHRINE_BADGE",
+    ]
+    
+    locationsToChange.forEach((locationId) => {
+      const itemLocation = romInfo.gameData.itemLocations[locationId]
+      itemLocation.areaId = "BLACKTHORN_GYM_1F_BACK_AREA"
+    })
+  }
+  
+  if (settings.RIDE_TRAIN_WITHOUT_POWER) {
+    removeAccessRequirements({
+      areaIds: [
+        "GOLDENROD_MAGNET_TRAIN_STATION",
+        "SAFFRON_MAGNET_TRAIN_STATION",
+      ],
+      requirements: [
+        "POWER_PLANT",
+        "MACHINE_PART",
+      ],
+      modifyMutualAccess: true,
+    })
+  }
 }

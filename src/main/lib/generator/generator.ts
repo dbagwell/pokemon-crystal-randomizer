@@ -11,7 +11,7 @@ import { updateRandomEncounters } from "@lib/generator/gameDataProcessors/encoun
 import { updateEventPokemon, updateEventPokemonMoves } from "@lib/generator/gameDataProcessors/eventPokemon"
 import { updateEvolutionMethods } from "@lib/generator/gameDataProcessors/evolutionMethods"
 import { updateIntroPokemon } from "@lib/generator/gameDataProcessors/introPokemon"
-import { shuffleItems, syncContestItems, updateItems } from "@lib/generator/gameDataProcessors/itemLocations"
+import { shuffleItems, syncContestItems, updateAccessLogic, updateItems } from "@lib/generator/gameDataProcessors/itemLocations"
 import { updateLevelUpMoves } from "@lib/generator/gameDataProcessors/levelUpMoves"
 import { updateMapObjectEvents } from "@lib/generator/gameDataProcessors/mapObjectEvents"
 import { updateMarts } from "@lib/generator/gameDataProcessors/marts"
@@ -237,7 +237,8 @@ const updateGameData = (
   updateTrainers(settings, romInfo, random)
   updateMapObjectEvents(settings, romInfo)
   updateItems(settings, romInfo, random)
-  shuffleItems(settings, romInfo, random)
+  updateAccessLogic(settings, romInfo)
+  shuffleItems(settings, romInfo, random) // Must be after updateAccessLogic
   syncContestItems(romInfo) // Must be after updateItems and shuffleItems
 }
 
