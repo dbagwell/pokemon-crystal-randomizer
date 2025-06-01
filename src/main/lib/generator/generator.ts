@@ -1152,6 +1152,19 @@ const createPatches = (
     ]
   }
   
+  // Flower Shop
+  
+  if (settings.SKIP_FLORIA || settings.SHUFFLED_ITEM_GROUPS.length > 0) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "flowerShopChanges.yml",
+      {},
+      {
+        checkFloriaState: settings.SKIP_FLORIA ? "18 18 18 18 18 18 18 18 18 18 18 18" : "31 B9 00 08 9F 53 31 BA 00 08 8F 53",
+      },
+    ).hunks)
+  }
+  
   // Skip Rockets
   
   if (settings.SKIP_MAHOGANY_ROCKETS || settings.SKIP_GOLDENROD_ROCKETS) {

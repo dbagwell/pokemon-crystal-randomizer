@@ -410,6 +410,12 @@ export const updateAccessLogic = (
     })
   }
   
+  if (settings.SKIP_FLORIA) {
+    romInfo.gameData.itemLocations.GOLDENROD_FLOWER_SHOP_OWNERS_GIFT.accessRequirements = romInfo.gameData.itemLocations.GOLDENROD_FLOWER_SHOP_OWNERS_GIFT.accessRequirements?.filter((requirement) => {
+      return requirement !== "ROUTE_36_WEST_AREA" && requirement !== "GOLDENROD_CITY_MAIN_AREA"
+    })
+  }
+  
   if (settings.SKIP_MAHOGANY_ROCKETS) {
     const itemLocation = romInfo.gameData.itemLocations["TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT"]
     itemLocation.areaId = "LAKE_OF_RAGE_MAIN_AREA"

@@ -3084,6 +3084,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     accessRequirements: [
       "ROUTE_36_WEST_AREA",
       "PLAINBADGE",
+      "GOLDENROD_CITY_MAIN_AREA",
     ],
     romOffset: [
       21,

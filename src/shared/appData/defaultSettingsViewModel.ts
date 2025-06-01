@@ -1148,6 +1148,11 @@ export const defaultSettingsViewModel = () => {
             description: "Removes the tree in Ilex Forest that can be cut down allowing you to pass without HM01 (Cut) and/or Hivebadge.",
           }),
           createSimpleToggleViewModel({
+            id: "SKIP_FLORIA" as const,
+            name: "Skip Talking to Floria",
+            description: "Removes requirement of having to talk to Floria on Route 36 and in the Flower shop before being able to get the item from the Flower Shop owner.",
+          }),
+          createSimpleToggleViewModel({
             id: "SKIP_MAHOGANY_ROCKETS" as const,
             name: "Skip Mahogany Rockets",
             description: "After talking to Lance at the Lake of Rage, he will give you HM06 (Whirlpool) "
