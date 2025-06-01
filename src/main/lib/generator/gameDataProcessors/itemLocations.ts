@@ -496,4 +496,19 @@ export const updateAccessLogic = (
       modifyMutualAccess: true,
     })
   }
+  
+  if (settings.CHANGE_SS_AQUA_REQUIREMENTS.includes("SKIP_E4")) {
+    removeAccessRequirements({
+      areaIds: [
+        "FAST_SHIP_1F_MAIN_AREA",
+        "VERMILION_PORT_SOUTH_AREA",
+      ],
+      requirements: [
+        "HALL_OF_FAME",
+      ],
+      matchingRequirements: [
+        "S_S_TICKET",
+      ],
+    })
+  }
 }

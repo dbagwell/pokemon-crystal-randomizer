@@ -3526,6 +3526,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       [
         "VERMILION_PORT_NORTH_AREA",
+        "FAST_SHIP_1F_MAIN_AREA",
+        "FAST_SHIP_CABINS_CAPTAINS_CABIN",
         "S_S_TICKET",
       ],
     ],
@@ -3562,6 +3564,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       [
         "OLIVINE_PORT_NORTH_AREA",
+        "FAST_SHIP_1F_MAIN_AREA",
+        "FAST_SHIP_CABINS_CAPTAINS_CABIN",
         "S_S_TICKET",
       ],
     ],
@@ -3586,6 +3590,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       [
         "OLIVINE_PORT_NORTH_AREA",
         "S_S_TICKET",
+        "HALL_OF_FAME",
       ],
       "FAST_SHIP_CABINS_NE_DOOR_OUT",
       "FAST_SHIP_CABINS_NNE_DOOR_OUT",

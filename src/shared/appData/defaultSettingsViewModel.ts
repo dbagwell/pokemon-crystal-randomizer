@@ -1209,6 +1209,28 @@ export const defaultSettingsViewModel = () => {
             description: "Makes it so Clair gives you her Badge and TM immediately after defeating her "
               + "instead of after passing the test in the Dragon Shrine.",
           }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_SS_AQUA_REQUIREMENTS" as const,
+            name: "Change S.S. Aqua Requirements",
+            description: "Changes the requirements for boarding the S.S. Aqua.",
+            options: [
+              createSimpleSelectorOption({
+                id: "SKIP_E4" as const,
+                name: "Remove E4 Requirement",
+                description: "Removes the requirement of having to defeat Champion Lance before being allowed to board the S.S. Aqua from the Olivine Port.",
+              }),
+              createSimpleSelectorOption({
+                id: "BOARD_ANY_DAY" as const,
+                name: "Remove Day Requirement",
+                description: "Allows boarding the S.S. Aqua from both the Olivne and Vermilion Ports any day of the week.",
+              }),
+              createSimpleSelectorOption({
+                id: "REBOARD_IMMEDIATELY" as const,
+                name: "Allow Reboarding",
+                description: "Allows boarding the S.S. Aqua again immediately after disembarking without having to reload the map.",
+              }),
+            ] as const,
+          }),
           createSimpleToggleViewModel({
             id: "RIDE_TRAIN_WITHOUT_POWER" as const,
             name: "Ride Train Without Power",

@@ -29,6 +29,7 @@ import { getVanillaROM } from "@lib/userData/vanillaROM"
 import { attemptWriteFile, getFilePathFromUserInput } from "@lib/utils/dialogUtils"
 import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
 import { type PlayerOptions, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
+import { eventFlagsMap } from "@shared/gameData/eventFlags"
 import { gen5BaseExpMap } from "@shared/gameData/gen5BaseExp"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemsMap } from "@shared/gameData/items"
@@ -1187,6 +1188,38 @@ const createPatches = (
         new DataHunk(ROMOffset.fromBankAddress(97, 0x507D), [0x90]),
       ] : [],
     ]
+  }
+  
+  // Boat changes
+  
+  if (settings.CHANGE_SS_AQUA_REQUIREMENTS.includes("SKIP_E4")) {
+    romInfo.patchHunks.push(new DataHunk(
+      ROMOffset.fromBankAddress(47, 0x44C9),
+      bytesFrom(eventFlagsMap.OLIVINE_PORT_SPRITES_BEFORE_HALL_OF_FAME.numericId, 2)
+    ))
+  }
+  
+  if (settings.CHANGE_SS_AQUA_REQUIREMENTS.includes("BOARD_ANY_DAY")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(29, 0x4935), [0x03]),
+      new DataHunk(ROMOffset.fromBankAddress(29, 0x49A7), [0x03]),
+      new DataHunk(ROMOffset.fromBankAddress(29, 0x4E33), [0x03, 0x49, 0x4E]),
+      new DataHunk(ROMOffset.fromBankAddress(29, 0x4E9F), [0x03, 0xB5, 0x4E]),
+    ])
+    
+    romInfo.freeSpace(ROMOffset.fromBankAddress(29, 0x4938), 22)
+    romInfo.freeSpace(ROMOffset.fromBankAddress(29, 0x49AA), 22)
+    romInfo.freeSpace(ROMOffset.fromBankAddress(29, 0x4E36), 19)
+    romInfo.freeSpace(ROMOffset.fromBankAddress(29, 0x4EA2), 19)
+  }
+  
+  if (settings.CHANGE_SS_AQUA_REQUIREMENTS.includes("REBOARD_IMMEDIATELY")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(29, 0x48C2), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(29, 0x499E), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(29, 0x4DC6), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(29, 0x4E99), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]),
+    ])
   }
   
   if (settings.SHUFFLED_ITEM_GROUPS.length > 0) {
