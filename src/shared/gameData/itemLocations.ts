@@ -3152,7 +3152,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     ],
     romOffset: [
       97,
-      0x5195,
+      0x519B,
     ],
   },
   OLIVINE_GOOD_ROD_HOUSE_MANS_GIFT: {
