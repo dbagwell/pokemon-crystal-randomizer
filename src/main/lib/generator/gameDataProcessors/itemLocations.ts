@@ -478,6 +478,10 @@ export const updateAccessLogic = (
     })
   }
   
+  if (settings.CLIMB_TIN_TOWER_FOR_HO_OH_CHAMBER) {
+    romInfo.gameData.warps.RUINS_OF_ALPH_HO_OH_CHAMBER_TOP_CAVE_IN.accessRequirements = ["TIN_TOWER_ROOF"]
+  }
+  
   if (settings.SKIP_GOLDENROD_ROCKETS) {
     const locationsToChange: ItemLocationId[] = [
       "DRAGON_SHRINE_BADGE",

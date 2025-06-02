@@ -926,7 +926,9 @@ export const defaultSettingsViewModel = () => {
           createGroupMultiSelectorViewModel({
             id: "SHUFFLED_ITEM_GROUPS" as const,
             name: "Shuffle Items",
-            description: "Create groups of item locations and shuffle the items that can be found at the locations within each group.",
+            description: "Create groups of item locations and shuffle the items that can be found at the locations within each group.\n"
+              + "Items that are required in order to progress the game will be never be placed in locations that could make it impossible to obtain them. "
+              + "This includes locations that can become inaccessible later in the game due to advancing the plot, ",
             options: itemLocationGroupIds.map((groupId) => {
               return createSimpleSelectorOption({
                 id: groupId,
@@ -1218,6 +1220,13 @@ export const defaultSettingsViewModel = () => {
                 description: "Changes the requirements for getting the item so that you no longer need to have a Suicune, an Entei and a Raikou from your game in your party or PC.",
               }),
             ] as const,
+          }),
+          createSimpleToggleViewModel({
+            id: "CLIMB_TIN_TOWER_FOR_HO_OH_CHAMBER" as const,
+            name: "Climb Tin Tower for Ho-oh Chamber",
+            description: "Changes the requirments for opening the door in the Ho-oh chamber of the Ruins of Alph "
+              + "so that the door opens after the player has fought the Pokémon at the top of Tin Tower "
+              + "instead of when the player has a Ho-oh as the first Pokémon in their party.",
           }),
           createSimpleToggleViewModel({
             id: "SKIP_CLAIR_BADGE_TEST" as const,

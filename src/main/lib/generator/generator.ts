@@ -1203,12 +1203,21 @@ const createPatches = (
     ]
   }
   
+  // Ho-oh Chamber
+  
+  if (settings.CLIMB_TIN_TOWER_FOR_HO_OH_CHAMBER) {
+    romInfo.patchHunks.push(new DataHunk(
+      ROMOffset.fromBankAddress(34, 0x6DDB),
+      [0x11, 0x17, 0x03, 0x06, 0x02, 0xCD, 0x6F, 0x2E, 0x28, 0x09, 0x00]
+    ))
+  }
+  
   // Boat changes
   
   if (settings.CHANGE_SS_AQUA_REQUIREMENTS.includes("SKIP_E4")) {
     romInfo.patchHunks.push(new DataHunk(
       ROMOffset.fromBankAddress(47, 0x44C9),
-      bytesFrom(eventFlagsMap.OLIVINE_PORT_SPRITES_BEFORE_HALL_OF_FAME.numericId, 2)
+      bytesFrom(eventFlagsMap.OLIVINE_PORT_SPRITES_BEFORE_HALL_OF_FAME.numericId, 2),
     ))
   }
   
