@@ -6,7 +6,7 @@ changes:
   locations:
   - bank: 97
     address: 0x5084
-  value: "21 B2 00"
+  value: "18 21 B2"
 - description: "Script that animates the stairs appearing."
   locations:
   - bank: 97
