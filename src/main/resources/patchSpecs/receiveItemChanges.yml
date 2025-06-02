@@ -29,6 +29,8 @@ values:
   checkGotBlainesItem: "08 25 75 33 13 01 91"
   checkAlreadyGotBluesItem: "31 14 01 09 51 6A 91"
   checkGotBluesItem: "08 4B 6A 33 14 01 91"
+  clearUndergroundWarehouseDirectorEventFlag: "36 13 00 32 17 01 57"
+  setUndergroundWarehouseDirectorEventFlag: "33 4A 00 33 17 01 57"
 changes:
 - description: "Changes the script for picking up an item ball to use the script that plays a sound dynamically based on the type of item."
   locations:
@@ -304,3 +306,21 @@ changes:
   - bank: 101
     address: 0x6E6C
   value: "9E 45 01 18 18 18 18 18 18 18 18 18"
+- description: "Adds code to clear the underground warehouse director event flag."
+  locations:
+  - bank: 47
+  value: "$clearUndergroundWarehouseDirectorEventFlag"
+- description: "Calls code to clear the underground warehouse director event flag."
+  locations:
+  - bank: 47
+    address: 0x4242
+  value: "00 @$clearUndergroundWarehouseDirectorEventFlag"
+- description: "Adds code to set the underground warehouse director event flag."
+  locations:
+  - bank: 31
+  value: "$setUndergroundWarehouseDirectorEventFlag"
+- description: "Calls code to clear the underground warehouse director event flag."
+  locations:
+  - bank: 31
+    address: 0x59CE
+  value: "00 @$setUndergroundWarehouseDirectorEventFlag"

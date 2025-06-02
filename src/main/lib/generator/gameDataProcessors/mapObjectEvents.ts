@@ -40,4 +40,10 @@ export const updateMapObjectEvents = (
       return object.id === "GOLDENROD_SE_AREA_ROCKET_GRUNT"
     })!.flagId = "INITIALIZED_EVENTS"
   }
+  
+  if (settings.SHUFFLED_ITEM_GROUPS.length > 0) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "GOLDENROD_UNDERGROUND_WAREHOUSE_DIRECTOR"
+    })!.flagId = "DIRECTOR_IN_UNDERGROUND_WAREHOUSE"
+  }
 }

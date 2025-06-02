@@ -998,6 +998,82 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "TIFFANY_GAVE_PINK_BOW",
     numericId: 260,
   },
+  GOT_ZEPHYRBADGE: {
+    id: "GOT_ZEPHYRBADGE",
+    numericId: 261,
+  },
+  GOT_HIVEBADGE: {
+    id: "GOT_HIVEBADGE",
+    numericId: 262,
+  },
+  GOT_PLAINBADGE: {
+    id: "GOT_PLAINBADGE",
+    numericId: 263,
+  },
+  GOT_FOGBADGE: {
+    id: "GOT_FOGBADGE",
+    numericId: 264,
+  },
+  GOT_MINERALBADGE: {
+    id: "GOT_MINERALBADGE",
+    numericId: 265,
+  },
+  GOT_STORMBADGE: {
+    id: "GOT_STORMBADGE",
+    numericId: 266,
+  },
+  GOT_GLACIERBADGE: {
+    id: "GOT_GLACIERBADGE",
+    numericId: 267,
+  },
+  GOT_RISINGBADGE: {
+    id: "GOT_RISINGBADGE",
+    numericId: 268,
+  },
+  GOT_BOULDERBADGE: {
+    id: "GOT_BOULDERBADGE",
+    numericId: 269,
+  },
+  GOT_CASCADEBADGE: {
+    id: "GOT_CASCADEBADGE",
+    numericId: 270,
+  },
+  GOT_THUNDERBADGE: {
+    id: "GOT_THUNDERBADGE",
+    numericId: 271,
+  },
+  GOT_RAINBOWBADGE: {
+    id: "GOT_RAINBOWBADGE",
+    numericId: 272,
+  },
+  GOT_SOULBADGE: {
+    id: "GOT_SOULBADGE",
+    numericId: 273,
+  },
+  GOT_MARSHBADGE: {
+    id: "GOT_MARSHBADGE",
+    numericId: 274,
+  },
+  GOT_VOLCANOBADGE: {
+    id: "GOT_VOLCANOBADGE",
+    numericId: 275,
+  },
+  GOT_EARTHBADGE: {
+    id: "GOT_EARTHBADGE",
+    numericId: 276,
+  },
+  GOT_RADIO_CARD: {
+    id: "GOT_RADIO_CARD",
+    numericId: 277,
+  },
+  GOT_EXPN_CARD: {
+    id: "GOT_EXPN_CARD",
+    numericId: 278,
+  },
+  DIRECTOR_IN_UNDERGROUND_WAREHOUSE: {
+    id: "DIRECTOR_IN_UNDERGROUND_WAREHOUSE",
+    numericId: 279,
+  },
   GAVE_KURT_RED_APRICORN: {
     id: "GAVE_KURT_RED_APRICORN",
     numericId: 600,

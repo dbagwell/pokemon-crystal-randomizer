@@ -1260,6 +1260,21 @@ const createPatches = (
         romInfo,
         "radioTower5FCutsceneChanges.yml",
       ).hunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "initializeEventFlags.yml",
+        {
+          events: [
+            {
+              path: "initializeEventFlag.yml",
+              extraIncludes: {},
+              extraValues: {
+                eventId: hexStringFrom(bytesFrom(eventFlagsMap.DIRECTOR_IN_UNDERGROUND_WAREHOUSE.numericId, 2)),
+              },
+            },
+          ],
+        }
+      ).hunks,
     ]
   }
   

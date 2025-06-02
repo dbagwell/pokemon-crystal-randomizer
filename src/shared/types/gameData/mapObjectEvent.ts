@@ -22,6 +22,7 @@ export type MapObjectEvent = {
 const mapObjectEventIds = [
   "GOLDENROD_FLOWER_SHOP_ROCKET_GRUNT",
   "GOLDENROD_SE_AREA_ROCKET_GRUNT",
+  "GOLDENROD_UNDERGROUND_WAREHOUSE_DIRECTOR",
 ] as const
 
 type MapObjectEventId = typeof mapObjectEventIds[number]

@@ -7516,6 +7516,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "RADIO_TOWER_ROCKET_TAKEOVER",
   },
   {
+    id: "GOLDENROD_UNDERGROUND_WAREHOUSE_DIRECTOR",
     romOffset: [
       31,
       24000,
