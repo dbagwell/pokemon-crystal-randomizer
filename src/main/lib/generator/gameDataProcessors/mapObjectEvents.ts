@@ -13,6 +13,9 @@ export const updateMapObjectEvents = (
     romInfo.gameData.mapObjectEvents.forEach((event) => {
       if (
         event.typeId === "TRAINER"
+          && !movementSettings.EXCLUDE.some((behaviour) => {
+            return trainerMovementBehavioursMap[behaviour].overworldMovementBehaviourId === event.movementBehaviourId
+          })
           && (
             movementSettings.INCLUDE_STATIONARY
               || event.movementBehaviourId === "SPINCLOCKWISE"

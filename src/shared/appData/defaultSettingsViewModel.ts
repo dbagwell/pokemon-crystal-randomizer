@@ -1130,6 +1130,17 @@ export const defaultSettingsViewModel = () => {
                   })
                 }),
               }), // END MOVEMENT
+              createSimpleMultiSelectorViewModel({
+                id: "EXCLUDE" as const,
+                name: "Exclude",
+                description: "Exclude trainers that have the selected movement behaviours.",
+                options: Object.values(trainerMovementBehavioursMap).map((movement) => {
+                  return createSimpleSelectorOption({
+                    id: movement.id,
+                    name: movement.name,
+                  })
+                }),
+              }), // END EXCLUDE
               createSimpleToggleViewModel({
                 id: "INCLUDE_STATIONARY" as const,
                 name: "Include Stationary Trainers",
