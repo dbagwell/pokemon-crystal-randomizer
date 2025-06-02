@@ -1,6 +1,6 @@
 description: "Shows the tm/hm move names when they are received."
 values:
-  hiddenItemsCode: "4C 45 76 0E 04 @$sharedCode 91"
+  hiddenItemsCode: "0E 04 @$sharedCode 4C 45 76 91"
   itemBallsCode: "CD D9 30"
   sharedCode: "11 9D D0 3E 25 21 @$appendTMHMMoveName CF C9"
   verboseCode: "CD C8 76 11 B0 D0"
