@@ -23,6 +23,7 @@ const mapObjectEventIds = [
   "GOLDENROD_FLOWER_SHOP_ROCKET_GRUNT",
   "GOLDENROD_SE_AREA_ROCKET_GRUNT",
   "GOLDENROD_UNDERGROUND_WAREHOUSE_DIRECTOR",
+  "RADIO_TOWER_1F_RADIO_CARD_QUIZ_WOMAN",
 ] as const
 
 type MapObjectEventId = typeof mapObjectEventIds[number]

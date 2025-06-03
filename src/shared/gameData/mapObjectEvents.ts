@@ -3457,6 +3457,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "GOLDENROD_CITY_CIVILIANS",
   },
   {
+    id: "RADIO_TOWER_1F_RADIO_CARD_QUIZ_WOMAN",
     romOffset: [
       23,
       22254,

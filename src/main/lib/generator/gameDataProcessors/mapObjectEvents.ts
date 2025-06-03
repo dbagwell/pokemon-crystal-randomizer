@@ -46,4 +46,10 @@ export const updateMapObjectEvents = (
       return object.id === "GOLDENROD_UNDERGROUND_WAREHOUSE_DIRECTOR"
     })!.flagId = "DIRECTOR_IN_UNDERGROUND_WAREHOUSE"
   }
+  
+  if (settings.RADIO_CARD_QUIZ_ALWAYS_ACCESSIBLE) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "RADIO_TOWER_1F_RADIO_CARD_QUIZ_WOMAN"
+    })!.flagId = undefined
+  }
 }

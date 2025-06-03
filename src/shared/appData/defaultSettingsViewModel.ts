@@ -1186,6 +1186,16 @@ export const defaultSettingsViewModel = () => {
               + "- the NPC blocking the entrance to the Blackthorn Gym will move out of the way\n"
               + "- the shady shopkeeper in the Mahogany Town Mart will be replaced with the real one",
           }),
+          createSimpleToggleViewModel({
+            id: "RADIO_CARD_QUIZ_ALWAYS_ACCESSIBLE" as const,
+            name: "Make Radio Card Quiz Always Accessible",
+            description: "Makes it so the woman, on the first floor of the Goldenrod Radio Tower, who gives the quiz to win the Radio Card is always there, even while Team Rocket has taken over.",
+          }),
+          createSimpleToggleViewModel({
+            id: "BUENA_ALWAYS_GIVES_ITEM" as const,
+            name: "Make Buena's Item Always Accessible",
+            description: "Makes it so Buena, the radio host on the second floor of the Goldenrod Radio Tower, will always give you her item (the Blue Card, unless it's been shuffled) the first time you talk to her, even while Team Rocket has taken over.",
+          }),
           createSimpleMultiSelectorViewModel({
             id: "REMOVE_ROCKET_GRUNTS" as const,
             name: "Remove Rocket Grunts",

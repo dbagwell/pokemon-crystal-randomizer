@@ -453,6 +453,14 @@ export const updateAccessLogic = (
     })
   }
   
+  if (settings.RADIO_CARD_QUIZ_ALWAYS_ACCESSIBLE) {
+    romInfo.gameData.itemLocations.RADIO_TOWER_1F_QUIZ_PRIZE.accessRequirements = undefined
+  }
+  
+  if (settings.BUENA_ALWAYS_GIVES_ITEM) {
+    romInfo.gameData.itemLocations.RADIO_TOWER_2F_BUENAS_GIFT.accessRequirements = undefined
+  }
+  
   if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_SE_AREA")) {
     removeAccessRequirements({
       areaIds: [
