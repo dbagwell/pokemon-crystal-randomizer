@@ -616,7 +616,13 @@ const createPatches = (
   
   // Items
   
-  if (settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE || settings.RANDOMIZE_TM_ITEM_BALLS.VALUE || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.VALUE || settings.SHUFFLED_ITEM_GROUPS.length > 0) {
+  if (
+    settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE
+    || settings.RANDOMIZE_TM_ITEM_BALLS.VALUE
+    || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.VALUE
+    || settings.SHUFFLED_ITEM_GROUPS.length > 0
+    || settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.VALUE
+  ) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       ...Patch.fromYAML(

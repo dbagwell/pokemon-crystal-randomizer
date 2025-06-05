@@ -940,7 +940,32 @@ export const defaultSettingsViewModel = () => {
             id: "START_WITH_ITEMS" as const,
             name: "Start With Items",
             description: "Add the selected items to the player's inventory when starting a new game.",
-            viewModels: createSelectorsFromItemCategories(),
+            viewModels: [
+              ...createSelectorsFromItemCategories(),
+              createConfigurableToggleViewModel({
+                id: "REPLACE_EXISTING_ITEMS" as const,
+                name: "Replace Existing Items",
+                description: "Replaces existing Badges, HMs, Key Items, and Menu Items that are also included in the player's starting inventory with the selected item.",
+                viewModels: [
+                  createSingleSelectorViewModel({
+                    id: "REPLACEMENT" as const,
+                    selectedOptionId: "RANDOM",
+                    options: [
+                      {
+                        id: "RANDOM" as const,
+                        name: "Random",
+                      },
+                      ...holdableItemIds.map((itemId) => {
+                        return {
+                          id: itemId,
+                          name: itemsMap[itemId].name,
+                        }
+                      }),
+                    ],
+                  }),
+                ] as const,
+              }),
+            ],
           }),
           createSimpleMultiSelectorViewModel({
             id: "BANNED_ITEMS" as const,

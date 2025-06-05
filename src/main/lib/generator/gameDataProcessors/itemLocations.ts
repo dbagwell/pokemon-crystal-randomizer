@@ -6,7 +6,7 @@ import type { LogicalAccessArea, LogicalAreaAccessOption } from "@shared/types/g
 import type { Mart } from "@shared/types/gameData/mart"
 import type { AccessRequirement, Warp } from "@shared/types/gameData/warp"
 import { type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
-import { type BadgeItemId, badgeItemIds, ballItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
+import { type BadgeItemId, badgeItemIds, ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
 import { type MartId, martIds } from "@shared/types/gameDataIds/marts"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
@@ -85,6 +85,22 @@ export const updateItems = (
           ],
         },
       })
+    })
+  }
+  
+  if (settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS) {
+    const startingItems = startingItemIds(settings)
+    
+    itemLocationIds.forEach((locationId) => {
+      if (startingItems.includes(romInfo.gameData.itemLocations[locationId].itemId)) {
+        const replacement = settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.SETTINGS.REPLACEMENT
+        
+        if (replacement === "RANDOM") {
+          romInfo.gameData.itemLocations[locationId].itemId = random.element({ array: [...holdableItemIds] })
+        } else {
+          romInfo.gameData.itemLocations[locationId].itemId = replacement
+        }
+      }
     })
   }
 }
