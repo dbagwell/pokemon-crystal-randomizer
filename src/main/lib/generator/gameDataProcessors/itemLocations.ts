@@ -114,14 +114,6 @@ export const shuffleItems = (
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   
   Object.values(romInfo.gameData.itemLocations).forEach((location) => {
-    if (
-      location.id === "NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL"
-      || location.id === "NATIONAL_PARK_BUG_CONTEST_WEST_ITEM_BALL"
-      || location.id === "NATIONAL_PARK_BUG_CONTEST_HIDDEN_ITEM"
-    ) {
-      return
-    }
-    
     const shuffleGroupIndex = settings.SHUFFLED_ITEM_GROUPS.findIndex((shuffleGroup) => {
       const groupId = shuffleGroup.find((groupId) => {
         return groupId === location.groupId
@@ -245,12 +237,6 @@ export const shuffleItems = (
     
     nonProgressionItems.splice(selectedItemIndex, 1)
   })
-}
-
-export const syncContestItems = (romInfo: ROMInfo) => {
-  romInfo.gameData.itemLocations["NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL"].itemId = romInfo.gameData.itemLocations["NATIONAL_PARK_EAST_ITEM_BALL"].itemId
-  romInfo.gameData.itemLocations["NATIONAL_PARK_BUG_CONTEST_WEST_ITEM_BALL"].itemId = romInfo.gameData.itemLocations["NATIONAL_PARK_WEST_ITEM_BALL"].itemId
-  romInfo.gameData.itemLocations["NATIONAL_PARK_BUG_CONTEST_HIDDEN_ITEM"].itemId = romInfo.gameData.itemLocations["NATIONAL_PARK_HIDDEN_ITEM"].itemId
 }
 
 const getAccessibleItemLocations = (params: {
