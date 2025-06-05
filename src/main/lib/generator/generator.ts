@@ -682,17 +682,19 @@ const createPatches = (
   
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
-      ...Object.values(romInfo.gameData.itemLocations).map((itemLocation) => {
-        return new DataHunk(
-          ROMOffset.fromBankAddress(
-            itemLocation.romOffset[0],
-            itemLocation.romOffset[1]
-          ),
-          compact([
-            itemsMap[itemLocation.itemId].numericId,
-            itemLocation.type !== "HIDDEN_ITEM" ? 1 : null,
-          ]),
-        )
+      ...Object.values(romInfo.gameData.itemLocations).flatMap((itemLocation) => {
+        return itemLocation.romOffsets.map((romOffset) => {
+          return new DataHunk(
+            ROMOffset.fromBankAddress(
+              romOffset[0],
+              romOffset[1]
+            ),
+            compact([
+              itemsMap[itemLocation.itemId].numericId,
+              itemLocation.type !== "HIDDEN_ITEM" ? 1 : null,
+            ]),
+          )
+        })
       }),
     ]
   }

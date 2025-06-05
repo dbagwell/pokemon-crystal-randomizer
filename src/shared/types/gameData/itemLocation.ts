@@ -19,5 +19,5 @@ export type ItemLocation = {
   itemId: ItemId
   areaId: LogicalAccessAreaId
   accessRequirements?: AccessRequirement[]
-  romOffset: [number, number]
+  romOffsets: [number, number][]
 }
