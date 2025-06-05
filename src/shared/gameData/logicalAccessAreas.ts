@@ -441,9 +441,15 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   NATIONAL_PARK_BUG_CONTEST: {
     id: "NATIONAL_PARK_BUG_CONTEST",
     accessOptions: [
-      "ROUTE_36_NATIONAL_PARK_GATE_WEST_DOOR_OUT_UPPER",
-      "ROUTE_35_NATIONAL_PARK_GATE_NORTH_DOOR_OUT_LEFT",
-      "ROUTE_35_NATIONAL_PARK_GATE_NORTH_DOOR_OUT_RIGHT",
+      "ROUTE_36_NATIONAL_PARK_GATE",
+      "ROUTE_35_NATIONAL_PARK_GATE",
+    ],
+  },
+  NATIONAL_PARK_ITEMS_GROUP: {
+    id: "NATIONAL_PARK_ITEMS_GROUP",
+    accessOptions: [
+      "NATIONAL_PARK",
+      "NATIONAL_PARK_BUG_CONTEST",
     ],
   },
   RADIO_TOWER_1F: {

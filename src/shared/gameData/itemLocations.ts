@@ -755,22 +755,17 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "PARLYZ_HEAL",
-    areaId: "NATIONAL_PARK",
-    romOffsets: [[
-      23,
-      0x41CC,
-    ]],
-  },
-  NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL: {
-    id: "NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL",
-    type: "ITEM_BALL",
-    groupId: "REGULAR_ITEM_BALLS",
-    itemId: "PARLYZ_HEAL",
-    areaId: "NATIONAL_PARK_BUG_CONTEST",
-    romOffsets: [[
-      23,
-      0x4945,
-    ]],
+    areaId: "NATIONAL_PARK_ITEMS_GROUP",
+    romOffsets: [
+      [
+        23,
+        0x41CC,
+      ],
+      [
+        23,
+        0x4945,
+      ],
+    ],
   },
   BURNED_TOWER_1F_ROCK_SMASH_AREA_ITEM_BALL: {
     id: "BURNED_TOWER_1F_ROCK_SMASH_AREA_ITEM_BALL",
@@ -1836,22 +1831,16 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
     type: "ITEM_BALL",
     groupId: "TM_ITEM_BALLS",
     itemId: "TM28",
-    areaId: "NATIONAL_PARK",
-    romOffsets: [[
-      23,
-      0x41CE,
-    ]],
-  },
-  NATIONAL_PARK_BUG_CONTEST_WEST_ITEM_BALL: {
-    id: "NATIONAL_PARK_BUG_CONTEST_WEST_ITEM_BALL",
-    type: "ITEM_BALL",
-    groupId: "TM_ITEM_BALLS",
-    itemId: "TM28",
-    areaId: "NATIONAL_PARK_BUG_CONTEST",
-    romOffsets: [[
-      23,
-      0x4947,
-    ]],
+    areaId: "NATIONAL_PARK_ITEMS_GROUP",
+    romOffsets: [
+      [
+        23,
+        0x41CE,
+      ], [
+        23,
+        0x4947,
+      ],
+    ],
   },
   BURNED_TOWER_B1F_STRENGTH_AREA_ITEM_BALL: {
     id: "BURNED_TOWER_B1F_STRENGTH_AREA_ITEM_BALL",
@@ -2387,22 +2376,16 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
     type: "HIDDEN_ITEM",
     groupId: "REGULAR_HIDDEN_ITEMS",
     itemId: "FULL_HEAL",
-    areaId: "NATIONAL_PARK",
-    romOffsets: [[
-      23,
-      0x41D2,
-    ]],
-  },
-  NATIONAL_PARK_BUG_CONTEST_HIDDEN_ITEM: {
-    id: "NATIONAL_PARK_BUG_CONTEST_HIDDEN_ITEM",
-    type: "HIDDEN_ITEM",
-    groupId: "REGULAR_HIDDEN_ITEMS",
-    itemId: "FULL_HEAL",
-    areaId: "NATIONAL_PARK_BUG_CONTEST",
-    romOffsets: [[
-      23,
-      0x494B,
-    ]],
+    areaId: "NATIONAL_PARK_ITEMS_GROUP",
+    romOffsets: [
+      [
+        23,
+        0x41D2,
+      ], [
+        23,
+        0x494B,
+      ],
+    ],
   },
   ECRUTEAK_CITY_HIDDEN_ITEM: {
     id: "ECRUTEAK_CITY_HIDDEN_ITEM",
