@@ -163,6 +163,8 @@ export const shuffleItems = (
     return [...progressionItemIds].includes(itemInfo.itemId)
   })
   
+  const startingItems = startingItemIds(settings)
+  
   while (remainingProgressionItems.length > 0) {
     const selectedItemInfo = random.element({ array: remainingProgressionItems })
     
@@ -181,9 +183,12 @@ export const shuffleItems = (
         warpsMap: romInfo.gameData.warps,
         areasMap: romInfo.gameData.areas,
         martsMap: romInfo.gameData.marts,
-        usableItems: remainingProgressionItems.map((itemInfo) => {
-          return itemInfo.itemId
-        }),
+        usableItems: [
+          ...startingItems,
+          ...remainingProgressionItems.map((itemInfo) => {
+            return itemInfo.itemId
+          }),
+        ],
       })
       
       const locationId = random.element({ array: accessibleItemLocationsWithoutSelectedItem.filter((locationId) => { return !invalidLocations.includes(locationId) && locationsToShuffle.find((locationInfo) => { return locationInfo.locationId === locationId })?.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex }) })
@@ -195,7 +200,7 @@ export const shuffleItems = (
         warpsMap: romInfo.gameData.warps,
         areasMap: romInfo.gameData.areas,
         martsMap: romInfo.gameData.marts,
-        usableItems: [],
+        usableItems: startingItems,
       })
       
       if (accessibleItemLocationsWithoutOtherItems.length === 0) {
@@ -529,4 +534,18 @@ export const updateAccessLogic = (
       ],
     })
   }
+}
+
+const startingItemIds = (settings: Settings) => {
+  const startingItemsSettings = settings.START_WITH_ITEMS.SETTINGS
+  
+  return [
+    ...startingItemsSettings.BADGES,
+    ...startingItemsSettings.HMS,
+    ...startingItemsSettings.KEY_ITEMS,
+    ...startingItemsSettings.MENU_ITEMS,
+    ...Object.keys(startingItemsSettings.TMS),
+    ...Object.keys(startingItemsSettings.REGULAR_ITEMS),
+    ...Object.keys(startingItemsSettings.BALLS),
+  ] as ItemId[]
 }
