@@ -110,11 +110,30 @@ export const shuffleItems = (
   romInfo: ROMInfo,
   random: Random,
 ) => {
+  if (!settings.SHUFFLE_ITEMS.VALUE) {
+    return
+  }
+  
   const locationsToShuffle: { locationId: ItemLocationId, shuffleGroupIndex: number }[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   
+  const startingItems = startingItemIds(settings)
+  
+  const allAccessibleItemLocations = getAccessibleItemLocations({
+    itemLocationsMap: romInfo.gameData.itemLocations,
+    warpsMap: romInfo.gameData.warps,
+    areasMap: romInfo.gameData.areas,
+    martsMap: romInfo.gameData.marts,
+    usableItems: startingItems,
+    includeLocationsWithItems: true,
+  })
+  
+  const inaccessibleItemLocations = itemLocationIds.filter((locationId) => {
+    return !allAccessibleItemLocations.includes(locationId)
+  })
+  
   Object.values(romInfo.gameData.itemLocations).forEach((location) => {
-    const shuffleGroupIndex = settings.SHUFFLED_ITEM_GROUPS.findIndex((shuffleGroup) => {
+    const shuffleGroupIndex = settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.findIndex((shuffleGroup) => {
       const groupId = shuffleGroup.find((groupId) => {
         return groupId === location.groupId
       })
@@ -122,7 +141,7 @@ export const shuffleItems = (
       return isNotNullish(groupId)
     })
     
-    if (shuffleGroupIndex !== -1) {
+    if (shuffleGroupIndex !== -1 && (!settings.SHUFFLE_ITEMS.SETTINGS.EXCLUDE_INACCESSIBLE_ITEMS || !inaccessibleItemLocations.includes(location.id))) {
       locationsToShuffle.push({
         locationId: location.id,
         shuffleGroupIndex: shuffleGroupIndex,
@@ -170,8 +189,6 @@ export const shuffleItems = (
   const remainingProgressionItems = itemsToShuffle.filter((itemInfo) => {
     return [...progressionItemIds].includes(itemInfo.itemId)
   })
-  
-  const startingItems = startingItemIds(settings)
   
   while (remainingProgressionItems.length > 0) {
     const selectedItemInfo = random.element({ array: remainingProgressionItems })
@@ -245,6 +262,7 @@ const getAccessibleItemLocations = (params: {
   areasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea>
   martsMap: IdMap<MartId, Mart>
   usableItems: ItemId[]
+  includeLocationsWithItems?: boolean
 }): ItemLocationId[] => {
   const {
     itemLocationsMap,
@@ -252,6 +270,7 @@ const getAccessibleItemLocations = (params: {
     areasMap,
     martsMap,
     usableItems,
+    includeLocationsWithItems,
   } = params
   
   const accessibleWarps: WarpId[] = []
@@ -260,13 +279,15 @@ const getAccessibleItemLocations = (params: {
   const accessibleItemLocations: ItemLocationId[] = []
   const accessibleMarts: MartId[] = []
   
-  const numberOfAccessibleBadges = accessibleItems.reduce((result, itemId) => {
-    if (badgeItemIds.includes(itemId as BadgeItemId)) {
-      return result + 1
-    } else {
-      return result
-    }
-  }, 0)
+  const numberOfAccessibleBadges = () => {
+    return accessibleItems.reduce((result, itemId) => {
+      if (badgeItemIds.includes(itemId as BadgeItemId)) {
+        return result + 1
+      } else {
+        return result
+      }
+    }, 0)
+  }
   
   const isAccessRequirementSatisfied = (requirement: LogicalAreaAccessOption | AccessRequirement): boolean => {
     if (Array.isArray(requirement)) {
@@ -284,7 +305,7 @@ const getAccessibleItemLocations = (params: {
     } else if (pokemonIds.includes(requirement as PokemonId)) {
       return false // TODO: Need to properly check if pokemon are accessible
     } else if (isNumber(requirement)) {
-      return numberOfAccessibleBadges >= requirement
+      return numberOfAccessibleBadges() >= requirement
     } else {
       return false // This should never happen
     }
@@ -353,7 +374,11 @@ const getAccessibleItemLocations = (params: {
     })
   }
   
-  return accessibleItemLocations.filter((locationId) => { return isNullish(itemLocationsMap[locationId].itemId) })
+  if (includeLocationsWithItems ?? false) {
+    return accessibleItemLocations
+  } else {
+    return accessibleItemLocations.filter((locationId) => { return isNullish(itemLocationsMap[locationId].itemId) })
+  }
 }
 
 export const updateAccessLogic = (

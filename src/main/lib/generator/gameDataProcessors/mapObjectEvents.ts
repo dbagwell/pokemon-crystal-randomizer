@@ -41,7 +41,7 @@ export const updateMapObjectEvents = (
     })!.flagId = "INITIALIZED_EVENTS"
   }
   
-  if (settings.SHUFFLED_ITEM_GROUPS.length > 0) {
+  if (settings.SHUFFLE_ITEMS.VALUE) {
     romInfo.gameData.mapObjectEvents.find((object) => {
       return object.id === "GOLDENROD_UNDERGROUND_WAREHOUSE_DIRECTOR"
     })!.flagId = "DIRECTOR_IN_UNDERGROUND_WAREHOUSE"

@@ -615,13 +615,13 @@ const createPatches = (
   
   // Items
   
-  if (
-    settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE
+  const shouldApplyReceiveItemsChanges = settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE
     || settings.RANDOMIZE_TM_ITEM_BALLS.VALUE
     || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.VALUE
-    || settings.SHUFFLED_ITEM_GROUPS.length > 0
+    || settings.SHUFFLE_ITEMS.VALUE
     || settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.VALUE
-  ) {
+  
+  if (shouldApplyReceiveItemsChanges) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       ...Patch.fromYAML(
@@ -695,6 +695,13 @@ const createPatches = (
           )
         })
       }),
+    ]
+  } else if (settings.FASTER_ITEM_PICKUP_SFX) {
+    romInfo.patchHunks = [
+      ...romInfo.patchHunks,
+      new DataHunk(ROMOffset.fromBankAddress(4, 0x62DC), [0x90, 0x00, 0x86, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(37, 0x6FF5), [0x90]),
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x4DBF), [0x90]),
     ]
   }
     
@@ -887,15 +894,6 @@ const createPatches = (
         romInfo,
         "escapeAllBuildings.yml",
       ).hunks,
-    ]
-  }
-  
-  if (settings.FASTER_ITEM_PICKUP_SFX && (settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE || settings.RANDOMIZE_TM_ITEM_BALLS.VALUE || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.VALUE || settings.SHUFFLED_ITEM_GROUPS.length === 0)) {
-    romInfo.patchHunks = [
-      ...romInfo.patchHunks,
-      new DataHunk(ROMOffset.fromBankAddress(4, 0x62DC), [0x90, 0x00, 0x86, 0x18]),
-      new DataHunk(ROMOffset.fromBankAddress(37, 0x6FF5), [0x90]),
-      new DataHunk(ROMOffset.fromBankAddress(47, 0x4DBF), [0x90]),
     ]
   }
     
@@ -1161,7 +1159,7 @@ const createPatches = (
   
   // Flower Shop
   
-  if (settings.SKIP_FLORIA || settings.SHUFFLED_ITEM_GROUPS.length > 0) {
+  if (settings.SKIP_FLORIA || settings.SHUFFLE_ITEMS.VALUE) {
     romInfo.patchHunks.push(...Patch.fromYAML(
       romInfo,
       "flowerShopChanges.yml",
@@ -1260,7 +1258,7 @@ const createPatches = (
     ])
   }
   
-  if (settings.SHUFFLED_ITEM_GROUPS.length > 0) {
+  if (settings.SHUFFLE_ITEMS.VALUE) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       ...Patch.fromYAML(
@@ -1304,7 +1302,7 @@ const createPatches = (
         "skipClairBadgeTest.yml",
         {
           options: [
-            settings.SHUFFLED_ITEM_GROUPS.length > 0 ? "skipClairBadgeTestOptions/itemShuffle.yml" : "skipClairBadgeTestOptions/default.yml",
+            shouldApplyReceiveItemsChanges ? "skipClairBadgeTestOptions/itemShuffle.yml" : "skipClairBadgeTestOptions/default.yml",
           ],
         },
         {
@@ -1313,7 +1311,7 @@ const createPatches = (
         }
       ).hunks,
     ]
-  } else if (settings.SHUFFLED_ITEM_GROUPS.length > 0) {
+  } else if (shouldApplyReceiveItemsChanges) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       new DataHunk(ROMOffset.fromBankAddress(101, 0x4E26), [0x31, 0x0C, 0x01]),

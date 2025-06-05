@@ -923,19 +923,35 @@ export const defaultSettingsViewModel = () => {
               }), // END BAN
             ] as const,
           }),
-          createGroupMultiSelectorViewModel({
-            id: "SHUFFLED_ITEM_GROUPS" as const,
+          createConfigurableToggleViewModel({
+            id: "SHUFFLE_ITEMS" as const,
             name: "Shuffle Items",
             description: "Create groups of item locations and shuffle the items that can be found at the locations within each group.\n"
-              + "Items that are required in order to progress the game will be never be placed in locations that could make it impossible to obtain them. "
-              + "This includes locations that can become inaccessible later in the game due to advancing the plot, ",
-            options: itemLocationGroupIds.map((groupId) => {
-              return createSimpleSelectorOption({
-                id: groupId,
-                name: itemLocationGroupsMap[groupId].name,
-              })
-            }),
-          }), // END SHUFFLED_ITEM_GROUPS
+              + "When Badges, HMs, Key Items, and/or Menu Items are shuffled, it can result in certain in game events happening out of order, "
+              + "this can result in some odd behaviour sometimes, but small changes are made to make sure that everything normally accessible in the vanilla game is still accessible with reasonable conditions.\n"
+              + "In addition, a set of rules about how the game works are used to make sure that items that are required in order to progress the game "
+              + "will be never be placed in locations that could make it impossible to obtain them. "
+              + "The following are included in these rules by default:\n"
+              + "- Zephyrbadge and HM05 (Flash) are expected to be obtained before having to enter any dark areas.\n"
+              + "- Areas or item locations that require owning or registering certain Pokémon are considered inacessible.",
+            viewModels: [
+              createGroupMultiSelectorViewModel({
+                id: "GROUPS" as const,
+                name: "Groups",
+                options: itemLocationGroupIds.map((groupId) => {
+                  return createSimpleSelectorOption({
+                    id: groupId,
+                    name: itemLocationGroupsMap[groupId].name,
+                  })
+                }),
+              }), // END GROUPS
+              createSimpleToggleViewModel({
+                id: "EXCLUDE_INACCESSIBLE_ITEMS" as const,
+                name: "Exclude Inaccessible Items",
+                description: "Items that are normally found at locations deemed completely inaccessible by the rules used to shuffle the items will not be shuffled.",
+              }),
+            ] as const,
+          }), // END SHUFFLE_ITEMS
           createConfigurableToggleViewModel({
             id: "START_WITH_ITEMS" as const,
             name: "Start With Items",
