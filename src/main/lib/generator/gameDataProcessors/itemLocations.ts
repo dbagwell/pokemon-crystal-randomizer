@@ -373,7 +373,7 @@ export const updateAccessLogic = (
       
         if (new Set(optionArray).isSupersetOf(new Set(matchingRequirements)) && (!(modifyMutualAccess ?? false) || new Set(optionArray).intersection(new Set(areaIds)).size > 0)) {
           return optionArray.filter((requirement) => {
-            return requirements.includes(requirement)
+            return !requirements.includes(requirement)
           })
         } else {
           return option
