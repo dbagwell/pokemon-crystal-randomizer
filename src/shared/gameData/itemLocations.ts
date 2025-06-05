@@ -3033,6 +3033,21 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       0x5B69,
     ]],
   },
+  AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL: {
+    id: "AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL",
+    type: "GIFT",
+    groupId: "KEY_ITEMS",
+    itemId: "GS_BALL",
+    areaId: "AZALEA_TOWN",
+    accessRequirements: [
+      "GS_BALL",
+      "KURTS_HOUSE",
+    ],
+    romOffsets: [[
+      102,
+      0x40FA,
+    ]],
+  },
   GOLDENROD_BIKE_SHOP_OWNERS_GIFT: {
     id: "GOLDENROD_BIKE_SHOP_OWNERS_GIFT",
     type: "GIFT",
@@ -3109,6 +3124,26 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       24,
       0x40DB,
     ]],
+  },
+  GOLDENROD_POKECENTER_1F_LINK_RECEPTIONISTS_GIFT: {
+    id: "GOLDENROD_POKECENTER_1F_LINK_RECEPTIONISTS_GIFT",
+    type: "GIFT",
+    groupId: "KEY_ITEMS",
+    itemId: "GS_BALL",
+    areaId: "GOLDENROD_POKECENTER_1F",
+    accessRequirements: [
+      "INACCESSIBLE",
+    ],
+    romOffsets: [
+      [
+        24,
+        0x4FBF,
+      ],
+      [
+        24,
+        0x5004,
+      ],
+    ],
   },
   ECRUTEAK_ITEMFINDER_HOUSE_MANS_GIFT: {
     id: "ECRUTEAK_ITEMFINDER_HOUSE_MANS_GIFT",
