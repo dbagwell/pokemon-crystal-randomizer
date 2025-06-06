@@ -144,6 +144,7 @@ export const createSimpleSelectorOption = <IdType extends string>(params: {
   id: IdType
   name: string
   description?: string
+  extraKeywords?: string
 }) => {
   return params
 }
@@ -153,6 +154,7 @@ export const createConfigurableSelectorOption = <IdType extends string, ViewMode
   id: IdType,
   name: string,
   description?: string,
+  extraKeywords?: string
   viewModels: ViewModelArrayType,
 }) => {
   return params

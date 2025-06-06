@@ -1,6 +1,7 @@
 import { growthRatesMap } from "@shared/gameData/growthRates"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemLocationGroupsMap } from "@shared/gameData/itemLocationGroups"
+import { itemLocationsMap } from "@shared/gameData/itemLocations"
 import { itemsMap } from "@shared/gameData/items"
 import { movesMap } from "@shared/gameData/moves"
 import { pokemonMap } from "@shared/gameData/pokemon"
@@ -9,6 +10,7 @@ import type { ItemCategory } from "@shared/types/gameData/itemCategory"
 import { growthRateIds } from "@shared/types/gameDataIds/growthRates"
 import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
 import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGroups"
+import { itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { ballItemIds, holdableItemIds, type ItemId, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
@@ -945,10 +947,20 @@ export const defaultSettingsViewModel = () => {
                   })
                 }),
               }), // END GROUPS
-              createSimpleToggleViewModel({
-                id: "EXCLUDE_INACCESSIBLE_ITEMS" as const,
-                name: "Exclude Inaccessible Items",
-                description: "Items that are normally found at locations deemed completely inaccessible by the rules used to shuffle the items will not be shuffled.",
+              createSimpleMultiSelectorViewModel({
+                id: "EXCLUDE_LOCATIONS" as const,
+                name: "Exclude Locations",
+                description: "Item locations to exclude from being shuffled.",
+                options: itemLocationIds.map((locationId) => {
+                  const itemName = itemsMap[itemLocationsMap[locationId].itemId].name
+                  
+                  return createSimpleSelectorOption({
+                    id: locationId,
+                    name: locationId,
+                    description: itemName,
+                    extraKeywords: itemName,
+                  })
+                }),
               }),
             ] as const,
           }), // END SHUFFLE_ITEMS

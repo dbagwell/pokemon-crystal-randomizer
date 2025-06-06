@@ -119,19 +119,6 @@ export const shuffleItems = (
   
   const startingItems = startingItemIds(settings)
   
-  const allAccessibleItemLocations = getAccessibleItemLocations({
-    itemLocationsMap: romInfo.gameData.itemLocations,
-    warpsMap: romInfo.gameData.warps,
-    areasMap: romInfo.gameData.areas,
-    martsMap: romInfo.gameData.marts,
-    usableItems: startingItems,
-    includeLocationsWithItems: true,
-  })
-  
-  const inaccessibleItemLocations = itemLocationIds.filter((locationId) => {
-    return !allAccessibleItemLocations.includes(locationId)
-  })
-  
   Object.values(romInfo.gameData.itemLocations).forEach((location) => {
     const shuffleGroupIndex = settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.findIndex((shuffleGroup) => {
       const groupId = shuffleGroup.find((groupId) => {
@@ -141,7 +128,7 @@ export const shuffleItems = (
       return isNotNullish(groupId)
     })
     
-    if (shuffleGroupIndex !== -1 && (!settings.SHUFFLE_ITEMS.SETTINGS.EXCLUDE_INACCESSIBLE_ITEMS || !inaccessibleItemLocations.includes(location.id))) {
+    if (shuffleGroupIndex !== -1 && !settings.SHUFFLE_ITEMS.SETTINGS.EXCLUDE_LOCATIONS.includes(location.id)) {
       locationsToShuffle.push({
         locationId: location.id,
         shuffleGroupIndex: shuffleGroupIndex,
@@ -262,7 +249,6 @@ const getAccessibleItemLocations = (params: {
   areasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea>
   martsMap: IdMap<MartId, Mart>
   usableItems: ItemId[]
-  includeLocationsWithItems?: boolean
 }): ItemLocationId[] => {
   const {
     itemLocationsMap,
@@ -270,7 +256,6 @@ const getAccessibleItemLocations = (params: {
     areasMap,
     martsMap,
     usableItems,
-    includeLocationsWithItems,
   } = params
   
   const accessibleWarps: WarpId[] = []
@@ -374,11 +359,7 @@ const getAccessibleItemLocations = (params: {
     })
   }
   
-  if (includeLocationsWithItems ?? false) {
-    return accessibleItemLocations
-  } else {
-    return accessibleItemLocations.filter((locationId) => { return isNullish(itemLocationsMap[locationId].itemId) })
-  }
+  return accessibleItemLocations.filter((locationId) => { return isNullish(itemLocationsMap[locationId].itemId) })
 }
 
 export const updateAccessLogic = (
