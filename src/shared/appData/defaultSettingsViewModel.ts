@@ -1,3 +1,4 @@
+import { accessRulesetIds, accessRulsetsMap } from "@shared/appData/accessRulesets"
 import { growthRatesMap } from "@shared/gameData/growthRates"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemLocationGroupsMap } from "@shared/gameData/itemLocationGroups"
@@ -947,6 +948,14 @@ export const defaultSettingsViewModel = () => {
                   })
                 }),
               }), // END GROUPS
+              createSimpleMultiSelectorViewModel({
+                id: "ACCESS_MODIFIERS" as const,
+                name: "Access Modifiers",
+                description: "Additional sets of rules to use when determining valid locations for the shuffled items.",
+                options: accessRulesetIds.map((rulesetId) => {
+                  return createSimpleSelectorOption(accessRulsetsMap[rulesetId])
+                }),
+              }),
               createSimpleMultiSelectorViewModel({
                 id: "EXCLUDE_LOCATIONS" as const,
                 name: "Exclude Locations",

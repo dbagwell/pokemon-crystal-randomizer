@@ -1,17 +1,19 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
+import { getYAML } from "@lib/utils/yamlUtils"
 import type { Settings } from "@shared/appData/settingsFromViewModel"
 import type { ItemLocation } from "@shared/types/gameData/itemLocation"
 import type { LogicalAccessArea, LogicalAreaAccessOption } from "@shared/types/gameData/logicalAccessArea"
 import type { Mart } from "@shared/types/gameData/mart"
-import type { AccessRequirement, Warp } from "@shared/types/gameData/warp"
+import { type AccessRequirement, isAccessRequirement, type Warp } from "@shared/types/gameData/warp"
 import { type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { type BadgeItemId, badgeItemIds, ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
 import { type MartId, martIds } from "@shared/types/gameDataIds/marts"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { type WarpId, warpIds } from "@shared/types/gameDataIds/warps"
-import { isNotNullish, isNullish, isNumber } from "@shared/utils"
+import { isNotNullish, isNullish, isNumber, isObject } from "@shared/utils"
+import path from "path"
 
 export const updateItems = (
   settings: Settings,
@@ -366,6 +368,38 @@ export const updateAccessLogic = (
   settings: Settings,
   romInfo: ROMInfo,
 ) => {
+  if (!settings.SHUFFLE_ITEMS.VALUE) {
+    return
+  }
+  
+  const addAccessRequirements = (params: {
+    areaIds: LogicalAccessAreaId[]
+    requirements: AccessRequirement[]
+    matchingRequirements?: AccessRequirement[]
+    modifyMutualAccess?: boolean
+  }) => {
+    const {
+      areaIds,
+      requirements,
+      matchingRequirements,
+      modifyMutualAccess,
+    } = params
+  
+    areaIds.forEach((areaId) => {
+      const area = romInfo.gameData.areas[areaId]
+      area.accessOptions = area.accessOptions.map((option) => {
+        const optionArray = [option].flat()
+        
+        if (new Set(optionArray).isSupersetOf(new Set(matchingRequirements)) && (!(modifyMutualAccess ?? false) || new Set(optionArray).intersection(new Set(areaIds)).size > 0)) {
+          optionArray.push(...requirements)
+          return optionArray
+        } else {
+          return option
+        }
+      })
+    })
+  }
+  
   const removeAccessRequirements = (params: {
     areaIds: LogicalAccessAreaId[]
     requirements: AccessRequirement[]
@@ -548,6 +582,45 @@ export const updateAccessLogic = (
       ],
     })
   }
+  
+  settings.SHUFFLE_ITEMS.SETTINGS.ACCESS_MODIFIERS.forEach((rulesetId) => {
+    let rulesetInfo: any
+    
+    try {
+      rulesetInfo = getYAML([path.resolve(__dirname, "accessRulesets", `${rulesetId}.yml`)])
+    } catch (error) {
+      throw new Error(`Cannot find selected ruleset of additional access modifiers '${rulesetId}'.`)
+    }
+    
+    if (!(
+      isObject(rulesetInfo)
+      && Array.isArray(rulesetInfo.addedRequirements)
+    )) {
+      throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
+    }
+    
+    rulesetInfo.addedRequirements.forEach((rule: any) => {
+      if (!(
+        isObject(rule)
+        && Array.isArray(rule.requirements)
+        && Array.isArray(rule.areaIds)
+        && Array.isArray(rule.matchingRequirements)
+        && rule.requirements.every((requirement: any) => {
+          return isAccessRequirement(requirement)
+        })
+        && rule.areaIds.every((requirement: any) => {
+          return logicalAccessAreaIds.includes(requirement)
+        })
+        && rule.matchingRequirements.every((requirement: any) => {
+          return isAccessRequirement(requirement)
+        })
+      )) {
+        throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
+      }
+    
+      addAccessRequirements(rule)
+    })
+  })
 }
 
 const startingItemIds = (settings: Settings) => {

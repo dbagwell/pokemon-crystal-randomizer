@@ -1,0 +1,38 @@
+addedRequirements:
+- requirements:
+  - STORMBADGE
+  - HM02
+  areaIds:
+  - FAST_SHIP_1F_MAIN_AREA
+  - VERMILION_PORT_SOUTH_AREA
+  - OLIVINE_PORT_SOUTH_AREA
+  matchingRequirements:
+  - S_S_TICKET
+- requirements:
+  - STORMBADGE
+  - HM02
+  areaIds:
+  - ROUTE_44
+  matchingRequirements:
+  - MAHOGANY_TOWN
+- requirements:
+  - STORMBADGE
+  - HM02
+  areaIds:
+  - TOHJO_FALLS_EAST_SURF_AREA
+  matchingRequirements:
+  - TOHJO_FALLS_WEST_SURF_AREA
+- requirements:
+  - STORMBADGE
+  - HM02
+  areaIds:
+  - POWER_PLANT
+  matchingRequirements:
+  - ROUTE_10_NORTH_POWER_PLANT_AREA_POWER_PLANT_DOOR_IN
+- requirements:
+  - STORMBADGE
+  - HM02
+  areaIds:
+  - DIGLETTS_CAVE_VERMILION_ENTRANCE_AREA
+  matchingRequirements:
+  - VERMILION_CITY_SNORLAX_AREA_CAVE_IN

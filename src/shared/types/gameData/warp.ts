@@ -1,9 +1,10 @@
 import type { GameMapId } from "@shared/types/gameDataIds/gameMaps"
-import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
-import type { ItemId } from "@shared/types/gameDataIds/items"
-import type { LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
-import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
-import type { WarpId } from "@shared/types/gameDataIds/warps"
+import { type ItemLocationId, itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
+import { type ItemId, itemIds } from "@shared/types/gameDataIds/items"
+import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
+import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
+import { type WarpId, warpIds } from "@shared/types/gameDataIds/warps"
+import { isNumber } from "@shared/utils"
 
 export type Warp = {
   id: WarpId
@@ -28,6 +29,16 @@ export type AccessRequirement =
   | ItemId
   | number
   | "INACCESSIBLE"
+  
+export const isAccessRequirement = (value: any): value is AccessRequirement => {
+  return logicalAccessAreaIds.includes(value)
+    || warpIds.includes(value)
+    || itemLocationIds.includes(value)
+    || pokemonIds.includes(value)
+    || itemIds.includes(value)
+    || isNumber(value)
+    || value === "INACCESSIBLE"
+}
 
 export const warpTypes = [
   "DOOR",
