@@ -3330,6 +3330,10 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
     groupId: "MENU_ITEMS",
     itemId: "EXPN_CARD",
     areaId: "LAV_RADIO_TOWER_1F",
+    accessRequirements: [
+      "POWER_PLANT",
+      "MACHINE_PART",
+    ],
     romOffsets: [[
       31,
       0x6E85,
