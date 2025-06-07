@@ -1,5 +1,6 @@
 export const accessRulesetIds = [
   "EARLY_FLY",
+  "NO_VANILLA_BASEMENT",
 ] as const
 
 export type AccessRulesetId = typeof accessRulesetIds[number]
@@ -19,5 +20,10 @@ export const accessRulsetsMap: IdMap<AccessRulesetId, AccessRuleset> = {
       + "- getting on the S.S. Aqua from either the Olivine or Vermilion Port\n"
       + "- entering the Power Plant\n"
       + "- entering the Vermilion entrance of Diglett's Cave.",
+  },
+  NO_VANILLA_BASEMENT: {
+    id: "NO_VANILLA_BASEMENT",
+    name: "No Vanilla Basement",
+    description: "Makes it so that if the Card Key is shuffled it must be obtainable before having to use the Basement Key.",
   },
 } as const

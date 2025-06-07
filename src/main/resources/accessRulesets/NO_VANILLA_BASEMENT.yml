@@ -1,0 +1,7 @@
+addedRequirements:
+- requirements:
+  - CARD_KEY
+  areaIds:
+  - GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCE
+  matchingRequirements:
+  - GOLDENROD_UNDERGROUND_DOOR_IN
