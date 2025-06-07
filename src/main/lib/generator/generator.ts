@@ -1232,6 +1232,15 @@ const createPatches = (
     ]
   }
   
+  // Ho-Oh Level
+  
+  if (settings.CHANGE_HO_OH_LEVEL.VALUE) {
+    romInfo.patchHunks.push(new DataHunk(
+      ROMOffset.fromBankAddress(29, 0x7255),
+      [settings.CHANGE_HO_OH_LEVEL.SETTINGS.LEVEL]
+    ))
+  }
+  
   // Ho-oh Chamber
   
   if (settings.CLIMB_TIN_TOWER_FOR_HO_OH_CHAMBER) {

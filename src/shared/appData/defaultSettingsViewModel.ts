@@ -573,6 +573,21 @@ export const defaultSettingsViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_HAPPINESS_EVOLUTION_REQUIREMENT
+          createConfigurableToggleViewModel({
+            id: "CHANGE_HO_OH_LEVEL" as const,
+            name: "Change Ho-oh Level",
+            description: "Changes the level of the Pokémon at the top of Tin Tower.",
+            viewModels: [
+              createIntegerInputViewModel({
+                id: "LEVEL" as const,
+                name: "Level",
+                isRequired: true as const,
+                min: 2,
+                max: 100,
+                value: 40,
+              }),
+            ] as const,
+          }), // END CHANGE_HO_OH_LEVEL
         ] as const,
       }), // END POKEMON_PROPERTIES
       createTabViewModel({
