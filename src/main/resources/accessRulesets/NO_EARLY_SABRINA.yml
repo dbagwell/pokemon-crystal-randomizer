@@ -1,0 +1,7 @@
+addedRequirements:
+- requirements:
+  - 7
+  areaIds:
+  - SAFFRON_GYM_CENTRAL_AREA
+  matchingRequirements:
+  - SAFFRON_GYM_NW_AREA_BOTTOM_LEFT_WARP_PAD

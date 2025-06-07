@@ -1,6 +1,7 @@
 export const accessRulesetIds = [
   "EARLY_FLY",
   "NO_VANILLA_BASEMENT",
+  "NO_EARLY_SABRINA",
 ] as const
 
 export type AccessRulesetId = typeof accessRulesetIds[number]
@@ -25,5 +26,10 @@ export const accessRulsetsMap: IdMap<AccessRulesetId, AccessRuleset> = {
     id: "NO_VANILLA_BASEMENT",
     name: "No Vanilla Basement",
     description: "Makes it so that if the Card Key is shuffled it must be obtainable before having to use the Basement Key.",
+  },
+  NO_EARLY_SABRINA: {
+    id: "NO_EARLY_SABRINA",
+    name: "No Early Sabrina",
+    description: "Makes it so that at least 7 badges must be obtainable before having to fight Sabrina.",
   },
 } as const
