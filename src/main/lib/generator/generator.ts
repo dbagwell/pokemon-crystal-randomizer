@@ -1170,6 +1170,21 @@ const createPatches = (
     ).hunks)
   }
   
+  // Auto Rocket Passwords
+  
+  if (settings.AUTO_ROCKET_PASSWORDS) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(
+        ROMOffset.fromBankAddress(27, 0x60A7),
+        [0x18]
+      ),
+      new DataHunk(
+        ROMOffset.fromBankAddress(27, 0x60BE),
+        [0x18]
+      ),
+    ])
+  }
+  
   // Skip Rockets
   
   if (settings.SKIP_MAHOGANY_ROCKETS || settings.SKIP_GOLDENROD_ROCKETS) {
