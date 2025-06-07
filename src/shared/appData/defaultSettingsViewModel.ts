@@ -1297,6 +1297,11 @@ export const defaultSettingsViewModel = () => {
             description: "Makes it so Clair gives you her Badge and TM immediately after defeating her "
               + "instead of after passing the test in the Dragon Shrine.",
           }),
+          createSimpleToggleViewModel({
+            id: "ENABLE_GS_BALL_EVENT" as const,
+            name: "Enable GS Ball Event",
+            description: "After defeating champion Lance, leaving the Goldenrod Pokécenter will trigger an event where someone will walk up to you and give an item (the GS Ball).",
+          }),
           createSimpleMultiSelectorViewModel({
             id: "CHANGE_SS_AQUA_REQUIREMENTS" as const,
             name: "Change S.S. Aqua Requirements",

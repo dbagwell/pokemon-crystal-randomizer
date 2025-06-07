@@ -1318,6 +1318,21 @@ const createPatches = (
     ]
   }
   
+  // GS Ball
+  
+  if (settings.ENABLE_GS_BALL_EVENT) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(
+        ROMOffset.fromBankAddress(24, 0x4F94),
+        [0x31, 0xBC, 0x05, 0x09, 0x9E, 0x4F, 0x91],
+      ),
+      new DataHunk(
+        ROMOffset.fromBankAddress(24, 0x4FD9),
+        [0x31, 0xBC, 0x05, 0x09, 0xE3, 0x4F, 0x91],
+      ),
+    ])
+  }
+  
   // Early Train
   
   if (settings.RIDE_TRAIN_WITHOUT_POWER) {

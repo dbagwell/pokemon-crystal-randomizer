@@ -528,6 +528,12 @@ export const updateAccessLogic = (
     })
   }
   
+  if (settings.ENABLE_GS_BALL_EVENT) {
+    romInfo.gameData.itemLocations.GOLDENROD_POKECENTER_1F_LINK_RECEPTIONISTS_GIFT.accessRequirements = [
+      "HALL_OF_FAME",
+    ]
+  }
+  
   if (settings.CHANGE_SS_AQUA_REQUIREMENTS.includes("SKIP_E4")) {
     removeAccessRequirements({
       areaIds: [
