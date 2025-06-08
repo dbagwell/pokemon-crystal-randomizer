@@ -583,6 +583,20 @@ export const updateAccessLogic = (
     })
   }
   
+  if (settings.FLY_TO_OLIVINE_FROM_PORT) {
+    romInfo.gameData.areas.OLIVINE_CITY.accessOptions.push([
+      "OLIVINE_PORT_NORTH_AREA",
+      "STORMBADGE",
+      "HM02",
+    ])
+    
+    romInfo.gameData.areas.OLIVINE_CITY.accessOptions.push([
+      "OLIVINE_PORT_SOUTH_AREA",
+      "STORMBADGE",
+      "HM02",
+    ])
+  }
+  
   settings.SHUFFLE_ITEMS.SETTINGS.ACCESS_MODIFIERS.forEach((rulesetId) => {
     let rulesetInfo: any
     

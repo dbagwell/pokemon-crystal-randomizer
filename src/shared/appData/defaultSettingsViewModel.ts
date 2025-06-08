@@ -1361,6 +1361,11 @@ export const defaultSettingsViewModel = () => {
             ] as const,
           }),
           createSimpleToggleViewModel({
+            id: "FLY_TO_OLIVINE_FROM_PORT" as const,
+            name: "Fly To Olivine From Port",
+            description: "Makes it so that you can also get the ability to fly to Olivine City when you enter the Olivine Port.",
+          }),
+          createSimpleToggleViewModel({
             id: "RIDE_TRAIN_WITHOUT_POWER" as const,
             name: "Ride Train Without Power",
             description: "Allows riding the magnet train between Goldenrod and Saffron before fixing the Kanto Power plant.",

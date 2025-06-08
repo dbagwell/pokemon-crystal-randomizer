@@ -1291,6 +1291,15 @@ const createPatches = (
     ])
   }
   
+  // Olivine Fly Point
+  
+  if (settings.FLY_TO_OLIVINE_FROM_PORT) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "olivineFlyPoint.yml",
+    ).hunks)
+  }
+  
   if (settings.SHUFFLE_ITEMS.VALUE) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
