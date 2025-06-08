@@ -1,0 +1,34 @@
+description: "Enables flying between Johto and Kanto by pressing left and right on the dpad while in the fly map menu."
+values:
+  initPlayerLocationValues: "79 EA 1B D4 78 EA 1C D4 7A EA 1A D4 C9"
+  handleDPadExtension1: "C2 9B 5B 7E E6 30 20 01 C9 F0 D2 A7 20 0F CD @$getJohtoInfo 16 01 CD @$showHidePlayer CD FF 5E 3E 90 18 0D CD @$getKantoInfo D8 16 00 CD @$showHidePlayer CD 04 5F AF EA D2 FF $handleDPadExtension2" 
+  handleDPadExtension2: "CD B5 5B FA D2 FF A7 21 00 98 20 03 21 00 9C 7D E0 D6 7C E0 D7 3E 01 E0 D4 CD 5A 04 AF E0 D4 C9"
+  showHidePlayer: "21 1B D4 2A 46 4F 21 05 00 09 FA 19 D4 BA 20 04 3E C0 18 03 FA 1A D4 77 C9"
+  getJohtoInfo: "3E 00 EA 02 D0 EA 05 D0 3E 0B EA 06 D0 C9"
+  getKantoInfo: "0E 0D CD 50 5C A7 06 17 20 17 21 76 5C 06 0B 2A FE FF 28 1D 04 4E 23 E5 C5 CD 50 5C C1 E1 A7 28 EE 3E 0C EA 05 D0 3E 17 EA 06 D0 78 EA 02 D0 A7 C9 37 C9"
+  checkRegion: "FA B5 DC 47 FA B6 DC 4F CD AF 2C FE 00 20 0B FA AD DC 47 FA AE DC 4F CD AF 2C FE 2F C9"
+changes:
+- description: "Adds code to help with flying between regions"
+  locations:
+  - bank: 36
+  value: "$initPlayerLocationValues $handleDPadExtension1 $showHidePlayer $getJohtoInfo $getJohtoInfo $getKantoInfo $checkRegion"
+- description: "Initializes some values related to the player location"
+  locations:
+  - bank: 36
+    address: 0x5B1F
+  value: "@$initPlayerLocationValues"
+- description: "Calls code to check for additional types of user inputs"
+  locations:
+  - bank: 36
+    address: 0x5B86
+  value: "C3 @$handleDPadExtension1"
+- description: "Updates code for updating the map after chaning locations on the current map"
+  locations:
+  - bank: 36
+    address: 0x5BAB
+  value: "C3 @$handleDPadExtension2"
+- description: "Updates the code for rendering the fly map."
+  locations:
+  - bank: 36
+    address: 0x5C90
+  value: "3E 90 E0 D2 CD @$checkRegion 30 10 F5 CD @$getJohtoInfo AF EA 19 D4 CD C9 5C F1 CD A6 5F C9 F5 CD @$getKantoInfo 38 12 AF E0 D2 3C EA 19 D4 CD C9 5C F1 CD A6 5F CD 04 5F C9 CD @$getJohtoInfo AF EA 19 D4 F1 CD 04 5F CD B5 5B CD 13 5F 21 00 9C CD E4 5E CD FF 5E CD B5 5B CD 13 5F 21 00 98 CD E4 5E CD 7B 5F 79 EA 03 D0 78 EA 04 D0 C9"

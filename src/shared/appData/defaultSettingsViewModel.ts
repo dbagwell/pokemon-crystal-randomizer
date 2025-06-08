@@ -1228,6 +1228,13 @@ export const defaultSettingsViewModel = () => {
             ] as const,
           }), // END CHANGE_OVERWORLD_TRAINER_MOVEMENT
           createSimpleToggleViewModel({
+            id: "FLY_BETWEEN_REGIONS" as const,
+            name: "Fly Between Regions",
+            description: "Adds the ability to press left or right while selecting a location to fly to. "
+             + "Doing this will switch the map between Johto and Kanto allowing you to select a location, for which you have the Fly Point, "
+             + "in a different region than your current region.",
+          }),
+          createSimpleToggleViewModel({
             id: "REMOVE_ROUTE_30_ROADBLOCK" as const,
             name: "Remove Route 30 Roadblock",
             description: "Removes the battle between Mikey and Joey that blocks the path on Route 30 at the start of the game allowing you to pass without turning in the Mystery Egg.",

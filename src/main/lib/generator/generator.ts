@@ -1139,6 +1139,15 @@ const createPatches = (
     romInfo.patchHunks = [...romInfo.patchHunks, ...experiencePatch.hunks]
   }
   
+  // Fly Between Regions
+  
+  if (settings.FLY_BETWEEN_REGIONS) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "flyBetweenRegions.yml",
+    ).hunks)
+  }
+  
   // Route 30 Roadblock
   
   if (settings.REMOVE_ROUTE_30_ROADBLOCK) {
