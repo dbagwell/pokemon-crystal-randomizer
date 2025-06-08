@@ -3514,7 +3514,10 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "OLIVINE_PORT_NORTH_AREA",
     accessOptions: [
       "OLIVINE_PORT_PASSAGE_TUNNEL_AREA_SOUTH_STAIRS_UP",
-      "OLIVINE_PORT_SOUTH_AREA",
+      [
+        "OLIVINE_PORT_SOUTH_AREA",
+        "HALL_OF_FAME",
+      ],
     ],
   },
   OLIVINE_PORT_NORTH_SURF_AREA: {

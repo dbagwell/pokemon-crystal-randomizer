@@ -572,13 +572,10 @@ export const updateAccessLogic = (
     removeAccessRequirements({
       areaIds: [
         "FAST_SHIP_1F_MAIN_AREA",
-        "VERMILION_PORT_SOUTH_AREA",
+        "OLIVINE_PORT_NORTH_AREA",
       ],
       requirements: [
         "HALL_OF_FAME",
-      ],
-      matchingRequirements: [
-        "S_S_TICKET",
       ],
     })
   }
