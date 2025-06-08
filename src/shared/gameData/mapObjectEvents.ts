@@ -6755,6 +6755,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "ILEX_FOREST_KURT",
   },
   {
+    id: "ILEX_FOREST_LASS",
     romOffset: [
       27,
       30307,

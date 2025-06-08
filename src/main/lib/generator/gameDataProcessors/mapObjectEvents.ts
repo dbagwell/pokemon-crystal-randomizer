@@ -45,6 +45,13 @@ export const updateMapObjectEvents = (
     romInfo.gameData.mapObjectEvents.find((object) => {
       return object.id === "GOLDENROD_UNDERGROUND_WAREHOUSE_DIRECTOR"
     })!.flagId = "DIRECTOR_IN_UNDERGROUND_WAREHOUSE"
+    
+    const object = romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "ILEX_FOREST_LASS"
+    })
+    
+    object!.coordinate = [9, 23]
+    object!.movementBehaviourId = "STANDING_LEFT"
   }
   
   if (settings.RADIO_CARD_QUIZ_ALWAYS_ACCESSIBLE) {
