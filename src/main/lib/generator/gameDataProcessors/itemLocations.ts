@@ -481,6 +481,36 @@ export const updateAccessLogic = (
         "LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT",
       ]
     })
+    
+    romInfo.gameData.areas.TEAM_ROCKET_BASE_B2F_CENTRAL_AREA.accessOptions.push([
+      "TEAM_ROCKET_BASE_B2F_SOUTH_AREA",
+      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+    ])
+    
+    romInfo.gameData.areas.TEAM_ROCKET_BASE_B3F_ADMIN_AREA.accessOptions.push([
+      "TEAM_ROCKET_BASE_B3F_NW_AREA",
+      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+    ])
+    
+    romInfo.gameData.areas.ROUTE_44.accessOptions.push([
+      "MAHOGANY_TOWN",
+      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+    ]),
+    
+    // TODO: This should acutally be added an additional separate access option, instead of just replacing the previous requirement, but we don't currently support that for warps
+    romInfo.gameData.warps.RADIO_TOWER_2F_STAIRS_UP.accessRequirements = [
+      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+    ]
+    
+    romInfo.gameData.areas.RADIO_TOWER_3F_EAST_AREA.accessOptions.push([
+      "RADIO_TOWER_3F_WEST_AREA",
+      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+    ])
+    
+    romInfo.gameData.areas.RADIO_TOWER_3F_WEST_AREA.accessOptions.push([
+      "RADIO_TOWER_3F_EAST_AREA",
+      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+    ])
   }
   
   if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_FLOWER_SHOP")) {

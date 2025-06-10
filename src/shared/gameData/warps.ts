@@ -1093,7 +1093,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "IN",
     direction: "UP",
     accessRequirements: [
-      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA",
+      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
     ],
     coordinate: [
       6,
@@ -2267,6 +2267,9 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     type: "STAIRS",
     polarity: "UP",
     direction: "UP",
+    accessRequirements: [
+      7,
+    ],
     coordinate: [
       0,
       0,
