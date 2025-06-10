@@ -3235,6 +3235,19 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
       ],
     ],
   },
+  ELMS_LAB_AIDES_GIFT_FOR_MYSTERY_EGG: {
+    id: "ELMS_LAB_AIDES_GIFT_FOR_MYSTERY_EGG",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "POKE_BALL",
+    areaId: "ELMS_LAB",
+    romOffsets: [
+      [
+        30,
+        0x4ED1,
+      ],
+    ],
+  },
   ROUTE_2_NUGGET_HOUSE_MANS_GIFT: {
     id: "ROUTE_2_NUGGET_HOUSE_MANS_GIFT",
     type: "GIFT",

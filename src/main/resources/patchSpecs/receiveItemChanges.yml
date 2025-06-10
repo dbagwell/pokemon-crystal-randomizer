@@ -334,3 +334,8 @@ changes:
   - bank: 99
     address: 0x495A
   value: "9E D7 01 08 F4 48 18 18 18 18 18 18 18 18 18 18 18"
+- description: "Update script where elms aide gives items after the mystery egg is delivered."
+  locations:
+  - bank: 30
+    address: 0x4ED0
+  value: "9E 05 $elmsAideNumberOfItems 4C 9A 60 55 18 18 18 18 18 18 18"

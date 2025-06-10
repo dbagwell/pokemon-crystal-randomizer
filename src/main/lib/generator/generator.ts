@@ -630,6 +630,7 @@ const createPatches = (
         {},
         {
           regularItemPickupSound: settings.FASTER_ITEM_PICKUP_SFX ? "90 00" : "01 00",
+          elmsAideNumberOfItems: hexStringFrom([Math.min(itemCategoriesMap[itemsMap[romInfo.gameData.itemLocations.ELMS_LAB_AIDES_GIFT_FOR_MYSTERY_EGG.itemId].category].slotSize, 5)]),
         },
       ).hunks,
       new DataHunk(
