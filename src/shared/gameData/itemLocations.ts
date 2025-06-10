@@ -4279,6 +4279,22 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
       ],
     ],
   },
+  DRAGONS_DEN_B1F_SOUTH_AREA_CLAIRS_GIFT: {
+    id: "DRAGONS_DEN_B1F_SOUTH_AREA_CLAIRS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM24",
+    areaId: "DRAGONS_DEN_B1F_SOUTH_AREA",
+    accessRequirements: [
+      "DRAGON_SHRINE_BADGE",
+    ],
+    romOffsets: [
+      [
+        99,
+        0x48D5,
+      ],
+    ],
+  },
 }
 
 export const hmGiftLocationsMap: IdMap<HMGiftLocationId, ItemLocation> = {

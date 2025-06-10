@@ -329,3 +329,8 @@ changes:
   - bank: 28
     address: 0x70C3
   value: "18 18 88"
+- description: "Change Clairs script for giving her tm item in dragons den."
+  locations:
+  - bank: 99
+    address: 0x495A
+  value: "9E D7 01 08 F4 48 18 18 18 18 18 18 18 18 18 18 18"

@@ -1354,6 +1354,14 @@ const createPatches = (
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       new DataHunk(ROMOffset.fromBankAddress(101, 0x4E26), [0x31, 0x0C, 0x01]),
+      ...Patch.fromYAML(
+        romInfo,
+        "clairBackupTM.yml",
+        {},
+        {
+          itemId: hexStringFrom([itemsMap[romInfo.gameData.itemLocations.DRAGONS_DEN_B1F_SOUTH_AREA_CLAIRS_GIFT.itemId].numericId]),
+        }
+      ).hunks,
     ]
   }
   
