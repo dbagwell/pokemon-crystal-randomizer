@@ -688,10 +688,7 @@ const createPatches = (
               romOffset[0],
               romOffset[1]
             ),
-            compact([
-              itemsMap[itemLocation.itemId].numericId,
-              itemLocation.type !== "HIDDEN_ITEM" ? 1 : null,
-            ]),
+            [itemsMap[itemLocation.itemId].numericId],
           )
         })
       }),

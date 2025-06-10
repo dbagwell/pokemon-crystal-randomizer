@@ -324,3 +324,8 @@ changes:
   - bank: 31
     address: 0x59CE
   value: "00 @$setUndergroundWarehouseDirectorEventFlag"
+- description: "Update the sound that plays when picking up the trash can item."
+  locations:
+  - bank: 28
+    address: 0x70C3
+  value: "18 18 88"

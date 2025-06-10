@@ -2778,6 +2778,27 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       0x5F7C,
     ]],
   },
+  CELADON_CAFE_HIDDEN_ITEM: {
+    id: "CELADON_CAFE_HIDDEN_ITEM",
+    type: "HIDDEN_ITEM",
+    groupId: "REGULAR_HIDDEN_ITEMS",
+    itemId: "LEFTOVERS",
+    areaId: "CELADON_CAFE",
+    romOffsets: [
+      [
+        28,
+        0x70B7,
+      ],
+      [
+        28,
+        0x70BE,
+      ],
+      [
+        28,
+        0x70CF,
+      ],
+    ],
+  },
   ROCK_TUNNEL_1F_LAVENDER_SIDE_HIDDEN_ITEM: {
     id: "ROCK_TUNNEL_1F_LAVENDER_SIDE_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
