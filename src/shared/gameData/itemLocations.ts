@@ -1556,7 +1556,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
     areaId: "DRAGONS_DEN_B1F_SOUTH_SURF_AREA",
     romOffsets: [[
       99,
-      0x495A,
+      0x495B,
     ]],
   },
   TOHJO_FALLS_WEST_SURF_AREA_ITEM_BALL: {

@@ -41,10 +41,6 @@ export const updateItems = (
         },
       })
     })
-    
-    romInfo.gameData.mapObjectEvents.find((event) => {
-      return event.flagId === "DRAGONS_DEN_B1F_DRAGON_FANG"
-    })!.typeId = "ITEMBALL"
   }
   
   if (settings.RANDOMIZE_TM_ITEM_BALLS.VALUE) {

@@ -59,4 +59,13 @@ export const updateMapObjectEvents = (
       return object.id === "RADIO_TOWER_1F_RADIO_CARD_QUIZ_WOMAN"
     })!.flagId = undefined
   }
+  
+  if (settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE || settings.SHUFFLE_ITEMS.VALUE) {
+    const object = romInfo.gameData.mapObjectEvents.find((event) => {
+      return event.flagId === "DRAGONS_DEN_B1F_DRAGON_FANG"
+    })!
+    
+    object.typeId = "ITEMBALL"
+    object.scriptPointer++
+  }
 }
