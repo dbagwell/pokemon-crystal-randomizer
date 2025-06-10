@@ -1,5 +1,5 @@
 import type { ItemLocation } from "@shared/types/gameData/itemLocation"
-import { type BadgeLocationId, type HMGiftLocationId, type HMItemBallLocationId, type KeyItemGiftLocationId, type KeyItemHiddenItemLocationId, type KeyItemItemBallLocationId, type MenuItemGiftLocationId, type RegularHiddenItemLocationId, type RegularItemBallLocationId, type TMItemBallLocationId } from "@shared/types/gameDataIds/itemLocations"
+import { type BadgeLocationId, type HMGiftLocationId, type HMItemBallLocationId, type KeyItemGiftLocationId, type KeyItemHiddenItemLocationId, type KeyItemItemBallLocationId, type MenuItemGiftLocationId, type RegularGiftLocationId, type RegularHiddenItemLocationId, type RegularItemBallLocationId, type TMGiftLocationId, type TMItemBallLocationId } from "@shared/types/gameDataIds/itemLocations"
 
 export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemLocation> = {
   ROUTE_2_SE_AREA_ITEM_BALL: {
@@ -2921,6 +2921,1345 @@ export const keyItemHiddenItemLocationsMap: IdMap<KeyItemHiddenItemLocationId, I
   },
 }
 
+export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation> = {
+  SLOWPOKE_WELL_B2F_MANS_GIFT: {
+    id: "SLOWPOKE_WELL_B2F_MANS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "KINGS_ROCK",
+    areaId: "SLOWPOKE_WELL_B2F_SURF_AREA",
+    romOffsets: [
+      [
+        22,
+        0x6D18,
+      ],
+    ],
+  },
+  OLIVINE_LIGHTHOUSE_2F_HUEYS_GIFT: {
+    id: "OLIVINE_LIGHTHOUSE_2F_HUEYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "PROTEIN",
+    areaId: "OLIVINE_LIGHTHOUSE_2F",
+    accessRequirements: [
+      "POKEGEAR",
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      "HALL_OF_FAME",
+      "POWER_PLANT_MANAGERS_GIFT",
+    ],
+    romOffsets: [
+      [
+        22,
+        0x7033,
+      ],
+      [
+        22,
+        0x7045,
+      ],
+    ],
+  },
+  NATIONAL_PARK_BENCH_LADYS_GIFT: {
+    id: "NATIONAL_PARK_BENCH_LADYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "QUICK_CLAW",
+    areaId: "NATIONAL_PARK",
+    romOffsets: [
+      [
+        23,
+        0x4015,
+      ],
+    ],
+  },
+  NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL: {
+    id: "NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "NUGGET",
+    areaId: "NATIONAL_PARK",
+    accessRequirements: [
+      "POKEGEAR",
+      "MARILL",
+    ],
+    romOffsets: [
+      [
+        23,
+        0x417B,
+      ],
+    ],
+  },
+  RADIO_TOWER_4F_EAST_AREA_DJ_MARYS_GIFT: {
+    id: "RADIO_TOWER_4F_EAST_AREA_DJ_MARYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "PINK_BOW",
+    areaId: "RADIO_TOWER_4F_EAST_AREA",
+    accessRequirements: [
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+    ],
+    romOffsets: [
+      [
+        23,
+        0x6B9E,
+      ],
+    ],
+  },
+  GOLDENROD_POKECENTER_1F_LADYS_GIFT: {
+    id: "GOLDENROD_POKECENTER_1F_LADYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "REVIVE",
+    areaId: "GOLDENROD_POKECENTER_1F",
+    accessRequirements: [
+      "EON_MAIL",
+    ],
+    romOffsets: [
+      [
+        24,
+        0x5040,
+      ],
+    ],
+  },
+  ROUTE_35_GOLDENROD_GATE_RANDYS_GIFT: {
+    id: "ROUTE_35_GOLDENROD_GATE_RANDYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "HP_UP",
+    areaId: "ROUTE_35_GOLDENROD_GATE",
+    accessRequirements: [
+      "ROUTE_31",
+    ],
+    romOffsets: [
+      [
+        26,
+        0x5D8A,
+      ],
+    ],
+  },
+  ROUTE_36_NATIONAL_PARK_GATE_CONTEST_1ST_PLACE_PRIZE: {
+    id: "ROUTE_36_NATIONAL_PARK_GATE_CONTEST_1ST_PLACE_PRIZE",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "SUN_STONE",
+    areaId: "ROUTE_36_NATIONAL_PARK_GATE",
+    romOffsets: [
+      [
+        26,
+        0x6CB4,
+      ],
+      [
+        47,
+        0x432A,
+      ],
+    ],
+  },
+  ROUTE_36_NATIONAL_PARK_GATE_CONTEST_2ND_PLACE_PRIZE: {
+    id: "ROUTE_36_NATIONAL_PARK_GATE_CONTEST_2ND_PLACE_PRIZE",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "EVERSTONE",
+    areaId: "ROUTE_36_NATIONAL_PARK_GATE",
+    romOffsets: [
+      [
+        26,
+        0x6CC3,
+      ],
+      [
+        47,
+        0x433B,
+      ],
+    ],
+  },
+  ROUTE_36_NATIONAL_PARK_GATE_CONTEST_3RD_PLACE_PRIZE: {
+    id: "ROUTE_36_NATIONAL_PARK_GATE_CONTEST_3RD_PLACE_PRIZE",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "GOLD_BERRY",
+    areaId: "ROUTE_36_NATIONAL_PARK_GATE",
+    romOffsets: [
+      [
+        26,
+        0x6CD2,
+      ],
+      [
+        47,
+        0x434C,
+      ],
+    ],
+  },
+  ROUTE_36_NATIONAL_PARK_GATE_CONTEST_CONSOLATION_PRIZE: {
+    id: "ROUTE_36_NATIONAL_PARK_GATE_CONTEST_CONSOLATION_PRIZE",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "BERRY",
+    areaId: "ROUTE_36_NATIONAL_PARK_GATE",
+    romOffsets: [
+      [
+        26,
+        0x6CE1,
+      ],
+      [
+        47,
+        0x42A4,
+      ],
+    ],
+  },
+  LAKE_OF_RAGE_CUT_AREA_WESLEYS_GIFT: {
+    id: "LAKE_OF_RAGE_CUT_AREA_WESLEYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "BLACKBELT",
+    areaId: "LAKE_OF_RAGE_CUT_AREA",
+    romOffsets: [
+      [
+        28,
+        0x412E,
+      ],
+    ],
+  },
+  FAST_SHIP_CABINS_SE_GENTLEMANS_GIFT: {
+    id: "FAST_SHIP_CABINS_SE_GENTLEMANS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "METAL_COAT",
+    areaId: "FAST_SHIP_CABINS_SE",
+    accessRequirements: [
+      "FAST_SHIP_CABINS_CAPTAINS_CABIN",
+    ],
+    romOffsets: [
+      [
+        29,
+        0x5F3C,
+      ],
+      [
+        29,
+        0x5F5D,
+      ],
+    ],
+  },
+  ROUTE_34_MAIN_AREA_GINAS_GIFT: {
+    id: "ROUTE_34_MAIN_AREA_GINAS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "LEAF_STONE",
+    areaId: "ROUTE_34_MAIN_AREA",
+    accessRequirements: [
+      "POKEGEAR",
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+    ],
+    romOffsets: [
+      [
+        30,
+        0x4217,
+      ],
+    ],
+  },
+  ROUTE_34_SURF_AREA_KATES_GIFT: {
+    id: "ROUTE_34_SURF_AREA_KATES_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "SOFT_SAND",
+    areaId: "ROUTE_34_SURF_AREA",
+    romOffsets: [
+      [
+        30,
+        0x4311,
+      ],
+    ],
+  },
+  ELMS_LAB_ELMS_GIFT_FOR_TOGEPI: {
+    id: "ELMS_LAB_ELMS_GIFT_FOR_TOGEPI",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "EVERSTONE",
+    areaId: "ELMS_LAB",
+    accessRequirements: [
+      "VIOLET_GYM",
+      "VIOLET_POKECENTER_1F",
+      "TOGEPI",
+    ],
+    romOffsets: [
+      [
+        30,
+        0x4E08,
+      ],
+    ],
+  },
+  ELMS_LAB_ELMS_GIFT_FOR_RISINGBADGE: {
+    id: "ELMS_LAB_ELMS_GIFT_FOR_RISINGBADGE",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "MASTER_BALL",
+    areaId: "ELMS_LAB",
+    accessRequirements: [
+      "RISINGBADGE",
+    ],
+    romOffsets: [
+      [
+        30,
+        0x4E21,
+      ],
+    ],
+  },
+  ELMS_LAB_AIDES_FREE_GIFT: {
+    id: "ELMS_LAB_AIDES_FREE_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "POTION",
+    areaId: "ELMS_LAB",
+    romOffsets: [
+      [
+        30,
+        0x4EA3,
+      ],
+    ],
+  },
+  ROUTE_2_NUGGET_HOUSE_MANS_GIFT: {
+    id: "ROUTE_2_NUGGET_HOUSE_MANS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "NUGGET",
+    areaId: "ROUTE_2_NUGGET_HOUSE",
+    romOffsets: [
+      [
+        38,
+        0x7854,
+      ],
+    ],
+  },
+  BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG: {
+    id: "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "EVERSTONE",
+    areaId: "BILLS_HOUSE",
+    accessRequirements: [
+      "LICKITUNG",
+    ],
+    romOffsets: [
+      [
+        98,
+        0x5645,
+      ],
+    ],
+  },
+  BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH: {
+    id: "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "LEAF_STONE",
+    areaId: "BILLS_HOUSE",
+    accessRequirements: [
+      "ODDISH",
+    ],
+    romOffsets: [
+      [
+        98,
+        0x565C,
+      ],
+    ],
+  },
+  BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU: {
+    id: "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "WATER_STONE",
+    areaId: "BILLS_HOUSE",
+    accessRequirements: [
+      "STARYU",
+    ],
+    romOffsets: [
+      [
+        98,
+        0x5673,
+      ],
+    ],
+  },
+  BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE: {
+    id: "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "FIRE_STONE",
+    areaId: "BILLS_HOUSE",
+    accessRequirements: [
+      "GROWLITHE",
+    ],
+    romOffsets: [
+      [
+        98,
+        0x568A,
+      ],
+    ],
+  },
+  BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_PICHU: {
+    id: "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_PICHU",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "THUNDERSTONE",
+    areaId: "BILLS_HOUSE",
+    accessRequirements: [
+      "PICHU",
+    ],
+    romOffsets: [
+      [
+        98,
+        0x569B,
+      ],
+    ],
+  },
+  SILPH_CO_1F_GUARDS_GIFT: {
+    id: "SILPH_CO_1F_GUARDS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "UP_GRADE",
+    areaId: "SILPH_CO_1F",
+    romOffsets: [
+      [
+        98,
+        0x6BF5,
+      ],
+    ],
+  },
+  ROUTE_5_CLEANSE_TAG_HOUSE_LADYS_GIFT: {
+    id: "ROUTE_5_CLEANSE_TAG_HOUSE_LADYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "CLEANSE_TAG",
+    areaId: "ROUTE_5_CLEANSE_TAG_HOUSE",
+    romOffsets: [
+      [
+        98,
+        0x7641,
+      ],
+    ],
+  },
+  DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA_MANS_GIFT: {
+    id: "DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA_MANS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "BLACKGLASSES",
+    areaId: "DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA",
+    romOffsets: [
+      [
+        99,
+        0x472D,
+      ],
+    ],
+  },
+  CHARCOAL_KILN_APPRENTICES_GIFT: {
+    id: "CHARCOAL_KILN_APPRENTICES_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "CHARCOAL",
+    areaId: "CHARCOAL_KILN",
+    accessRequirements: [
+      "SLOWPOKE_WELL_B1F_EAST_AREA",
+      "ILEX_FOREST_SOUTH_AREA_CHARCOAL_BOSSS_GIFT",
+    ],
+    romOffsets: [
+      [
+        99,
+        0x5D53,
+      ],
+    ],
+  },
+  KURTS_HOUSE_KURTS_GIFT: {
+    id: "KURTS_HOUSE_KURTS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "LURE_BALL",
+    areaId: "KURTS_HOUSE",
+    accessRequirements: [
+      "SLOWPOKE_WELL_B1F_EAST_AREA",
+    ],
+    romOffsets: [
+      [
+        99,
+        0x61C4,
+      ],
+    ],
+  },
+  ROUTE_32_NORTH_AREA_MANS_GIFT: {
+    id: "ROUTE_32_NORTH_AREA_MANS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "MIRACLE_SEED",
+    areaId: "ROUTE_32_NORTH_AREA",
+    accessRequirements: [
+      "VIOLET_GYM",
+      "VIOLET_POKECENTER_1F",
+    ],
+    romOffsets: [
+      [
+        100,
+        0x4494,
+      ],
+    ],
+  },
+  ROUTE_32_SOUTH_AREA_FRIEDAS_GIFT: {
+    id: "ROUTE_32_SOUTH_AREA_FRIEDAS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "POISON_BARB",
+    areaId: "ROUTE_32_SOUTH_AREA",
+    romOffsets: [
+      [
+        100,
+        0x4759,
+      ],
+    ],
+  },
+  POKEMON_FAN_CLUB_CHAIRMANS_GIFT: {
+    id: "POKEMON_FAN_CLUB_CHAIRMANS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "RARE_CANDY",
+    areaId: "POKEMON_FAN_CLUB",
+    romOffsets: [
+      [
+        100,
+        0x5807,
+      ],
+    ],
+  },
+  ROUTE_36_WEST_AREA_ALANS_GIFT: {
+    id: "ROUTE_36_WEST_AREA_ALANS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "FIRE_STONE",
+    areaId: "ROUTE_36_WEST_AREA",
+    accessRequirements: [
+      "POKEGEAR",
+    ],
+    romOffsets: [
+      [
+        101,
+        0x41B8,
+      ],
+    ],
+  },
+  ROUTE_36_EAST_AREA_ARTHURS_GIFT: {
+    id: "ROUTE_36_EAST_AREA_ARTHURS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "HARD_STONE",
+    areaId: "ROUTE_36_EAST_AREA",
+    romOffsets: [
+      [
+        101,
+        0x4221,
+      ],
+    ],
+  },
+  ROUTE_30_BERRY_HOUSE_MANS_GIFT: {
+    id: "ROUTE_30_BERRY_HOUSE_MANS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "BERRY",
+    areaId: "ROUTE_30_BERRY_HOUSE",
+    romOffsets: [
+      [
+        101,
+        0x6D71,
+      ],
+    ],
+  },
+  MR_POKEMONS_HOUSE_MR_POKEMONS_GIFT_FOR_RED_SCALE: {
+    id: "MR_POKEMONS_HOUSE_MR_POKEMONS_GIFT_FOR_RED_SCALE",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "EXP_SHARE",
+    areaId: "MR_POKEMONS_HOUSE",
+    accessRequirements: [
+      "RED_SCALE",
+    ],
+    romOffsets: [
+      [
+        101,
+        0x6EB8,
+      ],
+    ],
+  },
+  LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT: {
+    id: "LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "ELIXER",
+    areaId: "LAKE_OF_RAGE_MAGIKARP_HOUSE",
+    accessRequirements: [
+      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+      "MAGIKARP",
+    ],
+    romOffsets: [
+      [
+        102,
+        0x6703,
+      ],
+    ],
+  },
+  CHERRYGROVE_CITY_SURF_AREA_MYSTIC_WATER_GUYS_GIFT: {
+    id: "CHERRYGROVE_CITY_SURF_AREA_MYSTIC_WATER_GUYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "MYSTIC_WATER",
+    areaId: "CHERRYGROVE_CITY_SURF_AREA",
+    romOffsets: [
+      [
+        103,
+        0x417B,
+      ],
+    ],
+  },
+  ROUTE_43_TIFFANY_GIFT_FOR_CLEFARIY: {
+    id: "ROUTE_43_TIFFANY_GIFT_FOR_CLEFARIY",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "PINK_BOW",
+    areaId: "ROUTE_43",
+    accessRequirements: [
+      "POKEGEAR",
+      "CLEFAIRY",
+    ],
+    romOffsets: [
+      [
+        103,
+        0x5222,
+      ],
+    ],
+  },
+  ROUTE_44_VANCES_GIFT: {
+    id: "ROUTE_44_VANCES_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "CARBOS",
+    areaId: "ROUTE_44",
+    accessRequirements: [
+      "POKEGEAR",
+      "HALL_OF_FAME",
+      "POWER_PLANT_MANAGERS_GIFT",
+    ],
+    romOffsets: [
+      [
+        103,
+        0x58BF,
+      ],
+      [
+        103,
+        0x58D1,
+      ],
+    ],
+  },
+  ROUTE_44_WILTONS_GIFT_1: {
+    id: "ROUTE_44_WILTONS_GIFT_1",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "ULTRA_BALL",
+    areaId: "ROUTE_44",
+    accessRequirements: [
+      "POKEGEAR",
+    ],
+    romOffsets: [
+      [
+        103,
+        0x59CA,
+      ],
+    ],
+  },
+  ROUTE_44_WILTONS_GIFT_2: {
+    id: "ROUTE_44_WILTONS_GIFT_2",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "GREAT_BALL",
+    areaId: "ROUTE_44",
+    accessRequirements: [
+      "POKEGEAR",
+    ],
+    romOffsets: [
+      [
+        103,
+        0x59D3,
+      ],
+    ],
+  },
+  ROUTE_44_WILTONS_GIFT_3: {
+    id: "ROUTE_44_WILTONS_GIFT_3",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "POKE_BALL",
+    areaId: "ROUTE_44",
+    accessRequirements: [
+      "POKEGEAR",
+    ],
+    romOffsets: [
+      [
+        103,
+        0x59DC,
+      ],
+    ],
+  },
+  ROUTE_45_KENJIS_GIFT: {
+    id: "ROUTE_45_KENJIS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "PP_UP",
+    areaId: "ROUTE_45",
+    accessRequirements: [
+      "POKEGEAR",
+    ],
+    romOffsets: [
+      [
+        103,
+        0x60FE,
+      ],
+    ],
+  },
+  ROUTE_45_PARRYS_GIFT: {
+    id: "ROUTE_45_PARRYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "IRON",
+    areaId: "ROUTE_45",
+    accessRequirements: [
+      "POKEGEAR",
+      "HALL_OF_FAME",
+      "POWER_PLANT_MANAGERS_GIFT",
+    ],
+    romOffsets: [
+      [
+        103,
+        0x620D,
+      ],
+      [
+        103,
+        0x621F,
+      ],
+    ],
+  },
+  ROUTE_25_KEVINS_GIFT: {
+    id: "ROUTE_25_KEVINS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "NUGGET",
+    areaId: "ROUTE_25",
+    romOffsets: [
+      [
+        103,
+        0x6FBF,
+      ],
+    ],
+  },
+  ROUTE_27_WHIRLPOOL_AREA_JOSES_GIFT: {
+    id: "ROUTE_27_WHIRLPOOL_AREA_JOSES_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "STAR_PIECE",
+    areaId: "ROUTE_27_WHIRLPOOL_AREA",
+    accessRequirements: [
+      "POKEGEAR",
+    ],
+    romOffsets: [
+      [
+        104,
+        0x4949,
+      ],
+    ],
+  },
+  ROUTE_29_TUSCANYS_GIFT: {
+    id: "ROUTE_29_TUSCANYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "PINK_BOW",
+    areaId: "ROUTE_29",
+    accessRequirements: [
+      "ZEPHYRBADGE",
+    ],
+    romOffsets: [
+      [
+        104,
+        0x5069,
+      ],
+    ],
+  },
+  ROUTE_30_CHERRYGROVE_SIDE_JOEYS_GIFT: {
+    id: "ROUTE_30_CHERRYGROVE_SIDE_JOEYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "HP_UP",
+    areaId: "ROUTE_30_CHERRYGROVE_SIDE",
+    accessRequirements: [
+      "POKEGEAR",
+      "HALL_OF_FAME",
+      "GOLDENROD_CITY_MAIN_AREA",
+      "OLIVINE_CITY",
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+    ],
+    romOffsets: [
+      [
+        104,
+        0x5763,
+      ],
+      [
+        104,
+        0x5775,
+      ],
+    ],
+  },
+  ROUTE_38_DANAS_GIFT: {
+    id: "ROUTE_38_DANAS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "THUNDERSTONE",
+    areaId: "ROUTE_38",
+    accessRequirements: [
+      "POKEGEAR",
+    ],
+    romOffsets: [
+      [
+        104,
+        0x5DFA,
+      ],
+    ],
+  },
+  BLACKTHORN_CITY_SANTOSS_GIFT: {
+    id: "BLACKTHORN_CITY_SANTOSS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "SPELL_TAG",
+    areaId: "BLACKTHORN_CITY",
+    romOffsets: [
+      [
+        105,
+        0x474B,
+      ],
+    ],
+  },
+  ROUTE_31_WADES_GIFT_1: {
+    id: "ROUTE_31_WADES_GIFT_1",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "BERRY",
+    areaId: "ROUTE_31",
+    accessRequirements: [
+      "POKEGEAR",
+    ],
+    romOffsets: [
+      [
+        105,
+        0x5523,
+      ],
+    ],
+  },
+  ROUTE_31_WADES_GIFT_2: {
+    id: "ROUTE_31_WADES_GIFT_2",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "PSNCUREBERRY",
+    areaId: "ROUTE_31",
+    accessRequirements: [
+      "POKEGEAR",
+    ],
+    romOffsets: [
+      [
+        105,
+        0x552C,
+      ],
+    ],
+  },
+  ROUTE_31_WADES_GIFT_3: {
+    id: "ROUTE_31_WADES_GIFT_3",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "PRZCUREBERRY",
+    areaId: "ROUTE_31",
+    accessRequirements: [
+      "POKEGEAR",
+    ],
+    romOffsets: [
+      [
+        105,
+        0x5535,
+      ],
+    ],
+  },
+  ROUTE_31_WADES_GIFT_4: {
+    id: "ROUTE_31_WADES_GIFT_4",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "BITTER_BERRY",
+    areaId: "ROUTE_31",
+    accessRequirements: [
+      "POKEGEAR",
+    ],
+    romOffsets: [
+      [
+        105,
+        0x553E,
+      ],
+    ],
+  },
+  ROUTE_39_DEREKS_GIFT_FOR_PIKACHU: {
+    id: "ROUTE_39_DEREKS_GIFT_FOR_PIKACHU",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "NUGGET",
+    areaId: "ROUTE_39",
+    accessRequirements: [
+      "POKEGEAR",
+      "PIKACHU",
+    ],
+    romOffsets: [
+      [
+        105,
+        0x5B4E,
+      ],
+    ],
+  },
+  ROUTE_40_MONICAS_GIFT: {
+    id: "ROUTE_40_MONICAS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "SHARP_BEAK",
+    areaId: "ROUTE_40",
+    romOffsets: [
+      [
+        105,
+        0x61F9,
+      ],
+    ],
+  },
+  ROUTE_37_SUNNYS_GIFT: {
+    id: "ROUTE_37_SUNNYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "MAGNET",
+    areaId: "ROUTE_37",
+    romOffsets: [
+      [
+        106,
+        0x4DEC,
+      ],
+    ],
+  },
+  ROUTE_42_MAHOGANY_SIDE_TULLYS_GIFT: {
+    id: "ROUTE_42_MAHOGANY_SIDE_TULLYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "WATER_STONE",
+    areaId: "ROUTE_42_MAHOGANY_SIDE",
+    accessRequirements: [
+      "POKEGEAR",
+    ],
+    romOffsets: [
+      [
+        106,
+        0x52E0,
+      ],
+    ],
+  },
+  ROUTE_46_NORTH_AREA_ERINS_GIFT: {
+    id: "ROUTE_46_NORTH_AREA_ERINS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "CALCIUM",
+    areaId: "ROUTE_46_NORTH_AREA",
+    accessRequirements: [
+      "POKEGEAR",
+      "HALL_OF_FAME",
+      "POWER_PLANT_MANAGERS_GIFT",
+    ],
+    romOffsets: [
+      [
+        106,
+        0x572F,
+      ],
+      [
+        106,
+        0x5741,
+      ],
+    ],
+  },
+  VERMILION_CITY_BADGE_GUYS_GIFT: {
+    id: "VERMILION_CITY_BADGE_GUYS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "HP_UP",
+    areaId: "VERMILION_CITY",
+    accessRequirements: [
+      16,
+    ],
+    romOffsets: [
+      [
+        106,
+        0x69EF,
+      ],
+    ],
+  },
+}
+
+export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
+  GOLDENROD_GYM_WHITNEYS_GIFT: {
+    id: "GOLDENROD_GYM_WHITNEYS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM45",
+    areaId: "GOLDENROD_GYM",
+    romOffsets: [
+      [
+        21,
+        0x4069,
+      ],
+    ],
+  },
+  GOLDENROD_DEPT_STORE_5F_RECEPTIONISTS_GIFT_1: {
+    id: "GOLDENROD_DEPT_STORE_5F_RECEPTIONISTS_GIFT_1",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM27",
+    areaId: "GOLDENROD_DEPT_STORE_5F",
+    romOffsets: [
+      [
+        21,
+        0x60F3,
+      ],
+    ],
+  },
+  GOLDENROD_DEPT_STORE_5F_RECEPTIONISTS_GIFT_2: {
+    id: "GOLDENROD_DEPT_STORE_5F_RECEPTIONISTS_GIFT_2",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM21",
+    areaId: "GOLDENROD_DEPT_STORE_5F",
+    romOffsets: [
+      [
+        21,
+        0x6108,
+      ],
+    ],
+  },
+  RADIO_TOWER_3F_WEST_AREA_LADYS_GIFT: {
+    id: "RADIO_TOWER_3F_WEST_AREA_LADYS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM11",
+    areaId: "RADIO_TOWER_3F_WEST_AREA",
+    accessRequirements: [
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+    ],
+    romOffsets: [
+      [
+        23,
+        0x658F,
+      ],
+    ],
+  },
+  ROUTE_34_ILEX_FOREST_GATE_LADYS_GIFT: {
+    id: "ROUTE_34_ILEX_FOREST_GATE_LADYS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM12",
+    areaId: "ROUTE_34_ILEX_FOREST_GATE",
+    romOffsets: [
+      [
+        24,
+        0x6D76,
+      ],
+    ],
+  },
+  VIOLET_GYM_FALKNERS_GIFT: {
+    id: "VIOLET_GYM_FALKNERS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM31",
+    areaId: "VIOLET_GYM",
+    romOffsets: [
+      [
+        26,
+        0x4404,
+      ],
+    ],
+  },
+  ILEX_FOREST_NORTH_AREA_HEADBUTT_GUYS_GIFT: {
+    id: "ILEX_FOREST_NORTH_AREA_HEADBUTT_GUYS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM02",
+    areaId: "ILEX_FOREST_NORTH_AREA",
+    romOffsets: [
+      [
+        27,
+        0x6DEB,
+      ],
+    ],
+  },
+  CELADON_MANSION_ROOF_HOUSE_MANS_GIFT: {
+    id: "CELADON_MANSION_ROOF_HOUSE_MANS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM03",
+    areaId: "CELADON_MANSION_ROOF_HOUSE",
+    romOffsets: [
+      [
+        28,
+        0x5B19,
+      ],
+    ],
+  },
+  CELADON_GYM_ERIKAS_GIFT: {
+    id: "CELADON_GYM_ERIKAS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM19",
+    areaId: "CELADON_GYM",
+    romOffsets: [
+      [
+        28,
+        0x6AA6,
+      ],
+    ],
+  },
+  ROUTE_27_SANDSTORM_HOUSE_LADYS_GIFT: {
+    id: "ROUTE_27_SANDSTORM_HOUSE_LADYS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM37",
+    areaId: "ROUTE_27_SANDSTORM_HOUSE",
+    romOffsets: [
+      [
+        30,
+        0x73AF,
+      ],
+    ],
+  },
+  ECRUTEAK_GYM_MORTYS_GIFT: {
+    id: "ECRUTEAK_GYM_MORTYS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM30",
+    areaId: "ECRUTEAK_GYM",
+    romOffsets: [
+      [
+        38,
+        0x5DA3,
+      ],
+    ],
+  },
+  OLIVINE_GYM_JASMINES_GIFT: {
+    id: "OLIVINE_GYM_JASMINES_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM23",
+    areaId: "OLIVINE_GYM",
+    accessRequirements: [
+      "SECRETPOTION",
+      "OLIVINE_LIGHTHOUSE_6F",
+    ],
+    romOffsets: [
+      [
+        39,
+        0x4164,
+      ],
+    ],
+  },
+  ROUTE_39_FARMHOUSE_LADYS_GIFT: {
+    id: "ROUTE_39_FARMHOUSE_LADYS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM13",
+    areaId: "ROUTE_39_FARMHOUSE",
+    accessRequirements: [
+      "ROUTE_39_BARN",
+      "INACCESSIBLE", // TODO: need to be able to specify 7 berries
+    ],
+    romOffsets: [
+      [
+        39,
+        0x4F27,
+      ],
+    ],
+  },
+  CIANWOOD_GYM_STRENGTH_AREA_CHUCKS_GIFT: {
+    id: "CIANWOOD_GYM_STRENGTH_AREA_CHUCKS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM01",
+    areaId: "CIANWOOD_GYM_STRENGTH_AREA",
+    romOffsets: [
+      [
+        39,
+        0x566D,
+      ],
+    ],
+  },
+  POWER_PLANT_MANAGERS_GIFT: {
+    id: "POWER_PLANT_MANAGERS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM07",
+    areaId: "POWER_PLANT",
+    accessRequirements: [
+      "MACHINE_PART",
+    ],
+    romOffsets: [
+      [
+        98,
+        0x4EB7,
+      ],
+    ],
+  },
+  MR_PSYCHICS_HOUSE_MR_PSYCHICS_GIFT: {
+    id: "MR_PSYCHICS_HOUSE_MR_PSYCHICS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM29",
+    areaId: "MR_PSYCHICS_HOUSE",
+    romOffsets: [
+      [
+        98,
+        0x6787,
+      ],
+    ],
+  },
+  AZALEA_GYM_BUGSYS_GIFT: {
+    id: "AZALEA_GYM_BUGSYS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM49",
+    areaId: "AZALEA_GYM",
+    romOffsets: [
+      [
+        99,
+        0x6C5F,
+      ],
+    ],
+  },
+  ROUTE_32_CUT_AREA_ROAR_GUYS_GIFT: {
+    id: "ROUTE_32_CUT_AREA_ROAR_GUYS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM05",
+    areaId: "ROUTE_32_CUT_AREA",
+    romOffsets: [
+      [
+        100,
+        0x44DB,
+      ],
+    ],
+  },
+  ROUTE_36_EAST_AREA_ROCK_SMASH_GUYS_GIFT: {
+    id: "ROUTE_36_EAST_AREA_ROCK_SMASH_GUYS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM08",
+    areaId: "ROUTE_36_EAST_AREA",
+    accessRequirements: [
+      "SQUIRTBOTTLE",
+    ],
+    romOffsets: [
+      [
+        101,
+        0x40D2,
+      ],
+    ],
+  },
+  FUCHSIA_GYM_JANINES_GIFT: {
+    id: "FUCHSIA_GYM_JANINES_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM06",
+    areaId: "FUCHSIA_GYM",
+    romOffsets: [
+      [
+        101,
+        0x5E0D,
+      ],
+    ],
+  },
+  MAHOGANY_GYM_PRYCES_GIFT: {
+    id: "MAHOGANY_GYM_PRYCES_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM16",
+    areaId: "MAHOGANY_GYM",
+    romOffsets: [
+      [
+        102,
+        0x5AE2,
+      ],
+    ],
+  },
+  LAKE_OF_RAGE_HIDDEN_POWER_HOUSE_MANS_GIFT: {
+    id: "LAKE_OF_RAGE_HIDDEN_POWER_HOUSE_MANS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM10",
+    areaId: "LAKE_OF_RAGE_HIDDEN_POWER_HOUSE",
+    romOffsets: [
+      [
+        102,
+        0x6534,
+      ],
+    ],
+  },
+  ROUTE_43_GATE_GUARDS_GIFT: {
+    id: "ROUTE_43_GATE_GUARDS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM36",
+    areaId: "ROUTE_43_GATE",
+    accessRequirements: [
+      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+    ],
+    romOffsets: [
+      [
+        102,
+        0x6C92,
+      ],
+    ],
+  },
+  ROUTE_31_MANS_GIFT_FOR_RANDYS_MAIL: {
+    id: "ROUTE_31_MANS_GIFT_FOR_RANDYS_MAIL",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM50",
+    areaId: "ROUTE_31",
+    accessRequirements: [
+      "ROUTE_35_GOLDENROD_GATE",
+    ],
+    romOffsets: [
+      [
+        105,
+        0x55A7,
+      ],
+    ],
+  },
+  VIRIDIAN_CITY_ISOLATED_AREA_DREAM_EATER_GUYS_GIFT: {
+    id: "VIRIDIAN_CITY_ISOLATED_AREA_DREAM_EATER_GUYS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM42",
+    areaId: "VIRIDIAN_CITY_ISOLATED_AREA",
+    romOffsets: [
+      [
+        106,
+        0x5A82,
+      ],
+    ],
+  },
+  ROUTE_28_STEEL_WING_HOUSE_LADYS_GIFT: {
+    id: "ROUTE_28_STEEL_WING_HOUSE_LADYS_GIFT",
+    type: "GIFT",
+    groupId: "TM_GIFTS",
+    itemId: "TM47",
+    areaId: "ROUTE_28_STEEL_WING_HOUSE",
+    romOffsets: [
+      [
+        107,
+        0x6665,
+      ],
+    ],
+  },
+}
+
 export const hmGiftLocationsMap: IdMap<HMGiftLocationId, ItemLocation> = {
   ILEX_FOREST_SOUTH_AREA_CHARCOAL_BOSSS_GIFT: {
     id: "ILEX_FOREST_SOUTH_AREA_CHARCOAL_BOSSS_GIFT",
@@ -3539,6 +4878,8 @@ export const itemLocationsMap = {
   ...keyItemItemBallLocationsMap,
   ...regularHiddenItemLocationsMap,
   ...keyItemHiddenItemLocationsMap,
+  ...regularGiftLocationsMap,
+  ...tmGiftLocationsMap,
   ...hmGiftLocationsMap,
   ...keyItemGiftLocationsMap,
   ...menuItemGiftLocationsMap,

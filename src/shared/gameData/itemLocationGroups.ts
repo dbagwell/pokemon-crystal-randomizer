@@ -14,6 +14,14 @@ export const itemLocationGroupsMap: IdMap<ItemLocationGroupId, ItemLocationGroup
     id: "REGULAR_HIDDEN_ITEMS",
     name: "Regular Hidden Items",
   },
+  REGULAR_GIFTS: {
+    id: "REGULAR_GIFTS",
+    name: "Regular Gifts",
+  },
+  TM_GIFTS: {
+    id: "TM_GIFTS",
+    name: "TM Gifts",
+  },
   HMS: {
     id: "HMS",
     name: "HMs",

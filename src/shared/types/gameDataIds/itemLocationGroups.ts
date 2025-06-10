@@ -2,6 +2,8 @@ export const itemLocationGroupIds = [
   "REGULAR_ITEM_BALLS",
   "TM_ITEM_BALLS",
   "REGULAR_HIDDEN_ITEMS",
+  "REGULAR_GIFTS",
+  "TM_GIFTS",
   "HMS",
   "KEY_ITEMS",
   "MENU_ITEMS",
