@@ -629,7 +629,7 @@ const createPatches = (
         "receiveItemChanges.yml",
         {},
         {
-          regularItemPickupSound: "90 00",
+          regularItemPickupSound: settings.FASTER_ITEM_PICKUP_SFX ? "90 00" : "01 00",
         },
       ).hunks,
       new DataHunk(
