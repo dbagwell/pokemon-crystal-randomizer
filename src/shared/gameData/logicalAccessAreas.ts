@@ -2740,6 +2740,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       [
         "ROUTE_32_NORTH_AREA",
         "VIOLET_GYM",
+        "VIOLET_POKECENTER_1F",
       ],
     ],
   },
@@ -4834,6 +4835,21 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_1",
       "ROUTE_2_FOREST_AREA",
       "ROUTE_22",
+    ],
+  },
+  VIRIDIAN_CITY_ISOLATED_AREA: {
+    id: "VIRIDIAN_CITY_ISOLATED_AREA",
+    accessOptions: [
+      [
+        "VIRIDIAN_CITY",
+        "HIVEBADGE",
+        "HM01",
+      ],
+      [
+        "VIRIDIAN_CITY",
+        "FOGBADGE",
+        "HM03",
+      ],
     ],
   },
   VIRIDIAN_GYM: {

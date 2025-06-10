@@ -2922,8 +2922,8 @@ export const keyItemHiddenItemLocationsMap: IdMap<KeyItemHiddenItemLocationId, I
 }
 
 export const hmGiftLocationsMap: IdMap<HMGiftLocationId, ItemLocation> = {
-  ILEX_FOREST_SOUTH_AREA_CHARCOAL_BROTHERS_GIFT: {
-    id: "ILEX_FOREST_SOUTH_AREA_CHARCOAL_BROTHERS_GIFT",
+  ILEX_FOREST_SOUTH_AREA_CHARCOAL_BOSSS_GIFT: {
+    id: "ILEX_FOREST_SOUTH_AREA_CHARCOAL_BOSSS_GIFT",
     type: "GIFT",
     groupId: "HMS",
     itemId: "HM01",
