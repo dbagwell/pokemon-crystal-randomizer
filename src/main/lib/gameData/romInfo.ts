@@ -51,6 +51,7 @@ export class ROMInfo {
       mapObjectEvents: JSON.parse(JSON.stringify(mapObjectEvents)),
       marts: JSON.parse(JSON.stringify(martsMap)),
       moveTutorCost: 4000,
+      numberOfMiltankBerries: 7,
       itemLocations: JSON.parse(JSON.stringify(itemLocationsMap)),
       warps: JSON.parse(JSON.stringify(warpsMap)),
       areas: JSON.parse(JSON.stringify(logicalAccessAreasMap)),

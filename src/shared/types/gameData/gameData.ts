@@ -44,6 +44,7 @@ export type GameData = {
   mapObjectEvents: [MapObjectEvent]
   marts: IdMap<MartId, Mart>
   moveTutorCost: number
+  numberOfMiltankBerries: number
   itemLocations: IdMap<ItemLocationId, ItemLocation>
   warps: IdMap<WarpId, Warp>
   areas: IdMap<LogicalAccessAreaId, LogicalAccessArea>

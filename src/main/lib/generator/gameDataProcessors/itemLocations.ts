@@ -604,6 +604,11 @@ export const updateAccessLogic = (
     })
   }
   
+  romInfo.gameData.itemLocations.ROUTE_39_FARMHOUSE_LADYS_GIFT.accessRequirements = romInfo.gameData.numberOfMiltankBerries > 0 ? [
+    "ROUTE_39_BARN",
+    { item: "BERRY", number: romInfo.gameData.numberOfMiltankBerries },
+  ] : undefined
+  
   if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("SKIP_BEASTS")) {
     romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements = romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements?.filter((requirement) => {
       return requirement !== "SUICUNE" && requirement !== "RAIKOU" && requirement !== "ENTEI"

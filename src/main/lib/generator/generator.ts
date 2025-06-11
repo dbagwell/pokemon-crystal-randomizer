@@ -16,6 +16,7 @@ import { updateLevelUpMoves } from "@lib/generator/gameDataProcessors/levelUpMov
 import { updateMapObjectEvents } from "@lib/generator/gameDataProcessors/mapObjectEvents"
 import { updateMarts } from "@lib/generator/gameDataProcessors/marts"
 import { updateMoveTutorCost } from "@lib/generator/gameDataProcessors/moveTutorCost"
+import { updateNumberOfMiltankBerries } from "@lib/generator/gameDataProcessors/numberOfMiltankBerries"
 import { updatePokemonInfo } from "@lib/generator/gameDataProcessors/pokemonInfo"
 import { updateStarterItems, updateStarters } from "@lib/generator/gameDataProcessors/starters"
 import { updateTeachableMoves } from "@lib/generator/gameDataProcessors/teachableMoves"
@@ -39,6 +40,7 @@ import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
 import { itemHoldEffectsMap, itemMenuActionsMap } from "@shared/types/gameData/item"
+import type { EventFlagId } from "@shared/types/gameDataIds/eventFlags"
 import { type EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
 import { type ItemId } from "@shared/types/gameDataIds/items"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
@@ -235,6 +237,7 @@ const updateGameData = (
   updatePokemonInfo(settings, romInfo, random)
   updateMarts(settings, romInfo)
   updateMoveTutorCost(settings, romInfo, random)
+  updateNumberOfMiltankBerries(settings, romInfo, random) // Must be before updateAccessLogic
   updateTrainers(settings, romInfo, random)
   updateMapObjectEvents(settings, romInfo)
   updateItems(settings, romInfo, random)
@@ -1279,6 +1282,30 @@ const createPatches = (
     ))
   }
   
+  // Sick Miltank
+  
+  if (settings.RANDOMIZE_NUMBER_OF_BERRIES_FOR_MILTANK.VALUE) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(
+        ROMOffset.fromBankAddress(39, 0x4CDE),
+        [
+          0x06,
+          romInfo.gameData.numberOfMiltankBerries,
+          0x04,
+          0x4D,
+          0x06,
+          Math.floor(romInfo.gameData.numberOfMiltankBerries * 5 / 7),
+          0xFA,
+          0x4C,
+          0x06,
+          Math.floor(romInfo.gameData.numberOfMiltankBerries * 3 / 7),
+          0xF0,
+          0x4C,
+        ]
+      ),
+    ])
+  }
+  
   // Early Tin Tower
   
   if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.length > 0) {
@@ -1369,22 +1396,32 @@ const createPatches = (
         romInfo,
         "radioTower5FCutsceneChanges.yml",
       ).hunks,
-      ...Patch.fromYAML(
-        romInfo,
-        "initializeEventFlags.yml",
-        {
-          events: [
-            {
-              path: "initializeEventFlag.yml",
-              extraIncludes: {},
-              extraValues: {
-                eventId: hexStringFrom(bytesFrom(eventFlagsMap.DIRECTOR_IN_UNDERGROUND_WAREHOUSE.numericId, 2)),
-              },
-            },
-          ],
-        }
-      ).hunks,
     ]
+  }
+  
+  // Initialize events
+  
+  const eventFlagsToInitialize: EventFlagId[] = compact([
+    settings.SHUFFLE_ITEMS.VALUE ? "DIRECTOR_IN_UNDERGROUND_WAREHOUSE" : undefined,
+    romInfo.gameData.numberOfMiltankBerries === 0 ? "HEALED_MOOMOO" : undefined,
+  ])
+  
+  if (eventFlagsToInitialize.length > 0) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "initializeEventFlags.yml",
+      {
+        events: eventFlagsToInitialize.map((eventId) => {
+          return {
+            path: "initializeEventFlag.yml",
+            extraIncludes: {},
+            extraValues: {
+              eventId: hexStringFrom(bytesFrom(eventFlagsMap[eventId].numericId, 2)),
+            },
+          }
+        }),
+      }
+    ).hunks)
   }
   
   // Skip Clair Badge Test

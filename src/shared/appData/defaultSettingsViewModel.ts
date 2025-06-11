@@ -1298,6 +1298,20 @@ export const defaultSettingsViewModel = () => {
             name: "Make Buena's Item Always Accessible",
             description: "Makes it so Buena, the radio host on the second floor of the Goldenrod Radio Tower, will always give you her item (the Blue Card, unless it's been shuffled) the first time you talk to her, even while Team Rocket has taken over.",
           }),
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_NUMBER_OF_BERRIES_FOR_MILTANK" as const,
+            name: "Randomize Number Of Berries to Heal Miltank",
+            description: "Randomizes the number of berries you need to give the Miltank in the barn of Moo Moo Farms on Route 39 before it is healed.",
+            viewModels: [
+              createIntegerRangeInputViewModel({
+                id: "RANGE" as const,
+                min: 0,
+                max: 10,
+                selectedMinValue: 0,
+                selectedMaxValue: 7,
+              }),
+            ] as const,
+          }),
           createSimpleMultiSelectorViewModel({
             id: "REMOVE_ROCKET_GRUNTS" as const,
             name: "Remove Rocket Grunts",
