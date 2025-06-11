@@ -4495,7 +4495,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
     areaId: "ROUTE_39_FARMHOUSE",
     accessRequirements: [
       "ROUTE_39_BARN",
-      "INACCESSIBLE", // TODO: need to be able to specify 7 berries
+      { item: "BERRY", number: 7 },
     ],
     romOffsets: [
       [

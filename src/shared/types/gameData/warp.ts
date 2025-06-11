@@ -27,6 +27,7 @@ export type AccessRequirement =
   | ItemLocationId
   | PokemonId
   | ItemId
+  | { item: ItemId, number: number }
   | number
   | "INACCESSIBLE"
   

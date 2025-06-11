@@ -12,7 +12,7 @@ import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/ga
 import { type MartId, martIds } from "@shared/types/gameDataIds/marts"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { type WarpId, warpIds } from "@shared/types/gameDataIds/warps"
-import { isNotNullish, isNullish, isNumber, isObject } from "@shared/utils"
+import { isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
 import path from "path"
 
 export const updateItems = (
@@ -182,8 +182,8 @@ export const shuffleItems = (
     area.accessOptions.forEach((accessOption) => {
       if (Array.isArray(accessOption)) {
         accessOption.forEach((requirement) => {
-          if (itemIds.includes(requirement as ItemId)) {
-            progressionItemIds.add(requirement as ItemId)
+          if (itemIds.includes(requirement as ItemId) || isObject(requirement) && itemIds.includes(requirement.item)) {
+            progressionItemIds.add(isObject(requirement) ? requirement.item : requirement as ItemId)
           }
         })
       }
@@ -192,16 +192,16 @@ export const shuffleItems = (
   
   Object.values(romInfo.gameData.warps).forEach((warp) => {
     warp.accessRequirements?.forEach((accessRequirement) => {
-      if (itemIds.includes(accessRequirement as ItemId)) {
-        progressionItemIds.add(accessRequirement as ItemId)
+      if (itemIds.includes(accessRequirement as ItemId) || isObject(accessRequirement) && itemIds.includes(accessRequirement.item)) {
+        progressionItemIds.add(isObject(accessRequirement) ? accessRequirement.item : accessRequirement as ItemId)
       }
     })
   })
   
   Object.values(romInfo.gameData.itemLocations).forEach((location) => {
     location.accessRequirements?.forEach((accessRequirement) => {
-      if (itemIds.includes(accessRequirement as ItemId)) {
-        progressionItemIds.add(accessRequirement as ItemId)
+      if (itemIds.includes(accessRequirement as ItemId) || isObject(accessRequirement) && itemIds.includes(accessRequirement.item)) {
+        progressionItemIds.add(isObject(accessRequirement) ? accessRequirement.item : accessRequirement as ItemId)
       }
     })
   })
@@ -312,6 +312,12 @@ const getAccessibleItemLocations = (params: {
       return requirement.reduce((result, requirement) => {
         return result && isAccessRequirementSatisfied(requirement)
       }, true)
+    } else if (isObject(requirement)) {
+      return accessibleItems.filter((item) => {
+        return item === requirement.item
+      }).length >= requirement.number || accessibleMarts.some((mart) => {
+        return mart.includes(requirement.item)
+      })
     } else if (warpIds.includes(requirement as WarpId)) {
       return accessibleWarps.includes(requirement as WarpId)
     } else if (logicalAccessAreaIds.includes(requirement as LogicalAccessAreaId)) {
@@ -423,7 +429,7 @@ export const updateAccessLogic = (
       area.accessOptions = area.accessOptions.map((option) => {
         const optionArray = [option].flat()
         
-        if (new Set(optionArray).isSupersetOf(new Set(matchingRequirements)) && (!(modifyMutualAccess ?? false) || new Set(optionArray).intersection(new Set(areaIds)).size > 0)) {
+        if (new Set(optionArray).isSupersetOf(new Set(matchingRequirements)) && (!(modifyMutualAccess ?? false) || new Set(optionArray.filter((option) => { return isString(option) })).intersection(new Set(areaIds)).size > 0)) {
           optionArray.push(...requirements)
           return optionArray
         } else {
@@ -451,7 +457,7 @@ export const updateAccessLogic = (
       area.accessOptions = area.accessOptions.map((option) => {
         const optionArray = [option].flat()
       
-        if (new Set(optionArray).isSupersetOf(new Set(matchingRequirements)) && (!(modifyMutualAccess ?? false) || new Set(optionArray).intersection(new Set(areaIds)).size > 0)) {
+        if (new Set(optionArray).isSupersetOf(new Set(matchingRequirements)) && (!(modifyMutualAccess ?? false) || new Set(optionArray.filter((option) => { return isString(option) })).intersection(new Set(areaIds)).size > 0)) {
           return optionArray.filter((requirement) => {
             return !requirements.includes(requirement)
           })
