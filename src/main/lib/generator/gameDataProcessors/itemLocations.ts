@@ -103,6 +103,38 @@ export const updateItems = (
   }
 }
 
+const pokemonRequirements: ItemId[] = [
+  "HIVEBADGE",
+  "FOGBADGE",
+  "PLAINBADGE",
+  "ZEPHYRBADGE",
+  "GLACIERBADGE",
+  "RISINGBADGE",
+  "HM01",
+  "HM03",
+  "HM04",
+  "HM05",
+  "HM06",
+  "HM07",
+  "SQUIRTBOTTLE",
+  "PASS",
+  "S_S_TICKET",
+  "CARD_KEY",
+  "CLEAR_BELL",
+  "RAINBOW_WING",
+  "BICYCLE",
+  "POKEGEAR",
+  "RADIO_CARD",
+  "EXPN_CARD",
+  "POKEDEX",
+  "TM02",
+  "TM08",
+  "TM12",
+  "OLD_ROD",
+  "GOOD_ROD",
+  "SUPER_ROD",
+]
+
 export const shuffleItems = (
   settings: Settings,
   romInfo: ROMInfo,
@@ -141,7 +173,10 @@ export const shuffleItems = (
     }
   })
   
-  const progressionItemIds = new Set<ItemId>(badgeItemIds)
+  const progressionItemIds = new Set<ItemId>([
+    ...badgeItemIds,
+    ...pokemonRequirements,
+  ])
   
   Object.values(romInfo.gameData.areas).forEach((area) => {
     area.accessOptions.forEach((accessOption) => {
@@ -286,7 +321,9 @@ const getAccessibleItemLocations = (params: {
     } else if (itemIds.includes(requirement as ItemId)) {
       return accessibleItems.includes(requirement as ItemId)
     } else if (pokemonIds.includes(requirement as PokemonId)) {
-      return false // TODO: Need to properly check if pokemon are accessible
+      // This currently checks accessiblity of all the items required (with vanilla warps) to see all the random encounter slots
+      // It will need to be updated once we shuffle warps, also if we want to add an option to just check if specific pokemon are accessible
+      return new Set(accessibleItems).isSupersetOf(new Set(pokemonRequirements)) && numberOfAccessibleBadges() >= 7
     } else if (isNumber(requirement)) {
       return numberOfAccessibleBadges() >= requirement
     } else {
