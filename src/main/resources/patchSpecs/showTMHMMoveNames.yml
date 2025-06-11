@@ -3,6 +3,7 @@ values:
   hiddenItemsCode: "0E 04 @$sharedCode 4C 45 76 91"
   itemBallsCode: "CD D9 30"
   sharedCode: "11 9D D0 3E 25 21 @$appendTMHMMoveName CF C9"
+  fruitTreeCode: "0E 04 @$sharedCode 4C BA 40 91"
   trashCanCode: "0E 04 @$sharedCode 4C E7 72 91"
   verboseCode: "CD C8 76 11 B0 D0"
   appendTMHMMoveName: "FA 65 D2 FE BF D8 D5 4F 3E 03 21 07 54 CF 79 EA 65 D2 3E 0F CD 83 2D FA 65 D2 EA 65 D2 CD F8 34 E1 36 7F 23 11 73 D0 C3 D9 30"
@@ -21,7 +22,16 @@ changes:
   - bank: 4
     address: 0x762C
   value: "00 @$hiddenItemsCode"
-- description: "Calls new code when getting a trash can item"
+- description: "Adds new code when getting a fruit tree item"
+  locations:
+  - bank: 17
+  value: "$fruitTreeCode"
+- description: "Calls new code when getting a fruit tree item"
+  locations:
+  - bank: 17
+    address: 0x4021
+  value: "00 @$fruitTreeCode"
+- description: "Adds new code when getting a trash can item"
   locations:
   - bank: 28
   value: "$trashCanCode"

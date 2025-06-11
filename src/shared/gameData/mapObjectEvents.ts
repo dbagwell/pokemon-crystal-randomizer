@@ -598,6 +598,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 23842,
   },
   {
+    id: "ROUTE_38_FRUIT_TREE",
     romOffset: [
       104,
       25622,
@@ -803,6 +804,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 23466,
   },
   {
+    id: "ROUTE_39_FRUIT_TREE",
     romOffset: [
       105,
       24902,
@@ -1280,6 +1282,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 21269,
   },
   {
+    id: "ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE",
     romOffset: [
       106,
       22064,
@@ -1300,6 +1303,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 21325,
   },
   {
+    id: "ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE",
     romOffset: [
       106,
       22077,
@@ -1320,6 +1324,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 21327,
   },
   {
+    id: "ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE",
     romOffset: [
       106,
       22090,
@@ -1551,6 +1556,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 23038,
   },
   {
+    id: "ROUTE_44_FRUIT_TREE",
     romOffset: [
       103,
       24683,
@@ -11336,6 +11342,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 25173,
   },
   {
+    id: "ROUTE_45_FRUIT_TREE",
     romOffset: [
       103,
       27019,
@@ -11524,6 +11531,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 22164,
   },
   {
+    id: "ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE",
     romOffset: [
       106,
       23068,
@@ -11544,6 +11552,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 22415,
   },
   {
+    id: "ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE",
     romOffset: [
       106,
       23081,
@@ -13932,6 +13941,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 16386,
   },
   {
+    id: "ROUTE_33_FRUIT_TREE",
     romOffset: [
       107,
       17069,
@@ -14119,6 +14129,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "AZALEA_TOWN_SLOWPOKES",
   },
   {
+    id: "AZALEA_TOWN_FRUIT_TREE",
     romOffset: [
       102,
       18588,
@@ -14453,6 +14464,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 20577,
   },
   {
+    id: "ROUTE_43_SURF_CUT_AREA_FRUIT_TREE",
     romOffset: [
       103,
       22536,
@@ -15229,6 +15241,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 19017,
   },
   {
+    id: "ROUTE_35_SURF_AREA_FRUIT_TREE",
     romOffset: [
       103,
       20530,
@@ -15373,6 +15386,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 16569,
   },
   {
+    id: "ROUTE_36_WEST_AREA_FRUIT_TREE",
     romOffset: [
       101,
       19173,
@@ -15521,6 +15535,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 19883,
   },
   {
+    id: "ROUTE_37_LEFT_FRUIT_TREE",
     romOffset: [
       106,
       20952,
@@ -15562,6 +15577,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "ROUTE_37_SUNNY_OF_SUNDAY",
   },
   {
+    id: "ROUTE_37_MIDDLE_FRUIT_TREE",
     romOffset: [
       106,
       20978,
@@ -15582,6 +15598,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 19979,
   },
   {
+    id: "ROUTE_37_RIGHT_FRUIT_TREE",
     romOffset: [
       106,
       20991,
@@ -15707,6 +15724,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 17420,
   },
   {
+    id: "VIOLET_CITY_FRUIT_TREE",
     romOffset: [
       106,
       18425,
@@ -19212,6 +19230,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 16446,
   },
   {
+    id: "ROUTE_11_FRUIT_TREE",
     romOffset: [
       26,
       17030,
@@ -19875,6 +19894,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 17770,
   },
   {
+    id: "ROUTE_1_FRUIT_TREE",
     romOffset: [
       107,
       18111,
@@ -20206,6 +20226,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 16399,
   },
   {
+    id: "PEWTER_CITY_RIGHT_FRUIT_TREE",
     romOffset: [
       99,
       17246,
@@ -20226,6 +20247,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 16446,
   },
   {
+    id: "PEWTER_CITY_LEFT_FRUIT_TREE",
     romOffset: [
       99,
       17259,
@@ -22509,6 +22531,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 19240,
   },
   {
+    id: "FUCHSIA_CITY_CUT_AREA_FRUIT_TREE",
     romOffset: [
       101,
       19955,
@@ -22987,6 +23010,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 16466,
   },
   {
+    id: "ROUTE_8_FRUIT_TREE",
     romOffset: [
       27,
       17212,
@@ -27227,6 +27251,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "ROUTE_2_ELIXER",
   },
   {
+    id: "ROUTE_2_FOREST_AREA_FRUIT_TREE",
     romOffset: [
       107,
       17735,
@@ -27975,6 +28000,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 20139,
   },
   {
+    id: "ROUTE_26_FRUIT_TREE",
     romOffset: [
       105,
       21489,
@@ -28267,6 +28293,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 20523,
   },
   {
+    id: "ROUTE_29_FRUIT_TREE",
     romOffset: [
       104,
       22064,
@@ -30011,6 +30038,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "ROUTE_30_BATTLE",
   },
   {
+    id: "ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE",
     romOffset: [
       104,
       23768,
@@ -30031,6 +30059,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 22519,
   },
   {
+    id: "ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE",
     romOffset: [
       104,
       23781,
@@ -30173,6 +30202,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 22006,
   },
   {
+    id: "ROUTE_31_FRUIT_TREE",
     romOffset: [
       105,
       23244,

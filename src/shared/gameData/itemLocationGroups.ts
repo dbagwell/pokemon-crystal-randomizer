@@ -14,6 +14,10 @@ export const itemLocationGroupsMap: IdMap<ItemLocationGroupId, ItemLocationGroup
     id: "REGULAR_HIDDEN_ITEMS",
     name: "Regular Hidden Items",
   },
+  FRUIT_TREES: {
+    id: "FRUIT_TREES",
+    name: "Fruit Trees",
+  },
   REGULAR_GIFTS: {
     id: "REGULAR_GIFTS",
     name: "Regular Gifts",

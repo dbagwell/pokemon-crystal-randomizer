@@ -1,5 +1,5 @@
 import type { ItemLocation } from "@shared/types/gameData/itemLocation"
-import { type BadgeLocationId, type HMGiftLocationId, type HMItemBallLocationId, type KeyItemGiftLocationId, type KeyItemHiddenItemLocationId, type KeyItemItemBallLocationId, type MenuItemGiftLocationId, type RegularGiftLocationId, type RegularHiddenItemLocationId, type RegularItemBallLocationId, type TMGiftLocationId, type TMItemBallLocationId } from "@shared/types/gameDataIds/itemLocations"
+import { type BadgeLocationId, type FruitTreeLocationId, type HMGiftLocationId, type HMItemBallLocationId, type KeyItemGiftLocationId, type KeyItemHiddenItemLocationId, type KeyItemItemBallLocationId, type MenuItemGiftLocationId, type RegularGiftLocationId, type RegularHiddenItemLocationId, type RegularItemBallLocationId, type TMGiftLocationId, type TMItemBallLocationId } from "@shared/types/gameDataIds/itemLocations"
 
 export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemLocation> = {
   ROUTE_2_SE_AREA_ITEM_BALL: {
@@ -2942,6 +2942,399 @@ export const keyItemHiddenItemLocationsMap: IdMap<KeyItemHiddenItemLocationId, I
   },
 }
 
+export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
+  ROUTE_1_FRUIT_TREE: {
+    id: "ROUTE_1_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "BITTER_BERRY",
+    areaId: "ROUTE_1",
+    romOffsets: [
+      [
+        107,
+        0x4581,
+      ],
+    ],
+  },
+  ROUTE_2_FOREST_AREA_FRUIT_TREE: {
+    id: "ROUTE_2_FOREST_AREA_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "PSNCUREBERRY",
+    areaId: "ROUTE_2_FOREST_AREA",
+    romOffsets: [
+      [
+        107,
+        0x4306,
+      ],
+    ],
+  },
+  ROUTE_8_FRUIT_TREE: {
+    id: "ROUTE_8_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "PRZCUREBERRY",
+    areaId: "ROUTE_8",
+    romOffsets: [
+      [
+        27,
+        0x406C,
+      ],
+    ],
+  },
+  ROUTE_11_FRUIT_TREE: {
+    id: "ROUTE_11_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "BERRY",
+    areaId: "ROUTE_11",
+    romOffsets: [
+      [
+        26,
+        0x4055,
+      ],
+    ],
+  },
+  ROUTE_26_FRUIT_TREE: {
+    id: "ROUTE_26_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "ICE_BERRY",
+    areaId: "ROUTE_26",
+    romOffsets: [
+      [
+        105,
+        0x4EC2,
+      ],
+    ],
+  },
+  ROUTE_29_FRUIT_TREE: {
+    id: "ROUTE_29_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "BERRY",
+    areaId: "ROUTE_29",
+    romOffsets: [
+      [
+        104,
+        0x5089,
+      ],
+    ],
+  },
+  ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE: {
+    id: "ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "BERRY",
+    areaId: "ROUTE_30_CHERRYGROVE_SIDE",
+    romOffsets: [
+      [
+        104,
+        0x57F7,
+      ],
+    ],
+  },
+  ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE: {
+    id: "ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "PSNCUREBERRY",
+    areaId: "ROUTE_30_CHERRYGROVE_SIDE",
+    romOffsets: [
+      [
+        104,
+        0x57F9,
+      ],
+    ],
+  },
+  ROUTE_31_FRUIT_TREE: {
+    id: "ROUTE_31_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "BITTER_BERRY",
+    areaId: "ROUTE_31",
+    romOffsets: [
+      [
+        105,
+        0x55F9,
+      ],
+    ],
+  },
+  ROUTE_33_FRUIT_TREE: {
+    id: "ROUTE_33_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "PSNCUREBERRY",
+    areaId: "ROUTE_33",
+    romOffsets: [
+      [
+        107,
+        0x40EA,
+      ],
+    ],
+  },
+  ROUTE_35_SURF_AREA_FRUIT_TREE: {
+    id: "ROUTE_35_SURF_AREA_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "MYSTERYBERRY",
+    areaId: "ROUTE_35_SURF_AREA",
+    romOffsets: [
+      [
+        103,
+        0x4A7E,
+      ],
+    ],
+  },
+  ROUTE_36_WEST_AREA_FRUIT_TREE: {
+    id: "ROUTE_36_WEST_AREA_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "ICE_BERRY",
+    areaId: "ROUTE_36_WEST_AREA",
+    romOffsets: [
+      [
+        101,
+        0x4247,
+      ],
+    ],
+  },
+  ROUTE_37_LEFT_FRUIT_TREE: {
+    id: "ROUTE_37_LEFT_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "RED_APRICORN",
+    areaId: "ROUTE_37",
+    romOffsets: [
+      [
+        106,
+        0x4E09,
+      ],
+    ],
+  },
+  ROUTE_37_MIDDLE_FRUIT_TREE: {
+    id: "ROUTE_37_MIDDLE_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "BLK_APRICORN",
+    areaId: "ROUTE_37",
+    romOffsets: [
+      [
+        106,
+        0x4E0D,
+      ],
+    ],
+  },
+  ROUTE_37_RIGHT_FRUIT_TREE: {
+    id: "ROUTE_37_RIGHT_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "BLU_APRICORN",
+    areaId: "ROUTE_37",
+    romOffsets: [
+      [
+        106,
+        0x4E0B,
+      ],
+    ],
+  },
+  ROUTE_38_FRUIT_TREE: {
+    id: "ROUTE_38_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "BERRY",
+    areaId: "ROUTE_38",
+    romOffsets: [
+      [
+        104,
+        0x5F33,
+      ],
+    ],
+  },
+  ROUTE_39_FRUIT_TREE: {
+    id: "ROUTE_39_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "MINT_BERRY",
+    areaId: "ROUTE_39",
+    romOffsets: [
+      [
+        105,
+        0x5BF4,
+      ],
+    ],
+  },
+  ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE: {
+    id: "ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "PNK_APRICORN",
+    areaId: "ROUTE_42_MIDDLE_CUT_AREA",
+    romOffsets: [
+      [
+        106,
+        0x534D,
+      ],
+    ],
+  },
+  ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE: {
+    id: "ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "GRN_APRICORN",
+    areaId: "ROUTE_42_MIDDLE_CUT_AREA",
+    romOffsets: [
+      [
+        106,
+        0x534F,
+      ],
+    ],
+  },
+  ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE: {
+    id: "ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "YLW_APRICORN",
+    areaId: "ROUTE_42_MIDDLE_CUT_AREA",
+    romOffsets: [
+      [
+        106,
+        0x5351,
+      ],
+    ],
+  },
+  ROUTE_43_SURF_CUT_AREA_FRUIT_TREE: {
+    id: "ROUTE_43_SURF_CUT_AREA_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "BITTER_BERRY",
+    areaId: "ROUTE_43_SURF_CUT_AREA",
+    romOffsets: [
+      [
+        103,
+        0x5266,
+      ],
+    ],
+  },
+  ROUTE_44_FRUIT_TREE: {
+    id: "ROUTE_44_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "BURNT_BERRY",
+    areaId: "ROUTE_44",
+    romOffsets: [
+      [
+        103,
+        0x5A40,
+      ],
+    ],
+  },
+  ROUTE_45_FRUIT_TREE: {
+    id: "ROUTE_45_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "MYSTERYBERRY",
+    areaId: "ROUTE_45",
+    romOffsets: [
+      [
+        103,
+        0x6294,
+      ],
+    ],
+  },
+  ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE: {
+    id: "ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "BERRY",
+    areaId: "ROUTE_46_NORTH_AREA",
+    romOffsets: [
+      [
+        106,
+        0x578F,
+      ],
+    ],
+  },
+  ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE: {
+    id: "ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "PRZCUREBERRY",
+    areaId: "ROUTE_46_NORTH_AREA",
+    romOffsets: [
+      [
+        106,
+        0x5791,
+      ],
+    ],
+  },
+  PEWTER_CITY_LEFT_FRUIT_TREE: {
+    id: "PEWTER_CITY_LEFT_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "MINT_BERRY",
+    areaId: "PEWTER_CITY",
+    romOffsets: [
+      [
+        99,
+        0x4040,
+      ],
+    ],
+  },
+  PEWTER_CITY_RIGHT_FRUIT_TREE: {
+    id: "PEWTER_CITY_RIGHT_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "ICE_BERRY",
+    areaId: "PEWTER_CITY",
+    romOffsets: [
+      [
+        99,
+        0x403E,
+      ],
+    ],
+  },
+  FUCHSIA_CITY_CUT_AREA_FRUIT_TREE: {
+    id: "FUCHSIA_CITY_CUT_AREA_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "BURNT_BERRY",
+    areaId: "FUCHSIA_CITY_CUT_AREA",
+    romOffsets: [
+      [
+        101,
+        0x4B43,
+      ],
+    ],
+  },
+  VIOLET_CITY_FRUIT_TREE: {
+    id: "VIOLET_CITY_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "PRZCUREBERRY",
+    areaId: "VIOLET_CITY",
+    romOffsets: [
+      [
+        106,
+        0x4425,
+      ],
+    ],
+  },
+  AZALEA_TOWN_FRUIT_TREE: {
+    id: "AZALEA_TOWN_FRUIT_TREE",
+    type: "FRUIT_TREE",
+    groupId: "FRUIT_TREES",
+    itemId: "WHT_APRICORN",
+    areaId: "AZALEA_TOWN",
+    romOffsets: [
+      [
+        102,
+        0x412F,
+      ],
+    ],
+  },
+}
+
 export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation> = {
   SLOWPOKE_WELL_B2F_MANS_GIFT: {
     id: "SLOWPOKE_WELL_B2F_MANS_GIFT",
@@ -4928,6 +5321,7 @@ export const itemLocationsMap = {
   ...keyItemItemBallLocationsMap,
   ...regularHiddenItemLocationsMap,
   ...keyItemHiddenItemLocationsMap,
+  ...fruitTreeLocationsMap,
   ...regularGiftLocationsMap,
   ...tmGiftLocationsMap,
   ...hmGiftLocationsMap,

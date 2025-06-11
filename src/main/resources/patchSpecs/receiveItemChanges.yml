@@ -31,6 +31,7 @@ values:
   checkGotBluesItem: "08 4B 6A 33 14 01 91"
   clearUndergroundWarehouseDirectorEventFlag: "36 13 00 32 17 01 57"
   setUndergroundWarehouseDirectorEventFlag: "33 4A 00 33 17 01 57"
+  fruitTreeSoundEffectScript: "86 88 45 03 3F 40"
 changes:
 - description: "Changes the script for picking up an item ball to use the script that plays a sound dynamically based on the type of item."
   locations:
@@ -339,3 +340,12 @@ changes:
   - bank: 30
     address: 0x4ED0
   value: "9E 05 $elmsAideNumberOfItems 4C 9A 60 55 18 18 18 18 18 18 18"
+- description: "Update wait for the sound effect after picking up an item from a fruit tree."
+  locations:
+  - bank: 17
+  value: "$fruitTreeSoundEffectScript"
+- description: "Update wait for the sound effect after picking up an item from a fruit tree."
+  locations:
+  - bank: 17
+    address: 0x4035
+  value: "03 @$fruitTreeSoundEffectScript"

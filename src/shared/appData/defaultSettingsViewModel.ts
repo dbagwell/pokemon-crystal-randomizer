@@ -1104,6 +1104,11 @@ export const defaultSettingsViewModel = () => {
             name: "Show Received TM/HM Move Names",
             description: "When a TM or HM is received, the name of the move it contains is shown.",
           }),
+          createSimpleToggleViewModel({
+            id: "SINGLE_USE_FRUIT_TREES" as const,
+            name: "Single Use Fruit Trees",
+            description: "Makes it so fruit trees disappear forever after their item has been received.",
+          }),
         ] as const,
       }), // END ITEM_PROPERTIES
       createTabViewModel({

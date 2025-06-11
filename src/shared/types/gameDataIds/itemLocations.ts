@@ -278,6 +278,39 @@ export const keyItemHiddenItemLocationIds = [
   "CERULEAN_GYM_HIDDEN_ITEM",
 ] as const
 
+export const fruitTreeLocationIds = [
+  "ROUTE_1_FRUIT_TREE",
+  "ROUTE_2_FOREST_AREA_FRUIT_TREE",
+  "ROUTE_8_FRUIT_TREE",
+  "ROUTE_11_FRUIT_TREE",
+  "ROUTE_26_FRUIT_TREE",
+  "ROUTE_29_FRUIT_TREE",
+  "ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE",
+  "ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE",
+  "ROUTE_31_FRUIT_TREE",
+  "ROUTE_33_FRUIT_TREE",
+  "ROUTE_35_SURF_AREA_FRUIT_TREE",
+  "ROUTE_36_WEST_AREA_FRUIT_TREE",
+  "ROUTE_37_LEFT_FRUIT_TREE",
+  "ROUTE_37_MIDDLE_FRUIT_TREE",
+  "ROUTE_37_RIGHT_FRUIT_TREE",
+  "ROUTE_38_FRUIT_TREE",
+  "ROUTE_39_FRUIT_TREE",
+  "ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE",
+  "ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE",
+  "ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE",
+  "ROUTE_43_SURF_CUT_AREA_FRUIT_TREE",
+  "ROUTE_44_FRUIT_TREE",
+  "ROUTE_45_FRUIT_TREE",
+  "ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE",
+  "ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE",
+  "PEWTER_CITY_LEFT_FRUIT_TREE",
+  "PEWTER_CITY_RIGHT_FRUIT_TREE",
+  "FUCHSIA_CITY_CUT_AREA_FRUIT_TREE",
+  "VIOLET_CITY_FRUIT_TREE",
+  "AZALEA_TOWN_FRUIT_TREE",
+] as const
+
 export const regularGiftLocationIds = [
   "SLOWPOKE_WELL_B2F_MANS_GIFT",
   "OLIVINE_LIGHTHOUSE_2F_HUEYS_GIFT",
@@ -456,6 +489,7 @@ export const giftLocationIds = [
 
 export const itemLocationIds = [
   ...itemBallLocationIds,
+  ...fruitTreeLocationIds,
   ...hiddenItemLocationIds,
   ...giftLocationIds,
 ] as const
@@ -466,6 +500,7 @@ export type HMItemBallLocationId = typeof hmItemBallLocationIds[number]
 export type KeyItemItemBallLocationId = typeof keyItemItemBallLocationIds[number]
 export type RegularHiddenItemLocationId = typeof regularHiddenItemLocationIds[number]
 export type KeyItemHiddenItemLocationId = typeof keyItemHiddenItemLocationIds[number]
+export type FruitTreeLocationId = typeof fruitTreeLocationIds[number]
 export type RegularGiftLocationId = typeof regularGiftLocationIds[number]
 export type TMGiftLocationId = typeof tmGiftLocationIds[number]
 export type HMGiftLocationId = typeof hmGiftLocationIds[number]

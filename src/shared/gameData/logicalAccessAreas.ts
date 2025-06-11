@@ -2663,8 +2663,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "LAKE_OF_RAGE_MAIN_AREA",
     ],
   },
-  ROUTE_43_CUT_AREA: {
-    id: "ROUTE_43_CUT_AREA",
+  ROUTE_43_SURF_CUT_AREA: {
+    id: "ROUTE_43_SURF_CUT_AREA",
     accessOptions: [
       [
         "ROUTE_43",

@@ -7,6 +7,7 @@ import type { LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAcces
 export const itemLocationTypes = [
   "ITEM_BALL",
   "HIDDEN_ITEM",
+  "FRUIT_TREE",
   "GIFT",
 ] as const
 

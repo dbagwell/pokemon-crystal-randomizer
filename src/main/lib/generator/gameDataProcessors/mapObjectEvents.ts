@@ -68,4 +68,45 @@ export const updateMapObjectEvents = (
     object.typeId = "ITEMBALL"
     object.scriptPointer++
   }
+  
+  if (settings.SINGLE_USE_FRUIT_TREES) {
+    romInfo.gameData.mapObjectEvents.forEach((object) => {
+      if (object.spriteId === "FRUIT_TREE") {
+        object.typeId = "ITEMBALL"
+      }
+      
+      switch (object.id) {
+      case "ROUTE_1_FRUIT_TREE": object.flagId = "GOT_ROUTE_1_FRUIT_TREE"; break
+      case "ROUTE_2_FOREST_AREA_FRUIT_TREE": object.flagId = "GOT_ROUTE_2_FOREST_AREA_FRUIT_TREE"; break
+      case "ROUTE_8_FRUIT_TREE": object.flagId = "GOT_ROUTE_8_FRUIT_TREE"; break
+      case "ROUTE_11_FRUIT_TREE": object.flagId = "GOT_ROUTE_11_FRUIT_TREE"; break
+      case "ROUTE_26_FRUIT_TREE": object.flagId = "GOT_ROUTE_26_FRUIT_TREE"; break
+      case "ROUTE_29_FRUIT_TREE": object.flagId = "GOT_ROUTE_29_FRUIT_TREE"; break
+      case "ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE": object.flagId = "GOT_ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE"; break
+      case "ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE": object.flagId = "GOT_ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE"; break
+      case "ROUTE_31_FRUIT_TREE": object.flagId = "GOT_ROUTE_31_FRUIT_TREE"; break
+      case "ROUTE_33_FRUIT_TREE": object.flagId = "GOT_ROUTE_33_FRUIT_TREE"; break
+      case "ROUTE_35_SURF_AREA_FRUIT_TREE": object.flagId = "GOT_ROUTE_35_SURF_AREA_FRUIT_TREE"; break
+      case "ROUTE_36_WEST_AREA_FRUIT_TREE": object.flagId = "GOT_ROUTE_36_WEST_AREA_FRUIT_TREE"; break
+      case "ROUTE_37_LEFT_FRUIT_TREE": object.flagId = "GOT_ROUTE_37_LEFT_FRUIT_TREE"; break
+      case "ROUTE_37_MIDDLE_FRUIT_TREE": object.flagId = "GOT_ROUTE_37_MIDDLE_FRUIT_TREE"; break
+      case "ROUTE_37_RIGHT_FRUIT_TREE": object.flagId = "GOT_ROUTE_37_RIGHT_FRUIT_TREE"; break
+      case "ROUTE_38_FRUIT_TREE": object.flagId = "GOT_ROUTE_38_FRUIT_TREE"; break
+      case "ROUTE_39_FRUIT_TREE": object.flagId = "GOT_ROUTE_39_FRUIT_TREE"; break
+      case "ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE": object.flagId = "GOT_ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE"; break
+      case "ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE": object.flagId = "GOT_ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE"; break
+      case "ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE": object.flagId = "GOT_ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE"; break
+      case "ROUTE_43_SURF_CUT_AREA_FRUIT_TREE": object.flagId = "GOT_ROUTE_43_SURF_CUT_AREA_FRUIT_TREE"; break
+      case "ROUTE_44_FRUIT_TREE": object.flagId = "GOT_ROUTE_44_FRUIT_TREE"; break
+      case "ROUTE_45_FRUIT_TREE": object.flagId = "GOT_ROUTE_45_FRUIT_TREE"; break
+      case "ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE": object.flagId = "GOT_ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE"; break
+      case "ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE": object.flagId = "GOT_ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE"; break
+      case "PEWTER_CITY_LEFT_FRUIT_TREE": object.flagId = "GOT_PEWTER_CITY_LEFT_FRUIT_TREE"; break
+      case "PEWTER_CITY_RIGHT_FRUIT_TREE": object.flagId = "GOT_PEWTER_CITY_RIGHT_FRUIT_TREE"; break
+      case "FUCHSIA_CITY_CUT_AREA_FRUIT_TREE": object.flagId = "GOT_FUCHSIA_CITY_CUT_AREA_FRUIT_TREE"; break
+      case "VIOLET_CITY_FRUIT_TREE": object.flagId = "GOT_VIOLET_CITY_FRUIT_TREE"; break
+      case "AZALEA_TOWN_FRUIT_TREE": object.flagId = "GOT_AZALEA_TOWN_FRUIT_TREE"; break
+      }
+    })
+  }
 }

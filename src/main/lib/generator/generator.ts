@@ -682,12 +682,14 @@ const createPatches = (
   
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
-      ...Object.values(romInfo.gameData.itemLocations).flatMap((itemLocation) => {
+      ...Object.values(romInfo.gameData.itemLocations).filter((itemLocation) => {
+        return itemLocation.type !== "FRUIT_TREE"
+      }).flatMap((itemLocation) => {
         return itemLocation.romOffsets.map((romOffset) => {
           return new DataHunk(
             ROMOffset.fromBankAddress(
               romOffset[0],
-              romOffset[1]
+              romOffset[1],
             ),
             [itemsMap[itemLocation.itemId].numericId],
           )
@@ -701,6 +703,49 @@ const createPatches = (
       new DataHunk(ROMOffset.fromBankAddress(37, 0x6FF5), [0x90]),
       new DataHunk(ROMOffset.fromBankAddress(47, 0x4DBF), [0x90]),
     ]
+  }
+  
+  if (settings.SINGLE_USE_FRUIT_TREES) {
+    romInfo.patchHunks.push(...Object.values(romInfo.gameData.itemLocations).filter((itemLocation) => {
+      return itemLocation.type === "FRUIT_TREE"
+    }).flatMap((itemLocation) => {
+      return itemLocation.romOffsets.map((romOffset) => {
+        return new DataHunk(
+          ROMOffset.fromBankAddress(
+            romOffset[0],
+            romOffset[1],
+          ),
+          [itemsMap[itemLocation.itemId].numericId, 1],
+        )
+      })
+    }))
+  } else if (shouldApplyReceiveItemsChanges) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(
+        ROMOffset.fromBankAddress(
+          17,
+          0x4097,
+        ),
+        Object.values(romInfo.gameData.itemLocations).filter((itemLocation) => {
+          return itemLocation.type === "FRUIT_TREE"
+        }).map((itemLocation) => {
+          return itemsMap[itemLocation.itemId].numericId
+        })
+      ),
+      ...Object.values(romInfo.gameData.itemLocations).filter((itemLocation) => {
+        return itemLocation.type === "FRUIT_TREE"
+      }).flatMap((itemLocation, index) => {
+        return itemLocation.romOffsets.map((romOffset) => {
+          return new DataHunk(
+            ROMOffset.fromBankAddress(
+              romOffset[0],
+              romOffset[1] + 1,
+            ),
+            [index + 1],
+          )
+        })
+      }),
+    ])
   }
     
   // Starting Inventory
