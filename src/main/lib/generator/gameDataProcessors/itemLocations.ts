@@ -453,6 +453,20 @@ export const updateAccessLogic = (
     })
   }
   
+  if (settings.CLEAR_GOLDENROD_STORE_BASEMENT) {
+    removeAccessRequirements({
+      areaIds: [
+        "GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA",
+      ],
+      requirements: [
+        "GOLDENROD_DEPT_STORE_ELEVATOR",
+      ],
+      matchingRequirements: [
+        "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA",
+      ],
+    })
+  }
+  
   if (settings.SKIP_FLORIA) {
     romInfo.gameData.itemLocations.GOLDENROD_FLOWER_SHOP_OWNERS_GIFT.accessRequirements = romInfo.gameData.itemLocations.GOLDENROD_FLOWER_SHOP_OWNERS_GIFT.accessRequirements?.filter((requirement) => {
       return requirement !== "ROUTE_36_WEST_AREA" && requirement !== "GOLDENROD_CITY_MAIN_AREA"

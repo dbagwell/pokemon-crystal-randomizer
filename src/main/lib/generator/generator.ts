@@ -1209,6 +1209,16 @@ const createPatches = (
     ]
   }
   
+  // Goldenrod store basement
+  
+  if (settings.CLEAR_GOLDENROD_STORE_BASEMENT) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(43, 0x5EEF), [0x0D]),
+      new DataHunk(ROMOffset.fromBankAddress(43, 0x5EF6), [0x0D]),
+      new DataHunk(ROMOffset.fromBankAddress(43, 0x5F03), [0x0D]),
+    ])
+  }
+  
   // Flower Shop
   
   if (settings.SKIP_FLORIA || settings.SHUFFLE_ITEMS.VALUE) {

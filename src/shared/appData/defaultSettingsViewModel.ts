@@ -1250,6 +1250,11 @@ export const defaultSettingsViewModel = () => {
             description: "Removes the tree in Ilex Forest that can be cut down allowing you to pass without HM01 (Cut) and/or Hivebadge.",
           }),
           createSimpleToggleViewModel({
+            id: "CLEAR_GOLDENROD_STORE_BASEMENT" as const,
+            name: "Clear Goldenrod Store Basement",
+            description: "Removes permanently removes the boxes blocking the paths to the items in the Goldenrod Department Store Basement allowing them to all be obtained without having to use the elevator multiple times.",
+          }),
+          createSimpleToggleViewModel({
             id: "SKIP_FLORIA" as const,
             name: "Skip Talking to Floria",
             description: "Removes requirement of having to talk to Floria on Route 36 and in the Flower shop before being able to get the item from the Flower Shop owner.",
