@@ -214,7 +214,7 @@ export const shuffleItems = (
     const selectedItemInfo = random.element({ array: remainingProgressionItems })
     
     const selectedItemIndex = remainingProgressionItems.findIndex((itemInfo) => {
-      return itemInfo.itemId === selectedItemInfo.itemId
+      return itemInfo.itemId === selectedItemInfo.itemId && itemInfo.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
     })
     
     remainingProgressionItems.splice(selectedItemIndex, 1)
@@ -269,7 +269,7 @@ export const shuffleItems = (
     romInfo.gameData.itemLocations[locationInfo.locationId].itemId = selectedItemId
         
     const selectedItemIndex = nonProgressionItems.findIndex((itemInfo) => {
-      return itemInfo.itemId === selectedItemId
+      return itemInfo.itemId === selectedItemId && itemInfo.shuffleGroupIndex === locationInfo.shuffleGroupIndex
     })
     
     nonProgressionItems.splice(selectedItemIndex, 1)
