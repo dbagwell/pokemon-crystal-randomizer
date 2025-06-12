@@ -895,6 +895,13 @@ const createPatches = (
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...rodsAlwaysWorkPatch.hunks]
   }
+  
+  if (settings.PROGRESSIVE_RODS) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "progressiveRods.yml",
+    ).hunks)
+  }
     
   if (settings.HEADBUTT_ALWAYS_WORKS) {
     romInfo.patchHunks = [

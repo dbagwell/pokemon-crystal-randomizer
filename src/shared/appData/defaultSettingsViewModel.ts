@@ -1056,6 +1056,14 @@ export const defaultSettingsViewModel = () => {
             description: "Allows makes it so fishing rods will trigger a Pokémon encounter every time they are used.",
           }),
           createSimpleToggleViewModel({
+            id: "PROGRESSIVE_RODS" as const,
+            name: "Progressive Rods",
+            description: "Makes it so that whenever a fishing rod is received, "
+              + "if the player has a Good Rod, the newly received rod will be a Super Rod, "
+              + "if the player doesn't have Good Rod but has an Old Rod, the newly received rod will be a Good Rod,"
+              + "if the player has no fishing rods yet, the newly received rod will be an Old Rod.",
+          }),
+          createSimpleToggleViewModel({
             id: "HEADBUTT_ALWAYS_WORKS" as const,
             name: "Headbutt Always Works",
             description: "Makes it so that headbutting trees in locations that have tree encounters will always trigger a Pokémon encounter.",

@@ -2,6 +2,7 @@ description: "Shows a prompt to use another repel when one runs out. Uses Unused
 values:
   saveRepel: "FA 06 D1 EA 39 DC C3 89 77"
   checkRepel: "21 92 D8 CD 79 2F 3E 04 21 19 76 30 05 3E 04 21 @$useAnotherRepelScript CD 1F 26 37 C9"
+  checkRepelFarCall: "3E 03 21 @$checkRepel CF C9"
   useAnotherRepelScript: "47 19 39 DC 41 00 00 4C @$useAnotherRepelText 4E 08 A8 7D 0E 00 3F 2F 49 91 $useAnotherRepelText"
   useAnotherRepelText: "00 50 01 99 D0 00 7F 4F B6 AE B1 A4 7F AE A5 A5 E8 51 94 B2 A4 7F A0 AD AE B3 A7 A4 B1 E6 57"
 changes:
@@ -16,13 +17,17 @@ changes:
   value: "@$saveRepel"
 - description: "Checks if there are more of the active repel and shows a prompt to use another."
   locations:
-  - bank: 37
+  - bank: 3
   value: "$checkRepel"
+- description: "Adds farcall to call check repel code."
+  locations:
+  - bank: 37
+  value: "$checkRepelFarCall"
 - description: "Calls code to maybe show a prompt to use another repel."
   locations:
   - bank: 37
     address: 0x6BE1
-  value: "FA 39 DC EA 06 D1 CD @$checkRepel"
+  value: "FA 39 DC EA 06 D1 CD @$checkRepelFarCall"
 - description: "Calls code to maybe show a prompt to use another repel."
   locations:
   - bank: 4
