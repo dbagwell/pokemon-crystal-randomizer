@@ -1417,6 +1417,11 @@ export const defaultSettingsViewModel = () => {
             description: "Makes it so that you can get the item from the man in the house on the roof of the Celadon Mansion at any time of day.",
           }),
           createSimpleToggleViewModel({
+            id: "REMOVE_TOHJO_FALLS_HOUSE_GIFT_HAPPINESS_REQUIREMENT" as const,
+            name: "Remove Tohjo Falls House Gift Happiness Requirement",
+            description: "Makes it so that you can get the item from the lady in the house by Tohjo Falls regardless of your Pokémon's Happiness.",
+          }),
+          createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",

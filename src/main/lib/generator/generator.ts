@@ -1519,6 +1519,12 @@ const createPatches = (
     romInfo.patchHunks.push(new DataHunk(ROMOffset.fromBankAddress(28, 0x5B0B), [0x03]))
   }
   
+  // Sanstorm TM Gift
+  
+  if (settings.REMOVE_TOHJO_FALLS_HOUSE_GIFT_HAPPINESS_REQUIREMENT) {
+    romInfo.patchHunks.push(new DataHunk(ROMOffset.fromBankAddress(30, 0x73A8), [0xAA]))
+  }
+  
   // Performance Improvements
     
   if (settings.IMPROVE_PERFORMANCE) {
