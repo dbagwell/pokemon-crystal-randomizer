@@ -1421,6 +1421,23 @@ export const defaultSettingsViewModel = () => {
             name: "Remove Tohjo Falls House Gift Happiness Requirement",
             description: "Makes it so that you can get the item from the lady in the house by Tohjo Falls regardless of your Pokémon's Happiness.",
           }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_KENJI_GIFT_REQUIREMENTS" as const,
+            name: "Change Kenji Gift Requirements",
+            description: "Changes the requirements to get Kenji's gift on Route 45.",
+            options: [
+              createSimpleSelectorOption({
+                id: "REMOVE_TIME_REQUIREMENT" as const,
+                name: "Remove Time Requirement",
+                description: "Makes it so the item can be received on any day at any time of day.",
+              }),
+              createSimpleSelectorOption({
+                id: "REMOVE_CALL_REQUIREMENT" as const,
+                name: "Remove Call Requirement",
+                description: "Makes it so Kenji will give you his item without having to call him first.",
+              }),
+            ],
+          }),
           createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",

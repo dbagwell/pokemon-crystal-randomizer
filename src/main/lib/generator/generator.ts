@@ -1525,6 +1525,16 @@ const createPatches = (
     romInfo.patchHunks.push(new DataHunk(ROMOffset.fromBankAddress(30, 0x73A8), [0xAA]))
   }
   
+  // Kenji
+  
+  if (settings.CHANGE_KENJI_GIFT_REQUIREMENTS.includes("REMOVE_TIME_REQUIREMENT")) {
+    romInfo.patchHunks.push(new DataHunk(ROMOffset.fromBankAddress(103, 0x60B5), [0xF4]))
+  }
+  
+  if (settings.CHANGE_KENJI_GIFT_REQUIREMENTS.includes("REMOVE_CALL_REQUIREMENT")) {
+    romInfo.patchHunks.push(new DataHunk(ROMOffset.fromBankAddress(103, 0x60F4), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]))
+  }
+  
   // Performance Improvements
     
   if (settings.IMPROVE_PERFORMANCE) {
