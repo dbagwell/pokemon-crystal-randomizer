@@ -1513,6 +1513,12 @@ const createPatches = (
     ])
   }
   
+  // Curse TM Gift
+  
+  if (settings.CELADON_MANSION_ROOF_GIFT_ALWAYS_ACCESSIBLE) {
+    romInfo.patchHunks.push(new DataHunk(ROMOffset.fromBankAddress(28, 0x5B0B), [0x03]))
+  }
+  
   // Performance Improvements
     
   if (settings.IMPROVE_PERFORMANCE) {

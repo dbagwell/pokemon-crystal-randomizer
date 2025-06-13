@@ -1412,6 +1412,11 @@ export const defaultSettingsViewModel = () => {
               + "Also moves the hidden items that would be under Frieda and Wesley to be in front of them instead.",
           }),
           createSimpleToggleViewModel({
+            id: "CELADON_MANSION_ROOF_GIFT_ALWAYS_ACCESSIBLE" as const,
+            name: "Celadon Mansion Roof Gift Alwasy Accessible",
+            description: "Makes it so that you can get the item from the man in the house on the roof of the Celadon Mansion at any time of day.",
+          }),
+          createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",
