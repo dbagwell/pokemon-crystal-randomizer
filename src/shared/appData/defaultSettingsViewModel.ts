@@ -1406,6 +1406,12 @@ export const defaultSettingsViewModel = () => {
             description: "Allows riding the magnet train between Goldenrod and Saffron before fixing the Kanto Power plant.",
           }),
           createSimpleToggleViewModel({
+            id: "WEEKDAY_SIBLINGS_ALWAYS_ACCESSIBLE" as const,
+            name: "Weekday Siblings Always Accessible",
+            description: "Makes is so all the weekday siblings will show up on any day of the week.\n"
+              + "Also moves the hidden items that would be under Frieda and Wesley to be in front of them instead.",
+          }),
+          createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",

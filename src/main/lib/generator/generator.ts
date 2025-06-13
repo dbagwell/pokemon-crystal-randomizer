@@ -1490,6 +1490,29 @@ const createPatches = (
     ]
   }
   
+  // Weekday Siblings
+  
+  if (settings.WEEKDAY_SIBLINGS_ALWAYS_ACCESSIBLE) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(106, 0x4D77), [0x6F, 0x06, 0x90]), // Sunny
+      new DataHunk(ROMOffset.fromBankAddress(105, 0x6165), [0x6F, 0x0A, 0x90]), // Monica
+      new DataHunk(ROMOffset.fromBankAddress(104, 0x4F64), [0x6F, 0x08, 0x90]), // Tuscany
+      new DataHunk(ROMOffset.fromBankAddress(28, 0x4016), [0x6F, 0x0B, 0x90]), // Wesley
+      new DataHunk(ROMOffset.fromBankAddress(101, 0x400F), [0x6F, 0x08, 0x90]), // Arthur
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x4463), [0x6F, 0x0E, 0x90]), // Frieda
+      new DataHunk(ROMOffset.fromBankAddress(105, 0x46DC), [0x6F, 0x09, 0x90]), // Santos
+      new DataHunk(ROMOffset.fromBankAddress(106, 0x4DC7), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]), // Sunny
+      new DataHunk(ROMOffset.fromBankAddress(105, 0x61E1), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]), // Monica
+      new DataHunk(ROMOffset.fromBankAddress(104, 0x5051), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]), // Tuscany
+      new DataHunk(ROMOffset.fromBankAddress(28, 0x4116), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]), // Wesley
+      new DataHunk(ROMOffset.fromBankAddress(101, 0x4209), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]), // Arthur
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x4741), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]), // Frieda
+      new DataHunk(ROMOffset.fromBankAddress(105, 0x4733), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]), // Santos
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x53CB), [0x0B]), // Route 32 Hidden Item
+      new DataHunk(ROMOffset.fromBankAddress(28, 0x4937), [0x05]), // Lake of Rage Hidden Item
+    ])
+  }
+  
   // Performance Improvements
     
   if (settings.IMPROVE_PERFORMANCE) {
