@@ -1535,6 +1535,23 @@ const createPatches = (
     romInfo.patchHunks.push(new DataHunk(ROMOffset.fromBankAddress(103, 0x60F4), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]))
   }
   
+  // Return/Frustration TM Gifts
+  
+  if (settings.CHANGE_GOLDENROD_DEPT_STORE_TM_GIFTS_REQUIREMENTS.includes("REMOVE_DAY_REQUIREMENT")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x6090), [0x6F, 0x07, 0x90]),
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x60D0), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]),
+    ])
+  }
+  
+  if (settings.CHANGE_GOLDENROD_DEPT_STORE_TM_GIFTS_REQUIREMENTS.includes("REMOVE_HAPPINESS_REQUIREMENT")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x60D6), [0x31, ...bytesFrom(eventFlagsMap.GOT_RETURN.numericId, 2), 0x09, 0xFB, 0x60, 0x4C, 0x43, 0x61, 0x55, 0x03, 0xEE, 0x60, 0x09, 0x12, 0x61, 0x4C, 0x43, 0x61, 0x55, 0x03, 0x03, 0x61]),
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x60F5), [0x08, 0xFB, 0x60, 0x33, ...bytesFrom(eventFlagsMap.GOT_RETURN.numericId, 2), 0x31, ...bytesFrom(eventFlagsMap.GOT_FRUSTRATION.numericId, 2), 0x03, 0xE3, 0x60]),
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x610D), [0x33, ...bytesFrom(eventFlagsMap.GOT_FRUSTRATION.numericId, 2)]),
+    ])
+  }
+  
   // Performance Improvements
     
   if (settings.IMPROVE_PERFORMANCE) {

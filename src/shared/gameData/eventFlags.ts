@@ -1194,6 +1194,14 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "GOT_AZALEA_TOWN_FRUIT_TREE",
     numericId: 309,
   },
+  GOT_RETURN: {
+    id: "GOT_RETURN",
+    numericId: 310,
+  },
+  GOT_FRUSTRATION: {
+    id: "GOT_FRUSTRATION",
+    numericId: 311,
+  },
   GAVE_KURT_RED_APRICORN: {
     id: "GAVE_KURT_RED_APRICORN",
     numericId: 600,

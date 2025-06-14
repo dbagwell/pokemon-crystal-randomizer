@@ -1416,6 +1416,24 @@ export const defaultSettingsViewModel = () => {
             name: "Celadon Mansion Roof Gift Alwasy Accessible",
             description: "Makes it so that you can get the item from the man in the house on the roof of the Celadon Mansion at any time of day.",
           }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_GOLDENROD_DEPT_STORE_TM_GIFTS_REQUIREMENTS" as const,
+            name: "Change Goldenrod Dept. Store TM Gifts Requirements",
+            description: "Changes the requirements to get the gifts from the receptionist on the 5th floor of the Goldenrod Dept. Store.",
+            options: [
+              createSimpleSelectorOption({
+                id: "REMOVE_DAY_REQUIREMENT" as const,
+                name: "Remove Day Requirement",
+                description: "Makes it so the items can be received on any day of the week.",
+              }),
+              createSimpleSelectorOption({
+                id: "REMOVE_HAPPINESS_REQUIREMENT" as const,
+                name: "Remove Happiness Requirement",
+                description: "Makes it so both items can be received regardless of your Pokémon's happiness.\n"
+                 + "Also limits it so each item can only be received once.",
+              }),
+            ],
+          }),
           createSimpleToggleViewModel({
             id: "REMOVE_TOHJO_FALLS_HOUSE_GIFT_HAPPINESS_REQUIREMENT" as const,
             name: "Remove Tohjo Falls House Gift Happiness Requirement",
