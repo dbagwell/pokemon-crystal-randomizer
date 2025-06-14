@@ -1411,6 +1411,33 @@ export const defaultSettingsViewModel = () => {
             description: "Makes is so all the weekday siblings will show up on any day of the week.\n"
               + "Also moves the hidden items that would be under Frieda and Wesley to be in front of them instead.",
           }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_NATIONAL_PARK_CONTEST_REQUIREMENTS" as const,
+            name: "Change National Park Contest Requirements",
+            description: "Changes the requirements to be able to participate in the National Park Contest and get prizes.",
+            options: [
+              createSimpleSelectorOption({
+                id: "REMOVE_DAY_REQUIREMENT" as const,
+                name: "Remove Day Requirement",
+                description: "Makes it so the contest takes place on any day of the week.",
+              }),
+              createSimpleSelectorOption({
+                id: "REMOVE_DAILY_LIMIT" as const,
+                name: "Remove Daily Limit",
+                description: "Allows participating in the contest any number of times a day.",
+              }),
+              createSimpleSelectorOption({
+                id: "MERGE_SECOND_AND_THIRD" as const,
+                name: "Merge Second and Third Place",
+                description: "Makes it so you get the prizes for both Second and Third Place whenever you place at one of those tiers.",
+              }),
+              createSimpleSelectorOption({
+                id: "LIMIT_PRIZES" as const,
+                name: "Limit Prizes",
+                description: "Makes it so each prize can only be received once.",
+              }),
+            ],
+          }),
           createSimpleToggleViewModel({
             id: "CELADON_MANSION_ROOF_GIFT_ALWAYS_ACCESSIBLE" as const,
             name: "Celadon Mansion Roof Gift Alwasy Accessible",

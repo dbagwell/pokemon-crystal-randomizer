@@ -1202,6 +1202,22 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "GOT_FRUSTRATION",
     numericId: 311,
   },
+  GOT_FIRST_PLACE_PRIZE: {
+    id: "GOT_FIRST_PLACE_PRIZE",
+    numericId: 312,
+  },
+  GOT_SECOND_PLACE_PRIZE: {
+    id: "GOT_SECOND_PLACE_PRIZE",
+    numericId: 313,
+  },
+  GOT_THIRD_PLACE_PRIZE: {
+    id: "GOT_THIRD_PLACE_PRIZE",
+    numericId: 314,
+  },
+  GOT_CONSOLATION_PRIZE: {
+    id: "GOT_CONSOLATION_PRIZE",
+    numericId: 315,
+  },
   GAVE_KURT_RED_APRICORN: {
     id: "GAVE_KURT_RED_APRICORN",
     numericId: 600,

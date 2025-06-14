@@ -1552,6 +1552,51 @@ const createPatches = (
     ])
   }
   
+  if (settings.CHANGE_NATIONAL_PARK_CONTEST_REQUIREMENTS.includes("REMOVE_DAY_REQUIREMENT")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(26, 0x61AF), [0x03, 0xCA, 0x61]), // Route 35 Gate Init
+      new DataHunk(ROMOffset.fromBankAddress(26, 0x6204), [0x03, 0x16, 0x62]), // Route 35 Gate Guard Script
+      new DataHunk(ROMOffset.fromBankAddress(26, 0x6B29), [0x03, 0x42, 0x6B]), // Route 36 Gate Init
+      new DataHunk(ROMOffset.fromBankAddress(26, 0x6BE0), [0x03, 0xF2, 0x6B]), // Route 36 Gate Guard Script
+    ])
+  }
+  
+  if (settings.CHANGE_NATIONAL_PARK_CONTEST_REQUIREMENTS.includes("REMOVE_DAILY_LIMIT")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(26, 0x6218), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]), // Route 35 Gate
+      new DataHunk(ROMOffset.fromBankAddress(26, 0x6BF4), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18]), // Route 36 Gate
+    ])
+  }
+  
+  if (settings.CHANGE_NATIONAL_PARK_CONTEST_REQUIREMENTS.includes("LIMIT_PRIZES")) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "limitContestPrizes.yml",
+      {
+        options: [
+          settings.CHANGE_NATIONAL_PARK_CONTEST_REQUIREMENTS.includes("MERGE_SECOND_AND_THIRD") ? "limitContestPrizesOptions/mergeSecondAndThird.yml" : "limitContestPrizesOptions/default.yml",
+        ],
+      },
+      {
+        gotFirstPlacePrizeEventFlag: hexStringFrom(bytesFrom(eventFlagsMap.GOT_FIRST_PLACE_PRIZE.numericId, 2)),
+        gotSecondPlacePrizeEventFlag: hexStringFrom(bytesFrom(eventFlagsMap.GOT_SECOND_PLACE_PRIZE.numericId, 2)),
+        gotThirdPlacePrizeEventFlag: hexStringFrom(bytesFrom(eventFlagsMap.GOT_THIRD_PLACE_PRIZE.numericId, 2)),
+        gotConsolationPrizeEventFlag: hexStringFrom(bytesFrom(eventFlagsMap.GOT_CONSOLATION_PRIZE.numericId, 2)),
+      },
+    ).hunks)
+  } else if (settings.CHANGE_NATIONAL_PARK_CONTEST_REQUIREMENTS.includes("MERGE_SECOND_AND_THIRD")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x4341), [0x03, 0x4B, 0x43]),
+    ])
+  }
+  
+  if (settings.CHANGE_NATIONAL_PARK_CONTEST_REQUIREMENTS.includes("MERGE_SECOND_AND_THIRD")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x429B), [0x32, 0x43]),
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x4368), [0x43, 0x43]),
+    ])
+  }
+  
   // Performance Improvements
     
   if (settings.IMPROVE_PERFORMANCE) {
