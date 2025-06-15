@@ -1218,6 +1218,50 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "GOT_CONSOLATION_PRIZE",
     numericId: 315,
   },
+  GOT_NUGGET_FROM_BEVERLY: {
+    id: "GOT_NUGGET_FROM_BEVERLY",
+    numericId: 316,
+  },
+  GOT_STAR_PIECE_FROM_JOSE: {
+    id: "GOT_STAR_PIECE_FROM_JOSE",
+    numericId: 317,
+  },
+  GOT_BERRY_FROM_WADE: {
+    id: "GOT_BERRY_FROM_WADE",
+    numericId: 318,
+  },
+  GOT_PSNCUREBERRY_FROM_WADE: {
+    id: "GOT_PSNCUREBERRY_FROM_WADE",
+    numericId: 319,
+  },
+  GOT_PRZCUREBERRY_FROM_WADE: {
+    id: "GOT_PRZCUREBERRY_FROM_WADE",
+    numericId: 320,
+  },
+  GOT_BITTER_BERRY_FROM_WADE: {
+    id: "GOT_BITTER_BERRY_FROM_WADE",
+    numericId: 321,
+  },
+  GOT_NUGGET_FROM_DEREK: {
+    id: "GOT_NUGGET_FROM_DEREK",
+    numericId: 322,
+  },
+  GOT_ULTRA_BALL_FROM_WILTON: {
+    id: "GOT_ULTRA_BALL_FROM_WILTON",
+    numericId: 323,
+  },
+  GOT_GREAT_BALL_FROM_WILTON: {
+    id: "GOT_GREAT_BALL_FROM_WILTON",
+    numericId: 324,
+  },
+  GOT_POKE_BALL_FROM_WILTON: {
+    id: "GOT_POKE_BALL_FROM_WILTON",
+    numericId: 325,
+  },
+  GOT_PP_UP_FROM_KENJI: {
+    id: "GOT_PP_UP_FROM_KENJI",
+    numericId: 326,
+  },
   GAVE_KURT_RED_APRICORN: {
     id: "GAVE_KURT_RED_APRICORN",
     numericId: 600,

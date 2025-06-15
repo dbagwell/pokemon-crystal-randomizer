@@ -1597,6 +1597,77 @@ const createPatches = (
     ])
   }
   
+  // Phone Call Behaviour
+  
+  if (settings.CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR.includes("SKIP_TO_STRONGEST_AVAILABLE_REMATCH")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(22, 0x6FCF), [0x03, 0xE2, 0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(23, 0x4090), [0x03, 0xA7, 0x40]),
+      new DataHunk(ROMOffset.fromBankAddress(30, 0x40C5), [0x03, 0xDC, 0x40]),
+      new DataHunk(ROMOffset.fromBankAddress(30, 0x41A7), [0x03, 0xBE, 0x41]),
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x4585), [0x03, 0x9C, 0x45]),
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x4675), [0x03, 0x8C, 0x46]),
+      new DataHunk(ROMOffset.fromBankAddress(101, 0x4148), [0x03, 0x5F, 0x41]),
+      new DataHunk(ROMOffset.fromBankAddress(103, 0x49C3), [0x03, 0xDA, 0x49]),
+      new DataHunk(ROMOffset.fromBankAddress(103, 0x50D7), [0x03, 0xEA, 0x50]),
+      new DataHunk(ROMOffset.fromBankAddress(103, 0x51C9), [0x03, 0xDC, 0x51]),
+      new DataHunk(ROMOffset.fromBankAddress(103, 0x5872), [0x03, 0x81, 0x58]),
+      new DataHunk(ROMOffset.fromBankAddress(103, 0x5976), [0x03, 0x85, 0x59]),
+      new DataHunk(ROMOffset.fromBankAddress(103, 0x61C0), [0x03, 0xCF, 0x61]),
+      new DataHunk(ROMOffset.fromBankAddress(104, 0x4907), [0x03, 0x16, 0x49]),
+      new DataHunk(ROMOffset.fromBankAddress(104, 0x49F1), [0x03, 0x00, 0x4A]),
+      new DataHunk(ROMOffset.fromBankAddress(104, 0x56E8), [0x03, 0xFF, 0x56]),
+      new DataHunk(ROMOffset.fromBankAddress(104, 0x5D8A), [0x03, 0xA1, 0x5D]),
+      new DataHunk(ROMOffset.fromBankAddress(104, 0x5E7D), [0x03, 0x94, 0x5E]),
+      new DataHunk(ROMOffset.fromBankAddress(105, 0x4D81), [0x03, 0x90, 0x4D]),
+      new DataHunk(ROMOffset.fromBankAddress(105, 0x4E3D), [0x03, 0x4C, 0x4E]),
+      new DataHunk(ROMOffset.fromBankAddress(105, 0x549B), [0x03, 0xB2, 0x54]),
+      new DataHunk(ROMOffset.fromBankAddress(106, 0x5287), [0x03, 0x9A, 0x52]),
+      new DataHunk(ROMOffset.fromBankAddress(106, 0x56E2), [0x03, 0xF1, 0x56]),
+      new DataHunk(ROMOffset.fromBankAddress(107, 0x4059), [0x03, 0x70, 0x40]),
+    ])
+  }
+  
+  if (settings.CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR.includes("SIMULTANEOUS_GIFTS")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x54AD), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x5D57), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(103, 0x59CF), [0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(103, 0x59D8), [0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(105, 0x5528), [0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(105, 0x5531), [0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(105, 0x553A), [0x18, 0x18, 0x18]),
+    ])
+  }
+  
+  if (settings.CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR.includes("PRIORITIZE_USEFUL_CALLS")) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "prioritizeUsefulCalls.yml",
+    ).hunks)
+  }
+  
+  if (settings.CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR.includes("PREVENT_REPEAT_GIFTS")) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "preventRepeatPhoneCallGifts.yml",
+      {},
+      {
+        gotNuggetFromBeverlyEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_NUGGET_FROM_BEVERLY.numericId, 2)),
+        gotStarPieceFromJoseEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_STAR_PIECE_FROM_JOSE.numericId, 2)),
+        gotBerryFromWadeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_BERRY_FROM_WADE.numericId, 2)),
+        gotPsncureberryFromWadeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_PSNCUREBERRY_FROM_WADE.numericId, 2)),
+        gotPrzcureberryFromWadeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_PRZCUREBERRY_FROM_WADE.numericId, 2)),
+        gotBitterBerryFromWadeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_BITTER_BERRY_FROM_WADE.numericId, 2)),
+        gotNuggetFromDerekEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_NUGGET_FROM_DEREK.numericId, 2)),
+        gotPokeBallFromWiltonEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_POKE_BALL_FROM_WILTON.numericId, 2)),
+        gotGreatBallFromWiltonEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_GREAT_BALL_FROM_WILTON.numericId, 2)),
+        gotUltraBallFromWiltonEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_ULTRA_BALL_FROM_WILTON.numericId, 2)),
+        gotPPUpFromKenjiEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_PP_UP_FROM_KENJI.numericId, 2)),
+      }
+    ).hunks)
+  }
+  
   // Performance Improvements
     
   if (settings.IMPROVE_PERFORMANCE) {

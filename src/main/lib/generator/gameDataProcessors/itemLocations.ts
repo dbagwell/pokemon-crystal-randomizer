@@ -682,6 +682,22 @@ export const updateAccessLogic = (
     ])
   }
   
+  if (settings.CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR.includes("SKIP_TO_STRONGEST_AVAILABLE_REMATCH")) {
+    const powerPlantRequirements: AccessRequirement[] = [
+      "POKEGEAR",
+      "POWER_PLANT_MANAGERS_GIFT",
+    ]
+    
+    romInfo.gameData.itemLocations.OLIVINE_LIGHTHOUSE_2F_HUEYS_GIFT.accessRequirements = [...powerPlantRequirements]
+    romInfo.gameData.itemLocations.ROUTE_44_VANCES_GIFT.accessRequirements = [...powerPlantRequirements]
+    romInfo.gameData.itemLocations.ROUTE_45_PARRYS_GIFT.accessRequirements = [...powerPlantRequirements]
+    romInfo.gameData.itemLocations.ROUTE_46_NORTH_AREA_ERINS_GIFT.accessRequirements = [...powerPlantRequirements]
+    romInfo.gameData.itemLocations.ROUTE_30_CHERRYGROVE_SIDE_JOEYS_GIFT.accessRequirements = [
+      "POKEGEAR",
+      "HALL_OF_FAME",
+    ]
+  }
+  
   settings.SHUFFLE_ITEMS.SETTINGS.ACCESS_MODIFIERS.forEach((rulesetId) => {
     let rulesetInfo: any
     

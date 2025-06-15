@@ -1483,6 +1483,44 @@ export const defaultSettingsViewModel = () => {
               }),
             ],
           }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR" as const,
+            name: "Change Phone Call Trainer Behaviour",
+            description: "Changes the behaviour of phone call trainers.",
+            options: [
+              createSimpleSelectorOption({
+                id: "PRIORITIZE_USEFUL_CALLS" as const,
+                name: "Prioritize Useful Calls",
+                description: "Updates the priorities for all phone calls to be the following:\n"
+                  + "1. Offers to give you gifts\n"
+                  + "2. Notifications of rooftop sales\n"
+                  + "3. Notifications of Pokémon swarms\n"
+                  + "4. Inquiries about rematches\n"
+                  + "5. Stories about local Pokémon\n"
+                  + "6. Gossip\n"
+                  + "7. All other kinds of calls\n"
+                  + "When determining a phone call topic, the topic with the highest priority will always be chosen as long as it is available for the trainer that is calling and all the conditons for it have been met.",
+              }),
+              createSimpleSelectorOption({
+                id: "SKIP_TO_STRONGEST_AVAILABLE_REMATCH" as const,
+                name: "Skip To Strongest Available Rematch",
+                description: "Rematches with phone call trainers will always be against their strongest team available based on your current progression.\n"
+                  + "For example, a trainer that, in vanilla, offers a rematch after defeating Champion Lance, and then later a stronger rematch after fixing the Power Plant "
+                  + "will always fight you with ther stronger team as long as you have fixed the Power Plant, even if you never had a rematch against them using their weaker rematch team "
+                  + "(and even if you haven't actually defeated Champion Lance yet).",
+              }),
+              createSimpleSelectorOption({
+                id: "SIMULTANEOUS_GIFTS" as const,
+                name: "Simultaneous Gifts",
+                description: "When collecting gifts from phone call trainers who can give you different kinds of items, they will will give you all of them at the same time.",
+              }),
+              createSimpleSelectorOption({
+                id: "PREVENT_REPEAT_GIFTS" as const,
+                name: "Prevent Repeat Gifts",
+                description: "Prevents being able to receive the same gift from a phone call trainer more than once.",
+              }),
+            ],
+          }),
           createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",
