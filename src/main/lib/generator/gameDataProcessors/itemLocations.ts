@@ -698,6 +698,10 @@ export const updateAccessLogic = (
     ]
   }
   
+  if (settings.EARLY_CHARRGROVE_MART_POKE_BALLS) {
+    romInfo.gameData.marts.CHERRYGROVE_2.accessRequirements = []
+  }
+  
   settings.SHUFFLE_ITEMS.SETTINGS.ACCESS_MODIFIERS.forEach((rulesetId) => {
     let rulesetInfo: any
     
