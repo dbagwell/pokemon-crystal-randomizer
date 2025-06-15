@@ -1,0 +1,14 @@
+description: "Updates the script when talking to the manager for the first time to set up the events even if you are turning in the machine part at the same time."
+values:
+  managerSetup1: "09 AC 4E 31 CA 00 09 @$managerSetup2 33 CA 00 32 6D 07 32 FB 00 12 07 06 01 14 01 $managerSetup2"
+  managerSetup2: "03 6D 4E"
+changes:
+- description: "Adds Code"
+  locations:
+  - bank: 98
+  value: "$managerSetup1"
+- description: "Adds Code"
+  locations:
+  - bank: 98
+    address: 0x4E6A
+  value: "03 @$managerSetup1"

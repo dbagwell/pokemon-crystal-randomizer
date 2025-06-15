@@ -1403,6 +1403,10 @@ const createPatches = (
         romInfo,
         "radioTower5FCutsceneChanges.yml",
       ).hunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "powerPlantChanges.yml",
+      ).hunks,
     ]
   }
   
