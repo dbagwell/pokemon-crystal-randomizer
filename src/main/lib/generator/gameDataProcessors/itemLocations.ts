@@ -191,21 +191,34 @@ export const shuffleItems = (
   if (shopsShuffleGroupIndex >= 0) {
     Object.values(romInfo.gameData.marts).forEach((mart) => {
       mart.items.forEach((itemId, index) => {
+        const ignoredMartIds: MartId[] = [
+          "CHERRYGROVE_1",
+          "GOLDENROD_5F_1",
+          "GOLDENROD_5F_2",
+          "GOLDENROD_5F_3",
+          "GOLDENROD_5F_5",
+          "GOLDENROD_5F_6",
+          "GOLDENROD_5F_7",
+          settings.BUYABLE_TM12 ? "GOLDENROD_5F_4" : "GOLDENROD_5F_8",
+        ]
+        
         // TODO: Exclude locations
         
-        locationsToShuffle.push({
-          type: "SHOP",
-          martId: mart.id,
-          shopMenuIndex: index,
-          shuffleGroupIndex: shopsShuffleGroupIndex,
-        })
+        if (!ignoredMartIds.includes(mart.id)) {
+          locationsToShuffle.push({
+            type: "SHOP",
+            martId: mart.id,
+            shopMenuIndex: index,
+            shuffleGroupIndex: shopsShuffleGroupIndex,
+          })
         
-        itemsToShuffle.push({
-          itemId: itemId,
-          shuffleGroupIndex: shopsShuffleGroupIndex,
-        })
+          itemsToShuffle.push({
+            itemId: itemId,
+            shuffleGroupIndex: shopsShuffleGroupIndex,
+          })
         
-        mart.items[index] = undefined as unknown as ItemId
+          mart.items[index] = undefined as unknown as ItemId
+        }
       })
     })
   }
@@ -335,6 +348,29 @@ export const shuffleItems = (
     
     nonProgressionItems.splice(selectedItemIndex, 1)
   })
+  
+  if (shopsShuffleGroupIndex >= 0) {
+    if (!settings.EARLY_CHERRYGROVE_MART_POKE_BALLS) {
+      romInfo.gameData.marts.CHERRYGROVE_1.items = romInfo.gameData.marts.CHERRYGROVE_2.items.slice(1)
+    }
+    
+    if (!settings.EARLY_GOLDENROD_MART_TMS) {
+      if (settings.BUYABLE_TM12) {
+        romInfo.gameData.marts.GOLDENROD_5F_4.items = romInfo.gameData.marts.GOLDENROD_5F_8.items.slice(1, romInfo.gameData.marts.GOLDENROD_5F_8.items.length - 1)
+      }
+      
+      romInfo.gameData.marts.GOLDENROD_5F_1.items = [...romInfo.gameData.marts.GOLDENROD_5F_4.items].splice(romInfo.gameData.marts.GOLDENROD_5F_4.items.length - 2, 2)
+      romInfo.gameData.marts.GOLDENROD_5F_2.items = [...romInfo.gameData.marts.GOLDENROD_5F_4.items].splice(romInfo.gameData.marts.GOLDENROD_5F_4.items.length - 1, 1)
+      romInfo.gameData.marts.GOLDENROD_5F_3.items = [...romInfo.gameData.marts.GOLDENROD_5F_4.items].splice(romInfo.gameData.marts.GOLDENROD_5F_4.items.length - 2, 1)
+      
+      if (settings.BUYABLE_TM12) {
+        const addedItem = romInfo.gameData.marts.GOLDENROD_5F_8.items[romInfo.gameData.marts.GOLDENROD_5F_8.items.length - 1]
+        romInfo.gameData.marts.GOLDENROD_5F_5.items = [...romInfo.gameData.marts.GOLDENROD_5F_1.items, addedItem]
+        romInfo.gameData.marts.GOLDENROD_5F_6.items = [...romInfo.gameData.marts.GOLDENROD_5F_2.items, addedItem]
+        romInfo.gameData.marts.GOLDENROD_5F_7.items = [...romInfo.gameData.marts.GOLDENROD_5F_3.items, addedItem]
+      }
+    }
+  }
 }
 
 const getAccessibleItemLocations = (params: {
