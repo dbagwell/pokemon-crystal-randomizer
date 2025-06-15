@@ -1127,7 +1127,7 @@ export const defaultSettingsViewModel = () => {
         name: "Marts",
         viewModels: [
           createSimpleToggleViewModel({
-            id: "EARLY_CHARRGROVE_MART_POKE_BALLS" as const,
+            id: "EARLY_CHERRYGROVE_MART_POKE_BALLS" as const,
             name: "Early Cherrygrove Poké Balls",
             description: "Poké Balls will be available to buy in Cherrygrove City Mart "
               + "before giving the Mystery Egg to Prof. Elm.",
@@ -1152,6 +1152,14 @@ export const defaultSettingsViewModel = () => {
             name: "Buyable TM12 (Sweet Scent)",
             description: "Add TM12 (Sweet Scent) to the Goldenrod City Mart on the 5th floor "
               + "after obtaining the item from the lady in the gate north of Ilex Forest.",
+          }),
+          createSimpleToggleViewModel({
+            id: "EARLY_GOLDENROD_MART_TMS" as const,
+            name: "Early Goldenrod TMs",
+            description: "TM02 (Headbutt) and TM08 (Rock Smash) "
+              + "(as well as TM12 (Sweet Scent) if the 'Buyable TM12' setting is enabled) "
+              + "will be available to buy on the 5th floor of the Goldenrod City Department Store "
+              + "even before receiving the items from the NPC's that normally give you those TMs.",
           }),
           createSimpleToggleViewModel({
             id: "MOVE_TUTOR_ALWAYS_AVAILABLE" as const,

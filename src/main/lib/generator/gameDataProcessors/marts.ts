@@ -11,7 +11,7 @@ export const updateMarts = (
     romInfo.gameData.marts.CHERRYGROVE_2.items.splice(2, 0, "REPEL")
   }
   
-  if (settings.EARLY_CHARRGROVE_MART_POKE_BALLS) {
+  if (settings.EARLY_CHERRYGROVE_MART_POKE_BALLS) {
     romInfo.gameData.marts.CHERRYGROVE_1.items = []
   }
   
@@ -50,5 +50,15 @@ export const updateMarts = (
       ...romInfo.gameData.marts.GOLDENROD_5F_4.items,
       "TM12",
     ]
+  }
+  
+  if (settings.EARLY_GOLDENROD_MART_TMS) {
+    romInfo.gameData.marts.GOLDENROD_5F_1.items = []
+    romInfo.gameData.marts.GOLDENROD_5F_2.items = []
+    romInfo.gameData.marts.GOLDENROD_5F_3.items = []
+    romInfo.gameData.marts.GOLDENROD_5F_4.items = []
+    romInfo.gameData.marts.GOLDENROD_5F_5.items = []
+    romInfo.gameData.marts.GOLDENROD_5F_6.items = []
+    romInfo.gameData.marts.GOLDENROD_5F_7.items = []
   }
 }

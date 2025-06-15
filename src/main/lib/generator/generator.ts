@@ -43,6 +43,7 @@ import { itemHoldEffectsMap, itemMenuActionsMap } from "@shared/types/gameData/i
 import type { EventFlagId } from "@shared/types/gameDataIds/eventFlags"
 import { type EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
 import { type ItemId } from "@shared/types/gameDataIds/items"
+import { type MartId, martIds } from "@shared/types/gameDataIds/marts"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import type { TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
 import { trainerGroupIds } from "@shared/types/gameDataIds/trainerGroups"
@@ -962,7 +963,7 @@ const createPatches = (
   
   // Marts
   
-  if (settings.EARLY_CHARRGROVE_MART_POKE_BALLS) {
+  if (settings.EARLY_CHERRYGROVE_MART_POKE_BALLS) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       new DataHunk(
@@ -983,17 +984,42 @@ const createPatches = (
   }
   
   if (settings.BUYABLE_TM12) {
+    const numericMartIdFrom = (martId: MartId) => {
+      const updatedMartId = settings.EARLY_GOLDENROD_MART_TMS ? "GOLDENROD_5F_8" : martId
+      return hexStringFrom([martIds.findIndex((martId) => { return martId === updatedMartId })!])
+    }
+    
     romInfo.patchHunks = [
       ...romInfo.patchHunks, ...Patch.fromYAML(
         romInfo,
         "buyableSweetScent.yml",
+        {},
+        {
+          mart1Id: numericMartIdFrom("GOLDENROD_5F_1"),
+          mart2Id: numericMartIdFrom("GOLDENROD_5F_2"),
+          mart3Id: numericMartIdFrom("GOLDENROD_5F_3"),
+          mart4Id: numericMartIdFrom("GOLDENROD_5F_4"),
+          mart5Id: numericMartIdFrom("GOLDENROD_5F_5"),
+          mart6Id: numericMartIdFrom("GOLDENROD_5F_6"),
+          mart7Id: numericMartIdFrom("GOLDENROD_5F_7"),
+          mart8Id: numericMartIdFrom("GOLDENROD_5F_8"),
+        }
       ).hunks,
     ]
+  } else if (settings.EARLY_GOLDENROD_MART_TMS) {
+    const numericMartId = martIds.findIndex((martId) => { return martId === "GOLDENROD_5F_4" })!
+    
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x60B8), [numericMartId]),
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x60BE), [numericMartId]),
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x60C4), [numericMartId]),
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x60CA), [numericMartId]),
+    ])
   }
   
   if (
     settings.CHERRYGROVE_MART_REPELS
-    || settings.EARLY_CHARRGROVE_MART_POKE_BALLS
+    || settings.EARLY_CHERRYGROVE_MART_POKE_BALLS
     || settings.VIOLET_MART_REPELS
     || settings.BUYABLE_EVOLUTION_STONES
     || settings.BUYABLE_TM12
@@ -1002,7 +1028,8 @@ const createPatches = (
       romInfo,
       "marts.yml",
       {
-        marts: Object.values(romInfo.gameData.marts).map((mart) => {
+        marts: martIds.map((martId) => {
+          const mart = romInfo.gameData.marts[martId]
           return {
             path: "martItems.yml",
             extraIncludes: {},
