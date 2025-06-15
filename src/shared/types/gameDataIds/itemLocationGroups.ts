@@ -9,6 +9,7 @@ export const itemLocationGroupIds = [
   "KEY_ITEMS",
   "MENU_ITEMS",
   "BADGES",
+  "SHOPS",
 ] as const
 
 export type ItemLocationGroupId = typeof itemLocationGroupIds[number]

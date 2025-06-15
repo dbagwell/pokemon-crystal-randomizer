@@ -243,7 +243,7 @@ const updateGameData = (
   updateMapObjectEvents(settings, romInfo)
   updateItems(settings, romInfo, random)
   updateAccessLogic(settings, romInfo)
-  shuffleItems(settings, romInfo, random) // Must be after updateAccessLogic
+  shuffleItems(settings, romInfo, random) // Must be after updateMarts and updateAccessLogic
 }
 
 const createPatches = (

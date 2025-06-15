@@ -42,4 +42,8 @@ export const itemLocationGroupsMap: IdMap<ItemLocationGroupId, ItemLocationGroup
     id: "BADGES",
     name: "Badges",
   },
+  SHOPS: {
+    id: "SHOPS",
+    name: "Shops",
+  },
 }
