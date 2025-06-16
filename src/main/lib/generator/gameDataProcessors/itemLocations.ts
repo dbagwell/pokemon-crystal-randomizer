@@ -832,6 +832,10 @@ export const updateAccessLogic = (
     romInfo.gameData.marts.GOLDENROD_5F_8.accessRequirements = []
   }
   
+  if (settings.SHUFFLE_ITEMS.VALUE && settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
+    romInfo.gameData.marts.MAHOGANY_1.accessRequirements = []
+  }
+  
   settings.SHUFFLE_ITEMS.SETTINGS.ACCESS_MODIFIERS.forEach((rulesetId) => {
     let rulesetInfo: any
     

@@ -109,4 +109,10 @@ export const updateMapObjectEvents = (
       }
     })
   }
+  
+  if (settings.SHUFFLE_ITEMS.VALUE && settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "MAHOGANY_MART_1F_ROCKET_SALESMAN"
+    })!.flagId = undefined
+  }
 }

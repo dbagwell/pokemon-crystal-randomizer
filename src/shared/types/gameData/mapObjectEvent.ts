@@ -55,6 +55,7 @@ const mapObjectEventIds = [
   "FUCHSIA_CITY_CUT_AREA_FRUIT_TREE",
   "VIOLET_CITY_FRUIT_TREE",
   "AZALEA_TOWN_FRUIT_TREE",
+  "MAHOGANY_MART_1F_ROCKET_SALESMAN",
 ] as const
 
 type MapObjectEventId = typeof mapObjectEventIds[number]

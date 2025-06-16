@@ -5809,6 +5809,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "OLIVINE_LIGHTHOUSE_6F_SUPER_POTION",
   },
   {
+    id: "MAHOGANY_MART_1F_ROCKET_SALESMAN",
     romOffset: [
       27,
       17936,
