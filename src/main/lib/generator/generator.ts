@@ -1434,6 +1434,10 @@ const createPatches = (
         romInfo,
         "powerPlantChanges.yml",
       ).hunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "earlyGSBall.yml",
+      ).hunks,
     ]
   }
   
