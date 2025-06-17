@@ -1,0 +1,25 @@
+description: "Updates to make allow getting the hidden item in mount moon at any time on any day and only ever get it once"
+values:
+  loadObjectsCallback1: "31 EC 00 09 @$loadObjectsCallback2 34 58 00 08 @$loadObjectsCallback2 90 $loadObjectsCallback2"
+  loadObjectsCallback2: "6E 04 90"
+changes:
+- description: "adds code"
+  locations:
+  - bank: 29
+  value: "$loadObjectsCallback1"
+- description: "removes code that removes the hidden item whenever the map is loaded"
+  locations:
+  - bank: 29
+    address: 0x7093
+  value: "18 18 18"
+- description: "updates the load objects callback to only make the rock disappear if the hidden item has been obtained or if the cutscene has already played"
+  locations:
+  - bank: 29
+    address: 0x7097
+  value: "03 @$loadObjectsCallback1"
+- description: "removes the time/day checks from the cutscene and adds a check to stop the cutscene from playing if the item has already been obtained"
+  locations:
+  - bank: 29
+    address: 0x70A0
+  value: "31 EC 00 09 17 71 18 18 18 18 18"
+  

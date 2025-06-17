@@ -1530,6 +1530,15 @@ const createPatches = (
     ]
   }
   
+  // Mount Moon
+  
+  if (settings.MOUNT_MOON_HIDDEN_ITEM_ALWAYS_ACCESSIBLE) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "mountMoonClefairyDanceChanges.yml",
+    ).hunks)
+  }
+  
   // Weekday Siblings
   
   if (settings.WEEKDAY_SIBLINGS_ALWAYS_ACCESSIBLE) {

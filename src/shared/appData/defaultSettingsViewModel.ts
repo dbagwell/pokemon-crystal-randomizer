@@ -1419,6 +1419,11 @@ export const defaultSettingsViewModel = () => {
             description: "Allows riding the magnet train between Goldenrod and Saffron before fixing the Kanto Power plant.",
           }),
           createSimpleToggleViewModel({
+            id: "MOUNT_MOON_HIDDEN_ITEM_ALWAYS_ACCESSIBLE" as const,
+            name: "Mount Moon Hidden Item Always Accessible",
+            description: "Allows the Hidden Item in Mount Moon Square to be obtained at any time on any day, but also changes it so it can only be obtained once.",
+          }),
+          createSimpleToggleViewModel({
             id: "WEEKDAY_SIBLINGS_ALWAYS_ACCESSIBLE" as const,
             name: "Weekday Siblings Always Accessible",
             description: "Makes is so all the weekday siblings will show up on any day of the week.\n"
