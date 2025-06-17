@@ -15,14 +15,7 @@ values:
   checkKenjiItemEventFlag: "31 $gotPPUpFromKenjiEventFlagId 09 27 61 00 37 61 03 FD 60"
   setBeverlyItemEventFlag: "35 7D 00 33 $gotNuggetFromBeverlyEventFlagId 91"
   setJoseItemEventFlag: "35 7E 00 33 $gotStarPieceFromJoseEventFlagId 91"
-  setWadeItemEventFlag1: "08 49 55 33 $gotBerryFromWadeEventFlagId 03 28 55"
-  setWadeItemEventFlag2: "08 49 55 33 $gotPsncureberryFromWadeEventFlagId 03 31 55"
-  setWadeItemEventFlag3: "08 49 55 33 $gotPrzcureberryFromWadeEventFlagId 03 3A 55"
-  setWadeItemEventFlag4: "08 49 55 33 $gotBitterBerryFromWadeEventFlagId 03 43 55"
   setDerekItemEventFlag: "35 83 00 33 $gotNuggetFromDerekEventFlagId 91"
-  setWiltonItemEventFlag1: "08 E7 59 33 $gotUltraBallFromWiltonEventFlagId 03 CF 59"
-  setWiltonItemEventFlag2: "08 E7 59 33 $gotGreatBallFromWiltonEventFlagId 03 D8 59"
-  setWiltonItemEventFlag3: "08 E7 59 33 $gotPokeBallFromWiltonEventFlagId 03 E1 59"
   setKenjiItemEventFlag: "32 6A 02 33 $gotPPUpFromKenjiEventFlagId 91"
 changes:
 - description: "Adds Code"
@@ -40,11 +33,11 @@ changes:
 - description: "Adds Code"
   locations:
   - bank: 105
-  value: "$setWadeItemEventFlag1 $setWadeItemEventFlag2 $setWadeItemEventFlag3 $setWadeItemEventFlag4 $setDerekItemEventFlag"
+  value: "$setDerekItemEventFlag"
 - description: "Adds Code"
   locations:
   - bank: 103
-  value: "$setWiltonItemEventFlag1 $setWiltonItemEventFlag2 $setWiltonItemEventFlag3 $checkKenjiItemEventFlag $setKenjiItemEventFlag"
+  value: "$checkKenjiItemEventFlag $setKenjiItemEventFlag"
 - description: "Updates Beverly's phone call script"
   locations:
   - bank: 47
@@ -115,46 +108,11 @@ changes:
   - bank: 104
     address: 0x494E
   value: "00 @$setJoseItemEventFlag"
-- description: "Updates Wade's give item script"
-  locations:
-  - bank: 105
-    address: 0x5525
-  value: "03 @$setWadeItemEventFlag1"
-- description: "Updates Wade's give item script"
-  locations:
-  - bank: 105
-    address: 0x552E
-  value: "03 @$setWadeItemEventFlag2"
-- description: "Updates Wade's give item script"
-  locations:
-  - bank: 105
-    address: 0x5537
-  value: "03 @$setWadeItemEventFlag3"
-- description: "Updates Wade's give item script"
-  locations:
-  - bank: 105
-    address: 0x5540
-  value: "03 @$setWadeItemEventFlag4"
 - description: "Updates Derek's give item script"
   locations:
   - bank: 105
     address: 0x5B53
   value: "00 @$setDerekItemEventFlag"
-- description: "Updates Wilton's give item script"
-  locations:
-  - bank: 103
-    address: 0x59CC
-  value: "03 @$setWiltonItemEventFlag1"
-- description: "Updates Wilton's give item script"
-  locations:
-  - bank: 103
-    address: 0x59D5
-  value: "03 @$setWiltonItemEventFlag2"
-- description: "Updates Wilton's give item script"
-  locations:
-  - bank: 103
-    address: 0x59DE
-  value: "03 @$setWiltonItemEventFlag3"
 - description: "Updates Kenji's give item script"
   locations:
   - bank: 103

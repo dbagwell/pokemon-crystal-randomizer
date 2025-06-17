@@ -1671,13 +1671,25 @@ const createPatches = (
   if (settings.CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR.includes("SIMULTANEOUS_GIFTS")) {
     romInfo.patchHunks.push(...[
       new DataHunk(ROMOffset.fromBankAddress(47, 0x54AD), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x54BC), [0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x54C2), [0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x54C8), [0x18, 0x18, 0x18]),
       new DataHunk(ROMOffset.fromBankAddress(47, 0x5D57), [0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x5D61), [0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x5D67), [0x18, 0x18, 0x18]),
       new DataHunk(ROMOffset.fromBankAddress(103, 0x59CF), [0x18, 0x18, 0x18]),
       new DataHunk(ROMOffset.fromBankAddress(103, 0x59D8), [0x18, 0x18, 0x18]),
       new DataHunk(ROMOffset.fromBankAddress(105, 0x5528), [0x18, 0x18, 0x18]),
       new DataHunk(ROMOffset.fromBankAddress(105, 0x5531), [0x18, 0x18, 0x18]),
       new DataHunk(ROMOffset.fromBankAddress(105, 0x553A), [0x18, 0x18, 0x18]),
     ])
+  }
+  
+  if (settings.CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR.includes("SIMULTANEOUS_GIFTS") || settings.CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR.includes("PREVENT_REPEAT_GIFTS")) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "wadeAndWiltonChanges.yml",
+    ).hunks)
   }
   
   if (settings.CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR.includes("PRIORITIZE_USEFUL_CALLS")) {
