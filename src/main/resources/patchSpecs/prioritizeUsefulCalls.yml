@@ -76,7 +76,7 @@ changes:
 - description: "Removes some options that were being prioritized too early"
   locations:
   - bank: 47
-    address: 0x52D9
+    address: 0x52E5
   - bank: 47
     address: 0x58F7
   - bank: 47
@@ -126,7 +126,7 @@ changes:
   - bank: 47
     address: 0x52DD
   - bank: 47
-    address: 0x52D7
+    address: 0x52E3
   value: "0E 53"
 - description: "Updates Ralph's phone call script"
   locations:

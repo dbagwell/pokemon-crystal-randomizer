@@ -5225,7 +5225,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
     areaId: "PEWTER_GYM",
     romOffsets: [[
       104,
-      0x43EE,
+      0x6887,
     ]],
   },
   CERULEAN_GYM_BADGE: {

@@ -1311,7 +1311,7 @@ const createPatches = (
   
   if (settings.BUENA_ALWAYS_GIVES_ITEM) {
     romInfo.patchHunks.push(new DataHunk(
-      ROMOffset.fromBankAddress(34, 0x6DDB),
+      ROMOffset.fromBankAddress(23, 0x5777),
       [0x31, 0x3D, 0x03, 0x08, 0x00, 0x58, 0x34, 0x13, 0x00, 0x09, 0x65, 0x58]
     ))
   }

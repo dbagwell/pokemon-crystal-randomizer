@@ -9,5 +9,5 @@ changes:
 - description: "Updates the flower shop owner's script."
   locations:
   - bank: 21
-    address: 0x535E
+    address: 0x535D
   value: "$checkFloriaState 34 1D 00 08 9C 53 31 5C 00 08 7B 53 31 2A 00 03 @$decideFinalFlowerOwnerShopText"
