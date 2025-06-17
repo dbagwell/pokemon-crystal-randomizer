@@ -13,22 +13,22 @@ values:
   badgeCaseText: "81 80 83 86 84 7F 82 80 92 84 50"
   getItemPickupSound: "11 91 00 FE 02 28 11 11 $regularItemPickupSound FE 05 38 0A 11 91 00 FE 07 38 03 11 9C 00 C9"
   regularItemPickupSoundId: "01 00"
-  checkAlreadyGotBrocksItem: "31 0D 01 09 92 68 91"
-  checkGotBrocksItem: "08 8C 68 33 0D 01 91"
-  checkAlreadyGotMistysItem: "31 0E 01 09 60 44 91"
-  checkGotMistysItem: "08 60 44 33 0E 01 91"
-  checkAlreadyGotSurgesItem: "31 0F 01 09 D9 60 91"
-  checkGotSurgesItem: "08 D3 60 33 0F 01 91"
-  checkAlreadyGotErikasItem: "31 10 01 09 9B 6A 91"
-  checkGotErikasItem: "08 9B 6A 33 10 01 91"
-  checkAlreadyGotJaninesItem: "31 11 01 09 00 5E 91"
-  checkGotJaninesItem: "08 FD 5D 33 11 01 91"
-  checkAlreadyGotSabrinasItem: "31 12 01 09 65 5C 91"
-  checkGotSabrinasItem: "08 5F 5C 33 12 01 91"
-  checkAlreadyGotBlainesItem: "31 13 01 09 2B 75 91"
-  checkGotBlainesItem: "08 25 75 33 13 01 91"
-  checkAlreadyGotBluesItem: "31 14 01 09 51 6A 91"
-  checkGotBluesItem: "08 4B 6A 33 14 01 91"
+  checkAlreadyGotBrocksItem: "31 0D 01 09 92 68 03 86 68"
+  checkGotBrocksItem: "08 8C 68 33 0D 01 03 8C 68"
+  checkAlreadyGotMistysItem: "31 0E 01 09 60 44 03 5A 44"
+  checkGotMistysItem: "08 60 44 33 0E 01 03 60 44"
+  checkAlreadyGotSurgesItem: "31 0F 01 09 D9 60 03 CD 60"
+  checkGotSurgesItem: "08 D3 60 33 0F 01 03 D3 60"
+  checkAlreadyGotErikasItem: "31 10 01 09 9B 6A 03 95 6A"
+  checkGotErikasItem: "08 9B 6A 33 10 01 03 9B 6A"
+  checkAlreadyGotJaninesItem: "31 11 01 09 00 5E 03 F7 5D"
+  checkGotJaninesItem: "08 FD 5D 33 11 01 03 FD 5D"
+  checkAlreadyGotSabrinasItem: "31 12 01 09 65 5C 03 59 5C"
+  checkGotSabrinasItem: "08 5F 5C 33 12 01 03 5F 5C"
+  checkAlreadyGotBlainesItem: "31 13 01 09 2B 75 03 1F 75"
+  checkGotBlainesItem: "08 25 75 33 13 01 03 25 75"
+  checkAlreadyGotBluesItem: "31 14 01 09 51 6A 03 45 6A"
+  checkGotBluesItem: "08 4B 6A 33 14 01 03 4B 6A"
   clearUndergroundWarehouseDirectorEventFlag: "36 13 00 32 17 01 91"
   setUndergroundWarehouseDirectorEventFlag: "33 4A 00 33 17 01 91"
   fruitTreeSoundEffectScript: "86 88 45 03 3F 40"
@@ -139,7 +139,7 @@ changes:
   locations:
   - bank: 104
     address: 0x6882
-  value: "18 00 @$checkAlreadyGotBrocksItem 9E 95 01 00 @$checkGotBrocksItem"
+  value: "18 03 @$checkAlreadyGotBrocksItem 9E 95 01 03 @$checkGotBrocksItem"
 - description: "Adds logic for Brock's item."
   locations:
   - bank: 104
@@ -153,7 +153,7 @@ changes:
   locations:
   - bank: 98
     address: 0x4456
-  value: "18 00 @$checkAlreadyGotMistysItem 9E 99 01 00 @$checkGotMistysItem"
+  value: "18 03 @$checkAlreadyGotMistysItem 9E 99 01 03 @$checkGotMistysItem"
 - description: "Adds logic for Misty's item."
   locations:
   - bank: 98
@@ -167,7 +167,7 @@ changes:
   locations:
   - bank: 100
     address: 0x60C9
-  value: "18 00 @$checkAlreadyGotSurgesItem 9E 9A 01 00 @$checkGotSurgesItem"
+  value: "18 03 @$checkAlreadyGotSurgesItem 9E 9A 01 03 @$checkGotSurgesItem"
 - description: "Adds logic for Surge's item."
   locations:
   - bank: 100
@@ -181,7 +181,7 @@ changes:
   locations:
   - bank: 28
     address: 0x6A91
-  value: "18 00 @$checkAlreadyGotErikasItem 9E 9B 01 00 @$checkGotErikasItem"
+  value: "18 03 @$checkAlreadyGotErikasItem 9E 9B 01 03 @$checkGotErikasItem"
 - description: "Adds logic for Erika's item."
   locations:
   - bank: 28
@@ -195,7 +195,7 @@ changes:
   locations:
   - bank: 101
     address: 0x5DF3
-  value: "18 00 @$checkAlreadyGotJaninesItem 9E A2 01 00 @$checkGotJaninesItem"
+  value: "18 03 @$checkAlreadyGotJaninesItem 9E A2 01 03 @$checkGotJaninesItem"
 - description: "Adds logic for Janine's item."
   locations:
   - bank: 101
@@ -209,7 +209,7 @@ changes:
   locations:
   - bank: 98
     address: 0x5C55
-  value: "18 00 @$checkAlreadyGotSabrinasItem 9E AB 01 00 @$checkGotSabrinasItem"
+  value: "18 03 @$checkAlreadyGotSabrinasItem 9E AB 01 03 @$checkGotSabrinasItem"
 - description: "Adds logic for Sabrina's item."
   locations:
   - bank: 98
@@ -223,7 +223,7 @@ changes:
   locations:
   - bank: 106
     address: 0x751B
-  value: "18 00 @$checkAlreadyGotBlainesItem 9E B0 01 00 @$checkGotBlainesItem"
+  value: "18 03 @$checkAlreadyGotBlainesItem 9E B0 01 03 @$checkGotBlainesItem"
 - description: "Adds logic for Blaine's item."
   locations:
   - bank: 106
@@ -237,7 +237,7 @@ changes:
   locations:
   - bank: 38
     address: 0x6A41
-  value: "18 00 @$checkAlreadyGotBluesItem 9E B3 01 00 @$checkGotBluesItem"
+  value: "18 03 @$checkAlreadyGotBluesItem 9E B3 01 03 @$checkGotBluesItem"
 - description: "Adds logic for Blue's item."
   locations:
   - bank: 38
