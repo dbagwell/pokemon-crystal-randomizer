@@ -50,8 +50,8 @@ export const updateMapObjectEvents = (
       return object.id === "ILEX_FOREST_LASS"
     })
     
-    object!.coordinate = [9, 23]
-    object!.movementBehaviourId = "STANDING_LEFT"
+    object!.coordinate = [1, 17]
+    object!.movementBehaviourId = "STANDING_DOWN"
   }
   
   if (settings.RADIO_CARD_QUIZ_ALWAYS_ACCESSIBLE) {
