@@ -1438,6 +1438,10 @@ const createPatches = (
         romInfo,
         "earlyGSBall.yml",
       ).hunks,
+      new DataHunk(
+        ROMOffset.fromBankAddress(24, 0x4B93),
+        [31, 0x37, 0x00, 0x09, 0xA0, 0x4B, 0x4C, 0x81, 0x4C, 0x55, 0x33, 0x37, 0x00, 0x21, 0x43, 0x09, 0xAB, 0x4B]
+      ), // Allow getting secretpotion item even after turning in the secret potion to jasmine
     ]
   }
   
