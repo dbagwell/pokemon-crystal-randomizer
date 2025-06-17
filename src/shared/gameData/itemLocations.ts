@@ -3634,6 +3634,9 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     groupId: "REGULAR_GIFTS",
     itemId: "POKE_BALL",
     areaId: "ELMS_LAB",
+    accessRequirements: [
+      "MYSTERY_EGG",
+    ],
     romOffsets: [
       [
         30,
