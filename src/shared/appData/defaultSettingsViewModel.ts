@@ -1381,6 +1381,11 @@ export const defaultSettingsViewModel = () => {
             name: "Enable GS Ball Event",
             description: "After defeating champion Lance, leaving the Goldenrod Pokécenter will trigger an event where someone will walk up to you and give an item (the GS Ball).",
           }),
+          createSimpleToggleViewModel({
+            id: "SKIP_GS_BALL_INSPECTION" as const,
+            name: "Skip GS Ball Inspection",
+            description: "Kurt will immeditatly notice the GS Ball starting to shake after you give it to him, instead of having to wait until the next day.",
+          }),
           createSimpleMultiSelectorViewModel({
             id: "CHANGE_SS_AQUA_REQUIREMENTS" as const,
             name: "Change S.S. Aqua Requirements",

@@ -1515,6 +1515,11 @@ const createPatches = (
     ])
   }
   
+  if (settings.SKIP_GS_BALL_INSPECTION) {
+    romInfo.patchHunks.push(new DataHunk(ROMOffset.fromBankAddress(99, 0x635D), [0x18]))
+    romInfo.patchHunks.push(new DataHunk(ROMOffset.fromBankAddress(99, 0x6364), [0x03, 0x78, 0x63]))
+  }
+  
   // Early Train
   
   if (settings.RIDE_TRAIN_WITHOUT_POWER) {
