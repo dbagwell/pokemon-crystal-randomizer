@@ -29,7 +29,7 @@ values:
   checkGotBlainesItem: "08 25 75 33 13 01 03 25 75"
   checkAlreadyGotBluesItem: "31 14 01 09 51 6A 03 45 6A"
   checkGotBluesItem: "08 4B 6A 33 14 01 03 4B 6A"
-  clearUndergroundWarehouseDirectorEventFlag: "36 13 00 32 17 01 91"
+  clearUndergroundWarehouseDirectorEventFlag: "33 CF 06 32 17 01 91"
   setUndergroundWarehouseDirectorEventFlag: "33 4A 00 33 17 01 91"
   fruitTreeSoundEffectScript: "86 88 45 03 3F 40"
 changes:
@@ -314,7 +314,7 @@ changes:
 - description: "Calls code to clear the underground warehouse director event flag."
   locations:
   - bank: 47
-    address: 0x4242
+    address: 0x4245
   value: "00 @$clearUndergroundWarehouseDirectorEventFlag"
 - description: "Adds code to set the underground warehouse director event flag."
   locations:
