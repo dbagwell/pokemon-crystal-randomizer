@@ -1,0 +1,13 @@
+description: "Allows getting the item from the vermilion pokemon fan club member even after giving the lost item to the copycat"
+values:
+  updateFlags: "33 CF 00 33 D0 00 91"
+changes:
+- description: "Adds Code"
+  locations:
+  - bank: 98
+  value: $updateFlags
+- description: "Calls new code"
+  locations:
+  - bank: 98
+    address: 0x6F52
+  value: "00 @$updateFlags"

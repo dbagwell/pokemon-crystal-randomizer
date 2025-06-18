@@ -1419,6 +1419,11 @@ export const defaultSettingsViewModel = () => {
             description: "Allows riding the magnet train between Goldenrod and Saffron before fixing the Kanto Power plant.",
           }),
           createSimpleToggleViewModel({
+            id: "SKIP_TALKING_TO_COPYCAT" as const,
+            name: "Skip Talking to Copycat",
+            description: "Allows getting the item (Lost Item) from the Vermilion Pokémon Fan Club member without having to talk to the Copycat in Saffron City.",
+          }),
+          createSimpleToggleViewModel({
             id: "MOUNT_MOON_HIDDEN_ITEM_ALWAYS_ACCESSIBLE" as const,
             name: "Mount Moon Hidden Item Always Accessible",
             description: "Allows the Hidden Item in Mount Moon Square to be obtained at any time on any day, but also changes it so it can only be obtained once.",
