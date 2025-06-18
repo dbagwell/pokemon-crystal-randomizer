@@ -32,6 +32,7 @@ values:
   clearUndergroundWarehouseDirectorEventFlag: "33 CF 06 32 17 01 91"
   setUndergroundWarehouseDirectorEventFlag: "33 4A 00 33 17 01 91"
   fruitTreeSoundEffectScript: "86 88 45 03 3F 40"
+  elmMysteryEggCheck: "21 45 09 A2 4D 31 24 00 03 E5 4B"
 changes:
 - description: "Changes the script for picking up an item ball to use the script that plays a sound dynamically based on the type of item."
   locations:
@@ -349,3 +350,12 @@ changes:
   - bank: 17
     address: 0x4035
   value: "03 @$fruitTreeSoundEffectScript"
+- description: "Updates elms script to check if you have the mystery egg before doing anything else."
+  locations:
+  - bank: 30
+  value: "$elmMysteryEggCheck"
+- description: "Updates elms script to check if you have the mystery egg before doing anything else."
+  locations:
+  - bank: 30
+    address: 0x4BE2
+  value: "03 @$elmMysteryEggCheck"
