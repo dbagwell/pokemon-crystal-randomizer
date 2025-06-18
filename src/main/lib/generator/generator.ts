@@ -16,6 +16,7 @@ import { updateLevelUpMoves } from "@lib/generator/gameDataProcessors/levelUpMov
 import { updateMapObjectEvents } from "@lib/generator/gameDataProcessors/mapObjectEvents"
 import { updateMarts } from "@lib/generator/gameDataProcessors/marts"
 import { updateMoveTutorCost } from "@lib/generator/gameDataProcessors/moveTutorCost"
+import { updateNumberOfBadgesForOak } from "@lib/generator/gameDataProcessors/numberOfBadgesForOak"
 import { updateNumberOfMiltankBerries } from "@lib/generator/gameDataProcessors/numberOfMiltankBerries"
 import { updatePokemonInfo } from "@lib/generator/gameDataProcessors/pokemonInfo"
 import { updateStarterItems, updateStarters } from "@lib/generator/gameDataProcessors/starters"
@@ -242,6 +243,7 @@ const updateGameData = (
   updateTrainers(settings, romInfo, random)
   updateMapObjectEvents(settings, romInfo)
   updateItems(settings, romInfo, random)
+  updateNumberOfBadgesForOak(settings, romInfo, random) // Must be before updateAccessLogic
   updateAccessLogic(settings, romInfo)
   shuffleItems(settings, romInfo, random) // Must be after updateMarts and updateAccessLogic
 }
@@ -1740,6 +1742,27 @@ const createPatches = (
         gotPPUpFromKenjiEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_PP_UP_FROM_KENJI.numericId, 2)),
       }
     ).hunks)
+  }
+  
+  // Red / Mount Silver
+  
+  if (settings.SKIP_E4_FOR_RED && (!settings.EARLY_MOUNT_SILVER.VALUE || !settings.EARLY_MOUNT_SILVER.SETTINGS.REQUIRE_TALKING_TO_OAK_FOR_RED)) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(47, 0x44C5), [0x18, 0x18, 0x18]),
+    ])
+  }
+  
+  if (settings.EARLY_MOUNT_SILVER.VALUE && settings.EARLY_MOUNT_SILVER.SETTINGS.REQUIRE_TALKING_TO_OAK_FOR_RED) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "requireOakForRed.yml",
+    ).hunks)
+  }
+  
+  if (settings.RANDOMIZE_NUMBER_OF_BADGES_FOR_OAK.VALUE) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(102, 0x73E0), [romInfo.gameData.numberOfBadgesForOak]),
+    ])
   }
   
   // Performance Improvements

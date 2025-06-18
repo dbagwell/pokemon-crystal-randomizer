@@ -1544,6 +1544,37 @@ export const defaultSettingsViewModel = () => {
               }),
             ],
           }),
+          createConfigurableToggleViewModel({
+            id: "EARLY_MOUNT_SILVER" as const,
+            name: "Early Mount Silver",
+            description: "The guard in front of the Route 28 exit of the Victory Road Gate is removed before Prof. Oak gives you permission to go to Mount Silver.",
+            viewModels: [
+              createSimpleToggleViewModel({
+                id: "REQUIRE_TALKING_TO_OAK_FOR_RED" as const,
+                name: "Require Talking to Oak For Red",
+                description: "Makes it so Red won't appear on Mount Silver until you talk to Prof. Oak with the correct number of Badges.",
+              }),
+            ],
+          }),
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_NUMBER_OF_BADGES_FOR_OAK" as const,
+            name: "Randomize Number of Badges for Oak",
+            description: "Changes the number of badges needed for Prof. Oak to give you permission to go to Mount Silver (or for Red to appear if 'Early Mount Silver' and 'Require Talking to Oak For Red' are enabled).",
+            viewModels: [
+              createIntegerRangeInputViewModel({
+                id: "RANGE" as const,
+                min: 0,
+                max: 16,
+                selectedMinValue: 0,
+                selectedMaxValue: 16,
+              }),
+            ] as const,
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_E4_FOR_RED" as const,
+            name: "Skip E4 for Red",
+            description: "Makes it so Red can appear on Mount Silver before you've entered the Hall of Fame.",
+          }),
           createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",

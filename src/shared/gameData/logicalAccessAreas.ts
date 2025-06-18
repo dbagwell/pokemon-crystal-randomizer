@@ -4949,6 +4949,32 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
         "VICTORY_ROAD_GATE_SOUTH_AREA",
         8,
       ],
+      [
+        "VICTORY_ROAD_GATE_WEST_AREA",
+        "OAKS_LAB",
+        16,
+      ],
+      [
+        "VICTORY_ROAD_GATE_EAST_AREA",
+        "VERMILION_CITY",
+        "POKEGEAR",
+        "RADIO_CARD",
+        "EXPN_CARD",
+      ],
+      [
+        "VICTORY_ROAD_GATE_EAST_AREA",
+        "VERMILION_CITY_SNORLAX_AREA",
+        "POKEGEAR",
+        "RADIO_CARD",
+        "EXPN_CARD",
+      ],
+      [
+        "VICTORY_ROAD_GATE_EAST_AREA",
+        "ROUTE_11",
+        "POKEGEAR",
+        "RADIO_CARD",
+        "EXPN_CARD",
+      ],
     ],
   },
   VICTORY_ROAD_GATE_WEST_AREA: {

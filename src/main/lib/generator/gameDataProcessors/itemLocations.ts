@@ -836,6 +836,42 @@ export const updateAccessLogic = (
     romInfo.gameData.marts.MAHOGANY_1.accessRequirements = []
   }
   
+  if (settings.EARLY_MOUNT_SILVER.VALUE) {
+    removeAccessRequirements({
+      areaIds: [
+        "VICTORY_ROAD_GATE_WEST_AREA",
+        "VICTORY_ROAD_GATE_NORTH_AREA",
+      ],
+      requirements: [
+        "OAKS_LAB",
+        16,
+      ],
+      modifyMutualAccess: true,
+    })
+  } else if (settings.RANDOMIZE_NUMBER_OF_BADGES_FOR_OAK.VALUE) {
+    removeAccessRequirements({
+      areaIds: [
+        "VICTORY_ROAD_GATE_WEST_AREA",
+        "VICTORY_ROAD_GATE_NORTH_AREA",
+      ],
+      requirements: [
+        16,
+      ],
+      modifyMutualAccess: true,
+    })
+    
+    addAccessRequirements({
+      areaIds: [
+        "VICTORY_ROAD_GATE_WEST_AREA",
+        "VICTORY_ROAD_GATE_NORTH_AREA",
+      ],
+      requirements: [
+        romInfo.gameData.numberOfBadgesForOak,
+      ],
+      modifyMutualAccess: true,
+    })
+  }
+  
   settings.SHUFFLE_ITEMS.SETTINGS.ACCESS_MODIFIERS.forEach((rulesetId) => {
     let rulesetInfo: any
     

@@ -48,4 +48,5 @@ export type GameData = {
   itemLocations: IdMap<ItemLocationId, ItemLocation>
   warps: IdMap<WarpId, Warp>
   areas: IdMap<LogicalAccessAreaId, LogicalAccessArea>
+  numberOfBadgesForOak: number
 }

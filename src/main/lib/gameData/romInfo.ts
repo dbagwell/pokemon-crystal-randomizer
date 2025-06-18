@@ -55,6 +55,7 @@ export class ROMInfo {
       itemLocations: JSON.parse(JSON.stringify(itemLocationsMap)),
       warps: JSON.parse(JSON.stringify(warpsMap)),
       areas: JSON.parse(JSON.stringify(logicalAccessAreasMap)),
+      numberOfBadgesForOak: 16,
     }
   }
   

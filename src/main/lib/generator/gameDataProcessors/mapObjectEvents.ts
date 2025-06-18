@@ -115,4 +115,10 @@ export const updateMapObjectEvents = (
       return object.id === "MAHOGANY_MART_1F_ROCKET_SALESMAN"
     })!.flagId = undefined
   }
+  
+  if (settings.EARLY_MOUNT_SILVER.VALUE) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "VICTORY_ROAD_GATE_ROUTE_28_GUARD"
+    })!.flagId = "INITIALIZED_EVENTS"
+  }
 }

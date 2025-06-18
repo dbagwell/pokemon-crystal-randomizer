@@ -27833,6 +27833,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 31235,
   },
   {
+    id: "VICTORY_ROAD_GATE_ROUTE_28_GUARD",
     romOffset: [
       38,
       31710,
