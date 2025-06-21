@@ -1025,6 +1025,7 @@ const createPatches = (
     || settings.VIOLET_MART_REPELS
     || settings.BUYABLE_EVOLUTION_STONES
     || settings.BUYABLE_TM12
+    || settings.SHUFFLE_ITEMS.VALUE && settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")
   ) {
     const martsPatch = Patch.fromYAML(
       romInfo,
