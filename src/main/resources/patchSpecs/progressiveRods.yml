@@ -3,6 +3,8 @@ values:
   itemBallCode: "FA 3E D0 C3 @$maybeUpdateRod2"
   hiddenItemCode1: "0E 04 @$hiddenItemCode2 41 00 00 19 40 D0 91"
   hiddenItemCode2: "FA 40 D0 CD @$maybeUpdateRod2 EA DD C2 C9"
+  martCode1: "CD 4D 30 47 E5 3E 04 21 @$maybeUpdateRod1 CF E1 78 C9"
+  martCode2: "2A 47 3E 04 21 @$maybeUpdateRod1 CF 78 12 13 C9"
   trashCanCode: "19 06 D1 41 00 00 91"
   fruitTreeCode1: "0E 11 @$fruitTreeCode2 91"
   fruitTreeCode2: "FA 3F D0 47 3E 04 21 @$maybeUpdateRod1 CF 78 EA DD C2 C9"
@@ -14,6 +16,10 @@ changes:
   locations:
   - bank: 4
   value: "$itemBallCode $hiddenItemCode1 $hiddenItemCode2 $maybeUpdateRod1"
+- description: "Adds code."
+  locations:
+  - bank: 5
+  value: "$martCode1 $martCode2"
 - description: "Adds code."
   locations:
   - bank: 17
@@ -38,6 +44,16 @@ changes:
   - bank: 4
     address: 0x7629
   value: "00 @$hiddenItemCode1"
+- description: "Calls new code."
+  locations:
+  - bank: 5
+    address: 0x5BC8
+  value: "@$martCode1"
+- description: "Calls new code."
+  locations:
+  - bank: 5
+    address: 0x5C33
+  value: "CD @$martCode2"
 - description: "Calls new code."
   locations:
   - bank: 17
