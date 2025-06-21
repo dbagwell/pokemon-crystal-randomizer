@@ -1760,9 +1760,15 @@ const createPatches = (
   }
   
   if (settings.RANDOMIZE_NUMBER_OF_BADGES_FOR_OAK.VALUE) {
-    romInfo.patchHunks.push(...[
-      new DataHunk(ROMOffset.fromBankAddress(102, 0x73E0), [romInfo.gameData.numberOfBadgesForOak]),
-    ])
+    if (romInfo.gameData.numberOfBadgesForOak === 0) {
+      romInfo.patchHunks.push(...[
+        new DataHunk(ROMOffset.fromBankAddress(102, 0x73DF), [0x03, 0xF7, 0x73]),
+      ])
+    } else {
+      romInfo.patchHunks.push(...[
+        new DataHunk(ROMOffset.fromBankAddress(102, 0x73DF), [0x0A, romInfo.gameData.numberOfBadgesForOak - 1]),
+      ])
+    }
   }
   
   // Performance Improvements
