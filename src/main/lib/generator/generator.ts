@@ -702,6 +702,13 @@ const createPatches = (
         })
       }),
     ]
+    
+    if (settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
+      romInfo.patchHunks.push(...Patch.fromYAML(
+        romInfo,
+        "martsPreventDuplicateKeyItems.yml",
+      ).hunks)
+    }
   } else if (settings.FASTER_ITEM_PICKUP_SFX) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
