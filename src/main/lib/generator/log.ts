@@ -608,7 +608,7 @@ export const generatorLog = (params: {
             return [
               index === 0 ? mart.groupId : "",
               itemId,
-              `${itemsMap[itemId].price}`,
+              `${gameData.items[itemId].price}`,
             ]
           }),
         }

@@ -1,4 +1,5 @@
 import type { Encounter } from "@shared/types/gameData/encounter"
+import type { Item } from "@shared/types/gameData/item"
 import type { ItemLocation } from "@shared/types/gameData/itemLocation"
 import type { LogicalAccessArea } from "@shared/types/gameData/logicalAccessArea"
 import type { MapObjectEvent } from "@shared/types/gameData/mapObjectEvent"
@@ -11,7 +12,7 @@ import type { Trainer } from "@shared/types/gameData/trainer"
 import type { Warp } from "@shared/types/gameData/warp"
 import type { EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
 import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
-import type { HoldableItemId } from "@shared/types/gameDataIds/items"
+import type { HoldableItemId, ItemId } from "@shared/types/gameDataIds/items"
 import type { LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
 import type { MartId } from "@shared/types/gameDataIds/marts"
 import type { MoveId } from "@shared/types/gameDataIds/moves"
@@ -49,4 +50,5 @@ export type GameData = {
   warps: IdMap<WarpId, Warp>
   areas: IdMap<LogicalAccessAreaId, LogicalAccessArea>
   numberOfBadgesForOak: number
+  items: IdMap<ItemId, Item>
 }

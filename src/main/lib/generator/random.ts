@@ -8,9 +8,17 @@ export class Random {
     this.int = (min: number, max: number): number => {
       return Math.floor(rng() * (max + 1 - min)) + min
     }
+    
+    this.intFromNormalDistribution = (min: number, max: number): number => {
+      const sample1 = rng()
+      const sample2 = rng()
+      const transformed = Math.sqrt(-2 * Math.log(sample1)) * Math.cos(2 * Math.PI * sample2) * 0.3413447460685429 + 0.5
+      return Math.floor(transformed * (max + 1 - min)) + min
+    }
   }
   
   readonly int: (min: number, max: number) => number
+  readonly intFromNormalDistribution: (min: number, max: number) => number
   
   readonly boolean = (): boolean => {
     return this.int(0, 1) === 1

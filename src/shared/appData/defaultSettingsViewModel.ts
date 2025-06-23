@@ -12,7 +12,7 @@ import { growthRateIds } from "@shared/types/gameDataIds/growthRates"
 import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
 import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGroups"
 import { itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
-import { ballItemIds, holdableItemIds, type ItemId, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
+import { ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import {
@@ -1180,6 +1180,110 @@ export const defaultSettingsViewModel = () => {
                 selectedMaxValue: 9999,
               }),
             ] as const,
+          }),
+          createConfigurableToggleViewModel({
+            id: "CHANGE_DEFAULT_ITEM_PRICES" as const,
+            name: "Change Default Item Prices",
+            description: "Changes the prices of items that can be bought from regular shops. "
+              + "(This also changes the prices items can be sold for, "
+              + "since the sell prices are just calculated from the buy prices).",
+            viewModels: [
+              createConfigurableMultiSelectorViewModel({
+                id: "CUSTOM_BASE_PRICES" as const,
+                name: "Custom Base Prices",
+                description: "Set custom base prices for sepecific items.",
+                options: itemIds.map((itemId) => {
+                  return createConfigurableSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                    viewModels: [
+                      createIntegerInputViewModel({
+                        id: "PRICE" as const,
+                        name: "Price",
+                        isRequired: true,
+                        min: 0,
+                        max: 9999,
+                        value: itemsMap[itemId].price,
+                      }),
+                    ],
+                  })
+                }),
+              }),
+              createConfigurableToggleViewModel({
+                id: "RANDOMIZE_PRICES" as const,
+                name: "Randomize Prices",
+                description: "Changes the default prices of all items to random ones based on the selected constraints.",
+                viewModels: [
+                  createIntegerInputViewModel({
+                    id: "MIN_PERCENTAGE" as const,
+                    name: "Minimum Percentage",
+                    description: "If set, the price selected for each item will never be lower than this percentage of the base price of the item.",
+                    isRequired: false,
+                    min: 0,
+                    max: 100,
+                    value: undefined,
+                  }),
+                  createIntegerInputViewModel({
+                    id: "MAX_PERCENTAGE" as const,
+                    name: "Maximum Percentage",
+                    description: "If set, the price selected for each item will never be higher than this percentage of the base price of the item.",
+                    isRequired: false,
+                    min: 100,
+                    value: undefined,
+                  }),
+                  createIntegerRangeInputViewModel({
+                    id: "ABSOLUTE_RANGE" as const,
+                    name: "Absolute Range",
+                    description: "Selected prices will never be lower that then selected minumum and will never be higher than the selected maximum.",
+                    min: 0,
+                    max: 9999,
+                    selectedMinValue: 0,
+                    selectedMaxValue: 9999,
+                  }),
+                  createSimpleToggleViewModel({
+                    id: "PREFER_SIMILAR_PRICES" as const,
+                    name: "Prefer Similar Prices",
+                    description: "Makes it so numbers closer to the base price of each item will have a higher chance of being selected for that item.",
+                  }),
+                  createConfigurableToggleViewModel({
+                    id: "LIMIT_CHERRYGROVE_PRICES" as const,
+                    name: "Limit Cherrygrove Prices",
+                    description: "If possible, limits the prices of items that can be bought from the Cherrygrove Mart to be within the selected range.\n"
+                      + "This limitation will be ignored for items with a price range (as determined by the other settings) that does not intersect this range.",
+                    viewModels: [
+                      createIntegerRangeInputViewModel({
+                        id: "RANGE" as const,
+                        min: 0,
+                        max: 9999,
+                        selectedMinValue: 0,
+                        selectedMaxValue: 9999,
+                      }),
+                    ],
+                  }),
+                  createConfigurableMultiSelectorViewModel({
+                    id: "OVERRIDES" as const,
+                    name: "Overrides",
+                    description: "Specify custom prices for specific items instead of having them be random.",
+                    options: itemIds.map((itemId) => {
+                      return createConfigurableSelectorOption({
+                        id: itemId,
+                        name: itemsMap[itemId].name,
+                        viewModels: [
+                          createIntegerInputViewModel({
+                            id: "PRICE" as const,
+                            name: "Price",
+                            isRequired: true,
+                            min: 0,
+                            max: 9999,
+                            value: itemsMap[itemId].price,
+                          }),
+                        ],
+                      })
+                    }),
+                  }),
+                ],
+              }),
+            ],
           }),
         ] as const,
       }), // END MARTS

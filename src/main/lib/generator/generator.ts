@@ -19,6 +19,7 @@ import { updateMoveTutorCost } from "@lib/generator/gameDataProcessors/moveTutor
 import { updateNumberOfBadgesForOak } from "@lib/generator/gameDataProcessors/numberOfBadgesForOak"
 import { updateNumberOfMiltankBerries } from "@lib/generator/gameDataProcessors/numberOfMiltankBerries"
 import { updatePokemonInfo } from "@lib/generator/gameDataProcessors/pokemonInfo"
+import { updatePrices } from "@lib/generator/gameDataProcessors/prices"
 import { updateStarterItems, updateStarters } from "@lib/generator/gameDataProcessors/starters"
 import { updateTeachableMoves } from "@lib/generator/gameDataProcessors/teachableMoves"
 import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
@@ -34,7 +35,6 @@ import { type PlayerOptions, type Settings, settingsFromViewModel } from "@share
 import { eventFlagsMap } from "@shared/gameData/eventFlags"
 import { gen5BaseExpMap } from "@shared/gameData/gen5BaseExp"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
-import { itemsMap } from "@shared/gameData/items"
 import { movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
@@ -245,7 +245,8 @@ const updateGameData = (
   updateItems(settings, romInfo, random)
   updateNumberOfBadgesForOak(settings, romInfo, random) // Must be before updateAccessLogic
   updateAccessLogic(settings, romInfo)
-  shuffleItems(settings, romInfo, random) // Must be after updateMarts and updateAccessLogic
+  shuffleItems(settings, romInfo, random) // Must be after updateItems, updateMarts and updateAccessLogic
+  updatePrices(settings, romInfo, random) // Must be after updateMarts, updateItems, and shuffleItems
 }
 
 const createPatches = (
@@ -314,7 +315,7 @@ const createPatches = (
       return
     }
       
-    const item = itemsMap[itemId]
+    const item = romInfo.gameData.items[itemId]
       
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
@@ -636,13 +637,13 @@ const createPatches = (
         {},
         {
           regularItemPickupSound: settings.FASTER_ITEM_PICKUP_SFX ? "90 00" : "01 00",
-          elmsAideNumberOfItems: hexStringFrom([Math.min(itemCategoriesMap[itemsMap[romInfo.gameData.itemLocations.ELMS_LAB_AIDES_GIFT_FOR_MYSTERY_EGG.itemId].category].slotSize, 5)]),
+          elmsAideNumberOfItems: hexStringFrom([Math.min(itemCategoriesMap[romInfo.gameData.items[romInfo.gameData.itemLocations.ELMS_LAB_AIDES_GIFT_FOR_MYSTERY_EGG.itemId].category].slotSize, 5)]),
         },
       ).hunks,
       new DataHunk(
         ROMOffset.fromBankAddress(1, 0x67C1),
         Array(0xF9).fill(undefined).flatMap((_, index) => {
-          const item = Object.values(itemsMap).find((item) => {
+          const item = Object.values(romInfo.gameData.items).find((item) => {
             return item.numericId === index + 1
           })
         
@@ -673,7 +674,7 @@ const createPatches = (
       new DataHunk(
         ROMOffset.fromBankAddress(114, 0x4000),
         Array(0xF9).fill(undefined).flatMap((_, index) => {
-          const item = Object.values(itemsMap).find((item) => {
+          const item = Object.values(romInfo.gameData.items).find((item) => {
             return item.numericId === index + 1
           })
         
@@ -697,7 +698,7 @@ const createPatches = (
               romOffset[0],
               romOffset[1],
             ),
-            [itemsMap[itemLocation.itemId].numericId],
+            [romInfo.gameData.items[itemLocation.itemId].numericId],
           )
         })
       }),
@@ -728,7 +729,7 @@ const createPatches = (
             romOffset[0],
             romOffset[1],
           ),
-          [itemsMap[itemLocation.itemId].numericId, 1],
+          [romInfo.gameData.items[itemLocation.itemId].numericId, 1],
         )
       })
     }))
@@ -742,7 +743,7 @@ const createPatches = (
         Object.values(romInfo.gameData.itemLocations).filter((itemLocation) => {
           return itemLocation.type === "FRUIT_TREE"
         }).map((itemLocation) => {
-          return itemsMap[itemLocation.itemId].numericId
+          return romInfo.gameData.items[itemLocation.itemId].numericId
         })
       ),
       ...Object.values(romInfo.gameData.itemLocations).filter((itemLocation) => {
@@ -793,7 +794,7 @@ const createPatches = (
       Object.entries(itemAmountMap).forEach(([itemId, settings]) => {
         hasStartingInventory = true
           
-        const item = itemsMap[itemId as ItemId]
+        const item = romInfo.gameData.items[itemId as ItemId]
               
         switch (item.type) {
         case "POKEDEX_PART": {
@@ -1045,7 +1046,7 @@ const createPatches = (
             extraIncludes: {},
             extraValues: {
               numberOfItems: hexStringFrom([mart.items.length]),
-              items: hexStringFrom(mart.items.map((item) => { return itemsMap[item].numericId })),
+              items: hexStringFrom(mart.items.map((item) => { return romInfo.gameData.items[item].numericId })),
             },
           }
         }),
@@ -1149,7 +1150,7 @@ const createPatches = (
                     return [
                       pokemon.level,
                       pokemonMap[pokemon.id].numericId,
-                      hasItems ? isNotNullish(pokemon.itemId) ? itemsMap[pokemon.itemId].numericId : 0 : null,
+                      hasItems ? isNotNullish(pokemon.itemId) ? romInfo.gameData.items[pokemon.itemId].numericId : 0 : null,
                       hasMoves ? [...pokemon.moves.map((moveId) => {
                         return movesMap[moveId].numericId
                       }), ...Array(4 - pokemon.moves.length).fill(0)] : null,
@@ -1307,10 +1308,10 @@ const createPatches = (
         ]),
       },
       {
-        whirlpoolItem: hexStringFrom([itemsMap[romInfo.gameData.itemLocations.TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT.itemId].numericId]),
-        basementKeyItem: hexStringFrom([itemsMap[romInfo.gameData.itemLocations.RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT.itemId].numericId]),
-        cardKeyItem: hexStringFrom([itemsMap[romInfo.gameData.itemLocations.GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT.itemId].numericId]),
-        clearBellItem: hexStringFrom([itemsMap[romInfo.gameData.itemLocations.RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT.itemId].numericId]),
+        whirlpoolItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT.itemId].numericId]),
+        basementKeyItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT.itemId].numericId]),
+        cardKeyItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT.itemId].numericId]),
+        clearBellItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT.itemId].numericId]),
       }
     )
       
@@ -1497,8 +1498,8 @@ const createPatches = (
           ],
         },
         {
-          risingbadgeItem: hexStringFrom([itemsMap[romInfo.gameData.itemLocations.DRAGON_SHRINE_BADGE.itemId].numericId]),
-          tm24Item: hexStringFrom([itemsMap.TM24.numericId]),
+          risingbadgeItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.DRAGON_SHRINE_BADGE.itemId].numericId]),
+          tm24Item: hexStringFrom([romInfo.gameData.items.TM24.numericId]),
         }
       ).hunks,
     ]
@@ -1511,7 +1512,7 @@ const createPatches = (
         "clairBackupTM.yml",
         {},
         {
-          itemId: hexStringFrom([itemsMap[romInfo.gameData.itemLocations.DRAGONS_DEN_B1F_SOUTH_AREA_CLAIRS_GIFT.itemId].numericId]),
+          itemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.DRAGONS_DEN_B1F_SOUTH_AREA_CLAIRS_GIFT.itemId].numericId]),
         }
       ).hunks,
     ]

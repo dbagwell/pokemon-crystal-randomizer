@@ -2,6 +2,7 @@ import type { DataHunk } from "@lib/generator/patch"
 import { DataFormat } from "@lib/generator/patchInfo"
 import { encounters } from "@shared/gameData/encounters"
 import { itemLocationsMap } from "@shared/gameData/itemLocations"
+import { itemsMap } from "@shared/gameData/items"
 import { logicalAccessAreasMap } from "@shared/gameData/logicalAccessAreas"
 import { mapObjectEvents } from "@shared/gameData/mapObjectEvents"
 import { martsMap } from "@shared/gameData/marts"
@@ -56,6 +57,7 @@ export class ROMInfo {
       warps: JSON.parse(JSON.stringify(warpsMap)),
       areas: JSON.parse(JSON.stringify(logicalAccessAreasMap)),
       numberOfBadgesForOak: 16,
+      items: JSON.parse(JSON.stringify(itemsMap)),
     }
   }
   
