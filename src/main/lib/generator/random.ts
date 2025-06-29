@@ -24,7 +24,7 @@ export class Random {
     return this.int(0, 1) === 1
   }
   
-  readonly element = <Element>(
+  readonly element = <Element, AllowUndefinedType extends boolean | undefined = undefined>(
     params: {
       array: Element[]
       errorInfo?: {
@@ -33,9 +33,9 @@ export class Random {
         conflictingSettings: string[]
       } | undefined
       remove?: boolean
-      allowUndefined?: boolean
+      allowUndefined?: AllowUndefinedType
     }
-  ): Element => {
+  ): AllowUndefinedType extends true ? Element | undefined : Element => {
     const index = this.int(0, params.array.length - 1)
     const element = params.array[index]
     

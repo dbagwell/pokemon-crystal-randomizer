@@ -12,7 +12,7 @@ import { growthRateIds } from "@shared/types/gameDataIds/growthRates"
 import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
 import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGroups"
 import { itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
-import { ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
+import { ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import {
@@ -971,6 +971,28 @@ export const defaultSettingsViewModel = () => {
                 name: "Improved Consumable Access Logic",
                 description: "If shop items are being shuffled, at least one of each consumable item that is required for some sort of progression will be available in a renewable shop.\n"
                   + "Also, consumable items that are not obtained from renewable shops will be considered inaccessible by the rules used to shuffle the items.",
+              }),
+              createSimpleMultiSelectorViewModel({
+                id: "GUARANTEED_SHOP_ITEMS" as const,
+                name: "Guaranteed Shop Items",
+                description: "If shops items are being shuffled, as many regular shops as possible (with a priority on the Cherrygrove Mart) will contain at least 1 variant of each of the selected item types.",
+                options: [
+                  createSimpleSelectorOption({
+                    id: "BALL" as const,
+                    name: "Ball",
+                    description: "Possible Items:\n- " + ballItemIds.map((id) => { return itemsMap[id].name }).join("\n- "),
+                  }),
+                  createSimpleSelectorOption({
+                    id: "REPEL" as const,
+                    name: "Repel",
+                    description: "Possible Items:\n- " + repelItemIds.map((id) => { return itemsMap[id].name }).join("\n- "),
+                  }),
+                  createSimpleSelectorOption({
+                    id: "SIMPLE_HEALING_ITEM" as const,
+                    name: "Simple Healing Item",
+                    description: "Possible Items:\n- " + simpleHealingItemIds.map((id) => { return itemsMap[id].name }).join("\n- "),
+                  }),
+                ],
               }),
               createSimpleMultiSelectorViewModel({
                 id: "ACCESS_MODIFIERS" as const,

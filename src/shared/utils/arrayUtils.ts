@@ -28,3 +28,7 @@ export const reduceArrayIntoRecord = <Element, ResultKey extends PropertyKey, Re
   
   return result as Record<ResultKey, ResultValue>
 }
+
+export const removeFirstElementFromArrayWhere = <Element>(array: Element[], condition: (element: Element) => boolean) => {
+  array.splice(array.findIndex(condition), 1)
+}
