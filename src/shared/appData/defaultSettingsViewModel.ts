@@ -966,6 +966,12 @@ export const defaultSettingsViewModel = () => {
                   })
                 }),
               }), // END GROUPS
+              createSimpleToggleViewModel({
+                id: "IMPROVED_CONSUMABLE_ACCESS_LOGIC" as const,
+                name: "Improved Consumable Access Logic",
+                description: "If shop items are being shuffled, at least one of each consumable item that is required for some sort of progression will be available in a renewable shop.\n"
+                  + "Also, consumable items that are not obtained from renewable shops will be considered inaccessible by the rules used to shuffle the items.",
+              }),
               createSimpleMultiSelectorViewModel({
                 id: "ACCESS_MODIFIERS" as const,
                 name: "Access Modifiers",

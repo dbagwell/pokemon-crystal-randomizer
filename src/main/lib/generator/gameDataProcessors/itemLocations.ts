@@ -7,7 +7,7 @@ import type { LogicalAccessArea, LogicalAreaAccessOption } from "@shared/types/g
 import type { Mart } from "@shared/types/gameData/mart"
 import { type AccessRequirement, isAccessRequirement, type Warp } from "@shared/types/gameData/warp"
 import { type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
-import { type BadgeItemId, badgeItemIds, ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
+import { type BadgeItemId, badgeItemIds, ballItemIds, type HoldableItemId, holdableItemIds, type ItemId, itemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
 import { type MartId, martIds } from "@shared/types/gameDataIds/marts"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
@@ -256,18 +256,35 @@ export const shuffleItems = (
     })
   })
   
-  const remainingProgressionItems = itemsToShuffle.filter((itemInfo) => {
+  const remainingConsumableProgressionItems: typeof itemsToShuffle = []
+  const remainingProgressionItems: typeof itemsToShuffle = []
+  
+  itemsToShuffle.filter((itemInfo) => {
     return [...progressionItemIds].includes(itemInfo.itemId)
+  }).reduce((result, itemInfo) => {
+    if (!result.some((resultItemInfo) => { return resultItemInfo.itemId === itemInfo.itemId })) {
+      result.push(itemInfo)
+    }
+    
+    return result
+  }, [] as typeof itemsToShuffle).forEach((itemInfo) => {
+    if (settings.SHUFFLE_ITEMS.SETTINGS.IMPROVED_CONSUMABLE_ACCESS_LOGIC && holdableItemIds.includes(itemInfo.itemId as HoldableItemId)) {
+      remainingConsumableProgressionItems.push(itemInfo)
+    } else {
+      remainingProgressionItems.push(itemInfo)
+    }
   })
   
   while (remainingProgressionItems.length > 0) {
-    const selectedItemInfo = random.element({ array: remainingProgressionItems })
+    const itemsArray = remainingConsumableProgressionItems.length > 0 ? remainingConsumableProgressionItems : remainingProgressionItems
     
-    const selectedItemIndex = remainingProgressionItems.findIndex((itemInfo) => {
+    const selectedItemInfo = random.element({ array: itemsArray })
+    
+    const selectedItemIndex = itemsArray.findIndex((itemInfo) => {
       return itemInfo.itemId === selectedItemInfo.itemId && itemInfo.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
     })
     
-    remainingProgressionItems.splice(selectedItemIndex, 1)
+    itemsArray.splice(selectedItemIndex, 1)
     
     const invalidLocations: (ItemLocationId | MartId)[] = []
     let foundLocation = false
@@ -280,15 +297,23 @@ export const shuffleItems = (
         martsMap: romInfo.gameData.marts,
         usableItems: [
           ...startingItems,
+          ...remainingConsumableProgressionItems.map((itemInfo) => {
+            return itemInfo.itemId
+          }),
           ...remainingProgressionItems.map((itemInfo) => {
             return itemInfo.itemId
           }),
         ],
+        allowNormalConsumables: !settings.SHUFFLE_ITEMS.SETTINGS.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
       })
       
       const locationInfo = random.element({
         array: accessibleItemLocationsWithoutSelectedItem.filter((accessibleLocationInfo) => {
           if (accessibleLocationInfo.type === "NORMAL") {
+            if (remainingConsumableProgressionItems.length > 0) {
+              return false
+            }
+            
             return !invalidLocations.includes(accessibleLocationInfo.locationId) && locationsToShuffle.find((locationInfo) => {
               return locationInfo.type === "NORMAL" && locationInfo.locationId === accessibleLocationInfo.locationId
             })?.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
@@ -311,6 +336,7 @@ export const shuffleItems = (
         areasMap: romInfo.gameData.areas,
         martsMap: romInfo.gameData.marts,
         usableItems: startingItems,
+        allowNormalConsumables: !settings.SHUFFLE_ITEMS.SETTINGS.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
       })
       
       if (accessibleItemLocationsWithoutOtherItems.length === 0) {
@@ -327,8 +353,16 @@ export const shuffleItems = (
     }
   }
   
-  const nonProgressionItems = itemsToShuffle.filter((itemInfo) => {
-    return ![...progressionItemIds].includes(itemInfo.itemId)
+  const nonProgressionItems = [...itemsToShuffle]
+  
+  ;[...progressionItemIds].forEach((itemId) => {
+    const index = nonProgressionItems.findIndex((itemInfo) => {
+      return itemInfo.itemId === itemId
+    })
+    
+    if (index > -1) {
+      nonProgressionItems.splice(index, 1)
+    }
   })
   
   locationsToShuffle.filter((locationInfo) => {
@@ -379,6 +413,7 @@ const getAccessibleItemLocations = (params: {
   areasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea>
   martsMap: IdMap<MartId, Mart>
   usableItems: ItemId[]
+  allowNormalConsumables: boolean
 }): ({
   type: "NORMAL"
   locationId: ItemLocationId
@@ -393,6 +428,7 @@ const getAccessibleItemLocations = (params: {
     areasMap,
     martsMap,
     usableItems,
+    allowNormalConsumables,
   } = params
   
   const accessibleWarps: WarpId[] = []
@@ -478,7 +514,7 @@ const getAccessibleItemLocations = (params: {
       }, true)) {
         accessibleItemLocations.push(locationId)
         
-        if (isNotNullish(location.itemId)) {
+        if (isNotNullish(location.itemId) && (!holdableItemIds.includes(location.itemId as HoldableItemId) || allowNormalConsumables)) {
           accessibleItems.push(location.itemId)
         }
         
