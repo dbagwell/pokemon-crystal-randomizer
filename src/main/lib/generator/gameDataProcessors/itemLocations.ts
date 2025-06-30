@@ -203,9 +203,7 @@ export const shuffleItems = (
           settings.BUYABLE_TM12 ? "GOLDENROD_5F_4" : "GOLDENROD_5F_8",
         ]
         
-        // TODO: Exclude locations
-        
-        if (!ignoredMartIds.includes(mart.id)) {
+        if (!ignoredMartIds.includes(mart.id) && !settings.SHUFFLE_ITEMS.SETTINGS.EXCLUDE_LOCATIONS.includes(mart.groupId)) {
           locationsToShuffle.push({
             type: "SHOP",
             martId: mart.id,
@@ -290,7 +288,7 @@ export const shuffleItems = (
   
   if (settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
     settings.SHUFFLE_ITEMS.SETTINGS.GUARANTEED_SHOP_ITEMS.forEach((itemType) => {
-      const remainingShopIds = [...martGroupIds]
+      const remainingShopIds = [...martGroupIds.filter((martGroupId) => { return !settings.SHUFFLE_ITEMS.SETTINGS.EXCLUDE_LOCATIONS.includes(martGroupId) })]
       
       while (remainingShopIds.length > 0) {
         const shopId = remainingShopIds.find((id) => { return id === "CHERRYGROVE" }) ?? random.element({ array: remainingShopIds })

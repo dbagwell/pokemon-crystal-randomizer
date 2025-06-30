@@ -4,6 +4,7 @@ import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemLocationGroupsMap } from "@shared/gameData/itemLocationGroups"
 import { itemLocationsMap } from "@shared/gameData/itemLocations"
 import { itemsMap } from "@shared/gameData/items"
+import { martsMap } from "@shared/gameData/marts"
 import { movesMap } from "@shared/gameData/moves"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
@@ -13,6 +14,7 @@ import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
 import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGroups"
 import { itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
+import { martGroupIds } from "@shared/types/gameDataIds/martGroups"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import {
@@ -1017,16 +1019,40 @@ export const defaultSettingsViewModel = () => {
                 id: "EXCLUDE_LOCATIONS" as const,
                 name: "Exclude Locations",
                 description: "Item locations to exclude from being shuffled.",
-                options: itemLocationIds.map((locationId) => {
-                  const itemName = itemsMap[itemLocationsMap[locationId].itemId].name
+                options: [
+                  ...itemLocationIds.map((locationId) => {
+                    const itemName = itemsMap[itemLocationsMap[locationId].itemId].name
                   
-                  return createSimpleSelectorOption({
-                    id: locationId,
-                    name: locationId,
-                    description: itemName,
-                    extraKeywords: itemName,
-                  })
-                }),
+                    return createSimpleSelectorOption({
+                      id: locationId,
+                      name: locationId,
+                      description: itemName,
+                      extraKeywords: itemName,
+                    })
+                  }),
+                  ...martGroupIds.map((martGroupId) => {
+                    const itemNames = Object.values(martsMap).filter((mart) => {
+                      return mart.groupId === martGroupId
+                    }).reduce((result, mart) => {
+                      mart.items.forEach((itemId) => {
+                        if (!result.includes(itemId)) {
+                          result.push(itemId)
+                        }
+                      })
+                      
+                      return result
+                    }, [] as ItemId[]).map((itemId) => {
+                      return itemsMap[itemId].name
+                    }).join("\n")
+                    
+                    return createSimpleSelectorOption({
+                      id: martGroupId,
+                      name: `${martGroupId}_MART`,
+                      description: itemNames,
+                      extraKeywords: itemNames,
+                    })
+                  }),
+                ],
               }),
             ] as const,
           }), // END SHUFFLE_ITEMS
