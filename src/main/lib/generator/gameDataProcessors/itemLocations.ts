@@ -145,6 +145,8 @@ export const shuffleItems = (
     return
   }
   
+  const shuffleItemsSettings = settings.SHUFFLE_ITEMS.SETTINGS
+  
   const locationsToShuffle: ({
     type: "NORMAL"
     locationId: ItemLocationId
@@ -161,7 +163,7 @@ export const shuffleItems = (
   const startingItems = startingItemIds(settings)
   
   Object.values(romInfo.gameData.itemLocations).forEach((location) => {
-    const shuffleGroupIndex = settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.findIndex((shuffleGroup) => {
+    const shuffleGroupIndex = shuffleItemsSettings.GROUPS.findIndex((shuffleGroup) => {
       const groupId = shuffleGroup.find((groupId) => {
         return groupId === location.groupId
       })
@@ -169,7 +171,7 @@ export const shuffleItems = (
       return isNotNullish(groupId)
     })
     
-    if (shuffleGroupIndex !== -1 && !settings.SHUFFLE_ITEMS.SETTINGS.EXCLUDE_LOCATIONS.includes(location.id)) {
+    if (shuffleGroupIndex !== -1 && !shuffleItemsSettings.EXCLUDE_LOCATIONS.includes(location.id)) {
       locationsToShuffle.push({
         type: "NORMAL",
         locationId: location.id,
@@ -185,7 +187,7 @@ export const shuffleItems = (
     }
   })
   
-  const shopsShuffleGroupIndex = settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.findIndex((group) => {
+  const shopsShuffleGroupIndex = shuffleItemsSettings.GROUPS.findIndex((group) => {
     return group.includes("SHOPS")
   })
   
@@ -203,7 +205,7 @@ export const shuffleItems = (
           settings.BUYABLE_TM12 ? "GOLDENROD_5F_4" : "GOLDENROD_5F_8",
         ]
         
-        if (!ignoredMartIds.includes(mart.id) && !settings.SHUFFLE_ITEMS.SETTINGS.EXCLUDE_LOCATIONS.includes(mart.groupId)) {
+        if (!ignoredMartIds.includes(mart.id) && !shuffleItemsSettings.EXCLUDE_LOCATIONS.includes(mart.groupId)) {
           locationsToShuffle.push({
             type: "SHOP",
             martId: mart.id,
@@ -267,7 +269,7 @@ export const shuffleItems = (
     
     return result
   }, [] as typeof itemsToShuffle).forEach((itemInfo) => {
-    if (settings.SHUFFLE_ITEMS.SETTINGS.IMPROVED_CONSUMABLE_ACCESS_LOGIC && holdableItemIds.includes(itemInfo.itemId as HoldableItemId)) {
+    if (shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC && holdableItemIds.includes(itemInfo.itemId as HoldableItemId)) {
       remainingConsumableProgressionItems.push(itemInfo)
     } else {
       remainingProgressionItems.push(itemInfo)
@@ -286,9 +288,9 @@ export const shuffleItems = (
     })
   })
   
-  if (settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
-    settings.SHUFFLE_ITEMS.SETTINGS.GUARANTEED_SHOP_ITEMS.forEach((itemType) => {
-      const remainingShopIds = [...martGroupIds.filter((martGroupId) => { return !settings.SHUFFLE_ITEMS.SETTINGS.EXCLUDE_LOCATIONS.includes(martGroupId) })]
+  if (shuffleItemsSettings.GROUPS.flat().includes("SHOPS")) {
+    shuffleItemsSettings.GUARANTEED_SHOP_ITEMS.forEach((itemType) => {
+      const remainingShopIds = [...martGroupIds.filter((martGroupId) => { return !shuffleItemsSettings.EXCLUDE_LOCATIONS.includes(martGroupId) })]
       
       while (remainingShopIds.length > 0) {
         const shopId = remainingShopIds.find((id) => { return id === "CHERRYGROVE" }) ?? random.element({ array: remainingShopIds })
@@ -308,7 +310,7 @@ export const shuffleItems = (
           case "SIMPLE_HEALING_ITEM": return simpleHealingItemIds
           }
         })().filter((itemId) => {
-          return !settings.SHUFFLE_ITEMS.SETTINGS.PREVENT_SHOP_ITEMS.includes(itemId)
+          return !shuffleItemsSettings.PREVENT_SHOP_ITEMS.includes(itemId)
         })
         
         const selectedItemInfo = random.element({
@@ -366,7 +368,7 @@ export const shuffleItems = (
             return itemInfo.itemId
           }),
         ],
-        allowNormalConsumables: !settings.SHUFFLE_ITEMS.SETTINGS.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
+        allowNormalConsumables: !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
       })
       
       const locationInfo = random.element({
@@ -379,7 +381,7 @@ export const shuffleItems = (
             return !invalidLocations.includes(accessibleLocationInfo.locationId) && locationsToShuffle.find((locationInfo) => {
               return locationInfo.type === "NORMAL" && locationInfo.locationId === accessibleLocationInfo.locationId
             })?.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
-          } else if (!settings.SHUFFLE_ITEMS.SETTINGS.PREVENT_SHOP_ITEMS.includes(selectedItemInfo.itemId)) {
+          } else if (!shuffleItemsSettings.PREVENT_SHOP_ITEMS.includes(selectedItemInfo.itemId)) {
             return !invalidLocations.includes(accessibleLocationInfo.martId) && locationsToShuffle.find((locationInfo) => {
               return locationInfo.type === "SHOP" && locationInfo.martId === accessibleLocationInfo.martId
             })?.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
@@ -401,7 +403,7 @@ export const shuffleItems = (
         areasMap: romInfo.gameData.areas,
         martsMap: romInfo.gameData.marts,
         usableItems: startingItems,
-        allowNormalConsumables: !settings.SHUFFLE_ITEMS.SETTINGS.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
+        allowNormalConsumables: !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
       })
       
       if (accessibleItemLocationsWithoutOtherItems.length === 0) {
@@ -425,7 +427,7 @@ export const shuffleItems = (
   }).forEach((locationInfo) => {
     const selectedItemId = random.element({
       array: itemsToShuffle.filter((itemInfo) => {
-        return itemInfo.shuffleGroupIndex === locationInfo.shuffleGroupIndex && (locationInfo.type === "NORMAL" || !settings.SHUFFLE_ITEMS.SETTINGS.PREVENT_SHOP_ITEMS.includes(itemInfo.itemId))
+        return itemInfo.shuffleGroupIndex === locationInfo.shuffleGroupIndex && (locationInfo.type === "NORMAL" || !shuffleItemsSettings.PREVENT_SHOP_ITEMS.includes(itemInfo.itemId))
       }),
     }).itemId
     
