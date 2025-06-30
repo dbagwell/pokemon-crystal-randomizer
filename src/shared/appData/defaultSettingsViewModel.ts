@@ -1276,8 +1276,9 @@ export const defaultSettingsViewModel = () => {
                   createConfigurableToggleViewModel({
                     id: "LIMIT_CHERRYGROVE_PRICES" as const,
                     name: "Limit Cherrygrove Prices",
-                    description: "If possible, limits the prices of items that can be bought from the Cherrygrove Mart to be within the selected range.\n"
-                      + "This limitation will be ignored for items with a price range (as determined by the other settings) that does not intersect this range.",
+                    description: "Limits the prices of items that can be bought from the Cherrygrove Mart to be within the selected range.\n"
+                      + "If this price range does not intersect the price range for an item in the Cherrygrove Mart as determined by the other price randomization settings, "
+                      + "the minimum or maximum price in this range will be used for that item (whichever is closer to the other price range).",
                     viewModels: [
                       createIntegerRangeInputViewModel({
                         id: "RANGE" as const,

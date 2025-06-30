@@ -52,7 +52,13 @@ export const updatePrices = (
       const newMin = Math.max(min, cherrygroveSettings.RANGE.MIN)
       const newMax = Math.min(max, cherrygroveSettings.RANGE.MAX)
       
-      if (min <= max) {
+      if (newMin >= max) {
+        min = newMin
+        max = newMin
+      } else if (newMax <= min) {
+        min = newMax
+        max = newMax
+      } else {
         min = newMin
         max = newMax
       }
