@@ -3910,8 +3910,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
       ],
     ],
   },
-  LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT: {
-    id: "LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT",
+  LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP: {
+    id: "LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP",
     type: "GIFT",
     groupId: "REGULAR_GIFTS",
     itemId: "ELIXER",

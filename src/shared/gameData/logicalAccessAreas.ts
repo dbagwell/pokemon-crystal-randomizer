@@ -1006,9 +1006,16 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   GOLDENROD_UNDERGROUND_SWITCH_ROOM: {
     id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM",
     accessOptions: [
-      "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCE_STAIRS_DOWN",
+      "GOLDENROD_UNDERGROUND_SWITCH_ROOM_STAIRS_AREA",
       "GOLDENROD_UNDERGROUND_WAREHOUSE_DOOR_OUT_LEFT",
       "GOLDENROD_UNDERGROUND_WAREHOUSE_DOOR_OUT_RIGHT",
+    ],
+  },
+  GOLDENROD_UNDERGROUND_SWITCH_ROOM_STAIRS_AREA: {
+    id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_STAIRS_AREA",
+    accessOptions: [
+      "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCE_STAIRS_DOWN",
+      "GOLDENROD_UNDERGROUND_SWITCH_ROOM",
     ],
   },
   GOLDENROD_UNDERGROUND_WAREHOUSE: {
@@ -1794,10 +1801,17 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   MOUNT_MOON_MAIN_AREA: {
     id: "MOUNT_MOON_MAIN_AREA",
     accessOptions: [
-      "ROUTE_3_CAVE_IN",
+      "MOUNT_MOON_MAIN_AREA_WEST_EXIT_AREA",
       "ROUTE_4_WEST_AREA_CAVE_IN",
       "MOUNT_MOON_2F_NORTH_AREA_LADDER_DOWN",
       "MOUNT_MOON_LEDGE_AREA",
+    ],
+  },
+  MOUNT_MOON_MAIN_AREA_WEST_EXIT_AREA: {
+    id: "MOUNT_MOON_MAIN_AREA_WEST_EXIT_AREA",
+    accessOptions: [
+      "ROUTE_3_CAVE_IN",
+      "MOUNT_MOON_MAIN_AREA",
     ],
   },
   MOUNT_MOON_LEDGE_AREA: {
@@ -1938,7 +1952,15 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "VICTORY_ROAD_3F_NORTH_AREA",
     accessOptions: [
       "VICTORY_ROAD_2F_SOUTH_AREA_LADDER_UP",
+      "VICTORY_ROAD_3F_NORTH_EXIT_AREA",
+    ],
+  },
+  VICTORY_ROAD_3F_NORTH_EXIT_AREA: {
+    id: "VICTORY_ROAD_3F_NORTH_EXIT_AREA",
+    accessOptions: [
+      "VICTORY_ROAD_3F_NORTH_AREA",
       "ROUTE_23_CAVE_IN_LEFT",
+      "ROUTE_23_CAVE_IN_RIGHT",
     ],
   },
   VICTORY_ROAD_2F_NE_AREA: {
@@ -3820,7 +3842,6 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "HALL_OF_FAME",
     accessOptions: [
       "LANCES_ROOM_NORTH_DOOR_OUT_LEFT",
-      "LANCES_ROOM_NORTH_DOOR_OUT_RIGHT",
       "LANCES_ROOM_NORTH_DOOR_OUT_RIGHT",
     ],
   },

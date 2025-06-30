@@ -968,34 +968,73 @@ export const updateAccessLogic = (
       throw new Error(`Cannot find selected ruleset of additional access modifiers '${rulesetId}'.`)
     }
     
-    if (!(
-      isObject(rulesetInfo)
-      && Array.isArray(rulesetInfo.addedRequirements)
-    )) {
+    if (!isObject(rulesetInfo)) {
       throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
     }
     
-    rulesetInfo.addedRequirements.forEach((rule: any) => {
-      if (!(
-        isObject(rule)
+    if (isNotNullish(rulesetInfo.addedAreaRequirements)) {
+      if (!Array.isArray(rulesetInfo.addedAreaRequirements)) {
+        throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
+      }
+      
+      rulesetInfo.addedAreaRequirements.forEach((rule: any) => {
+        if (!(
+          isObject(rule)
         && Array.isArray(rule.requirements)
         && Array.isArray(rule.areaIds)
-        && Array.isArray(rule.matchingRequirements)
+        && (Array.isArray(rule.matchingRequirements) || isNullish(rule.matchingRequirements))
         && rule.requirements.every((requirement: any) => {
           return isAccessRequirement(requirement)
         })
-        && rule.areaIds.every((requirement: any) => {
-          return logicalAccessAreaIds.includes(requirement)
+        && rule.areaIds.every((id: any) => {
+          return logicalAccessAreaIds.includes(id)
         })
-        && rule.matchingRequirements.every((requirement: any) => {
+        && (rule.matchingRequirements?.every((requirement: any) => {
           return isAccessRequirement(requirement)
-        })
-      )) {
+        }) ?? true)
+        )) {
+          throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
+        }
+    
+        addAccessRequirements(rule)
+      })
+    }
+    
+    if (isNotNullish(rulesetInfo.addedItemLocationAndWarpRequirements)) {
+      if (!Array.isArray(rulesetInfo.addedItemLocationAndWarpRequirements)) {
         throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
       }
+      
+      rulesetInfo.addedItemLocationAndWarpRequirements.forEach((rule: any) => {
+        if (!(
+          isObject(rule)
+        && Array.isArray(rule.requirements)
+        && Array.isArray(rule.itemLocationAndWarpIds)
+        && rule.requirements.every((requirement: any) => {
+          return isAccessRequirement(requirement)
+        })
+        && rule.itemLocationAndWarpIds.every((id: any) => {
+          return itemLocationIds.includes(id) || warpIds.includes(id)
+        })
+        )) {
+          throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
+        }
     
-      addAccessRequirements(rule)
-    })
+        rule.itemLocationAndWarpIds.forEach((id: any) => {
+          if (itemLocationIds.includes(id)) {
+            romInfo.gameData.itemLocations[id as ItemLocationId].accessRequirements = [
+              ...romInfo.gameData.itemLocations[id as ItemLocationId].accessRequirements ?? [],
+              ...rule.requirements,
+            ]
+          } else {
+            romInfo.gameData.warps[id as WarpId].accessRequirements = [
+              ...romInfo.gameData.warps[id as WarpId].accessRequirements ?? [],
+              ...rule.requirements,
+            ]
+          }
+        })
+      })
+    }
   })
 }
 
