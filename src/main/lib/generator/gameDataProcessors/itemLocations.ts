@@ -309,7 +309,9 @@ export const shuffleItems = (
           case "REPEL": return repelItemIds
           case "SIMPLE_HEALING_ITEM": return simpleHealingItemIds
           }
-        })()
+        })().filter((itemId) => {
+          return !settings.SHUFFLE_ITEMS.SETTINGS.PREVENT_SHOP_ITEMS.includes(itemId)
+        })
         
         const selectedItemInfo = random.element({
           array: itemsToShuffle.filter((itemInfo) => {
@@ -379,10 +381,12 @@ export const shuffleItems = (
             return !invalidLocations.includes(accessibleLocationInfo.locationId) && locationsToShuffle.find((locationInfo) => {
               return locationInfo.type === "NORMAL" && locationInfo.locationId === accessibleLocationInfo.locationId
             })?.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
-          } else {
+          } else if (!settings.SHUFFLE_ITEMS.SETTINGS.PREVENT_SHOP_ITEMS.includes(selectedItemInfo.itemId)) {
             return !invalidLocations.includes(accessibleLocationInfo.martId) && locationsToShuffle.find((locationInfo) => {
               return locationInfo.type === "SHOP" && locationInfo.martId === accessibleLocationInfo.martId
             })?.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
+          } else {
+            return false
           }
         }),
       })
@@ -418,8 +422,14 @@ export const shuffleItems = (
   
   locationsToShuffle.filter((locationInfo) => {
     return locationInfo.type === "NORMAL" && isNullish(romInfo.gameData.itemLocations[locationInfo.locationId].itemId) || locationInfo.type === "SHOP" && isNullish(romInfo.gameData.marts[locationInfo.martId].items[locationInfo.shopMenuIndex])
+  }).toSorted((locationInfo1) => {
+    return locationInfo1.type === "SHOP" ? -1 : 1
   }).forEach((locationInfo) => {
-    const selectedItemId = random.element({ array: itemsToShuffle.filter((itemInfo) => { return itemInfo.shuffleGroupIndex === locationInfo.shuffleGroupIndex }) }).itemId
+    const selectedItemId = random.element({
+      array: itemsToShuffle.filter((itemInfo) => {
+        return itemInfo.shuffleGroupIndex === locationInfo.shuffleGroupIndex && (locationInfo.type === "NORMAL" || !settings.SHUFFLE_ITEMS.SETTINGS.PREVENT_SHOP_ITEMS.includes(itemInfo.itemId))
+      }),
+    }).itemId
     
     if (locationInfo.type === "NORMAL") {
       romInfo.gameData.itemLocations[locationInfo.locationId].itemId = selectedItemId

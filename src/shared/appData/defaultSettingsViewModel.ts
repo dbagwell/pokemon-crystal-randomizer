@@ -995,6 +995,17 @@ export const defaultSettingsViewModel = () => {
                 ],
               }),
               createSimpleMultiSelectorViewModel({
+                id: "PREVENT_SHOP_ITEMS" as const,
+                name: "Prevent Shop Items",
+                description: "If shop items are being shuffled with other items, the selected items will never be made available to buy in a shop.",
+                options: itemIds.map((itemId) => {
+                  return createSimpleSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                  })
+                }),
+              }),
+              createSimpleMultiSelectorViewModel({
                 id: "ACCESS_MODIFIERS" as const,
                 name: "Access Modifiers",
                 description: "Additional sets of rules to use when determining valid locations for the shuffled items.",
