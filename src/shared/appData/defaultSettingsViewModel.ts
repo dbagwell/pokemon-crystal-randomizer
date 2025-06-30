@@ -1007,6 +1007,23 @@ export const defaultSettingsViewModel = () => {
                   })
                 }),
               }),
+              createConfigurableToggleViewModel({
+                id: "DECREASE_PROGRESS_IN_SHOPS" as const,
+                name: "Decrease Progress in Shops",
+                description: "Decreases the chances that the locations picked in which to place progress items will shops.\n"
+                  + "Does not affect progress items that are required to be placed in shops due to other settings.",
+                viewModels: [
+                  createIntegerInputViewModel({
+                    id: "PERCENTAGE" as const,
+                    name: "Percentage",
+                    description: "The percentage of random shop item slots that will be banned from having progress items.",
+                    isRequired: true as const,
+                    min: 0,
+                    max: 100,
+                    value: 0,
+                  }),
+                ],
+              }),
               createSimpleMultiSelectorViewModel({
                 id: "ACCESS_MODIFIERS" as const,
                 name: "Access Modifiers",

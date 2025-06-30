@@ -339,6 +339,23 @@ export const shuffleItems = (
     })
   }
   
+  const progressBannedShopLocations: { martId: MartId, shopMenuIndex: number }[] = []
+      
+  if (shuffleItemsSettings.DECREASE_PROGRESS_IN_SHOPS.VALUE) {
+    const allShopLocations = locationsToShuffle.filter((locationInfo) => {
+      return locationInfo.type === "SHOP"
+    })
+    
+    const numberOfBannedShopLocations = Math.round(allShopLocations.length * shuffleItemsSettings.DECREASE_PROGRESS_IN_SHOPS.SETTINGS.PERCENTAGE / 100)
+    
+    for (let i = 0; i < numberOfBannedShopLocations; i++) {
+      progressBannedShopLocations.push(random.element({
+        array: allShopLocations,
+        remove: true,
+      }))
+    }
+  }
+  
   while (remainingProgressionItems.length > 0) {
     const itemsArray = remainingConsumableProgressionItems.length > 0 ? remainingConsumableProgressionItems : remainingProgressionItems
     
@@ -382,7 +399,9 @@ export const shuffleItems = (
               return locationInfo.type === "NORMAL" && locationInfo.locationId === accessibleLocationInfo.locationId
             })?.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
           } else if (!shuffleItemsSettings.PREVENT_SHOP_ITEMS.includes(selectedItemInfo.itemId)) {
-            return !invalidLocations.includes(accessibleLocationInfo.martId) && locationsToShuffle.find((locationInfo) => {
+            return !invalidLocations.includes(accessibleLocationInfo.martId) && (remainingConsumableProgressionItems.length > 0 || !progressBannedShopLocations.some((locationInfo) => {
+              return locationInfo.martId === accessibleLocationInfo.martId && locationInfo.shopMenuIndex === accessibleLocationInfo.shopMenuIndex
+            })) && locationsToShuffle.find((locationInfo) => {
               return locationInfo.type === "SHOP" && locationInfo.martId === accessibleLocationInfo.martId
             })?.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
           } else {
