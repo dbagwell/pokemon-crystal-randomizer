@@ -525,6 +525,11 @@ export const shuffleItems = (
         romInfo.gameData.marts.GOLDENROD_5F_7.items = [...romInfo.gameData.marts.GOLDENROD_5F_3.items, addedItem]
       }
     }
+    
+    romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items = [
+      ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_1.items,
+      ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items,
+    ]
   }
 }
 

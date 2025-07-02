@@ -1107,17 +1107,23 @@ const createPatches = (
           }),
         ]
       ),
-      new DataHunk(
-        ROMOffset.fromBankAddress(5, 0x5B00),
-        [
-          ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items.flatMap((itemInfo) => {
-            return [
-              romInfo.gameData.items[itemInfo.itemId].numericId,
-              ...bytesFrom(itemInfo.price, 2),
-            ]
-          }),
-        ]
-      ),
+      ...Patch.fromYAML(
+        romInfo,
+        "rooftopSalePostE4.yml",
+        {},
+        {
+          itemData: hexStringFrom([
+            romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items.length,
+            ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items.flatMap((itemInfo) => {
+              return [
+                romInfo.gameData.items[itemInfo.itemId].numericId,
+                ...bytesFrom(itemInfo.price, 2),
+              ]
+            }),
+            0xFF,
+          ]),
+        },
+      ).hunks,
       // MooMoo Milk Vendor
       new DataHunk(ROMOffset.fromBankAddress(39, 0x4EC6), [mooMooItem.numericId]),
       new DataHunk(ROMOffset.fromBankAddress(39, 0x4EDD), [0x9E, mooMooItem.numericId]),

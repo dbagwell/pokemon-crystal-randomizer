@@ -1,0 +1,15 @@
+description: "Updates the items (and their prices) sold at the rooftop sale after beating the e4"
+changes:
+- description: "the item data"
+  locations:
+  - bank: 5
+  value: "$itemData"
+- description: "updates the reference to the item data"
+  locations:
+  - bank: 5
+    address: 0x5AD3
+  value: "@$itemData"
+freeSpaces:
+- bank: 5
+  address: 0x5AFF
+  size: 17
