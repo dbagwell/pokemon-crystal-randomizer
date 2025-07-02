@@ -40,3 +40,18 @@ export const martIds = [
 ] as const
 
 export type MartId = typeof martIds[number]
+
+export const specialShopIds = [
+  "GOLDENROD_VENDING_MACHINES",
+  "CELADON_VENDING_MACHINES",
+  "UNDERGROUND_BARGAIN_SHOP",
+  "GOLDENROD_ROOFTOP_VENDOR_1",
+  "GOLDENROD_ROOFTOP_VENDOR_2",
+  "MOOMOO_FARM",
+  "MAHOGANY_STREET_VENDOR",
+  "GOLDENROD_GAME_CORNER",
+  "CELADON_GAME_CORNER",
+  "BLUE_CARD_REWARD_LADY",
+] as const
+
+export type SpecialShopId = typeof specialShopIds[number]

@@ -4,7 +4,7 @@ import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemLocationGroupsMap } from "@shared/gameData/itemLocationGroups"
 import { itemLocationsMap } from "@shared/gameData/itemLocations"
 import { itemsMap } from "@shared/gameData/items"
-import { martsMap } from "@shared/gameData/marts"
+import { martsMap, specialShopsMap } from "@shared/gameData/marts"
 import { movesMap } from "@shared/gameData/moves"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
@@ -15,6 +15,7 @@ import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGrou
 import { itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { martGroupIds } from "@shared/types/gameDataIds/martGroups"
+import { specialShopIds } from "@shared/types/gameDataIds/marts"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import {
@@ -1065,6 +1066,26 @@ export const defaultSettingsViewModel = () => {
                     return createSimpleSelectorOption({
                       id: martGroupId,
                       name: `${martGroupId}_MART`,
+                      description: itemNames,
+                      extraKeywords: itemNames,
+                    })
+                  }),
+                  ...specialShopIds.map((shopId) => {
+                    const itemNames = Object.values(specialShopsMap).reduce((result, shop) => {
+                      shop.items.forEach((itemInfo) => {
+                        if (!result.includes(itemInfo.itemId)) {
+                          result.push(itemInfo.itemId)
+                        }
+                      })
+                      
+                      return result
+                    }, [] as ItemId[]).map((itemId) => {
+                      return itemsMap[itemId].name
+                    }).join("\n")
+                    
+                    return createSimpleSelectorOption({
+                      id: shopId,
+                      name: shopId,
                       description: itemNames,
                       extraKeywords: itemNames,
                     })

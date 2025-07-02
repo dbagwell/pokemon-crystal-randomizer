@@ -1,5 +1,5 @@
-import type { Mart } from "@shared/types/gameData/mart"
-import type { MartId } from "@shared/types/gameDataIds/marts"
+import type { Mart, SpecialShop } from "@shared/types/gameData/mart"
+import type { MartId, SpecialShopId } from "@shared/types/gameDataIds/marts"
 
 export const martsMap: IdMap<MartId, Mart> = {
   CHERRYGROVE_1: {
@@ -532,3 +532,241 @@ export const martsMap: IdMap<MartId, Mart> = {
     ],
   },
 } as const
+
+export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
+  GOLDENROD_VENDING_MACHINES: {
+    id: "GOLDENROD_VENDING_MACHINES",
+    areaId: "GOLDENROD_DEPT_STORE_6F",
+    items: [
+      {
+        itemId: "FRESH_WATER",
+        price: 200,
+      },
+      {
+        itemId: "SODA_POP",
+        price: 300,
+      },
+      {
+        itemId: "LEMONADE",
+        price: 350,
+      },
+    ],
+  },
+  CELADON_VENDING_MACHINES: {
+    id: "CELADON_VENDING_MACHINES",
+    areaId: "CELADON_DEPT_STORE_6F",
+    items: [
+      {
+        itemId: "FRESH_WATER",
+        price: 200,
+      },
+      {
+        itemId: "SODA_POP",
+        price: 300,
+      },
+      {
+        itemId: "LEMONADE",
+        price: 350,
+      },
+    ],
+  },
+  UNDERGROUND_BARGAIN_SHOP: {
+    id: "UNDERGROUND_BARGAIN_SHOP",
+    areaId: "GOLDENROD_UNDERGROUND",
+    items: [
+      {
+        itemId: "NUGGET",
+        price: 4500,
+      },
+      {
+        itemId: "PEARL",
+        price: 650,
+      },
+      {
+        itemId: "BIG_PEARL",
+        price: 3500,
+      },
+      {
+        itemId: "STARDUST",
+        price: 900,
+      },
+      {
+        itemId: "STAR_PIECE",
+        price: 4600,
+      },
+    ],
+  },
+  GOLDENROD_ROOFTOP_VENDOR_1: {
+    id: "GOLDENROD_ROOFTOP_VENDOR_1",
+    areaId: "GOLDENROD_DEPT_STORE_ROOF",
+    items: [
+      {
+        itemId: "POKE_BALL",
+        price: 150,
+      },
+      {
+        itemId: "GREAT_BALL",
+        price: 500,
+      },
+      {
+        itemId: "SUPER_POTION",
+        price: 500,
+      },
+      {
+        itemId: "FULL_HEAL",
+        price: 500,
+      },
+      {
+        itemId: "REVIVE",
+        price: 1200,
+      },
+    ],
+    accessRequirements: [
+      "ROUTE_34_MAIN_AREA",
+      "POKEGEAR",
+    ],
+  },
+  GOLDENROD_ROOFTOP_VENDOR_2: {
+    id: "GOLDENROD_ROOFTOP_VENDOR_2",
+    areaId: "GOLDENROD_DEPT_STORE_ROOF",
+    items: [
+      {
+        itemId: "HYPER_POTION",
+        price: 1000,
+      },
+      {
+        itemId: "FULL_RESTORE",
+        price: 2000,
+      },
+      {
+        itemId: "FULL_HEAL",
+        price: 500,
+      },
+      {
+        itemId: "ULTRA_BALL",
+        price: 1000,
+      },
+      {
+        itemId: "PROTEIN",
+        price: 7800,
+      },
+    ],
+    accessRequirements: [
+      "ROUTE_34_MAIN_AREA",
+      "POKEGEAR",
+      "HALL_OF_FAME",
+    ],
+  },
+  MOOMOO_FARM: {
+    id: "MOOMOO_FARM",
+    areaId: "ROUTE_39_FARMHOUSE",
+    items: [
+      {
+        itemId: "MOOMOO_MILK",
+        price: 500,
+      },
+    ],
+    accessRequirements: [
+      "ROUTE_39_BARN",
+      { item: "BERRY", number: 7 },
+    ],
+  },
+  MAHOGANY_STREET_VENDOR: {
+    id: "MAHOGANY_STREET_VENDOR",
+    areaId: "MAHOGANY_TOWN",
+    items: [
+      {
+        itemId: "RAGECANDYBAR",
+        price: 300,
+      },
+    ],
+  },
+  GOLDENROD_GAME_CORNER: {
+    id: "GOLDENROD_GAME_CORNER",
+    areaId: "GOLDENROD_GAME_CORNER",
+    items: [
+      {
+        itemId: "TM25",
+        price: 5500,
+      },
+      {
+        itemId: "TM14",
+        price: 5500,
+      },
+      {
+        itemId: "TM38",
+        price: 5500,
+      },
+    ],
+    accessRequirements: [
+      "COIN_CASE",
+    ],
+  },
+  CELADON_GAME_CORNER: {
+    id: "CELADON_GAME_CORNER",
+    areaId: "CELADON_GAME_CORNER_PRIZE_ROOM",
+    items: [
+      {
+        itemId: "TM32",
+        price: 1500,
+      },
+      {
+        itemId: "TM29",
+        price: 3500,
+      },
+      {
+        itemId: "TM15",
+        price: 7500,
+      },
+    ],
+    accessRequirements: [
+      "COIN_CASE",
+    ],
+  },
+  BLUE_CARD_REWARD_LADY: {
+    id: "BLUE_CARD_REWARD_LADY",
+    areaId: "RADIO_TOWER_2F",
+    items: [
+      {
+        itemId: "ULTRA_BALL",
+        price: 2,
+      },
+      {
+        itemId: "FULL_RESTORE",
+        price: 2,
+      },
+      {
+        itemId: "NUGGET",
+        price: 3,
+      },
+      {
+        itemId: "RARE_CANDY",
+        price: 3,
+      },
+      {
+        itemId: "PROTEIN",
+        price: 5,
+      },
+      {
+        itemId: "IRON",
+        price: 5,
+      },
+      {
+        itemId: "CARBOS",
+        price: 5,
+      },
+      {
+        itemId: "CALCIUM",
+        price: 5,
+      },
+      {
+        itemId: "HP_UP",
+        price: 5,
+      },
+    ],
+    accessRequirements: [
+      "BLUE_CARD",
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+    ],
+  },
+}

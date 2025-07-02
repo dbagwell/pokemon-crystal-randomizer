@@ -1640,6 +1640,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "ROUTE_44_MAX_REPEL",
   },
   {
+    id: "MAHOGANY_TOWN_STREET_VENDOR",
     romOffset: [
       100,
       17435,

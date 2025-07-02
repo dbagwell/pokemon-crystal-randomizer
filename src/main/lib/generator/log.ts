@@ -15,7 +15,7 @@ import { fishingGroupIds } from "@shared/types/gameDataIds/fishingGroups"
 import { fishingRodIds } from "@shared/types/gameDataIds/fishingRods"
 import { badgeLocationIds, fruitTreeLocationIds, hmGiftLocationIds, hmItemBallLocationIds, keyItemGiftLocationIds, keyItemHiddenItemLocationIds, keyItemItemBallLocationIds, menuItemGiftLocationIds, regularGiftLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmGiftLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { isItemId, tmItemIds } from "@shared/types/gameDataIds/items"
-import { type MartId, martIds } from "@shared/types/gameDataIds/marts"
+import { type MartId, martIds, specialShopIds } from "@shared/types/gameDataIds/marts"
 import { isMoveId } from "@shared/types/gameDataIds/moves"
 import { isPokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
@@ -587,32 +587,47 @@ export const generatorLog = (params: {
         "ITEM",
         "PRICE",
       ],
-      sections: martIds.filter((martId) => {
-        const ignoredMartIds: MartId[] = [
-          "CHERRYGROVE_1",
-          "GOLDENROD_5F_1",
-          "GOLDENROD_5F_2",
-          "GOLDENROD_5F_3",
-          "GOLDENROD_5F_5",
-          "GOLDENROD_5F_6",
-          "GOLDENROD_5F_7",
-          settings.BUYABLE_TM12 ? "GOLDENROD_5F_4" : "GOLDENROD_5F_8",
-        ]
+      sections: [
+        ...martIds.filter((martId) => {
+          const ignoredMartIds: MartId[] = [
+            "CHERRYGROVE_1",
+            "GOLDENROD_5F_1",
+            "GOLDENROD_5F_2",
+            "GOLDENROD_5F_3",
+            "GOLDENROD_5F_5",
+            "GOLDENROD_5F_6",
+            "GOLDENROD_5F_7",
+            settings.BUYABLE_TM12 ? "GOLDENROD_5F_4" : "GOLDENROD_5F_8",
+          ]
         
-        return gameData.marts[martId].items.length > 0 && !ignoredMartIds.includes(martId)
-      }).map((martId) => {
-        const mart = gameData.marts[martId]
+          return gameData.marts[martId].items.length > 0 && !ignoredMartIds.includes(martId)
+        }).map((martId) => {
+          const mart = gameData.marts[martId]
         
-        return {
-          rows: mart.items.map((itemId, index) => {
-            return [
-              index === 0 ? mart.groupId : "",
-              itemId,
-              `${gameData.items[itemId].price}`,
-            ]
-          }),
-        }
-      }),
+          return {
+            rows: mart.items.map((itemId, index) => {
+              return [
+                index === 0 ? mart.groupId : "",
+                itemId,
+                `${gameData.items[itemId].price}`,
+              ]
+            }),
+          }
+        }),
+        ...specialShopIds.map((shopId) => {
+          const shop = gameData.specialShops[shopId]
+        
+          return {
+            rows: shop.items.map((itemInfo, index) => {
+              return [
+                index === 0 ? shop.id : "",
+                itemInfo.itemId,
+                `${itemInfo.price}`,
+              ]
+            }),
+          }
+        }),
+      ],
     }),
   })
   

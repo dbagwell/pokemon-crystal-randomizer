@@ -1,0 +1,107 @@
+description: 
+values:
+  goldenrodMenuData: "80 04 $goldenrodItem1NameAndPrice 50 $goldenrodItem2NameAndPrice 50 $goldenrodItem3NameAndPrice 50 82 80 8D 82 84 8B 50"
+  celadonMenuData: "80 04 $celadonItem1NameAndPrice 50 $celadonItem2NameAndPrice 50 $celadonItem3NameAndPrice 50 82 80 8D 82 84 8B 50"
+changes:
+- description:
+  locations:
+  - bank: 21
+  value: "$goldenrodMenuData"
+- description:
+  locations:
+  - bank: 21
+    address: 0x647D
+  value: "@$goldenrodMenuData"
+- description:
+  locations:
+  - bank: 21
+    address: 0x6C5E
+  - bank: 21
+    address: 0x6424
+  value: "$goldenrodItem1Id"
+- description:
+  locations:
+  - bank: 21
+    address: 0x6C4E
+  - bank: 21
+    address: 0x6C53
+  value: "$goldenrodItem1Price"
+- description:
+  locations:
+  - bank: 21
+    address: 0x6C7A
+  - bank: 21
+    address: 0x643E
+  value: "$goldenrodItem2Id"
+- description:
+  locations:
+  - bank: 21
+    address: 0x6C6A
+  - bank: 21
+    address: 0x6C7F
+  value: "$goldenrodItem2Price"
+- description:
+  locations:
+  - bank: 21
+    address: 0x6C96
+  - bank: 21
+    address: 0x6458
+  value: "$goldenrodItem3Id"
+- description:
+  locations:
+  - bank: 21
+    address: 0x6C86
+  - bank: 21
+    address: 0x6C9B
+  value: "$goldenrodItem3Price"
+- description:
+  locations:
+  - bank: 28
+  value: "$celadonMenuData"
+- description:
+  locations:
+  - bank: 28
+    address: 0x5208
+  value: "@$celadonMenuData"
+- description:
+  locations:
+  - bank: 28
+    address: 0x51A4
+  - bank: 28
+    address: 0x51AD
+  value: "$celadonItem1Id"
+- description:
+  locations:
+  - bank: 28
+    address: 0x519D
+  - bank: 28
+    address: 0x51AC
+  value: "$celadonItem1Price"
+- description:
+  locations:
+  - bank: 28
+    address: 0x51BE
+  - bank: 28
+    address: 0x51C9
+  value: "$celadonItem2Id"
+- description:
+  locations:
+  - bank: 28
+    address: 0x51B7
+  - bank: 28
+    address: 0x51C6
+  value: "$celadonItem2Price"
+- description:
+  locations:
+  - bank: 28
+    address: 0x51D8
+  - bank: 28
+    address: 0x51E3
+  value: "$celadonItem3Id"
+- description:
+  locations:
+  - bank: 28
+    address: 0x51D1
+  - bank: 28
+    address: 0x51E0
+  value: "$celadonItem3Price"

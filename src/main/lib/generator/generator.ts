@@ -44,7 +44,7 @@ import { itemHoldEffectsMap, itemMenuActionsMap } from "@shared/types/gameData/i
 import type { EventFlagId } from "@shared/types/gameDataIds/eventFlags"
 import { type EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
 import { type ItemId } from "@shared/types/gameDataIds/items"
-import { type MartId, martIds } from "@shared/types/gameDataIds/marts"
+import { type MartId, martIds, type SpecialShopId } from "@shared/types/gameDataIds/marts"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import type { TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
 import { trainerGroupIds } from "@shared/types/gameDataIds/trainerGroups"
@@ -1054,6 +1054,138 @@ const createPatches = (
     )
 
     romInfo.patchHunks = [...romInfo.patchHunks, ...martsPatch.hunks]
+  }
+  
+  if (settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
+    const itemInfo = (shopId: SpecialShopId, index: number) => {
+      return romInfo.gameData.specialShops[shopId].items[index]
+    }
+    
+    const item = (shopId: SpecialShopId, index: number) => {
+      return romInfo.gameData.items[itemInfo(shopId, index).itemId]
+    }
+    
+    const mooMooItemInfo = itemInfo("MOOMOO_FARM", 0)
+    const mooMooItem = item("MOOMOO_FARM", 0)
+    
+    const mahoganyItemInfo = itemInfo("MAHOGANY_STREET_VENDOR", 0)
+    const mahoganyItem = item("MAHOGANY_STREET_VENDOR", 0)
+    
+    const gameCornerItemNameAndPriceText = (shopId: SpecialShopId, index: number) => {
+      return hexStringFrom(bytesFromTextData(item(shopId, index).inGameName.padEnd(12, " ") + ` ${itemInfo(shopId, index).price}`.padStart(4, " ")))
+    }
+    
+    romInfo.patchHunks.push(...[
+      new DataHunk(
+        ROMOffset.fromBankAddress(34, 0x715E),
+        romInfo.gameData.specialShops.BLUE_CARD_REWARD_LADY.items.flatMap((itemInfo) => {
+          return [
+            romInfo.gameData.items[itemInfo.itemId].numericId,
+            itemInfo.price,
+          ]
+        })
+      ),
+      new DataHunk(
+        ROMOffset.fromBankAddress(5, 0x5C52),
+        [
+          ...romInfo.gameData.specialShops.UNDERGROUND_BARGAIN_SHOP.items.flatMap((itemInfo) => {
+            return [
+              romInfo.gameData.items[itemInfo.itemId].numericId,
+              ...bytesFrom(itemInfo.price, 2),
+            ]
+          }),
+        ]
+      ),
+      new DataHunk(
+        ROMOffset.fromBankAddress(5, 0x5AEF),
+        [
+          ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_1.items.flatMap((itemInfo) => {
+            return [
+              romInfo.gameData.items[itemInfo.itemId].numericId,
+              ...bytesFrom(itemInfo.price, 2),
+            ]
+          }),
+        ]
+      ),
+      new DataHunk(
+        ROMOffset.fromBankAddress(5, 0x5B00),
+        [
+          ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items.flatMap((itemInfo) => {
+            return [
+              romInfo.gameData.items[itemInfo.itemId].numericId,
+              ...bytesFrom(itemInfo.price, 2),
+            ]
+          }),
+        ]
+      ),
+      // MooMoo Milk Vendor
+      new DataHunk(ROMOffset.fromBankAddress(39, 0x4EC6), [mooMooItem.numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(39, 0x4EDD), [0x9E, mooMooItem.numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(39, 0x4FF3), bytesFromTextData(`${mooMooItem.inGameName}?`.padEnd(12, " ").substring(0, 12))),
+      new DataHunk(ROMOffset.fromBankAddress(39, 0x4ED7), [mooMooItemInfo.price]),
+      new DataHunk(ROMOffset.fromBankAddress(39, 0x4EE6), [mooMooItemInfo.price]),
+      new DataHunk(ROMOffset.fromBankAddress(39, 0x504E), bytesFromTextData(`fer ${mooMooItemInfo.price}.`.padEnd(14, " "))),
+      new DataHunk(ROMOffset.fromBankAddress(39, 0x4EEB), [0x18, 0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(39, 0x4EF3), [0x18]),
+      // Ragecandybar Vendor
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x4054), [0x9E, mahoganyItem.numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x4100), bytesFromTextScript(`${mahoganyItem.inGameName},`.padEnd(16, " ") + "\tyum!")),
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x404E), [mahoganyItemInfo.price]),
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x4061), [mahoganyItemInfo.price]),
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x413B), bytesFromTextData(`${mahoganyItemInfo.price}! Want it?`.padEnd(15, " "))),
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x4032), [0x18, 0x18, 0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x405A), [0x18, 0x18, 0x18, 0x18]),
+      ...Patch.fromYAML(
+        romInfo,
+        "gameCornerItems.yml",
+        {},
+        {
+          goldenrodItem1NameAndPrice: gameCornerItemNameAndPriceText("GOLDENROD_GAME_CORNER", 0),
+          goldenrodItem2NameAndPrice: gameCornerItemNameAndPriceText("GOLDENROD_GAME_CORNER", 1),
+          goldenrodItem3NameAndPrice: gameCornerItemNameAndPriceText("GOLDENROD_GAME_CORNER", 2),
+          celadonItem1NameAndPrice: gameCornerItemNameAndPriceText("CELADON_GAME_CORNER", 0),
+          celadonItem2NameAndPrice: gameCornerItemNameAndPriceText("CELADON_GAME_CORNER", 1),
+          celadonItem3NameAndPrice: gameCornerItemNameAndPriceText("CELADON_GAME_CORNER", 2),
+          goldenrodItem1Id: hexStringFrom([item("GOLDENROD_GAME_CORNER", 0).numericId]),
+          goldenrodItem1Price: hexStringFrom(bytesFrom(itemInfo("GOLDENROD_GAME_CORNER", 0).price, 2)),
+          goldenrodItem2Id: hexStringFrom([item("GOLDENROD_GAME_CORNER", 1).numericId]),
+          goldenrodItem2Price: hexStringFrom(bytesFrom(itemInfo("GOLDENROD_GAME_CORNER", 1).price, 2)),
+          goldenrodItem3Id: hexStringFrom([item("GOLDENROD_GAME_CORNER", 2).numericId]),
+          goldenrodItem3Price: hexStringFrom(bytesFrom(itemInfo("GOLDENROD_GAME_CORNER", 2).price, 2)),
+          celadonItem1Id: hexStringFrom([item("CELADON_GAME_CORNER", 0).numericId]),
+          celadonItem1Price: hexStringFrom(bytesFrom(itemInfo("CELADON_GAME_CORNER", 0).price, 2)),
+          celadonItem2Id: hexStringFrom([item("CELADON_GAME_CORNER", 1).numericId]),
+          celadonItem2Price: hexStringFrom(bytesFrom(itemInfo("CELADON_GAME_CORNER", 1).price, 2)),
+          celadonItem3Id: hexStringFrom([item("CELADON_GAME_CORNER", 2).numericId]),
+          celadonItem3Price: hexStringFrom(bytesFrom(itemInfo("CELADON_GAME_CORNER", 2).price, 2)),
+        },
+      ).hunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "vendingMachineItems.yml",
+        {},
+        {
+          goldenrodItem1NameAndPrice: gameCornerItemNameAndPriceText("GOLDENROD_VENDING_MACHINES", 0),
+          goldenrodItem2NameAndPrice: gameCornerItemNameAndPriceText("GOLDENROD_VENDING_MACHINES", 1),
+          goldenrodItem3NameAndPrice: gameCornerItemNameAndPriceText("GOLDENROD_VENDING_MACHINES", 2),
+          celadonItem1NameAndPrice: gameCornerItemNameAndPriceText("CELADON_VENDING_MACHINES", 0),
+          celadonItem2NameAndPrice: gameCornerItemNameAndPriceText("CELADON_VENDING_MACHINES", 1),
+          celadonItem3NameAndPrice: gameCornerItemNameAndPriceText("CELADON_VENDING_MACHINES", 2),
+          goldenrodItem1Id: hexStringFrom([item("GOLDENROD_VENDING_MACHINES", 0).numericId]),
+          goldenrodItem1Price: hexStringFrom(bytesFrom(itemInfo("GOLDENROD_VENDING_MACHINES", 0).price, 2)),
+          goldenrodItem2Id: hexStringFrom([item("GOLDENROD_VENDING_MACHINES", 1).numericId]),
+          goldenrodItem2Price: hexStringFrom(bytesFrom(itemInfo("GOLDENROD_VENDING_MACHINES", 1).price, 2)),
+          goldenrodItem3Id: hexStringFrom([item("GOLDENROD_VENDING_MACHINES", 2).numericId]),
+          goldenrodItem3Price: hexStringFrom(bytesFrom(itemInfo("GOLDENROD_VENDING_MACHINES", 2).price, 2)),
+          celadonItem1Id: hexStringFrom([item("CELADON_VENDING_MACHINES", 0).numericId]),
+          celadonItem1Price: hexStringFrom(bytesFrom(itemInfo("CELADON_VENDING_MACHINES", 0).price, 2)),
+          celadonItem2Id: hexStringFrom([item("CELADON_VENDING_MACHINES", 1).numericId]),
+          celadonItem2Price: hexStringFrom(bytesFrom(itemInfo("CELADON_VENDING_MACHINES", 1).price, 2)),
+          celadonItem3Id: hexStringFrom([item("CELADON_VENDING_MACHINES", 2).numericId]),
+          celadonItem3Price: hexStringFrom(bytesFrom(itemInfo("CELADON_VENDING_MACHINES", 2).price, 2)),
+        },
+      ).hunks,
+    ])
   }
   
   if (settings.MOVE_TUTOR_ALWAYS_AVAILABLE) {

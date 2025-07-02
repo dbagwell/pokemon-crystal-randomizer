@@ -3,7 +3,7 @@ import type { Item } from "@shared/types/gameData/item"
 import type { ItemLocation } from "@shared/types/gameData/itemLocation"
 import type { LogicalAccessArea } from "@shared/types/gameData/logicalAccessArea"
 import type { MapObjectEvent } from "@shared/types/gameData/mapObjectEvent"
-import type { Mart } from "@shared/types/gameData/mart"
+import type { Mart, SpecialShop } from "@shared/types/gameData/mart"
 import type { OddEgg } from "@shared/types/gameData/oddEgg"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
 import type { TeachableMove } from "@shared/types/gameData/teachableMove"
@@ -14,7 +14,7 @@ import type { EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
 import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
 import type { HoldableItemId, ItemId } from "@shared/types/gameDataIds/items"
 import type { LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
-import type { MartId } from "@shared/types/gameDataIds/marts"
+import type { MartId, SpecialShopId } from "@shared/types/gameDataIds/marts"
 import type { MoveId } from "@shared/types/gameDataIds/moves"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import type { StarterLocationId } from "@shared/types/gameDataIds/starterLocations"
@@ -44,6 +44,7 @@ export type GameData = {
   trainers: Trainer[]
   mapObjectEvents: [MapObjectEvent]
   marts: IdMap<MartId, Mart>
+  specialShops: IdMap<SpecialShopId, SpecialShop>
   moveTutorCost: number
   numberOfMiltankBerries: number
   itemLocations: IdMap<ItemLocationId, ItemLocation>

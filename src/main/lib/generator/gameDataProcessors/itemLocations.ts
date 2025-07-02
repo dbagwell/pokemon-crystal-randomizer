@@ -4,13 +4,13 @@ import { getYAML } from "@lib/utils/yamlUtils"
 import type { Settings } from "@shared/appData/settingsFromViewModel"
 import type { ItemLocation } from "@shared/types/gameData/itemLocation"
 import type { LogicalAccessArea, LogicalAreaAccessOption } from "@shared/types/gameData/logicalAccessArea"
-import type { Mart } from "@shared/types/gameData/mart"
+import type { Mart, SpecialShop } from "@shared/types/gameData/mart"
 import { type AccessRequirement, isAccessRequirement, type Warp } from "@shared/types/gameData/warp"
 import { type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { type BadgeItemId, badgeItemIds, ballItemIds, type HoldableItemId, holdableItemIds, type ItemId, itemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
 import { martGroupIds } from "@shared/types/gameDataIds/martGroups"
-import { type MartId, martIds } from "@shared/types/gameDataIds/marts"
+import { type MartId, martIds, type SpecialShopId, specialShopIds } from "@shared/types/gameDataIds/marts"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { type WarpId, warpIds } from "@shared/types/gameDataIds/warps"
 import { compact, isNotNullish, isNullish, isNumber, isObject, isString, removeFirstElementFromArrayWhere } from "@shared/utils"
@@ -152,8 +152,13 @@ export const shuffleItems = (
     locationId: ItemLocationId
     shuffleGroupIndex: number
   } | {
-    type: "SHOP"
+    type: "MART"
     martId: MartId
+    shopMenuIndex: number
+    shuffleGroupIndex: number
+  } | {
+    type: "SPECIAL_SHOP"
+    shopId: SpecialShopId
     shopMenuIndex: number
     shuffleGroupIndex: number
   })[] = []
@@ -207,7 +212,7 @@ export const shuffleItems = (
         
         if (!ignoredMartIds.includes(mart.id) && !shuffleItemsSettings.EXCLUDE_LOCATIONS.includes(mart.groupId)) {
           locationsToShuffle.push({
-            type: "SHOP",
+            type: "MART",
             martId: mart.id,
             shopMenuIndex: index,
             shuffleGroupIndex: shopsShuffleGroupIndex,
@@ -219,6 +224,26 @@ export const shuffleItems = (
           })
         
           mart.items[index] = undefined as unknown as ItemId
+        }
+      })
+    })
+    
+    Object.values(romInfo.gameData.specialShops).forEach((shop) => {
+      shop.items.forEach((itemInfo, index) => {
+        if (!shuffleItemsSettings.EXCLUDE_LOCATIONS.includes(shop.id)) {
+          locationsToShuffle.push({
+            type: "SPECIAL_SHOP",
+            shopId: shop.id,
+            shopMenuIndex: index,
+            shuffleGroupIndex: shopsShuffleGroupIndex,
+          })
+        
+          itemsToShuffle.push({
+            itemId: itemInfo.itemId,
+            shuffleGroupIndex: shopsShuffleGroupIndex,
+          })
+        
+          shop.items[index].itemId = undefined as unknown as ItemId
         }
       })
     })
@@ -290,18 +315,18 @@ export const shuffleItems = (
   
   if (shuffleItemsSettings.GROUPS.flat().includes("SHOPS")) {
     shuffleItemsSettings.GUARANTEED_SHOP_ITEMS.forEach((itemType) => {
-      const remainingShopIds = [...martGroupIds.filter((martGroupId) => { return !shuffleItemsSettings.EXCLUDE_LOCATIONS.includes(martGroupId) })]
+      const remainingMartGroupIds = [...martGroupIds.filter((martGroupId) => { return !shuffleItemsSettings.EXCLUDE_LOCATIONS.includes(martGroupId) })]
       
-      while (remainingShopIds.length > 0) {
-        const shopId = remainingShopIds.find((id) => { return id === "CHERRYGROVE" }) ?? random.element({ array: remainingShopIds })
-        const shopIndex = remainingShopIds.indexOf(shopId)
-        remainingShopIds.splice(shopIndex, 1)
+      while (remainingMartGroupIds.length > 0) {
+        const shopId = remainingMartGroupIds.find((id) => { return id === "CHERRYGROVE" }) ?? random.element({ array: remainingMartGroupIds })
+        const shopIndex = remainingMartGroupIds.indexOf(shopId)
+        remainingMartGroupIds.splice(shopIndex, 1)
       
         const locationInfo = random.element({
           array: locationsToShuffle.filter((locationInfo) => {
-            return locationInfo.type === "SHOP" && romInfo.gameData.marts[locationInfo.martId].groupId === shopId && isNullish(romInfo.gameData.marts[locationInfo.martId].items[locationInfo.shopMenuIndex])
+            return locationInfo.type === "MART" && romInfo.gameData.marts[locationInfo.martId].groupId === shopId && isNullish(romInfo.gameData.marts[locationInfo.martId].items[locationInfo.shopMenuIndex])
           }),
-        }) as typeof locationsToShuffle[number] & { type: "SHOP" }
+        }) as typeof locationsToShuffle[number] & { type: "MART" }
         
         const filterArray = (() => {
           switch (itemType) {
@@ -339,11 +364,11 @@ export const shuffleItems = (
     })
   }
   
-  const progressBannedShopLocations: { martId: MartId, shopMenuIndex: number }[] = []
+  const progressBannedShopLocations: typeof locationsToShuffle = []
       
   if (shuffleItemsSettings.DECREASE_PROGRESS_IN_SHOPS.VALUE) {
     const allShopLocations = locationsToShuffle.filter((locationInfo) => {
-      return locationInfo.type === "SHOP"
+      return locationInfo.type === "MART" || locationInfo.type === "SPECIAL_SHOP"
     })
     
     const numberOfBannedShopLocations = Math.round(allShopLocations.length * shuffleItemsSettings.DECREASE_PROGRESS_IN_SHOPS.SETTINGS.PERCENTAGE / 100)
@@ -367,7 +392,7 @@ export const shuffleItems = (
     
     itemsArray.splice(selectedItemIndex, 1)
     
-    const invalidLocations: (ItemLocationId | MartId)[] = []
+    const invalidLocations: (ItemLocationId | MartId | SpecialShopId)[] = []
     let foundLocation = false
     
     while (!foundLocation) {
@@ -376,6 +401,7 @@ export const shuffleItems = (
         warpsMap: romInfo.gameData.warps,
         areasMap: romInfo.gameData.areas,
         martsMap: romInfo.gameData.marts,
+        specialShopsMap: romInfo.gameData.specialShops,
         usableItems: [
           ...startingItems,
           ...remainingConsumableProgressionItems.map((itemInfo) => {
@@ -398,22 +424,30 @@ export const shuffleItems = (
             return !invalidLocations.includes(accessibleLocationInfo.locationId) && locationsToShuffle.find((locationInfo) => {
               return locationInfo.type === "NORMAL" && locationInfo.locationId === accessibleLocationInfo.locationId
             })?.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
-          } else if (!shuffleItemsSettings.PREVENT_SHOP_ITEMS.includes(selectedItemInfo.itemId)) {
+          } else if (shuffleItemsSettings.PREVENT_SHOP_ITEMS.includes(selectedItemInfo.itemId)) {
+            return false
+          } else if (accessibleLocationInfo.type === "MART") {
             return !invalidLocations.includes(accessibleLocationInfo.martId) && (remainingConsumableProgressionItems.length > 0 || !progressBannedShopLocations.some((locationInfo) => {
-              return locationInfo.martId === accessibleLocationInfo.martId && locationInfo.shopMenuIndex === accessibleLocationInfo.shopMenuIndex
+              return locationInfo.type === "MART" && locationInfo.martId === accessibleLocationInfo.martId && locationInfo.shopMenuIndex === accessibleLocationInfo.shopMenuIndex
             })) && locationsToShuffle.find((locationInfo) => {
-              return locationInfo.type === "SHOP" && locationInfo.martId === accessibleLocationInfo.martId
+              return locationInfo.type === "MART" && locationInfo.martId === accessibleLocationInfo.martId
             })?.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
           } else {
-            return false
+            return !invalidLocations.includes(accessibleLocationInfo.shopId) && (remainingConsumableProgressionItems.length > 0 || !progressBannedShopLocations.some((locationInfo) => {
+              return locationInfo.type === "SPECIAL_SHOP" && locationInfo.shopId === accessibleLocationInfo.shopId && locationInfo.shopMenuIndex === accessibleLocationInfo.shopMenuIndex
+            })) && locationsToShuffle.find((locationInfo) => {
+              return locationInfo.type === "SPECIAL_SHOP" && locationInfo.shopId === accessibleLocationInfo.shopId
+            })?.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
           }
         }),
       })
       
       if (locationInfo.type === "NORMAL") {
         romInfo.gameData.itemLocations[locationInfo.locationId].itemId = selectedItemInfo.itemId
-      } else {
+      } else if (locationInfo.type === "MART") {
         romInfo.gameData.marts[locationInfo.martId].items[locationInfo.shopMenuIndex] = selectedItemInfo.itemId
+      } else {
+        romInfo.gameData.specialShops[locationInfo.shopId].items[locationInfo.shopMenuIndex].itemId = selectedItemInfo.itemId
       }
       
       const accessibleItemLocationsWithoutOtherItems = getAccessibleItemLocations({
@@ -421,6 +455,7 @@ export const shuffleItems = (
         warpsMap: romInfo.gameData.warps,
         areasMap: romInfo.gameData.areas,
         martsMap: romInfo.gameData.marts,
+        specialShopsMap: romInfo.gameData.specialShops,
         usableItems: startingItems,
         allowNormalConsumables: !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
       })
@@ -428,11 +463,13 @@ export const shuffleItems = (
       if (accessibleItemLocationsWithoutOtherItems.length === 0) {
         if (locationInfo.type === "NORMAL") {
           romInfo.gameData.itemLocations[locationInfo.locationId].itemId = undefined as unknown as ItemId
-        } else {
+        } else if (locationInfo.type === "MART") {
           romInfo.gameData.marts[locationInfo.martId].items[locationInfo.shopMenuIndex] = undefined as unknown as ItemId
+        } else {
+          romInfo.gameData.specialShops[locationInfo.shopId].items[locationInfo.shopMenuIndex].itemId = undefined as unknown as ItemId
         }
         
-        invalidLocations.push(locationInfo.type === "NORMAL" ? locationInfo.locationId : locationInfo.martId)
+        invalidLocations.push(locationInfo.type === "NORMAL" ? locationInfo.locationId : locationInfo.type === "MART" ? locationInfo.martId : locationInfo.shopId)
       } else {
         foundLocation = true
       }
@@ -440,9 +477,11 @@ export const shuffleItems = (
   }
   
   locationsToShuffle.filter((locationInfo) => {
-    return locationInfo.type === "NORMAL" && isNullish(romInfo.gameData.itemLocations[locationInfo.locationId].itemId) || locationInfo.type === "SHOP" && isNullish(romInfo.gameData.marts[locationInfo.martId].items[locationInfo.shopMenuIndex])
+    return locationInfo.type === "NORMAL" && isNullish(romInfo.gameData.itemLocations[locationInfo.locationId].itemId)
+    || locationInfo.type === "MART" && isNullish(romInfo.gameData.marts[locationInfo.martId].items[locationInfo.shopMenuIndex])
+    || locationInfo.type === "SPECIAL_SHOP" && isNullish(romInfo.gameData.specialShops[locationInfo.shopId].items[locationInfo.shopMenuIndex].itemId)
   }).toSorted((locationInfo1) => {
-    return locationInfo1.type === "SHOP" ? -1 : 1
+    return locationInfo1.type === "MART" || locationInfo1.type === "SPECIAL_SHOP" ? -1 : 1
   }).forEach((locationInfo) => {
     const selectedItemId = random.element({
       array: itemsToShuffle.filter((itemInfo) => {
@@ -452,8 +491,10 @@ export const shuffleItems = (
     
     if (locationInfo.type === "NORMAL") {
       romInfo.gameData.itemLocations[locationInfo.locationId].itemId = selectedItemId
-    } else {
+    } else if (locationInfo.type === "MART") {
       romInfo.gameData.marts[locationInfo.martId].items[locationInfo.shopMenuIndex] = selectedItemId
+    } else {
+      romInfo.gameData.specialShops[locationInfo.shopId].items[locationInfo.shopMenuIndex].itemId = selectedItemId
     }
         
     const selectedItemIndex = itemsToShuffle.findIndex((itemInfo) => {
@@ -492,14 +533,19 @@ const getAccessibleItemLocations = (params: {
   warpsMap: IdMap<WarpId, Warp>
   areasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea>
   martsMap: IdMap<MartId, Mart>
+  specialShopsMap: IdMap<SpecialShopId, SpecialShop>
   usableItems: ItemId[]
   allowNormalConsumables: boolean
 }): ({
   type: "NORMAL"
   locationId: ItemLocationId
 } | {
-  type: "SHOP"
+  type: "MART"
   martId: MartId
+  shopMenuIndex: number
+} | {
+  type: "SPECIAL_SHOP"
+  shopId: SpecialShopId
   shopMenuIndex: number
 })[] => {
   const {
@@ -507,6 +553,7 @@ const getAccessibleItemLocations = (params: {
     warpsMap,
     areasMap,
     martsMap,
+    specialShopsMap,
     usableItems,
     allowNormalConsumables,
   } = params
@@ -516,6 +563,7 @@ const getAccessibleItemLocations = (params: {
   const accessibleItems: ItemId[] = [...usableItems]
   const accessibleItemLocations: ItemLocationId[] = []
   const accessibleMarts: MartId[] = []
+  const accessibleSpecialShops: SpecialShopId[] = []
   
   const numberOfAccessibleBadges = () => {
     return accessibleItems.reduce((result, itemId) => {
@@ -535,8 +583,8 @@ const getAccessibleItemLocations = (params: {
     } else if (isObject(requirement)) {
       return accessibleItems.filter((item) => {
         return item === requirement.item
-      }).length >= requirement.number || accessibleMarts.some((mart) => {
-        return mart.includes(requirement.item)
+      }).length >= requirement.number || accessibleMarts.some((martId) => {
+        return martsMap[martId].items.includes(requirement.item)
       })
     } else if (warpIds.includes(requirement as WarpId)) {
       return accessibleWarps.includes(requirement as WarpId)
@@ -618,6 +666,23 @@ const getAccessibleItemLocations = (params: {
         didUpdate = true
       }
     })
+    
+    specialShopIds.filter((shopId) => {
+      return !accessibleSpecialShops.includes(shopId)
+    }).forEach((shopId) => {
+      const shop = specialShopsMap[shopId]
+      if (accessibleAreas.includes(shop.areaId) && (shop.accessRequirements ?? []).reduce((result, accessRequirement) => {
+        return result && isAccessRequirementSatisfied(accessRequirement)
+      }, true)) {
+        accessibleSpecialShops.push(shopId)
+        
+        shop.items.forEach((itemInfo) => {
+          accessibleItems.push(itemInfo.itemId)
+        })
+        
+        didUpdate = true
+      }
+    })
   }
   
   return [
@@ -633,8 +698,21 @@ const getAccessibleItemLocations = (params: {
       return compact(martsMap[martId].items.map((itemId, index) => {
         if (isNullish(itemId)) {
           return {
-            type: "SHOP" as const,
+            type: "MART" as const,
             martId: martId,
+            shopMenuIndex: index,
+          }
+        } else {
+          return undefined
+        }
+      }))
+    }),
+    ...accessibleSpecialShops.flatMap((shopId) => {
+      return compact(specialShopsMap[shopId].items.map((itemInfo, index) => {
+        if (isNullish(itemInfo.itemId)) {
+          return {
+            type: "SPECIAL_SHOP" as const,
+            shopId: shopId,
             shopMenuIndex: index,
           }
         } else {
@@ -847,6 +925,11 @@ export const updateAccessLogic = (
   }
   
   romInfo.gameData.itemLocations.ROUTE_39_FARMHOUSE_LADYS_GIFT.accessRequirements = romInfo.gameData.numberOfMiltankBerries > 0 ? [
+    "ROUTE_39_BARN",
+    { item: "BERRY", number: romInfo.gameData.numberOfMiltankBerries },
+  ] : undefined
+  
+  romInfo.gameData.specialShops.MOOMOO_FARM.accessRequirements = romInfo.gameData.numberOfMiltankBerries > 0 ? [
     "ROUTE_39_BARN",
     { item: "BERRY", number: romInfo.gameData.numberOfMiltankBerries },
   ] : undefined

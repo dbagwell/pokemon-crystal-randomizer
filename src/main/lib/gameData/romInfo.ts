@@ -5,7 +5,7 @@ import { itemLocationsMap } from "@shared/gameData/itemLocations"
 import { itemsMap } from "@shared/gameData/items"
 import { logicalAccessAreasMap } from "@shared/gameData/logicalAccessAreas"
 import { mapObjectEvents } from "@shared/gameData/mapObjectEvents"
-import { martsMap } from "@shared/gameData/marts"
+import { martsMap, specialShopsMap } from "@shared/gameData/marts"
 import { oddEggs } from "@shared/gameData/oddEggs"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { teachableMovesMap } from "@shared/gameData/teachableMoves"
@@ -51,6 +51,7 @@ export class ROMInfo {
       trainers: JSON.parse(JSON.stringify(trainers)),
       mapObjectEvents: JSON.parse(JSON.stringify(mapObjectEvents)),
       marts: JSON.parse(JSON.stringify(martsMap)),
+      specialShops: JSON.parse(JSON.stringify(specialShopsMap)),
       moveTutorCost: 4000,
       numberOfMiltankBerries: 7,
       itemLocations: JSON.parse(JSON.stringify(itemLocationsMap)),

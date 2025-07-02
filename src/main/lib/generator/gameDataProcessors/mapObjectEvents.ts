@@ -114,6 +114,10 @@ export const updateMapObjectEvents = (
     romInfo.gameData.mapObjectEvents.find((object) => {
       return object.id === "MAHOGANY_MART_1F_ROCKET_SALESMAN"
     })!.flagId = undefined
+    
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "MAHOGANY_TOWN_STREET_VENDOR"
+    })!.flagId = undefined
   }
   
   if (settings.EARLY_MOUNT_SILVER.VALUE) {
