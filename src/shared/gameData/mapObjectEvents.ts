@@ -3698,6 +3698,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 22389,
   },
   {
+    id: "RADIO_TOWER_2F_BLUE_CARD_REWARD_LADY",
     romOffset: [
       23,
       25905,

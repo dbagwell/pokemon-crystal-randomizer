@@ -125,4 +125,10 @@ export const updateMapObjectEvents = (
       return object.id === "VICTORY_ROAD_GATE_ROUTE_28_GUARD"
     })!.flagId = "INITIALIZED_EVENTS"
   }
+  
+  if (settings.BLUE_CARD_REWARDS_ALWAYS_ACCESSIBLE) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "RADIO_TOWER_2F_BLUE_CARD_REWARD_LADY"
+    })!.flagId = undefined
+  }
 }

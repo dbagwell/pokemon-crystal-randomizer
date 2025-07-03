@@ -1265,6 +1265,61 @@ export const defaultSettingsViewModel = () => {
               + "even before receiving the items from the NPC's that normally give you those TMs.",
           }),
           createSimpleToggleViewModel({
+            id: "REMOVE_HERB_SHOP_TIME_REQUIREMENT" as const,
+            name: "Remove Herb Shop Time Requirement",
+            description: "Makes it so the herb vendor in the Goldenrod Underground is always at her stall.",
+          }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_BARGAIN_SHOP_BEHAVIOR" as const,
+            name: "Change Bargain Shop Behavior",
+            description: "Changes the behaviour of the bargain shop vendor in the Goldenrod Underground.",
+            options: [
+              createSimpleSelectorOption({
+                id: "REMOVE_TIME_REQUIREMENT" as const,
+                name: "Remove Time Requirement",
+                description: "Makes it so the bargain shop vendor is always at his stall.",
+              }),
+              createSimpleSelectorOption({
+                id: "ALLOW_REPEAT_VISITS" as const,
+                name: "Allow Repeat Visits",
+                description: "Makes it so that you can always view the bargain shop vendor's wares if he is at his stall.",
+              }),
+            ],
+          }),
+          createSimpleToggleViewModel({
+            id: "BLUE_CARD_REWARDS_ALWAYS_ACCESSIBLE" as const,
+            name: "Blue Card Rewards Always Accessible",
+            description: "Makes it so the Blue Card Rewards exchange lady can be found on the second floor of the Goldenrod Radio Tower even when the rockets have taken over.",
+          }),
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_BLUE_CARD_REWARD_COSTS" as const,
+            name: "Randomize Blue Card Reward Costs",
+            description: "Changes the number of points required to exchange for Blue Card rewards to random amounts in the chosen range.",
+            viewModels: [
+              createIntegerRangeInputViewModel({
+                id: "RANGE" as const,
+                min: 0,
+                max: 9,
+                selectedMinValue: 0,
+                selectedMaxValue: 9,
+              }),
+            ] as const,
+          }),
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_GAME_CORNER_ITEM_PRICES" as const,
+            name: "Randomize Game Corner Item Prices",
+            description: "Changes the number of coins required to buy the items from the Game Corner Prize counters to random amounts in the chosen range.",
+            viewModels: [
+              createIntegerRangeInputViewModel({
+                id: "RANGE" as const,
+                min: 0,
+                max: 9999,
+                selectedMinValue: 0,
+                selectedMaxValue: 9999,
+              }),
+            ] as const,
+          }),
+          createSimpleToggleViewModel({
             id: "MOVE_TUTOR_ALWAYS_AVAILABLE" as const,
             name: "Move Tutor Always Available",
             description: "Makes it so the move tutor is always available in Goldenrod City "

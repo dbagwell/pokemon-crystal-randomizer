@@ -1597,6 +1597,38 @@ const createPatches = (
     ]
   }
   
+  // Special Shop Changes
+  
+  if (settings.REMOVE_HERB_SHOP_TIME_REQUIREMENT) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x40B2), [0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x40BB), [0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x40C4), [0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x40CD), [0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x40D6), [0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x4133), [0x03, 0x40, 0x41]),
+    ])
+  }
+  
+  if (settings.CHANGE_BARGAIN_SHOP_BEHAVIOR.includes("REMOVE_TIME_REQUIREMENT")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x409C), [0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x40a5), [0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x40b5), [0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x40be), [0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x40c7), [0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x40d0), [0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x40d9), [0x6F]),
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x414D), [0x03, 0x5B, 0x41]),
+    ])
+  }
+  
+  if (settings.CHANGE_BARGAIN_SHOP_BEHAVIOR.includes("ALLOW_REPEAT_VISITS")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(31, 0x414A), [0x18, 0x18, 0x18]),
+    ])
+  }
+  
   // Initialize events
   
   const eventFlagsToInitialize: EventFlagId[] = compact([

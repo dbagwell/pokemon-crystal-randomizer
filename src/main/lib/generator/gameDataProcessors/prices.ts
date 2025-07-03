@@ -9,10 +9,32 @@ export const updatePrices = (
   romInfo: ROMInfo,
   random: Random,
 ) => {
-  if (!settings.CHANGE_DEFAULT_ITEM_PRICES.VALUE) {
-    return
+  if (settings.CHANGE_DEFAULT_ITEM_PRICES.VALUE) {
+    updateDefaultItemPrices(settings, romInfo, random)
   }
   
+  if (settings.RANDOMIZE_BLUE_CARD_REWARD_COSTS.VALUE) {
+    romInfo.gameData.specialShops.BLUE_CARD_REWARD_LADY.items.forEach((itemInfo) => {
+      itemInfo.price = random.int(settings.RANDOMIZE_BLUE_CARD_REWARD_COSTS.SETTINGS.RANGE.MIN, settings.RANDOMIZE_BLUE_CARD_REWARD_COSTS.SETTINGS.RANGE.MAX)
+    })
+  }
+  
+  if (settings.RANDOMIZE_GAME_CORNER_ITEM_PRICES.VALUE) {
+    romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER.items.forEach((itemInfo) => {
+      itemInfo.price = random.int(settings.RANDOMIZE_GAME_CORNER_ITEM_PRICES.SETTINGS.RANGE.MIN, settings.RANDOMIZE_GAME_CORNER_ITEM_PRICES.SETTINGS.RANGE.MAX)
+    })
+    
+    romInfo.gameData.specialShops.CELADON_GAME_CORNER.items.forEach((itemInfo) => {
+      itemInfo.price = random.int(settings.RANDOMIZE_GAME_CORNER_ITEM_PRICES.SETTINGS.RANGE.MIN, settings.RANDOMIZE_GAME_CORNER_ITEM_PRICES.SETTINGS.RANGE.MAX)
+    })
+  }
+}
+  
+const updateDefaultItemPrices = (
+  settings: Settings,
+  romInfo: ROMInfo,
+  random: Random,
+) => {
   const priceSettings = settings.CHANGE_DEFAULT_ITEM_PRICES.SETTINGS
   const randomSettings = priceSettings.RANDOMIZE_PRICES.SETTINGS
   const cherrygroveSettings = randomSettings.LIMIT_CHERRYGROVE_PRICES.SETTINGS
