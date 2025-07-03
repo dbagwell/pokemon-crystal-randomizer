@@ -15,44 +15,44 @@ changes:
 - description: "updates the first item"
   locations:
   - bank: 21
-    address: 0x6C5E
+    address: 0x6419
   - bank: 21
     address: 0x6424
   value: "$goldenrodItem1Id"
 - description: "updates the first item price"
   locations:
   - bank: 21
-    address: 0x6C4E
+    address: 0x6412
   - bank: 21
-    address: 0x6C53
+    address: 0x6421
   value: "$goldenrodItem1Price"
 - description: "updates the second item"
   locations:
   - bank: 21
-    address: 0x6C7A
+    address: 0x6433
   - bank: 21
     address: 0x643E
   value: "$goldenrodItem2Id"
 - description: "updates the second item price"
   locations:
   - bank: 21
-    address: 0x6C6A
+    address: 0x642C
   - bank: 21
-    address: 0x6C7F
+    address: 0x643B
   value: "$goldenrodItem2Price"
 - description: "updates the third item"
   locations:
   - bank: 21
-    address: 0x6C96
+    address: 0x644D
   - bank: 21
     address: 0x6458
   value: "$goldenrodItem3Id"
 - description: "updates the third item price"
   locations:
   - bank: 21
-    address: 0x6C86
+    address: 0x6446
   - bank: 21
-    address: 0x6C9B
+    address: 0x6455
   value: "$goldenrodItem3Price"
 - description: "updates the buy menu text"
   locations:

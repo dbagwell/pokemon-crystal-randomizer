@@ -24,6 +24,7 @@ const characterMap: Record<string, number> = {
   "<MN>": 0xE2,
   "-": 0xE3,
   ...characterMapFrom("?!.&", 0xE6),
+  "¥": 0xF0,
   "×": 0xF1,
   "/": 0xF3,
   ",": 0xF4,
