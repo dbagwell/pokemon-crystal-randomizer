@@ -13,6 +13,30 @@ export const updatePrices = (
     updateDefaultItemPrices(settings, romInfo, random)
   }
   
+  if (!(settings.CHANGE_DEFAULT_ITEM_PRICES.VALUE || !settings.SHUFFLE_ITEMS.VALUE && settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS"))) {
+    return
+  }
+  
+  romInfo.gameData.specialShops.UNDERGROUND_BARGAIN_SHOP.items.forEach((itemInfo) => {
+    itemInfo.price = Math.round(romInfo.gameData.items[itemInfo.itemId].price * 0.45)
+  })
+  
+  ;[
+    ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_1.items,
+    ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items,
+  ].forEach((itemInfo) => {
+    itemInfo.price = Math.round(romInfo.gameData.items[itemInfo.itemId].price * 0.8)
+  })
+  
+  ;[
+    ...romInfo.gameData.specialShops.MOOMOO_FARM.items,
+    ...romInfo.gameData.specialShops.MAHOGANY_STREET_VENDOR.items,
+    ...romInfo.gameData.specialShops.GOLDENROD_VENDING_MACHINES.items,
+    ...romInfo.gameData.specialShops.CELADON_VENDING_MACHINES.items,
+  ].forEach((itemInfo) => {
+    itemInfo.price = romInfo.gameData.items[itemInfo.itemId].price
+  })
+  
   if (settings.RANDOMIZE_BLUE_CARD_REWARD_COSTS.VALUE) {
     romInfo.gameData.specialShops.BLUE_CARD_REWARD_LADY.items.forEach((itemInfo) => {
       itemInfo.price = random.int(settings.RANDOMIZE_BLUE_CARD_REWARD_COSTS.SETTINGS.RANGE.MIN, settings.RANDOMIZE_BLUE_CARD_REWARD_COSTS.SETTINGS.RANGE.MAX)
