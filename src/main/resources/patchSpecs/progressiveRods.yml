@@ -4,7 +4,7 @@ values:
   hiddenItemCode1: "0E 04 @$hiddenItemCode2 41 00 00 19 40 D0 91"
   hiddenItemCode2: "FA 40 D0 CD @$maybeUpdateRod2 EA DD C2 C9"
   martCode1: "CD 4D 30 47 E5 3E 04 21 @$maybeUpdateRod1 CF E1 78 C9"
-  martCode2: "2A 47 E5 3E 04 21 @$maybeUpdateRod1 CF E1 78 12 13 C9"
+  martCode2: "C5 2A 47 E5 3E 04 21 @$maybeUpdateRod1 CF E1 78 12 13 C1 C9"
   trashCanCode: "19 06 D1 41 00 00 91"
   fruitTreeCode1: "0E 11 @$fruitTreeCode2 91"
   fruitTreeCode2: "FA 3F D0 47 3E 04 21 @$maybeUpdateRod1 CF 78 EA DD C2 C9"
