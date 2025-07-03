@@ -1629,6 +1629,37 @@ const createPatches = (
     ])
   }
   
+  // Mystery Gift
+  
+  if (settings.CHANGE_MYSTERY_GIFT) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(
+        ROMOffset.fromBankAddress(21, 0x611A),
+        [
+          0x34,
+          ...bytesFrom(eventFlagsMap["GOT_EON_MAIL"].numericId, 2),
+          0x09,
+          0x29,
+          0x61,
+          0x9E,
+          romInfo.gameData.items[romInfo.gameData.itemLocations.GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT.itemId].numericId,
+          0x01,
+          0x08,
+          0x29,
+          0x61,
+          0x36,
+          ...bytesFrom(eventFlagsMap["GOT_EON_MAIL"].numericId, 2),
+          0x4C,
+          0x41,
+          0x62,
+          0x54,
+          0x49,
+          0x91,
+        ],
+      ),
+    ])
+  }
+  
   // Initialize events
   
   const eventFlagsToInitialize: EventFlagId[] = compact([

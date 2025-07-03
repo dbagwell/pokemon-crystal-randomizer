@@ -176,6 +176,10 @@ export const shuffleItems = (
       return isNotNullish(groupId)
     })
     
+    if (location.id === "GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT" && !settings.CHANGE_MYSTERY_GIFT) {
+      return
+    }
+    
     if (shuffleGroupIndex !== -1 && !shuffleItemsSettings.EXCLUDE_LOCATIONS.includes(location.id)) {
       locationsToShuffle.push({
         type: "NORMAL",

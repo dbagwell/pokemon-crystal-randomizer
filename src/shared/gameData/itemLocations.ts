@@ -4324,6 +4324,14 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
       ],
     ],
   },
+  GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT: {
+    id: "GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT",
+    type: "GIFT",
+    groupId: "REGULAR_GIFTS",
+    itemId: "EON_MAIL",
+    areaId: "GOLDENROD_DEPT_STORE_5F",
+    romOffsets: [],
+  },
 }
 
 export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {

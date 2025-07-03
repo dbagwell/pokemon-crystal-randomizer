@@ -532,7 +532,9 @@ export const generatorLog = (params: {
         fruitTreeLocationIds,
       ].map((group) => {
         return {
-          rows: group.map((id) => {
+          rows: group.filter((id) => {
+            return settings.CHANGE_MYSTERY_GIFT || id !== "GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT"
+          }).map((id) => {
             let displayId: string = id
             
             if (settings.SKIP_MAHOGANY_ROCKETS && id === "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT") {

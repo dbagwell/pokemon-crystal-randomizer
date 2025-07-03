@@ -1537,6 +1537,11 @@ export const defaultSettingsViewModel = () => {
             description: "Removes permanently removes the boxes blocking the paths to the items in the Goldenrod Department Store Basement allowing them to all be obtained without having to use the elevator multiple times.",
           }),
           createSimpleToggleViewModel({
+            id: "CHANGE_MYSTERY_GIFT" as const,
+            name: "Change Mystery Gift",
+            description: "Makes it so the girl on the fifth floor of the Goldenrod Dept. Store gives you an item (Eon Mail) instead of enabling the Mystery Gift Function.",
+          }),
+          createSimpleToggleViewModel({
             id: "SKIP_FLORIA" as const,
             name: "Skip Talking to Floria",
             description: "Removes requirement of having to talk to Floria on Route 36 and in the Flower shop before being able to get the item from the Flower Shop owner.",

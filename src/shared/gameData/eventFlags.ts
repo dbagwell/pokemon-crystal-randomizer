@@ -1262,6 +1262,10 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "GOT_PP_UP_FROM_KENJI",
     numericId: 326,
   },
+  GOT_EON_MAIL: {
+    id: "GOT_EON_MAIL",
+    numericId: 327,
+  },
   GAVE_KURT_RED_APRICORN: {
     id: "GAVE_KURT_RED_APRICORN",
     numericId: 600,

@@ -374,6 +374,7 @@ export const regularGiftLocationIds = [
   "ROUTE_42_MAHOGANY_SIDE_TULLYS_GIFT",
   "ROUTE_46_NORTH_AREA_ERINS_GIFT",
   "VERMILION_CITY_BADGE_GUYS_GIFT",
+  "GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT",
 ] as const
 
 export const tmGiftLocationIds = [
