@@ -4836,6 +4836,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       "GS_BALL",
       "KURTS_HOUSE",
       "SLOWPOKE_WELL_B1F_EAST_AREA",
+      "AZALEA_TOWN",
     ],
     romOffsets: [[
       102,

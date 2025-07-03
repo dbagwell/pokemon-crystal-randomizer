@@ -1,4 +1,4 @@
-addedItemLocationAndWarpRequirements:
+addedItemLocationRequirements:
 - requirements:
   - POTION
   - SUPER_POTION
@@ -7,6 +7,6 @@ addedItemLocationAndWarpRequirements:
   - FULL_RESTORE
   - REVIVE
   - FULL_HEAL
-  itemLocationAndWarpIds:
+  itemLocationIds:
   - SILVER_CAVE_ROOM_3_CAVE_OUT
   

@@ -1044,6 +1044,10 @@ export const updateAccessLogic = (
     romInfo.gameData.marts.MAHOGANY_1.accessRequirements = []
   }
   
+  if (settings.BLUE_CARD_REWARDS_ALWAYS_ACCESSIBLE) {
+    romInfo.gameData.specialShops.BLUE_CARD_REWARD_LADY.accessRequirements = ["BLUE_CARD"]
+  }
+  
   if (settings.EARLY_MOUNT_SILVER.VALUE) {
     removeAccessRequirements({
       areaIds: [
@@ -1121,35 +1125,45 @@ export const updateAccessLogic = (
       })
     }
     
-    if (isNotNullish(rulesetInfo.addedItemLocationAndWarpRequirements)) {
-      if (!Array.isArray(rulesetInfo.addedItemLocationAndWarpRequirements)) {
+    if (isNotNullish(rulesetInfo.addedItemLocationRequirements)) {
+      if (!Array.isArray(rulesetInfo.addedItemLocationRequirements)) {
         throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
       }
       
-      rulesetInfo.addedItemLocationAndWarpRequirements.forEach((rule: any) => {
+      rulesetInfo.addedItemLocationRequirements.forEach((rule: any) => {
         if (!(
           isObject(rule)
         && Array.isArray(rule.requirements)
-        && Array.isArray(rule.itemLocationAndWarpIds)
+        && Array.isArray(rule.itemLocationIds)
         && rule.requirements.every((requirement: any) => {
           return isAccessRequirement(requirement)
         })
-        && rule.itemLocationAndWarpIds.every((id: any) => {
-          return itemLocationIds.includes(id) || warpIds.includes(id)
+        && rule.itemLocationIds.every((id: any) => {
+          return itemLocationIds.includes(id) || warpIds.includes(id) || martIds.includes(id) || specialShopIds.includes(id)
         })
         )) {
           throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
         }
     
-        rule.itemLocationAndWarpIds.forEach((id: any) => {
+        rule.itemLocationIds.forEach((id: any) => {
           if (itemLocationIds.includes(id)) {
             romInfo.gameData.itemLocations[id as ItemLocationId].accessRequirements = [
               ...romInfo.gameData.itemLocations[id as ItemLocationId].accessRequirements ?? [],
               ...rule.requirements,
             ]
-          } else {
+          } else if (warpIds.includes(id)) {
             romInfo.gameData.warps[id as WarpId].accessRequirements = [
               ...romInfo.gameData.warps[id as WarpId].accessRequirements ?? [],
+              ...rule.requirements,
+            ]
+          } else if (martIds.includes(id)) {
+            romInfo.gameData.marts[id as MartId].accessRequirements = [
+              ...romInfo.gameData.marts[id as MartId].accessRequirements ?? [],
+              ...rule.requirements,
+            ]
+          } else {
+            romInfo.gameData.specialShops[id as SpecialShopId].accessRequirements = [
+              ...romInfo.gameData.specialShops[id as SpecialShopId].accessRequirements ?? [],
               ...rule.requirements,
             ]
           }
