@@ -1071,7 +1071,7 @@ const createPatches = (
     const mahoganyItemInfo = itemInfo("MAHOGANY_STREET_VENDOR", 0)
     const mahoganyItem = item("MAHOGANY_STREET_VENDOR", 0)
     
-    const gameCornerItemNameAndPriceText = (shopId: SpecialShopId, index: number) => {
+    const shopMenuItemNameAndPriceText = (shopId: SpecialShopId, index: number) => {
       return hexStringFrom(bytesFromTextData(item(shopId, index).inGameName.padEnd(12, " ") + `${itemInfo(shopId, index).price}`.padStart(5, " ")))
     }
     
@@ -1146,12 +1146,12 @@ const createPatches = (
         "gameCornerItems.yml",
         {},
         {
-          goldenrodItem1NameAndPrice: gameCornerItemNameAndPriceText("GOLDENROD_GAME_CORNER", 0),
-          goldenrodItem2NameAndPrice: gameCornerItemNameAndPriceText("GOLDENROD_GAME_CORNER", 1),
-          goldenrodItem3NameAndPrice: gameCornerItemNameAndPriceText("GOLDENROD_GAME_CORNER", 2),
-          celadonItem1NameAndPrice: gameCornerItemNameAndPriceText("CELADON_GAME_CORNER", 0),
-          celadonItem2NameAndPrice: gameCornerItemNameAndPriceText("CELADON_GAME_CORNER", 1),
-          celadonItem3NameAndPrice: gameCornerItemNameAndPriceText("CELADON_GAME_CORNER", 2),
+          goldenrodItem1NameAndPrice: shopMenuItemNameAndPriceText("GOLDENROD_GAME_CORNER", 0),
+          goldenrodItem2NameAndPrice: shopMenuItemNameAndPriceText("GOLDENROD_GAME_CORNER", 1),
+          goldenrodItem3NameAndPrice: shopMenuItemNameAndPriceText("GOLDENROD_GAME_CORNER", 2),
+          celadonItem1NameAndPrice: shopMenuItemNameAndPriceText("CELADON_GAME_CORNER", 0),
+          celadonItem2NameAndPrice: shopMenuItemNameAndPriceText("CELADON_GAME_CORNER", 1),
+          celadonItem3NameAndPrice: shopMenuItemNameAndPriceText("CELADON_GAME_CORNER", 2),
           goldenrodItem1Id: hexStringFrom([item("GOLDENROD_GAME_CORNER", 0).numericId]),
           goldenrodItem1Price: hexStringFrom(bytesFrom(itemInfo("GOLDENROD_GAME_CORNER", 0).price, 2)),
           goldenrodItem2Id: hexStringFrom([item("GOLDENROD_GAME_CORNER", 1).numericId]),
@@ -1171,12 +1171,12 @@ const createPatches = (
         "vendingMachineItems.yml",
         {},
         {
-          goldenrodItem1NameAndPrice: gameCornerItemNameAndPriceText("GOLDENROD_VENDING_MACHINES", 0),
-          goldenrodItem2NameAndPrice: gameCornerItemNameAndPriceText("GOLDENROD_VENDING_MACHINES", 1),
-          goldenrodItem3NameAndPrice: gameCornerItemNameAndPriceText("GOLDENROD_VENDING_MACHINES", 2),
-          celadonItem1NameAndPrice: gameCornerItemNameAndPriceText("CELADON_VENDING_MACHINES", 0),
-          celadonItem2NameAndPrice: gameCornerItemNameAndPriceText("CELADON_VENDING_MACHINES", 1),
-          celadonItem3NameAndPrice: gameCornerItemNameAndPriceText("CELADON_VENDING_MACHINES", 2),
+          goldenrodItem1NameAndPrice: shopMenuItemNameAndPriceText("GOLDENROD_VENDING_MACHINES", 0),
+          goldenrodItem2NameAndPrice: shopMenuItemNameAndPriceText("GOLDENROD_VENDING_MACHINES", 1),
+          goldenrodItem3NameAndPrice: shopMenuItemNameAndPriceText("GOLDENROD_VENDING_MACHINES", 2),
+          celadonItem1NameAndPrice: shopMenuItemNameAndPriceText("CELADON_VENDING_MACHINES", 0),
+          celadonItem2NameAndPrice: shopMenuItemNameAndPriceText("CELADON_VENDING_MACHINES", 1),
+          celadonItem3NameAndPrice: shopMenuItemNameAndPriceText("CELADON_VENDING_MACHINES", 2),
           goldenrodItem1Id: hexStringFrom([item("GOLDENROD_VENDING_MACHINES", 0).numericId]),
           goldenrodItem1Price: hexStringFrom(bytesFrom(itemInfo("GOLDENROD_VENDING_MACHINES", 0).price, 2, true)),
           goldenrodItem2Id: hexStringFrom([item("GOLDENROD_VENDING_MACHINES", 1).numericId]),
