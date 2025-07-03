@@ -1191,6 +1191,10 @@ const createPatches = (
           celadonItem3Price: hexStringFrom(bytesFrom(itemInfo("CELADON_VENDING_MACHINES", 2).price, 2, true)),
         },
       ).hunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "moveMahoganyStreetVendor.yml",
+      ).hunks,
     ])
   }
   
