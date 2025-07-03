@@ -1125,12 +1125,12 @@ const createPatches = (
         },
       ).hunks,
       // MooMoo Milk Vendor
-      new DataHunk(ROMOffset.fromBankAddress(39, 0x4EC6), [mooMooItem.numericId]),
       new DataHunk(ROMOffset.fromBankAddress(39, 0x4EDD), [0x9E, mooMooItem.numericId]),
       new DataHunk(ROMOffset.fromBankAddress(39, 0x4FF3), bytesFromTextData(`${mooMooItem.inGameName}?`.padEnd(12, " ").substring(0, 12))),
       new DataHunk(ROMOffset.fromBankAddress(39, 0x4ED7), [mooMooItemInfo.price]),
       new DataHunk(ROMOffset.fromBankAddress(39, 0x4EE6), [mooMooItemInfo.price]),
       new DataHunk(ROMOffset.fromBankAddress(39, 0x504E), bytesFromTextData(`fer ${mooMooItemInfo.price}.`.padEnd(14, " "))),
+      new DataHunk(ROMOffset.fromBankAddress(39, 0x4EC5), [0x18, 0x18]),
       new DataHunk(ROMOffset.fromBankAddress(39, 0x4EEB), [0x18, 0x18, 0x18, 0x18]),
       new DataHunk(ROMOffset.fromBankAddress(39, 0x4EF3), [0x18]),
       // Ragecandybar Vendor
