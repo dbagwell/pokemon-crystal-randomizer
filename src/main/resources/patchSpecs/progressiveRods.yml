@@ -5,6 +5,21 @@ values:
   hiddenItemCode2: "FA 40 D0 CD @$maybeUpdateRod2 EA DD C2 C9"
   martCode1: "CD 4D 30 47 E5 3E 04 21 @$maybeUpdateRod1 CF E1 78 C9"
   martCode2: "C5 2A 47 E5 3E 04 21 @$maybeUpdateRod1 CF E1 78 12 13 C1 C9"
+  buenaCode1: "47 3E 04 21 @$maybeUpdateRod1 CF 78 EA 65 D2 C9"
+  buenaCode2: "47 3E 04 21 @$maybeUpdateRod1 CF 78 EA 06 D1 C9"
+  goldenrodGameCornerCode1: "15 $goldenrodGameCornerItem1Id 0E 04 @$sharedGameCornerVendingMachineCode 91"
+  goldenrodGameCornerCode2: "15 $goldenrodGameCornerItem2Id 0E 04 @$sharedGameCornerVendingMachineCode 91"
+  goldenrodGameCornerCode3: "15 $goldenrodGameCornerItem3Id 0E 04 @$sharedGameCornerVendingMachineCode 91"
+  goldenrodVendingMachinesCode1: "15 $goldenrodVendingMachinesItem1Id 0E 04 @$sharedGameCornerVendingMachineCode 91"
+  goldenrodVendingMachinesCode2: "15 $goldenrodVendingMachinesItem2Id 0E 04 @$sharedGameCornerVendingMachineCode 91"
+  goldenrodVendingMachinesCode3: "15 $goldenrodVendingMachinesItem3Id 0E 04 @$sharedGameCornerVendingMachineCode 91"
+  celadonGameCornerCode1: "15 $celadonGameCornerItem1Id 0E 04 @$sharedGameCornerVendingMachineCode 91"
+  celadonGameCornerCode2: "15 $celadonGameCornerItem2Id 0E 04 @$sharedGameCornerVendingMachineCode 91"
+  celadonGameCornerCode3: "15 $celadonGameCornerItem3Id 0E 04 @$sharedGameCornerVendingMachineCode 91"
+  celadonVendingMachinesCode1: "15 $celadonVendingMachinesItem1Id 0E 04 @$sharedGameCornerVendingMachineCode 91"
+  celadonVendingMachinesCode2: "15 $celadonVendingMachinesItem2Id 0E 04 @$sharedGameCornerVendingMachineCode 91"
+  celadonVendingMachinesCode3: "15 $celadonVendingMachinesItem3Id 0E 04 @$sharedGameCornerVendingMachineCode 91"
+  sharedGameCornerVendingMachineCode: "FA DD C2 CD @$maybeUpdateRod2 EA 65 D2 CD 68 34 21 99 D0 CD D9 30 C9"
   trashCanCode: "19 06 D1 41 00 00 91"
   fruitTreeCode1: "0E 11 @$fruitTreeCode2 91"
   fruitTreeCode2: "FA 3F D0 47 3E 04 21 @$maybeUpdateRod1 CF 78 EA DD C2 C9"
@@ -15,7 +30,7 @@ changes:
 - description: "Adds code."
   locations:
   - bank: 4
-  value: "$itemBallCode $hiddenItemCode1 $hiddenItemCode2 $maybeUpdateRod1"
+  value: "$itemBallCode $hiddenItemCode1 $hiddenItemCode2 $sharedGameCornerVendingMachineCode $maybeUpdateRod1"
 - description: "Adds code."
   locations:
   - bank: 5
@@ -26,8 +41,16 @@ changes:
   value: "$fruitTreeCode1 $fruitTreeCode2"
 - description: "Adds code."
   locations:
+  - bank: 21
+  value: "$goldenrodGameCornerCode1 $goldenrodGameCornerCode2 $goldenrodGameCornerCode3 $goldenrodVendingMachinesCode1 $goldenrodVendingMachinesCode2 $goldenrodVendingMachinesCode3"
+- description: "Adds code."
+  locations:
   - bank: 28
-  value: "$trashCanCode"
+  value: "$trashCanCode $celadonGameCornerCode1 $celadonGameCornerCode2 $celadonGameCornerCode3 $celadonVendingMachinesCode1 $celadonVendingMachinesCode2 $celadonVendingMachinesCode3"
+- description: "Adds code."
+  locations:
+  - bank: 34
+  value: "$buenaCode1 $buenaCode2"
 - description: "Adds code."
   locations:
   - bank: 37
@@ -71,3 +94,75 @@ changes:
   - bank: 37
     address: 0x77CD
   value: "CD @$giveItemCode 00 00 00 00"
+- description: "Calls new code."
+  locations:
+  - bank: 34
+    address: 0x7006
+  - bank: 34
+    address: 0x713C
+  value: "CD @$buenaCode1"
+- description: "Calls new code."
+  locations:
+  - bank: 34
+    address: 0x7028
+  value: "CD @$buenaCode2"
+- description: "Calls new code."
+  locations:
+  - bank: 21
+    address: 0x6C54
+  value: "00 @$goldenrodGameCornerCode1"
+- description: "Calls new code."
+  locations:
+  - bank: 21
+    address: 0x6C70
+  value: "00 @$goldenrodGameCornerCode2"
+- description: "Calls new code."
+  locations:
+  - bank: 21
+    address: 0x6C8C
+  value: "00 @$goldenrodGameCornerCode3"
+- description: "Calls new code."
+  locations:
+  - bank: 21
+    address: 0x6422
+  value: "00 @$goldenrodVendingMachinesCode1"
+- description: "Calls new code."
+  locations:
+  - bank: 21
+    address: 0x643C
+  value: "00 @$goldenrodVendingMachinesCode2"
+- description: "Calls new code."
+  locations:
+  - bank: 21
+    address: 0x6456
+  value: "00 @$goldenrodVendingMachinesCode3"
+- description: "Calls new code."
+  locations:
+  - bank: 28
+    address: 0x671B
+  value: "00 @$celadonGameCornerCode1"
+- description: "Calls new code."
+  locations:
+  - bank: 28
+    address: 0x6737
+  value: "00 @$celadonGameCornerCode2"
+- description: "Calls new code."
+  locations:
+  - bank: 28
+    address: 0x6753
+  value: "00 @$celadonGameCornerCode3"
+- description: "Calls new code."
+  locations:
+  - bank: 28
+    address: 0x51AB
+  value: "00 @$celadonVendingMachinesCode1"
+- description: "Calls new code."
+  locations:
+  - bank: 28
+    address: 0x51C7
+  value: "00 @$celadonVendingMachinesCode2"
+- description: "Calls new code."
+  locations:
+  - bank: 28
+    address: 0x51E1
+  value: "00 @$celadonVendingMachinesCode3"

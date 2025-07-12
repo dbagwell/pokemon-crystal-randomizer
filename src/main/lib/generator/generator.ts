@@ -911,6 +911,21 @@ const createPatches = (
     romInfo.patchHunks.push(...Patch.fromYAML(
       romInfo,
       "progressiveRods.yml",
+      {},
+      {
+        goldenrodGameCornerItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER.items[0].itemId].numericId]),
+        goldenrodGameCornerItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER.items[1].itemId].numericId]),
+        goldenrodGameCornerItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER.items[2].itemId].numericId]),
+        goldenrodVendingMachinesItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_VENDING_MACHINES.items[0].itemId].numericId]),
+        goldenrodVendingMachinesItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_VENDING_MACHINES.items[1].itemId].numericId]),
+        goldenrodVendingMachinesItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_VENDING_MACHINES.items[2].itemId].numericId]),
+        celadonGameCornerItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_GAME_CORNER.items[0].itemId].numericId]),
+        celadonGameCornerItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_GAME_CORNER.items[1].itemId].numericId]),
+        celadonGameCornerItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_GAME_CORNER.items[2].itemId].numericId]),
+        celadonVendingMachinesItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_VENDING_MACHINES.items[0].itemId].numericId]),
+        celadonVendingMachinesItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_VENDING_MACHINES.items[1].itemId].numericId]),
+        celadonVendingMachinesItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_VENDING_MACHINES.items[2].itemId].numericId]),
+      }
     ).hunks)
   }
     
@@ -1065,14 +1080,21 @@ const createPatches = (
       return romInfo.gameData.items[itemInfo(shopId, index).itemId]
     }
     
+    const itemName = (shopId: SpecialShopId, index: number) => {
+      const itemData = item(shopId, index)
+      return settings.PROGRESSIVE_RODS && (itemData.id === "OLD_ROD" || itemData.id === "GOOD_ROD" || itemData.id === "SUPER_ROD") ? "ROD UPGRADE" : itemData.inGameName
+    }
+    
     const mooMooItemInfo = itemInfo("MOOMOO_FARM", 0)
     const mooMooItem = item("MOOMOO_FARM", 0)
+    const mooMooItemName = itemName("MOOMOO_FARM", 0)
     
     const mahoganyItemInfo = itemInfo("MAHOGANY_STREET_VENDOR", 0)
     const mahoganyItem = item("MAHOGANY_STREET_VENDOR", 0)
+    const mahoganyItemName = itemName("MAHOGANY_STREET_VENDOR", 0)
     
     const shopMenuItemNameAndPriceText = (shopId: SpecialShopId, index: number) => {
-      return hexStringFrom(bytesFromTextData(item(shopId, index).inGameName.padEnd(12, " ") + `${itemInfo(shopId, index).price}`.padStart(5, " ")))
+      return hexStringFrom(bytesFromTextData(itemName(shopId, index).padEnd(12, " ") + `${itemInfo(shopId, index).price}`.padStart(5, " ")))
     }
     
     romInfo.patchHunks.push(...[
@@ -1126,7 +1148,7 @@ const createPatches = (
       ).hunks,
       // MooMoo Milk Vendor
       new DataHunk(ROMOffset.fromBankAddress(39, 0x4EDD), [0x9E, mooMooItem.numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(39, 0x4FF3), bytesFromTextData(`${mooMooItem.inGameName}?`.padEnd(12, " ").substring(0, 12))),
+      new DataHunk(ROMOffset.fromBankAddress(39, 0x4FF3), bytesFromTextData(`${mooMooItemName}?`.padEnd(12, " ").substring(0, 12))),
       new DataHunk(ROMOffset.fromBankAddress(39, 0x4ED7), bytesFrom(mooMooItemInfo.price, 2, true)),
       new DataHunk(ROMOffset.fromBankAddress(39, 0x4EE6), bytesFrom(mooMooItemInfo.price, 2, true)),
       new DataHunk(ROMOffset.fromBankAddress(39, 0x504E), bytesFromTextData(`fer ¥${mooMooItemInfo.price}.`.padEnd(14, " "))),
@@ -1135,7 +1157,7 @@ const createPatches = (
       new DataHunk(ROMOffset.fromBankAddress(39, 0x4EF3), [0x18]),
       // Ragecandybar Vendor
       new DataHunk(ROMOffset.fromBankAddress(100, 0x4054), [0x9E, mahoganyItem.numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(100, 0x4100), bytesFromTextScript(`${mahoganyItem.inGameName},`.padEnd(16, " ") + "\nyum!")),
+      new DataHunk(ROMOffset.fromBankAddress(100, 0x4100), bytesFromTextScript(`${mahoganyItemName},`.padEnd(16, " ") + "\nyum!")),
       new DataHunk(ROMOffset.fromBankAddress(100, 0x404E), bytesFrom(mahoganyItemInfo.price, 2, true)),
       new DataHunk(ROMOffset.fromBankAddress(100, 0x4061), bytesFrom(mahoganyItemInfo.price, 2, true)),
       new DataHunk(ROMOffset.fromBankAddress(100, 0x413B), bytesFromTextData(`${mahoganyItemInfo.price}!`.padEnd(14, " "))),
@@ -1196,6 +1218,23 @@ const createPatches = (
         "moveMahoganyStreetVendor.yml",
       ).hunks,
     ])
+    
+    if (!settings.PROGRESSIVE_RODS) {
+      romInfo.patchHunks.push(...[
+        new DataHunk(ROMOffset.fromBankAddress(21, 0x6C56), [item("GOLDENROD_GAME_CORNER", 0).numericId]),
+        new DataHunk(ROMOffset.fromBankAddress(21, 0x6C72), [item("GOLDENROD_GAME_CORNER", 1).numericId]),
+        new DataHunk(ROMOffset.fromBankAddress(21, 0x6C8E), [item("GOLDENROD_GAME_CORNER", 2).numericId]),
+        new DataHunk(ROMOffset.fromBankAddress(21, 0x6424), [item("GOLDENROD_VENDING_MACHINES", 0).numericId]),
+        new DataHunk(ROMOffset.fromBankAddress(21, 0x643E), [item("GOLDENROD_VENDING_MACHINES", 1).numericId]),
+        new DataHunk(ROMOffset.fromBankAddress(21, 0x6458), [item("GOLDENROD_VENDING_MACHINES", 2).numericId]),
+        new DataHunk(ROMOffset.fromBankAddress(28, 0x671D), [item("CELADON_GAME_CORNER", 0).numericId]),
+        new DataHunk(ROMOffset.fromBankAddress(28, 0x6739), [item("CELADON_GAME_CORNER", 1).numericId]),
+        new DataHunk(ROMOffset.fromBankAddress(28, 0x6755), [item("CELADON_GAME_CORNER", 2).numericId]),
+        new DataHunk(ROMOffset.fromBankAddress(28, 0x51AD), [item("CELADON_VENDING_MACHINES", 0).numericId]),
+        new DataHunk(ROMOffset.fromBankAddress(28, 0x51C9), [item("CELADON_VENDING_MACHINES", 1).numericId]),
+        new DataHunk(ROMOffset.fromBankAddress(28, 0x51E3), [item("CELADON_VENDING_MACHINES", 2).numericId]),
+      ])
+    }
   }
   
   if (settings.MOVE_TUTOR_ALWAYS_AVAILABLE) {

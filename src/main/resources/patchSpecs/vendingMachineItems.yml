@@ -16,8 +16,6 @@ changes:
   locations:
   - bank: 21
     address: 0x6419
-  - bank: 21
-    address: 0x6424
   value: "$goldenrodItem1Id"
 - description: "updates the first item price"
   locations:
@@ -30,8 +28,6 @@ changes:
   locations:
   - bank: 21
     address: 0x6433
-  - bank: 21
-    address: 0x643E
   value: "$goldenrodItem2Id"
 - description: "updates the second item price"
   locations:
@@ -44,8 +40,6 @@ changes:
   locations:
   - bank: 21
     address: 0x644D
-  - bank: 21
-    address: 0x6458
   value: "$goldenrodItem3Id"
 - description: "updates the third item price"
   locations:
@@ -67,8 +61,6 @@ changes:
   locations:
   - bank: 28
     address: 0x51A4
-  - bank: 28
-    address: 0x51AD
   value: "$celadonItem1Id"
 - description: "updates the first item price"
   locations:
@@ -81,8 +73,6 @@ changes:
   locations:
   - bank: 28
     address: 0x51BE
-  - bank: 28
-    address: 0x51C9
   value: "$celadonItem2Id"
 - description: "updates the second item price"
   locations:
@@ -95,8 +85,6 @@ changes:
   locations:
   - bank: 28
     address: 0x51D8
-  - bank: 28
-    address: 0x51E3
   value: "$celadonItem3Id"
 - description: "updates the third item price"
   locations:
