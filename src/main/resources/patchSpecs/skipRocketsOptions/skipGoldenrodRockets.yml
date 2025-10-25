@@ -9,10 +9,10 @@ changes:
   - bank: 47
     address: 0x423E
   value: "91"
-- description: "New scripts that to the script that cause the rockets to take over the Goldenrod/radio tower."
+- description: "New scripts that make changes to the script that cause the rockets to take over the Goldenrod/radio tower."
   locations:
   - bank: 47
-  value: "$goldenrodRocketsScript $rocketTakeoverScript1 $rocketTakeoverScript2"
+  value: "$goldenrodRocketsScript $rocketTakeoverScript"
 - description: "Calls the new script that causes the rockets to take over."
   locations:
   - bank: 47
