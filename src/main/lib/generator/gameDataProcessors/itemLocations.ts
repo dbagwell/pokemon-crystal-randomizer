@@ -7,7 +7,7 @@ import type { LogicalAccessArea, LogicalAreaAccessOption } from "@shared/types/g
 import type { Mart, SpecialShop } from "@shared/types/gameData/mart"
 import { type AccessRequirement, isAccessRequirement, type Warp } from "@shared/types/gameData/warp"
 import { type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
-import { type BadgeItemId, badgeItemIds, ballItemIds, type HoldableItemId, holdableItemIds, type ItemId, itemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
+import { type BadgeItemId, badgeItemIds, ballItemIds, type HoldableItemId, holdableItemIds, type ItemId, itemIds, type KeyItemId, keyItemIds, type MenuItemId, menuItemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
 import { martGroupIds } from "@shared/types/gameDataIds/martGroups"
 import { type MartId, martIds, type SpecialShopId, specialShopIds } from "@shared/types/gameDataIds/marts"
@@ -87,11 +87,18 @@ export const updateItems = (
     })
   }
   
-  if (settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS) {
+  if (settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.VALUE) {
     const startingItems = startingItemIds(settings)
     
     itemLocationIds.forEach((locationId) => {
-      if (startingItems.includes(romInfo.gameData.itemLocations[locationId].itemId)) {
+      if (
+        startingItems.includes(romInfo.gameData.itemLocations[locationId].itemId)
+        && (
+          menuItemIds.includes(romInfo.gameData.itemLocations[locationId].itemId as MenuItemId)
+          || keyItemIds.includes(romInfo.gameData.itemLocations[locationId].itemId as KeyItemId)
+          || badgeItemIds.includes(romInfo.gameData.itemLocations[locationId].itemId as BadgeItemId)
+        )
+      ) {
         const replacement = settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.SETTINGS.REPLACEMENT
         
         if (replacement === "RANDOM") {
