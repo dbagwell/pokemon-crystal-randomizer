@@ -1071,16 +1071,8 @@ export const defaultSettingsViewModel = () => {
                     })
                   }),
                   ...specialShopIds.map((shopId) => {
-                    const itemNames = Object.values(specialShopsMap).reduce((result, shop) => {
-                      shop.items.forEach((itemInfo) => {
-                        if (!result.includes(itemInfo.itemId)) {
-                          result.push(itemInfo.itemId)
-                        }
-                      })
-                      
-                      return result
-                    }, [] as ItemId[]).map((itemId) => {
-                      return itemsMap[itemId].name
+                    const itemNames = specialShopsMap[shopId].items.map((item) => {
+                      return itemsMap[item.itemId].name
                     }).join("\n")
                     
                     return createSimpleSelectorOption({
