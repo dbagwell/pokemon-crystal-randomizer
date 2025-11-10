@@ -22,7 +22,7 @@ changes:
   - bank: 21
     address: 0x6C4E
   - bank: 21
-    address: 0x6C53
+    address: 0x6C64
   value: "$goldenrodItem1Price"
 - description: "updates the second item"
   locations:
@@ -34,7 +34,7 @@ changes:
   - bank: 21
     address: 0x6C6A
   - bank: 21
-    address: 0x6C7F
+    address: 0x6C80
   value: "$goldenrodItem2Price"
 - description: "updates the third item"
   locations:
@@ -46,7 +46,7 @@ changes:
   - bank: 21
     address: 0x6C86
   - bank: 21
-    address: 0x6C9B
+    address: 0x6C9C
   value: "$goldenrodItem3Price"
 - description: "updates the buy menu text"
   locations:
