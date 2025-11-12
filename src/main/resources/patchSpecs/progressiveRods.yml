@@ -124,17 +124,17 @@ changes:
 - description: "Calls new code."
   locations:
   - bank: 21
-    address: 0x6422
+    address: 0x6423
   value: "00 @$goldenrodVendingMachinesCode1"
 - description: "Calls new code."
   locations:
   - bank: 21
-    address: 0x643C
+    address: 0x643D
   value: "00 @$goldenrodVendingMachinesCode2"
 - description: "Calls new code."
   locations:
   - bank: 21
-    address: 0x6456
+    address: 0x6457
   value: "00 @$goldenrodVendingMachinesCode3"
 - description: "Calls new code."
   locations:
@@ -154,15 +154,15 @@ changes:
 - description: "Calls new code."
   locations:
   - bank: 28
-    address: 0x51AB
+    address: 0x51AE
   value: "00 @$celadonVendingMachinesCode1"
 - description: "Calls new code."
   locations:
   - bank: 28
-    address: 0x51C7
+    address: 0x51C8
   value: "00 @$celadonVendingMachinesCode2"
 - description: "Calls new code."
   locations:
   - bank: 28
-    address: 0x51E1
+    address: 0x51E2
   value: "00 @$celadonVendingMachinesCode3"
