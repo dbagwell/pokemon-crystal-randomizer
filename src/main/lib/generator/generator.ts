@@ -638,6 +638,25 @@ const createPatches = (
         {
           regularItemPickupSound: settings.FASTER_ITEM_PICKUP_SFX ? "90 00" : "01 00",
           elmsAideNumberOfItems: hexStringFrom([Math.min(itemCategoriesMap[romInfo.gameData.items[romInfo.gameData.itemLocations.ELMS_LAB_AIDES_GIFT_FOR_MYSTERY_EGG.itemId].category].slotSize, 5)]),
+          gotZephyrbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_ZEPHYRBADGE.numericId, 2)),
+          gotHivebadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_HIVEBADGE.numericId, 2)),
+          gotPlainbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_PLAINBADGE.numericId, 2)),
+          gotFogbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_FOGBADGE.numericId, 2)),
+          gotMineralbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_MINERALBADGE.numericId, 2)),
+          gotStormbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_STORMBADGE.numericId, 2)),
+          gotGlacierbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_GLACIERBADGE.numericId, 2)),
+          gotRisingbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_RISINGBADGE.numericId, 2)),
+          gotBoulderbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_BOULDERBADGE.numericId, 2)),
+          gotCascadebadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_CASCADEBADGE.numericId, 2)),
+          gotThunderbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_THUNDERBADGE.numericId, 2)),
+          gotRainbowbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_RAINBOWBADGE.numericId, 2)),
+          gotSoulbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_SOULBADGE.numericId, 2)),
+          gotMarshbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_MARSHBADGE.numericId, 2)),
+          gotVolcanobadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_VOLCANOBADGE.numericId, 2)),
+          gotEarthbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_EARTHBADGE.numericId, 2)),
+          gotRadioCardEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_RADIO_CARD.numericId, 2)),
+          gotExpnCardEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_EXPN_CARD.numericId, 2)),
+          directorInUndergroundWarehouseEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.DIRECTOR_IN_UNDERGROUND_WAREHOUSE.numericId, 2)),
         },
       ).hunks,
       new DataHunk(
@@ -1966,6 +1985,16 @@ const createPatches = (
     romInfo.patchHunks.push(...Patch.fromYAML(
       romInfo,
       "wadeAndWiltonChanges.yml",
+      {},
+      {
+        gotBerryFromWadeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_BERRY_FROM_WADE.numericId, 2)),
+        gotPsncureberryFromWadeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_PSNCUREBERRY_FROM_WADE.numericId, 2)),
+        gotPrzcureberryFromWadeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_PRZCUREBERRY_FROM_WADE.numericId, 2)),
+        gotBitterBerryFromWadeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_BITTER_BERRY_FROM_WADE.numericId, 2)),
+        gotUltraBallFromWiltonEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_ULTRA_BALL_FROM_WILTON.numericId, 2)),
+        gotGreatBallFromWiltonEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_GREAT_BALL_FROM_WILTON.numericId, 2)),
+        gotPokeBallFromWiltonEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_POKE_BALL_FROM_WILTON.numericId, 2)),
+      }
     ).hunks)
   }
   
