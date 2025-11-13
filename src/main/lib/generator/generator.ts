@@ -729,6 +729,7 @@ const createPatches = (
         "martsPreventDuplicateKeyItems.yml",
         {},
         {
+          rooftopSaleMartIndex: hexStringFrom([martIds.length]),
           gotMartItemsEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_MART_ITEMS.numericId, 2)),
         }
       ).hunks)
