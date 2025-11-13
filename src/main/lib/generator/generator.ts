@@ -727,6 +727,10 @@ const createPatches = (
       romInfo.patchHunks.push(...Patch.fromYAML(
         romInfo,
         "martsPreventDuplicateKeyItems.yml",
+        {},
+        {
+          gotMartItemsEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_MART_ITEMS.numericId, 2)),
+        }
       ).hunks)
     }
   } else if (settings.FASTER_ITEM_PICKUP_SFX) {

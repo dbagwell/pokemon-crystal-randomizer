@@ -1,7 +1,7 @@
 description: "Prevents buying the same entry in the mart twice if it is an hm, key item, menu item or badge"
 values:
   saveMartIndex: "7B EA D4 D0 C3 31 5B"
-  getMartItemFlagIndex: "11 41 03 21 3D 5B 2A 46 6F 60 2A 46 6F 60 FA D4 D0 47 0E FF 23 0C 79 B8 28 08 2A FE FF 28 F5 13 18 F8 FA 45 D0 47 AF 3C B8 28 03 13 18 F9 C9"
+  getMartItemFlagIndex: "11 $gotMartItemsEventFlagId 21 3D 5B 2A 46 6F 60 2A 46 6F 60 FA D4 D0 47 0E FF 23 0C 79 B8 28 08 2A FE FF 28 F5 13 18 F8 FA 45 D0 47 AF 3C B8 28 03 13 18 F9 C9"
   checkMartItemFlag: "E5 3E 63 EA 0D D1 3E 03 21 3D 54 CF FA 42 D1 FE 02 28 0F FE 05 30 0B FA 06 D1 FE F3 30 04 E1 C3 91 5C 3E 01 EA 0D D1 CD @$getMartItemFlagIndex 06 02 CD 6F 2E 79 A7 28 EB 21 81 5E CD 57 10 CD 36 0A E1 37 C9"
   setMartItemFlag: "E5 CD @$getMartItemFlagIndex 06 01 CD 6F 2E E1 C3 66 2F"
 changes:

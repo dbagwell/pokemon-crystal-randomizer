@@ -998,273 +998,9 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "TIFFANY_GAVE_PINK_BOW",
     numericId: 260,
   },
-  GOT_ZEPHYRBADGE: {
-    id: "GOT_ZEPHYRBADGE",
+  GOT_MART_ITEMS: { // This is actually an array of event flags, 1 for each item in in the marts
+    id: "GOT_MART_ITEMS",
     numericId: 261,
-  },
-  GOT_HIVEBADGE: {
-    id: "GOT_HIVEBADGE",
-    numericId: 262,
-  },
-  GOT_PLAINBADGE: {
-    id: "GOT_PLAINBADGE",
-    numericId: 263,
-  },
-  GOT_FOGBADGE: {
-    id: "GOT_FOGBADGE",
-    numericId: 264,
-  },
-  GOT_MINERALBADGE: {
-    id: "GOT_MINERALBADGE",
-    numericId: 265,
-  },
-  GOT_STORMBADGE: {
-    id: "GOT_STORMBADGE",
-    numericId: 266,
-  },
-  GOT_GLACIERBADGE: {
-    id: "GOT_GLACIERBADGE",
-    numericId: 267,
-  },
-  GOT_RISINGBADGE: {
-    id: "GOT_RISINGBADGE",
-    numericId: 268,
-  },
-  GOT_BOULDERBADGE: {
-    id: "GOT_BOULDERBADGE",
-    numericId: 269,
-  },
-  GOT_CASCADEBADGE: {
-    id: "GOT_CASCADEBADGE",
-    numericId: 270,
-  },
-  GOT_THUNDERBADGE: {
-    id: "GOT_THUNDERBADGE",
-    numericId: 271,
-  },
-  GOT_RAINBOWBADGE: {
-    id: "GOT_RAINBOWBADGE",
-    numericId: 272,
-  },
-  GOT_SOULBADGE: {
-    id: "GOT_SOULBADGE",
-    numericId: 273,
-  },
-  GOT_MARSHBADGE: {
-    id: "GOT_MARSHBADGE",
-    numericId: 274,
-  },
-  GOT_VOLCANOBADGE: {
-    id: "GOT_VOLCANOBADGE",
-    numericId: 275,
-  },
-  GOT_EARTHBADGE: {
-    id: "GOT_EARTHBADGE",
-    numericId: 276,
-  },
-  GOT_RADIO_CARD: {
-    id: "GOT_RADIO_CARD",
-    numericId: 277,
-  },
-  GOT_EXPN_CARD: {
-    id: "GOT_EXPN_CARD",
-    numericId: 278,
-  },
-  DIRECTOR_IN_UNDERGROUND_WAREHOUSE: {
-    id: "DIRECTOR_IN_UNDERGROUND_WAREHOUSE",
-    numericId: 279,
-  },
-  GOT_ROUTE_1_FRUIT_TREE: {
-    id: "GOT_ROUTE_1_FRUIT_TREE",
-    numericId: 280,
-  },
-  GOT_ROUTE_2_FOREST_AREA_FRUIT_TREE: {
-    id: "GOT_ROUTE_2_FOREST_AREA_FRUIT_TREE",
-    numericId: 281,
-  },
-  GOT_ROUTE_8_FRUIT_TREE: {
-    id: "GOT_ROUTE_8_FRUIT_TREE",
-    numericId: 282,
-  },
-  GOT_ROUTE_11_FRUIT_TREE: {
-    id: "GOT_ROUTE_11_FRUIT_TREE",
-    numericId: 283,
-  },
-  GOT_ROUTE_26_FRUIT_TREE: {
-    id: "GOT_ROUTE_26_FRUIT_TREE",
-    numericId: 284,
-  },
-  GOT_ROUTE_29_FRUIT_TREE: {
-    id: "GOT_ROUTE_29_FRUIT_TREE",
-    numericId: 285,
-  },
-  GOT_ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE: {
-    id: "GOT_ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE",
-    numericId: 286,
-  },
-  GOT_ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE: {
-    id: "GOT_ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE",
-    numericId: 287,
-  },
-  GOT_ROUTE_31_FRUIT_TREE: {
-    id: "GOT_ROUTE_31_FRUIT_TREE",
-    numericId: 288,
-  },
-  GOT_ROUTE_33_FRUIT_TREE: {
-    id: "GOT_ROUTE_33_FRUIT_TREE",
-    numericId: 289,
-  },
-  GOT_ROUTE_35_SURF_AREA_FRUIT_TREE: {
-    id: "GOT_ROUTE_35_SURF_AREA_FRUIT_TREE",
-    numericId: 290,
-  },
-  GOT_ROUTE_36_WEST_AREA_FRUIT_TREE: {
-    id: "GOT_ROUTE_36_WEST_AREA_FRUIT_TREE",
-    numericId: 291,
-  },
-  GOT_ROUTE_37_LEFT_FRUIT_TREE: {
-    id: "GOT_ROUTE_37_LEFT_FRUIT_TREE",
-    numericId: 292,
-  },
-  GOT_ROUTE_37_MIDDLE_FRUIT_TREE: {
-    id: "GOT_ROUTE_37_MIDDLE_FRUIT_TREE",
-    numericId: 293,
-  },
-  GOT_ROUTE_37_RIGHT_FRUIT_TREE: {
-    id: "GOT_ROUTE_37_RIGHT_FRUIT_TREE",
-    numericId: 294,
-  },
-  GOT_ROUTE_38_FRUIT_TREE: {
-    id: "GOT_ROUTE_38_FRUIT_TREE",
-    numericId: 295,
-  },
-  GOT_ROUTE_39_FRUIT_TREE: {
-    id: "GOT_ROUTE_39_FRUIT_TREE",
-    numericId: 296,
-  },
-  GOT_ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE: {
-    id: "GOT_ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE",
-    numericId: 297,
-  },
-  GOT_ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE: {
-    id: "GOT_ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE",
-    numericId: 298,
-  },
-  GOT_ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE: {
-    id: "GOT_ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE",
-    numericId: 299,
-  },
-  GOT_ROUTE_43_SURF_CUT_AREA_FRUIT_TREE: {
-    id: "GOT_ROUTE_43_SURF_CUT_AREA_FRUIT_TREE",
-    numericId: 300,
-  },
-  GOT_ROUTE_44_FRUIT_TREE: {
-    id: "GOT_ROUTE_44_FRUIT_TREE",
-    numericId: 301,
-  },
-  GOT_ROUTE_45_FRUIT_TREE: {
-    id: "GOT_ROUTE_45_FRUIT_TREE",
-    numericId: 302,
-  },
-  GOT_ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE: {
-    id: "GOT_ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE",
-    numericId: 303,
-  },
-  GOT_ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE: {
-    id: "GOT_ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE",
-    numericId: 304,
-  },
-  GOT_PEWTER_CITY_LEFT_FRUIT_TREE: {
-    id: "GOT_PEWTER_CITY_LEFT_FRUIT_TREE",
-    numericId: 305,
-  },
-  GOT_PEWTER_CITY_RIGHT_FRUIT_TREE: {
-    id: "GOT_PEWTER_CITY_RIGHT_FRUIT_TREE",
-    numericId: 306,
-  },
-  GOT_FUCHSIA_CITY_CUT_AREA_FRUIT_TREE: {
-    id: "GOT_FUCHSIA_CITY_CUT_AREA_FRUIT_TREE",
-    numericId: 307,
-  },
-  GOT_VIOLET_CITY_FRUIT_TREE: {
-    id: "GOT_VIOLET_CITY_FRUIT_TREE",
-    numericId: 308,
-  },
-  GOT_AZALEA_TOWN_FRUIT_TREE: {
-    id: "GOT_AZALEA_TOWN_FRUIT_TREE",
-    numericId: 309,
-  },
-  GOT_RETURN: {
-    id: "GOT_RETURN",
-    numericId: 310,
-  },
-  GOT_FRUSTRATION: {
-    id: "GOT_FRUSTRATION",
-    numericId: 311,
-  },
-  GOT_FIRST_PLACE_PRIZE: {
-    id: "GOT_FIRST_PLACE_PRIZE",
-    numericId: 312,
-  },
-  GOT_SECOND_PLACE_PRIZE: {
-    id: "GOT_SECOND_PLACE_PRIZE",
-    numericId: 313,
-  },
-  GOT_THIRD_PLACE_PRIZE: {
-    id: "GOT_THIRD_PLACE_PRIZE",
-    numericId: 314,
-  },
-  GOT_CONSOLATION_PRIZE: {
-    id: "GOT_CONSOLATION_PRIZE",
-    numericId: 315,
-  },
-  GOT_NUGGET_FROM_BEVERLY: {
-    id: "GOT_NUGGET_FROM_BEVERLY",
-    numericId: 316,
-  },
-  GOT_STAR_PIECE_FROM_JOSE: {
-    id: "GOT_STAR_PIECE_FROM_JOSE",
-    numericId: 317,
-  },
-  GOT_BERRY_FROM_WADE: {
-    id: "GOT_BERRY_FROM_WADE",
-    numericId: 318,
-  },
-  GOT_PSNCUREBERRY_FROM_WADE: {
-    id: "GOT_PSNCUREBERRY_FROM_WADE",
-    numericId: 319,
-  },
-  GOT_PRZCUREBERRY_FROM_WADE: {
-    id: "GOT_PRZCUREBERRY_FROM_WADE",
-    numericId: 320,
-  },
-  GOT_BITTER_BERRY_FROM_WADE: {
-    id: "GOT_BITTER_BERRY_FROM_WADE",
-    numericId: 321,
-  },
-  GOT_NUGGET_FROM_DEREK: {
-    id: "GOT_NUGGET_FROM_DEREK",
-    numericId: 322,
-  },
-  GOT_ULTRA_BALL_FROM_WILTON: {
-    id: "GOT_ULTRA_BALL_FROM_WILTON",
-    numericId: 323,
-  },
-  GOT_GREAT_BALL_FROM_WILTON: {
-    id: "GOT_GREAT_BALL_FROM_WILTON",
-    numericId: 324,
-  },
-  GOT_POKE_BALL_FROM_WILTON: {
-    id: "GOT_POKE_BALL_FROM_WILTON",
-    numericId: 325,
-  },
-  GOT_PP_UP_FROM_KENJI: {
-    id: "GOT_PP_UP_FROM_KENJI",
-    numericId: 326,
-  },
-  GOT_EON_MAIL: {
-    id: "GOT_EON_MAIL",
-    numericId: 327,
   },
   GAVE_KURT_RED_APRICORN: {
     id: "GAVE_KURT_RED_APRICORN",
@@ -2073,6 +1809,274 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
   GOT_GS_BALL_FROM_POKECOM_CENTER: {
     id: "GOT_GS_BALL_FROM_POKECOM_CENTER",
     numericId: 832,
+  },
+  GOT_ZEPHYRBADGE: {
+    id: "GOT_ZEPHYRBADGE",
+    numericId: 833,
+  },
+  GOT_HIVEBADGE: {
+    id: "GOT_HIVEBADGE",
+    numericId: 834,
+  },
+  GOT_PLAINBADGE: {
+    id: "GOT_PLAINBADGE",
+    numericId: 835,
+  },
+  GOT_FOGBADGE: {
+    id: "GOT_FOGBADGE",
+    numericId: 836,
+  },
+  GOT_MINERALBADGE: {
+    id: "GOT_MINERALBADGE",
+    numericId: 837,
+  },
+  GOT_STORMBADGE: {
+    id: "GOT_STORMBADGE",
+    numericId: 838,
+  },
+  GOT_GLACIERBADGE: {
+    id: "GOT_GLACIERBADGE",
+    numericId: 839,
+  },
+  GOT_RISINGBADGE: {
+    id: "GOT_RISINGBADGE",
+    numericId: 840,
+  },
+  GOT_BOULDERBADGE: {
+    id: "GOT_BOULDERBADGE",
+    numericId: 841,
+  },
+  GOT_CASCADEBADGE: {
+    id: "GOT_CASCADEBADGE",
+    numericId: 842,
+  },
+  GOT_THUNDERBADGE: {
+    id: "GOT_THUNDERBADGE",
+    numericId: 843,
+  },
+  GOT_RAINBOWBADGE: {
+    id: "GOT_RAINBOWBADGE",
+    numericId: 844,
+  },
+  GOT_SOULBADGE: {
+    id: "GOT_SOULBADGE",
+    numericId: 845,
+  },
+  GOT_MARSHBADGE: {
+    id: "GOT_MARSHBADGE",
+    numericId: 846,
+  },
+  GOT_VOLCANOBADGE: {
+    id: "GOT_VOLCANOBADGE",
+    numericId: 847,
+  },
+  GOT_EARTHBADGE: {
+    id: "GOT_EARTHBADGE",
+    numericId: 848,
+  },
+  GOT_RADIO_CARD: {
+    id: "GOT_RADIO_CARD",
+    numericId: 849,
+  },
+  GOT_EXPN_CARD: {
+    id: "GOT_EXPN_CARD",
+    numericId: 850,
+  },
+  DIRECTOR_IN_UNDERGROUND_WAREHOUSE: {
+    id: "DIRECTOR_IN_UNDERGROUND_WAREHOUSE",
+    numericId: 851,
+  },
+  GOT_ROUTE_1_FRUIT_TREE: {
+    id: "GOT_ROUTE_1_FRUIT_TREE",
+    numericId: 852,
+  },
+  GOT_ROUTE_2_FOREST_AREA_FRUIT_TREE: {
+    id: "GOT_ROUTE_2_FOREST_AREA_FRUIT_TREE",
+    numericId: 853,
+  },
+  GOT_ROUTE_8_FRUIT_TREE: {
+    id: "GOT_ROUTE_8_FRUIT_TREE",
+    numericId: 854,
+  },
+  GOT_ROUTE_11_FRUIT_TREE: {
+    id: "GOT_ROUTE_11_FRUIT_TREE",
+    numericId: 855,
+  },
+  GOT_ROUTE_26_FRUIT_TREE: {
+    id: "GOT_ROUTE_26_FRUIT_TREE",
+    numericId: 856,
+  },
+  GOT_ROUTE_29_FRUIT_TREE: {
+    id: "GOT_ROUTE_29_FRUIT_TREE",
+    numericId: 857,
+  },
+  GOT_ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE: {
+    id: "GOT_ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE",
+    numericId: 858,
+  },
+  GOT_ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE: {
+    id: "GOT_ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE",
+    numericId: 859,
+  },
+  GOT_ROUTE_31_FRUIT_TREE: {
+    id: "GOT_ROUTE_31_FRUIT_TREE",
+    numericId: 860,
+  },
+  GOT_ROUTE_33_FRUIT_TREE: {
+    id: "GOT_ROUTE_33_FRUIT_TREE",
+    numericId: 861,
+  },
+  GOT_ROUTE_35_SURF_AREA_FRUIT_TREE: {
+    id: "GOT_ROUTE_35_SURF_AREA_FRUIT_TREE",
+    numericId: 862,
+  },
+  GOT_ROUTE_36_WEST_AREA_FRUIT_TREE: {
+    id: "GOT_ROUTE_36_WEST_AREA_FRUIT_TREE",
+    numericId: 863,
+  },
+  GOT_ROUTE_37_LEFT_FRUIT_TREE: {
+    id: "GOT_ROUTE_37_LEFT_FRUIT_TREE",
+    numericId: 864,
+  },
+  GOT_ROUTE_37_MIDDLE_FRUIT_TREE: {
+    id: "GOT_ROUTE_37_MIDDLE_FRUIT_TREE",
+    numericId: 865,
+  },
+  GOT_ROUTE_37_RIGHT_FRUIT_TREE: {
+    id: "GOT_ROUTE_37_RIGHT_FRUIT_TREE",
+    numericId: 866,
+  },
+  GOT_ROUTE_38_FRUIT_TREE: {
+    id: "GOT_ROUTE_38_FRUIT_TREE",
+    numericId: 867,
+  },
+  GOT_ROUTE_39_FRUIT_TREE: {
+    id: "GOT_ROUTE_39_FRUIT_TREE",
+    numericId: 868,
+  },
+  GOT_ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE: {
+    id: "GOT_ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE",
+    numericId: 869,
+  },
+  GOT_ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE: {
+    id: "GOT_ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE",
+    numericId: 870,
+  },
+  GOT_ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE: {
+    id: "GOT_ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE",
+    numericId: 871,
+  },
+  GOT_ROUTE_43_SURF_CUT_AREA_FRUIT_TREE: {
+    id: "GOT_ROUTE_43_SURF_CUT_AREA_FRUIT_TREE",
+    numericId: 872,
+  },
+  GOT_ROUTE_44_FRUIT_TREE: {
+    id: "GOT_ROUTE_44_FRUIT_TREE",
+    numericId: 873,
+  },
+  GOT_ROUTE_45_FRUIT_TREE: {
+    id: "GOT_ROUTE_45_FRUIT_TREE",
+    numericId: 874,
+  },
+  GOT_ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE: {
+    id: "GOT_ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE",
+    numericId: 875,
+  },
+  GOT_ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE: {
+    id: "GOT_ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE",
+    numericId: 876,
+  },
+  GOT_PEWTER_CITY_LEFT_FRUIT_TREE: {
+    id: "GOT_PEWTER_CITY_LEFT_FRUIT_TREE",
+    numericId: 877,
+  },
+  GOT_PEWTER_CITY_RIGHT_FRUIT_TREE: {
+    id: "GOT_PEWTER_CITY_RIGHT_FRUIT_TREE",
+    numericId: 878,
+  },
+  GOT_FUCHSIA_CITY_CUT_AREA_FRUIT_TREE: {
+    id: "GOT_FUCHSIA_CITY_CUT_AREA_FRUIT_TREE",
+    numericId: 879,
+  },
+  GOT_VIOLET_CITY_FRUIT_TREE: {
+    id: "GOT_VIOLET_CITY_FRUIT_TREE",
+    numericId: 880,
+  },
+  GOT_AZALEA_TOWN_FRUIT_TREE: {
+    id: "GOT_AZALEA_TOWN_FRUIT_TREE",
+    numericId: 881,
+  },
+  GOT_RETURN: {
+    id: "GOT_RETURN",
+    numericId: 882,
+  },
+  GOT_FRUSTRATION: {
+    id: "GOT_FRUSTRATION",
+    numericId: 883,
+  },
+  GOT_FIRST_PLACE_PRIZE: {
+    id: "GOT_FIRST_PLACE_PRIZE",
+    numericId: 884,
+  },
+  GOT_SECOND_PLACE_PRIZE: {
+    id: "GOT_SECOND_PLACE_PRIZE",
+    numericId: 885,
+  },
+  GOT_THIRD_PLACE_PRIZE: {
+    id: "GOT_THIRD_PLACE_PRIZE",
+    numericId: 886,
+  },
+  GOT_CONSOLATION_PRIZE: {
+    id: "GOT_CONSOLATION_PRIZE",
+    numericId: 887,
+  },
+  GOT_NUGGET_FROM_BEVERLY: {
+    id: "GOT_NUGGET_FROM_BEVERLY",
+    numericId: 888,
+  },
+  GOT_STAR_PIECE_FROM_JOSE: {
+    id: "GOT_STAR_PIECE_FROM_JOSE",
+    numericId: 889,
+  },
+  GOT_BERRY_FROM_WADE: {
+    id: "GOT_BERRY_FROM_WADE",
+    numericId: 890,
+  },
+  GOT_PSNCUREBERRY_FROM_WADE: {
+    id: "GOT_PSNCUREBERRY_FROM_WADE",
+    numericId: 891,
+  },
+  GOT_PRZCUREBERRY_FROM_WADE: {
+    id: "GOT_PRZCUREBERRY_FROM_WADE",
+    numericId: 892,
+  },
+  GOT_BITTER_BERRY_FROM_WADE: {
+    id: "GOT_BITTER_BERRY_FROM_WADE",
+    numericId: 893,
+  },
+  GOT_NUGGET_FROM_DEREK: {
+    id: "GOT_NUGGET_FROM_DEREK",
+    numericId: 894,
+  },
+  GOT_ULTRA_BALL_FROM_WILTON: {
+    id: "GOT_ULTRA_BALL_FROM_WILTON",
+    numericId: 895,
+  },
+  GOT_GREAT_BALL_FROM_WILTON: {
+    id: "GOT_GREAT_BALL_FROM_WILTON",
+    numericId: 896,
+  },
+  GOT_POKE_BALL_FROM_WILTON: {
+    id: "GOT_POKE_BALL_FROM_WILTON",
+    numericId: 897,
+  },
+  GOT_PP_UP_FROM_KENJI: {
+    id: "GOT_PP_UP_FROM_KENJI",
+    numericId: 898,
+  },
+  GOT_EON_MAIL: {
+    id: "GOT_EON_MAIL",
+    numericId: 899,
   },
   BEAT_SWIMMERF_ELAINE: {
     id: "BEAT_SWIMMERF_ELAINE",
