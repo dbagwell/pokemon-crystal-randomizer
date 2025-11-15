@@ -633,6 +633,24 @@ export const generatorLog = (params: {
     }),
   })
   
+  addSection({
+    header: "OTHER",
+    content: logTable({
+      headers: [
+        "SETTING",
+        "VALUE",
+      ],
+      sections: [
+        {
+          rows: [
+            ["BADGES REQUIRED FOR OAK/RED", `${gameData.numberOfBadgesForOak}`],
+            ["BERRIES REQUIRED FOR MILTANK", `${gameData.numberOfMiltankBerries}`],
+          ]
+        },
+      ]
+    }),
+  })
+  
   return [
     basicInfos,
     "----- TABLE OF CONTENTS -----",
