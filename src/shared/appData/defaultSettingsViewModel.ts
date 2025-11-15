@@ -1598,6 +1598,11 @@ export const defaultSettingsViewModel = () => {
               }),
             ] as const,
           }),
+          createSimpleToggleViewModel({
+            id: "IGNORE_MAGIKARP_SIZE" as const,
+            name: "Ignore Magikarp Size",
+            description: "Makes it so the man in the man in the house at the Lake of Rage will give away his item when shown any Magikarp.",
+          }),
           createSimpleMultiSelectorViewModel({
             id: "REMOVE_ROCKET_GRUNTS" as const,
             name: "Remove Rocket Grunts",

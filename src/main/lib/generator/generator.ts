@@ -1659,6 +1659,12 @@ const createPatches = (
     ])
   }
   
+  // Magikarp Size
+  
+  if (settings.IGNORE_MAGIKARP_SIZE) {
+    romInfo.patchHunks.push(new DataHunk(ROMOffset.fromBankAddress(102, 0x66EC), [0x03, 0xFE, 0x66]))
+  }
+  
   // Early Tin Tower
   
   if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.length > 0) {
