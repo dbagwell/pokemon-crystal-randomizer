@@ -335,6 +335,65 @@ export const defaultSettingsViewModel = () => {
             name: "Randomize Intro Pokémon",
             description: "Randomizes the Pokémon shown by Prof. Oak during the game's introduction.",
           }),
+          createConfigurableToggleViewModel({
+            id: "CHANGE_UNOWN_SETS" as const,
+            name: "Change Unown Sets",
+            description: "Change which unown letters are unlocked by each puzzle in the Ruins of Alph.",
+            viewModels: [
+              createSingleSelectorViewModel({
+                selectedOptionId: "RANDOM",
+                id: "METHOD" as const,
+                options: [
+                  createConfigurableSelectorOption({
+                    id: "RANDOM" as const,
+                    name: "Random",
+                    description: "Change the Unown letters in each set to random ones.",
+                    viewModels: [
+                      createSimpleToggleViewModel({
+                        id: "PREVENT_DUPLICATES" as const,
+                        name: "Prevent Duplicates",
+                        description: "Makes it so no sets have the same Unown letter as another set. Every Unown letter will be guaranteed to be available in one of the sets.",
+                      }),
+                      createSingleSelectorViewModel({
+                        selectedOptionId: "VANILLA",
+                        id: "DISTRIBUTION" as const,
+                        name: "Distribution",
+                        description: "Determines how many Unown letters are unlocked by each puzzle.",
+                        options: [
+                          createSimpleSelectorOption({
+                            id: "VANILLA" as const,
+                            name: "Vanilla",
+                            description: "Uses the default set distributions.\n"
+                              + "- The Kabuto puzzle unlocks 11 letters.\n"
+                              + "- The Omanyte puzzle unlocks 7 letters.\n"
+                              + "- The Aerodactyl puzzle unlocks 5 letters.\n"
+                              + "- The Ho-oh puzzle unlocks 3 letters.",
+                          }),
+                          createSimpleSelectorOption({
+                            id: "RANDOM" as const,
+                            name: "Random",
+                            description: "Picks a random number of letters for each set, while making sure the sum of the number of letters in each set still adds up to 26.",
+                          }),
+                          createSimpleSelectorOption({
+                            id: "BALANCED" as const,
+                            name: "Balanced",
+                            description: "Makes it so each set has about the same number of letters.\n"
+                              + "The Kabuto and Omanyte puzzles will each unlock 7 letters.\n"
+                              + "The Aerodactyl and Ho-oh puzzles will each unlock 6 letters.",
+                          }),
+                        ] as const,
+                      }), // END DISTRIBUTION
+                    ] as const,
+                  }), // END RANDOM
+                  createSimpleSelectorOption({
+                    id: "SINGLE_SET" as const,
+                    name: "Single Set",
+                    description: "Makes it so any puzzle will unlock all 26 Unown letters.",
+                  }),
+                ] as const,
+              }),
+            ] as const,
+          }), // END CHANGE_UNOWN_SETS
           createSimpleMultiSelectorViewModel({
             id: "BANNED_POKEMON" as const,
             name: "Globally Banned Pokémon",

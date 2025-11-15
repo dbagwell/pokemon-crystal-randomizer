@@ -20,6 +20,8 @@ import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import type { StarterLocationId } from "@shared/types/gameDataIds/starterLocations"
 import type { TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
 import type { TradeId } from "@shared/types/gameDataIds/trades"
+import type { UnownLetterId } from "@shared/types/gameDataIds/unownLetters"
+import type { UnownSetId } from "@shared/types/gameDataIds/unownSets"
 import type { WarpId } from "@shared/types/gameDataIds/warps"
 
 export type GameData = {
@@ -35,6 +37,7 @@ export type GameData = {
   encounters: Encounter[]
   oddEggs: OddEgg[]
   eventPokemon: Record<EventPokemonId, PokemonId>
+  unownSets: Record<UnownSetId, UnownLetterId[]>
   dratiniMoves: {
     regular: MoveId[]
     special: MoveId[]

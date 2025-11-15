@@ -24,6 +24,7 @@ import { updateStarterItems, updateStarters } from "@lib/generator/gameDataProce
 import { updateTeachableMoves } from "@lib/generator/gameDataProcessors/teachableMoves"
 import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
+import { updateUnownSets } from "@lib/generator/gameDataProcessors/unownSets"
 import { generatorLog } from "@lib/generator/log"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { createPCRP } from "@lib/generator/pcrpProcessor"
@@ -40,6 +41,7 @@ import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
+import { unownLetters } from "@shared/gameData/unownLetters"
 import { itemHoldEffectsMap, itemMenuActionsMap } from "@shared/types/gameData/item"
 import type { EventFlagId } from "@shared/types/gameDataIds/eventFlags"
 import { type EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
@@ -230,6 +232,7 @@ const updateGameData = (
   updateStarterItems(settings, romInfo, random)
   updateEventPokemon(settings, romInfo, random)
   updateRandomEncounters(settings, romInfo, random)
+  updateUnownSets(settings, romInfo, random)
   updateEncounterRates(settings, romInfo)
   updateTrades(settings, romInfo, random)
   updateEvolutionMethods(settings, romInfo)
@@ -1663,6 +1666,39 @@ const createPatches = (
   
   if (settings.IGNORE_MAGIKARP_SIZE) {
     romInfo.patchHunks.push(new DataHunk(ROMOffset.fromBankAddress(102, 0x66EC), [0x03, 0xFE, 0x66]))
+  }
+  
+  // Unown Sets
+  
+  if (settings.CHANGE_UNOWN_SETS.VALUE) {
+    let omanyteOffset = 0x6BA9
+    let aerodactylOffset = 0x6BA9
+    let hoOhOffset = 0x6BA9
+    
+    if (settings.CHANGE_UNOWN_SETS.SETTINGS.METHOD.VALUE === "RANDOM") {
+      omanyteOffset += romInfo.gameData.unownSets.KABUTO_PUZZLE.length + 1
+      aerodactylOffset = omanyteOffset + romInfo.gameData.unownSets.OMANYTE_PUZZLE.length + 1
+      hoOhOffset = aerodactylOffset + romInfo.gameData.unownSets.AERODACTYL_PUZZLE.length + 1
+    }
+    
+    romInfo.patchHunks.push(...[
+      new DataHunk(
+        ROMOffset.fromBankAddress(15, 0x6BA3),
+        [
+          ...bytesFrom(omanyteOffset, 2),
+          ...bytesFrom(aerodactylOffset, 2),
+          ...bytesFrom(hoOhOffset, 2),
+          ...romInfo.gameData.unownSets.KABUTO_PUZZLE.map((id) => { return unownLetters[id].numericId}),
+          0xFF,
+          ...romInfo.gameData.unownSets.OMANYTE_PUZZLE.map((id) => { return unownLetters[id].numericId}),
+          0xFF,
+          ...romInfo.gameData.unownSets.AERODACTYL_PUZZLE.map((id) => { return unownLetters[id].numericId}),
+          0xFF,
+          ...romInfo.gameData.unownSets.HO_OH_PUZZLE.map((id) => { return unownLetters[id].numericId}),
+          0xFF,
+        ]
+      ),
+    ])
   }
   
   // Early Tin Tower

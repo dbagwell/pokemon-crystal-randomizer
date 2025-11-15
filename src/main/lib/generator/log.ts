@@ -22,6 +22,7 @@ import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import { moveTutorIds } from "@shared/types/gameDataIds/teachableMoves"
 import { trainerClassIds } from "@shared/types/gameDataIds/trainerClasses"
 import { treeGroupIds } from "@shared/types/gameDataIds/treeGroups"
+import type { UnownSetId } from "@shared/types/gameDataIds/unownSets"
 import { compact, isNotNullish } from "@shared/utils"
 import { app } from "electron"
 import yaml from "yaml"
@@ -320,6 +321,26 @@ export const generatorLog = (params: {
               encounter.pokemonId,
               `Lv. ${encounter.minLevel}-${encounter.maxLevel}`,
               `${encounterRatios.CONTEST[encounter.slot]}%`,
+            ]
+          }),
+        },
+      ],
+    }),
+  })
+    
+  addSection({
+    header: "UNOWN SETS",
+    content: logTable({
+      headers: [
+        "SET",
+        "LETTERS",
+      ],
+      sections: [
+        {
+          rows: Object.keys(gameData.unownSets).map((setId) => {
+            return [
+              setId,
+              settings.CHANGE_UNOWN_SETS.VALUE && settings.CHANGE_UNOWN_SETS.SETTINGS.METHOD.VALUE === "SINGLE_SET" ? gameData.unownSets.KABUTO_PUZZLE.join(", ") : gameData.unownSets[setId as UnownSetId].join(", "),
             ]
           }),
         },

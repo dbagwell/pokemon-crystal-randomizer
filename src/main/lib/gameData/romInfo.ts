@@ -32,6 +32,12 @@ export class ROMInfo {
       encounters: JSON.parse(JSON.stringify(encounters)),
       oddEggs: JSON.parse(JSON.stringify(oddEggs)),
       eventPokemon: JSON.parse(JSON.stringify(eventPokemonMap)),
+      unownSets: {
+        KABUTO_PUZZLE: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"],
+        OMANYTE_PUZZLE: ["L", "M", "N", "O", "P", "Q", "R"],
+        AERODACTYL_PUZZLE: ["S", "T", "U", "V", "W"],
+        HO_OH_PUZZLE: ["X", "Y", "Z"],
+      },
       dratiniMoves: {
         regular: [
           "WRAP",
