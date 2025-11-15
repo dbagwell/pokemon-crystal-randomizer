@@ -1,0 +1,9 @@
+description: "Makes it so that the second item in the goldenrod game corner can only be purchased once."
+values:
+  script: "31 parent.$gotGoldenrodGameCornerItem2EventFlagId 09 @parent.$goldenrodGameCornerSoldOutScript 00 A1 6C 03 76 6C"
+changes:
+- description: "Calls the new code."
+  locations:
+  - bank: 21
+    address: 0x6C73
+  value: "03 @$script"

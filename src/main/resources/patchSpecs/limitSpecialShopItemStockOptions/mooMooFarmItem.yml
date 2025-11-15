@@ -1,0 +1,9 @@
+description: "Makes it so that the item from the farmer can only be purchased once."
+values:
+  script: "31 parent.$gotMooMooMilkEventFlagId 09 08 4F 03 CA 4E"
+changes:
+- description: "Calls the new code."
+  locations:
+  - bank: 39
+    address: 0x4EC7
+  value: "03 @$script"

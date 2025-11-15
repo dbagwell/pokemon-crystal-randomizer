@@ -1,0 +1,9 @@
+description: "Makes it so that the third item in the goldenrod vending machine can only be purchased once."
+values:
+  script: "06 02 6A 64 31 parent.$gotGoldenrodVendingMachineItem3EventFlagId 09 @parent.$goldenrodSoldOutScript 03 4C 64"
+changes:
+- description: "Calls the new code."
+  locations:
+  - bank: 21
+    address: 0x6448
+  value: "03 @$script"

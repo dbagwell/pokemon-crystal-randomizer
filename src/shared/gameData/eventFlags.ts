@@ -2078,6 +2078,98 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "GOT_EON_MAIL",
     numericId: 899,
   },
+  GOT_GOLDENROD_GAME_CORNER_ITEM_1: {
+    id: "GOT_GOLDENROD_GAME_CORNER_ITEM_1",
+    numericId: 900,
+  },
+  GOT_GOLDENROD_GAME_CORNER_ITEM_2: {
+    id: "GOT_GOLDENROD_GAME_CORNER_ITEM_2",
+    numericId: 901,
+  },
+  GOT_GOLDENROD_GAME_CORNER_ITEM_3: {
+    id: "GOT_GOLDENROD_GAME_CORNER_ITEM_3",
+    numericId: 902,
+  },
+  GOT_CELADON_GAME_CORNER_ITEM_1: {
+    id: "GOT_CELADON_GAME_CORNER_ITEM_1",
+    numericId: 903,
+  },
+  GOT_CELADON_GAME_CORNER_ITEM_2: {
+    id: "GOT_CELADON_GAME_CORNER_ITEM_2",
+    numericId: 904,
+  },
+  GOT_CELADON_GAME_CORNER_ITEM_3: {
+    id: "GOT_CELADON_GAME_CORNER_ITEM_3",
+    numericId: 905,
+  },
+  GOT_GOLDENROD_VENDING_MACHINE_ITEM_1: {
+    id: "GOT_GOLDENROD_VENDING_MACHINE_ITEM_1",
+    numericId: 906,
+  },
+  GOT_GOLDENROD_VENDING_MACHINE_ITEM_2: {
+    id: "GOT_GOLDENROD_VENDING_MACHINE_ITEM_2",
+    numericId: 907,
+  },
+  GOT_GOLDENROD_VENDING_MACHINE_ITEM_3: {
+    id: "GOT_GOLDENROD_VENDING_MACHINE_ITEM_3",
+    numericId: 908,
+  },
+  GOT_CELADON_VENDING_MACHINE_ITEM_1: {
+    id: "GOT_CELADON_VENDING_MACHINE_ITEM_1",
+    numericId: 909,
+  },
+  GOT_CELADON_VENDING_MACHINE_ITEM_2: {
+    id: "GOT_CELADON_VENDING_MACHINE_ITEM_2",
+    numericId: 910,
+  },
+  GOT_CELADON_VENDING_MACHINE_ITEM_3: {
+    id: "GOT_CELADON_VENDING_MACHINE_ITEM_3",
+    numericId: 911,
+  },
+  GOT_BLUE_CARD_PRIZE_1: {
+    id: "GOT_BLUE_CARD_PRIZE_1",
+    numericId: 912,
+  },
+  GOT_BLUE_CARD_PRIZE_2: {
+    id: "GOT_BLUE_CARD_PRIZE_2",
+    numericId: 913,
+  },
+  GOT_BLUE_CARD_PRIZE_3: {
+    id: "GOT_BLUE_CARD_PRIZE_3",
+    numericId: 914,
+  },
+  GOT_BLUE_CARD_PRIZE_4: {
+    id: "GOT_BLUE_CARD_PRIZE_4",
+    numericId: 915,
+  },
+  GOT_BLUE_CARD_PRIZE_5: {
+    id: "GOT_BLUE_CARD_PRIZE_5",
+    numericId: 916,
+  },
+  GOT_BLUE_CARD_PRIZE_6: {
+    id: "GOT_BLUE_CARD_PRIZE_6",
+    numericId: 917,
+  },
+  GOT_BLUE_CARD_PRIZE_7: {
+    id: "GOT_BLUE_CARD_PRIZE_7",
+    numericId: 918,
+  },
+  GOT_BLUE_CARD_PRIZE_8: {
+    id: "GOT_BLUE_CARD_PRIZE_8",
+    numericId: 919,
+  },
+  GOT_BLUE_CARD_PRIZE_9: {
+    id: "GOT_BLUE_CARD_PRIZE_9",
+    numericId: 920,
+  },
+  GOT_MOOMOO_MILK: {
+    id: "GOT_MOOMOO_MILK",
+    numericId: 921,
+  },
+  GOT_RAGECANDYBAR: {
+    id: "GOT_RAGECANDYBAR",
+    numericId: 922,
+  },
   BEAT_SWIMMERF_ELAINE: {
     id: "BEAT_SWIMMERF_ELAINE",
     numericId: 1000,

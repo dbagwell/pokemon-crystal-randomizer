@@ -1297,6 +1297,11 @@ export const defaultSettingsViewModel = () => {
               }),
             ] as const,
           }),
+          createSimpleToggleViewModel({
+            id: "LIMIT_BLUE_CARD_REWARDS_STOCK" as const,
+            name: "Limit Blue Card Rewards Stock",
+            description: "Makes it so each Blue Card reward can only be received once.",
+          }),
           createConfigurableToggleViewModel({
             id: "RANDOMIZE_GAME_CORNER_ITEM_PRICES" as const,
             name: "Randomize Game Corner Item Prices",
@@ -1310,6 +1315,11 @@ export const defaultSettingsViewModel = () => {
                 selectedMaxValue: 0xFFFF,
               }),
             ] as const,
+          }),
+          createSimpleToggleViewModel({
+            id: "LIMIT_GAME_CORNER_ITEM_STOCK" as const,
+            name: "Limit Game Corner Item Stock",
+            description: "Makes it so each item available for purchase in the Goldenrod and Celadon Game Corners can only be purchased once.",
           }),
           createSimpleToggleViewModel({
             id: "MOVE_TUTOR_ALWAYS_AVAILABLE" as const,
