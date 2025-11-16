@@ -1091,6 +1091,14 @@ export const updateAccessLogic = (
     })
   }
   
+  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE && settings.RANDOMIZE_EVENT_POKEMON.SETTINGS.MYSTERY_EGG_RESEARCH_REQUEST === "MATCH_EGG") {
+    romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements = romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements?.filter((requirement) => {
+      return requirement !== "TOGEPI"
+    })
+    
+    romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements?.push(romInfo.gameData.eventPokemon.TOGEPI)
+  }
+  
   settings.SHUFFLE_ITEMS.SETTINGS.ACCESS_MODIFIERS.forEach((rulesetId) => {
     let rulesetInfo: any
     

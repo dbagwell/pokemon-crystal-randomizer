@@ -170,6 +170,24 @@ export const defaultSettingsViewModel = () => {
                   }),
                 ] as const,
               }), // END ODD_EGG
+              createSingleSelectorViewModel({
+                id: "MYSTERY_EGG_RESEARCH_REQUEST" as const,
+                name: "Mystery Egg Research Request",
+                description: "Determines what Pokémon you need to show Prof. Elm to get his Everstone gift.",
+                selectedOptionId: "TOGEPI_TOGETIC",
+                options: [
+                  createSimpleSelectorOption({
+                    id: "TOGEPI_TOGETIC" as const,
+                    name: "Togepi/Togetic",
+                    description: "Keeps it so you must show Prof. Elm a Togepi or a Togetic to get his Everstone gift.",
+                  }),
+                  createSimpleSelectorOption({
+                    id: "MATCH_EGG" as const,
+                    name: "Match Egg",
+                    description: "Makes it so you must show Prof. Elm a Pokémon that is the same species as the one that hatches from the Mystery Egg to get his Everston gift.",
+                  }),
+                ] as const,
+              }), // END MYSTERY_EGG_RESEARCH_REQUEST
               createBannedPokemonSelectorViewModel(),
             ] as const,
           }), // END RANDOMIZE_EVENT_POKEMON
@@ -1656,6 +1674,12 @@ export const defaultSettingsViewModel = () => {
                 selectedMaxValue: 7,
               }),
             ] as const,
+          }),
+          createSimpleToggleViewModel({
+            id: "HATCH_ANY_EGG_FOR_ELM" as const,
+            name: "Hatch Any Egg for Prof. Elm",
+            description: "Makes it so Prof. Elm will ask you to show him a Pokémon after you hatch any egg, not just the Mystery Egg (or an egg that contains the same Pokémon as the Mystery Egg).\n"
+              + "Getting the Mystery Egg from Prof. Elm's Aide in the Violet City Pokémon Center is still required though.",
           }),
           createSimpleToggleViewModel({
             id: "IGNORE_MAGIKARP_SIZE" as const,

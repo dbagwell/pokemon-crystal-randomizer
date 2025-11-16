@@ -1662,6 +1662,40 @@ const createPatches = (
     ])
   }
   
+  // Elm Everstone Requirements
+  
+  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE && settings.RANDOMIZE_EVENT_POKEMON.SETTINGS.MYSTERY_EGG_RESEARCH_REQUEST === "MATCH_EGG") {
+    const numericId = pokemonMap[romInfo.gameData.eventPokemon.TOGEPI].numericId
+    
+    romInfo.patchHunks.push(...[
+      new DataHunk(
+        ROMOffset.fromBankAddress(30, 0x4C0D),
+        [numericId],
+      ),
+      new DataHunk(
+        ROMOffset.fromBankAddress(30, 0x4C15),
+        [numericId],
+      ),
+      new DataHunk(
+        ROMOffset.fromBankAddress(30, 0x4C23),
+        [numericId],
+      ),
+      new DataHunk(
+        ROMOffset.fromBankAddress(30, 0x4C2B),
+        [numericId],
+      ),
+    ])
+  }
+  
+  if (settings.HATCH_ANY_EGG_FOR_ELM) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(
+        ROMOffset.fromBankAddress(5, 0x6FB5),
+        [0, 0],
+      ),
+    ])
+  }
+  
   // Magikarp Size
   
   if (settings.IGNORE_MAGIKARP_SIZE) {
