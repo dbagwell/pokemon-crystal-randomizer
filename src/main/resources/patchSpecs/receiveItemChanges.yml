@@ -33,6 +33,9 @@ values:
   setUndergroundWarehouseDirectorEventFlag: "33 4A 00 33 $directorInUndergroundWarehouseEventFlagId 91"
   fruitTreeSoundEffectScript: "86 88 45 03 3F 40"
   elmMysteryEggCheck: "21 45 09 A2 4D 31 24 00 03 E5 4B"
+  elmAfterTurningInMysteryEgg: "14 06 03 E0 4B"
+  elmAfterGivingMasterBall: "4C 31 5D 54 49 03 E0 4B"
+  elmAfterGivingSSTicket: "08 EE 4B 33 24 00 4C 6F 5E 54 49 03 E0 4B"
 changes:
 - description: "Changes the script for picking up an item ball to use the script that plays a sound dynamically based on the type of item."
   locations:
@@ -359,3 +362,35 @@ changes:
   - bank: 30
     address: 0x4BE2
   value: "03 @$elmMysteryEggCheck"
+- description: "Updates elms script to loop back on itself after taking the mystery egg."
+  locations:
+  - bank: 30
+  value: "$elmAfterTurningInMysteryEgg"
+- description: "Updates elms script to loop back on itself after taking the mystery egg."
+  locations:
+  - bank: 30
+    address: 0x4DD9
+  value: "03 @$elmAfterTurningInMysteryEgg"
+- description: "Updates elms script to continue checking for other items after failing to give the master ball."
+  locations:
+  - bank: 30
+    address: 0x4E24
+  value: "FA 4B"
+- description: "Updates elms script to loop back on itself after giving the master ball."
+  locations:
+  - bank: 30
+  value: "$elmAfterGivingMasterBall"
+- description: "Updates elms script to loop back on itself after giving the master ball."
+  locations:
+  - bank: 30
+    address: 0x4E29
+  value: "03 @$elmAfterGivingMasterBall"
+- description: "Updates elms script to loop back on itself after giving the SS Ticket."
+  locations:
+  - bank: 30
+  value: "$elmAfterGivingSSTicket"
+- description: "Updates elms script to loop back on itself after giving the SS Ticket."
+  locations:
+  - bank: 30
+    address: 0x4E36
+  value: "03 @$elmAfterGivingSSTicket"
