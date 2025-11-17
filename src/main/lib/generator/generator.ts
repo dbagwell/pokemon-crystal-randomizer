@@ -1735,6 +1735,26 @@ const createPatches = (
     ])
   }
   
+  // Better Pokemon Info
+  
+  if (settings.SHOW_REQUESTED_POKEMON_INFO) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "improvedPokemonRequests.yml",
+      {},
+      {
+        togepiId: hexStringFrom([pokemonMap[romInfo.gameData.eventPokemon.TOGEPI].numericId]),
+      },
+    ).hunks)
+  }
+  
+  if (settings.SHOW_REQUESTED_POKEMON_INFO || settings.CHANGE_STARTERS.VALUE) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "allowUnownPokepics.yml",
+    ).hunks)
+  }
+  
   // Early Tin Tower
   
   if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.length > 0) {

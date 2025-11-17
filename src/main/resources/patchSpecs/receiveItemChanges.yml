@@ -394,3 +394,43 @@ changes:
   - bank: 30
     address: 0x4E36
   value: "03 @$elmAfterGivingSSTicket"
+- description: "Continues the to check for the next bills grandpa pokemon after failing to give an item."
+  locations:
+  - bank: 98
+    address: 0x5648
+  value: "92 55"
+- description: "Continues the to check for the next bills grandpa pokemon after giving an item."
+  locations:
+  - bank: 98
+    address: 0x564D
+  value: "03 92 55"
+- description: "Continues the to check for the next bills grandpa pokemon after failing to give an item."
+  locations:
+  - bank: 98
+    address: 0x565F
+  value: "B3 55"
+- description: "Continues the to check for the next bills grandpa pokemon after giving an item."
+  locations:
+  - bank: 98
+    address: 0x5664
+  value: "03 B3 55"
+- description: "Continues the to check for the next bills grandpa pokemon after failing to give an item."
+  locations:
+  - bank: 98
+    address: 0x5676
+  value: "D4 55"
+- description: "Continues the to check for the next bills grandpa pokemon after giving an item."
+  locations:
+  - bank: 98
+    address: 0x567B
+  value: "03 D4 55"
+- description: "Continues the to check for the next bills grandpa pokemon after failing to give an item."
+  locations:
+  - bank: 98
+    address: 0x568D
+  value: "1A 56"
+- description: "Continues the to check for the next bills grandpa pokemon after giving an item."
+  locations:
+  - bank: 98
+    address: 0x5692
+  value: "03 1A 56"

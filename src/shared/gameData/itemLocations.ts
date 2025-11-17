@@ -3680,6 +3680,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "LEAF_STONE",
     areaId: "BILLS_HOUSE",
     accessRequirements: [
+      "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG",
       "ODDISH",
     ],
     romOffsets: [
@@ -3696,6 +3697,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "WATER_STONE",
     areaId: "BILLS_HOUSE",
     accessRequirements: [
+      "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH",
       "STARYU",
     ],
     romOffsets: [
@@ -3712,6 +3714,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "FIRE_STONE",
     areaId: "BILLS_HOUSE",
     accessRequirements: [
+      "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU",
       "GROWLITHE",
     ],
     romOffsets: [
@@ -3728,6 +3731,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "THUNDERSTONE",
     areaId: "BILLS_HOUSE",
     accessRequirements: [
+      "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE",
       "PICHU",
     ],
     romOffsets: [

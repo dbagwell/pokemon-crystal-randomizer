@@ -1715,6 +1715,11 @@ export const defaultSettingsViewModel = () => {
             ] as const,
           }),
           createSimpleToggleViewModel({
+            id: "SHOW_REQUESTED_POKEMON_INFO" as const,
+            name: "Show Requested Pokémon Info",
+            description: "Makes it so NPC's that want you to show them a specific Pokémon in exchange for something will show you a picture of the Pokémon they want to see and register it in your Pokédex.",
+          }),
+          createSimpleToggleViewModel({
             id: "HATCH_ANY_EGG_FOR_ELM" as const,
             name: "Hatch Any Egg for Prof. Elm",
             description: "Makes it so Prof. Elm will ask you to show him a Pokémon after you hatch any egg, not just the Mystery Egg (or an egg that contains the same Pokémon as the Mystery Egg).\n"
