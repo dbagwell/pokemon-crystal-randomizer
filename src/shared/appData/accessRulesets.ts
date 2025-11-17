@@ -50,37 +50,37 @@ export const accessRulsetsMap: IdMap<AccessRulesetId, AccessRuleset> = {
     id: "X_ITEMS_FOR_HARD_FIGHTS",
     name: "X Items for Hard Fights",
     description: "Makes it so that X Attack, X Special, X Defend, X Speed, X Accuracy, Guard Spec., and Dire Hit must be obtainable before having to battle the following trainers:\n"
-      + "- Sages in the Tin Tower Gate"
-      + "- Rocket Executives in Radio Tower"
-      + "- Trainers on Route 25"
-      + "- Rival in the Goldenrod Underground Switch Room"
-      + "- Rival in Victory Road"
-      + "- Rival in Mount Moon"
-      + "- Leader Brock"
-      + "- Leader Misty"
-      + "- Leader Lt. Surge"
-      + "- Leader Erika"
-      + "- Leader Janine"
-      + "- Leader Sabrina"
-      + "- Leader Blaine"
-      + "- Leader Blue"
-      + "- Elite 4 Will"
-      + "- Elite 4 Koga"
-      + "- Elite 4 Bruno"
-      + "- Elite 4 Karen"
-      + "- Champion Lance"
+      + "- Sages in the Tin Tower Gate\n"
+      + "- Rocket Executives in Radio Tower\n"
+      + "- Trainers on Route 25\n"
+      + "- Rival in the Goldenrod Underground Switch Room\n"
+      + "- Rival in Victory Road\n"
+      + "- Rival in Mount Moon\n"
+      + "- Leader Brock\n"
+      + "- Leader Misty\n"
+      + "- Leader Lt. Surge\n"
+      + "- Leader Erika\n"
+      + "- Leader Janine\n"
+      + "- Leader Sabrina\n"
+      + "- Leader Blaine\n"
+      + "- Leader Blue\n"
+      + "- Elite 4 Will\n"
+      + "- Elite 4 Koga\n"
+      + "- Elite 4 Bruno\n"
+      + "- Elite 4 Karen\n"
+      + "- Champion Lance\n"
       + "- Pokémon Trainer Red",
   },
   HEALING_ITEMS_FOR_RED: {
     id: "HEALING_ITEMS_FOR_RED",
     name: "Healing Items for Red",
     description: "Makes it so the following items must be obtainable before having to fight Red:\n"
-      + "- POTION"
-      + "- SUPER_POTION"
-      + "- HYPER_POTION"
-      + "- MAX_POTION"
-      + "- FULL_RESTORE"
-      + "- REVIVE"
-      + "- FULL_HEAL",
+      + "- Potion\n"
+      + "- Super Potion\n"
+      + "- Hyper Potion\n"
+      + "- Max Potion\n"
+      + "- Full Restore\n"
+      + "- Revive\n"
+      + "- Full Heal",
   },
 } as const
