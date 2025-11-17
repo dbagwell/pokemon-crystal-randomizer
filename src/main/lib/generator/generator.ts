@@ -660,6 +660,7 @@ const createPatches = (
           gotRadioCardEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_RADIO_CARD.numericId, 2)),
           gotExpnCardEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_EXPN_CARD.numericId, 2)),
           directorInUndergroundWarehouseEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.DIRECTOR_IN_UNDERGROUND_WAREHOUSE.numericId, 2)),
+          gotUnownDexEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_UNOWN_DEX.numericId, 2)),
         },
       ).hunks,
       new DataHunk(

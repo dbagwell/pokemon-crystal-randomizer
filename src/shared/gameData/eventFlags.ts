@@ -2170,6 +2170,10 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "GOT_RAGECANDYBAR",
     numericId: 922,
   },
+  GOT_UNOWN_DEX: {
+    id: "GOT_UNOWN_DEX",
+    numericId: 3,
+  },
   BEAT_SWIMMERF_ELAINE: {
     id: "BEAT_SWIMMERF_ELAINE",
     numericId: 1000,
