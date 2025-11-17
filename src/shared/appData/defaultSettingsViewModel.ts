@@ -1046,6 +1046,45 @@ export const defaultSettingsViewModel = () => {
                   })
                 }),
               }), // END GROUPS
+              createConfigurableMultiSelectorViewModel({
+                id: "REPLACE_ITEMS" as const,
+                name: "Replace Items",
+                description: "Choose items in the shuffled item pool that will have a chance to be replaced with a different item.\n"
+                  + "Each item of the selected type will have the chosen percentage chance to be replaced with the selected replacement.",
+                options: ["HM02" as ItemId, ...holdableItemIds].map((itemId) => {
+                  return createConfigurableSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                    viewModels: [
+                      createSingleSelectorViewModel({
+                        id: "REPLACEMENT" as const,
+                        name: "Replacement",
+                        selectedOptionId: "RANDOM",
+                        options: [
+                          {
+                            id: "RANDOM" as const,
+                            name: "Random",
+                          },
+                          ...holdableItemIds.map((itemId) => {
+                            return {
+                              id: itemId,
+                              name: itemsMap[itemId].name,
+                            }
+                          }),
+                        ],
+                      }),
+                      createIntegerInputViewModel({
+                        id: "PERCENTAGE" as const,
+                        name: "Percentage",
+                        isRequired: true as const,
+                        min: 0,
+                        max: 100,
+                        value: 100,
+                      }),
+                    ],
+                  })
+                }),
+              }), // END REPLACE_ITEMS
               createSimpleToggleViewModel({
                 id: "IMPROVED_CONSUMABLE_ACCESS_LOGIC" as const,
                 name: "Improved Consumable Access Logic",
@@ -1437,7 +1476,7 @@ export const defaultSettingsViewModel = () => {
                       createIntegerInputViewModel({
                         id: "PRICE" as const,
                         name: "Price",
-                        isRequired: true,
+                        isRequired: true as const,
                         min: 0,
                         max: 0xFFFF,
                         value: itemsMap[itemId].price,

@@ -293,6 +293,24 @@ export const shuffleItems = (
     })
   })
   
+  if (settings.SHUFFLE_ITEMS.VALUE) {
+    const replacements = settings.SHUFFLE_ITEMS.SETTINGS.REPLACE_ITEMS
+    itemsToShuffle.filter((itemInfo) => {
+      return Object.keys(replacements).includes(itemInfo.itemId)
+    }).forEach((itemInfo) => {
+      const percentage = replacements[itemInfo.itemId]!.PERCENTAGE
+      if (random.int(0, percentage) <= percentage) {
+        let replacement = replacements[itemInfo.itemId]!.REPLACEMENT
+        
+        if (replacement === "RANDOM") {
+          itemInfo.itemId = random.element({ array: [...holdableItemIds] })
+        } else {
+          itemInfo.itemId = replacement
+        }
+      }
+    })
+  }
+  
   const remainingConsumableProgressionItems: typeof itemsToShuffle = []
   const remainingProgressionItems: typeof itemsToShuffle = []
   
