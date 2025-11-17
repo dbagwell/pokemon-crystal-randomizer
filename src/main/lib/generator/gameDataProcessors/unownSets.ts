@@ -1,7 +1,7 @@
-import type { ROMInfo } from "@lib/gameData/romInfo";
-import type { Random } from "@lib/generator/random";
-import type { Settings } from "@shared/appData/settingsFromViewModel";
-import { unownLetterIds } from "@shared/types/gameDataIds/unownLetters";
+import type { ROMInfo } from "@lib/gameData/romInfo"
+import type { Random } from "@lib/generator/random"
+import type { Settings } from "@shared/appData/settingsFromViewModel"
+import { unownLetterIds } from "@shared/types/gameDataIds/unownLetters"
 
 export const updateUnownSets = (
   settings: Settings,
@@ -80,7 +80,6 @@ export const updateUnownSets = (
         remove: true,
       }))
     }
-    
   } else {
     romInfo.gameData.unownSets.KABUTO_PUZZLE = [...unownLetterIds]
   }

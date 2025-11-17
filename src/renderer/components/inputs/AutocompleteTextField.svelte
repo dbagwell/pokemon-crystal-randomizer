@@ -186,7 +186,7 @@
       async () => { await updateOptionsLayout() },
       {
         elementResize: false,
-      }
+      },
     )
   }
   

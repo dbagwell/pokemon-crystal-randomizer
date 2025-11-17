@@ -9,7 +9,7 @@ export const primaryOptionsValue = (
     sound: "STEREO" | "MONO"
   },
   instantTextEnabled: boolean,
-  hasAdditionalOptions: boolean
+  hasAdditionalOptions: boolean,
 ): number => {
   let result = 0
   

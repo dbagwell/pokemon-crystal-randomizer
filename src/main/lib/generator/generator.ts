@@ -447,7 +447,7 @@ const createPatches = (
         ROMOffset.fromBankAddress(126, 0x756E),
         romInfo.gameData.oddEggs.flatMap((oddEgg) => {
           return bytesFromOddEgg(oddEgg)
-        })
+        }),
       ),
     ]
   }
@@ -617,7 +617,7 @@ const createPatches = (
         tm37Text: hexStringFrom(bytesFromTextScript(`\n${updatedTeachableMove("TM37").name.toUpperCase()}.\rIt<'s> for advanced\ntrainers only.\rUse it if you\ndare. Good luck!\f`)),
         tm42Text: hexStringFrom(bytesFromTextScript(`\n${updatedTeachableMove("TM42").name.toUpperCase()}…\r…Zzzz…\f`)),
         tm50Text: hexStringFrom(bytesFromTextScript(`\0TM50 is\n${updatedTeachableMove("TM50").name.toUpperCase()}.\rIt<'s> a wicked move.\rOoooh…\nThat<'s> scary…\rI don<'t> want to\nhave bad dreams.\f`)),
-      }
+      },
     )
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...teachableMovesPatch.hunks]
@@ -734,7 +734,7 @@ const createPatches = (
         {
           rooftopSaleMartIndex: hexStringFrom([martIds.length]),
           gotMartItemsEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_MART_ITEMS.numericId, 2)),
-        }
+        },
       ).hunks)
     }
   } else if (settings.FASTER_ITEM_PICKUP_SFX) {
@@ -771,7 +771,7 @@ const createPatches = (
           return itemLocation.type === "FRUIT_TREE"
         }).map((itemLocation) => {
           return romInfo.gameData.items[itemLocation.itemId].numericId
-        })
+        }),
       ),
       ...Object.values(romInfo.gameData.itemLocations).filter((itemLocation) => {
         return itemLocation.type === "FRUIT_TREE"
@@ -869,7 +869,7 @@ const createPatches = (
           pokegearParts: hexStringFrom(bytesFrom(pokegearPartsValue, 1)),
           johtoBadges: hexStringFrom(bytesFrom(johtoBadgesValue, 1)),
           kantoBadges: hexStringFrom(bytesFrom(kantoBadgesValue, 1)),
-        }
+        },
       )
       
       romInfo.patchHunks = [...romInfo.patchHunks, ...startingItemsPatch.hunks]
@@ -952,7 +952,7 @@ const createPatches = (
         celadonVendingMachinesItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_VENDING_MACHINES.items[0].itemId].numericId]),
         celadonVendingMachinesItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_VENDING_MACHINES.items[1].itemId].numericId]),
         celadonVendingMachinesItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_VENDING_MACHINES.items[2].itemId].numericId]),
-      }
+      },
     ).hunks)
   }
     
@@ -1055,7 +1055,7 @@ const createPatches = (
           mart6Id: numericMartIdFrom("GOLDENROD_5F_6"),
           mart7Id: numericMartIdFrom("GOLDENROD_5F_7"),
           mart8Id: numericMartIdFrom("GOLDENROD_5F_8"),
-        }
+        },
       ).hunks,
     ]
   } else if (settings.EARLY_GOLDENROD_MART_TMS) {
@@ -1092,7 +1092,7 @@ const createPatches = (
             },
           }
         }),
-      }
+      },
     )
 
     romInfo.patchHunks = [...romInfo.patchHunks, ...martsPatch.hunks]
@@ -1126,7 +1126,7 @@ const createPatches = (
             romInfo.gameData.items[itemInfo.itemId].numericId,
             itemInfo.price,
           ]
-        })
+        }),
       ),
     ])
   }
@@ -1155,7 +1155,7 @@ const createPatches = (
               ...bytesFrom(itemInfo.price, 2),
             ]
           }),
-        ]
+        ],
       ),
       // Rooftop Sale
       new DataHunk(
@@ -1167,7 +1167,7 @@ const createPatches = (
               ...bytesFrom(itemInfo.price, 2),
             ]
           }),
-        ]
+        ],
       ),
       ...Patch.fromYAML(
         romInfo,
@@ -1250,7 +1250,7 @@ const createPatches = (
             shouldLimitItemStock("CELADON_VENDING_MACHINES", 2) ? "limitSpecialShopItemStockOptions/celadonVendingMachineItem3.yml" : undefined,
           ]),
           mooMooFarmOptions: compact([
-            shouldLimitItemStock("MOOMOO_FARM", 0) ? "limitSpecialShopItemStockOptions/mooMooFarmItem.yml" : undefined
+            shouldLimitItemStock("MOOMOO_FARM", 0) ? "limitSpecialShopItemStockOptions/mooMooFarmItem.yml" : undefined,
           ]),
         },
         {
@@ -1261,7 +1261,7 @@ const createPatches = (
           gotCeladonVendingMachineItem2EventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_CELADON_VENDING_MACHINE_ITEM_2.numericId, 2)),
           gotCeladonVendingMachineItem3EventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_CELADON_VENDING_MACHINE_ITEM_3.numericId, 2)),
           gotMooMooMilkEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_MOOMOO_MILK.numericId, 2)),
-        }
+        },
       ).hunks,
     ])
   }
@@ -1310,7 +1310,7 @@ const createPatches = (
         "limitBlueCardRewardsStock.yml",
         {
           options: compact([
-            settings.LIMIT_BLUE_CARD_REWARDS_STOCK ? undefined : "limitBlueCardRewardsStockOptions/onlyLimitKeyItems.yml"
+            settings.LIMIT_BLUE_CARD_REWARDS_STOCK ? undefined : "limitBlueCardRewardsStockOptions/onlyLimitKeyItems.yml",
           ]),
         },
         {
@@ -1385,7 +1385,7 @@ const createPatches = (
         {
           cost: hexStringFrom(bytesFrom(romInfo.gameData.moveTutorCost, 2)),
           costText: hexStringFrom(bytesFromTextScript(`${romInfo.gameData.moveTutorCost} coins. Okay?`.padEnd(17, " "))),
-        }
+        },
       ).hunks,
     ]
   }
@@ -1401,7 +1401,7 @@ const createPatches = (
         {},
         {
           genderId: hexStringFrom(bytesFrom(playerSpriteMap.GIRL.numericId, 1)),
-        }
+        },
       ).hunks,
     ]
   }
@@ -1474,7 +1474,7 @@ const createPatches = (
           extraValues: {},
         }
       }),
-    }
+    },
   )
     
   romInfo.patchHunks = [...romInfo.patchHunks, ...trainersPatch.hunks]
@@ -1492,7 +1492,7 @@ const createPatches = (
     {},
     {
       fastSpinDurationMask: hexStringFrom([trainerMovementBehavioursMap[settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.SETTINGS.MOVEMENT].fastSpinDurationMask]),
-    }
+    },
   )
   
   romInfo.patchHunks = [...romInfo.patchHunks, ...trainerMovementSpeedPatch.hunks]
@@ -1535,7 +1535,7 @@ const createPatches = (
         gen5BaseExpTable: settings.USE_UPDATED_BASE_EXP ? hexStringFrom(Object.values(gen5BaseExpMap).flatMap((value) => {
           return bytesFrom(value, 2)
         })) : "",
-      }
+      },
     )
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...experiencePatch.hunks]
@@ -1597,11 +1597,11 @@ const createPatches = (
     romInfo.patchHunks.push(...[
       new DataHunk(
         ROMOffset.fromBankAddress(27, 0x60A7),
-        [0x18]
+        [0x18],
       ),
       new DataHunk(
         ROMOffset.fromBankAddress(27, 0x60BE),
-        [0x18]
+        [0x18],
       ),
     ])
   }
@@ -1623,7 +1623,7 @@ const createPatches = (
         basementKeyItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT.itemId].numericId]),
         cardKeyItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT.itemId].numericId]),
         clearBellItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT.itemId].numericId]),
-      }
+      },
     )
       
     romInfo.patchHunks = [...romInfo.patchHunks, ...additionalOptionsPatch.hunks]
@@ -1634,7 +1634,7 @@ const createPatches = (
   if (settings.BUENA_ALWAYS_GIVES_ITEM) {
     romInfo.patchHunks.push(new DataHunk(
       ROMOffset.fromBankAddress(23, 0x5777),
-      [0x31, 0x3D, 0x03, 0x08, 0x00, 0x58, 0x34, 0x13, 0x00, 0x09, 0x65, 0x58]
+      [0x31, 0x3D, 0x03, 0x08, 0x00, 0x58, 0x34, 0x13, 0x00, 0x09, 0x65, 0x58],
     ))
   }
   
@@ -1657,7 +1657,7 @@ const createPatches = (
           Math.floor(romInfo.gameData.numberOfMiltankBerries * 3 / 7),
           0xF0,
           0x4C,
-        ]
+        ],
       ),
     ])
   }
@@ -1722,15 +1722,15 @@ const createPatches = (
           ...bytesFrom(omanyteOffset, 2),
           ...bytesFrom(aerodactylOffset, 2),
           ...bytesFrom(hoOhOffset, 2),
-          ...romInfo.gameData.unownSets.KABUTO_PUZZLE.map((id) => { return unownLetters[id].numericId}),
+          ...romInfo.gameData.unownSets.KABUTO_PUZZLE.map((id) => { return unownLetters[id].numericId }),
           0xFF,
-          ...romInfo.gameData.unownSets.OMANYTE_PUZZLE.map((id) => { return unownLetters[id].numericId}),
+          ...romInfo.gameData.unownSets.OMANYTE_PUZZLE.map((id) => { return unownLetters[id].numericId }),
           0xFF,
-          ...romInfo.gameData.unownSets.AERODACTYL_PUZZLE.map((id) => { return unownLetters[id].numericId}),
+          ...romInfo.gameData.unownSets.AERODACTYL_PUZZLE.map((id) => { return unownLetters[id].numericId }),
           0xFF,
-          ...romInfo.gameData.unownSets.HO_OH_PUZZLE.map((id) => { return unownLetters[id].numericId}),
+          ...romInfo.gameData.unownSets.HO_OH_PUZZLE.map((id) => { return unownLetters[id].numericId }),
           0xFF,
-        ]
+        ],
       ),
     ])
   }
@@ -1755,7 +1755,7 @@ const createPatches = (
   if (settings.CHANGE_HO_OH_LEVEL.VALUE) {
     romInfo.patchHunks.push(new DataHunk(
       ROMOffset.fromBankAddress(29, 0x7255),
-      [settings.CHANGE_HO_OH_LEVEL.SETTINGS.LEVEL]
+      [settings.CHANGE_HO_OH_LEVEL.SETTINGS.LEVEL],
     ))
   }
   
@@ -1764,7 +1764,7 @@ const createPatches = (
   if (settings.CLIMB_TIN_TOWER_FOR_HO_OH_CHAMBER) {
     romInfo.patchHunks.push(new DataHunk(
       ROMOffset.fromBankAddress(34, 0x6DDB),
-      [0x11, 0x17, 0x03, 0x06, 0x02, 0xCD, 0x6F, 0x2E, 0x79, 0xA7, 0xC8]
+      [0x11, 0x17, 0x03, 0x06, 0x02, 0xCD, 0x6F, 0x2E, 0x79, 0xA7, 0xC8],
     ))
   }
   
@@ -1834,7 +1834,7 @@ const createPatches = (
       ).hunks,
       new DataHunk(
         ROMOffset.fromBankAddress(24, 0x4B93),
-        [0x31, 0x37, 0x00, 0x09, 0xA0, 0x4B, 0x4C, 0x81, 0x4C, 0x55, 0x33, 0x37, 0x00, 0x21, 0x43, 0x09, 0xAB, 0x4B]
+        [0x31, 0x37, 0x00, 0x09, 0xA0, 0x4B, 0x4C, 0x81, 0x4C, 0x55, 0x33, 0x37, 0x00, 0x21, 0x43, 0x09, 0xAB, 0x4B],
       ), // Allow getting secretpotion item even after turning in the secret potion to jasmine
       ...Patch.fromYAML(
         romInfo,
@@ -1927,7 +1927,7 @@ const createPatches = (
             },
           }
         }),
-      }
+      },
     ).hunks)
   }
   
@@ -1947,7 +1947,7 @@ const createPatches = (
         {
           risingbadgeItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.DRAGON_SHRINE_BADGE.itemId].numericId]),
           tm24Item: hexStringFrom([romInfo.gameData.items.TM24.numericId]),
-        }
+        },
       ).hunks,
     ]
   } else if (shouldApplyReceiveItemsChanges) {
@@ -1960,7 +1960,7 @@ const createPatches = (
         {},
         {
           itemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.DRAGONS_DEN_B1F_SOUTH_AREA_CLAIRS_GIFT.itemId].numericId]),
-        }
+        },
       ).hunks,
     ]
   }
@@ -2178,7 +2178,7 @@ const createPatches = (
         gotUltraBallFromWiltonEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_ULTRA_BALL_FROM_WILTON.numericId, 2)),
         gotGreatBallFromWiltonEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_GREAT_BALL_FROM_WILTON.numericId, 2)),
         gotPokeBallFromWiltonEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_POKE_BALL_FROM_WILTON.numericId, 2)),
-      }
+      },
     ).hunks)
   }
   
@@ -2206,7 +2206,7 @@ const createPatches = (
         gotGreatBallFromWiltonEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_GREAT_BALL_FROM_WILTON.numericId, 2)),
         gotUltraBallFromWiltonEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_ULTRA_BALL_FROM_WILTON.numericId, 2)),
         gotPPUpFromKenjiEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_PP_UP_FROM_KENJI.numericId, 2)),
-      }
+      },
     ).hunks)
   }
   
@@ -2324,7 +2324,7 @@ const createPlayerOptionsPatches = (
         {},
         {
           genderId: hexStringFrom(bytesFrom(genderId, 1)),
-        }
+        },
       ).hunks,
     ]
   }

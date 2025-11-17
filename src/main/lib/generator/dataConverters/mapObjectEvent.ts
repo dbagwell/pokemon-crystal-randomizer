@@ -11,7 +11,7 @@ import { bytesFrom, isNotNullish } from "@shared/utils"
 export const dataHunkFromMapObjectEvent = (event: MapObjectEvent) => {
   return new DataHunk(
     ROMOffset.fromBankAddress(event.romOffset[0], event.romOffset[1]),
-    bytesFromMapObjectEvent(event)
+    bytesFromMapObjectEvent(event),
   )
 }
 

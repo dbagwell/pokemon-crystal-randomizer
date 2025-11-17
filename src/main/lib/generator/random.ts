@@ -34,7 +34,7 @@ export class Random {
       } | undefined
       remove?: boolean
       allowUndefined?: AllowUndefinedType
-    }
+    },
   ): AllowUndefinedType extends true ? Element | undefined : Element => {
     const index = this.int(0, params.array.length - 1)
     const element = params.array[index]

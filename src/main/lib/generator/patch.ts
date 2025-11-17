@@ -44,7 +44,7 @@ export class DataHunk {
           
           return bytesFrom(referenceAddresses[value], 2)
         }
-      })
+      }),
     )
   }
   

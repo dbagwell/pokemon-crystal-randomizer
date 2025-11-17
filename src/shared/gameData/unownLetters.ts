@@ -1,5 +1,5 @@
-import type { UnownLetter } from "@shared/types/gameData/unownLetter";
-import type { UnownLetterId } from "@shared/types/gameDataIds/unownLetters";
+import type { UnownLetter } from "@shared/types/gameData/unownLetter"
+import type { UnownLetterId } from "@shared/types/gameDataIds/unownLetters"
 
 export const unownLetters: IdMap<UnownLetterId, UnownLetter> = {
   A: {

@@ -198,7 +198,7 @@ export class PatchInfo {
 
   readonly dataFormatFromTokens = (
     tokens: Token[],
-    offset: number = 0
+    offset: number = 0,
   ): DataFormat => {
     const result = new DataFormat()
     let updatedOffset = offset

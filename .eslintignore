@@ -27,6 +27,7 @@ src/renderer/css/*
 src/main/lib/grammars/*
 src/shared/typeValidators/*
 tools/build/*
+tools/output/*
 
 # or tsconfig files
 **tsconfig.json

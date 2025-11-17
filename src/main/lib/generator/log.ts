@@ -666,9 +666,9 @@ export const generatorLog = (params: {
           rows: [
             ["BADGES REQUIRED FOR OAK/RED", `${gameData.numberOfBadgesForOak}`],
             ["BERRIES REQUIRED FOR MILTANK", `${gameData.numberOfMiltankBerries}`],
-          ]
+          ],
         },
-      ]
+      ],
     }),
   })
   

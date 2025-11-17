@@ -300,7 +300,7 @@ export const shuffleItems = (
     }).forEach((itemInfo) => {
       const percentage = replacements[itemInfo.itemId]!.PERCENTAGE
       if (random.int(0, percentage) <= percentage) {
-        let replacement = replacements[itemInfo.itemId]!.REPLACEMENT
+        const replacement = replacements[itemInfo.itemId]!.REPLACEMENT
         
         if (replacement === "RANDOM") {
           itemInfo.itemId = random.element({ array: [...holdableItemIds] })
