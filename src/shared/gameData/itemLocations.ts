@@ -3588,7 +3588,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "EVERSTONE",
     areaId: "ELMS_LAB",
     accessRequirements: [
-      "VIOLET_GYM",
+      "VIOLET_GYM_BADGE",
       "VIOLET_POKECENTER_1F",
       "TOGEPI",
     ],
@@ -3820,7 +3820,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "MIRACLE_SEED",
     areaId: "ROUTE_32_NORTH_AREA",
     accessRequirements: [
-      "VIOLET_GYM",
+      "ZEPHYRBADGE",
+      "VIOLET_GYM_BADGE",
       "VIOLET_POKECENTER_1F",
     ],
     romOffsets: [
