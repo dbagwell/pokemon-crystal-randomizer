@@ -640,6 +640,18 @@ const createPatches = (
         {},
         {
           regularItemPickupSound: settings.FASTER_ITEM_PICKUP_SFX ? "90 00" : "01 00",
+          mapCardItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.CHERRYGROVE_CITY_GUIDE_GENTS_GIFT.itemId].numericId]),
+          mysteryEggItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.MR_POKEMONS_HOUSE_MR_POKEMONS_FREE_GIFT.itemId].numericId]),
+          pokedexItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.MR_POKEMONS_HOUSE_OAKS_GIFT.itemId].numericId]),
+          potionItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.ELMS_LAB_AIDES_FREE_GIFT.itemId].numericId]),
+          pokeBallsItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.ELMS_LAB_AIDES_GIFT_FOR_MYSTERY_EGG.itemId].numericId]),
+          blueCardItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.RADIO_TOWER_2F_BUENAS_GIFT.itemId].numericId]),
+          basementKeyItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT.itemId].numericId]),
+          clearBellItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT.itemId].numericId]),
+          rainbowWingItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.TIN_TOWER_1F_NORTH_SAGES_GIFT.itemId].numericId]),
+          redScaleItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT.itemId].numericId]),
+          risingbadgeItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.DRAGON_SHRINE_BADGE.itemId].numericId]),
+          whirlpoolItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT.itemId].numericId]),
           elmsAideNumberOfItems: hexStringFrom([Math.min(itemCategoriesMap[romInfo.gameData.items[romInfo.gameData.itemLocations.ELMS_LAB_AIDES_GIFT_FOR_MYSTERY_EGG.itemId].category].slotSize, 5)]),
           gotZephyrbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_ZEPHYRBADGE.numericId, 2)),
           gotHivebadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_HIVEBADGE.numericId, 2)),
@@ -661,6 +673,15 @@ const createPatches = (
           gotExpnCardEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_EXPN_CARD.numericId, 2)),
           directorInUndergroundWarehouseEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.DIRECTOR_IN_UNDERGROUND_WAREHOUSE.numericId, 2)),
           gotUnownDexEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_UNOWN_DEX.numericId, 2)),
+          gotMapCardEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_MAP_CARD.numericId, 2)),
+          gotPokedexEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_POKEDEX.numericId, 2)),
+          gotMysteryEggEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_MYSTERY_EGG.numericId, 2)),
+          elmsAideHasPotionEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.ELMS_AIDE_HAS_POTION.numericId, 2)),
+          elmsAideHasPokeBallsEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.ELMS_AIDE_HAS_POKE_BALLS.numericId, 2)),
+          gotBasementKeyEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_BASEMENT_KEY.numericId, 2)),
+          gotCardKeyEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_CARD_KEY.numericId, 2)),
+          beatRedGyaradosEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.BEAT_RED_GYARADOS.numericId, 2)),
+          gotAzaleaGSBallEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_AZALEA_GS_BALL.numericId, 2)),
         },
       ).hunks,
       new DataHunk(
@@ -709,7 +730,8 @@ const createPatches = (
         }),
       ),
     ]
-  
+    
+    // These hunks need to be added to the array after receiveItemChanges patch some things in here still overwrite some things from that patch
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       ...Object.values(romInfo.gameData.itemLocations).filter((itemLocation) => {
@@ -1624,6 +1646,8 @@ const createPatches = (
         basementKeyItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT.itemId].numericId]),
         cardKeyItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT.itemId].numericId]),
         clearBellItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT.itemId].numericId]),
+        gotBasementKeyEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_BASEMENT_KEY.numericId, 2)),
+        gotCardKeyEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_CARD_KEY.numericId, 2)),
       },
     )
       
@@ -1974,7 +1998,7 @@ const createPatches = (
   } else if (shouldApplyReceiveItemsChanges) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
-      new DataHunk(ROMOffset.fromBankAddress(101, 0x4E26), [0x31, 0x0C, 0x01]),
+      new DataHunk(ROMOffset.fromBankAddress(101, 0x4E26), [0x31, ...bytesFrom(eventFlagsMap.GOT_RISINGBADGE.numericId, 2)]),
       ...Patch.fromYAML(
         romInfo,
         "clairBackupTM.yml",

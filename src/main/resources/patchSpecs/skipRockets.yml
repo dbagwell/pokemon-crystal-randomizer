@@ -1,6 +1,6 @@
 description: "Gives items and sets flags after talking to Lance at the Lake of Rage in order to skip certain parts of the game's storyline."
 values:
-  giveItemsAndSetFlags: "#options.$giveItemsAndSetFlags 91"
+  giveItemsAndSetFlags: "32 00 00 #options.$giveItemsAndSetFlags 91"
 changes:
 - description: "Adds code to give items and set flags based on which options have been included."
   locations:
@@ -10,7 +10,7 @@ changes:
   locations:
   - bank: 28
     address: 0x4038
-  value: "00 @$giveItemsAndSetFlags 54 49 85 13 00 69 02 55 41 6E 02 91"
+  value: "00 @$giveItemsAndSetFlags 54 49 31 00 00 09 4C 40 85 13 00 69 02 55 41 6E 02 91"
 - description: "Changes Lance's text to ask if you want items."
   locations:
   - bank: 28

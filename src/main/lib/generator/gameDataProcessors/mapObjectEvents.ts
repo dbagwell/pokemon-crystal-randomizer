@@ -131,4 +131,16 @@ export const updateMapObjectEvents = (
       return object.id === "RADIO_TOWER_2F_BLUE_CARD_REWARD_LADY"
     })!.flagId = undefined
   }
+  
+  if (
+    settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE
+    || settings.RANDOMIZE_TM_ITEM_BALLS.VALUE
+    || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.VALUE
+    || settings.SHUFFLE_ITEMS.VALUE
+    || settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.VALUE
+  ) { // shouldApplyReceiveItemsChanges
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "TEAM_ROCKET_BASE_B2F_LANCE"
+    })!.scriptPointer = 0x5184
+  }
 }

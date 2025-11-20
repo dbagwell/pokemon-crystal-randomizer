@@ -30,13 +30,307 @@ values:
   checkAlreadyGotBluesItem: "31 $gotEarthbadgeEventFlagId 09 51 6A 03 45 6A"
   checkGotBluesItem: "08 4B 6A 33 $gotEarthbadgeEventFlagId 03 4B 6A"
   clearUndergroundWarehouseDirectorEventFlag: "33 CF 06 32 $directorInUndergroundWarehouseEventFlagId 91"
-  setUndergroundWarehouseDirectorEventFlag: "33 4A 00 33 $directorInUndergroundWarehouseEventFlagId 91"
   fruitTreeSoundEffectScript: "86 88 45 03 3F 40"
   elmMysteryEggCheck: "21 45 09 A2 4D 31 24 00 03 E5 4B"
   elmAfterTurningInMysteryEgg: "14 06 03 E0 4B"
   elmAfterGivingMasterBall: "4C 31 5D 54 49 03 E0 4B"
   elmAfterGivingSSTicket: "08 EE 4B 33 24 00 4C 6F 5E 54 49 03 E0 4B"
+  maybeGiveMapCard: "6B 47 31 $gotMapCardEventFlagId 09 @$continueGuideGentScript 9E $mapCardItemId 01 08 @$continueGuideGentScript 33 $gotMapCardEventFlagId $continueGuideGentScript"
+  continueGuideGentScript: "4C 0D 6C 54 49 91"
+  maybeGiveMysteryEggAndPokedex: "31 $gotMysteryEggEventFlagId 09 @$maybeGivePokedex 9E $mysteryEggItemId 01 08 @$maybeGivePokedex 33 $gotMysteryEggEventFlagId $maybeGivePokedex"
+  maybeGivePokedex: "31 $gotPokedexEventFlagId 09 @$continueMrPokemonScript 9E $pokedexItemId 01 08 @$continueMrPokemonScript 33 $gotPokedexEventFlagId $continueMrPokemonScript"
+  continueMrPokemonScript: "31 1F 00 03 A1 6E"
+  maybeSetSSTicketEvent: "08 39 4E 33 24 00 03 39 4E"
+  maybeSetPotionEvent: "09 @$continuePotionScript 33 $elmsAideHasPotionEventFlagId $continuePotionScript"
+  continuePotionScript: "4C 65 5F 03 A8 4E"
+  maybeGivePotionAndPokeBalls: "31 $elmsAideHasPotionEventFlagId 08 @$maybeGivePokeBalls 9E $potionItemId 01 08 @$maybeGivePokeBalls 32 $elmsAideHasPotionEventFlagId $maybeGivePokeBalls"
+  maybeGivePokeBalls: "31 $elmsAideHasPokeBallsEventFlagId 08 @$continueElmsAideScript 9E $pokeBallsItemId $elmsAideNumberOfItems 08 @$continueElmsAideScript 32 $elmsAideHasPokeBallsEventFlagId $continueElmsAideScript"
+  continueElmsAideScript: "31 2D 00 03 EB 4E"
+  maybeSetOldRodEvent: "08 73 5B 33 17 00 91"
+  maybeSetAzaleaGSBallEvent: "08 @$continueKurtScript 33 $gotAzaleaGSBallEventFlagId 33 A4 07 32 3E 07 $continueKurtScript"
+  continueKurtScript: "76 0D 02 13 08 0A 41 03 FF 40"
+  maybeGiveGSBall: "31 $gotAzaleaGSBallEventFlagId 08 F5 40 4C 28 46 03 11 41"
+  maybeSetBuenaEvent: "08 0A 58 33 3D 03 03 0A 58"
+  maybeSetSquirtbottleEvent: "08 87 53 33 5C 00 03 87 53"
+  maybeSetBasementKeyEvent: "08 @$continueFalseDirectorCutscene 33 $gotBasementKeyEventFlagId $continueFalseDirectorCutscene"
+  continueFalseDirectorCutscene: "33 73 05 91"
+  maybeGiveBasementKey: "54 31 $gotBasementKeyEventFlagId 09 @$continueRadioDirectorScript 9E $basementKeyItemId 01 08 @$continueRadioDirectorScript 33 $gotBasementKeyEventFlagId $continueRadioDirectorScript"
+  continueRadioDirectorScript: "49 91"
+  showBen: "0F 33 00 6F 05"
+  maybeSetClearBellEvent: "08 EB 40 33 78 00 03 EB 40"
+  maybeGiveClearBell: "6B 47 31 78 00 08 @$showBenText 9E $clearBellItemId 01 08 @$showBenText 33 78 00 $showBenText"
+  showBenText: "4C BE 48 54 49 91"
+  maybeSetGoldenrodGSBallEventLeft: "08 C4 4F 33 40 03 03 C4 4F"
+  maybeSetGoldenrodGSBallEventRight: "08 09 50 33 40 03 03 09 50"
+  maybeSetCardKeyEvent: "08 @$continueWarehouseDirectorScript 33 $gotCardKeyEventFlagId $continueWarehouseDirectorScript"
+  continueWarehouseDirectorScript: "33 4A 00 33 $directorInUndergroundWarehouseEventFlagId 03 D1 59"
+  maybeSetItemfinderEvent: "08 14 66 33 5A 00 03 14 66"
+  maybeSetSurfEvent: "08 0F 55 33 12 00 03 0F 55"
+  maybeSetRainbowWingEvent: "9E $rainbowWingItemId 01 08 9D 51 33 36 03 03 9D 51"
+  maybeFightSageLi: "09 D1 49 31 19 04 09 BE 49 03 AB 49"
+  maybeSetFlashEvent: "08 C8 49 33 14 00 03 C8 49"
+  maybeSetGoodRodEvent: "08 39 47 33 18 00 91"
+  maybeSetStrengthEvent: "08 D3 48 33 13 00 03 D3 48"
+  maybeFightGyarados: "31 $beatRedGyaradosEventFlagId 09 7B 40 47 4C CB 43 03 67 40"
+  makeGyaradosReappear: "6F 0A 03 88 40"
+  maybeSetSilverWingEvent: "08 21 40 33 79 00 49 91"
+  maybeGiveRisingBadge: "31 $gotRisingbadgeEventFlagId 09 @$continueElderScript 9E $risingbadgeItemId 01 08 @$continueElderScript 33 $gotRisingbadgeEventFlagId $continueElderScript"
+  continueElderScript: "31 00 00 03 AA 51"
+  maybeSetCutEvent: "08 CD 6D 33 10 00 03 C0 6D"
+  maybeDoPostElectrodesCutscene: "31 22 00 09 @$maybeGiveWhirlpool 72 04 12 06 03 88 51 $maybeGiveWhirlpool"
+  maybeGiveWhirlpool: "6B 47 31 15 00 09 @$skipGivingWhirlpool 76 9E $whirlpoolItemId 01 08 $skipGivingWhirlpool 33 15 00 33 D6 06 $skipGivingWhirlpool"
+  skipGivingWhirlpool: "4C F8 58 54 49 91"
+  maybeSetWhirlpoolEvent: "08 DD 76 33 15 00 03 9C 51 $continuePostElectrodesCutscene"
+  continuePostElectrodesCutscene: "49 03 B3 51"
 changes:
+- description: "allows giving kurt the gs ball even if you haven't gotten his lure ball item"
+  locations:
+  - bank: 99
+    address: 0x61C7
+  value: "CC 61"
+- description: "adds code related to lance giving his whirlpool item"
+  locations:
+  - bank: 27
+  value: "$maybeDoPostElectrodesCutscene $maybeSetWhirlpoolEvent"
+- description: "hijack the start of the post electrodes cutscene with a branch that serves as lance's script"
+  locations:
+  - bank: 27
+    address: 0x5184
+  value: "03 @$maybeDoPostElectrodesCutscene 18"
+- description: "only set the whirlpool event if you actually get the item"
+  locations:
+  - bank: 27
+    address: 0x5199
+  value: "03 @$maybeSetWhirlpoolEvent 18"
+- description: "only set the cut event if you actually got the item"
+  locations:
+  - bank: 27
+  value: "$maybeSetCutEvent"
+- description: "only set the cut event if you actually got the item"
+  locations:
+  - bank: 27
+    address: 0x6DBD
+  value: "03 @$maybeSetCutEvent"
+- description: "dont remove the npcs from ilex forest if you didn't get the cut item"
+  locations:
+  - bank: 27
+    address: 0x6DC4
+  value: "33 E9 06 33 F3 06 33 F4 06 49"
+- description: "only set the silver wing event if you actually got the item"
+  locations:
+  - bank: 99
+  value: "$maybeSetSilverWingEvent"
+- description: "only set the silver wing event if you actually got the item"
+  locations:
+  - bank: 99
+    address: 0x401E
+  value: "03 @$maybeSetSilverWingEvent"
+- description: "only set the strength event if you actually got the item"
+  locations:
+  - bank: 39
+  value: "$maybeSetStrengthEvent"
+- description: "only set the strength event if you actually got the item"
+  locations:
+  - bank: 39
+    address: 0x48D0
+  value: "03 @$maybeSetStrengthEvent"
+- description: "only set the good rod event if you actually got the item"
+  locations:
+  - bank: 39
+  value: "$maybeSetGoodRodEvent"
+- description: "only set the good rod event if you actually got the item"
+  locations:
+  - bank: 39
+    address: 0x4736
+  value: "03 @$maybeSetGoodRodEvent"
+- description: "Updates sage li's script to check if you've beaten him so that you can't fight him again if you didn't get his item"
+  locations:
+  - bank: 97
+  value: "$maybeFightSageLi"
+- description: "Updates sage li's script to check if you've beaten him so that you can't fight him again if you didn't get his item"
+  locations:
+  - bank: 97
+    address: 0x49AB
+  value: "03 @$maybeFightSageLi"
+- description: "only set the flash event if you actually got the item"
+  locations:
+  - bank: 97
+  value: "$maybeSetFlashEvent"
+- description: "only set the flash event if you actually got the item"
+  locations:
+  - bank: 97
+    address: 0x49C5
+  value: "03 @$maybeSetFlashEvent"
+- description: "only set the rainbow wing event if you actually got the item"
+  locations:
+  - bank: 97
+  value: "$maybeSetRainbowWingEvent"
+- description: "only set the rainbow wing event if you actually got the item"
+  locations:
+  - bank: 97
+    address: 0x519A
+  value: "03 @$maybeSetRainbowWingEvent"
+- description: "only set the rainbow wing event if you actually got the item"
+  locations:
+  - bank: 97
+    address: 0x51AB
+  value: "18 18 18"
+- description: "only set the surf event if you actually got the item"
+  locations:
+  - bank: 38
+  value: "$maybeSetSurfEvent"
+- description: "only set the surf event if you actually got the item"
+  locations:
+  - bank: 38
+    address: 0x550C
+  value: "03 @$maybeSetSurfEvent"
+- description: "only set the itemfinder event if you actually got the item"
+  locations:
+  - bank: 38
+  value: "$maybeSetItemfinderEvent"
+- description: "only set the itemfinder event if you actually got the item"
+  locations:
+  - bank: 38
+    address: 0x6611
+  value: "03 @$maybeSetItemfinderEvent"
+- description: "only sets the goldenrod gs ball event if you actually got the item"
+  locations:
+  - bank: 24
+  value: "$maybeSetGoldenrodGSBallEventLeft $maybeSetGoldenrodGSBallEventRight"
+- description: "only sets the goldenrod gs ball event if you actually got the item"
+  locations:
+  - bank: 24
+    address: 0x4FC1
+  value: "03 @$maybeSetGoldenrodGSBallEventLeft"
+- description: "only sets the goldenrod gs ball event if you actually got the item"
+  locations:
+  - bank: 24
+    address: 0x5006
+  value: "03 @$maybeSetGoldenrodGSBallEventRight"
+- description: "Makes ben appear immediately after defeating the rocket boss"
+  locations:
+  - bank: 24
+  value: "$showBen"
+- description: "Makes ben appear immediately after defeating the rocket boss"
+  locations:
+  - bank: 24
+    address: 0x4093
+  value: "03 @$showBen"
+- description: "Only sets the clear bell event if you actually got the item"
+  locations:
+  - bank: 24
+  value: "$maybeSetClearBellEvent"
+- description: "Only sets the clear bell event if you actually got the item"
+  locations:
+  - bank: 24
+    address: 0x40E8
+  value: "03 @$maybeSetClearBellEvent"
+- description: "Makes ben give the clear bell item if you weren't able to get it during the director cutscene"
+  locations:
+  - bank: 24
+  value: "$maybeGiveClearBell"
+- description: "Makes ben give the clear bell item if you weren't able to get it during the director cutscene"
+  locations:
+  - bank: 24
+    address: 0x40FB
+  value: "03 @$maybeGiveClearBell"
+- description: "Only sets the basement key event if you actually got the item"
+  locations:
+  - bank: 24
+  value: "$maybeSetBasementKeyEvent"
+- description: "Only sets the basement key event if you actually got the item"
+  locations:
+  - bank: 24
+    address: 0x4042
+  value: "03 @$maybeSetBasementKeyEvent"
+- description: "Makes the (false) director give the basement key item if you haven't gotten it already"
+  locations:
+  - bank: 24
+  value: "$maybeGiveBasementKey"
+- description: "Makes the (false) director give the basement key item if you haven't gotten it already"
+  locations:
+  - bank: 24
+    address: 0x4051
+  - bank: 24
+    address: 0x4057
+  value: "03 @$maybeGiveBasementKey"
+- description: "Only sets the squirtbottle event if you actually got the item"
+  locations:
+  - bank: 21
+  value: "$maybeSetSquirtbottleEvent"
+- description: "Only sets the squirtbottle event if you actually got the item"
+  locations:
+  - bank: 21
+    address: 0x5384
+  value: "03 @$maybeSetSquirtbottleEvent"
+- description: "Only sets the met buena event if you actually got the item she was trying to give"
+  locations:
+  - bank: 23
+  value: "$maybeSetBuenaEvent"
+- description: "Only sets the met buena event if you actually got the item she was trying to give"
+  locations:
+  - bank: 23
+    address: 0x5804
+  value: "9E $blueCardItemId 01 03 @$maybeSetBuenaEvent"
+- description: "Updates kurt to stay put until he successfully gives his gs ball item"
+  locations:
+  - bank: 102
+  value: "$maybeSetAzaleaGSBallEvent"
+- description: "Updates kurt to stay put until he successfully gives his gs ball item"
+  locations:
+  - bank: 102
+    address: 0x40FC
+  value: "03 @$maybeSetAzaleaGSBallEvent"
+- description: "Updates kurt to stay put until he successfully gives his gs ball item"
+  locations:
+  - bank: 27
+    address: 0x6E48
+  value: "18 18 18"
+- description: "Makes kurt give the gs ball item if you haven't already gotten it"
+  locations:
+  - bank: 102
+  value: "$maybeGiveGSBall"
+- description: "Makes kurt give the gs ball item if you haven't already gotten it"
+  locations:
+  - bank: 102
+    address: 0x410E
+  value: "03 @$maybeGiveGSBall"
+- description: "Only sets the old rod event if you got the item"
+  locations:
+  - bank: 26
+  value: "$maybeSetOldRodEvent"
+- description: "Only sets the old rod event if you got the item"
+  locations:
+  - bank: 26
+    address: 0x5B70
+  value: "03 @$maybeSetOldRodEvent"
+- description: "Sets a flag if the aide fails to give his item during the cutscene"
+  locations:
+  - bank: 30
+  value: "$maybeSetPotionEvent"
+- description: "Sets a flag if the aide fails to give his item during the cutscene"
+  locations:
+  - bank: 30
+    address: 0x4EA5
+  value: "03 @$maybeSetPotionEvent"
+- description: "Makes the aide give his items if you haven't already gotten them"
+  locations:
+  - bank: 30
+  value: "$maybeGivePotionAndPokeBalls"
+- description: "Makes the aide give his items if you haven't already gotten them"
+  locations:
+  - bank: 30
+    address: 0x4EE8
+  value: "03 @$maybeGivePotionAndPokeBalls"
+- description: "Only sets the got ss ticket event if you had room for the item"
+  locations:
+  - bank: 30
+  value: "$maybeSetSSTicketEvent"
+- description: "Only sets the got ss ticket event if you had room for the item"
+  locations:
+  - bank: 30
+    address: 0x4E36
+  value: "03 @$maybeSetSSTicketEvent"
 - description: "Changes the script for picking up an item ball to use the script that plays a sound dynamically based on the type of item."
   locations:
   - bank: 4
@@ -133,7 +427,16 @@ changes:
   locations:
   - bank: 99
     address: 0x5161
-  value: "9E 94 01 33 $gotRisingbadgeEventFlagId 0F 3D 00 14 01 12 03 51 01 03 78 51"
+  value: "9E 94 01 08 6A 51 33 $gotRisingbadgeEventFlagId 0F 3D 00 14 01 12 03 51 01 03 78 51"
+- description: "makes the dragon shrine elder give you clair's badge item if you haven't already gotten it"
+  locations:
+  - bank: 99
+  value: "$maybeGiveRisingBadge"
+- description: "makes the dragon shrine elder give you clair's badge item if you haven't already gotten it"
+  locations:
+  - bank: 99
+    address: 0x51A7
+  value: "03 @$maybeGiveRisingBadge"
 - description: "Changes some logic to check if Brock has been defeated instead of checking if the player has the Boulderbadge and changes a jump."
   locations:
   - bank: 104
@@ -255,17 +558,42 @@ changes:
   locations:
   - bank: 103
     address: 0x406F
-  value: "9E 5A 01 18 18 18 18 18 18 18 18 18 18 18"
+  value: "9E 5A 01 08 7D 40 33 $gotMapCardEventFlagId 18 18 18 18 18"
+- description: "Makes the guide gent give his item when you talk to him in his house if you haven't already gotten his item."
+  locations:
+  - bank: 101
+  value: "$maybeGiveMapCard"
+- description: "Makes the guide gent give his item when you talk to him in his house if you haven't already gotten his item."
+  locations:
+  - bank: 101
+    address: 0x6C07
+  value: "03 @$maybeGiveMapCard"
 - description: "Makes Prof Oak give one of the unused items instead of the pokedex."
   locations:
   - bank: 101
     address: 0x6ED8
-  value: "9E 19 01 18 18 18 18 18 18 18 18"
+  value: "9E 19 01 08 E3 6E 33 $gotPokedexEventFlagId 18 18"
+- description: "Makes Mr Pokemon give his and prof oak's items if you don't already have them."
+  locations:
+  - bank: 101
+  value: "$maybeGiveMysteryEggAndPokedex"
+- description: "Makes Mr Pokemon give his and prof oak's items if you don't already have them."
+  locations:
+  - bank: 101
+    address: 0x6E9E
+  value: "03 @$maybeGiveMysteryEggAndPokedex"
+- description: "Makes Mr Pokemon give his and prof oak's items if you don't already have them."
+  locations:
+  - bank: 101
+    address: 0x6EBB
+  - bank: 101
+    address: 0x6EC1
+  value: "@$maybeGiveMysteryEggAndPokedex"
 - description: "Makes the ruins of alph reasearcher give one of the unused items instead of the unowndex."
   locations:
   - bank: 22
     address: 0x51B8
-  value: "9E 2D 01 33 $gotUnownDexEventFlagId 18 18 18 18"
+  value: "9E 2D 01 08 C2 51 33 $gotUnownDexEventFlagId 18"
 - description: "Changes the check to see if the ruins of alph reasearcher should appear outside the ruins of alph to check if you got the item from him instead of if you have the unown dex."
   locations:
   - bank: 22
@@ -295,17 +623,26 @@ changes:
   locations:
   - bank: 21
     address: 0x4763
-  value: "9E 07 01 18 18 18 18 18 18 18 18 18"
-- description: "Changes the lake of rage shiny to use the shared verbosegiveitem script when giving the red scale."
+  value: "9E 07 01 08 7B 47 18 18 18 18 18 18"
+- description: "adds code related to the red gyarados."
   locations:
   - bank: 28
-    address: 0x407C
-  value: "9E 42 01 18 18 18 18 18 18 18 18 18"
+  value: "$maybeFightGyarados $makeGyaradosReappear"
+- description: "Makes it so if you've already beaten the red gyarados you don't fight it again, you just get the item if you don't already have it"
+  locations:
+  - bank: 28
+    address: 0x4063
+  value: "03 @$maybeFightGyarados 18"
+- description: "Changes the lake of rage shiny to use the shared verbosegiveitem script when giving the red scale and updates it so that it reappears if you don't get the item."
+  locations:
+  - bank: 28
+    address: 0x4078
+  value: "7D 40 33 $beatRedGyaradosEventFlagId 6E 0A 60 47 9E $redScaleItemId 01 08 @$makeGyaradosReappear 18 18 18"
 - description: "Changes the pharmacy owner to use the shared verbosegiveitem script when giving the secretpotion."
   locations:
   - bank: 39
     address: 0x5FB0
-  value: "9E 43 01 18 18 18 18 18 18 18 18"
+  value: "9E 43 01 08 C4 5F 33 23 00 18 18 18 18 18"
 - description: "Changes the fan club member to use the shared verbosegiveitem script when giving the lost item."
   locations:
   - bank: 100
@@ -315,7 +652,7 @@ changes:
   locations:
   - bank: 101
     address: 0x6E6C
-  value: "9E 45 01 18 18 18 18 18 18 18 18 18"
+  value: "9E 45 01 08 78 6E 33 $gotMysteryEggEventFlagId 18 18 18"
 - description: "Adds code to clear the underground warehouse director event flag."
   locations:
   - bank: 47
@@ -325,15 +662,20 @@ changes:
   - bank: 47
     address: 0x4245
   value: "00 @$clearUndergroundWarehouseDirectorEventFlag"
-- description: "Adds code to set the underground warehouse director event flag."
+- description: "Only sets the card key event if you actually got the item"
   locations:
   - bank: 31
-  value: "$setUndergroundWarehouseDirectorEventFlag"
-- description: "Calls code to clear the underground warehouse director event flag."
+  value: "$maybeSetCardKeyEvent"
+- description: "Only sets the card key event if you actually got the item"
   locations:
   - bank: 31
     address: 0x59CE
-  value: "00 @$setUndergroundWarehouseDirectorEventFlag"
+  value: "03 @$maybeSetCardKeyEvent"
+- description: "Changes the event used to check if you got the card key item"
+  locations:
+  - bank: 31
+    address: 0x59C2
+  value: "$gotCardKeyEventFlagId"
 - description: "Update the sound that plays when picking up the trash can item."
   locations:
   - bank: 28
@@ -348,7 +690,7 @@ changes:
   locations:
   - bank: 30
     address: 0x4ED0
-  value: "9E 05 $elmsAideNumberOfItems 4C 9A 60 55 18 18 18 18 18 18 18"
+  value: "9E $pokeBallsItemId $elmsAideNumberOfItems 09 D9 4E 33 $elmsAideHasPokeBallsEventFlagId 4C 9A 60 55 18"
 - description: "Update wait for the sound effect after picking up an item from a fruit tree."
   locations:
   - bank: 17

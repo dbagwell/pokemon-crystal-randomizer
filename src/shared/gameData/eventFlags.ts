@@ -2172,7 +2172,43 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
   },
   GOT_UNOWN_DEX: {
     id: "GOT_UNOWN_DEX",
-    numericId: 3,
+    numericId: 923,
+  },
+  GOT_MAP_CARD: {
+    id: "GOT_MAP_CARD",
+    numericId: 924,
+  },
+  GOT_POKEDEX: {
+    id: "GOT_POKEDEX",
+    numericId: 925,
+  },
+  GOT_MYSTERY_EGG: {
+    id: "GOT_MYSTERY_EGG",
+    numericId: 926,
+  },
+  GOT_BASEMENT_KEY: {
+    id: "GOT_BASEMENT_KEY",
+    numericId: 927,
+  },
+  GOT_CARD_KEY: {
+    id: "GOT_CARD_KEY",
+    numericId: 928,
+  },
+  ELMS_AIDE_HAS_POTION: {
+    id: "ELMS_AIDE_HAS_POTION",
+    numericId: 929,
+  },
+  ELMS_AIDE_HAS_POKE_BALLS: {
+    id: "ELMS_AIDE_HAS_POKE_BALLS",
+    numericId: 930,
+  },
+  GOT_AZALEA_GS_BALL: {
+    id: "GOT_AZALEA_GS_BALL",
+    numericId: 931,
+  },
+  BEAT_RED_GYARADOS: {
+    id: "BEAT_RED_GYARADOS",
+    numericId: 932,
   },
   BEAT_SWIMMERF_ELAINE: {
     id: "BEAT_SWIMMERF_ELAINE",

@@ -6087,6 +6087,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "TEAM_ROCKET_BASE_B2F_EXECUTIVE",
   },
   {
+    id: "TEAM_ROCKET_BASE_B2F_LANCE",
     romOffset: [
       27,
       24376,

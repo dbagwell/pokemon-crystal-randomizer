@@ -3637,12 +3637,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     accessRequirements: [
       "MYSTERY_EGG",
     ],
-    romOffsets: [
-      [
-        30,
-        0x4ED1,
-      ],
-    ],
+    romOffsets: [],
   },
   ROUTE_2_NUGGET_HOUSE_MANS_GIFT: {
     id: "ROUTE_2_NUGGET_HOUSE_MANS_GIFT",
@@ -4868,10 +4863,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     accessRequirements: [
       "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
     ],
-    romOffsets: [[
-      23,
-      0x5808,
-    ]],
+    romOffsets: [],
   },
   GOLDENROD_FLOWER_SHOP_OWNERS_GIFT: {
     id: "GOLDENROD_FLOWER_SHOP_OWNERS_GIFT",
@@ -4968,10 +4960,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       "ENTEI",
       "RAIKOU",
     ],
-    romOffsets: [[
-      97,
-      0x519B,
-    ]],
+    romOffsets: [],
   },
   OLIVINE_GOOD_ROD_HOUSE_MANS_GIFT: {
     id: "OLIVINE_GOOD_ROD_HOUSE_MANS_GIFT",
@@ -5004,10 +4993,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     groupId: "KEY_ITEMS",
     itemId: "RED_SCALE",
     areaId: "LAKE_OF_RAGE_SURF_AREA",
-    romOffsets: [[
-      28,
-      0x407D,
-    ]],
+    romOffsets: [],
   },
   POKEMON_FAN_CLUB_MEMBERS_GIFT: {
     id: "POKEMON_FAN_CLUB_MEMBERS_GIFT",
