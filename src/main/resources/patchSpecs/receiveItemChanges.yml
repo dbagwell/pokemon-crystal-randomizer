@@ -67,12 +67,13 @@ values:
   maybeSetItemfinderEvent: "08 14 66 33 5A 00 03 14 66"
   maybeSetSurfEvent: "08 0F 55 33 12 00 03 0F 55"
   maybeSetRainbowWingEvent: "9E $rainbowWingItemId 01 08 9D 51 33 36 03 03 9D 51"
-  maybeFightSageLi: "09 D1 49 31 19 04 09 BE 49 03 AB 49"
+  maybeFightSageLi: "09 D1 49 31 19 04 09 BE 49 03 AE 49"
   maybeSetFlashEvent: "08 C8 49 33 14 00 03 C8 49"
   maybeSetGoodRodEvent: "08 39 47 33 18 00 91"
   maybeSetStrengthEvent: "08 D3 48 33 13 00 03 D3 48"
-  maybeFightGyarados: "31 $beatRedGyaradosEventFlagId 09 7B 40 47 4C CB 43 03 67 40"
-  makeGyaradosReappear: "6F 0A 03 88 40"
+  maybeFightGyarados: "31 $beatRedGyaradosEventFlagId 09 @$hideGyarados 47 4C CB 43 03 67 40 $hideGyarados"
+  hideGyarados: "6E 0A 03 7E 40"
+  makeGyaradosReappear: "6F 0A 03 85 40"
   maybeSetSilverWingEvent: "08 21 40 33 79 00 49 91"
   maybeGiveRisingBadge: "31 $gotRisingbadgeEventFlagId 09 @$continueElderScript 9E $risingbadgeItemId 01 08 @$continueElderScript 33 $gotRisingbadgeEventFlagId $continueElderScript"
   continueElderScript: "31 00 00 03 AA 51"
@@ -111,6 +112,11 @@ changes:
   - bank: 27
     address: 0x6DBD
   value: "03 @$maybeSetCutEvent"
+- description: "change the charcoal apprentice to check for beating slowpoke well instead of getting cut before giving you the charcoal item"
+  locations:
+  - bank: 99
+    address: 0x5D43
+  value: "2B 00"
 - description: "dont remove the npcs from ilex forest if you didn't get the cut item"
   locations:
   - bank: 27
@@ -608,7 +614,7 @@ changes:
   locations:
   - bank: 23
     address: 0x4E1F
-  value: "9E 64 01 33 $gotRadioCardEventFlagId 18 18 18 18 18 18 18 18"
+  value: "9E 64 01 08 2D 4E 33 $gotRadioCardEventFlagId 18 18 18 18 18"
 - description: "Changes some logic to check if you've already gotten the item from the kanto radio tower instead of checking if you already have the expn card."
   locations:
   - bank: 31
@@ -618,7 +624,7 @@ changes:
   locations:
   - bank: 31
     address: 0x6E84
-  value: "9E 78 01 33 $gotExpnCardEventFlagId 18 18 18 18"
+  value: "9E 78 01 08 8E 6E 33 $gotExpnCardEventFlagId 18"
 - description: "Changes the bike shop owner to use the shared verbosegiveitem script when giving the bike."
   locations:
   - bank: 21
@@ -636,8 +642,8 @@ changes:
 - description: "Changes the lake of rage shiny to use the shared verbosegiveitem script when giving the red scale and updates it so that it reappears if you don't get the item."
   locations:
   - bank: 28
-    address: 0x4078
-  value: "7D 40 33 $beatRedGyaradosEventFlagId 6E 0A 60 47 9E $redScaleItemId 01 08 @$makeGyaradosReappear 18 18 18"
+    address: 0x4076
+  value: "7D 40 33 $beatRedGyaradosEventFlagId 6E 0A 60 47 9E $redScaleItemId 01 08 @$makeGyaradosReappear 6E 02 18"
 - description: "Changes the pharmacy owner to use the shared verbosegiveitem script when giving the secretpotion."
   locations:
   - bank: 39
