@@ -50,7 +50,7 @@ export const updateMapObjectEvents = (
       return object.id === "ILEX_FOREST_LASS"
     })
     
-    object!.coordinate = [1, 17]
+    object!.coordinate = [0, 18]
     object!.movementBehaviourId = "STANDING_DOWN"
   }
   
