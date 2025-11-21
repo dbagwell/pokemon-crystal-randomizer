@@ -1,6 +1,6 @@
 description: "moves the mahogany town street vendor after getting 7 badges so that he is not on screen when arriving from route 44"
 values:
-  callback1: "36 49 00 1C 10 0B 07 @$callback2 72 02 0D 08 $callback2"
+  callback1: "36 49 00 1C 07 0B 07 @$callback2 72 02 0D 08 $callback2"
   callback2: "91"
 changes:
 - description: "adds code"
