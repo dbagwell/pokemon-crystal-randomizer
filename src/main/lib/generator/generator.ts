@@ -1951,6 +1951,19 @@ const createPatches = (
     ])
   }
   
+  // Eon Mail
+  
+  if (settings.LIMIT_ITEMS_FROM_GOLDENROD_POKEFAN) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "limitItemsFromGoldenrodPokefan.yml",
+      {},
+      {
+        gotReviveFromPokefanEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_REVIVE_FROM_POKEFAN.numericId, 2)),
+      },
+    ).hunks)
+  }
+  
   // Initialize events
   
   const eventFlagsToInitialize: EventFlagId[] = compact([

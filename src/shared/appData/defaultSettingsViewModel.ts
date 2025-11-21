@@ -1660,6 +1660,11 @@ export const defaultSettingsViewModel = () => {
             description: "Makes it so the girl on the fifth floor of the Goldenrod Dept. Store gives you an item (Eon Mail) instead of enabling the Mystery Gift Function.",
           }),
           createSimpleToggleViewModel({
+            id: "LIMIT_ITEMS_FROM_GOLDENROD_POKEFAN" as const,
+            name: "Limit Items from Goldenrod Pokéfan",
+            description: "Makes it so Pokéfan in the Goldenrod Pokémon Center will only give you her item in exchange for Eon Mail once.",
+          }),
+          createSimpleToggleViewModel({
             id: "SKIP_FLORIA" as const,
             name: "Skip Talking to Floria",
             description: "Removes requirement of having to talk to Floria on Route 36 and in the Flower shop before being able to get the item from the Flower Shop owner.",

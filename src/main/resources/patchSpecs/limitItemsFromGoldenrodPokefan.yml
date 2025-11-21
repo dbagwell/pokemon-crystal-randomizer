@@ -1,0 +1,19 @@
+description: "Makes it so Pokéfan in the Goldenrod Pokémon Center will only give you her item in exchange for Eon Mail once."
+values:
+  checkIfGotItem: "31 $gotReviveFromPokefanEventFlagId 09 45 50 4C FB 63 03 29 50"
+  setEvent: "08 51 50 33 $gotReviveFromPokefanEventFlagId 03 45 50"
+changes:
+- description: "adds code"
+  locations:
+  - bank: 24
+  value: "$checkIfGotItem $setEvent"
+- description: "calls code"
+  locations:
+  - bank: 24
+    address: 0x5026
+  value: "03 @$checkIfGotItem"
+- description: "calls code"
+  locations:
+  - bank: 24
+    address: 0x5042
+  value: "03 @$setEvent"
