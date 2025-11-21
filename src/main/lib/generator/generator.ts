@@ -1931,7 +1931,7 @@ const createPatches = (
       new DataHunk(
         ROMOffset.fromBankAddress(21, 0x611A),
         [
-          0x34,
+          0x31,
           ...bytesFrom(eventFlagsMap["GOT_EON_MAIL"].numericId, 2),
           0x09,
           0x29,
@@ -1942,7 +1942,7 @@ const createPatches = (
           0x08,
           0x29,
           0x61,
-          0x36,
+          0x33,
           ...bytesFrom(eventFlagsMap["GOT_EON_MAIL"].numericId, 2),
           0x4C,
           0x41,
