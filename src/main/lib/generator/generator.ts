@@ -2282,6 +2282,15 @@ const createPatches = (
     }
   }
   
+  // Kanto Badges
+  
+  if (settings.ADD_KANTO_BADGES_TO_TRAINER_CARD) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "kantoBadgesInTrainerCard.yml",
+    ).hunks)
+  }
+  
   // Performance Improvements
     
   if (settings.IMPROVE_PERFORMANCE) {

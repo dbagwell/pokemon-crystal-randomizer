@@ -1978,6 +1978,11 @@ export const defaultSettingsViewModel = () => {
             description: "Makes it so Red can appear on Mount Silver before you've entered the Hall of Fame.",
           }),
           createSimpleToggleViewModel({
+            id: "ADD_KANTO_BADGES_TO_TRAINER_CARD" as const,
+            name: "Add Kanto Badges to Trainer Card",
+            description: "Adds a third page to the trainer card where you can see all the Kanto Badges you've received.",
+          }),
+          createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,
             name: "Add Performance Improvements",
             description: "Adds general performance improvements to the game, like removing lag when performing certain actions.",
