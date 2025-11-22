@@ -21700,6 +21700,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "MT_MOON_SQUARE_ROCK",
   },
   {
+    id: "MORNING_MT_MOON_SHOP_OWNER",
     romOffset: [
       29,
       29175,

@@ -1264,7 +1264,7 @@ export const defaultSettingsViewModel = () => {
           createSimpleToggleViewModel({
             id: "RODS_ALWAYS_WORK" as const,
             name: "Rods Always Work",
-            description: "Allows makes it so fishing rods will trigger a Pokémon encounter every time they are used.",
+            description: "Makes it so fishing rods will trigger a Pokémon encounter every time they are used.",
           }),
           createSimpleToggleViewModel({
             id: "PROGRESSIVE_RODS" as const,
@@ -1393,6 +1393,11 @@ export const defaultSettingsViewModel = () => {
                 description: "Makes it so that you can always view the bargain shop vendor's wares if he is at his stall.",
               }),
             ],
+          }),
+          createSimpleToggleViewModel({
+            id: "REMOVE_MT_MOON_SHOP_TIME_REQUIREMENT" as const,
+            name: "Remove Mt. Moon Shop Time Requirement",
+            description: "Makes it so the vendor in Mt. Moon is alway in their house.",
           }),
           createSimpleToggleViewModel({
             id: "BLUE_CARD_REWARDS_ALWAYS_ACCESSIBLE" as const,
