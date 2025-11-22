@@ -1,7 +1,7 @@
 description: "Makes it so red doesn't appear in mount silver until talking to oak with the correct number of badges"
 values:
   updateRedFlagInHallOfFame: "31 4F 07 08 81 54 32 62 07 03 81 54"
-  updateRedFlagInOaksLab: "33 4F 07 33 62 07 91"
+  updateRedFlagInOaksLab: "33 4F 07 32 62 07 91"
 changes:
 - description: "Adds code"
   locations:
