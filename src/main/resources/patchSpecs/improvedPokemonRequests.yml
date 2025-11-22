@@ -1,7 +1,8 @@
 description: "Makes it so npcs who want to see a specific pokemon will show you a picture of the pokemon and register it as seen in the pokedex."
 values:
   togepiScript: "54 49 48 00 56 $togepiId 15 $togepiId 0F 3A 00 84 $togepiId 00 54 57 49 91"
-  unownScript: "54 49 48 00 56 C9 15 C9 0F 3A 00 84 C9 00 54 57 49 91"
+  unownScript: "54 49 48 00 56 C9 15 C9 0F 3A 00 0E 16 @$setFirstUnownSeen 84 C9 00 54 57 49 91 $setFirstUnownSeen"
+  setFirstUnownSeen: "21 F4 DE 36 01 C9"
   lickitungScript: "4C C0 58 54 48 00 56 6C 15 6C 0F 3A 00 84 6C 00 54 57 91"
   oddishScript: "4C FF 58 54 48 00 56 2B 15 2B 0F 3A 00 84 2B 00 54 57 91"
   staryuScript: "4C 53 59 54 48 00 56 78 15 78 0F 3A 00 84 78 00 54 57 91"
