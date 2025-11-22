@@ -2306,6 +2306,13 @@ const createPatches = (
       romInfo,
       "kantoBadgesInTrainerCard.yml",
     ).hunks)
+    
+    // Swap the Soul and Marsh badges so that they show up in the desired order on the tainer card
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(32, 0x44D9), [0b00100000]), // Swap the bitmasks for the Soul and Marsh badge engine actions
+      new DataHunk(ROMOffset.fromBankAddress(32, 0x44DC), [0b00010000]), // Swap the bitmasks for the Soul and Marsh badge engine actions
+      new DataHunk(ROMOffset.fromBankAddress(62, 0x7E8C), [0x18, 0x03]), // Swap the Soul and Marsh Type boosts
+    ])
   }
   
   // Performance Improvements

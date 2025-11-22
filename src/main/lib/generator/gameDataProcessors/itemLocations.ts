@@ -109,6 +109,11 @@ export const updateItems = (
       }
     })
   }
+  
+  if (settings.ADD_KANTO_BADGES_TO_TRAINER_CARD) {
+    romInfo.gameData.items.SOULBADGE.associatedValue = 0b00100000
+    romInfo.gameData.items.MARSHBADGE.associatedValue = 0b00010000
+  }
 }
 
 const pokemonRequirements: ItemId[] = [
