@@ -1890,6 +1890,10 @@ const createPatches = (
         romInfo,
         "copycatChanges.yml",
       ).hunks,
+      ...Patch.fromYAML(
+        romInfo,
+        "boatChanges.yml",
+      ).hunks,
     ]
   }
   
