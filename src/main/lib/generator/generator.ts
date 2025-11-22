@@ -652,6 +652,7 @@ const createPatches = (
           redScaleItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT.itemId].numericId]),
           risingbadgeItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.DRAGON_SHRINE_BADGE.itemId].numericId]),
           whirlpoolItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT.itemId].numericId]),
+          tm24ItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.DRAGONS_DEN_B1F_SOUTH_AREA_CLAIRS_GIFT.itemId].numericId]),
           elmsAideNumberOfItems: hexStringFrom([Math.min(itemCategoriesMap[romInfo.gameData.items[romInfo.gameData.itemLocations.ELMS_LAB_AIDES_GIFT_FOR_MYSTERY_EGG.itemId].category].slotSize, 5)]),
           gotZephyrbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_ZEPHYRBADGE.numericId, 2)),
           gotHivebadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_HIVEBADGE.numericId, 2)),

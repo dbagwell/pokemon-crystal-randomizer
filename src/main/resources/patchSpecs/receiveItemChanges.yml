@@ -690,8 +690,8 @@ changes:
 - description: "Change Clairs script for giving her tm item in dragons den."
   locations:
   - bank: 99
-    address: 0x495A
-  value: "9E D7 01 08 F4 48 18 18 18 18 18 18 18 18 18 18 18"
+    address: 0x48D4
+  value: "9E $tm24ItemId 01 08 E8 48 18 18 18 18 18 18 18 18 18 18 18 18 18 18"
 - description: "Update script where elms aide gives items after the mystery egg is delivered."
   locations:
   - bank: 30

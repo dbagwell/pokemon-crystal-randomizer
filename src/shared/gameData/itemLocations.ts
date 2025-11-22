@@ -659,7 +659,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
     areaId: "UNION_CAVE_1F",
     romOffsets: [[
       22,
-      0x5C08,
+      0x5C06,
     ]],
   },
   UNION_CAVE_B1F_MIDDLE_AREA_EAST_ITEM_BALL: {
@@ -1618,11 +1618,11 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
     id: "FIGHTING_DOJO_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
-    itemId: "BLACKBELT",
+    itemId: "FOCUS_BAND",
     areaId: "FIGHTING_DOJO",
     romOffsets: [[
       98,
-      0x5B61,
+      0x5B6A,
     ]],
   },
   ROCK_TUNNEL_1F_LAVENDER_SIDE_ITEM_BALL_WEST_OF_PLATEAU: {
@@ -2202,7 +2202,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       "TM08",
     ],
     romOffsets: [[
-      106,
+      105,
       0x621B,
     ]],
   },
@@ -4705,12 +4705,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
     accessRequirements: [
       "DRAGON_SHRINE_BADGE",
     ],
-    romOffsets: [
-      [
-        99,
-        0x48D5,
-      ],
-    ],
+    romOffsets: [],
   },
 }
 
