@@ -1799,7 +1799,7 @@ const createPatches = (
   
   if (settings.CHANGE_HO_OH_LEVEL.VALUE) {
     romInfo.patchHunks.push(new DataHunk(
-      ROMOffset.fromBankAddress(29, 0x7255),
+      ROMOffset.fromBankAddress(29, 0x7257),
       [settings.CHANGE_HO_OH_LEVEL.SETTINGS.LEVEL],
     ))
   }
