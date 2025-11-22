@@ -102,7 +102,7 @@ changes:
   locations:
   - bank: 27
     address: 0x5199
-  value: "03 @$maybeSetWhirlpoolEvent 18"
+  value: "03 @$maybeSetWhirlpoolEvent"
 - description: "only set the cut event if you actually got the item"
   locations:
   - bank: 27
