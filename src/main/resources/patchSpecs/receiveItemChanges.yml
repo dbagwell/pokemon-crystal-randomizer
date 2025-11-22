@@ -56,14 +56,14 @@ values:
   continueFalseDirectorCutscene: "33 73 05 91"
   maybeGiveBasementKey: "54 31 $gotBasementKeyEventFlagId 09 @$continueRadioDirectorScript 9E $basementKeyItemId 01 08 @$continueRadioDirectorScript 33 $gotBasementKeyEventFlagId $continueRadioDirectorScript"
   continueRadioDirectorScript: "49 91"
-  showBen: "0F 33 00 6F 05"
+  showBen: "0F 33 00 6F 05 91"
   maybeSetClearBellEvent: "08 EB 40 33 78 00 03 EB 40"
-  maybeGiveClearBell: "6B 47 31 78 00 08 @$showBenText 9E $clearBellItemId 01 08 @$showBenText 33 78 00 $showBenText"
+  maybeGiveClearBell: "6B 47 31 78 00 09 @$showBenText 9E $clearBellItemId 01 08 @$showBenText 33 78 00 $showBenText"
   showBenText: "4C BE 48 54 49 91"
   maybeSetGoldenrodGSBallEventLeft: "08 C4 4F 33 40 03 03 C4 4F"
   maybeSetGoldenrodGSBallEventRight: "08 09 50 33 40 03 03 09 50"
-  maybeSetCardKeyEvent: "08 @$continueWarehouseDirectorScript 33 $gotCardKeyEventFlagId $continueWarehouseDirectorScript"
-  continueWarehouseDirectorScript: "33 4A 00 33 $directorInUndergroundWarehouseEventFlagId 03 D1 59"
+  maybeSetCardKeyEvent: "08 @$continueWarehouseDirectorScript 33 $gotCardKeyEventFlagId 33 $directorInUndergroundWarehouseEventFlagId $continueWarehouseDirectorScript"
+  continueWarehouseDirectorScript: "33 4A 00 03 D1 59"
   maybeSetItemfinderEvent: "08 14 66 33 5A 00 03 14 66"
   maybeSetSurfEvent: "08 0F 55 33 12 00 03 0F 55"
   maybeSetRainbowWingEvent: "9E $rainbowWingItemId 01 08 9D 51 33 36 03 03 9D 51"
@@ -79,9 +79,9 @@ values:
   continueElderScript: "31 00 00 03 AA 51"
   maybeSetCutEvent: "08 CD 6D 33 10 00 03 C0 6D"
   maybeDoPostElectrodesCutscene: "31 22 00 09 @$maybeGiveWhirlpool 72 04 12 06 03 88 51 $maybeGiveWhirlpool"
-  maybeGiveWhirlpool: "6B 47 31 15 00 09 @$skipGivingWhirlpool 76 9E $whirlpoolItemId 01 08 $skipGivingWhirlpool 33 15 00 33 D6 06 $skipGivingWhirlpool"
+  maybeGiveWhirlpool: "6B 47 31 15 00 09 @$skipGivingWhirlpool 9E $whirlpoolItemId 01 08 @$skipGivingWhirlpool 33 15 00 33 D6 06 $skipGivingWhirlpool"
   skipGivingWhirlpool: "4C F8 58 54 49 91"
-  maybeSetWhirlpoolEvent: "08 DD 76 33 15 00 03 9C 51 $continuePostElectrodesCutscene"
+  maybeSetWhirlpoolEvent: "08 @$continuePostElectrodesCutscene 33 15 00 03 9C 51 $continuePostElectrodesCutscene"
   continuePostElectrodesCutscene: "49 03 B3 51"
 changes:
 - description: "allows giving kurt the gs ball even if you haven't gotten his lure ball item"
@@ -221,7 +221,7 @@ changes:
   locations:
   - bank: 24
     address: 0x4093
-  value: "03 @$showBen"
+  value: "00 @$showBen"
 - description: "Only sets the clear bell event if you actually got the item"
   locations:
   - bank: 24
