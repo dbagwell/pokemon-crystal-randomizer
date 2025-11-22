@@ -25,7 +25,7 @@ values:
   fruitTreeCode2: "FA 3F D0 47 3E 04 21 @$maybeUpdateRod1 CF 78 EA DD C2 C9"
   giveItemCode: "FE FF 20 03 FA DD C2 47 3E 04 21 @$maybeUpdateRod1 CF 78 C9"
   maybeUpdateRod1: "78 $maybeUpdateRod2"
-  maybeUpdateRod2: "E5 21 92 D8 FE 3A 38 22 FE 3E 30 1E 3E 3B EA 06 D1 CD 79 2F 30 04 3E 3D 18 10 3E 3A EA 06 D1 CD 79 2F 30 04 3E 3B 18 02 3E 3A E1 47 C9"
+  maybeUpdateRod2: "E5 21 92 D8 FE 3A 38 26 FE 3E 30 22 FE 3C 28 1E 3E 3B EA 06 D1 CD 79 2F 30 04 3E 3D 18 10 3E 3A EA 06 D1 CD 79 2F 30 04 3E 3B 18 02 3E 3A E1 47 C9"
 changes:
 - description: "Adds code."
   locations:
