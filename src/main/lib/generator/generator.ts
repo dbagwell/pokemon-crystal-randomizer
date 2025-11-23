@@ -2280,6 +2280,27 @@ const createPatches = (
     ).hunks)
   }
   
+  if (settings.CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR.includes("AUTOMATICALLY_OFFER_TO_SHARE_NUMBERS")) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(ROMOffset.fromBankAddress(22, 0x6F94), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(23, 0x413B), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(30, 0x4080), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(30, 0x4162), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(101, 0x4103), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(103, 0x517F), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(103, 0x5833), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(103, 0x5931), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(103, 0x6181), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(104, 0x48C2), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(104, 0x56A9), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(104, 0x5D45), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(105, 0x5456), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(105, 0x5B0E), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(106, 0x5242), [0x18]),
+      new DataHunk(ROMOffset.fromBankAddress(106, 0x56A3), [0x18]),
+    ])
+  }
+  
   // Red / Mount Silver
   
   if (settings.SKIP_E4_FOR_RED && (!settings.EARLY_MOUNT_SILVER.VALUE || !settings.EARLY_MOUNT_SILVER.SETTINGS.REQUIRE_TALKING_TO_OAK_FOR_RED)) {

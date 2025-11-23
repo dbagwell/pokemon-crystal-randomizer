@@ -1954,6 +1954,11 @@ export const defaultSettingsViewModel = () => {
                 name: "Prevent Repeat Gifts",
                 description: "Prevents being able to receive the same gift from a phone call trainer more than once.",
               }),
+              createSimpleSelectorOption({
+                id: "AUTOMATICALLY_OFFER_TO_SHARE_NUMBERS" as const,
+                name: "Automatically Offer to Share Numbers",
+                description: "Phone call trainers who have the potential to give you gifts or announce rooftop sales will automatically offer to share phone numbers with you after you defeat them in battle.",
+              }),
             ],
           }),
           createConfigurableToggleViewModel({
