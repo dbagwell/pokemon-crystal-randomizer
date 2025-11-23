@@ -110,7 +110,7 @@ app.on("ready", async () => {
     if (process.argv[import.meta.env.DEV ? 2 : 1] === "generate") {
       await generateFromCLI(process.argv)
       app.quit()
-    } else if (!import.meta.env.DEV && isNotNullish(process.argv[1])) {
+    } else if (isNotNullish(process.argv[1]) && process.argv[1].endsWith(".pcrp")) {
       await handlePCRPFile(process.argv[1])
       app.quit()
     } else {

@@ -26,6 +26,7 @@ const init = async () => {
   switch (windowType) {
   case "GENERATOR": {
     const initialAppData = (await window.mainAPI.getInitialAppData()).result
+    document.title = `Pokémon Crystal Randomizer ${initialAppData.appVersion}`
     
     mount(AppView, {
       target: containerDiv,
@@ -43,6 +44,8 @@ const init = async () => {
     break
   }
   case "PLAYER_OPTIONS": {
+    document.title = "Player Options"
+    
     mount(PlayerOptionsWindow, {
       target: containerDiv,
       props: {
