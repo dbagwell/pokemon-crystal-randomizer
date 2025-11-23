@@ -5050,10 +5050,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
     groupId: "MENU_ITEMS",
     itemId: "POKEGEAR",
     areaId: "PLAYERS_HOUSE_1F",
-    romOffsets: [[
-      30,
-      0x64FC,
-    ]],
+    romOffsets: [],
   },
   CHERRYGROVE_CITY_GUIDE_GENTS_GIFT: {
     id: "CHERRYGROVE_CITY_GUIDE_GENTS_GIFT",

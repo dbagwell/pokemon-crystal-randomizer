@@ -654,6 +654,7 @@ const createPatches = (
           whirlpoolItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT.itemId].numericId]),
           tm24ItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.DRAGONS_DEN_B1F_SOUTH_AREA_CLAIRS_GIFT.itemId].numericId]),
           unownDexItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.RUINS_OF_ALPH_OUTSIDE_MAIN_AREA_RESEARCHERS_GIFT.itemId].numericId]),
+          pokegearItemId: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.PLAYERS_HOUSE_1F_MOMS_GIFT.itemId].numericId]),
           elmsAideNumberOfItems: hexStringFrom([Math.min(itemCategoriesMap[romInfo.gameData.items[romInfo.gameData.itemLocations.ELMS_LAB_AIDES_GIFT_FOR_MYSTERY_EGG.itemId].category].slotSize, 5)]),
           gotZephyrbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_ZEPHYRBADGE.numericId, 2)),
           gotHivebadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_HIVEBADGE.numericId, 2)),
@@ -684,6 +685,7 @@ const createPatches = (
           gotCardKeyEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_CARD_KEY.numericId, 2)),
           beatRedGyaradosEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.BEAT_RED_GYARADOS.numericId, 2)),
           gotAzaleaGSBallEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_AZALEA_GS_BALL.numericId, 2)),
+          gotPokegearEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_POKEGEAR.numericId, 2)),
         },
       ).hunks,
       new DataHunk(

@@ -86,7 +86,18 @@ values:
   maybeGiveUnownDex: "6B 47 31 $gotUnownDexEventFlagId 09 @$continueResearcherScript 9E $unownDexItemId 01 08 @$continueResearcherScript 33 $gotUnownDexEventFlagId $continueResearcherScript"
   continueResearcherScript: "1C 0E 91"
   checkGaveKenya: "31 51 00 09 A6 55 31 50 00 03 7B 55"
+  maybeGivePokegear: "31 $gotPokegearEventFlagId 09 @$continueMomScript 47 9E $pokegearItemId 01 49 08 @$continueMomScript 33 $gotPokegearEventFlagId $continueMomScript"
+  continueMomScript: "33 01 00 91"
 changes:
+- description: "makes it so you the man on route 31 gives his item if you failed to get it when you gave him kenya"
+  locations:
+  - bank: 30
+  value: "$maybeGivePokegear"
+- description: "makes it so you the man on route 31 gives his item if you failed to get it when you gave him kenya"
+  locations:
+  - bank: 30
+    address: 0x6583
+  value: "00 @$maybeGivePokegear"
 - description: "makes it so you the man on route 31 gives his item if you failed to get it when you gave him kenya"
   locations:
   - bank: 105
@@ -571,7 +582,7 @@ changes:
   locations:
   - bank: 30
     address: 0x64FB
-  value: "9E 32 01 18 18 18 18 18 18 18 18 18 18"
+  value: "9E $pokegearItemId 01 08 08 65 33 $gotPokegearEventFlagId 18 18 18 18"
 - description: "Makes the guide gent give one of the unused items instead of the map card."
   locations:
   - bank: 103
