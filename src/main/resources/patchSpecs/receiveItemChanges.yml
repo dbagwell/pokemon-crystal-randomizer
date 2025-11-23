@@ -85,7 +85,17 @@ values:
   continuePostElectrodesCutscene: "49 03 B3 51"
   maybeGiveUnownDex: "6B 47 31 $gotUnownDexEventFlagId 09 @$continueResearcherScript 9E $unownDexItemId 01 08 @$continueResearcherScript 33 $gotUnownDexEventFlagId $continueResearcherScript"
   continueResearcherScript: "1C 0E 91"
+  checkGaveKenya: "31 51 00 09 A6 55 31 50 00 03 7B 55"
 changes:
+- description: "makes it so you the man on route 31 gives his item if you failed to get it when you gave him kenya"
+  locations:
+  - bank: 105
+  value: "$checkGaveKenya"
+- description: "makes it so you the man on route 31 gives his item if you failed to get it when you gave him kenya"
+  locations:
+  - bank: 105
+    address: 0x5578
+  value: "03 @$checkGaveKenya"
 - description: "allows giving kurt the gs ball even if you haven't gotten his lure ball item"
   locations:
   - bank: 99
