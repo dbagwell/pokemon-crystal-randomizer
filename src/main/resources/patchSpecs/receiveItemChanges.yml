@@ -83,6 +83,8 @@ values:
   skipGivingWhirlpool: "4C F8 58 54 49 91"
   maybeSetWhirlpoolEvent: "08 @$continuePostElectrodesCutscene 33 15 00 03 9C 51 $continuePostElectrodesCutscene"
   continuePostElectrodesCutscene: "49 03 B3 51"
+  maybeGiveUnownDex: "6B 47 31 $gotUnownDexEventFlagId 09 @$continueResearcherScript 9E $unownDexItemId 01 08 @$continueResearcherScript 33 $gotUnownDexEventFlagId $continueResearcherScript"
+  continueResearcherScript: "1C 0E 91"
 changes:
 - description: "allows giving kurt the gs ball even if you haven't gotten his lure ball item"
   locations:
@@ -599,12 +601,21 @@ changes:
   locations:
   - bank: 22
     address: 0x51B8
-  value: "9E 2D 01 08 C2 51 33 $gotUnownDexEventFlagId 18"
-- description: "Changes the check to see if the ruins of alph reasearcher should appear outside the ruins of alph to check if you got the item from him instead of if you have the unown dex."
+  value: "9E $unownDexItemId 01 08 C2 51 33 $gotUnownDexEventFlagId 18"
+- description: "Makes the ruins of alph reasearcher give you his item if you failed to get it during the cutscene."
+  locations:
+  - bank: 22
+  value: "$maybeGiveUnownDex"
+- description: "Makes the ruins of alph reasearcher give you his item if you failed to get it during the cutscene."
+  locations:
+  - bank: 22
+    address: 0x51D1
+  value: "18 00 @$maybeGiveUnownDex"
+- description: "Changes the check to see if the ruins of alph reasearcher should appear outside the ruins of alph to check if he is already in the research center."
   locations:
   - bank: 22
     address: 0x400F
-  value: "31 $gotUnownDexEventFlagId"
+  value: "31 04 07 08"
 - description: "Changes some logic to check if you've already gotten the item from the radio tower quiz instead of checking if you already have the radio card."
   locations:
   - bank: 23

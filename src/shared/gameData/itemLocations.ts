@@ -5084,12 +5084,10 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
     itemId: "UNONWNDEX",
     areaId: "RUINS_OF_ALPH_OUTSIDE_MAIN_AREA",
     accessRequirements: [
+      "RUINS_OF_ALPH_RESEARCH_CENTER",
       "UNOWN",
     ],
-    romOffsets: [[
-      22,
-      0x51B9,
-    ]],
+    romOffsets: [],
   },
   RADIO_TOWER_1F_QUIZ_PRIZE: {
     id: "RADIO_TOWER_1F_QUIZ_PRIZE",
