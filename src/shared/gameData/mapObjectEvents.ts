@@ -9223,6 +9223,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "DRAGONS_DEN_B1F_DRAGON_FANG",
   },
   {
+    id: "DRAGONS_DEN_1F_CLAIR",
     romOffset: [
       99,
       20396,

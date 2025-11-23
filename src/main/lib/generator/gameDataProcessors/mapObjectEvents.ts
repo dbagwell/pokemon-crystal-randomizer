@@ -142,6 +142,10 @@ export const updateMapObjectEvents = (
     romInfo.gameData.mapObjectEvents.find((object) => {
       return object.id === "TEAM_ROCKET_BASE_B2F_LANCE"
     })!.scriptPointer = 0x5184
+    
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "DRAGONS_DEN_1F_CLAIR"
+    })!.scriptPointer = 0x48F4
   }
   
   if (settings.REMOVE_MT_MOON_SHOP_TIME_REQUIREMENT) {

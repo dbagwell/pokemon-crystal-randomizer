@@ -4,4 +4,4 @@ changes:
   locations:
   - bank: 101
     address: 0x4E73
-  value: "9E $itemId 01 08 8E 4E 18 18 18 18 18 18 18 18 18 18 18"
+  value: "9E $itemId 01 08 8E 4E 12 03 51 00 33 D8 06 18 18 18 18"
