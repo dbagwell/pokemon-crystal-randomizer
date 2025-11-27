@@ -16417,7 +16417,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     id: "FUCHSIA_CITY_CUT_AREA_MART_DOOR_IN",
     mapId: "FUCHSIA_CITY",
     index: 1,
-    areaId: "FUCHSIA_CITY",
+    areaId: "FUCHSIA_CITY_CUT_AREA",
     type: "DOOR",
     polarity: "IN",
     direction: "UP",
