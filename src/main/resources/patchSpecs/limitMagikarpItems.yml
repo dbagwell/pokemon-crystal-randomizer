@@ -1,0 +1,19 @@
+description: "Makes it so the man in the house at the Lake of Rage will only give you his item in exchange for seeing a Magikarp once."
+values:
+  checkIfGotItem: "31 $gotElixerForMagikarpEventFlagId 09 C8 66 31 3A 00 03 B3 66"
+  setEvent: "08 11 67 33 $gotElixerForMagikarpEventFlagId 03 08 67"
+changes:
+- description: "adds code"
+  locations:
+  - bank: 102
+  value: "$checkIfGotItem $setEvent"
+- description: "calls code"
+  locations:
+  - bank: 102
+    address: 0x66B0
+  value: "03 @$checkIfGotItem"
+- description: "calls code"
+  locations:
+  - bank: 102
+    address: 0x6705
+  value: "03 @$setEvent"

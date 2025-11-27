@@ -1738,7 +1738,12 @@ export const defaultSettingsViewModel = () => {
           createSimpleToggleViewModel({
             id: "IGNORE_MAGIKARP_SIZE" as const,
             name: "Ignore Magikarp Size",
-            description: "Makes it so the man in the man in the house at the Lake of Rage will give away his item when shown any Magikarp.",
+            description: "Makes it so the man in the house at the Lake of Rage will give away his item when shown any Magikarp.",
+          }),
+          createSimpleToggleViewModel({
+            id: "LIMIT_ITEMS_FROM_MAGIKARP_REQUEST" as const,
+            name: "Limit Items from Magikarp Request",
+            description: "Makes it so the man in the house at the Lake of Rage will only give you his item in exchange for seeing a Magikarp once.",
           }),
           createSimpleMultiSelectorViewModel({
             id: "REMOVE_ROCKET_GRUNTS" as const,

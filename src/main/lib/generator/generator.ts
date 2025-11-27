@@ -1725,10 +1725,21 @@ const createPatches = (
     ])
   }
   
-  // Magikarp Size
+  // Magikarp
   
   if (settings.IGNORE_MAGIKARP_SIZE) {
     romInfo.patchHunks.push(new DataHunk(ROMOffset.fromBankAddress(102, 0x66EC), [0x03, 0xFE, 0x66]))
+  }
+  
+  if (settings.LIMIT_ITEMS_FROM_MAGIKARP_REQUEST) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "limitMagikarpItems.yml",
+      {},
+      {
+        gotElixerForMagikarpEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_ELIXER_FOR_MAGIKARP.numericId, 2)),
+      },
+    ).hunks)
   }
   
   // Unown Sets
