@@ -914,6 +914,19 @@ const createPatches = (
       ).hunks,
     ]
   }
+  
+  if (settings.EARLY_KANTO_DEX) {
+    romInfo.patchHunks.push(...[
+      new DataHunk(
+        ROMOffset.fromBankAddress(36, 0x50ED),
+        [0x00, 0x00],
+      ),
+      new DataHunk(
+        ROMOffset.fromBankAddress(36, 0x5DBC),
+        [0x00],
+      ),
+    ])
+  }
     
   if (settings.BIKE_INDOORS) {
     const bikeAnywherePatch = Patch.fromYAML(

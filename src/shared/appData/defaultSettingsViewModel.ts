@@ -1257,6 +1257,11 @@ export const defaultSettingsViewModel = () => {
               + "if the Pokémon can be encountered on Land or when surfing in the Water of the player's current area.",
           }),
           createSimpleToggleViewModel({
+            id: "EARLY_KANTO_DEX" as const,
+            name: "Early Kanto Dex",
+            description: "Makes it so the Pokédex will always allow scrolling over to to the map of Kanto when viewing the locations where a Pokémon can be found (instead of just after defeating Champion Lance).",
+          }),
+          createSimpleToggleViewModel({
             id: "BIKE_INDOORS" as const,
             name: "Bike Indoors",
             description: "Allows the player to use the bike inside all buildings.",
