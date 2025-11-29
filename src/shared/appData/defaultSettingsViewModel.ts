@@ -1286,7 +1286,7 @@ export const defaultSettingsViewModel = () => {
           }),
           createSimpleToggleViewModel({
             id: "ROCK_SMASH_ALWAYS_WORKS" as const,
-            name: "Change Box Phone Call",
+            name: "Rock Smash Always Works",
             description: "Makes it so that smashing rocks in locations that have rock encounters will always trigger a Pokémon encounter.",
           }),
           createSimpleToggleViewModel({
