@@ -11,7 +11,7 @@ import { compressToUint8Array, decompressFromUint8Array } from "lz-string"
 import path from "path"
 import yaml from "yaml"
 
-import { showWindow } from "../../windowManager"
+import { forceCloseWindow, showWindow } from "../../windowManager"
 
 export const createPCRP = (params: {
   seed: string,
@@ -67,29 +67,16 @@ export const handlePCRPFile = async (filePath: string) => {
       
       let isWindowClosed = false
       
-      const forceCloseWindow = async () => {
+      const closeWindow = async () => {
         if (!isWindowClosed) {
-          // Close the window
-          // window.close() doesn't work for some reason, so we use window.destroy() instead
-          // window.destroy() has a delay, so we hide the window first
-          // window.hide() also has a delay unless we listen and wait for the hide event
-          
-          const hidePromise = new Promise<void>((resolve) => {
-            window.once("hide", async () => {
-              resolve()
-            })
-          })
-          
-          window.hide()
-          await hidePromise
-          window.destroy()
+          forceCloseWindow(window)
         }
       }
       
       window.once("close", () => {
         // For some reason, when the window is closed with a keyboard shortcut, there is a delay before it disappears
         // so when we get the notification that it's about to close, we do our workaround to hide and force close it
-        forceCloseWindow()
+        closeWindow()
       })
       
       const closedPromise = new Promise((resolve) => {
@@ -110,7 +97,7 @@ export const handlePCRPFile = async (filePath: string) => {
         playerOptionsPromise, // Use the new playerOptions set by the user.
       ])
       
-      await forceCloseWindow()
+      await closeWindow()
     }
     
     applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])

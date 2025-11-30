@@ -3,6 +3,7 @@ import "source-map-support/register"
 import { generateFromCLI } from "@lib/generator/cli"
 import { handlePCRPFile as processPCRPFile } from "@lib/generator/pcrpProcessor"
 import { MainAPI } from "@lib/ipc/mainAPI"
+import { makeRendererAPIRequest, rendererAPIS } from "@lib/ipc/rendererAPIUtils"
 import { getPreference, ignoreUpdateVersion, setPreference } from "@lib/userData/preferences"
 import { debounce } from "@lib/utils/commonUtils"
 import { compact, isNotNullish } from "@shared/utils"
@@ -10,7 +11,7 @@ import { app, BrowserWindow, dialog, Menu, type MenuItemConstructorOptions } fro
 import { exposeMainApi } from "electron-affinity/main"
 import { autoUpdater } from "electron-updater"
 
-import { showWindow } from "./windowManager"
+import { forceCloseWindow, showWindow } from "./windowManager"
 
 let ready = false
 let quitAfterGenerating = false
@@ -24,8 +25,6 @@ app.on("window-all-closed", () => {
 })
 
 const showGeneratorWindow = async () => {
-  checkForUpdates()
-  
   const windowSize = getPreference("generatorWindowSize")
   
   const window = await showWindow({
@@ -34,6 +33,8 @@ const showGeneratorWindow = async () => {
     width: windowSize[0],
     height: windowSize[1],
   })
+  
+  checkForUpdates()
   
   window.on("resized", () => {
     const size = window.getSize()
@@ -60,29 +61,49 @@ const checkForUpdates = async () => {
   const updateInfo = await autoUpdater.checkForUpdates()
   
   if (isNotNullish(updateInfo) && updateInfo.isUpdateAvailable && !getPreference("ignoredUpdateVersions").includes(updateInfo.updateInfo.version)) {
-    const result = dialog.showMessageBoxSync({
-      message: `A newer version of Pokémon Crystal Randomizer is available.\n\nWould you like to update to version ${updateInfo.updateInfo.version}?`,
-      buttons: [
-        "Update and Restart",
-        "Ask Again Later",
-        "Skip Update",
-      ],
-    })
-    
-    if (result === 0) {
-      try {
-        autoUpdater.autoRunAppAfterInstall = true
-        await autoUpdater.downloadUpdate()
-        autoUpdater.quitAndInstall()
-      } catch (error: any) {
-        dialog.showErrorBox(
-          "Error",
-          error.message,
+    showWindow({
+      windowType: "RELEASE_NOTES",
+      width: 800,
+      height: 700,
+      afterBind: async (window) => {
+        const selectedAction = await makeRendererAPIRequest(
+          (requestId: string) => {
+            rendererAPIS[window.id]?.setReleaseNotes({
+              requestId: requestId,
+              releaseNotes: updateInfo.updateInfo.releaseNotes as string,
+              currentVersionNumber: app.getVersion(),
+              newVersionNumber: updateInfo.updateInfo.version,
+            })
+          },
+          (selectedAction, resolve, reject) => {
+            if (selectedAction === "UPDATE" || selectedAction === "IGNORE" || selectedAction === "SKIP") {
+              resolve(selectedAction)
+            } else {
+              reject(new Error(`Received invalid action from release notes. Expected one of 'UPDATE', 'IGNORE', or 'SKIP' but got '${selectedAction}'.`))
+            }
+          },
         )
-      }
-    } else if (result === 2) {
-      ignoreUpdateVersion(updateInfo.updateInfo.version)
-    }
+    
+        if (selectedAction === "UPDATE") {
+          try {
+            autoUpdater.autoRunAppAfterInstall = true
+            await autoUpdater.downloadUpdate()
+            autoUpdater.quitAndInstall()
+          } catch (error: any) {
+            dialog.showErrorBox(
+              "Error",
+              error.message,
+            )
+          }
+        } else {
+          if (selectedAction === "SKIP") {
+            ignoreUpdateVersion(updateInfo.updateInfo.version)
+          }
+        
+          forceCloseWindow(window)
+        }
+      },
+    })
   }
 }
 

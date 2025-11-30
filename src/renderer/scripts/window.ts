@@ -2,6 +2,7 @@ import "material-icons/iconfont/material-icons.css"
 
 import AppView from "@components/AppView.svelte"
 import PlayerOptionsWindow from "@components/PlayerOptionsWindow.svelte"
+import ReleaseNotesWindow from "@components/ReleaseNotesWindow.svelte"
 import type { MainAPI } from "@mainAPI" // Only the type is allowed to be imported, the type keyword must be placed outside of the brackets.
 import { updateColors } from "@scripts/colors"
 import { RendererAPI } from "@scripts/ipc/rendererAPI"
@@ -52,6 +53,15 @@ const init = async () => {
         initialPlayerOptions: (await window.mainAPI.getPlayerOptions()).result,
       },
     })
+    
+    break
+  }
+  case "RELEASE_NOTES": {
+    document.title = "Auto Update"
+    mount(ReleaseNotesWindow, {
+      target: containerDiv,
+    })
+    break
   }
   }
 }
