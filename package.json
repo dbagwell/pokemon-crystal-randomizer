@@ -1,7 +1,7 @@
 {
   "name": "pokemon-crystal-randomizer",
   "productName": "Pokemon Crystal Randomizer",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Generate and apply patches for Pokémon Crystal Version",
   "author": "David Bagwell",
   "license": "MIT",

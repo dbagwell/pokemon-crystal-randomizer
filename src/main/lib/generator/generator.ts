@@ -95,6 +95,7 @@ export const generateROM = async (params: {
   inputROM?: Buffer
   forceOverwrite?: boolean
   throwErrorOnWriteFailure?: boolean
+  skipWritingOutputFile?: boolean
 }) => {
   const {
     data,
@@ -104,13 +105,16 @@ export const generateROM = async (params: {
     inputROM,
     forceOverwrite,
     throwErrorOnWriteFailure,
+    skipWritingOutputFile,
   } = params
   
-  const fileData = inputROM ?? await getVanillaROM(showInputInRenderer)
+  const inputFileData = inputROM ?? await getVanillaROM(showInputInRenderer)
   
-  if (isNullish(fileData)) {
+  if (isNullish(inputFileData)) {
     throw new Error("A Pokémon Crystal Version 1.1 ROM is required.")
   }
+  
+  const sharedOutputFileData = Buffer.from(inputFileData)
   
   const basePatch = Patch.fromYAML(
     data.romInfo,
@@ -122,13 +126,66 @@ export const generateROM = async (params: {
     },
   )
   
-  data.romInfo.patchHunks = [...data.romInfo.patchHunks, ...basePatch.hunks]
-  
-  createPlayerOptionsPatches(data.settings, playerOptions, data.romInfo)
+  data.romInfo.patchHunks.push(...basePatch.hunks)
   
   data.romInfo.patchHunks.forEach((hunk) => {
-    fileData.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
+    sharedOutputFileData.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
   })
+  
+  const outputFileData = Buffer.from(sharedOutputFileData)
+  
+  applyPlayerOptionsToROM({
+    settings: data.settings,
+    playerOptions: playerOptions,
+    romData: outputFileData,
+  })
+  
+  return {
+    inputFileData: inputFileData,
+    sharedOutputFileData: sharedOutputFileData,
+    ...writeRomData({
+      fileData: outputFileData,
+      defaultFileName: defaultFileName ?? data.checkValue,
+      forcePromptForLocation: isNullish(defaultFileName),
+      forceOverwrite: forceOverwrite,
+      throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+      skipWritingOutputFile: skipWritingOutputFile,
+    }),
+  }
+}
+
+export const applyPlayerOptionsToROM = (params: {
+  settings: Settings
+  playerOptions: PlayerOptions
+  romData: Buffer
+}) => {
+  const {
+    settings,
+    playerOptions,
+    romData,
+  } = params
+  
+  createPlayerOptionsPatches(settings, playerOptions).forEach((hunk) => {
+    romData.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
+  })
+}
+
+export const writeRomData = (params: {
+  fileData: Buffer
+  defaultFileName: string
+  forcePromptForLocation: boolean
+  forceOverwrite?: boolean
+  throwErrorOnWriteFailure?: boolean
+  skipWritingOutputFile?: boolean
+}) => {
+  const {
+    fileData,
+    defaultFileName,
+    forcePromptForLocation,
+    forceOverwrite,
+    throwErrorOnWriteFailure,
+    skipWritingOutputFile,
+  } = params
   
   let filePath: string | undefined
   
@@ -136,31 +193,33 @@ export const generateROM = async (params: {
     title: "Save Generated ROM to:",
     buttonLabel: "Generate",
     fileType: "gbc" as const,
-    defaultFilePath: `${defaultFileName ?? data.checkValue}.gbc`,
+    defaultFilePath: `${defaultFileName}.gbc`,
   }
+  
+  if (!(skipWritingOutputFile ?? false)) {
+    if (!forcePromptForLocation) {
+      filePath = attemptWriteFile({
+        ...dialogParams,
+        data: fileData,
+        forceOverwrite: forceOverwrite,
+        throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+      })
+    } else {
+      filePath = getFilePathFromUserInput(dialogParams)
+        
+      if (isNotNullish(filePath)) {
+        fs.writeFileSync(filePath, fileData)
+      }
+    }
     
-  if (defaultFileName) {
-    filePath = attemptWriteFile({
-      ...dialogParams,
-      data: fileData,
-      forceOverwrite: forceOverwrite,
-      throwErrorOnWriteFailure: throwErrorOnWriteFailure,
-    })
-  } else {
-    filePath = getFilePathFromUserInput(dialogParams)
-      
-    if (isNotNullish(filePath)) {
-      fs.writeFileSync(filePath, fileData)
+    if (isNullish(filePath)) {
+      throw new Error("A save location must be specified.")
     }
   }
   
-  if (isNullish(filePath)) {
-    throw new Error("A save location must be specified.")
-  }
-  
   return {
-    full: filePath,
-    withoutExtension: filePath.replace(/\.gbc$/, ""),
+    fullOutputFilePath: filePath ?? "",
+    outputPathWithoutExtension: filePath?.replace(/\.gbc$/, "") ?? "",
   }
 }
 
@@ -195,21 +254,26 @@ export const generateLog = (params: {
 }
 
 export const generatePatch = (params: {
-  data: ReturnType<typeof generatorDataFrom>
+  settings: Settings
+  inputROMData: Buffer
+  sharedOutputROMData: Buffer
   defaultFileName?: string
   forceOverwrite?: boolean
   throwErrorOnWriteFailure?: boolean
 }) => {
   const {
-    data,
+    settings,
+    inputROMData,
+    sharedOutputROMData,
     defaultFileName,
     forceOverwrite,
     throwErrorOnWriteFailure,
   } = params
   
   const pcrpData = createPCRP({
-    seed: data.seed,
-    settings: data.settings,
+    settings: settings,
+    inputROMData: inputROMData,
+    sharedOutputROMData: sharedOutputROMData,
   })
             
   attemptWriteFile({
@@ -1433,17 +1497,10 @@ const createPatches = (
   // Skip Gender
   
   if (settings.SKIP_GENDER) {
-    romInfo.patchHunks = [
-      ...romInfo.patchHunks,
-      ...Patch.fromYAML(
-        romInfo,
-        "skipGender.yml",
-        {},
-        {
-          genderId: hexStringFrom(bytesFrom(playerSpriteMap.GIRL.numericId, 1)),
-        },
-      ).hunks,
-    ]
+    romInfo.patchHunks.push(new DataHunk(
+      ROMOffset.fromBankAddress(1, 0x5B97),
+      [0x3E, ...bytesFrom(playerSpriteMap.GIRL.numericId, 1), 0xEA, 0x72, 0xD4, 0x00],
+    ))
   }
     
   // Skip Name
@@ -2440,38 +2497,28 @@ const createPatches = (
 const createPlayerOptionsPatches = (
   settings: Settings,
   playerOptions: PlayerOptions,
-  romInfo: ROMInfo,
 ) => {
+  const patchHunks: DataHunk[] = []
+  
   // Skip Gender
   
   const genderId = playerSpriteMap[playerOptions.PLAYER_GENDER].numericId
   
   if (settings.SKIP_GENDER) {
-    romInfo.patchHunks = [
-      ...romInfo.patchHunks,
-      ...Patch.fromYAML(
-        romInfo,
-        "skipGender.yml",
-        {},
-        {
-          genderId: hexStringFrom(bytesFrom(genderId, 1)),
-        },
-      ).hunks,
-    ]
+    patchHunks.push(new DataHunk(
+      ROMOffset.fromBankAddress(1, 0x5B98),
+      [genderId],
+    ))
   }
   
-  romInfo.patchHunks = [
-    ...romInfo.patchHunks,
-    new DataHunk(
-      ROMOffset.fromBankAddress(18, 0x4E03),
-      bytesFrom(genderId + 1, 1),
-    ),
-  ]
+  patchHunks.push(new DataHunk(
+    ROMOffset.fromBankAddress(18, 0x4E03),
+    bytesFrom(genderId + 1, 1),
+  ))
   
   // Player Name
   
-  romInfo.patchHunks = [
-    ...romInfo.patchHunks,
+  patchHunks.push(...[
     new DataHunk(
       ROMOffset.fromBankAddress(1, 0x60D3),
       bytesFromTextData(`${playerOptions.PLAYER_NAME}@`),
@@ -2480,14 +2527,13 @@ const createPlayerOptionsPatches = (
       ROMOffset.fromBankAddress(1, 0x60DE),
       bytesFromTextData(`${playerOptions.PLAYER_NAME}@`),
     ),
-  ]
+  ])
   
   // Default Options
   
   const selectedAdditionalOptionIds = settings.ADDITIONAL_OPTIONS
     
-  romInfo.patchHunks = [
-    ...romInfo.patchHunks,
+  patchHunks.push(...[
     new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7C), [
       primaryOptionsValue(
         {
@@ -2510,5 +2556,7 @@ const createPlayerOptionsPatches = (
     ]),
     new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7E), [frameTypeValue(playerOptions.FRAME_TYPE)]),
     new DataHunk(ROMOffset.fromBankAddress(5, 0x4F80), [printToneValue(playerOptions.PRINT_TONE)]),
-  ]
+  ])
+  
+  return patchHunks
 }
