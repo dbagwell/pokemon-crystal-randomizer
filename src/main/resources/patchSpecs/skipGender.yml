@@ -1,7 +1,0 @@
-description: "Skips the gender selection dialog when starting a new game and sets the player sprite to the provided value."
-changes:
-- description: "Skips the gender question and sets the player sprite."
-  locations:
-  - bank: 1
-    address: 0x5B97
-  value: "3E $genderId EA 72 D4 00"

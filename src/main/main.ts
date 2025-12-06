@@ -6,12 +6,11 @@ import { MainAPI } from "@lib/ipc/mainAPI"
 import { makeRendererAPIRequest, rendererAPIS } from "@lib/ipc/rendererAPIUtils"
 import { getPreference, ignoreUpdateVersion, setPreference } from "@lib/userData/preferences"
 import { debounce } from "@lib/utils/commonUtils"
+import { forceCloseWindow, showWindow } from "@lib/utils/windowManager"
 import { compact, isNotNullish } from "@shared/utils"
 import { app, BrowserWindow, dialog, Menu, type MenuItemConstructorOptions } from "electron"
 import { exposeMainApi } from "electron-affinity/main"
 import { autoUpdater } from "electron-updater"
-
-import { forceCloseWindow, showWindow } from "./windowManager"
 
 let ready = false
 let quitAfterGenerating = false
@@ -193,6 +192,12 @@ app.applicationMenu = Menu.buildFromTemplate(compact([
                 name: "Pokémon Crystal Randomizer Patch",
                 extensions: [
                   "pcrp",
+                ],
+              },
+              {
+                name: "Binary Patch System File",
+                extensions: [
+                  "bps",
                 ],
               },
             ],

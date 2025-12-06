@@ -106,7 +106,7 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
         settings: settings,
       })
       
-      const filePathInfo = await generateROM({
+      const fileInfo = await generateROM({
         data: data,
         playerOptions: playerOptions,
         showInputInRenderer: true,
@@ -115,14 +115,16 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
       if (shouldGenerateLog) {
         generateLog({
           data: data,
-          defaultFileName: filePathInfo.withoutExtension,
+          defaultFileName: fileInfo.outputPathWithoutExtension,
         })
       }
       
       if (createPatch) {
         generatePatch({
-          data: data,
-          defaultFileName: filePathInfo.withoutExtension,
+          settings: data.settings,
+          inputROMData: fileInfo.inputFileData,
+          sharedOutputROMData: fileInfo.sharedOutputFileData,
+          defaultFileName: fileInfo.outputPathWithoutExtension,
         })
       }
       
