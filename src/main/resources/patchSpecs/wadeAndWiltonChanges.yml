@@ -1,0 +1,67 @@
+description: "Updates wade and wiltons scripts to check all items every time and to update events appropriately."
+values:
+  checkWiltonPokeBallFlag: "09 DB 59 03 @$updateWiltonPokeBallFlags2"
+  updateWiltonUltraBallFlags: "33 $gotUltraBallFromWiltonEventFlagId 32 2F 03 03 BD 59"
+  updateWiltonGreatBallFlags: "33 $gotGreatBallFromWiltonEventFlagId 32 30 03 03 C3 59"
+  updateWiltonPokeBallFlags1: "08 @$updateWiltonPokeBallFlags2 33 $gotPokeBallFromWiltonEventFlagId 32 31 03 $updateWiltonPokeBallFlags2"
+  updateWiltonPokeBallFlags2: "31 2F 03 09 E7 59 31 30 03 09 E7 59 31 31 03 09 E7 59 03 E1 59"
+  checkWadeBitterBerryFlag: "09 3D 55 03 @$updateWadeBitterBerryFlags2"
+  updateWadeBerryFlags: "33 $gotBerryFromWadeEventFlagId 32 2B 03 03 10 55"
+  updateWadePsncureberryFlags: "33 $gotPsncureberryFromWadeEventFlagId 32 2C 03 03 16 55"
+  updateWadePrzcureberryFlags: "33 $gotPrzcureberryFromWadeEventFlagId 32 2D 03 03 1C 55"
+  updateWadeBitterBerryFlags1: "08 @$updateWadeBitterBerryFlags2 33 $gotBitterBerryFromWadeEventFlagId 32 2E 03 $updateWadeBitterBerryFlags2"
+  updateWadeBitterBerryFlags2: "31 2B 03 09 49 55 31 2C 03 09 49 55 31 2D 03 09 49 55 31 2E 03 09 49 55 03 43 55"
+changes:
+- description: "Adds code for wilton"
+  locations:
+  - bank: 103
+  value: "$checkWiltonPokeBallFlag $updateWiltonUltraBallFlags $updateWiltonGreatBallFlags $updateWiltonPokeBallFlags1"
+- description: "Checks if wilton should give the poke ball item"
+  locations:
+  - bank: 103
+    address: 0x59C6
+  value: "03 @$checkWiltonPokeBallFlag"
+- description: "Updates Wilton's Ultra Ball flags if he gave the item, otherwise jumps to check the next item"
+  locations:
+  - bank: 103
+    address: 0x59CD
+  value: "BD 59 03 @$updateWiltonUltraBallFlags"
+- description: "Updates Wilton's Great Ball flags if he gave the item, otherwise jumps to check the next item"
+  locations:
+  - bank: 103
+    address: 0x59D6
+  value: "C3 59 03 @$updateWiltonGreatBallFlags"
+- description: "Updates Wilton's Poke Ball flags if he gave the item"
+  locations:
+  - bank: 103
+    address: 0x59DE
+  value: "03 @$updateWiltonPokeBallFlags1"
+- description: "Adds code for wade"
+  locations:
+  - bank: 105
+  value: "$checkWadeBitterBerryFlag $updateWadeBerryFlags $updateWadePsncureberryFlags $updateWadePrzcureberryFlags $updateWadeBitterBerryFlags1"
+- description: "Checks if wade should give the bitter berry item"
+  locations:
+  - bank: 105
+    address: 0x551F
+  value: "03 @$checkWadeBitterBerryFlag"
+- description: "Updates Wade's Berry flags if he gave the item, otherwise jumps to check the next item"
+  locations:
+  - bank: 105
+    address: 0x5526
+  value: "10 55 03 @$updateWadeBerryFlags"
+- description: "Updates Wade's Psncureberry flags if he gave the item, otherwise jumps to check the next item"
+  locations:
+  - bank: 105
+    address: 0x552F
+  value: "16 55 03 @$updateWadePsncureberryFlags"
+- description: "Updates Wade's Przcureberry flags if he gave the item, otherwise jumps to check the next item"
+  locations:
+  - bank: 105
+    address: 0x5538
+  value: "1C 55 03 @$updateWadePrzcureberryFlags"
+- description: "Updates Wade's Bitter Berry flags if he gave the item"
+  locations:
+  - bank: 105
+    address: 0x5540
+  value: "03 @$updateWadeBitterBerryFlags1"

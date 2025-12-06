@@ -1,0 +1,13 @@
+description: "Makes it so showing a pokepic of an unown won't crash because no letter was specified."
+values:
+  setUnownLetter: "21 47 45 3E 01 EA 34 D2 C9"
+changes:
+- description: "Adds code"
+  locations:
+  - bank: 9
+  value: "$setUnownLetter"
+- description: "Calls code"
+  locations:
+  - bank: 9
+    address: 0x44E3
+  value: "CD @$setUnownLetter"

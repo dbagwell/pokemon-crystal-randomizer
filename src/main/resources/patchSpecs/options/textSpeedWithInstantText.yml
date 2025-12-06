@@ -6,6 +6,9 @@ values:
   checkInstantText: "FA CC CF E6 07 FE 00 C9"
   maybeDelayFrames: "CD @$checkInstantText C4 68 04 C9"
   maybeChangeToMedium: "F5 CD @$checkInstantText 28 03 EA CC CF F1 C9"
+  blueCardPurchaseSFX: "CD 23 3C CD 55 3C C9"
+  goldenrodVendingMachineSFX: "85 1F 00 86 91"
+  celadonVendingMachineSFX: "85 1F 00 86 91"
 changes:
   - description: Adds helper functions to support instant text.
     locations:
@@ -38,5 +41,30 @@ changes:
       - bank: 19
         address: 0x6592
     value: "CD @$maybeChangeToMedium"
-
-      
+  - description: Adds code that plays sfx and then waits for it to finish
+    locations:
+      - bank: 34
+    value: "$blueCardPurchaseSFX"
+  - description: Adds a wait after a the sfx for purchasing an item from the blue card rewards lady
+    locations:
+      - bank: 34
+        address: 0x7055
+    value: "@$blueCardPurchaseSFX"
+  - description: Adds a wait after a the sfx for purchasing an item from the goldenrod vending machine
+    locations:
+      - bank: 21
+    value: "$goldenrodVendingMachineSFX"
+  - description: Adds a wait after a the sfx for purchasing an item from the goldenrod vending machine
+    locations:
+      - bank: 21
+        address: 0x645F
+    value: "00 @$goldenrodVendingMachineSFX"
+  - description: Adds a wait after a the sfx for purchasing an item from the goldenrod vending machine
+    locations:
+      - bank: 28
+    value: "$celadonVendingMachineSFX"
+  - description: Adds a wait after a the sfx for purchasing an item from the goldenrod vending machine
+    locations:
+      - bank: 28
+        address: 0x51EA
+    value: "00 @$celadonVendingMachineSFX"

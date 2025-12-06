@@ -1,0 +1,13 @@
+description: "Allows giving the GS Ball to Kurt before getting the item from the link receptionist in the goldenrod pokecenter"
+values:
+  updatedChecks: "31 BF 00 09 68 63 21 73 09 4E 63 03 02 62"
+changes:
+- description: "adds code"
+  locations:
+  - bank: 99
+  value: "$updatedChecks"
+- description: "updates Kurt's GS Ball checks"
+  locations:
+  - bank: 99
+    address: 0x61FC
+  value: "03 @$updatedChecks"

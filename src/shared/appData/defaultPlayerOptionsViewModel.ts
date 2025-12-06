@@ -44,7 +44,7 @@ const playerNameOption = () => {
     description: "Sets the default player name used if no name is entered when starting a new game. "
       + "Also used as the player's name if the 'Skip Name Selection' setting is enabled.\n"
       + "Unsupported characters will be replaced with spaces.",
-    maxCharacters: 7,
+    maxInGameCharacters: 7,
     isRequired: true as const,
     value: "KRIS",
   })

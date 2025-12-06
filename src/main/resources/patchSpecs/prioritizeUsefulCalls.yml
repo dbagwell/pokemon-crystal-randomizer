@@ -1,0 +1,234 @@
+description: "Updates the phone call trainer scripts to change the priorities (and remove randommess) of what they are calling about."
+values:
+  genericMalePhoneCallScript: "04 28 00 40"
+  genericFemalePhoneCallScript: "04 28 17 40"
+  extraDerekCheck: "06 06 9E 5A 03 BA 66"
+changes:
+- description: "Adds Code"
+  locations:
+  - bank: 47
+  value: "$genericMalePhoneCallScript $genericFemalePhoneCallScript $extraDerekCheck"
+- description: "Removes some randomness from some phone call scripts"
+  locations:
+  - bank: 47
+    address: 0x511A
+  - bank: 47
+    address: 0x5122
+  - bank: 47
+    address: 0x516A
+  - bank: 47
+    address: 0x51C1
+  - bank: 47
+    address: 0x521C
+  - bank: 47
+    address: 0x527F
+  - bank: 47
+    address: 0x52F1
+  - bank: 47
+    address: 0x535E
+  - bank: 47
+    address: 0x53B8
+  - bank: 47
+    address: 0x5434
+  - bank: 47
+    address: 0x5462
+  - bank: 47
+    address: 0x5470
+  - bank: 47
+    address: 0x5478
+  - bank: 47
+    address: 0x57AE
+  - bank: 47
+    address: 0x5909
+  - bank: 47
+    address: 0x5911
+  - bank: 47
+    address: 0x5993
+  - bank: 47
+    address: 0x599B
+  - bank: 47
+    address: 0x5A10
+  - bank: 47
+    address: 0x5A18
+  - bank: 47
+    address: 0x5A7A
+  - bank: 47
+    address: 0x5A96
+  - bank: 47
+    address: 0x5B0F
+  - bank: 47
+    address: 0x5B17
+  - bank: 47
+    address: 0x5B80
+  - bank: 47
+    address: 0x5C04
+  - bank: 47
+    address: 0x5C0C
+  - bank: 47
+    address: 0x5CB5
+  - bank: 47
+    address: 0x5D2B
+  - bank: 47
+    address: 0x5DCB
+  - bank: 47
+    address: 0x5E26
+  value: "18 03"
+- description: "Removes some options that were being prioritized too early"
+  locations:
+  - bank: 47
+    address: 0x52E5
+  - bank: 47
+    address: 0x58F7
+  - bank: 47
+    address: 0x5981
+  - bank: 47
+    address: 0x59F8
+  - bank: 47
+    address: 0x5AFD
+  - bank: 47
+    address: 0x5B68
+  - bank: 47
+    address: 0x5BD4
+  - bank: 47
+    address: 0x5BF2
+  - bank: 47
+    address: 0x5D1F
+  - bank: 47
+    address: 0x5102
+  value: "18 18 18 18 18 18 18 18"
+- description: "Updates some pointers that need to now point to the generic male script"
+  locations:
+  - bank: 47
+    address: 0x58E9
+  - bank: 47
+    address: 0x58EF
+  - bank: 47
+    address: 0x58F5
+  - bank: 47
+    address: 0x5A82
+  - bank: 47
+    address: 0x5AEF
+  - bank: 47
+    address: 0x5AF5
+  - bank: 47
+    address: 0x5AFB
+  - bank: 47
+    address: 0x5D11
+  - bank: 47
+    address: 0x5D17
+  - bank: 47
+    address: 0x5D1D
+  value: "@$genericMalePhoneCallScript"
+- description: "Updates Jose's phone call script"
+  locations:
+  - bank: 47
+    address: 0x52D7
+  - bank: 47
+    address: 0x52DD
+  - bank: 47
+    address: 0x52E3
+  value: "0E 53"
+- description: "Updates Ralph's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5511
+  value: "34 52 00 08 5C 55 34 46 00 08 5C 55 34 6D 00 09 5C 55 34 8F 00 09 5C 55 03 3A 55 18 18 18"
+- description: "Updates Liz's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5595
+  value: "18 18 18 18"
+- description: "Updates Liz's phone call script"
+  locations:
+  - bank: 47
+    address: 0x55A1
+  - bank: 47
+    address: 0x55A7
+  value: "D4"
+- description: "Updates Liz's phone call script"
+  locations:
+  - bank: 47
+    address: 0x55A9
+  value: "34 46 00 09 C6 55 01 2F 3F 5E 18 03 D4"
+- description: "Updates Anthony's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5673
+  value: "34 A0 00 08 A6 56 34 46 00 08 BD 56 34 6F 00 09 BD 56 34 91 00 09 BD 56 03 9C 56 18 18 18"
+- description: "Updates Todd's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5701
+  - bank: 47
+    address: 0x5707
+  value: "38"
+- description: "Updates Todd's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5709
+  value: "34 61 00 08 3C 57 34 46 00 08 38 57 03 2E 57 18 18 18"
+- description: "Updates Arnie's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5852
+  value: "34 A1 00 08 87 58 34 72 00 09 9E 58 34 94 00 09 9E 58 03 7D 58 18 18 18"
+- description: "Updates Alan's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5915
+  value: "03 1C 59"
+- description: "Updates Dana's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5973
+  - bank: 47
+    address: 0x5979
+  - bank: 47
+    address: 0x597F
+  value: "B8"
+- description: "Updates Dana's phone call script"
+  locations:
+  - bank: 47
+    address: 0x599F
+  value: "03 AE 59"
+- description: "Updates Derek's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5A8E
+  value: "03 @$extraDerekCheck"
+- description: "Updates Derek's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5A9A
+  value: "03 7E 5A"
+- description: "Updates Tully's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5B1B
+  value: "03 22 5B"
+- description: "Updates Brent's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5B74
+  - bank: 47
+    address: 0x5B7A
+  value: "95"
+- description: "Updates Tiffany's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5BE4
+  - bank: 47
+    address: 0x5BEA
+  - bank: 47
+    address: 0x5BF0
+  value: "@$genericFemalePhoneCallScript"
+- description: "Updates Tiffany's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5C10
+  value: "03 17 5C"
+- description: "Updates Wilton's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5D2F
+  value: "03 36 5D"

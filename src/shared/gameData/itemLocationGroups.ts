@@ -10,8 +10,40 @@ export const itemLocationGroupsMap: IdMap<ItemLocationGroupId, ItemLocationGroup
     id: "TM_ITEM_BALLS",
     name: "TM Item Balls",
   },
-  HIDDEN_ITEMS: {
-    id: "HIDDEN_ITEMS",
-    name: "Hidden Items",
+  REGULAR_HIDDEN_ITEMS: {
+    id: "REGULAR_HIDDEN_ITEMS",
+    name: "Regular Hidden Items",
+  },
+  FRUIT_TREES: {
+    id: "FRUIT_TREES",
+    name: "Fruit Trees",
+  },
+  REGULAR_GIFTS: {
+    id: "REGULAR_GIFTS",
+    name: "Regular Gifts",
+  },
+  TM_GIFTS: {
+    id: "TM_GIFTS",
+    name: "TM Gifts",
+  },
+  HMS: {
+    id: "HMS",
+    name: "HMs",
+  },
+  KEY_ITEMS: {
+    id: "KEY_ITEMS",
+    name: "Key Items",
+  },
+  MENU_ITEMS: {
+    id: "MENU_ITEMS",
+    name: "Menu Items",
+  },
+  BADGES: {
+    id: "BADGES",
+    name: "Badges",
+  },
+  SHOPS: {
+    id: "SHOPS",
+    name: "Shops",
   },
 }

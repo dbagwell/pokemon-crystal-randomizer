@@ -33,7 +33,7 @@
     "@tsconfig/svelte": "^5.0.4",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
-    "electron": "27.1.2",
+    "electron": "36.0.0",
     "electron-affinity": "^1.2.4",
     "electron-builder": "^26.0.12",
     "electron-updater": "^6.6.2",

@@ -11,7 +11,7 @@ import { bytesFrom, isNotNullish } from "@shared/utils"
 export const dataHunkFromMapObjectEvent = (event: MapObjectEvent) => {
   return new DataHunk(
     ROMOffset.fromBankAddress(event.romOffset[0], event.romOffset[1]),
-    bytesFromMapObjectEvent(event)
+    bytesFromMapObjectEvent(event),
   )
 }
 
@@ -38,6 +38,6 @@ const bytesFromMapObjectEvent = (event: MapObjectEvent) => {
     ((isNotNullish(event.palletId) ? overworldSpritePalletsMap[event.palletId].numericId : 0) << 4) + mapObjectTypesMap[event.typeId].numericId,
     event.sightRange,
     ...bytesFrom(event.scriptPointer, 2),
-    ...isNotNullish(event.flagId) ? bytesFrom(eventFlagsMap[event.flagId].numericId, 2) : [-1],
+    ...isNotNullish(event.flagId) ? bytesFrom(eventFlagsMap[event.flagId].numericId, 2) : [-1, -1],
   ]
 }

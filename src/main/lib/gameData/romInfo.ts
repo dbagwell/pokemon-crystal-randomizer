@@ -2,16 +2,19 @@ import type { DataHunk } from "@lib/generator/patch"
 import { DataFormat } from "@lib/generator/patchInfo"
 import { encounters } from "@shared/gameData/encounters"
 import { itemLocationsMap } from "@shared/gameData/itemLocations"
+import { itemsMap } from "@shared/gameData/items"
+import { logicalAccessAreasMap } from "@shared/gameData/logicalAccessAreas"
 import { mapObjectEvents } from "@shared/gameData/mapObjectEvents"
-import { martsMap } from "@shared/gameData/marts"
+import { martsMap, specialShopsMap } from "@shared/gameData/marts"
 import { oddEggs } from "@shared/gameData/oddEggs"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { teachableMovesMap } from "@shared/gameData/teachableMoves"
 import { tradesMap } from "@shared/gameData/trades"
 import { trainers } from "@shared/gameData/trainers"
+import { warpsMap } from "@shared/gameData/warps"
 import { eventPokemonMap } from "@shared/types/gameData/eventPokemon"
 import type { GameData } from "@shared/types/gameData/gameData"
-import { bytesFrom, compact } from "@utils"
+import { bytesFrom } from "@utils"
 
 export class ROMInfo {
   
@@ -29,6 +32,12 @@ export class ROMInfo {
       encounters: JSON.parse(JSON.stringify(encounters)),
       oddEggs: JSON.parse(JSON.stringify(oddEggs)),
       eventPokemon: JSON.parse(JSON.stringify(eventPokemonMap)),
+      unownSets: {
+        KABUTO_PUZZLE: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"],
+        OMANYTE_PUZZLE: ["L", "M", "N", "O", "P", "Q", "R"],
+        AERODACTYL_PUZZLE: ["S", "T", "U", "V", "W"],
+        HO_OH_PUZZLE: ["X", "Y", "Z"],
+      },
       dratiniMoves: {
         regular: [
           "WRAP",
@@ -48,8 +57,14 @@ export class ROMInfo {
       trainers: JSON.parse(JSON.stringify(trainers)),
       mapObjectEvents: JSON.parse(JSON.stringify(mapObjectEvents)),
       marts: JSON.parse(JSON.stringify(martsMap)),
+      specialShops: JSON.parse(JSON.stringify(specialShopsMap)),
       moveTutorCost: 4000,
+      numberOfMiltankBerries: 7,
       itemLocations: JSON.parse(JSON.stringify(itemLocationsMap)),
+      warps: JSON.parse(JSON.stringify(warpsMap)),
+      areas: JSON.parse(JSON.stringify(logicalAccessAreasMap)),
+      numberOfBadgesForOak: 16,
+      items: JSON.parse(JSON.stringify(itemsMap)),
     }
   }
   
@@ -187,101 +202,6 @@ export class ROMInfo {
       new Hunk(ROMOffset.fromBankAddress(126, 0x78A8), 0x0758),
       new Hunk(ROMOffset.fromBankAddress(127, 0x4000), 0x3DE0),
     ])
-  }
-  
-  static readonly bytesFromTextScript = (string: string): number[] => {
-    return [...string].flatMap((character: string) => {
-      if (character === "\0") { // Starts a text script and starts a paragraph
-        return 0x00
-      } else if (character === "\r") { // starts a new paragraph in the same text script
-        return 0x51
-      } else if (character === "\n") { // starts a new line in the same paragraph
-        return 0x4F
-      } else if (character === "\t") { // continues a line in the same paragraph
-        return 0x55
-      } else if (character === "\f") { // Ends a text script
-        return 0x57
-      } else {
-        return ROMInfo.bytesFromText(character)
-      }
-    })
-  }
-  
-  static readonly bytesFromText = (string: string): number[] => {
-    const appostropheLetters = "dlmrstv"
-    
-    return compact([...string].map((character: string, index: number) => {
-      const number = parseInt(character)
-      if (!isNaN(number)) {
-        return 0xF6 + number
-      } else if (character === "…") {
-        return 0x75
-      } else if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(character)) {
-        return 0x80 + character.charCodeAt(0) - 65
-      } else if (appostropheLetters.includes(character) && [...string][index - 1] === "'") {
-        if (character === "d") {
-          return 0xD0
-        } else if (character === "l") {
-          return 0xD1
-        } else if (character === "m") {
-          return 0xD2
-        } else if (character === "r") {
-          return 0xD3
-        } else if (character === "s") {
-          return 0xD4
-        } else if (character === "t") {
-          return 0xD5
-        } else if (character === "v") {
-          return 0xD6
-        } else {
-          return undefined // Should never happen
-        }
-      } else if ("abcdefghijklmnopqrstuvwxyz".includes(character)) {
-        return 0xA0 + character.charCodeAt(0) - 97
-      } else if (character === "(") {
-        return 0x9A
-      } else if (character === ")") {
-        return 0x9B
-      } else if (character === ":") {
-        return 0x9C
-      } else if (character === ";") {
-        return 0x9D
-      } else if (character === "[") {
-        return 0x9E
-      } else if (character === "]") {
-        return 0x9F
-      } else if (character === "'") {
-        if (!appostropheLetters.includes([...string][index + 1])) {
-          return 0xE0
-        } else {
-          return undefined // Skip this so that we can encode it with the letter as a combo
-        }
-      } else if (character === "<") { // PK
-        return 0xE1
-      } else if (character === ">") { // MN
-        return 0xE2
-      } else if (character === "-") {
-        return 0xE3
-      } else if (character === "?") {
-        return 0xE6
-      } else if (character === "!") {
-        return 0xE7
-      } else if (character === ".") {
-        return 0xE8
-      } else if (character === "&") {
-        return 0xE9
-      } else if (character === "×") {
-        return 0xF1
-      } else if (character === "/") {
-        return 0xF3
-      } else if (character === ",") {
-        return 0xF4
-      } else if (character === "@") {
-        return 0x50
-      } else {
-        return 0x7F // Treat unmapped characters as spaces.
-      }
-    }))
   }
   
   static readonly returnInstruction = () => {

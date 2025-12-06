@@ -1,0 +1,14 @@
+description: "Gives the Olivine fly point when entering the Olivine Port."
+values:
+  setupOlivinePortScenes1: "36 47 00 13 08 @$setupOlivinePortScenes2 8D B1 48 $setupOlivinePortScenes2"
+  setupOlivinePortScenes2: "91"
+changes:
+- description: "Adds code to give the fly point and perform scene specific operations"
+  locations:
+  - bank: 29
+  value: "$setupOlivinePortScenes1"
+- description: "Calls the new code when setting up either of the olivine port's scenes."
+  locations:
+  - bank: 29
+    address: 0x48AC
+  value: "18 03 @$setupOlivinePortScenes1"

@@ -549,8 +549,8 @@ export const gameMapsMap: IdMap<GameMapId, GameMap> = {
     numericId: 53,
     mapGroup: "DUNGEONS",
   },
-  GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES: {
-    id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES",
+  GOLDENROD_UNDERGROUND_SWITCH_ROOM: {
+    id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM",
     numericId: 54,
     mapGroup: "DUNGEONS",
   },
@@ -564,8 +564,8 @@ export const gameMapsMap: IdMap<GameMapId, GameMap> = {
     numericId: 56,
     mapGroup: "DUNGEONS",
   },
-  MOUNT_MORTAR_1F_OUTSIDE: {
-    id: "MOUNT_MORTAR_1F_OUTSIDE",
+  MOUNT_MORTAR_FRONT: {
+    id: "MOUNT_MORTAR_FRONT",
     numericId: 57,
     mapGroup: "DUNGEONS",
     encounterRegion: "JOHTO",
@@ -577,8 +577,8 @@ export const gameMapsMap: IdMap<GameMapId, GameMap> = {
     waterEncounterRate: 10,
     fishingGroup: "LAKE",
   },
-  MOUNT_MORTAR_1F_INSIDE: {
-    id: "MOUNT_MORTAR_1F_INSIDE",
+  MOUNT_MORTAR_BACK_1F: {
+    id: "MOUNT_MORTAR_BACK_1F",
     numericId: 58,
     mapGroup: "DUNGEONS",
     encounterRegion: "JOHTO",
@@ -588,8 +588,8 @@ export const gameMapsMap: IdMap<GameMapId, GameMap> = {
       15,
     ],
   },
-  MOUNT_MORTAR_2F_INSIDE: {
-    id: "MOUNT_MORTAR_2F_INSIDE",
+  MOUNT_MORTAR_BACK_2F: {
+    id: "MOUNT_MORTAR_BACK_2F",
     numericId: 59,
     mapGroup: "DUNGEONS",
     encounterRegion: "JOHTO",
@@ -941,8 +941,8 @@ export const gameMapsMap: IdMap<GameMapId, GameMap> = {
       15,
     ],
   },
-  ECRUTEAK_TIN_TOWER_ENTRANCE: {
-    id: "ECRUTEAK_TIN_TOWER_ENTRANCE",
+  ECRUTEAK_TIN_TOWER_GATE: {
+    id: "ECRUTEAK_TIN_TOWER_GATE",
     numericId: 1,
     mapGroup: "ECRUTEAK",
   },

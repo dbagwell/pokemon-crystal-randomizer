@@ -1,0 +1,31 @@
+description: "Makes it so each cutscene on the 5th floor of radio tower is always available until the relevant fight has been won."
+values:
+  falseDirectorCheck: "31 73 05 09 45 40 76 02 01 03 14 40"
+  rocketBossCheck: "31 21 00 09 FA 40 69 00 25 41 03 72 40"
+changes:
+- description: "Adds code to check if the cutscenes should be triggered."
+  locations:
+  - bank: 24
+  value: "$falseDirectorCheck $rocketBossCheck"
+- description: "Call the check for the false director cutscene."
+  locations:
+  - bank: 24
+    address: 0x4011
+  value: "03 @$falseDirectorCheck"
+- description: "Call the check for the rocket boss cutscene."
+  locations:
+  - bank: 24
+    address: 0x406E
+  value: "03 @$rocketBossCheck 18"
+- description: "Removes code that changes the scene since that's no longer required."
+  locations:
+  - bank: 24
+    address: 0x4040
+  - bank: 24
+    address: 0x40E2
+  value: "18 18"
+- description: "Change the scene that will trigger the rocket boss cutscene."
+  locations:
+  - bank: 24
+    address: 0x491C
+  value: "00"

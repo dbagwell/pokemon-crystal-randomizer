@@ -71,7 +71,7 @@
               </Stack>
               <Stack
                 alignment="start"
-                direction="vertical"
+                direction="horizontal"
                 distribution="start"
                 minSpacing={15}
                 padding={[0, 0, 0, 20]}

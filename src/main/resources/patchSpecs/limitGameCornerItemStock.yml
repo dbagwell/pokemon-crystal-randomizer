@@ -1,0 +1,65 @@
+description: "Prevents buying more than one of the same item from the game corners."
+values:
+  goldenrodSetItem1EventFlag: "33 $gotGoldenrodGameCornerItem1EventFlagId 03 A6 6C"
+  goldenrodSetItem2EventFlag: "33 $gotGoldenrodGameCornerItem2EventFlagId 03 A6 6C"
+  goldenrodSetItem3EventFlag: "33 $gotGoldenrodGameCornerItem3EventFlagId 03 A6 6C"
+  celadonSetItem1EventFlag: "33 $gotCeladonGameCornerItem1EventFlagId 03 6D 67"
+  celadonSetItem2EventFlag: "33 $gotCeladonGameCornerItem2EventFlagId 03 6D 67"
+  celadonSetItem3EventFlag: "33 $gotCeladonGameCornerItem3EventFlagId 03 6D 67"
+  goldenrodGameCornerSoldOutScript: "4B 71 F7 4D 54 49 91"
+  celadonGameCornerSoldOutScript: "4B 71 F7 4D 54 49 91"
+changes:
+- description: "adds code that sets the flags that indicates that items have been purchased"
+  locations:
+  - bank: 21
+  value: "$goldenrodSetItem1EventFlag $goldenrodSetItem2EventFlag $goldenrodSetItem3EventFlag"
+- description: "calls code that sets the flag that indicates that item 1 has been purchased"
+  locations:
+  - bank: 21
+    address: 0x6C67
+  value: "@$goldenrodSetItem1EventFlag"
+- description: "calls code that sets the flag that indicates that item 2 has been purchased"
+  locations:
+  - bank: 21
+    address: 0x6C83
+  value: "@$goldenrodSetItem2EventFlag"
+- description: "calls code that sets the flag that indicates that item 3 has been purchased"
+  locations:
+  - bank: 21
+    address: 0x6C9F
+  value: "@$goldenrodSetItem3EventFlag"
+- description: "adds code that sets the flags that indicates that items have been purchased"
+  locations:
+  - bank: 28
+  value: "$celadonSetItem1EventFlag $celadonSetItem2EventFlag $celadonSetItem3EventFlag"
+- description: "calls code that sets the flag that indicates that item 1 has been purchased"
+  locations:
+  - bank: 28
+    address: 0x672E
+  value: "@$celadonSetItem1EventFlag"
+- description: "calls code that sets the flag that indicates that item 2 has been purchased"
+  locations:
+  - bank: 28
+    address: 0x674A
+  value: "@$celadonSetItem2EventFlag"
+- description: "calls code that sets the flag that indicates that item 3 has been purchased"
+  locations:
+  - bank: 28
+    address: 0x6766
+  value: "@$celadonSetItem3EventFlag"
+- description: "Adds code that shows dialog saying the selected item is sold out."
+  locations:
+  - bank: 21
+  value: "$goldenrodGameCornerSoldOutScript"
+- description: "Adds code that shows dialog saying the selected item is sold out."
+  locations:
+  - bank: 28
+  value: "$celadonGameCornerSoldOutScript"
+- description: "Adds code that checks if the items have already been purchased."
+  locations:
+  - bank: 21
+  value: "#goldenrodGameCornerOptions.$script"
+- description: "Adds code that checks if the items have already been purchased."
+  locations:
+  - bank: 28
+  value: "#celadonGameCornerOptions.$script"

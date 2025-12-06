@@ -59,7 +59,7 @@ export const getVanillaROM = async (showInputInRenderer: boolean): Promise<Buffe
       (
         inputValue: any,
         resolve: (result: Buffer | undefined) => void,
-        reject
+        reject,
       ) => {
         if (isNullish(inputValue)) {
           resolve(undefined)
@@ -68,7 +68,7 @@ export const getVanillaROM = async (showInputInRenderer: boolean): Promise<Buffe
         } else {
           reject(new Error(`Received invalid input type from input dialog. Expected a file but got input type of '${typeof inputValue}'.`))
         }
-      }
+      },
     )
   
     if (isNullish(fileData)) {

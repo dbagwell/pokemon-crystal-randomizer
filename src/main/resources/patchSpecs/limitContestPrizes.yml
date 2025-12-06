@@ -1,0 +1,84 @@
+description: "Updates to how the national park contest prizes are given out."
+values:
+  checkFirstPlacePrizeEvent: "4B 6C 21 46 54 31 $gotFirstPlacePrizeEventFlag 09 B1 42 03 29 43"
+  checkSecondPlacePrizeEvent: "4B 6C 21 46 54 31 $gotSecondPlacePrizeEventFlag 09 B1 42 03 3A 43"
+  checkThirdPlacePrizeEvent1: "4B 6C 21 46 54 $checkThirdPlacePrizeEvent2"
+  checkThirdPlacePrizeEvent2: "31 $gotThirdPlacePrizeEventFlag 09 B1 42 03 4B 43"
+  checkConsolationPrizeEvent: "4B 6C 81 46 55 31 $gotConsolationPrizeEventFlag 09 B1 42 03 A3 42"
+  setFirstPlacePrizeEvent: "33 $gotFirstPlacePrizeEventFlag 03 B1 42"
+  setSecondPlacePrizeEvent: "33 $gotSecondPlacePrizeEventFlag 03 #options.$jumpAddressAfterSecondPlacePrize"
+  setThirdPlacePrizeEvent: "33 $gotThirdPlacePrizeEventFlag 03 B1 42"
+  setConsolationPrizeEvent: "08 75 43 33 $gotConsolationPrizeEventFlag 03 B1 42"
+  backupFirstPlacePrizeEvent: "32 13 03 33 $gotFirstPlacePrizeEventFlag 91"
+  backupSecondPlacePrizeEvent: "32 14 03 33 $gotSecondPlacePrizeEventFlag 91"
+  backupThirdPlacePrizeEvent: "32 15 03 33 $gotThirdPlacePrizeEventFlag 91" 
+  backupConsolationPrizeEvent: "32 16 03 33 $gotConsolationPrizeEventFlag 91"
+changes:
+- description: "Adds code"
+  locations:
+  - bank: 47
+  value: "$checkFirstPlacePrizeEvent $checkSecondPlacePrizeEvent $checkThirdPlacePrizeEvent1 $checkConsolationPrizeEvent $setFirstPlacePrizeEvent $setSecondPlacePrizeEvent $setThirdPlacePrizeEvent $setConsolationPrizeEvent"
+- description: "Checks the event flag for receiving the first place prize"
+  locations:
+  - bank: 47
+    address: 0x4324
+  value: "03 @$checkFirstPlacePrizeEvent"
+- description: "Checks the event flag for receiving the second place prize"
+  locations:
+  - bank: 47
+    address: 0x4335
+  value: "03 @$checkSecondPlacePrizeEvent"
+- description: "Checks the event flag for receiving the third place prize"
+  locations:
+  - bank: 47
+    address: 0x4346
+  value: "03 @$checkThirdPlacePrizeEvent1"
+- description: "Checks the event flag for receiving the consolation prize"
+  locations:
+  - bank: 47
+    address: 0x429D
+  value: "03 @$checkConsolationPrizeEvent"
+- description: "Sets the event flag for receiving the first place prize"
+  locations:
+  - bank: 47
+    address: 0x4330
+  value: "@$setFirstPlacePrizeEvent"
+- description: "Sets the event flag for receiving the second place prize"
+  locations:
+  - bank: 47
+    address: 0x4341
+  value: "@$setSecondPlacePrizeEvent"
+- description: "Sets the event flag for receiving the third place prize"
+  locations:
+  - bank: 47
+    address: 0x4352
+  value: "@$setThirdPlacePrizeEvent"
+- description: "Sets the event flag for receiving the consolation prize"
+  locations:
+  - bank: 47
+    address: 0x42A6
+  value: "03 @$setConsolationPrizeEvent"
+- description: "Adds code"
+  locations:
+  - bank: 26
+  value: "$backupFirstPlacePrizeEvent $backupSecondPlacePrizeEvent $backupThirdPlacePrizeEvent $backupConsolationPrizeEvent"
+- description: "Sets the event flag for receiving the backup first place prize"
+  locations:
+  - bank: 26
+    address: 0x6CB9
+  value: "00 @$backupFirstPlacePrizeEvent"
+- description: "Sets the event flag for receiving the backup second place prize"
+  locations:
+  - bank: 26
+    address: 0x6CB9
+  value: "00 @$backupSecondPlacePrizeEvent"
+- description: "Sets the event flag for receiving the backup third place prize"
+  locations:
+  - bank: 26
+    address: 0x6CB9
+  value: "00 @$backupThirdPlacePrizeEvent"
+- description: "Sets the event flag for receiving the backup consolation prize"
+  locations:
+  - bank: 26
+    address: 0x6CB9
+  value: "00 @$backupConsolationPrizeEvent"

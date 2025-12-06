@@ -1,6 +1,7 @@
 description: "Fixes issue where the game will hang when trying to enter a battle with a wild Unown."
 values:
   lockedUnownLettersFix: "FA 30 D2 FE 00 28 02 A7 C9 FA F3 DE C3 78 6B"
+  setBattleType: "EA 43 D1 FA 30 D2 A7 C0 3E 0D EA 30 D2 C9"
 changes:
 - description: "Code to allow any unown letter if the battle type is not normal."
   locations:
@@ -11,3 +12,12 @@ changes:
   - bank: 15
     address: 0x6B75
   value: "C3 @$lockedUnownLettersFix"
+- description: "Code to set the battle type to an unused value if it is the normal battle type."
+  locations:
+  - bank: 37
+  value: "$setBattleType"
+- description: "Changes the battle type when loading a static wild pokemon."
+  locations:
+  - bank: 37
+    address: 0x7420
+  value: "CD @$setBattleType"

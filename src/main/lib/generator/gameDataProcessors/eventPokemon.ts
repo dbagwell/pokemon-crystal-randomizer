@@ -91,9 +91,9 @@ export const updateEventPokemonMoves = (
   if (settings.RANDOMIZE_EVENT_POKEMON.VALUE || settings.RANDOMIZE_LEVEL_UP_MOVES.VALUE) {
     const getEligibleMoves = (pokemonId: PokemonId, level: number) => {
       const allLevelUpMoves = romInfo.gameData.pokemon[pokemonId].levelUpMoves
-      const indexOfLastMove = allLevelUpMoves.map((move) => {
-        return move.level
-      }).lastIndexOf(level)
+      const indexOfLastMove = allLevelUpMoves.findLastIndex((move) => {
+        return move.level <= level
+      })
       
       return allLevelUpMoves.slice(indexOfLastMove < 3 ? 0 : indexOfLastMove - 3, indexOfLastMove + 1).map((move) => {
         return move.moveId

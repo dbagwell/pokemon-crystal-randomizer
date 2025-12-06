@@ -1,7 +1,10 @@
+import { accessRulesetIds, accessRulsetsMap } from "@shared/appData/accessRulesets"
 import { growthRatesMap } from "@shared/gameData/growthRates"
 import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemLocationGroupsMap } from "@shared/gameData/itemLocationGroups"
+import { itemLocationsMap } from "@shared/gameData/itemLocations"
 import { itemsMap } from "@shared/gameData/items"
+import { martsMap, specialShopsMap } from "@shared/gameData/marts"
 import { movesMap } from "@shared/gameData/moves"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
@@ -9,7 +12,10 @@ import type { ItemCategory } from "@shared/types/gameData/itemCategory"
 import { growthRateIds } from "@shared/types/gameDataIds/growthRates"
 import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
 import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGroups"
-import { ballItemIds, holdableItemIds, type ItemId, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
+import { itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
+import { ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
+import { martGroupIds } from "@shared/types/gameDataIds/martGroups"
+import { specialShopIds } from "@shared/types/gameDataIds/marts"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import {
@@ -164,6 +170,24 @@ export const defaultSettingsViewModel = () => {
                   }),
                 ] as const,
               }), // END ODD_EGG
+              createSingleSelectorViewModel({
+                id: "MYSTERY_EGG_RESEARCH_REQUEST" as const,
+                name: "Mystery Egg Research Request",
+                description: "Determines what Pokémon you need to show Prof. Elm to get his Everstone gift.",
+                selectedOptionId: "TOGEPI_TOGETIC",
+                options: [
+                  createSimpleSelectorOption({
+                    id: "TOGEPI_TOGETIC" as const,
+                    name: "Togepi/Togetic",
+                    description: "Keeps it so you must show Prof. Elm a Togepi or a Togetic to get his Everstone gift.",
+                  }),
+                  createSimpleSelectorOption({
+                    id: "MATCH_EGG" as const,
+                    name: "Match Egg",
+                    description: "Makes it so you must show Prof. Elm a Pokémon that is the same species as the one that hatches from the Mystery Egg to get his Everston gift.",
+                  }),
+                ] as const,
+              }), // END MYSTERY_EGG_RESEARCH_REQUEST
               createBannedPokemonSelectorViewModel(),
             ] as const,
           }), // END RANDOMIZE_EVENT_POKEMON
@@ -329,6 +353,65 @@ export const defaultSettingsViewModel = () => {
             name: "Randomize Intro Pokémon",
             description: "Randomizes the Pokémon shown by Prof. Oak during the game's introduction.",
           }),
+          createConfigurableToggleViewModel({
+            id: "CHANGE_UNOWN_SETS" as const,
+            name: "Change Unown Sets",
+            description: "Change which unown letters are unlocked by each puzzle in the Ruins of Alph.",
+            viewModels: [
+              createSingleSelectorViewModel({
+                selectedOptionId: "RANDOM",
+                id: "METHOD" as const,
+                options: [
+                  createConfigurableSelectorOption({
+                    id: "RANDOM" as const,
+                    name: "Random",
+                    description: "Change the Unown letters in each set to random ones.",
+                    viewModels: [
+                      createSimpleToggleViewModel({
+                        id: "PREVENT_DUPLICATES" as const,
+                        name: "Prevent Duplicates",
+                        description: "Makes it so no sets have the same Unown letter as another set. Every Unown letter will be guaranteed to be available in one of the sets.",
+                      }),
+                      createSingleSelectorViewModel({
+                        selectedOptionId: "VANILLA",
+                        id: "DISTRIBUTION" as const,
+                        name: "Distribution",
+                        description: "Determines how many Unown letters are unlocked by each puzzle.",
+                        options: [
+                          createSimpleSelectorOption({
+                            id: "VANILLA" as const,
+                            name: "Vanilla",
+                            description: "Uses the default set distributions.\n"
+                              + "- The Kabuto puzzle unlocks 11 letters.\n"
+                              + "- The Omanyte puzzle unlocks 7 letters.\n"
+                              + "- The Aerodactyl puzzle unlocks 5 letters.\n"
+                              + "- The Ho-oh puzzle unlocks 3 letters.",
+                          }),
+                          createSimpleSelectorOption({
+                            id: "RANDOM" as const,
+                            name: "Random",
+                            description: "Picks a random number of letters for each set, while making sure the sum of the number of letters in each set still adds up to 26.",
+                          }),
+                          createSimpleSelectorOption({
+                            id: "BALANCED" as const,
+                            name: "Balanced",
+                            description: "Makes it so each set has about the same number of letters.\n"
+                              + "The Kabuto and Omanyte puzzles will each unlock 7 letters.\n"
+                              + "The Aerodactyl and Ho-oh puzzles will each unlock 6 letters.",
+                          }),
+                        ] as const,
+                      }), // END DISTRIBUTION
+                    ] as const,
+                  }), // END RANDOM
+                  createSimpleSelectorOption({
+                    id: "SINGLE_SET" as const,
+                    name: "Single Set",
+                    description: "Makes it so any puzzle will unlock all 26 Unown letters.",
+                  }),
+                ] as const,
+              }),
+            ] as const,
+          }), // END CHANGE_UNOWN_SETS
           createSimpleMultiSelectorViewModel({
             id: "BANNED_POKEMON" as const,
             name: "Globally Banned Pokémon",
@@ -570,6 +653,21 @@ export const defaultSettingsViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_HAPPINESS_EVOLUTION_REQUIREMENT
+          createConfigurableToggleViewModel({
+            id: "CHANGE_HO_OH_LEVEL" as const,
+            name: "Change Ho-oh Level",
+            description: "Changes the level of the Pokémon at the top of Tin Tower.",
+            viewModels: [
+              createIntegerInputViewModel({
+                id: "LEVEL" as const,
+                name: "Level",
+                isRequired: true as const,
+                min: 2,
+                max: 100,
+                value: 40,
+              }),
+            ] as const,
+          }), // END CHANGE_HO_OH_LEVEL
         ] as const,
       }), // END POKEMON_PROPERTIES
       createTabViewModel({
@@ -744,8 +842,8 @@ export const defaultSettingsViewModel = () => {
             ] as const,
           }), // END RANDOMIZE_TM_ITEM_BALLS
           createConfigurableToggleViewModel({
-            id: "RANDOMIZE_HIDDEN_ITEMS" as const,
-            name: "Randomize Hidden Items",
+            id: "RANDOMIZE_REGULAR_HIDDEN_ITEMS" as const,
+            name: "Randomize Regular Hidden Items",
             description: "Change the items received from hidden items to random ones. "
               + "Doesn't include hidden items that give key items or the items in trash cans.",
             viewModels: [
@@ -765,7 +863,7 @@ export const defaultSettingsViewModel = () => {
                 }),
               }), // END BAN
             ] as const,
-          }), // END RANDOMIZE_HIDDEN_ITEMS
+          }), // END RANDOMIZE_REGULAR_HIDDEN_ITEMS
           createConfigurableToggleViewModel({
             id: "RANDOMIZE_WILD_HELD_ITEMS" as const,
             name: "Randomize Items Held by Wild Pokémon",
@@ -923,22 +1021,217 @@ export const defaultSettingsViewModel = () => {
               }), // END BAN
             ] as const,
           }),
-          createGroupMultiSelectorViewModel({
-            id: "SHUFFLED_ITEM_GROUPS" as const,
+          createConfigurableToggleViewModel({
+            id: "SHUFFLE_ITEMS" as const,
             name: "Shuffle Items",
-            description: "Create groups of item locations and shuffle the items that can be found at the locations within each group.",
-            options: itemLocationGroupIds.map((groupId) => {
-              return createSimpleSelectorOption({
-                id: groupId,
-                name: itemLocationGroupsMap[groupId].name,
-              })
-            }),
-          }), // END SHUFFLED_ITEM_GROUPS
+            description: "Create groups of item locations and shuffle the items that can be found at the locations within each group.\n"
+              + "When Badges, HMs, Key Items, and/or Menu Items are shuffled, it can result in certain in game events happening out of order, "
+              + "this can result in some odd behaviour sometimes, but small changes are made to make sure that everything normally accessible in the vanilla game is still accessible with reasonable conditions.\n"
+              + "In addition, a set of rules about how the game works are used to make sure that items that are required in order to progress the game "
+              + "will be never be placed in locations that could make it impossible to obtain them. "
+              + "The following are included in these rules by default:\n"
+              + "- Zephyrbadge and HM05 (Flash) are expected to be obtained before having to enter any dark areas.\n"
+              + "- Areas or item locations that require owning or registering certain Pokémon are considered accessible if "
+              + "the Pokédex and TM12 (Sweet Scent) are accessible and all random pokemon encounters are accessible "
+              + "(this means having access to at least 7 badges as well as the ability to use all HMs except for Fly "
+              + "and having access to the Bicycle, Squirtbottle, Pass, S.S.Ticket, Card Key, Clear Bell, Rainbow Wing, TM02 (Headbutt), TM08 (Rock Smash) and all 3 Fishing Rods).",
+            viewModels: [
+              createGroupMultiSelectorViewModel({
+                id: "GROUPS" as const,
+                name: "Groups",
+                options: itemLocationGroupIds.map((groupId) => {
+                  return createSimpleSelectorOption({
+                    id: groupId,
+                    name: itemLocationGroupsMap[groupId].name,
+                  })
+                }),
+              }), // END GROUPS
+              createConfigurableMultiSelectorViewModel({
+                id: "REPLACE_ITEMS" as const,
+                name: "Replace Items",
+                description: "Choose items in the shuffled item pool that will have a chance to be replaced with a different item.\n"
+                  + "Each item of the selected type will have the chosen percentage chance to be replaced with the selected replacement.",
+                options: ["HM02" as ItemId, ...holdableItemIds].map((itemId) => {
+                  return createConfigurableSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                    viewModels: [
+                      createSingleSelectorViewModel({
+                        id: "REPLACEMENT" as const,
+                        name: "Replacement",
+                        selectedOptionId: "RANDOM",
+                        options: [
+                          {
+                            id: "RANDOM" as const,
+                            name: "Random",
+                          },
+                          ...holdableItemIds.map((itemId) => {
+                            return {
+                              id: itemId,
+                              name: itemsMap[itemId].name,
+                            }
+                          }),
+                        ],
+                      }),
+                      createIntegerInputViewModel({
+                        id: "PERCENTAGE" as const,
+                        name: "Percentage",
+                        isRequired: true as const,
+                        min: 0,
+                        max: 100,
+                        value: 100,
+                      }),
+                    ],
+                  })
+                }),
+              }), // END REPLACE_ITEMS
+              createSimpleToggleViewModel({
+                id: "IMPROVED_CONSUMABLE_ACCESS_LOGIC" as const,
+                name: "Improved Consumable Access Logic",
+                description: "If shop items are being shuffled, at least one of each consumable item that is required for some sort of progression will be available in a renewable shop.\n"
+                  + "Also, consumable items that are not obtained from renewable shops will be considered inaccessible by the rules used to shuffle the items.",
+              }),
+              createSimpleMultiSelectorViewModel({
+                id: "GUARANTEED_SHOP_ITEMS" as const,
+                name: "Guaranteed Shop Items",
+                description: "If shops items are being shuffled, as many regular shops as possible (with a priority on the Cherrygrove Mart) will contain at least 1 variant of each of the selected item types.",
+                options: [
+                  createSimpleSelectorOption({
+                    id: "BALL" as const,
+                    name: "Ball",
+                    description: "Possible Items:\n- " + ballItemIds.map((id) => { return itemsMap[id].name }).join("\n- "),
+                  }),
+                  createSimpleSelectorOption({
+                    id: "REPEL" as const,
+                    name: "Repel",
+                    description: "Possible Items:\n- " + repelItemIds.map((id) => { return itemsMap[id].name }).join("\n- "),
+                  }),
+                  createSimpleSelectorOption({
+                    id: "SIMPLE_HEALING_ITEM" as const,
+                    name: "Simple Healing Item",
+                    description: "Possible Items:\n- " + simpleHealingItemIds.map((id) => { return itemsMap[id].name }).join("\n- "),
+                  }),
+                ],
+              }),
+              createSimpleMultiSelectorViewModel({
+                id: "PREVENT_SHOP_ITEMS" as const,
+                name: "Prevent Shop Items",
+                description: "If shop items are being shuffled with other items, the selected items will never be made available to buy in a shop.",
+                options: itemIds.map((itemId) => {
+                  return createSimpleSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                  })
+                }),
+              }),
+              createConfigurableToggleViewModel({
+                id: "DECREASE_PROGRESS_IN_SHOPS" as const,
+                name: "Decrease Progress in Shops",
+                description: "Decreases the chances that the locations picked in which to place progress items will shops.\n"
+                  + "Does not affect progress items that are required to be placed in shops due to other settings.",
+                viewModels: [
+                  createIntegerInputViewModel({
+                    id: "PERCENTAGE" as const,
+                    name: "Percentage",
+                    description: "The percentage of random shop item slots that will be banned from having progress items.",
+                    isRequired: true as const,
+                    min: 0,
+                    max: 100,
+                    value: 0,
+                  }),
+                ],
+              }),
+              createSimpleMultiSelectorViewModel({
+                id: "ACCESS_MODIFIERS" as const,
+                name: "Access Modifiers",
+                description: "Additional sets of rules to use when determining valid locations for the shuffled items.",
+                options: accessRulesetIds.map((rulesetId) => {
+                  return createSimpleSelectorOption(accessRulsetsMap[rulesetId])
+                }),
+              }),
+              createSimpleMultiSelectorViewModel({
+                id: "EXCLUDE_LOCATIONS" as const,
+                name: "Exclude Locations",
+                description: "Item locations to exclude from being shuffled.",
+                options: [
+                  ...itemLocationIds.map((locationId) => {
+                    const itemName = itemsMap[itemLocationsMap[locationId].itemId].name
+                  
+                    return createSimpleSelectorOption({
+                      id: locationId,
+                      name: locationId,
+                      description: itemName,
+                      extraKeywords: itemName,
+                    })
+                  }),
+                  ...martGroupIds.map((martGroupId) => {
+                    const itemNames = Object.values(martsMap).filter((mart) => {
+                      return mart.groupId === martGroupId
+                    }).reduce((result, mart) => {
+                      mart.items.forEach((itemId) => {
+                        if (!result.includes(itemId)) {
+                          result.push(itemId)
+                        }
+                      })
+                      
+                      return result
+                    }, [] as ItemId[]).map((itemId) => {
+                      return itemsMap[itemId].name
+                    }).join("\n")
+                    
+                    return createSimpleSelectorOption({
+                      id: martGroupId,
+                      name: `${martGroupId}_MART`,
+                      description: itemNames,
+                      extraKeywords: itemNames,
+                    })
+                  }),
+                  ...specialShopIds.map((shopId) => {
+                    const itemNames = specialShopsMap[shopId].items.map((item) => {
+                      return itemsMap[item.itemId].name
+                    }).join("\n")
+                    
+                    return createSimpleSelectorOption({
+                      id: shopId,
+                      name: shopId,
+                      description: itemNames,
+                      extraKeywords: itemNames,
+                    })
+                  }),
+                ],
+              }),
+            ] as const,
+          }), // END SHUFFLE_ITEMS
           createConfigurableToggleViewModel({
             id: "START_WITH_ITEMS" as const,
             name: "Start With Items",
             description: "Add the selected items to the player's inventory when starting a new game.",
-            viewModels: createSelectorsFromItemCategories(),
+            viewModels: [
+              ...createSelectorsFromItemCategories(),
+              createConfigurableToggleViewModel({
+                id: "REPLACE_EXISTING_ITEMS" as const,
+                name: "Replace Existing Items",
+                description: "Replaces existing Badges, HMs, Key Items, and Menu Items that are also included in the player's starting inventory with the selected item.",
+                viewModels: [
+                  createSingleSelectorViewModel({
+                    id: "REPLACEMENT" as const,
+                    selectedOptionId: "RANDOM",
+                    options: [
+                      {
+                        id: "RANDOM" as const,
+                        name: "Random",
+                      },
+                      ...holdableItemIds.map((itemId) => {
+                        return {
+                          id: itemId,
+                          name: itemsMap[itemId].name,
+                        }
+                      }),
+                    ],
+                  }),
+                ] as const,
+              }),
+            ],
           }),
           createSimpleMultiSelectorViewModel({
             id: "BANNED_ITEMS" as const,
@@ -964,6 +1257,11 @@ export const defaultSettingsViewModel = () => {
               + "if the Pokémon can be encountered on Land or when surfing in the Water of the player's current area.",
           }),
           createSimpleToggleViewModel({
+            id: "EARLY_KANTO_DEX" as const,
+            name: "Early Kanto Dex",
+            description: "Makes it so the Pokédex will always allow scrolling over to to the map of Kanto when viewing the locations where a Pokémon can be found (instead of just after defeating Champion Lance).",
+          }),
+          createSimpleToggleViewModel({
             id: "BIKE_INDOORS" as const,
             name: "Bike Indoors",
             description: "Allows the player to use the bike inside all buildings.",
@@ -971,7 +1269,15 @@ export const defaultSettingsViewModel = () => {
           createSimpleToggleViewModel({
             id: "RODS_ALWAYS_WORK" as const,
             name: "Rods Always Work",
-            description: "Allows makes it so fishing rods will trigger a Pokémon encounter every time they are used.",
+            description: "Makes it so fishing rods will trigger a Pokémon encounter every time they are used.",
+          }),
+          createSimpleToggleViewModel({
+            id: "PROGRESSIVE_RODS" as const,
+            name: "Progressive Rods",
+            description: "Makes it so that whenever a fishing rod is received, "
+              + "if the player has a Good Rod, the newly received rod will be a Super Rod, "
+              + "if the player doesn't have Good Rod but has an Old Rod, the newly received rod will be a Good Rod,"
+              + "if the player has no fishing rods yet, the newly received rod will be an Old Rod.",
           }),
           createSimpleToggleViewModel({
             id: "HEADBUTT_ALWAYS_WORKS" as const,
@@ -980,7 +1286,7 @@ export const defaultSettingsViewModel = () => {
           }),
           createSimpleToggleViewModel({
             id: "ROCK_SMASH_ALWAYS_WORKS" as const,
-            name: "Change Box Phone Call",
+            name: "Rock Smash Always Works",
             description: "Makes it so that smashing rocks in locations that have rock encounters will always trigger a Pokémon encounter.",
           }),
           createSimpleToggleViewModel({
@@ -1025,6 +1331,11 @@ export const defaultSettingsViewModel = () => {
             name: "Show Received TM/HM Move Names",
             description: "When a TM or HM is received, the name of the move it contains is shown.",
           }),
+          createSimpleToggleViewModel({
+            id: "SINGLE_USE_FRUIT_TREES" as const,
+            name: "Single Use Fruit Trees",
+            description: "Makes it so fruit trees disappear forever after their item has been received.",
+          }),
         ] as const,
       }), // END ITEM_PROPERTIES
       createTabViewModel({
@@ -1032,7 +1343,7 @@ export const defaultSettingsViewModel = () => {
         name: "Marts",
         viewModels: [
           createSimpleToggleViewModel({
-            id: "EARLY_CHARRGROVE_MART_POKE_BALLS" as const,
+            id: "EARLY_CHERRYGROVE_MART_POKE_BALLS" as const,
             name: "Early Cherrygrove Poké Balls",
             description: "Poké Balls will be available to buy in Cherrygrove City Mart "
               + "before giving the Mystery Egg to Prof. Elm.",
@@ -1059,6 +1370,84 @@ export const defaultSettingsViewModel = () => {
               + "after obtaining the item from the lady in the gate north of Ilex Forest.",
           }),
           createSimpleToggleViewModel({
+            id: "EARLY_GOLDENROD_MART_TMS" as const,
+            name: "Early Goldenrod TMs",
+            description: "TM02 (Headbutt) and TM08 (Rock Smash) "
+              + "(as well as TM12 (Sweet Scent) if the 'Buyable TM12' setting is enabled) "
+              + "will be available to buy on the 5th floor of the Goldenrod City Department Store "
+              + "even before receiving the items from the NPC's that normally give you those TMs.",
+          }),
+          createSimpleToggleViewModel({
+            id: "REMOVE_HERB_SHOP_TIME_REQUIREMENT" as const,
+            name: "Remove Herb Shop Time Requirement",
+            description: "Makes it so the herb vendor in the Goldenrod Underground is always at her stall.",
+          }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_BARGAIN_SHOP_BEHAVIOR" as const,
+            name: "Change Bargain Shop Behavior",
+            description: "Changes the behaviour of the bargain shop vendor in the Goldenrod Underground.",
+            options: [
+              createSimpleSelectorOption({
+                id: "REMOVE_TIME_REQUIREMENT" as const,
+                name: "Remove Time Requirement",
+                description: "Makes it so the bargain shop vendor is always at his stall.",
+              }),
+              createSimpleSelectorOption({
+                id: "ALLOW_REPEAT_VISITS" as const,
+                name: "Allow Repeat Visits",
+                description: "Makes it so that you can always view the bargain shop vendor's wares if he is at his stall.",
+              }),
+            ],
+          }),
+          createSimpleToggleViewModel({
+            id: "REMOVE_MT_MOON_SHOP_TIME_REQUIREMENT" as const,
+            name: "Remove Mt. Moon Shop Time Requirement",
+            description: "Makes it so the vendor in Mt. Moon is alway in their house.",
+          }),
+          createSimpleToggleViewModel({
+            id: "BLUE_CARD_REWARDS_ALWAYS_ACCESSIBLE" as const,
+            name: "Blue Card Rewards Always Accessible",
+            description: "Makes it so the Blue Card Rewards exchange lady can be found on the second floor of the Goldenrod Radio Tower even when the rockets have taken over.",
+          }),
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_BLUE_CARD_REWARD_COSTS" as const,
+            name: "Randomize Blue Card Reward Costs",
+            description: "Changes the number of points required to exchange for Blue Card rewards to random amounts in the chosen range.",
+            viewModels: [
+              createIntegerRangeInputViewModel({
+                id: "RANGE" as const,
+                min: 0,
+                max: 9,
+                selectedMinValue: 0,
+                selectedMaxValue: 9,
+              }),
+            ] as const,
+          }),
+          createSimpleToggleViewModel({
+            id: "LIMIT_BLUE_CARD_REWARDS_STOCK" as const,
+            name: "Limit Blue Card Rewards Stock",
+            description: "Makes it so each Blue Card reward can only be received once.",
+          }),
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_GAME_CORNER_ITEM_PRICES" as const,
+            name: "Randomize Game Corner Item Prices",
+            description: "Changes the number of coins required to buy the items from the Game Corner Prize counters to random amounts in the chosen range.",
+            viewModels: [
+              createIntegerRangeInputViewModel({
+                id: "RANGE" as const,
+                min: 0,
+                max: 0xFFFF,
+                selectedMinValue: 0,
+                selectedMaxValue: 0xFFFF,
+              }),
+            ] as const,
+          }),
+          createSimpleToggleViewModel({
+            id: "LIMIT_GAME_CORNER_ITEM_STOCK" as const,
+            name: "Limit Game Corner Item Stock",
+            description: "Makes it so each item available for purchase in the Goldenrod and Celadon Game Corners can only be purchased once.",
+          }),
+          createSimpleToggleViewModel({
             id: "MOVE_TUTOR_ALWAYS_AVAILABLE" as const,
             name: "Move Tutor Always Available",
             description: "Makes it so the move tutor is always available in Goldenrod City "
@@ -1074,9 +1463,114 @@ export const defaultSettingsViewModel = () => {
                 min: 0,
                 max: 0xFFFF,
                 selectedMinValue: 0,
-                selectedMaxValue: 9999,
+                selectedMaxValue: 0xFFFF,
               }),
             ] as const,
+          }),
+          createConfigurableToggleViewModel({
+            id: "CHANGE_DEFAULT_ITEM_PRICES" as const,
+            name: "Change Default Item Prices",
+            description: "Changes the prices of items that can be bought from regular shops. "
+              + "(This also changes the prices items can be sold for, "
+              + "since the sell prices are just calculated from the buy prices).",
+            viewModels: [
+              createConfigurableMultiSelectorViewModel({
+                id: "CUSTOM_BASE_PRICES" as const,
+                name: "Custom Base Prices",
+                description: "Set custom base prices for sepecific items.",
+                options: itemIds.map((itemId) => {
+                  return createConfigurableSelectorOption({
+                    id: itemId,
+                    name: itemsMap[itemId].name,
+                    viewModels: [
+                      createIntegerInputViewModel({
+                        id: "PRICE" as const,
+                        name: "Price",
+                        isRequired: true as const,
+                        min: 0,
+                        max: 0xFFFF,
+                        value: itemsMap[itemId].price,
+                      }),
+                    ],
+                  })
+                }),
+              }),
+              createConfigurableToggleViewModel({
+                id: "RANDOMIZE_PRICES" as const,
+                name: "Randomize Prices",
+                description: "Changes the default prices of all items to random ones based on the selected constraints.",
+                viewModels: [
+                  createIntegerInputViewModel({
+                    id: "MIN_PERCENTAGE" as const,
+                    name: "Minimum Percentage",
+                    description: "If set, the price selected for each item will never be lower than this percentage of the base price of the item.",
+                    isRequired: false,
+                    min: 0,
+                    max: 100,
+                    value: undefined,
+                  }),
+                  createIntegerInputViewModel({
+                    id: "MAX_PERCENTAGE" as const,
+                    name: "Maximum Percentage",
+                    description: "If set, the price selected for each item will never be higher than this percentage of the base price of the item.",
+                    isRequired: false,
+                    min: 100,
+                    value: undefined,
+                  }),
+                  createIntegerRangeInputViewModel({
+                    id: "ABSOLUTE_RANGE" as const,
+                    name: "Absolute Range",
+                    description: "Selected prices will never be lower that then selected minumum and will never be higher than the selected maximum.",
+                    min: 0,
+                    max: 0xFFFF,
+                    selectedMinValue: 0,
+                    selectedMaxValue: 0xFFFF,
+                  }),
+                  createSimpleToggleViewModel({
+                    id: "PREFER_SIMILAR_PRICES" as const,
+                    name: "Prefer Similar Prices",
+                    description: "Makes it so numbers closer to the base price of each item will have a higher chance of being selected for that item.",
+                  }),
+                  createConfigurableToggleViewModel({
+                    id: "LIMIT_CHERRYGROVE_PRICES" as const,
+                    name: "Limit Cherrygrove Prices",
+                    description: "Limits the prices of items that can be bought from the Cherrygrove Mart to be within the selected range.\n"
+                      + "If this price range does not intersect the price range for an item in the Cherrygrove Mart as determined by the other price randomization settings, "
+                      + "the minimum or maximum price in this range will be used for that item (whichever is closer to the other price range).",
+                    viewModels: [
+                      createIntegerRangeInputViewModel({
+                        id: "RANGE" as const,
+                        min: 0,
+                        max: 0xFFFF,
+                        selectedMinValue: 0,
+                        selectedMaxValue: 0xFFFF,
+                      }),
+                    ],
+                  }),
+                  createConfigurableMultiSelectorViewModel({
+                    id: "OVERRIDES" as const,
+                    name: "Overrides",
+                    description: "Specify custom prices for specific items instead of having them be random.",
+                    options: itemIds.map((itemId) => {
+                      return createConfigurableSelectorOption({
+                        id: itemId,
+                        name: itemsMap[itemId].name,
+                        viewModels: [
+                          createIntegerInputViewModel({
+                            id: "PRICE" as const,
+                            name: "Price",
+                            isRequired: true,
+                            min: 0,
+                            max: 0xFFFF,
+                            value: itemsMap[itemId].price,
+                          }),
+                        ],
+                      })
+                    }),
+                  }),
+                ],
+              }),
+            ],
           }),
         ] as const,
       }), // END MARTS
@@ -1130,6 +1624,17 @@ export const defaultSettingsViewModel = () => {
                   })
                 }),
               }), // END MOVEMENT
+              createSimpleMultiSelectorViewModel({
+                id: "EXCLUDE" as const,
+                name: "Exclude",
+                description: "Exclude trainers that have the selected movement behaviours.",
+                options: Object.values(trainerMovementBehavioursMap).map((movement) => {
+                  return createSimpleSelectorOption({
+                    id: movement.id,
+                    name: movement.name,
+                  })
+                }),
+              }), // END EXCLUDE
               createSimpleToggleViewModel({
                 id: "INCLUDE_STATIONARY" as const,
                 name: "Include Stationary Trainers",
@@ -1137,6 +1642,48 @@ export const defaultSettingsViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_OVERWORLD_TRAINER_MOVEMENT
+          createSimpleToggleViewModel({
+            id: "FLY_BETWEEN_REGIONS" as const,
+            name: "Fly Between Regions",
+            description: "Adds the ability to press left or right while selecting a location to fly to. "
+             + "Doing this will switch the map between Johto and Kanto allowing you to select a location, for which you have the Fly Point, "
+             + "in a different region than your current region.",
+          }),
+          createSimpleToggleViewModel({
+            id: "REMOVE_ROUTE_30_ROADBLOCK" as const,
+            name: "Remove Route 30 Roadblock",
+            description: "Removes the battle between Mikey and Joey that blocks the path on Route 30 at the start of the game allowing you to pass without turning in the Mystery Egg.",
+          }),
+          createSimpleToggleViewModel({
+            id: "REMOVE_ILEX_CUT_TREE" as const,
+            name: "Remove Ilex Cut Tree",
+            description: "Removes the tree in Ilex Forest that can be cut down allowing you to pass without HM01 (Cut) and/or Hivebadge.",
+          }),
+          createSimpleToggleViewModel({
+            id: "CLEAR_GOLDENROD_STORE_BASEMENT" as const,
+            name: "Clear Goldenrod Store Basement",
+            description: "Removes permanently removes the boxes blocking the paths to the items in the Goldenrod Department Store Basement allowing them to all be obtained without having to use the elevator multiple times.",
+          }),
+          createSimpleToggleViewModel({
+            id: "CHANGE_MYSTERY_GIFT" as const,
+            name: "Change Mystery Gift",
+            description: "Makes it so the girl on the fifth floor of the Goldenrod Dept. Store gives you an item (Eon Mail) instead of enabling the Mystery Gift Function.",
+          }),
+          createSimpleToggleViewModel({
+            id: "LIMIT_ITEMS_FROM_GOLDENROD_POKEFAN" as const,
+            name: "Limit Items from Goldenrod Pokéfan",
+            description: "Makes it so Pokéfan in the Goldenrod Pokémon Center will only give you her item in exchange for Eon Mail once.",
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_FLORIA" as const,
+            name: "Skip Talking to Floria",
+            description: "Removes requirement of having to talk to Floria on Route 36 and in the Flower shop before being able to get the item from the Flower Shop owner.",
+          }),
+          createSimpleToggleViewModel({
+            id: "AUTO_ROCKET_PASSWORDS" as const,
+            name: "Auto Rocket Passwords",
+            description: "Makes the Rocket Grunts on the bottom floor of Team Rocket's Base automatically tell you their passwords after defeating them.",
+          }),
           createSimpleToggleViewModel({
             id: "SKIP_MAHOGANY_ROCKETS" as const,
             name: "Skip Mahogany Rockets",
@@ -1158,29 +1705,307 @@ export const defaultSettingsViewModel = () => {
               + "- the NPC blocking the entrance to the Blackthorn Gym will move out of the way\n"
               + "- the shady shopkeeper in the Mahogany Town Mart will be replaced with the real one",
           }),
+          createSimpleToggleViewModel({
+            id: "RADIO_CARD_QUIZ_ALWAYS_ACCESSIBLE" as const,
+            name: "Make Radio Card Quiz Always Accessible",
+            description: "Makes it so the woman, on the first floor of the Goldenrod Radio Tower, who gives the quiz to win the Radio Card is always there, even while Team Rocket has taken over.",
+          }),
+          createSimpleToggleViewModel({
+            id: "BUENA_ALWAYS_GIVES_ITEM" as const,
+            name: "Make Buena's Item Always Accessible",
+            description: "Makes it so Buena, the radio host on the second floor of the Goldenrod Radio Tower, will always give you her item (the Blue Card, unless it's been shuffled) the first time you talk to her, even while Team Rocket has taken over.",
+          }),
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_NUMBER_OF_BERRIES_FOR_MILTANK" as const,
+            name: "Randomize Number Of Berries to Heal Miltank",
+            description: "Randomizes the number of berries you need to give the Miltank in the barn of Moo Moo Farms on Route 39 before it is healed.",
+            viewModels: [
+              createIntegerRangeInputViewModel({
+                id: "RANGE" as const,
+                min: 0,
+                max: 10,
+                selectedMinValue: 0,
+                selectedMaxValue: 7,
+              }),
+            ] as const,
+          }),
+          createSimpleToggleViewModel({
+            id: "SHOW_REQUESTED_POKEMON_INFO" as const,
+            name: "Show Requested Pokémon Info",
+            description: "Makes it so NPC's that want you to show them a specific Pokémon in exchange for something will show you a picture of the Pokémon they want to see and register it in your Pokédex.",
+          }),
+          createSimpleToggleViewModel({
+            id: "HATCH_ANY_EGG_FOR_ELM" as const,
+            name: "Hatch Any Egg for Prof. Elm",
+            description: "Makes it so Prof. Elm will ask you to show him a Pokémon after you hatch any egg, not just the Mystery Egg (or an egg that contains the same Pokémon as the Mystery Egg).\n"
+              + "Getting the Mystery Egg from Prof. Elm's Aide in the Violet City Pokémon Center is still required though.",
+          }),
+          createSimpleToggleViewModel({
+            id: "IGNORE_MAGIKARP_SIZE" as const,
+            name: "Ignore Magikarp Size",
+            description: "Makes it so the man in the house at the Lake of Rage will give away his item when shown any Magikarp.",
+          }),
+          createSimpleToggleViewModel({
+            id: "LIMIT_ITEMS_FROM_MAGIKARP_REQUEST" as const,
+            name: "Limit Items from Magikarp Request",
+            description: "Makes it so the man in the house at the Lake of Rage will only give you his item in exchange for seeing a Magikarp once.",
+          }),
+          createSimpleMultiSelectorViewModel({
+            id: "REMOVE_ROCKET_GRUNTS" as const,
+            name: "Remove Rocket Grunts",
+            description: "Makes it so the selected Rocket Grunt NPCs never show up in the overworld.",
+            options: [
+              createSimpleSelectorOption({
+                id: "GOLDENROD_FLOWER_SHOP" as const,
+                name: "Goldenrod Flower Shop",
+                description: "Removes the Rocket Grunt that blocks the entrance to the Goldenrod Flower Shop after the Rockets take over Goldenrod City.",
+              }),
+              createSimpleSelectorOption({
+                id: "GOLDENROD_SE_AREA" as const,
+                name: "Goldenrod South East Area",
+                description: "Removes the Rocket Grunt that blocks the entrance to the south eastern area of Goldenrod City (which contains the Bike Shop) after the Rockets take over Goldenrod City.",
+              }),
+            ] as const,
+          }),
           createSimpleMultiSelectorViewModel({
             id: "CHANGE_TIN_TOWER_REQUIREMENTS" as const,
             name: "Change Tin Tower Requirements",
-            description: "Changes the requirements to be able to get the Rainbow Wing "
-              + "and reveal the staircase to the 2nd floor of Tin Tower.",
+            description: "Changes the requirements for getting the item (Rainbow Wing) from the Sage by the staircase on the first floor of Tin Tower "
+              + "and revealing the staircase to the 2nd floor of Tin Tower.",
             options: [
               createSimpleSelectorOption({
                 id: "SKIP_E4" as const,
                 name: "Change E4 Requirement",
-                description: "Instead of having to defeat Champion Lance, you just need to have the Clear Bell.",
+                description: "Changes the requirements for getting the item so that instead of having to defeat Champion Lance, you just need to have the Clear Bell.",
               }),
               createSimpleSelectorOption({
                 id: "SKIP_BEASTS" as const,
                 name: "Remove Beasts Requirement",
-                description: "Removes the requirement of needing to have a Suicune, an Entei and a Raikou from your game in your party or PC.",
+                description: "Changes the requirements for getting the item so that you no longer need to have a Suicune, an Entei and a Raikou from your game in your party or PC.",
               }),
             ] as const,
+          }),
+          createSimpleToggleViewModel({
+            id: "CLIMB_TIN_TOWER_FOR_HO_OH_CHAMBER" as const,
+            name: "Climb Tin Tower for Ho-oh Chamber",
+            description: "Changes the requirments for opening the door in the Ho-oh chamber of the Ruins of Alph "
+              + "so that the door opens after the player has fought the Pokémon at the top of Tin Tower "
+              + "instead of when the player has a Ho-oh as the first Pokémon in their party.",
           }),
           createSimpleToggleViewModel({
             id: "SKIP_CLAIR_BADGE_TEST" as const,
             name: "Skip Clair's Badge Test",
             description: "Makes it so Clair gives you her Badge and TM immediately after defeating her "
               + "instead of after passing the test in the Dragon Shrine.",
+          }),
+          createSimpleToggleViewModel({
+            id: "ENABLE_GS_BALL_EVENT" as const,
+            name: "Enable GS Ball Event",
+            description: "After defeating champion Lance, leaving the Goldenrod Pokécenter will trigger an event where someone will walk up to you and give an item (the GS Ball).",
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_GS_BALL_INSPECTION" as const,
+            name: "Skip GS Ball Inspection",
+            description: "Kurt will immeditatly notice the GS Ball starting to shake after you give it to him, instead of having to wait until the next day.",
+          }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_SS_AQUA_REQUIREMENTS" as const,
+            name: "Change S.S. Aqua Requirements",
+            description: "Changes the requirements for boarding the S.S. Aqua.",
+            options: [
+              createSimpleSelectorOption({
+                id: "SKIP_E4" as const,
+                name: "Remove E4 Requirement",
+                description: "Removes the requirement of having to defeat Champion Lance before being allowed to board the S.S. Aqua from the Olivine Port.",
+              }),
+              createSimpleSelectorOption({
+                id: "BOARD_ANY_DAY" as const,
+                name: "Remove Day Requirement",
+                description: "Allows boarding the S.S. Aqua from both the Olivne and Vermilion Ports any day of the week.",
+              }),
+              createSimpleSelectorOption({
+                id: "REBOARD_IMMEDIATELY" as const,
+                name: "Allow Reboarding",
+                description: "Allows boarding the S.S. Aqua again immediately after disembarking without having to reload the map.",
+              }),
+            ] as const,
+          }),
+          createSimpleToggleViewModel({
+            id: "FLY_TO_OLIVINE_FROM_PORT" as const,
+            name: "Fly To Olivine From Port",
+            description: "Makes it so that you can also get the ability to fly to Olivine City when you enter the Olivine Port.",
+          }),
+          createSimpleToggleViewModel({
+            id: "RIDE_TRAIN_WITHOUT_POWER" as const,
+            name: "Ride Train Without Power",
+            description: "Allows riding the magnet train between Goldenrod and Saffron before fixing the Kanto Power plant.",
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_TALKING_TO_COPYCAT" as const,
+            name: "Skip Talking to Copycat",
+            description: "Allows getting the item (Lost Item) from the Vermilion Pokémon Fan Club member without having to talk to the Copycat in Saffron City.",
+          }),
+          createSimpleToggleViewModel({
+            id: "MOUNT_MOON_HIDDEN_ITEM_ALWAYS_ACCESSIBLE" as const,
+            name: "Mount Moon Hidden Item Always Accessible",
+            description: "Allows the Hidden Item in Mount Moon Square to be obtained at any time on any day, but also changes it so it can only be obtained once.",
+          }),
+          createSimpleToggleViewModel({
+            id: "WEEKDAY_SIBLINGS_ALWAYS_ACCESSIBLE" as const,
+            name: "Weekday Siblings Always Accessible",
+            description: "Makes is so all the weekday siblings will show up on any day of the week.\n"
+              + "Also moves the hidden items that would be under Frieda and Wesley to be in front of them instead.",
+          }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_NATIONAL_PARK_CONTEST_REQUIREMENTS" as const,
+            name: "Change National Park Contest Requirements",
+            description: "Changes the requirements to be able to participate in the National Park Contest and get prizes.",
+            options: [
+              createSimpleSelectorOption({
+                id: "REMOVE_DAY_REQUIREMENT" as const,
+                name: "Remove Day Requirement",
+                description: "Makes it so the contest takes place on any day of the week.",
+              }),
+              createSimpleSelectorOption({
+                id: "REMOVE_DAILY_LIMIT" as const,
+                name: "Remove Daily Limit",
+                description: "Allows participating in the contest any number of times a day.",
+              }),
+              createSimpleSelectorOption({
+                id: "MERGE_SECOND_AND_THIRD" as const,
+                name: "Merge Second and Third Place",
+                description: "Makes it so you get the prizes for both Second and Third Place whenever you place at one of those tiers.",
+              }),
+              createSimpleSelectorOption({
+                id: "LIMIT_PRIZES" as const,
+                name: "Limit Prizes",
+                description: "Makes it so each prize can only be received once.",
+              }),
+            ],
+          }),
+          createSimpleToggleViewModel({
+            id: "CELADON_MANSION_ROOF_GIFT_ALWAYS_ACCESSIBLE" as const,
+            name: "Celadon Mansion Roof Gift Alwasy Accessible",
+            description: "Makes it so that you can get the item from the man in the house on the roof of the Celadon Mansion at any time of day.",
+          }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_GOLDENROD_DEPT_STORE_TM_GIFTS_REQUIREMENTS" as const,
+            name: "Change Goldenrod Dept. Store TM Gifts Requirements",
+            description: "Changes the requirements to get the gifts from the receptionist on the 5th floor of the Goldenrod Dept. Store.",
+            options: [
+              createSimpleSelectorOption({
+                id: "REMOVE_DAY_REQUIREMENT" as const,
+                name: "Remove Day Requirement",
+                description: "Makes it so the items can be received on any day of the week.",
+              }),
+              createSimpleSelectorOption({
+                id: "REMOVE_HAPPINESS_REQUIREMENT" as const,
+                name: "Remove Happiness Requirement",
+                description: "Makes it so both items can be received regardless of your Pokémon's happiness.\n"
+                 + "Also limits it so each item can only be received once.",
+              }),
+            ],
+          }),
+          createSimpleToggleViewModel({
+            id: "REMOVE_TOHJO_FALLS_HOUSE_GIFT_HAPPINESS_REQUIREMENT" as const,
+            name: "Remove Tohjo Falls House Gift Happiness Requirement",
+            description: "Makes it so that you can get the item from the lady in the house by Tohjo Falls regardless of your Pokémon's Happiness.",
+          }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_KENJI_GIFT_REQUIREMENTS" as const,
+            name: "Change Kenji Gift Requirements",
+            description: "Changes the requirements to get Kenji's gift on Route 45.",
+            options: [
+              createSimpleSelectorOption({
+                id: "REMOVE_TIME_REQUIREMENT" as const,
+                name: "Remove Time Requirement",
+                description: "Makes it so the item can be received on any day at any time of day.",
+              }),
+              createSimpleSelectorOption({
+                id: "REMOVE_CALL_REQUIREMENT" as const,
+                name: "Remove Call Requirement",
+                description: "Makes it so Kenji will give you his item without having to call him first.",
+              }),
+            ],
+          }),
+          createSimpleMultiSelectorViewModel({
+            id: "CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR" as const,
+            name: "Change Phone Call Trainer Behaviour",
+            description: "Changes the behaviour of phone call trainers.",
+            options: [
+              createSimpleSelectorOption({
+                id: "PRIORITIZE_USEFUL_CALLS" as const,
+                name: "Prioritize Useful Calls",
+                description: "Updates the priorities for all phone calls to be the following:\n"
+                  + "1. Offers to give you gifts\n"
+                  + "2. Notifications of rooftop sales\n"
+                  + "3. Notifications of Pokémon swarms\n"
+                  + "4. Inquiries about rematches\n"
+                  + "5. Stories about local Pokémon\n"
+                  + "6. Gossip\n"
+                  + "7. All other kinds of calls\n"
+                  + "When determining a phone call topic, the topic with the highest priority will always be chosen as long as it is available for the trainer that is calling and all the conditons for it have been met.",
+              }),
+              createSimpleSelectorOption({
+                id: "SKIP_TO_STRONGEST_AVAILABLE_REMATCH" as const,
+                name: "Skip To Strongest Available Rematch",
+                description: "Rematches with phone call trainers will always be against their strongest team available based on your current progression.\n"
+                  + "For example, a trainer that, in vanilla, offers a rematch after defeating Champion Lance, and then later a stronger rematch after fixing the Power Plant "
+                  + "will always fight you with ther stronger team as long as you have fixed the Power Plant, even if you never had a rematch against them using their weaker rematch team "
+                  + "(and even if you haven't actually defeated Champion Lance yet).",
+              }),
+              createSimpleSelectorOption({
+                id: "SIMULTANEOUS_GIFTS" as const,
+                name: "Simultaneous Gifts",
+                description: "When collecting gifts from phone call trainers who can give you different kinds of items, they will will give you all of them at the same time.",
+              }),
+              createSimpleSelectorOption({
+                id: "PREVENT_REPEAT_GIFTS" as const,
+                name: "Prevent Repeat Gifts",
+                description: "Prevents being able to receive the same gift from a phone call trainer more than once.",
+              }),
+              createSimpleSelectorOption({
+                id: "AUTOMATICALLY_OFFER_TO_SHARE_NUMBERS" as const,
+                name: "Automatically Offer to Share Numbers",
+                description: "Phone call trainers who have the potential to give you gifts or announce rooftop sales will automatically offer to share phone numbers with you after you defeat them in battle.",
+              }),
+            ],
+          }),
+          createConfigurableToggleViewModel({
+            id: "EARLY_MOUNT_SILVER" as const,
+            name: "Early Mount Silver",
+            description: "The guard in front of the Route 28 exit of the Victory Road Gate is removed before Prof. Oak gives you permission to go to Mount Silver.",
+            viewModels: [
+              createSimpleToggleViewModel({
+                id: "REQUIRE_TALKING_TO_OAK_FOR_RED" as const,
+                name: "Require Talking to Oak For Red",
+                description: "Makes it so Red won't appear on Mount Silver until you talk to Prof. Oak with the correct number of Badges.",
+              }),
+            ],
+          }),
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_NUMBER_OF_BADGES_FOR_OAK" as const,
+            name: "Randomize Number of Badges for Oak",
+            description: "Changes the number of badges needed for Prof. Oak to give you permission to go to Mount Silver (or for Red to appear if 'Early Mount Silver' and 'Require Talking to Oak For Red' are enabled).",
+            viewModels: [
+              createIntegerRangeInputViewModel({
+                id: "RANGE" as const,
+                min: 0,
+                max: 16,
+                selectedMinValue: 0,
+                selectedMaxValue: 16,
+              }),
+            ] as const,
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_E4_FOR_RED" as const,
+            name: "Skip E4 for Red",
+            description: "Makes it so Red can appear on Mount Silver before you've entered the Hall of Fame.",
+          }),
+          createSimpleToggleViewModel({
+            id: "ADD_KANTO_BADGES_TO_TRAINER_CARD" as const,
+            name: "Add Kanto Badges to Trainer Card",
+            description: "Adds a third page to the trainer card where you can see all the Kanto Badges you've received.",
           }),
           createSimpleToggleViewModel({
             id: "IMPROVE_PERFORMANCE" as const,

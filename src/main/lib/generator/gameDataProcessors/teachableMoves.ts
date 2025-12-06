@@ -60,8 +60,8 @@ export const updateTeachableMoves = (
           }
         })
           
-        tm.moveId = random.element({ array: primaryChoices, allowUndefined: true }).id
-          ?? random.element({ array: secondaryChoices, allowUndefined: true }).id
+        tm.moveId = random.element({ array: primaryChoices, allowUndefined: true })?.id
+          ?? random.element({ array: secondaryChoices, allowUndefined: true })?.id
           ?? random.element({
             array: tertiaryChoices,
             errorInfo: {
@@ -133,8 +133,8 @@ export const updateTeachableMoves = (
         }
       })
       
-      moveTutorMove.moveId = random.element({ array: primaryChoices, allowUndefined: true }).id
-        ?? random.element({ array: secondaryChoices, allowUndefined: true }).id
+      moveTutorMove.moveId = random.element({ array: primaryChoices, allowUndefined: true })?.id
+        ?? random.element({ array: secondaryChoices, allowUndefined: true })?.id
         ?? random.element({
           array: tertiaryChoices,
           errorInfo: {

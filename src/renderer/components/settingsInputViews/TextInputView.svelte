@@ -19,6 +19,7 @@
   import { tooltip } from "@components/utility/Tooltip.svelte"
   import type { TextInputViewModel } from "@shared/types/viewModels"
   import { isNotNullish, isNullish } from "@shared/utils"
+  import { inGameStringLength } from "@shared/utils/textConverters"
   
   type Props = {
     viewModel: TextInputViewModel
@@ -46,6 +47,8 @@
       }
     } else if (isNotNullish(viewModel.maxCharacters) && value.length > viewModel.maxCharacters) {
       error = `${viewModel.name} must be less than or equal to ${viewModel.maxCharacters} characters long.`
+    } else if (isNotNullish(viewModel.maxInGameCharacters) && inGameStringLength(value) > viewModel.maxInGameCharacters) {
+      error = `${viewModel.name} must be less than or equal to ${viewModel.maxInGameCharacters} "in game characters" long.`
     } else {
       error = null
       viewModel.value = value

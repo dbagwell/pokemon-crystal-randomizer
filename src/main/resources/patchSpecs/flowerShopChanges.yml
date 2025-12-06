@@ -1,0 +1,13 @@
+description: "Changes to the flower shop."
+values:
+  decideFinalFlowerOwnerShopText: "09 8F 53 03 99 53"
+changes:
+- description: "Adds code to determine the final dialog for the flower shop owner."
+  locations:
+  - bank: 21
+  value: "$decideFinalFlowerOwnerShopText"
+- description: "Updates the flower shop owner's script."
+  locations:
+  - bank: 21
+    address: 0x535D
+  value: "$checkFloriaState 34 1D 00 08 9C 53 31 5C 00 08 7B 53 31 2A 00 03 @$decideFinalFlowerOwnerShopText"

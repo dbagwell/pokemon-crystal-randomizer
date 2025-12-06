@@ -1,0 +1,125 @@
+description: "Updates the phone call trainer scripts so that they can't repeatedly give their items."
+values:
+  checkBeverlyItemEventFlag: "31 $gotNuggetFromBeverlyEventFlagId 09 6E 51 01 2F 45 5E 03 6A 51"
+  checkJoseItemEventFlag1: "31 $gotStarPieceFromJoseEventFlagId 08 @$checkJoseItemEventFlag2 01 2F 42 5E 03 F5 52 $checkJoseItemEventFlag2"
+  checkJoseItemEventFlag2: "01 2F 42 5E 03 F1 52"
+  checkWadeItemEventFlags1: "31 $gotBitterBerryFromWadeEventFlagId 08 @$checkWadeItemEventFlags2 31 $gotPrzcureberryFromWadeEventFlagId 08 @$checkWadeItemEventFlags2 31 $gotPsncureberryFromWadeEventFlagId 08 @$checkWadeItemEventFlags2 31 $gotBerryFromWadeEventFlagId 08 @$checkWadeItemEventFlags2 03 66 54 $checkWadeItemEventFlags2"
+  checkWadeItemEventFlags2: "01 2F 3F 5E 03 62 54"
+  checkWadeItemEventFlags3: "31 $gotBitterBerryFromWadeEventFlagId 09 @$checkWadeItemEventFlags4 15 03 31 $gotPrzcureberryFromWadeEventFlagId 09 @$checkWadeItemEventFlags4 15 02 31 $gotPsncureberryFromWadeEventFlagId 09 @$checkWadeItemEventFlags4 15 01 31 $gotBerryFromWadeEventFlagId 09 @$checkWadeItemEventFlags4 15 00 $checkWadeItemEventFlags4"
+  checkWadeItemEventFlags4: "06 00 B9 54 03 AD 54"
+  checkDerekItemEventFlag: "31 $gotNuggetFromDerekEventFlagId 09 9A 5A 01 2F 45 5E 03 96 5A"
+  checkWiltonItemEventFlags1: "31 $gotPokeBallFromWiltonEventFlagId 08 @$checkWiltonItemEventFlags2 31 $gotGreatBallFromWiltonEventFlagId 08 @$checkWiltonItemEventFlags2 31 $gotUltraBallFromWiltonEventFlagId 08 @$checkWiltonItemEventFlags2 03 2F 5D $checkWiltonItemEventFlags2"
+  checkWiltonItemEventFlags2: "01 2F 3F 5E 03 2B 5D"
+  checkWiltonItemEventFlags3: "31 $gotPokeBallFromWiltonEventFlagId 09 @$checkWiltonItemEventFlags2 15 01 31 $gotGreatBallFromWiltonEventFlagId 09 @$checkWiltonItemEventFlags2 15 00 31 $gotUltraBallFromWiltonEventFlagId 09 @$checkWiltonItemEventFlags2 15 02 06 02 5E 5D 03 57 5D $checkWiltonItemEventFlags4"
+  checkWiltonItemEventFlags4: "06 02 5E 5D 03 57 5D"
+  checkKenjiItemEventFlag: "31 $gotPPUpFromKenjiEventFlagId 09 27 61 00 37 61 03 FD 60"
+  setBeverlyItemEventFlag: "35 7D 00 33 $gotNuggetFromBeverlyEventFlagId 91"
+  setJoseItemEventFlag: "35 7E 00 33 $gotStarPieceFromJoseEventFlagId 91"
+  setDerekItemEventFlag: "35 83 00 33 $gotNuggetFromDerekEventFlagId 91"
+  setKenjiItemEventFlag: "32 6A 02 33 $gotPPUpFromKenjiEventFlagId 91"
+changes:
+- description: "Adds Code"
+  locations:
+  - bank: 47
+  value: "$checkBeverlyItemEventFlag $checkJoseItemEventFlag1 $checkDerekItemEventFlag $checkWadeItemEventFlags1 $checkWadeItemEventFlags3 $checkWiltonItemEventFlags1 $checkWiltonItemEventFlags3"
+- description: "Adds Code"
+  locations:
+  - bank: 23
+  value: "$setBeverlyItemEventFlag"
+- description: "Adds Code"
+  locations:
+  - bank: 104
+  value: "$setJoseItemEventFlag"
+- description: "Adds Code"
+  locations:
+  - bank: 105
+  value: "$setDerekItemEventFlag"
+- description: "Adds Code"
+  locations:
+  - bank: 103
+  value: "$checkKenjiItemEventFlag $setKenjiItemEventFlag"
+- description: "Updates Beverly's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5166
+  value: "03 @$checkBeverlyItemEventFlag"
+- description: "Updates Jose's phone call script"
+  locations:
+  - bank: 47
+    address: 0x52ED
+  value: "03 @$checkJoseItemEventFlag1"
+- description: "Updates Wade's phone call script"
+  locations:
+  - bank: 47
+    address: 0x545E
+  value: "03 @$checkWadeItemEventFlags1"
+- description: "Updates Wade's phone call script"
+  locations:
+  - bank: 47
+    address: 0x54A7
+  value: "03 @$checkWadeItemEventFlags3"
+- description: "Updates Gina's phone call script"
+  locations:
+  - bank: 47
+    address: 0x57A8
+  value: "BA"
+- description: "Updates Alan's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5903
+  value: "15"
+- description: "Updates Dana's phone call script"
+  locations:
+  - bank: 47
+    address: 0x598D
+  value: "9F"
+- description: "Updates Derek's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5A92
+  value: "03 @$checkDerekItemEventFlag"
+- description: "Updates Tully's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5B09
+  value: "1B"
+- description: "Updates Tiffany's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5BFE
+  value: "10"
+- description: "Updates Wilton's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5D27
+  value: "03 @$checkWiltonItemEventFlags1"
+- description: "Updates Wilton's phone call script"
+  locations:
+  - bank: 47
+    address: 0x5D4F
+  value: "03 @$checkWiltonItemEventFlags3"
+- description: "Updates Beverly's give item script"
+  locations:
+  - bank: 23
+    address: 0x4180
+  value: "00 @$setBeverlyItemEventFlag"
+- description: "Updates Jose's give item script"
+  locations:
+  - bank: 104
+    address: 0x494E
+  value: "00 @$setJoseItemEventFlag"
+- description: "Updates Derek's give item script"
+  locations:
+  - bank: 105
+    address: 0x5B53
+  value: "00 @$setDerekItemEventFlag"
+- description: "Updates Kenji's give item script"
+  locations:
+  - bank: 103
+    address: 0x60FA
+  value: "03 @$checkKenjiItemEventFlag"
+- description: "Updates Kenji's give item script"
+  locations:
+  - bank: 103
+    address: 0x6103
+  value: "00 @$setKenjiItemEventFlag"

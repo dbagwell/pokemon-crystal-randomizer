@@ -18,7 +18,7 @@ export const makeRendererAPIRequest = async <Result>(
     result: any,
     resolve: (value: Result | PromiseLike<Result>) => void,
     reject: (reason?: any) => void,
-  ) => void
+  ) => void,
 ): Promise<Result> => {
   return await new Promise<Result>((resolve, reject) => {
     const requestId = crypto.randomUUID()

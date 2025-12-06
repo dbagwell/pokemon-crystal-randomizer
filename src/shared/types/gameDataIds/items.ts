@@ -315,3 +315,26 @@ export type ItemId = typeof itemIds[number]
 export const isItemId = (value: string): value is ItemId => {
   return itemIds.includes(value as any)
 }
+
+export const repelItemIds: ItemId[] = [
+  "REPEL",
+  "SUPER_REPEL",
+  "MAX_REPEL",
+] as const
+
+export const simpleHealingItemIds: ItemId[] = [
+  "POTION",
+  "SUPER_POTION",
+  "HYPER_POTION",
+  "MAX_POTION",
+  "RAGECANDYBAR",
+  "FRESH_WATER",
+  "SODA_POP",
+  "LEMONADE",
+  "MOOMOO_MILK",
+  "BERRY",
+  "BERRY_JUICE",
+  "GOLD_BERRY",
+  "ENERGYPOWDER",
+  "ENERGY_ROOT",
+] as const

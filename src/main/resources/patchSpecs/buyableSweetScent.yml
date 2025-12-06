@@ -1,13 +1,13 @@
 description: "Adds code to used a different set of mart items on the 5th floor of Goldenrod Department Store that includes the Sweet Scent TM if the item has been received from lady in the gate north of Ilex Forest."
 values:
-  clerkScript: "6B 47 31 5F 00 09 @$hasHeadbuttScript 31 4B 00 09 @$hasRockSmashScript 31 7A 00 09 @$hasSweetScentScript 94 00 09 00 49 91"
-  hasHeadbuttScript: "31 4B 00 09 @$hasHeadbuttAndRockSmashScript 31 7A 00 09 @$hasHeadbuttAndSweetScentScript 94 00 0A 00 49 91"
-  hasRockSmashScript: "31 7A 00 09 @$hasRockSmashAndSweetScentScript 94 00 0B 00 49 91"
-  hasSweetScentScript: "94 00 22 00 49 91"
-  hasHeadbuttAndRockSmashScript: "31 7A 00 09 @$hasHeadbuttRockSmashAndSweetScentScript 94 00 0C 00 49 91"
-  hasHeadbuttAndSweetScentScript: "94 00 23 00 49 91"
-  hasRockSmashAndSweetScentScript: "94 00 24 00 49 91"
-  hasHeadbuttRockSmashAndSweetScentScript: "94 00 25 00 49 91"
+  clerkScript: "6B 47 31 5F 00 09 @$hasHeadbuttScript 31 4B 00 09 @$hasRockSmashScript 31 7A 00 09 @$hasSweetScentScript 94 00 $mart1Id 00 49 91"
+  hasHeadbuttScript: "31 4B 00 09 @$hasHeadbuttAndRockSmashScript 31 7A 00 09 @$hasHeadbuttAndSweetScentScript 94 00 $mart2Id 00 49 91"
+  hasRockSmashScript: "31 7A 00 09 @$hasRockSmashAndSweetScentScript 94 00 $mart3Id 00 49 91"
+  hasSweetScentScript: "94 00 $mart5Id 00 49 91"
+  hasHeadbuttAndRockSmashScript: "31 7A 00 09 @$hasHeadbuttRockSmashAndSweetScentScript 94 00 $mart4Id 00 49 91"
+  hasHeadbuttAndSweetScentScript: "94 00 $mart6Id 00 49 91"
+  hasRockSmashAndSweetScentScript: "94 00 $mart7Id 00 49 91"
+  hasHeadbuttRockSmashAndSweetScentScript: "94 00 $mart8Id 00 49 91"
 changes:
 - description: "Adds code to check flags and choose the set of items."
   locations:
