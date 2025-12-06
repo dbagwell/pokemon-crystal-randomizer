@@ -1,0 +1,3 @@
+description: "Give third place prize after second place prize"
+values:
+  jumpAddressAfterSecondPlacePrize: "@parent.$checkThirdPlacePrizeEvent2"

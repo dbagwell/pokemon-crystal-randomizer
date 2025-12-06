@@ -99,10 +99,11 @@ export const generateFromCLI = async (args: string[]) => {
   })
   
   const baseFilePath = path.resolve(outputDir, name ?? generatorData.checkValue)
+  let romFileData: Awaited<ReturnType<typeof generateROM>> | undefined
   
-  if (shouldGenerateROM) {
+  if (shouldGenerateROM || shouldGeneratePatch) {
     try {
-      await generateROM({
+      romFileData = await generateROM({
         data: generatorData,
         playerOptions: playerOptionsFromViewModel(playerOptionsViewModel),
         showInputInRenderer: false,
@@ -110,6 +111,7 @@ export const generateFromCLI = async (args: string[]) => {
         inputROM: inputROMData,
         forceOverwrite: force,
         throwErrorOnWriteFailure: true,
+        skipWritingOutputFile: !shouldGenerateROM,
       })
     } catch (error) {
       console.error(`${error}`)
@@ -129,10 +131,12 @@ export const generateFromCLI = async (args: string[]) => {
     }
   }
   
-  if (shouldGeneratePatch) {
+  if (shouldGeneratePatch && isNotNullish(romFileData)) {
     try {
       generatePatch({
-        data: generatorData,
+        settings: generatorData.settings,
+        inputROMData: romFileData.inputFileData,
+        sharedOutputROMData: romFileData.sharedOutputFileData,
         defaultFileName: baseFilePath,
         forceOverwrite: force,
         throwErrorOnWriteFailure: true,

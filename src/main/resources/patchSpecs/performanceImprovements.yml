@@ -241,3 +241,8 @@ changes:
   locations:
   - bank: 66
   value: "$credits2"
+- description: "Fixes an issue where the cianwood photo studio would hang indefinitely due to the other changes to the gfx/lcd."
+  locations:
+  - bank: 33
+    address: 0x462B
+  value: "0B"

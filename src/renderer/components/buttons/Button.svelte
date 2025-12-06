@@ -139,8 +139,8 @@
       container.style.boxShadow = ""
       textContainer.style.fontSize = "16px"
       textContainer.style.color = isHovered && !isDisabled
-        ? isDestructive ? colors.destructiveTint : colors.secondaryTint
-        : colors.primaryTint
+        ? isDestructive ? colors.secondaryDestructiveTint : colors.secondaryTint
+        : isDestructive ? colors.destructiveTint : colors.primaryTint
       break
     }
     case "deemphasized-text": {

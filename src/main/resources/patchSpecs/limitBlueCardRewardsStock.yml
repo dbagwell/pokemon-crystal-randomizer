@@ -1,0 +1,21 @@
+description: "Prevents buying more than one of the same item from the blue card rewards."
+values:
+  checkIfCanBuy: "#options.$data CD @$getItemFlag 06 02 CD 6F 2E 79 A7 28 08 21 @$soldOutText CD 5A 10 37 C9 CD 68 34 21 77 70 CD 5A 10 C3 CF 1D CD 6A 7A 06 01 CD 6F 2E C3 97 70"
+  setItemFlag: "CD @$getItemFlag 06 01 CD 6F 2E C3 97 70"
+  getItemFlag: "FA 75 CF 11 $blueCardPrize1EventFlagId 26 00 6F 19 54 5D C9"
+  soldOutText: "00 92 AE B1 B1 B8 F4 4F B3 A7 A0 B3 D4 7F B2 AE AB A3 7F AE B4 B3 E8 51 57"
+changes:
+- description: "adds code"
+  locations:
+  - bank: 34
+  value: "$checkIfCanBuy $setItemFlag $getItemFlag $soldOutText"
+- description: "calls code"
+  locations:
+  - bank: 34
+    address: 0x700A
+  value: "@$checkIfCanBuy 00 00 00 00 00 00 00 00 00"
+- description: "calls code"
+  locations:
+  - bank: 34
+    address: 0x7043
+  value: "@$setItemFlag"

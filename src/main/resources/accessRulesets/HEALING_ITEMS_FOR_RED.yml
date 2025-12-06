@@ -1,0 +1,12 @@
+addedItemLocationRequirements:
+- requirements:
+  - POTION
+  - SUPER_POTION
+  - HYPER_POTION
+  - MAX_POTION
+  - FULL_RESTORE
+  - REVIVE
+  - FULL_HEAL
+  itemLocationIds:
+  - SILVER_CAVE_ROOM_3_CAVE_OUT
+  

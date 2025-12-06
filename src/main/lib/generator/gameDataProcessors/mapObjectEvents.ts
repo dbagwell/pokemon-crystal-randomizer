@@ -6,14 +6,16 @@ export const updateMapObjectEvents = (
   settings: Settings,
   romInfo: ROMInfo,
 ) => {
-  if (!settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.VALUE) { return }
-  
-  const movementSettings = settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.SETTINGS
-  const behaviour = trainerMovementBehavioursMap[movementSettings.MOVEMENT]
+  if (settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.VALUE) {
+    const movementSettings = settings.CHANGE_OVERWORLD_TRAINER_MOVEMENT.SETTINGS
+    const behaviour = trainerMovementBehavioursMap[movementSettings.MOVEMENT]
     
-  romInfo.gameData.mapObjectEvents.forEach((event) => {
-    if (
-      event.typeId === "TRAINER"
+    romInfo.gameData.mapObjectEvents.forEach((event) => {
+      if (
+        event.typeId === "TRAINER"
+          && !movementSettings.EXCLUDE.some((behaviour) => {
+            return trainerMovementBehavioursMap[behaviour].overworldMovementBehaviourId === event.movementBehaviourId
+          })
           && (
             movementSettings.INCLUDE_STATIONARY
               || event.movementBehaviourId === "SPINCLOCKWISE"
@@ -21,8 +23,134 @@ export const updateMapObjectEvents = (
               || event.movementBehaviourId === "SPINRANDOM_SLOW"
               || event.movementBehaviourId === "SPINRANDOM_FAST"
           )
-    ) {
-      event.movementBehaviourId = behaviour.overworldMovementBehaviourId
-    }
-  })
+      ) {
+        event.movementBehaviourId = behaviour.overworldMovementBehaviourId
+      }
+    })
+  }
+  
+  if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_FLOWER_SHOP")) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "GOLDENROD_FLOWER_SHOP_ROCKET_GRUNT"
+    })!.flagId = "INITIALIZED_EVENTS"
+  }
+  
+  if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_SE_AREA")) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "GOLDENROD_SE_AREA_ROCKET_GRUNT"
+    })!.flagId = "INITIALIZED_EVENTS"
+  }
+  
+  if (settings.SHUFFLE_ITEMS.VALUE) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "GOLDENROD_UNDERGROUND_WAREHOUSE_DIRECTOR"
+    })!.flagId = "DIRECTOR_IN_UNDERGROUND_WAREHOUSE"
+    
+    const object = romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "ILEX_FOREST_LASS"
+    })
+    
+    object!.coordinate = [0, 18]
+    object!.movementBehaviourId = "STANDING_DOWN"
+  }
+  
+  if (settings.RADIO_CARD_QUIZ_ALWAYS_ACCESSIBLE) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "RADIO_TOWER_1F_RADIO_CARD_QUIZ_WOMAN"
+    })!.flagId = undefined
+  }
+  
+  if (settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE || settings.SHUFFLE_ITEMS.VALUE) {
+    const object = romInfo.gameData.mapObjectEvents.find((event) => {
+      return event.flagId === "DRAGONS_DEN_B1F_DRAGON_FANG"
+    })!
+    
+    object.typeId = "ITEMBALL"
+    object.scriptPointer++
+  }
+  
+  if (settings.SINGLE_USE_FRUIT_TREES) {
+    romInfo.gameData.mapObjectEvents.forEach((object) => {
+      if (object.spriteId === "FRUIT_TREE") {
+        object.typeId = "ITEMBALL"
+      }
+      
+      switch (object.id) {
+      case "ROUTE_1_FRUIT_TREE": object.flagId = "GOT_ROUTE_1_FRUIT_TREE"; break
+      case "ROUTE_2_FOREST_AREA_FRUIT_TREE": object.flagId = "GOT_ROUTE_2_FOREST_AREA_FRUIT_TREE"; break
+      case "ROUTE_8_FRUIT_TREE": object.flagId = "GOT_ROUTE_8_FRUIT_TREE"; break
+      case "ROUTE_11_FRUIT_TREE": object.flagId = "GOT_ROUTE_11_FRUIT_TREE"; break
+      case "ROUTE_26_FRUIT_TREE": object.flagId = "GOT_ROUTE_26_FRUIT_TREE"; break
+      case "ROUTE_29_FRUIT_TREE": object.flagId = "GOT_ROUTE_29_FRUIT_TREE"; break
+      case "ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE": object.flagId = "GOT_ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE"; break
+      case "ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE": object.flagId = "GOT_ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE"; break
+      case "ROUTE_31_FRUIT_TREE": object.flagId = "GOT_ROUTE_31_FRUIT_TREE"; break
+      case "ROUTE_33_FRUIT_TREE": object.flagId = "GOT_ROUTE_33_FRUIT_TREE"; break
+      case "ROUTE_35_SURF_AREA_FRUIT_TREE": object.flagId = "GOT_ROUTE_35_SURF_AREA_FRUIT_TREE"; break
+      case "ROUTE_36_WEST_AREA_FRUIT_TREE": object.flagId = "GOT_ROUTE_36_WEST_AREA_FRUIT_TREE"; break
+      case "ROUTE_37_LEFT_FRUIT_TREE": object.flagId = "GOT_ROUTE_37_LEFT_FRUIT_TREE"; break
+      case "ROUTE_37_MIDDLE_FRUIT_TREE": object.flagId = "GOT_ROUTE_37_MIDDLE_FRUIT_TREE"; break
+      case "ROUTE_37_RIGHT_FRUIT_TREE": object.flagId = "GOT_ROUTE_37_RIGHT_FRUIT_TREE"; break
+      case "ROUTE_38_FRUIT_TREE": object.flagId = "GOT_ROUTE_38_FRUIT_TREE"; break
+      case "ROUTE_39_FRUIT_TREE": object.flagId = "GOT_ROUTE_39_FRUIT_TREE"; break
+      case "ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE": object.flagId = "GOT_ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE"; break
+      case "ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE": object.flagId = "GOT_ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE"; break
+      case "ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE": object.flagId = "GOT_ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE"; break
+      case "ROUTE_43_SURF_CUT_AREA_FRUIT_TREE": object.flagId = "GOT_ROUTE_43_SURF_CUT_AREA_FRUIT_TREE"; break
+      case "ROUTE_44_FRUIT_TREE": object.flagId = "GOT_ROUTE_44_FRUIT_TREE"; break
+      case "ROUTE_45_FRUIT_TREE": object.flagId = "GOT_ROUTE_45_FRUIT_TREE"; break
+      case "ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE": object.flagId = "GOT_ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE"; break
+      case "ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE": object.flagId = "GOT_ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE"; break
+      case "PEWTER_CITY_LEFT_FRUIT_TREE": object.flagId = "GOT_PEWTER_CITY_LEFT_FRUIT_TREE"; break
+      case "PEWTER_CITY_RIGHT_FRUIT_TREE": object.flagId = "GOT_PEWTER_CITY_RIGHT_FRUIT_TREE"; break
+      case "FUCHSIA_CITY_CUT_AREA_FRUIT_TREE": object.flagId = "GOT_FUCHSIA_CITY_CUT_AREA_FRUIT_TREE"; break
+      case "VIOLET_CITY_FRUIT_TREE": object.flagId = "GOT_VIOLET_CITY_FRUIT_TREE"; break
+      case "AZALEA_TOWN_FRUIT_TREE": object.flagId = "GOT_AZALEA_TOWN_FRUIT_TREE"; break
+      }
+    })
+  }
+  
+  if (settings.SHUFFLE_ITEMS.VALUE && settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "MAHOGANY_MART_1F_ROCKET_SALESMAN"
+    })!.flagId = undefined
+    
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "MAHOGANY_TOWN_STREET_VENDOR"
+    })!.flagId = undefined
+  }
+  
+  if (settings.EARLY_MOUNT_SILVER.VALUE) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "VICTORY_ROAD_GATE_ROUTE_28_GUARD"
+    })!.flagId = "INITIALIZED_EVENTS"
+  }
+  
+  if (settings.BLUE_CARD_REWARDS_ALWAYS_ACCESSIBLE) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "RADIO_TOWER_2F_BLUE_CARD_REWARD_LADY"
+    })!.flagId = undefined
+  }
+  
+  if (
+    settings.RANDOMIZE_REGULAR_ITEM_BALLS.VALUE
+    || settings.RANDOMIZE_TM_ITEM_BALLS.VALUE
+    || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.VALUE
+    || settings.SHUFFLE_ITEMS.VALUE
+    || settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.VALUE
+  ) { // shouldApplyReceiveItemsChanges
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "TEAM_ROCKET_BASE_B2F_LANCE"
+    })!.scriptPointer = 0x5184
+    
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "DRAGONS_DEN_1F_CLAIR"
+    })!.scriptPointer = 0x48F4
+  }
+  
+  if (settings.REMOVE_MT_MOON_SHOP_TIME_REQUIREMENT) {
+    romInfo.gameData.mapObjectEvents.find((object) => {
+      return object.id === "MORNING_MT_MOON_SHOP_OWNER"
+    })!.time = [18, 10]
+  }
 }

@@ -1,7 +1,7 @@
 {
   "name": "pokemon-crystal-randomizer",
   "productName": "Pokemon Crystal Randomizer",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Generate and apply patches for Pokémon Crystal Version",
   "author": "David Bagwell",
   "license": "MIT",
@@ -33,7 +33,8 @@
     "@tsconfig/svelte": "^5.0.4",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
-    "electron": "27.1.2",
+    "dompurify": "^3.3.0",
+    "electron": "36.0.0",
     "electron-affinity": "^1.2.4",
     "electron-builder": "^26.0.12",
     "electron-updater": "^6.6.2",

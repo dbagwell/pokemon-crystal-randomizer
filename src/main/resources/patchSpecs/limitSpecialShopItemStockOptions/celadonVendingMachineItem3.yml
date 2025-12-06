@@ -1,0 +1,9 @@
+description: "Makes it so that the first item in the celadon vending machine can only be purchased once."
+values:
+  script: "06 02 F5 51 31 parent.$gotCeladonVendingMachineItem3EventFlagId 09 @parent.$celadonSoldOutScript 03 D7 51"
+changes:
+- description: "Calls the new code."
+  locations:
+  - bank: 28
+    address: 0x51D3
+  value: "03 @$script"

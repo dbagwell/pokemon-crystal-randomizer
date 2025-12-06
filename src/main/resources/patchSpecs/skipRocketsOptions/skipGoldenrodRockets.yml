@@ -1,23 +1,36 @@
 description: "Gives Basement Key, Card Key and Clear Bell and skips the Goldenrod Rockets."
 values:
-  giveItemsAndSetFlags: "9E 85 01 9E 7F 01 9E 46 01 33 4A 00 33 78 00 33 CE 06 33 D1 06 33 25 00 33 71 05 33 73 05 33 21 00 33 61 07 33 04 03 33 CC 06 33 CD 06 33 E3 06 32 05 03 32 06 03 32 E4 06 32 D0 06 32 36 07 35 13 00 12 03 15 02 12 04 01 00"
-  rocketTakeoverScript1: "31 21 00 09 @$rocketTakeoverScript2 36 13 00 33 CF 06 33 D1 06 32 CE 06 32 25 00 33 56 07 9C 04 00 12 02 07 01"
-  rocketTakeoverScript2: "91"
+  giveItemsAndSetFlags: "$checkBasementKey $noRoomForBasementKey $checkCardKey $noRoomForCardKey $checkClearBell $noRoomForClearBell $checkOtherFlags $skipOtherFlags"
+  checkBasementKey: "31 parent.$gotBasementKeyEventFlagId 09 @$checkCardKey 9E parent.$basementKeyItem 01 08 @$noRoomForBasementKey 33 parent.$gotBasementKeyEventFlagId 03 @$checkCardKey"
+  noRoomForBasementKey: "33 00 00"
+  checkCardKey: "31 parent.$gotCardKeyEventFlagId 09 @$checkClearBell 9E parent.$cardKeyItem 01 08 @$noRoomForCardKey 33 parent.$gotCardKeyEventFlagId 03 @$checkClearBell"
+  noRoomForCardKey: "33 00 00"
+  checkClearBell: "31 78 00 09 @$checkOtherFlags 9E parent.$clearBellItem 01 08 @$noRoomForClearBell 33 78 00 03 @$checkOtherFlags"
+  noRoomForClearBell: "33 00 00"
+  checkOtherFlags: "31 21 00 09 @$skipOtherFlags 33 4A 00 33 CE 06 33 D1 06 33 25 00 33 71 05 33 73 05 33 21 00 33 61 07 33 04 03 33 CC 06 33 CD 06 33 E3 06 32 05 03 32 06 03 32 E4 06 32 D0 06 32 36 07 35 13 00 12 03 15 02 12 04 01 00"
+  skipOtherFlags: ""
+  goldenrodRocketsScript: "31 21 00 09 41 42 32 CD 06 91"
+  rocketTakeoverScript: "31 21 00 09 5B 42 36 13 00 03 45 42"
 changes:
 - description: "Skip code that adds more rockets to Goldenrod City."
   locations:
   - bank: 47
     address: 0x423E
   value: "91"
-- description: "New script that to the script that causes the rockets to take over the Goldenrod radio tower."
+- description: "New scripts that make changes to the script that cause the rockets to take over the Goldenrod/radio tower."
   locations:
   - bank: 47
-  value: "$rocketTakeoverScript1 $rocketTakeoverScript2"
+  value: "$goldenrodRocketsScript $rocketTakeoverScript"
+- description: "Calls the new script that causes the rockets to take over."
+  locations:
+  - bank: 47
+    address: 0x423E
+  value: "03 @$goldenrodRocketsScript"
 - description: "Calls the new script that causes the rockets to take over."
   locations:
   - bank: 47
     address: 0x4242
-  value: "03 @$rocketTakeoverScript1"
+  value: "03 @$rocketTakeoverScript"
 freeSpaces:
 - bank: 47
   address: 0x4245

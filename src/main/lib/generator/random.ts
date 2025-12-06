@@ -8,15 +8,23 @@ export class Random {
     this.int = (min: number, max: number): number => {
       return Math.floor(rng() * (max + 1 - min)) + min
     }
+    
+    this.intFromNormalDistribution = (min: number, max: number): number => {
+      const sample1 = rng()
+      const sample2 = rng()
+      const transformed = Math.sqrt(-2 * Math.log(sample1)) * Math.cos(2 * Math.PI * sample2) * 0.3413447460685429 + 0.5
+      return Math.floor(transformed * (max + 1 - min)) + min
+    }
   }
   
   readonly int: (min: number, max: number) => number
+  readonly intFromNormalDistribution: (min: number, max: number) => number
   
   readonly boolean = (): boolean => {
     return this.int(0, 1) === 1
   }
   
-  readonly element = <Element>(
+  readonly element = <Element, AllowUndefinedType extends boolean | undefined = undefined>(
     params: {
       array: Element[]
       errorInfo?: {
@@ -25,9 +33,9 @@ export class Random {
         conflictingSettings: string[]
       } | undefined
       remove?: boolean
-      allowUndefined?: boolean
-    }
-  ): Element => {
+      allowUndefined?: AllowUndefinedType
+    },
+  ): AllowUndefinedType extends true ? Element | undefined : Element => {
     const index = this.int(0, params.array.length - 1)
     const element = params.array[index]
     
@@ -44,7 +52,7 @@ export class Random {
       }
     }
     
-    if (params.array.length > 1 && params.remove) {
+    if (params.array.length > 0 && params.remove) {
       params.array.splice(index, 1)
     }
     

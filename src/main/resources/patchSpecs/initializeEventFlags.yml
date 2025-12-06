@@ -1,0 +1,13 @@
+description: "Adds new event flags to be set by default."
+values:
+  initialzeEventFlags: "#events.$data 33 36 00 91"
+changes:
+- description: "Adds code to initialze event flags."
+  locations:
+  - bank: 47
+  value: "$initialzeEventFlags"
+- description: "Calls the new code to initialze event flags."
+  locations:
+  - bank: 47
+    address: 0x4570
+  value: "00 @$initialzeEventFlags"

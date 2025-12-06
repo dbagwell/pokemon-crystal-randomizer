@@ -1,0 +1,9 @@
+description: "Makes it so that the first item in the goldenrod game corner can only be purchased once."
+values:
+  script: "31 parent.$gotCeladonGameCornerItem1EventFlagId 09 @parent.$celadonGameCornerSoldOutScript 00 68 67 03 21 67"
+changes:
+- description: "Calls the new code."
+  locations:
+  - bank: 28
+    address: 0x671E
+  value: "03 @$script"

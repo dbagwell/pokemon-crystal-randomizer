@@ -1,0 +1,18 @@
+description: "Makes it so the flag saying you've already ridden the boat is set at the same time as when the boat first arrives at it's destination"
+values:
+  setEvents: "33 30 00 33 31 00 91"
+changes:
+- description: "Adds code"
+  locations:
+  - bank: 29
+  value: "$setEvents"
+- description: "Calls code"
+  locations:
+  - bank: 29
+    address: 0x5F50
+  value: "00 @$setEvents"
+- description: "removes code that sets the first time travelling on the boat event after leaving the ship in the vermilion port"
+  locations:
+  - bank: 29
+    address: 0x4DBA
+  value: "18 18 18"

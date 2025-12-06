@@ -1,0 +1,18 @@
+description: "Changes the script when talking to the sage in tin tower so that he can still give his item even if the player has already fought ho-oh."
+values:
+  checkFoughtHoOh: "31 17 03 09 B6 51 4C 4A 56 03 B3 51"
+changes:
+- description: "Removes the initial ho-oh fight check."
+  locations:
+  - bank: 97
+    address: 0x518A
+  value: "18 18 18 18 18 18"
+- description: "Script that checks if ho-oh has been fought then takes appropriate action."
+  locations:
+  - bank: 97
+  value: "$checkFoughtHoOh"
+- description: "Checks calls the new script to check if ho-oh has been fought after potentialy giving the item to determine the final dialog."
+  locations:
+  - bank: 97
+    address: 0x51B0
+  value: "03 @$checkFoughtHoOh"

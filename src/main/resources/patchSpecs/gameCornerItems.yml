@@ -1,0 +1,95 @@
+description: "Updates the items (and their prices) sold at the game corners"
+values:
+  goldenrodMenuData: "80 04 $goldenrodItem1NameAndPrice 50 $goldenrodItem2NameAndPrice 50 $goldenrodItem3NameAndPrice 50 82 80 8D 82 84 8B 50"
+  celadonMenuData: "80 04 $celadonItem1NameAndPrice 50 $celadonItem2NameAndPrice 50 $celadonItem3NameAndPrice 50 82 80 8D 82 84 8B 50"
+changes:
+- description: "updates the buy menu text"
+  locations:
+  - bank: 21
+  value: "$goldenrodMenuData"
+- description: "updates the buy menu text"
+  locations:
+  - bank: 21
+    address: 0x6CCD
+  value: "13 @$goldenrodMenuData"
+- description: "updates the first item"
+  locations:
+  - bank: 21
+    address: 0x6C5E
+  value: "$goldenrodItem1Id"
+- description: "updates the first item price"
+  locations:
+  - bank: 21
+    address: 0x6C4E
+  - bank: 21
+    address: 0x6C64
+  value: "$goldenrodItem1Price"
+- description: "updates the second item"
+  locations:
+  - bank: 21
+    address: 0x6C7A
+  value: "$goldenrodItem2Id"
+- description: "updates the second item price"
+  locations:
+  - bank: 21
+    address: 0x6C6A
+  - bank: 21
+    address: 0x6C80
+  value: "$goldenrodItem2Price"
+- description: "updates the third item"
+  locations:
+  - bank: 21
+    address: 0x6C96
+  value: "$goldenrodItem3Id"
+- description: "updates the third item price"
+  locations:
+  - bank: 21
+    address: 0x6C86
+  - bank: 21
+    address: 0x6C9C
+  value: "$goldenrodItem3Price"
+- description: "updates the buy menu text"
+  locations:
+  - bank: 28
+  value: "$celadonMenuData"
+- description: "updates the buy menu text"
+  locations:
+  - bank: 28
+    address: 0x6794
+  value: "13 @$celadonMenuData"
+- description: "updates the first item"
+  locations:
+  - bank: 28
+    address: 0x6725
+  value: "$celadonItem1Id"
+- description: "updates the first item price"
+  locations:
+  - bank: 28
+    address: 0x6715
+  - bank: 28
+    address: 0x672B
+  value: "$celadonItem1Price"
+- description: "updates the second item"
+  locations:
+  - bank: 28
+    address: 0x6741
+  value: "$celadonItem2Id"
+- description: "updates the second item price"
+  locations:
+  - bank: 28
+    address: 0x6731
+  - bank: 28
+    address: 0x6747
+  value: "$celadonItem2Price"
+- description: "updates the third item"
+  locations:
+  - bank: 28
+    address: 0x675D
+  value: "$celadonItem3Id"
+- description: "updates the third item price"
+  locations:
+  - bank: 28
+    address: 0x674D
+  - bank: 28
+    address: 0x6763
+  value: "$celadonItem3Price"

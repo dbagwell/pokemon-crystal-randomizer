@@ -7,3 +7,10 @@ changes:
     address: 0x6EAE
     maxSize: 10
   value: "AF E0 B3 E0 B4 E0 B5 57 FA 2C D2 E0 B6 #options.$extraCalculations C9 $gen5BaseExpTable"
+- description: "Makes it so 5 digits can be shown in the experience gain text"
+  locations:
+  - bank: 112
+    address: 0x42B9
+  - bank: 112
+    address: 0x42CF
+  value: "25"

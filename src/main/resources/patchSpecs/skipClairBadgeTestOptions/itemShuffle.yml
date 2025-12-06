@@ -1,0 +1,5 @@
+description: "Code for checking for and giving the Clair's first item"
+values:
+  badgeCheckScript: "31 $gotRisingbadgeEventFlagId 08 69 4E"
+  giveBadgeScript: "9E parent.$risingbadgeItem 01 08 @$giveBadgeScriptEnd 33 $gotRisingbadgeEventFlagId $giveBadgeScriptEnd"
+  giveBadgeScriptEnd: "91"

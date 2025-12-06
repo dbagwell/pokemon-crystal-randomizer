@@ -598,6 +598,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 23842,
   },
   {
+    id: "ROUTE_38_FRUIT_TREE",
     romOffset: [
       104,
       25622,
@@ -803,6 +804,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 23466,
   },
   {
+    id: "ROUTE_39_FRUIT_TREE",
     romOffset: [
       105,
       24902,
@@ -1280,6 +1282,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 21269,
   },
   {
+    id: "ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE",
     romOffset: [
       106,
       22064,
@@ -1300,6 +1303,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 21325,
   },
   {
+    id: "ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE",
     romOffset: [
       106,
       22077,
@@ -1320,6 +1324,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 21327,
   },
   {
+    id: "ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE",
     romOffset: [
       106,
       22090,
@@ -1551,6 +1556,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 23038,
   },
   {
+    id: "ROUTE_44_FRUIT_TREE",
     romOffset: [
       103,
       24683,
@@ -1634,6 +1640,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "ROUTE_44_MAX_REPEL",
   },
   {
+    id: "MAHOGANY_TOWN_STREET_VENDOR",
     romOffset: [
       100,
       17435,
@@ -3457,6 +3464,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "GOLDENROD_CITY_CIVILIANS",
   },
   {
+    id: "RADIO_TOWER_1F_RADIO_CARD_QUIZ_WOMAN",
     romOffset: [
       23,
       22254,
@@ -3690,6 +3698,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 22389,
   },
   {
+    id: "RADIO_TOWER_2F_BLUE_CARD_REWARD_LADY",
     romOffset: [
       23,
       25905,
@@ -5802,6 +5811,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "OLIVINE_LIGHTHOUSE_6F_SUPER_POTION",
   },
   {
+    id: "MAHOGANY_MART_1F_ROCKET_SALESMAN",
     romOffset: [
       27,
       17936,
@@ -6077,6 +6087,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "TEAM_ROCKET_BASE_B2F_EXECUTIVE",
   },
   {
+    id: "TEAM_ROCKET_BASE_B2F_LANCE",
     romOffset: [
       27,
       24376,
@@ -6754,6 +6765,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "ILEX_FOREST_KURT",
   },
   {
+    id: "ILEX_FOREST_LASS",
     romOffset: [
       27,
       30307,
@@ -7240,7 +7252,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 20093,
-    flagId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES_SMOKE_BALL",
+    flagId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_SMOKE_BALL",
   },
   {
     romOffset: [
@@ -7261,7 +7273,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 20095,
-    flagId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES_FULL_HEAL",
+    flagId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_FULL_HEAL",
   },
   {
     romOffset: [
@@ -7516,6 +7528,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "RADIO_TOWER_ROCKET_TAKEOVER",
   },
   {
+    id: "GOLDENROD_UNDERGROUND_WAREHOUSE_DIRECTOR",
     romOffset: [
       31,
       24000,
@@ -7618,7 +7631,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24054,
-    flagId: "MOUNT_MORTAR_1F_OUTSIDE_ETHER",
+    flagId: "MOUNT_MORTAR_FRONT_ETHER",
   },
   {
     romOffset: [
@@ -7639,7 +7652,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24056,
-    flagId: "MOUNT_MORTAR_1F_OUTSIDE_REVIVE",
+    flagId: "MOUNT_MORTAR_FRONT_REVIVE",
   },
   {
     romOffset: [
@@ -7680,7 +7693,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24188,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_ESCAPE_ROPE",
+    flagId: "MOUNT_MORTAR_BACK_1F_ESCAPE_ROPE",
   },
   {
     romOffset: [
@@ -7701,7 +7714,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24190,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_MAX_REVIVE",
+    flagId: "MOUNT_MORTAR_BACK_1F_MAX_REVIVE",
   },
   {
     romOffset: [
@@ -7722,7 +7735,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24192,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_HYPER_POTION",
+    flagId: "MOUNT_MORTAR_BACK_1F_HYPER_POTION",
   },
   {
     romOffset: [
@@ -7743,7 +7756,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24194,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_MAX_POTION",
+    flagId: "MOUNT_MORTAR_BACK_1F_MAX_POTION",
   },
   {
     romOffset: [
@@ -7764,7 +7777,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24196,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_NUGGET",
+    flagId: "MOUNT_MORTAR_BACK_1F_NUGGET",
   },
   {
     romOffset: [
@@ -7827,7 +7840,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24198,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_IRON",
+    flagId: "MOUNT_MORTAR_BACK_1F_IRON",
   },
   {
     romOffset: [
@@ -7848,7 +7861,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24200,
-    flagId: "MOUNT_MORTAR_1F_INSIDE_ULTRA_BALL",
+    flagId: "MOUNT_MORTAR_BACK_1F_ULTRA_BALL",
   },
   {
     romOffset: [
@@ -7869,7 +7882,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24798,
-    flagId: "MOUNT_MORTAR_2F_INSIDE_MAX_POTION",
+    flagId: "MOUNT_MORTAR_BACK_2F_MAX_POTION",
   },
   {
     romOffset: [
@@ -7890,7 +7903,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24800,
-    flagId: "MOUNT_MORTAR_2F_INSIDE_RARE_CANDY",
+    flagId: "MOUNT_MORTAR_BACK_2F_RARE_CANDY",
   },
   {
     romOffset: [
@@ -7911,7 +7924,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24802,
-    flagId: "MOUNT_MORTAR_2F_INSIDE_TM_DEFENSE_CURL",
+    flagId: "MOUNT_MORTAR_BACK_2F_TM_DEFENSE_CURL",
   },
   {
     romOffset: [
@@ -7932,7 +7945,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24804,
-    flagId: "MOUNT_MORTAR_2F_INSIDE_DRAGON_SCALE",
+    flagId: "MOUNT_MORTAR_BACK_2F_DRAGON_SCALE",
   },
   {
     romOffset: [
@@ -7953,7 +7966,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24806,
-    flagId: "MOUNT_MORTAR_2F_INSIDE_ELIXER",
+    flagId: "MOUNT_MORTAR_BACK_2F_ELIXER",
   },
   {
     romOffset: [
@@ -7974,7 +7987,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "ITEMBALL",
     sightRange: 0,
     scriptPointer: 24808,
-    flagId: "MOUNT_MORTAR_2F_INSIDE_ESCAPE_ROPE",
+    flagId: "MOUNT_MORTAR_BACK_2F_ESCAPE_ROPE",
   },
   {
     romOffset: [
@@ -9210,6 +9223,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "DRAGONS_DEN_B1F_DRAGON_FANG",
   },
   {
+    id: "DRAGONS_DEN_1F_CLAIR",
     romOffset: [
       99,
       20396,
@@ -9817,7 +9831,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "SCRIPT",
     sightRange: 0,
     scriptPointer: 16560,
-    flagId: "ECRUTEAK_TIN_TOWER_ENTRANCE_WANDERING_SAGE",
+    flagId: "ECRUTEAK_TIN_TOWER_GATE_WANDERING_SAGE",
   },
   {
     romOffset: [
@@ -9838,7 +9852,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "SCRIPT",
     sightRange: 0,
     scriptPointer: 16580,
-    flagId: "ECRUTEAK_TIN_TOWER_ENTRANCE_WANDERING_SAGE",
+    flagId: "ECRUTEAK_TIN_TOWER_GATE_WANDERING_SAGE",
   },
   {
     romOffset: [
@@ -11333,6 +11347,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 25173,
   },
   {
+    id: "ROUTE_45_FRUIT_TREE",
     romOffset: [
       103,
       27019,
@@ -11521,6 +11536,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 22164,
   },
   {
+    id: "ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE",
     romOffset: [
       106,
       23068,
@@ -11541,6 +11557,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 22415,
   },
   {
+    id: "ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE",
     romOffset: [
       106,
       23081,
@@ -13929,6 +13946,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 16386,
   },
   {
+    id: "ROUTE_33_FRUIT_TREE",
     romOffset: [
       107,
       17069,
@@ -14116,6 +14134,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "AZALEA_TOWN_SLOWPOKES",
   },
   {
+    id: "AZALEA_TOWN_FRUIT_TREE",
     romOffset: [
       102,
       18588,
@@ -14450,6 +14469,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 20577,
   },
   {
+    id: "ROUTE_43_SURF_CUT_AREA_FRUIT_TREE",
     romOffset: [
       103,
       22536,
@@ -15226,6 +15246,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 19017,
   },
   {
+    id: "ROUTE_35_SURF_AREA_FRUIT_TREE",
     romOffset: [
       103,
       20530,
@@ -15370,6 +15391,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 16569,
   },
   {
+    id: "ROUTE_36_WEST_AREA_FRUIT_TREE",
     romOffset: [
       101,
       19173,
@@ -15518,6 +15540,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 19883,
   },
   {
+    id: "ROUTE_37_LEFT_FRUIT_TREE",
     romOffset: [
       106,
       20952,
@@ -15559,6 +15582,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "ROUTE_37_SUNNY_OF_SUNDAY",
   },
   {
+    id: "ROUTE_37_MIDDLE_FRUIT_TREE",
     romOffset: [
       106,
       20978,
@@ -15579,6 +15603,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 19979,
   },
   {
+    id: "ROUTE_37_RIGHT_FRUIT_TREE",
     romOffset: [
       106,
       20991,
@@ -15704,6 +15729,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 17420,
   },
   {
+    id: "VIOLET_CITY_FRUIT_TREE",
     romOffset: [
       106,
       18425,
@@ -17330,6 +17356,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "RADIO_TOWER_ROCKET_TAKEOVER",
   },
   {
+    id: "GOLDENROD_FLOWER_SHOP_ROCKET_GRUNT",
     romOffset: [
       102,
       21242,
@@ -17351,6 +17378,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "RADIO_TOWER_ROCKET_TAKEOVER",
   },
   {
+    id: "GOLDENROD_SE_AREA_ROCKET_GRUNT",
     romOffset: [
       102,
       21255,
@@ -19207,6 +19235,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 16446,
   },
   {
+    id: "ROUTE_11_FRUIT_TREE",
     romOffset: [
       26,
       17030,
@@ -19870,6 +19899,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 17770,
   },
   {
+    id: "ROUTE_1_FRUIT_TREE",
     romOffset: [
       107,
       18111,
@@ -20201,6 +20231,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 16399,
   },
   {
+    id: "PEWTER_CITY_RIGHT_FRUIT_TREE",
     romOffset: [
       99,
       17246,
@@ -20221,6 +20252,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 16446,
   },
   {
+    id: "PEWTER_CITY_LEFT_FRUIT_TREE",
     romOffset: [
       99,
       17259,
@@ -21669,6 +21701,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "MT_MOON_SQUARE_ROCK",
   },
   {
+    id: "MORNING_MT_MOON_SHOP_OWNER",
     romOffset: [
       29,
       29175,
@@ -22504,6 +22537,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 19240,
   },
   {
+    id: "FUCHSIA_CITY_CUT_AREA_FRUIT_TREE",
     romOffset: [
       101,
       19955,
@@ -22982,6 +23016,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 16466,
   },
   {
+    id: "ROUTE_8_FRUIT_TREE",
     romOffset: [
       27,
       17212,
@@ -27222,6 +27257,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "ROUTE_2_ELIXER",
   },
   {
+    id: "ROUTE_2_FOREST_AREA_FRUIT_TREE",
     romOffset: [
       107,
       17735,
@@ -27802,6 +27838,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 31235,
   },
   {
+    id: "VICTORY_ROAD_GATE_ROUTE_28_GUARD",
     romOffset: [
       38,
       31710,
@@ -27970,6 +28007,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 20139,
   },
   {
+    id: "ROUTE_26_FRUIT_TREE",
     romOffset: [
       105,
       21489,
@@ -28262,6 +28300,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 20523,
   },
   {
+    id: "ROUTE_29_FRUIT_TREE",
     romOffset: [
       104,
       22064,
@@ -30006,6 +30045,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "ROUTE_30_BATTLE",
   },
   {
+    id: "ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE",
     romOffset: [
       104,
       23768,
@@ -30026,6 +30066,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 22519,
   },
   {
+    id: "ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE",
     romOffset: [
       104,
       23781,
@@ -30168,6 +30209,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 22006,
   },
   {
+    id: "ROUTE_31_FRUIT_TREE",
     romOffset: [
       105,
       23244,

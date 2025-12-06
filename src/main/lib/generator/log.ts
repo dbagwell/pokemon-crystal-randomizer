@@ -13,14 +13,16 @@ import type { GameData } from "@shared/types/gameData/gameData"
 import { eventPokemonIds } from "@shared/types/gameDataIds/eventPokemon"
 import { fishingGroupIds } from "@shared/types/gameDataIds/fishingGroups"
 import { fishingRodIds } from "@shared/types/gameDataIds/fishingRods"
-import { hiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
+import { badgeLocationIds, fruitTreeLocationIds, hmGiftLocationIds, hmItemBallLocationIds, keyItemGiftLocationIds, keyItemHiddenItemLocationIds, keyItemItemBallLocationIds, menuItemGiftLocationIds, regularGiftLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmGiftLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { isItemId, tmItemIds } from "@shared/types/gameDataIds/items"
+import { type MartId, martIds, specialShopIds } from "@shared/types/gameDataIds/marts"
 import { isMoveId } from "@shared/types/gameDataIds/moves"
 import { isPokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import { moveTutorIds } from "@shared/types/gameDataIds/teachableMoves"
 import { trainerClassIds } from "@shared/types/gameDataIds/trainerClasses"
 import { treeGroupIds } from "@shared/types/gameDataIds/treeGroups"
+import type { UnownSetId } from "@shared/types/gameDataIds/unownSets"
 import { compact, isNotNullish } from "@shared/utils"
 import { app } from "electron"
 import yaml from "yaml"
@@ -325,6 +327,26 @@ export const generatorLog = (params: {
       ],
     }),
   })
+    
+  addSection({
+    header: "UNOWN SETS",
+    content: logTable({
+      headers: [
+        "SET",
+        "LETTERS",
+      ],
+      sections: [
+        {
+          rows: Object.keys(gameData.unownSets).map((setId) => {
+            return [
+              setId,
+              settings.CHANGE_UNOWN_SETS.VALUE && settings.CHANGE_UNOWN_SETS.SETTINGS.METHOD.VALUE === "SINGLE_SET" ? gameData.unownSets.KABUTO_PUZZLE.join(", ") : gameData.unownSets[setId as UnownSetId].join(", "),
+            ]
+          }),
+        },
+      ],
+    }),
+  })
   
   addSection({
     header: "IN GAME TRADES",
@@ -509,26 +531,144 @@ export const generatorLog = (params: {
   })
   
   addSection({
-    header: "OVERWORLD ITEMS",
+    header: "ITEMS",
     content: logTable({
       headers: [
         "LOCATION",
         "ITEM",
       ],
       sections: [
-        regularItemBallLocationIds.filter((id) => { return id !== "NATIONAL_PARK_BUG_CONTEST_EAST_ITEM_BALL" }),
-        tmItemBallLocationIds.filter((id) => { return id !== "NATIONAL_PARK_BUG_CONTEST_WEST_ITEM_BALL" }),
-        hiddenItemLocationIds.filter((id) => { return id !== "NATIONAL_PARK_BUG_CONTEST_HIDDEN_ITEM" }),
+        badgeLocationIds,
+        menuItemGiftLocationIds,
+        keyItemItemBallLocationIds,
+        keyItemHiddenItemLocationIds,
+        keyItemGiftLocationIds,
+        hmItemBallLocationIds,
+        hmGiftLocationIds,
+        tmItemBallLocationIds,
+        tmGiftLocationIds,
+        regularItemBallLocationIds,
+        regularHiddenItemLocationIds,
+        regularGiftLocationIds,
+        fruitTreeLocationIds,
       ].map((group) => {
         return {
-          rows: group.map((id) => {
+          rows: group.filter((id) => {
+            return settings.CHANGE_MYSTERY_GIFT || id !== "GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT"
+          }).map((id) => {
+            let displayId: string = id
+            
+            if (settings.SKIP_MAHOGANY_ROCKETS && id === "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT") {
+              if (settings.SKIP_GOLDENROD_ROCKETS) {
+                displayId = "LAKE_OF_RAGE_LANCES_GIFT_1"
+              } else {
+                displayId = "LAKE_OF_RAGE_LANCES_GIFT"
+              }
+            }
+            
+            if (settings.SKIP_GOLDENROD_ROCKETS) {
+              if (id === "RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT") {
+                if (settings.SKIP_MAHOGANY_ROCKETS) {
+                  displayId = "LAKE_OF_RAGE_LANCES_GIFT_2"
+                } else {
+                  displayId = "LAKE_OF_RAGE_LANCES_GIFT_1"
+                }
+              } else if (id === "GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT") {
+                if (settings.SKIP_MAHOGANY_ROCKETS) {
+                  displayId = "LAKE_OF_RAGE_LANCES_GIFT_3"
+                } else {
+                  displayId = "LAKE_OF_RAGE_LANCES_GIFT_2"
+                }
+              } else if (id === "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT") {
+                if (settings.SKIP_MAHOGANY_ROCKETS) {
+                  displayId = "LAKE_OF_RAGE_LANCES_GIFT_4"
+                } else {
+                  displayId = "LAKE_OF_RAGE_LANCES_GIFT_3"
+                }
+              }
+            }
+            
+            if (settings.SKIP_CLAIR_BADGE_TEST && id === "DRAGON_SHRINE_BADGE") {
+              displayId = "BLACKTHORN_GYM_BADGE"
+            }
+            
             return [
-              id,
+              displayId,
               gameData.itemLocations[id].itemId,
             ]
           }),
         }
       }),
+    }),
+  })
+  
+  addSection({
+    header: "SHOPS",
+    content: logTable({
+      headers: [
+        "SHOP",
+        "ITEM",
+        "PRICE",
+      ],
+      sections: [
+        ...martIds.filter((martId) => {
+          const ignoredMartIds: MartId[] = [
+            "CHERRYGROVE_1",
+            "GOLDENROD_5F_1",
+            "GOLDENROD_5F_2",
+            "GOLDENROD_5F_3",
+            "GOLDENROD_5F_5",
+            "GOLDENROD_5F_6",
+            "GOLDENROD_5F_7",
+            settings.BUYABLE_TM12 ? "GOLDENROD_5F_4" : "GOLDENROD_5F_8",
+          ]
+        
+          return gameData.marts[martId].items.length > 0 && !ignoredMartIds.includes(martId)
+        }).map((martId) => {
+          const mart = gameData.marts[martId]
+        
+          return {
+            rows: mart.items.map((itemId, index) => {
+              return [
+                index === 0 ? mart.groupId : "",
+                itemId,
+                `${gameData.items[itemId].price}`,
+              ]
+            }),
+          }
+        }),
+        ...specialShopIds.map((shopId) => {
+          const shop = gameData.specialShops[shopId]
+        
+          return {
+            rows: shop.items.map((itemInfo, index) => {
+              return [
+                index === 0 ? shop.id : "",
+                itemInfo.itemId,
+                `${itemInfo.price}`,
+              ]
+            }),
+          }
+        }),
+      ],
+    }),
+  })
+  
+  addSection({
+    header: "OTHER",
+    content: logTable({
+      headers: [
+        "SETTING",
+        "VALUE",
+      ],
+      sections: [
+        {
+          rows: [
+            ["BADGES REQUIRED FOR OAK/RED", `${gameData.numberOfBadgesForOak}`],
+            ["BERRIES REQUIRED FOR MILTANK", `${gameData.numberOfMiltankBerries}`],
+          ],
+        },
+      ],
     }),
   })
   

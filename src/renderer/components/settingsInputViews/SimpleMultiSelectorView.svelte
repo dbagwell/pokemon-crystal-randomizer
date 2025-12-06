@@ -76,7 +76,7 @@
                 id: option.id,
                 name: option.name,
                 description: option.description,
-                keywords: option.name,
+                keywords: `${option.name} ${option.extraKeywords ?? ""}`,
                 value: option.id,
               }
             })}
