@@ -3418,8 +3418,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
       ],
     ],
   },
-  GOLDENROD_POKECENTER_1F_LADYS_GIFT: {
-    id: "GOLDENROD_POKECENTER_1F_LADYS_GIFT",
+  GOLDENROD_POKECENTER_1F_LADYS_GIFT_FOR_EON_MAIL: {
+    id: "GOLDENROD_POKECENTER_1F_LADYS_GIFT_FOR_EON_MAIL",
     type: "GIFT",
     groupId: "REGULAR_GIFTS",
     itemId: "REVIVE",
