@@ -177,6 +177,11 @@ export class MainAPI implements ElectronMainApi<MainAPI> {
     delete rendererAPIResponseListeners[params.requestId]
   }
   
+  readonly processReleaseNotesResponse = async (params: ProcessReleaseNotesRequestParams): Promise<void> => {
+    rendererAPIResponseListeners[params.requestId]?.(params.selectedAction)
+    delete rendererAPIResponseListeners[params.requestId]
+  }
+  
 }
 
 export type VoidAPIResponse = {
@@ -191,4 +196,9 @@ export type APIResponse<Result> = {
 export type ProcessInputRequestParams = {
   requestId: string,
   inputValue: any,
+}
+
+export type ProcessReleaseNotesRequestParams = {
+  requestId: string,
+  selectedAction: "UPDATE" | "IGNORE" | "SKIP",
 }
