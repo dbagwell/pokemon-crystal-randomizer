@@ -1885,7 +1885,7 @@ export const defaultSettingsViewModel = () => {
           }),
           createSimpleToggleViewModel({
             id: "CELADON_MANSION_ROOF_GIFT_ALWAYS_ACCESSIBLE" as const,
-            name: "Celadon Mansion Roof Gift Alwasy Accessible",
+            name: "Celadon Mansion Roof Gift Always Accessible",
             description: "Makes it so that you can get the item from the man in the house on the roof of the Celadon Mansion at any time of day.",
           }),
           createSimpleMultiSelectorViewModel({
