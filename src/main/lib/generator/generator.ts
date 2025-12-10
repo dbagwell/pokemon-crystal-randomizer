@@ -2098,6 +2098,7 @@ const createPatches = (
         {
           risingbadgeItem: hexStringFrom([romInfo.gameData.items[romInfo.gameData.itemLocations.DRAGON_SHRINE_BADGE.itemId].numericId]),
           tm24Item: hexStringFrom([romInfo.gameData.items.TM24.numericId]),
+          gotRisingbadgeEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_RISINGBADGE.numericId, 2)),
         },
       ).hunks,
     ]
