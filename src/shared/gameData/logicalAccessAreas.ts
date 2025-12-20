@@ -844,7 +844,6 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "OLIVINE_LIGHTHOUSE_5F_OUTER_AREA_STAIRS_DOWN",
       "OLIVINE_LIGHTHOUSE_5F_OUTER_AREA_HOLE_LEFT",
       "OLIVINE_LIGHTHOUSE_5F_OUTER_AREA_HOLE_RIGHT",
-      "OLIVINE_LIGHTHOUSE_4F_MIDDLE_HOLE_AREA",
     ],
   },
   OLIVINE_LIGHTHOUSE_4F_INNER_AREA: {
@@ -852,7 +851,6 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "OLIVINE_LIGHTHOUSE_5F_INNER_AREA_STAIRS_DOWN",
       "OLIVINE_LIGHTHOUSE_3F_INNER_AREA_STAIRS_UP",
-      "OLIVINE_LIGHTHOUSE_4F_MIDDLE_HOLE_AREA",
     ],
   },
   OLIVINE_LIGHTHOUSE_4F_MIDDLE_HOLE_AREA: {
@@ -2336,12 +2334,6 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
         "FOGBADGE",
         "HM03",
       ],
-      [
-        "ROUTE_19",
-        "ROUTE_20_SURF_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
     ],
   },
   ROUTE_20: {
@@ -2820,6 +2812,10 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
         "ROUTE_36_EAST_AREA",
         "SQUIRTBOTTLE",
       ],
+      [
+        "ROUTE_37",
+        "SQUIRTBOTTLE",
+      ],
     ],
   },
   ROUTE_36_EAST_AREA: {
@@ -2831,6 +2827,10 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "VIOLET_CITY",
       [
         "ROUTE_36_WEST_AREA",
+        "SQUIRTBOTTLE",
+      ],
+      [
+        "ROUTE_37",
         "SQUIRTBOTTLE",
       ],
     ],
@@ -3281,7 +3281,6 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "VERMILION_DIGLETTS_CAVE_SPEECH_HOUSE_DOOR_OUT_RIGHT",
       "VERMILION_PORT_PASSAGE_ENTRANCE_AREA_DOOR_OUT_LEFT",
       "VERMILION_PORT_PASSAGE_ENTRANCE_AREA_DOOR_OUT_RIGHT",
-      "VERMILION_PORT_PASSAGE_ENTRANCE_AREA_DOOR_OUT_RIGHT",
       "ROUTE_6",
       [
         "VERMILION_CITY_GYM_AREA",
@@ -3607,6 +3606,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
         "FAST_SHIP_1F_MAIN_AREA",
         "FAST_SHIP_CABINS_CAPTAINS_CABIN",
         "S_S_TICKET",
+        "HALL_OF_FAME",
       ],
     ],
   },
@@ -5057,7 +5057,6 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_27_WEST_SURF_AREA: {
     id: "ROUTE_27_WEST_SURF_AREA",
     accessOptions: [
-      "TOHJO_FALLS_WEST_AREA_CAVE_OUT",
       "NEW_BARK_TOWN_SURF_AREA",
       [
         "ROUTE_27_WEST_AREA",
@@ -5152,7 +5151,6 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   PLAYERS_HOUSE_2F: {
     id: "PLAYERS_HOUSE_2F",
     accessOptions: [
-      "PLAYERS_HOUSE_1F_STAIRS_UP",
       [],
     ],
   },

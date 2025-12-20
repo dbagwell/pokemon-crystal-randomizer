@@ -1025,6 +1025,7 @@ export const updateAccessLogic = (
       areaIds: [
         "FAST_SHIP_1F_MAIN_AREA",
         "OLIVINE_PORT_NORTH_AREA",
+        "VERMILION_PORT_SOUTH_AREA",
       ],
       requirements: [
         "HALL_OF_FAME",
