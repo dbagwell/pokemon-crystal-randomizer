@@ -1,6 +1,6 @@
 import type { GameMapId } from "@shared/types/gameDataIds/gameMaps"
 import { type ItemLocationId, itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
-import { type ItemId, itemIds } from "@shared/types/gameDataIds/items"
+import { type HoldableItemId, type ItemId, itemIds } from "@shared/types/gameDataIds/items"
 import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { type WarpId, warpIds } from "@shared/types/gameDataIds/warps"
@@ -27,7 +27,7 @@ export type AccessRequirement =
   | ItemLocationId
   | PokemonId
   | ItemId
-  | { item: ItemId, number: number }
+  | { item: HoldableItemId, number: number }
   | number
   | "INACCESSIBLE"
   
