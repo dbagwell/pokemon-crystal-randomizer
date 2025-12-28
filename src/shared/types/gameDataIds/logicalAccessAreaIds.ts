@@ -607,3 +607,7 @@ export const logicalAccessAreaIds = [
 ] as const
 
 export type LogicalAccessAreaId = typeof logicalAccessAreaIds[number]
+
+export const isLogicalAccessAreaId = (value: string): value is LogicalAccessAreaId => {
+  return (logicalAccessAreaIds as readonly string[]).includes(value)
+}

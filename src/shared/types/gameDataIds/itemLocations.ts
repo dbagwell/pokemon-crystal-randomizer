@@ -512,3 +512,7 @@ export type ItemBallLocationId = typeof itemBallLocationIds[number]
 export type HiddenItemLocationId = typeof hiddenItemLocationIds[number]
 export type GiftLocationId = typeof giftLocationIds[number]
 export type ItemLocationId = typeof itemLocationIds[number]
+
+export const isItemLocationId = (value: string): value is ItemLocationId => {
+  return (itemLocationIds as readonly string[]).includes(value)
+}

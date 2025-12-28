@@ -32,3 +32,53 @@ export const reduceArrayIntoRecord = <Element, ResultKey extends PropertyKey, Re
 export const removeFirstElementFromArrayWhere = <Element>(array: Element[], condition: (element: Element) => boolean) => {
   array.splice(array.findIndex(condition), 1)
 }
+
+export const getAllCombinations = <Element>(sets: Element[][][]): Element[][] => {
+  const filteredSets = sets.filter((set) => { return set.length > 0 })
+  
+  if (filteredSets.length === 0) {
+    return []
+  }
+  
+  const [firstSet, ...remainingSets] = filteredSets
+  const subCombinations = getAllCombinations(remainingSets)
+  const combinations = []
+  
+  if (subCombinations.length === 0) {
+    return firstSet
+  }
+
+  for (const value of firstSet) {
+    for (const subCombination of subCombinations) {
+      combinations.push([...new Set([...value, ...subCombination])])
+    }
+  }
+
+  return [...new Set(combinations)]
+}
+
+export const removeDuplicates = <Element>(array: Element[][]): Element[][] => {
+  const stringifiedSets = array.map((subArray) => { return JSON.stringify(subArray.toSorted()) })
+  return [...new Set(stringifiedSets)].map((string) => { return JSON.parse(string) })
+}
+
+export const removeSupersets = <Element>(array: Element[][]): Element[][] => {
+  const uniques = removeDuplicates(array)
+  const result: Element[][] = []
+
+  for (let i = 0; i < uniques.length; i++) {
+    let isSuperset = false
+    for (let j = 0; j < uniques.length; j++) {
+      if (i !== j && new Set(uniques[i]).isSupersetOf(new Set(uniques[j]))) {
+        isSuperset = true
+        break
+      }
+    }
+    
+    if (!isSuperset) {
+      result.push(uniques[i])
+    }
+  }
+  
+  return result
+}
