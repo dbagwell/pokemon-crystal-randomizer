@@ -59,7 +59,7 @@ export const presetsMap: IdMap<PresetId, Preset> = {
   CLASSIC_CRAZY_FIR: {
     id: "CLASSIC_CRAZY_FIR",
     name: "Classic Crazy Chaos FIR",
-    description: "Same as 'Classic Extreme FIR' hidden items are not randomized. Also, hidden items, fruit trees, and gift items with time and hapiness requirements are shuffled with all the other shuffled items.",
+    description: "Same as 'Classic Extreme FIR' except hidden items, fruit trees, and gift items with time and happiness requirements are also shuffled with all the other shuffled items.",
   },
   CLASSIC_MAX: {
     id: "CLASSIC_MAX",
