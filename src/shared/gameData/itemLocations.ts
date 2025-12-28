@@ -4330,6 +4330,9 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     groupId: "REGULAR_GIFTS",
     itemId: "EON_MAIL",
     areaId: "GOLDENROD_DEPT_STORE_5F",
+    accessRequirements: [
+      "INACCESSIBLE",
+    ],
     romOffsets: [],
   },
 }

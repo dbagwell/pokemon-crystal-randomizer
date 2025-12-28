@@ -1014,6 +1014,10 @@ export const updateAccessLogic = (
     })
   }
   
+  if (settings.CHANGE_MYSTERY_GIFT) {
+    romInfo.gameData.itemLocations.GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT.accessRequirements = []
+  }
+  
   if (settings.ENABLE_GS_BALL_EVENT) {
     romInfo.gameData.itemLocations.GOLDENROD_POKECENTER_1F_LINK_RECEPTIONISTS_GIFT.accessRequirements = [
       "HALL_OF_FAME",
