@@ -431,7 +431,7 @@ export const generatorLog = (params: {
   })
   
   addSection({
-    header: "TMS",
+    header: "TM MOVES",
     content: logTable({
       headers: [
         "TM",
@@ -531,7 +531,7 @@ export const generatorLog = (params: {
   })
   
   addSection({
-    header: "ITEMS",
+    header: "ITEM LOCATIONS",
     content: logTable({
       headers: [
         "LOCATION",
@@ -603,7 +603,7 @@ export const generatorLog = (params: {
   })
   
   addSection({
-    header: "SHOPS",
+    header: "SHOP ITEMS",
     content: logTable({
       headers: [
         "SHOP",
