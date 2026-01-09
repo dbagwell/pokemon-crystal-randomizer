@@ -208,10 +208,11 @@
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/utility/ProgressIndicator.svelte"
   import Tooltip from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
-  import { applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
+  import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
+  import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
   import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
   import { presetsMap } from "@shared/appData/presets"
-  import { type PlayerOptions, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
+  import { type PlayerOptions, playerOptionsFromViewModel, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
   import { createSimpleToggleViewModel } from "@shared/types/viewModels"
   import { isNullish } from "@shared/utils"
   import { onMount } from "svelte"
@@ -242,7 +243,7 @@
   let mainContentContainer: HTMLElement
   let seed = $state("")
   let settingsViewModel = $state(defaultSettingsViewModel())
-  let playerOptions = $state(initialPlayerOptions as PlayerOptions)
+  let playerOptions = $state(initialPlayerOptions)
   let generateLogToggleViewModel = $state(createSimpleToggleViewModel({
     id: "CREATE_LOG" as const,
     name: "Generate Log File",
@@ -514,12 +515,15 @@
   }
   
   const generateROM = async (settings: Settings) => {
+    const playerOptionsViewModel = defaultPlayerOptionsViewModel()
+    applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
+    
     try {
       showProgressIndicator()
       const response = await window.mainAPI.generateROM(
         seed === "" ? undefined : seed,
         settings,
-        $state.snapshot(playerOptions),
+        playerOptionsFromViewModel(playerOptionsViewModel),
         currentPreset.id,
         generateLogToggleViewModel.isOn,
         generatePatchFileToggleViewModel.isOn,
