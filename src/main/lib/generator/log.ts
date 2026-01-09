@@ -431,7 +431,7 @@ export const generatorLog = (params: {
   })
   
   addSection({
-    header: "TMS",
+    header: "TM MOVES",
     content: logTable({
       headers: [
         "TM",
@@ -531,7 +531,7 @@ export const generatorLog = (params: {
   })
   
   addSection({
-    header: "ITEMS",
+    header: "ITEM LOCATIONS",
     content: logTable({
       headers: [
         "LOCATION",
@@ -603,7 +603,7 @@ export const generatorLog = (params: {
   })
   
   addSection({
-    header: "SHOPS",
+    header: "SHOP ITEMS",
     content: logTable({
       headers: [
         "SHOP",
@@ -698,7 +698,8 @@ const logTable = (params: {
         if (isPokemonId(value)) {
           return pokemonMap[value].name.toUpperCase()
         } else if (isItemId(value) && !value.startsWith("TM")) {
-          return itemsMap[value].name.toUpperCase()
+          const name = itemsMap[value].name.toUpperCase()
+          return name.replaceAll(/É/g, "E")
         } else if (isMoveId(value)) {
           return movesMap[value].name.toUpperCase()
         } else {
