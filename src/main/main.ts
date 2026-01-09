@@ -57,6 +57,7 @@ const showGeneratorWindow = async () => {
 const checkForUpdates = async () => {
   autoUpdater.autoInstallOnAppQuit = false
   autoUpdater.autoDownload = false
+  autoUpdater.fullChangelog = true
   const updateInfo = await autoUpdater.checkForUpdates()
   
   if (isNotNullish(updateInfo) && updateInfo.isUpdateAvailable && !getPreference("ignoredUpdateVersions").includes(updateInfo.updateInfo.version)) {
@@ -69,7 +70,7 @@ const checkForUpdates = async () => {
           (requestId: string) => {
             rendererAPIS[window.id]?.setReleaseNotes({
               requestId: requestId,
-              releaseNotes: updateInfo.updateInfo.releaseNotes as string,
+              releaseNotes: updateInfo.updateInfo.releaseNotes as { version: string, note: string | null }[],
               currentVersionNumber: app.getVersion(),
               newVersionNumber: updateInfo.updateInfo.version,
             })

@@ -39,6 +39,25 @@
         style:flex-grow="1"
         style:flex-shrink="1"
       >
+        <Stack
+          alignment="fill"
+          direction="vertical"
+          distribution="fill"
+          height="100%"
+          minSpacing={5}
+          width="100%"
+        >
+          {#each releaseNotes as releaseNote, index (releaseNote.version)}
+            {#if index !== 0}
+              <hr style:width="100%">
+            {/if}
+            <div>
+              <h1>Version {releaseNote.version}</h1>
+              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+              {@html DOMPurify.sanitize(releaseNote.note ?? "")}
+            </div>
+          {/each}
+        </Stack>
       </div>
       <div use:textStyle={"content"}>
         Would you like to update?
@@ -80,6 +99,7 @@
   let container: HTMLElement
   let currentVersionNumber = ""
   let newVersionNumber = ""
+  let releaseNotes: { version: string, note: string | null }[] = []
   
   const updateAndRestart = () => {
     performAction?.("UPDATE")
@@ -96,12 +116,12 @@
   let performAction: ((response: "UPDATE" | "IGNORE" | "SKIP") => void) | undefined
   
   setReleaseNotes = (
-    releaseNotes: string,
+    releaseNotesArray: { version: string, note: string | null }[],
     currentVersionNumberValue: string,
     newVersionNumberValue: string,
     performSelectedAction: (response: "UPDATE" | "IGNORE" | "SKIP") => void,
   ) => {
-    container.innerHTML = DOMPurify.sanitize(releaseNotes)
+    releaseNotes = releaseNotesArray
     currentVersionNumber = currentVersionNumberValue
     newVersionNumber = newVersionNumberValue
     performAction = performSelectedAction
@@ -113,7 +133,7 @@
   module
 >
   export let setReleaseNotes: (
-    releaseNotes: string,
+    releaseNotes: { version: string, note: string | null }[],
     currentVersionNumber: string,
     newVersionNumber: string,
     performSelectedAction: (selectedAction: "UPDATE" | "IGNORE" | "SKIP") => void,
