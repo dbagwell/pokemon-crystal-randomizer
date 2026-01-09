@@ -1294,6 +1294,10 @@ export const updateAccessLogic = (
     })
   }
   
+  if (settings.CHANGE_MYSTERY_GIFT) {
+    romInfo.gameData.itemLocations.GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT.accessRequirements = []
+  }
+  
   if (settings.ENABLE_GS_BALL_EVENT) {
     romInfo.gameData.itemLocations.GOLDENROD_POKECENTER_1F_LINK_RECEPTIONISTS_GIFT.accessRequirements = [
       "HALL_OF_FAME",
@@ -1305,6 +1309,7 @@ export const updateAccessLogic = (
       areaIds: [
         "FAST_SHIP_1F_MAIN_AREA",
         "OLIVINE_PORT_NORTH_AREA",
+        "VERMILION_PORT_SOUTH_AREA",
       ],
       requirements: [
         "HALL_OF_FAME",

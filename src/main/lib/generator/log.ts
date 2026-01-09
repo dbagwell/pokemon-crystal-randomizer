@@ -554,7 +554,8 @@ export const generatorLog = (params: {
       ].map((group) => {
         return {
           rows: group.filter((id) => {
-            return settings.CHANGE_MYSTERY_GIFT || id !== "GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT"
+            return (settings.CHANGE_MYSTERY_GIFT || id !== "GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT")
+              && (settings.ENABLE_GS_BALL_EVENT || id !== "GOLDENROD_POKECENTER_1F_LINK_RECEPTIONISTS_GIFT")
           }).map((id) => {
             let displayId: string = id
             
