@@ -698,7 +698,8 @@ const logTable = (params: {
         if (isPokemonId(value)) {
           return pokemonMap[value].name.toUpperCase()
         } else if (isItemId(value) && !value.startsWith("TM")) {
-          return itemsMap[value].name.toUpperCase()
+          const name = itemsMap[value].name.toUpperCase()
+          return name.replaceAll(/É/g, "E")
         } else if (isMoveId(value)) {
           return movesMap[value].name.toUpperCase()
         } else {
