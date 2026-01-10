@@ -820,6 +820,23 @@ export const defaultSettingsViewModel = () => {
                   })
                 }),
               }), // END BAN
+              createSimpleMultiSelectorViewModel({
+                id: "EXCLUDE_LOCATIONS" as const,
+                name: "Exclude Locations",
+                description: "Item locations to exclude from being randomized.",
+                options: itemLocationIds.filter((locationId) => {
+                  return itemLocationsMap[locationId].groupId === "REGULAR_ITEM_BALLS"
+                }).map((locationId) => {
+                  const itemName = itemsMap[itemLocationsMap[locationId].itemId].name
+                  
+                  return createSimpleSelectorOption({
+                    id: locationId,
+                    name: locationId,
+                    description: itemName,
+                    extraKeywords: itemName,
+                  })
+                }),
+              }),
             ] as const,
           }), // END RANDOMIZE_REGULAR_ITEM_BALLS
           createConfigurableToggleViewModel({
@@ -839,6 +856,23 @@ export const defaultSettingsViewModel = () => {
                   })
                 }),
               }), // END BAN
+              createSimpleMultiSelectorViewModel({
+                id: "EXCLUDE_LOCATIONS" as const,
+                name: "Exclude Locations",
+                description: "Item locations to exclude from being randomized.",
+                options: itemLocationIds.filter((locationId) => {
+                  return itemLocationsMap[locationId].groupId === "TM_ITEM_BALLS"
+                }).map((locationId) => {
+                  const itemName = itemsMap[itemLocationsMap[locationId].itemId].name
+                  
+                  return createSimpleSelectorOption({
+                    id: locationId,
+                    name: locationId,
+                    description: itemName,
+                    extraKeywords: itemName,
+                  })
+                }),
+              }),
             ] as const,
           }), // END RANDOMIZE_TM_ITEM_BALLS
           createConfigurableToggleViewModel({
@@ -862,6 +896,23 @@ export const defaultSettingsViewModel = () => {
                   })
                 }),
               }), // END BAN
+              createSimpleMultiSelectorViewModel({
+                id: "EXCLUDE_LOCATIONS" as const,
+                name: "Exclude Locations",
+                description: "Item locations to exclude from being randomized.",
+                options: itemLocationIds.filter((locationId) => {
+                  return itemLocationsMap[locationId].groupId === "REGULAR_HIDDEN_ITEMS"
+                }).map((locationId) => {
+                  const itemName = itemsMap[itemLocationsMap[locationId].itemId].name
+                  
+                  return createSimpleSelectorOption({
+                    id: locationId,
+                    name: locationId,
+                    description: itemName,
+                    extraKeywords: itemName,
+                  })
+                }),
+              }),
             ] as const,
           }), // END RANDOMIZE_REGULAR_HIDDEN_ITEMS
           createConfigurableToggleViewModel({

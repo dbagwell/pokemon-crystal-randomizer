@@ -30,7 +30,9 @@ export const updateItems = (
       return !settings.BANNED_ITEMS.includes(itemId) && !settings.RANDOMIZE_REGULAR_ITEM_BALLS.SETTINGS.BAN.includes(itemId)
     })
     
-    regularItemBallLocationIds.forEach((locationId) => {
+    regularItemBallLocationIds.filter((locationId) => {
+      return !settings.RANDOMIZE_REGULAR_ITEM_BALLS.SETTINGS.EXCLUDE_LOCATIONS.includes(locationId)
+    }).forEach((locationId) => {
       romInfo.gameData.itemLocations[locationId].itemId = random.element({
         array: availableItemIds,
         errorInfo: {
@@ -50,7 +52,9 @@ export const updateItems = (
       return !settings.BANNED_ITEMS.includes(itemId) && !settings.RANDOMIZE_TM_ITEM_BALLS.SETTINGS.BAN.includes(itemId)
     })
     
-    tmItemBallLocationIds.forEach((locationId) => {
+    tmItemBallLocationIds.filter((locationId) => {
+      return !settings.RANDOMIZE_TM_ITEM_BALLS.SETTINGS.EXCLUDE_LOCATIONS.includes(locationId)
+    }).forEach((locationId) => {
       romInfo.gameData.itemLocations[locationId].itemId = random.element({
         array: availableItemIds,
         errorInfo: {
@@ -73,7 +77,9 @@ export const updateItems = (
       return !settings.BANNED_ITEMS.includes(itemId) && !settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.SETTINGS.BAN.includes(itemId)
     })
     
-    regularHiddenItemLocationIds.forEach((locationId) => {
+    regularHiddenItemLocationIds.filter((locationId) => {
+      return !settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.SETTINGS.EXCLUDE_LOCATIONS.includes(locationId)
+    }).forEach((locationId) => {
       romInfo.gameData.itemLocations[locationId].itemId = random.element({
         array: availableItemIds,
         errorInfo: {
