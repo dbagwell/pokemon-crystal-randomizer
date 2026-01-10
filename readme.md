@@ -91,3 +91,7 @@ This project would not be possible without the following other projects that cam
 - The Pokémon Crystal Speedchoice project by Dabombstew
 - The Universal Pokémon Randomizer by Dabombstew and all its successors
 - The Pokémon Crystal Item Randomizer (for Speedchoice) by ERC and Chaotix
+
+## Notice
+
+This project is not affiliated with, authorised, or endorsed by The Pokémon Company, Game Freak, Creatures, or Nintendo.
