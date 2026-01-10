@@ -53,9 +53,16 @@ The app can also be used to generate ROMs, logs and patches without having to us
 - `--log`: **boolean flag (optional)** - Tells the generator to create a `.log.txt` file in the specified `--outputDir` that details all the changes included in the patch.
 - `--patch`: **boolean flag (optional)** - Tells the generator to create a `.pcrp` file in the specified `--outputDir` that can be used to create a patched ROM with the same changes.
 - `--preset`: **string (optional)** - The id of the settings preset to use when generating the changes. This can be one of the built in presets or one of the custom presets that were created using the app. The id of a custom preset is just its (case sensitive) name, and the following is a list of the built in preset ids:
-  - `VANILLA`
-  - `CLASSIC_BINGO`
-  - `BINGO_PLUS`
+  - VANILLA
+  - CLASSIC_BINGO
+  - BINGO_PLUS
+  - CLASSIC_KIR
+  - CLASSIC_EXTREME_KIR
+  - CLASSIC_FIR
+  - CLASSIC_EXTREME_FIR
+  - CLASSIC_CRAZY_FIR
+  - CLASSIC_MAX
+  - MAXIMUM_PLUS
 - `--settings`: **string (optional)** - The path to a `.yml` file that contains the desired settings to used when generating the changes.
 - `--seed`: **string (optional)** - The seed to use for all the random choices when generating the changes. If not specified, a random seed will be used.
 - `--inputROM`: **string (optional)** - The path to a `.gbc` file that contains the vanilla Pokémon Crystal Version 1.1 ROM. Required if using the `--rom` option and no vanilla ROM has been provided to the app before.
