@@ -431,7 +431,7 @@ export const generatorLog = (params: {
   })
   
   addSection({
-    header: "TMS",
+    header: "TM MOVES",
     content: logTable({
       headers: [
         "TM",
@@ -531,7 +531,7 @@ export const generatorLog = (params: {
   })
   
   addSection({
-    header: "ITEMS",
+    header: "ITEM LOCATIONS",
     content: logTable({
       headers: [
         "LOCATION",
@@ -554,7 +554,8 @@ export const generatorLog = (params: {
       ].map((group) => {
         return {
           rows: group.filter((id) => {
-            return settings.CHANGE_MYSTERY_GIFT || id !== "GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT"
+            return (settings.CHANGE_MYSTERY_GIFT || id !== "GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT")
+              && (settings.ENABLE_GS_BALL_EVENT || id !== "GOLDENROD_POKECENTER_1F_LINK_RECEPTIONISTS_GIFT")
           }).map((id) => {
             let displayId: string = id
             
@@ -603,7 +604,7 @@ export const generatorLog = (params: {
   })
   
   addSection({
-    header: "SHOPS",
+    header: "SHOP ITEMS",
     content: logTable({
       headers: [
         "SHOP",
@@ -698,7 +699,8 @@ const logTable = (params: {
         if (isPokemonId(value)) {
           return pokemonMap[value].name.toUpperCase()
         } else if (isItemId(value) && !value.startsWith("TM")) {
-          return itemsMap[value].name.toUpperCase()
+          const name = itemsMap[value].name.toUpperCase()
+          return name.replaceAll(/É/g, "E")
         } else if (isMoveId(value)) {
           return movesMap[value].name.toUpperCase()
         } else {

@@ -1285,3 +1285,7 @@ export const warpIds = [
 ] as const
 
 export type WarpId = typeof warpIds[number]
+
+export const isWarpId = (value: string): value is WarpId => {
+  return (warpIds as readonly string[]).includes(value)
+}

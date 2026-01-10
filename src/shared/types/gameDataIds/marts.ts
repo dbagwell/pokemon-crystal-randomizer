@@ -41,6 +41,10 @@ export const martIds = [
 
 export type MartId = typeof martIds[number]
 
+export const isMartId = (value: string): value is MartId => {
+  return (martIds as readonly string[]).includes(value)
+}
+
 export const specialShopIds = [
   "GOLDENROD_VENDING_MACHINES",
   "CELADON_VENDING_MACHINES",
@@ -55,3 +59,7 @@ export const specialShopIds = [
 ] as const
 
 export type SpecialShopId = typeof specialShopIds[number]
+
+export const isSpecialShopId = (value: string): value is SpecialShopId => {
+  return (specialShopIds as readonly string[]).includes(value)
+}

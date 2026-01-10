@@ -312,7 +312,7 @@ export type HoldableItemId = typeof holdableItemIds[number]
 export type BagItemId = typeof bagItemIds[number]
 export type ItemId = typeof itemIds[number]
 
-export const isItemId = (value: string): value is ItemId => {
+export const isItemId = (value: any): value is ItemId => {
   return itemIds.includes(value as any)
 }
 

@@ -32,7 +32,7 @@ export class RendererAPI implements ElectronWindowApi<RendererAPI> {
   
   readonly setReleaseNotes = async (params: {
     requestId: string,
-    releaseNotes: string,
+    releaseNotes: { version: string, note: string | null }[],
     currentVersionNumber: string,
     newVersionNumber: string,
   }): Promise<void> => {

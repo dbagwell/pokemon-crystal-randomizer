@@ -153,7 +153,8 @@
       const filteredFilesTransfer = new DataTransfer()
       
       ;[...event.dataTransfer.files].forEach((file) => {
-        if (allowedExtensions.includes(file.path.split(".").toReversed()[0])) {
+        console.log(file)
+        if (allowedExtensions.includes(file.name.split(".").toReversed()[0])) {
           filteredFilesTransfer.items.add(file)
         }
       })

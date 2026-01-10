@@ -36,3 +36,10 @@ addedAreaRequirements:
   - DIGLETTS_CAVE_VERMILION_ENTRANCE_AREA
   matchingRequirements:
   - VERMILION_CITY_SNORLAX_AREA_CAVE_IN
+- requirements:
+  - STORMBADGE
+  - HM02
+  areaIds:
+  - VICTORY_ROAD_GATE_EAST_AREA
+  matchingRequirements:
+  - VICTORY_ROAD_GATE_NORTH_AREA
