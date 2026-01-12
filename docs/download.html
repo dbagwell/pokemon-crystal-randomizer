@@ -46,7 +46,13 @@
         font-family: Roboto, sans-serif;
       }
       
+      html {
+        height: 100%;
+      }
+      
       body {
+        margin: 0;
+        height: 100%;
         background-color: #F0F0F0;
         color: #0A0A0A;
         display: flex;
@@ -57,7 +63,9 @@
         display: grid;
         grid-template-columns: minmax(0, max-content);
         gap: 15px;
-        margin: auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: auto;
         max-width: 100%;
       }
       
