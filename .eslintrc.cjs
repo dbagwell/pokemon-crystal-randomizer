@@ -66,6 +66,7 @@ module.exports = {
     "func-call-spacing": "error",
     "function-call-argument-newline": ["error", "consistent"],
     "function-paren-newline": "error",
+    "html-eslint/id-naming-convention": "never",
     "implicit-arrow-linebreak": "error",
     "indent": ["error", 2],
     "key-spacing": "error",

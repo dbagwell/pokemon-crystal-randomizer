@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Download Pokémon Crystal Randomizer</title>
+    <script type="text/javascript">
+        const getVersion = async () => {
+          try {
+            const response = await fetch(
+              "https://api.github.com/repos/dbagwell/pokemon-crystal-randomizer/releases/latest", 
+              {
+                headers: {
+                  'X-GitHub-Api-Version': '2022-11-28',
+                }
+              }
+            )
+
+            if (!response.ok) {
+              throw new Error(`GitHub API responded with status ${response.status}`)
+            }
+            
+            const data = await response.json()
+            const version = data.tag_name.slice(1)
+            const baseURL = "https://github.com/dbagwell/pokemon-crystal-randomizer/releases/latest/download"
+            const baseWindowsURL = `${baseURL}/Pokemon-Crystal-Randomizer-Installer-${version}-windows`
+            const baseMacURL = `${baseURL}/Pokemon-Crystal-Randomizer-${version}-macOS`
+            const baseLinuxURL = `${baseURL}/Pokemon-Crystal-Randomizer-${version}-linux`
+            
+            document.getElementById("windows_ia32").href = `${baseWindowsURL}-ia32.exe`
+            document.getElementById("windows_x64").href = `${baseWindowsURL}-x64.exe`
+            document.getElementById("windows_arm64").href = `${baseWindowsURL}-arm64.exe`
+            document.getElementById("mac_universal").href = `${baseMacURL}-universal.zip`
+            document.getElementById("mac_x64").href = `${baseMacURL}-x64.zip`
+            document.getElementById("mac_arm64").href = `${baseMacURL}-arm64.zip`
+            document.getElementById("linux_armv7l").href = `${baseLinuxURL}-armv7l.AppImage`
+            document.getElementById("linux_x86_64").href = `${baseLinuxURL}-x86_64.AppImage`
+            document.getElementById("linux_arm64").href = `${baseLinuxURL}-arm64.AppImage`
+          } catch (error) {
+            console.error("Failed to fetch the latest release:", error)
+          }
+        }
+        
+        getVersion();
+    </script>
+    <style>
+      * {
+        font-family: Roboto, sans-serif;
+      }
+      
+      html {
+        height: 100%;
+      }
+      
+      body {
+        margin: 0;
+        height: 100%;
+        background-color: #F0F0F0;
+        color: #0A0A0A;
+        display: flex;
+        justify-content: center;
+      }
+      
+      .container {
+        display: grid;
+        grid-template-columns: minmax(0, max-content);
+        gap: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: auto;
+        max-width: 100%;
+      }
+      
+      .osContainer {
+        background-color: #DDDDDD;
+        padding: 15px;
+        border-radius: 20px;
+      }
+      
+      a {
+        color: #8828B0;
+      }
+      
+      pre {
+        font-family: monospace;
+        background-color: #CCCCCC;
+        display: inline-block;
+        padding: 5px;
+        margin: 0px;
+      }
+      
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #181818;
+          color: #EEEEEE;
+        }
+      
+        .osContainer {
+          background-color: #282828;
+        }
+      
+        pre {
+          background-color: #0A0A0A;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Download Pokémon Crystal Randomizer</h1>
+      <h3>Installation Steps</h3>
+      <div>Click on the appropriate download link for your system below and follow the installation instructions.</div>
+      <br>
+      <div class="osContainer">
+        <h2>Windows</h2>
+        <div>
+          <a id="windows_ia32">32-bit App</a>
+        </div>
+        <br>
+        <div>
+          <a id="windows_x64">64-bit App (for x86 based systems)</a>
+        </div>
+        <br>
+        <div>
+          <a id="windows_arm64">64-bit App (for arm based systems)</a>
+        </div>
+        <p>After downloading the installer, run it and follow the installation steps.</p>
+      </div>
+      <div class="osContainer">
+        <h2>macOS</h2>
+        <div>
+          <a id="mac_universal">32-bit App</a>
+        </div>
+        <br>
+        <div>
+          <a id="mac_x64">64-bit App (for Intel based systems)</a>
+        </div>
+        <br>
+        <div>
+          <a id="mac_arm64">64-bit App (for Apple M series systems)</a>
+        </div>
+        <p>After downloading the Zip file, decompress/unzip it to extract the App from it.</p>
+      </div>
+      <div class="osContainer">
+        <h2>Linux</h2>
+        <div>
+          <a id="linux_armv7l">32-bit App</a>
+        </div>
+        <br>
+        <div>
+          <a id="linux_x86_64">64-bit App (for x86 based systems)</a>
+        </div>
+        <br>
+        <div>
+          <a id="linux_arm64">64-bit App (for arm based systems)</a>
+        </div>
+        <p>After downloading the AppImage file, make it executable by using the command line to run the following command:</p>
+        <pre>chmod a+x "path_to_AppImage"</pre>
+      </div>
+    </div>
+  </body>
+</html>

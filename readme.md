@@ -4,17 +4,7 @@ Pokémon Crystal Randomizer is a tool for modifying the "vanilla" Pokémon Cryst
 
 ## Installation
 
-### Windows
-
-Download and run the appropriate Windows Executable (.exe) installer for your system from [here](https://github.com/dbagwell/pokemon-crystal-randomizer/releases/latest) and follow the installation steps.
-
-### macOS
-
-Download the appropriate Zip file (.zip) for your system from here [here](https://github.com/dbagwell/pokemon-crystal-randomizer/releases/latest) and decompress/unzip it to extract the App from it.
-
-### Linux
-
-Download the appropriate AppImage file for your system from here [here](https://github.com/dbagwell/pokemon-crystal-randomizer/releases/latest).
+Download the latest release of the application from [here](https://dbagwell.github.io/pokemon-crystal-randomizer/docs/download.html) and follow the installation instructions.
 
 ## Usage
 
