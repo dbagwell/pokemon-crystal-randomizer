@@ -1,15 +1,15 @@
-import type { RendererAPI } from "@rendererAPI"
+import type { RendererAPIInterface } from "@shared/types/ipc/rendererAPIInterface"
 import crypto from "crypto"
 import type { BrowserWindow } from "electron"
 import { bindWindowApi, type WindowApiBinding } from "electron-affinity/main"
 
-type RendererAPIDictionary<Key extends number | "generatorWindow"> = { [K in Key]?: WindowApiBinding<RendererAPI> }
+type RendererAPIDictionary<Key extends number | "generatorWindow"> = { [K in Key]?: WindowApiBinding<RendererAPIInterface> }
 
 export const rendererAPIS: RendererAPIDictionary<number | "generatorWindow"> = {}
 export const rendererAPIResponseListeners: Dictionary<(result: any) => void> = {}
 
 export const bindRendererAPI = async (window: BrowserWindow, isGeneratorWindow?: boolean) => {
-  rendererAPIS[isGeneratorWindow ? "generatorWindow" : window.id] = await bindWindowApi<RendererAPI>(window, "RendererAPI")
+  rendererAPIS[isGeneratorWindow ? "generatorWindow" : window.id] = await bindWindowApi<RendererAPIInterface>(window, "RendererAPI")
 }
 
 export const makeRendererAPIRequest = async <Result>(

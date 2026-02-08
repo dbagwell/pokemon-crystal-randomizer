@@ -3,16 +3,16 @@ import "material-icons/iconfont/material-icons.css"
 import AppView from "@components/AppView.svelte"
 import PlayerOptionsWindow from "@components/PlayerOptionsWindow.svelte"
 import ReleaseNotesWindow from "@components/ReleaseNotesWindow.svelte"
-import type { MainAPI } from "@mainAPI" // Only the type is allowed to be imported, the type keyword must be placed outside of the brackets.
 import { updateColors } from "@scripts/colors"
 import { RendererAPI } from "@scripts/ipc/rendererAPI"
 import type { WindowType } from "@shared/appData/windowTypes"
+import type { MainAPIInterface } from "@shared/types/ipc/mainAPIInterface"
 import { bindMainApi, exposeWindowApi } from "electron-affinity/window"
 import { mount } from "svelte"
 
 const init = async () => {
   exposeWindowApi(new RendererAPI())
-  window.mainAPI = await bindMainApi<MainAPI>("MainAPI")
+  window.mainAPI = await bindMainApi<MainAPIInterface>("MainAPI")
   
   updateColors()
   
