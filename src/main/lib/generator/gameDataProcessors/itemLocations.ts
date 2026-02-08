@@ -1125,6 +1125,10 @@ export const updateAccessLogic = (
       ],
       modifyMutualAccess: true,
     })
+    
+    romInfo.gameData.itemLocations["ROUTE_30_CHERRYGROVE_SIDE_JOEYS_GIFT"].accessRequirements = romInfo.gameData.itemLocations["ROUTE_30_CHERRYGROVE_SIDE_JOEYS_GIFT"].accessRequirements?.filter((requirement) => {
+      return requirement !== "ELMS_LAB" && requirement !== "MYSTERY_EGG"
+    })
   }
   
   if (settings.REMOVE_ILEX_CUT_TREE) {

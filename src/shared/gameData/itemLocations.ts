@@ -4122,6 +4122,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
       "GOLDENROD_CITY_MAIN_AREA",
       "OLIVINE_CITY",
       "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      "MYSTERY_EGG",
+      "ELMS_LAB",
     ],
     romOffsets: [
       [
