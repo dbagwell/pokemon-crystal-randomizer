@@ -366,21 +366,24 @@ export const shuffleItems = (
     let foundLocation = false
     
     while (!foundLocation) {
-      const location = random.element({
-        array: getAccessibleLocations({
-          accessibleItems: [
-            ...startingAccessibleItems,
-            ...allRemainingProgressionItems.map((item) => {
-              return {
-                itemId: item.itemId,
-                isFromMart: true, // Might not always be correct, but is always correct when it matters.
-              }
-            }),
-          ],
-          allItemLocations: allItemLocations,
-          allowNormalConsumables: !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
-        }).filter((location) => {
-          return isNullish(location.itemId)
+      let location
+      
+      try {
+        location = random.element({
+          array: getAccessibleLocations({
+            accessibleItems: [
+              ...startingAccessibleItems,
+              ...allRemainingProgressionItems.map((item) => {
+                return {
+                  itemId: item.itemId,
+                  isFromMart: true, // Might not always be correct, but is always correct when it matters.
+                }
+              }),
+            ],
+            allItemLocations: allItemLocations,
+            allowNormalConsumables: !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
+          }).filter((location) => {
+            return isNullish(location.itemId)
             && !invalidLocations.includes(location.id)
             && location.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
             && (!(holdableItemIds as readonly ItemId[]).includes(selectedItemInfo.itemId) || !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC || location.type === "MART")
@@ -390,8 +393,11 @@ export const shuffleItems = (
                 return bannedShopLocation.id === location.id
               })
             )
-        }),
-      })
+          }),
+        })
+      } catch {
+        throw new Error("Unable to shuffle items. Not enough valid locations to place items. Try updating 'SHUFFLE_ITEMS' subsettings to be less restrictive.")
+      }
       
       location.itemId = selectedItemInfo.itemId
       
