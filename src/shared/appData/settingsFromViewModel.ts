@@ -2,6 +2,7 @@ import type {
   ConfigurableMultiSelectorViewModel,
   ConfigurableSelectorOption,
   GroupMultiSelectorViewModel,
+  InputGroupListViewModel,
   InputViewModel,
   IntegerInputGroupViewModel,
   IntegerInputViewModel,
@@ -163,6 +164,13 @@ const settingsFromConfigurableSelectorOption = <OptionType extends ConfigurableS
   }) as SettingsFromConfigurableSelectorOption<OptionType>
 }
 
+type SettingsFromInputGroupListViewModel<ViewModelType extends InputGroupListViewModel> = SettingsFromArrayOfInputViewModels<ViewModelType["groups"][number]>[]
+const settingsFromInputGroupListViewModel = <ViewModelType extends InputGroupListViewModel>(viewModel: ViewModelType): SettingsFromInputGroupListViewModel<ViewModelType> => {
+  return viewModel.groups.map((group) => {
+    return settingsFromArrayOfInputViewModels(group)
+  }) as SettingsFromInputGroupListViewModel<ViewModelType>
+}
+
 type SettingsFromInputViewModel<ViewModelType extends InputViewModel> =
   ViewModelType extends IntegerInputViewModel ? SettingsFromIntegerInputViewModel<ViewModelType>
   : ViewModelType extends IntegerInputGroupViewModel ? SettingsFromIntegerInputGroupViewModel
@@ -173,6 +181,7 @@ type SettingsFromInputViewModel<ViewModelType extends InputViewModel> =
   : ViewModelType extends ConfigurableMultiSelectorViewModel ? SettingsFromConfigurableMultiSelectorViewModel<ViewModelType>
   : ViewModelType extends GroupMultiSelectorViewModel ? SettingsFromGroupMultiSelectorViewModel<ViewModelType>
   : ViewModelType extends ToggleViewModel ? SettingsFromToggleViewModel<ViewModelType>
+  : ViewModelType extends InputGroupListViewModel ? SettingsFromInputGroupListViewModel<ViewModelType>
   : never
 const settingsFromInputViewModel = <ViewModelType extends InputViewModel>(viewModel: ViewModelType): SettingsFromInputViewModel<ViewModelType> => {
   switch (viewModel.type) {
@@ -202,6 +211,9 @@ const settingsFromInputViewModel = <ViewModelType extends InputViewModel>(viewMo
   }
   case "TOGGLE": {
     return settingsFromToggleViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
+  }
+  case "INPUT_GROUP_LIST": {
+    return settingsFromInputGroupListViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
   default: {
     const unhandledCase: never = viewModel

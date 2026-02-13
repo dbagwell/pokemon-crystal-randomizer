@@ -144,7 +144,7 @@
     })
   })
   
-  const handleAutocompleteSelection = (optionId: string | undefined) => {
+  const handleAutocompleteSelection = (optionId: string | number | undefined) => {
     const option = viewModel.options.find((option) => {
       return option.id === optionId
     })

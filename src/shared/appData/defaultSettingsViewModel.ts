@@ -4,6 +4,7 @@ import { itemCategoriesMap } from "@shared/gameData/itemCategories"
 import { itemLocationGroupsMap } from "@shared/gameData/itemLocationGroups"
 import { itemLocationsMap } from "@shared/gameData/itemLocations"
 import { itemsMap } from "@shared/gameData/items"
+import { martGroupsMap } from "@shared/gameData/martGroups"
 import { martsMap, specialShopsMap } from "@shared/gameData/marts"
 import { movesMap } from "@shared/gameData/moves"
 import { pokemonMap } from "@shared/gameData/pokemon"
@@ -14,15 +15,18 @@ import { type ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
 import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGroups"
 import { itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
+import { logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
 import { martGroupIds } from "@shared/types/gameDataIds/martGroups"
 import { specialShopIds } from "@shared/types/gameDataIds/marts"
 import { moveIds } from "@shared/types/gameDataIds/moves"
 import { pokemonIds } from "@shared/types/gameDataIds/pokemon"
+import { warpIds } from "@shared/types/gameDataIds/warps"
 import {
   createConfigurableMultiSelectorViewModel,
   createConfigurableSelectorOption,
   createConfigurableToggleViewModel,
   createGroupMultiSelectorViewModel,
+  createInputGroupListViewModel,
   createIntegerInputGroupViewModel,
   createIntegerInputViewModel,
   createIntegerRangeInputViewModel,
@@ -1194,11 +1198,72 @@ export const defaultSettingsViewModel = () => {
               }),
               createSimpleMultiSelectorViewModel({
                 id: "ACCESS_MODIFIERS" as const,
-                name: "Access Modifiers",
+                name: "Preset Access Modifiers",
                 description: "Additional sets of rules to use when determining valid locations for the shuffled items.",
                 options: accessRulesetIds.map((rulesetId) => {
                   return createSimpleSelectorOption(accessRulsetsMap[rulesetId])
                 }),
+              }),
+              createInputGroupListViewModel({
+                id: "CUSTOM_ACCESS_MODIFIERS" as const,
+                name: "Custom Access Modifiers",
+                description: "Additional rules to use when determining valid locations for the shuffled items.",
+                itemName: "Modifier",
+                createGroupFunction: () => {
+                  return [
+                    createSimpleMultiSelectorViewModel({
+                      id: "LOCATIONS" as const,
+                      name: "Locations",
+                      description: "The locations that should have their access requirements modified.\n"
+                        + "These can either be specific item locations, shops, or entire areas in the overworld.",
+                      options: [
+                        ...itemLocationIds.map((locationId) => {
+                          return createSimpleSelectorOption({
+                            id: locationId,
+                            name: locationId,
+                          })
+                        }),
+                        ...martGroupIds.map((groupId) => {
+                          return createSimpleSelectorOption({
+                            id: groupId,
+                            name: groupId,
+                          })
+                        }),
+                        ...specialShopIds.map((shopId) => {
+                          return createSimpleSelectorOption({
+                            id: shopId,
+                            name: shopId,
+                          })
+                        }),
+                        ...logicalAccessAreaIds.map((areaId) => {
+                          return createSimpleSelectorOption({
+                            id: areaId,
+                            name: areaId,
+                          })
+                        }),
+                        ...warpIds.map((warpId) => {
+                          return createSimpleSelectorOption({
+                            id: warpId,
+                            name: warpId,
+                          })
+                        }),
+                      ],
+                    }),
+                    createSimpleMultiSelectorViewModel({
+                      id: "ADDED_REQUIREMENTS" as const,
+                      name: "Additional Access Requirements",
+                      description: "A list of Items, Pokémon, Locations, Areas, and Warps that the player must already have access to in order to be able to access the locations specified above.",
+                      options: createAllRequirementsOptions(),
+                    }),
+                    createSimpleMultiSelectorViewModel({
+                      id: "MATCHING_REQUIREMENTS" as const,
+                      name: "Matching Requirements",
+                      description: "Locations could have multiple methods of being accessed that have different requirements. The additional access requirements specified above will only be added to the access methods of each location that already have all of the following requirements.",
+                      options: createAllRequirementsOptions(),
+                    }),
+                  ]
+                },
+                groups: [],
               }),
               createSimpleMultiSelectorViewModel({
                 id: "EXCLUDE_LOCATIONS" as const,
@@ -2242,4 +2307,45 @@ const createSelectorsFromItemCategories = (): SelectorsFromItemCategoriesMap => 
   return Object.values(itemCategoriesMap).map((category) => {
     return createSelectorFromItemCategory(category) as ReturnType<typeof createSelectorFromItemCategory>
   }) as SelectorsFromItemCategoriesMap
+}
+
+const createAllRequirementsOptions = () => {
+  return [
+    ...itemIds.map((itemId) => {
+      return createSimpleSelectorOption(itemsMap[itemId])
+    }),
+    ...pokemonIds.map((pokemonId) => {
+      return createSimpleSelectorOption(pokemonMap[pokemonId])
+    }),
+    ...itemLocationIds.map((locationId) => {
+      return createSimpleSelectorOption({
+        id: locationId,
+        name: locationId,
+      })
+    }),
+    ...logicalAccessAreaIds.map((areaId) => {
+      return createSimpleSelectorOption({
+        id: areaId,
+        name: areaId,
+      })
+    }),
+    ...warpIds.map((warpId) => {
+      return createSimpleSelectorOption({
+        id: warpId,
+        name: warpId,
+      })
+    }),
+    ...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map((number) => {
+      return createSimpleSelectorOption({
+        id: number,
+        name: `${number} Badges`,
+        description: `Indicates that the locations should only be considered accessible if the player already has access to at least ${number} badges.`,
+      })
+    }),
+    createSimpleSelectorOption({
+      id: "INACCESSIBLE",
+      name: "INACCESSIBLE",
+      description: "Indicates that the locations should not ever be considered accessible, meaning nothing important should be placed there.",
+    }),
+  ]
 }

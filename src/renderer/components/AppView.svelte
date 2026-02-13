@@ -116,7 +116,7 @@
               onRemove={showRemovePresetConfirmation}
               onSelect={(presetId) => { presetSelected(presetId ?? "VANILLA") }}
               options={presetOptions}
-              previousSelection={optionFrom(currentPreset)}
+              previousSelection={optionFrom(currentPreset as Preset)}
               restoreOnBlur={true}
               title="Choose Preset"
             />
@@ -211,7 +211,7 @@
   import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
   import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
   import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
-  import { presetsMap } from "@shared/appData/presets"
+  import { type Preset, presetsMap } from "@shared/appData/presets"
   import { type PlayerOptions, playerOptionsFromViewModel, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
   import { createSimpleToggleViewModel } from "@shared/types/viewModels"
   import { isNullish } from "@shared/utils"

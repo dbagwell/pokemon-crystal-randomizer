@@ -1,21 +1,20 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
-import { getYAML } from "@lib/utils/yamlUtils"
+import { accessRulsetsMap } from "@shared/appData/accessRulesets"
 import type { Settings } from "@shared/appData/settingsFromViewModel"
 import type { GameData } from "@shared/types/gameData/gameData"
 import type { ItemLocation } from "@shared/types/gameData/itemLocation"
 import type { Mart, SpecialShop } from "@shared/types/gameData/mart"
-import { type AccessRequirement, isAccessRequirement, type Warp } from "@shared/types/gameData/warp"
+import { type AccessRequirement, type Warp } from "@shared/types/gameData/warp"
 import type { ItemLocationGroupId } from "@shared/types/gameDataIds/itemLocationGroups"
-import { type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
+import { isItemLocationId, type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { type BadgeItemId, badgeItemIds, ballItemIds, type HoldableItemId, holdableItemIds, isItemId, type ItemId, type KeyItemId, keyItemIds, type MenuItemId, menuItemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
-import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
-import { martGroupIds } from "@shared/types/gameDataIds/martGroups"
-import { type MartId, martIds, type SpecialShopId, specialShopIds } from "@shared/types/gameDataIds/marts"
+import { isLogicalAccessAreaId, type LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
+import { isMartGroupId, martGroupIds } from "@shared/types/gameDataIds/martGroups"
+import { type MartId, type SpecialShopId } from "@shared/types/gameDataIds/marts"
 import { isPokemonId } from "@shared/types/gameDataIds/pokemon"
-import { type WarpId, warpIds } from "@shared/types/gameDataIds/warps"
+import { isWarpId } from "@shared/types/gameDataIds/warps"
 import { getAllCombinations, isNotNullish, isNullish, isNumber, isObject, isString, removeFirstElementFromArrayWhere, removeSupersets } from "@shared/utils"
-import path from "path"
 
 export const updateItems = (
   settings: Settings,
@@ -1061,8 +1060,17 @@ export const updateAccessLogic = (
       const area = romInfo.gameData.areas[areaId]
       area.accessOptions = area.accessOptions.map((option) => {
         const optionArray = [option].flat()
+        const stringRequirements = new Set(optionArray.filter((option) => {
+          return isString(option)
+        })) as Set<string>
         
-        if (new Set(optionArray).isSupersetOf(new Set(matchingRequirements)) && (!(modifyMutualAccess ?? false) || new Set(optionArray.filter((option) => { return isString(option) })).intersection(new Set(areaIds)).size > 0)) {
+        if (
+          new Set(optionArray).isSupersetOf(new Set(matchingRequirements))
+          && (
+            !(modifyMutualAccess ?? false)
+            || stringRequirements.intersection(new Set(areaIds)).size > 0
+          )
+        ) {
           optionArray.push(...requirements)
           return optionArray
         } else {
@@ -1089,8 +1097,17 @@ export const updateAccessLogic = (
       const area = romInfo.gameData.areas[areaId]
       area.accessOptions = area.accessOptions.map((option) => {
         const optionArray = [option].flat()
+        const stringRequirements = new Set(optionArray.filter((option) => {
+          return isString(option)
+        })) as Set<string>
       
-        if (new Set(optionArray).isSupersetOf(new Set(matchingRequirements)) && (!(modifyMutualAccess ?? false) || new Set(optionArray.filter((option) => { return isString(option) })).intersection(new Set(areaIds)).size > 0)) {
+        if (
+          new Set(optionArray).isSupersetOf(new Set(matchingRequirements))
+          && (
+            !(modifyMutualAccess ?? false)
+            || stringRequirements.intersection(new Set(areaIds)).size > 0
+          )
+        ) {
           return optionArray.filter((requirement) => {
             return !requirements.includes(requirement)
           })
@@ -1405,92 +1422,51 @@ export const updateAccessLogic = (
     romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements?.push(romInfo.gameData.eventPokemon.TOGEPI)
   }
   
-  settings.SHUFFLE_ITEMS.SETTINGS.ACCESS_MODIFIERS.forEach((rulesetId) => {
-    let rulesetInfo: any
+  const accessModifiers = [
+    ...settings.SHUFFLE_ITEMS.SETTINGS.ACCESS_MODIFIERS.flatMap((rulesetId) => {
+      return accessRulsetsMap[rulesetId].accessModifiers
+    }),
+    ...settings.SHUFFLE_ITEMS.SETTINGS.CUSTOM_ACCESS_MODIFIERS,
+  ]
+  
+  accessModifiers.forEach((modifier) => {
+    const areaIds: LogicalAccessAreaId[] = []
     
-    try {
-      rulesetInfo = getYAML([path.resolve(__dirname, "accessRulesets", `${rulesetId}.yml`)])
-    } catch (error) {
-      throw new Error(`Cannot find selected ruleset of additional access modifiers '${rulesetId}'.`)
-    }
-    
-    if (!isObject(rulesetInfo)) {
-      throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
-    }
-    
-    if (isNotNullish(rulesetInfo.addedAreaRequirements)) {
-      if (!Array.isArray(rulesetInfo.addedAreaRequirements)) {
-        throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
+    modifier.LOCATIONS.forEach((id) => {
+      if (isLogicalAccessAreaId(id)) {
+        areaIds.push(id)
+      } else if (isItemLocationId(id)) {
+        romInfo.gameData.itemLocations[id].accessRequirements = [
+          ...romInfo.gameData.itemLocations[id].accessRequirements ?? [],
+          ...modifier.ADDED_REQUIREMENTS,
+        ]
+      } else if (isWarpId(id)) {
+        romInfo.gameData.warps[id].accessRequirements = [
+          ...romInfo.gameData.warps[id].accessRequirements ?? [],
+          ...modifier.ADDED_REQUIREMENTS,
+        ]
+      } else if (isMartGroupId(id)) {
+        Object.values(romInfo.gameData.marts).filter((mart) => {
+          return mart.groupId === id
+        }).forEach((mart) => {
+          mart.accessRequirements = [
+            ...mart.accessRequirements ?? [],
+            ...modifier.ADDED_REQUIREMENTS,
+          ]
+        })
+      } else {
+        romInfo.gameData.specialShops[id].accessRequirements = [
+          ...romInfo.gameData.specialShops[id].accessRequirements ?? [],
+          ...modifier.ADDED_REQUIREMENTS,
+        ]
       }
-      
-      rulesetInfo.addedAreaRequirements.forEach((rule: any) => {
-        if (!(
-          isObject(rule)
-        && Array.isArray(rule.requirements)
-        && Array.isArray(rule.areaIds)
-        && (Array.isArray(rule.matchingRequirements) || isNullish(rule.matchingRequirements))
-        && rule.requirements.every((requirement: any) => {
-          return isAccessRequirement(requirement)
-        })
-        && rule.areaIds.every((id: any) => {
-          return logicalAccessAreaIds.includes(id)
-        })
-        && (rule.matchingRequirements?.every((requirement: any) => {
-          return isAccessRequirement(requirement)
-        }) ?? true)
-        )) {
-          throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
-        }
+    })
     
-        addAccessRequirements(rule)
-      })
-    }
-    
-    if (isNotNullish(rulesetInfo.addedItemLocationRequirements)) {
-      if (!Array.isArray(rulesetInfo.addedItemLocationRequirements)) {
-        throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
-      }
-      
-      rulesetInfo.addedItemLocationRequirements.forEach((rule: any) => {
-        if (!(
-          isObject(rule)
-        && Array.isArray(rule.requirements)
-        && Array.isArray(rule.itemLocationIds)
-        && rule.requirements.every((requirement: any) => {
-          return isAccessRequirement(requirement)
-        })
-        && rule.itemLocationIds.every((id: any) => {
-          return itemLocationIds.includes(id) || warpIds.includes(id) || martIds.includes(id) || specialShopIds.includes(id)
-        })
-        )) {
-          throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
-        }
-    
-        rule.itemLocationIds.forEach((id: any) => {
-          if (itemLocationIds.includes(id)) {
-            romInfo.gameData.itemLocations[id as ItemLocationId].accessRequirements = [
-              ...romInfo.gameData.itemLocations[id as ItemLocationId].accessRequirements ?? [],
-              ...rule.requirements,
-            ]
-          } else if (warpIds.includes(id)) {
-            romInfo.gameData.warps[id as WarpId].accessRequirements = [
-              ...romInfo.gameData.warps[id as WarpId].accessRequirements ?? [],
-              ...rule.requirements,
-            ]
-          } else if (martIds.includes(id)) {
-            romInfo.gameData.marts[id as MartId].accessRequirements = [
-              ...romInfo.gameData.marts[id as MartId].accessRequirements ?? [],
-              ...rule.requirements,
-            ]
-          } else {
-            romInfo.gameData.specialShops[id as SpecialShopId].accessRequirements = [
-              ...romInfo.gameData.specialShops[id as SpecialShopId].accessRequirements ?? [],
-              ...rule.requirements,
-            ]
-          }
-        })
-      })
-    }
+    addAccessRequirements({
+      areaIds: areaIds,
+      requirements: modifier.ADDED_REQUIREMENTS,
+      matchingRequirements: modifier.MATCHING_REQUIREMENTS,
+    })
   })
 }
 

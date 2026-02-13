@@ -1,4 +1,4 @@
-import type { ConfigurableMultiSelectorViewModel, GroupMultiSelectorViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, IntegerRangeInputViewModel, PlayerOptionsViewModel, SettingsViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
+import type { ConfigurableMultiSelectorViewModel, GroupMultiSelectorViewModel, InputGroupListViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, IntegerRangeInputViewModel, PlayerOptionsViewModel, SettingsViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
 import { compact, isBoolean, isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
 
 export const applyPlayerOptionsToViewModel = (playerOptions: any, viewModel: PlayerOptionsViewModel, warnings: string[]) => {
@@ -67,6 +67,10 @@ const applySettingsToInputViewModel = (settings: any, viewModel: InputViewModel,
   }
   case "TOGGLE": {
     applySettingsToToggleViewModel(settings, viewModel, path, warnings)
+    break
+  }
+  case "INPUT_GROUP_LIST": {
+    applySettingsToInputGroupListViewModel(settings, viewModel, path, warnings)
     break
   }
   default: {
@@ -327,7 +331,7 @@ const applySettingsToSingleSelectorViewModel = (settings: any, viewModel: Single
         applySettingsToInputViewModel(settings.SETTINGS?.[option.id]?.[viewModel.id], viewModel, `${path}.SETTINGS.${option.id}.${viewModel.id}`, warnings)
       })
     } else if (isNotNullish(settings.SETTINGS) && isNotNullish(settings.SETTINGS?.[option.id])) {
-      warnings.push(unexpectedKeyWarning(`${path}.SETTINGS`, option.id))
+      warnings.push(unexpectedKeyWarning(`${path}.SETTINGS`, `${option.id}`))
     }
   })
 }
@@ -442,6 +446,22 @@ const applySettingsToGroupMultiSelectorViewModel = (settings: any, viewModel: Gr
     })
   } else if (isNotNullish(settings)) {
     warnings.push(invalidValueWarning(path, expectedSettingsType, settings))
+  }
+}
+
+const applySettingsToInputGroupListViewModel = (settings: any, viewModel: InputGroupListViewModel, path: string, warnings: string[]) => {
+  if (Array.isArray(settings)) {
+    viewModel.groups = settings.map((group, groupIndex) => {
+      const viewModels = viewModel.createGroupFunction()
+      
+      viewModels.forEach((subViewModel) => {
+        applySettingsToInputViewModel(group[subViewModel.id], subViewModel, `${path}.${groupIndex}.${subViewModel.id}`, warnings)
+      })
+      
+      return viewModels
+    })
+  } else if (isNotNullish(settings)) {
+    warnings.push(invalidValueWarning(path, "array of access modifier setting groups", settings))
   }
 }
 
