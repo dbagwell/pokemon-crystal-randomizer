@@ -1,4 +1,6 @@
 import { classicEarlyFly } from "@shared/appData/accessRulesets/classicEarlyFly"
+import { flashForDarkAreas } from "@shared/appData/accessRulesets/flashForDarkAreas"
+import { flashForPokemon } from "@shared/appData/accessRulesets/flashForPokemon"
 import { flyForPhoneCalls } from "@shared/appData/accessRulesets/flyForPhoneCalls"
 import { flyForPokemon } from "@shared/appData/accessRulesets/flyForPokemon"
 import { healingItemsForRed } from "@shared/appData/accessRulesets/healingItemsForRed"
@@ -20,11 +22,13 @@ export type AccessModifier = {
 }
 
 export const accessRulesetIds = [
+  "FLASH_FOR_DARK_AREAS",
   "CLASSIC_EARLY_FLY",
   "NO_VANILLA_BASEMENT",
   "NO_EARLY_SABRINA",
   "FLY_FOR_PHONE_CALLS",
   "FLY_FOR_POKEMON",
+  "FLASH_FOR_POKEMON",
   "POKEDEX_AND_SWEET_SCENT_FOR_POKEMON",
   "X_ITEMS_FOR_HARD_FIGHTS",
   "HEALING_ITEMS_FOR_RED",
@@ -39,6 +43,12 @@ export type AccessRuleset = {
 }
 
 export const accessRulsetsMap: IdMap<AccessRulesetId, AccessRuleset> = {
+  FLASH_FOR_DARK_AREAS: {
+    id: "FLASH_FOR_DARK_AREAS",
+    name: "Flash for Dark Areas",
+    description: "Makes it so that both Zephyrbadge and HM05 (Flash) must be obtainable before having to enter any dark areas.",
+    accessModifiers: flashForDarkAreas,
+  },
   CLASSIC_EARLY_FLY: {
     id: "CLASSIC_EARLY_FLY",
     name: "Classic Early Fly",
@@ -74,9 +84,15 @@ export const accessRulsetsMap: IdMap<AccessRulesetId, AccessRuleset> = {
     description: "Makes it so that both Stormbadge and HM02 (Fly) must be obtainable before having get items that require obtaining specific species of Pokémon.",
     accessModifiers: flyForPokemon,
   },
+  FLASH_FOR_POKEMON: {
+    id: "FLASH_FOR_POKEMON",
+    name: "Flash for Pokémon Checks",
+    description: "Makes it so that both Zephyrbadge and HM05 (Flash) must be obtainable before having get items that require obtaining specific species of Pokémon.",
+    accessModifiers: flashForPokemon,
+  },
   POKEDEX_AND_SWEET_SCENT_FOR_POKEMON: {
     id: "POKEDEX_AND_SWEET_SCENT_FOR_POKEMON",
-    name: "Pokédex and Sweet Scent for Pokémon",
+    name: "Pokédex and Sweet Scent for Pokémon Checks",
     description: "Makes it so that both the Pokédex and TM12 (Sweet Scent) must be obtainable before having get items that require obtaining specific species of Pokémon.",
     accessModifiers: pokedexAndSweetScentForPokemon,
   },

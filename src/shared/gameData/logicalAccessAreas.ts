@@ -1459,16 +1459,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   SILVER_CAVE_ROOM_1: {
     id: "SILVER_CAVE_ROOM_1",
     accessOptions: [
-      [
-        "SILVER_CAVE_OUTSIDE_CAVE_IN",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
-      [
-        "SILVER_CAVE_ROOM_2_MAIN_AREA_SOUTH_CAVE_OUT",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
+      "SILVER_CAVE_OUTSIDE_CAVE_IN",
+      "SILVER_CAVE_ROOM_2_MAIN_AREA_SOUTH_CAVE_OUT",
     ],
   },
   SILVER_CAVE_ROOM_2_MAIN_AREA: {
@@ -1567,11 +1559,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   DARK_CAVE_VIOLET_ENTRANCE_WEST_AREA: {
     id: "DARK_CAVE_VIOLET_ENTRANCE_WEST_AREA",
     accessOptions: [
-      [
-        "ROUTE_31_CAVE_IN",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
+      "ROUTE_31_CAVE_IN",
       "DARK_CAVE_VIOLET_ENTRANCE_SURF_AREA",
       "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA",
     ],
@@ -1579,22 +1567,14 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   DARK_CAVE_VIOLET_ENTRANCE_NORTH_AREA: {
     id: "DARK_CAVE_VIOLET_ENTRANCE_NORTH_AREA",
     accessOptions: [
-      [
-        "DARK_CAVE_BLACKTHORN_ENTRANCE_SW_AREA_CAVE_OUT",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
+      "DARK_CAVE_BLACKTHORN_ENTRANCE_SW_AREA_CAVE_OUT",
       "DARK_CAVE_VIOLET_ENTRANCE_SURF_AREA",
     ],
   },
   DARK_CAVE_VIOLET_ENTRANCE_SE_AREA: {
     id: "DARK_CAVE_VIOLET_ENTRANCE_SE_AREA",
     accessOptions: [
-      [
-        "ROUTE_46_NORTH_AREA_CAVE_IN",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
+      "ROUTE_46_NORTH_AREA_CAVE_IN",
       "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA",
     ],
   },
@@ -1638,22 +1618,14 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   DARK_CAVE_BLACKTHORN_ENTRANCE_NE_AREA: {
     id: "DARK_CAVE_BLACKTHORN_ENTRANCE_NE_AREA",
     accessOptions: [
-      [
-        "ROUTE_45_CAVE_IN",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
+      "ROUTE_45_CAVE_IN",
       "DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA",
     ],
   },
   DARK_CAVE_BLACKTHORN_ENTRANCE_SW_AREA: {
     id: "DARK_CAVE_BLACKTHORN_ENTRANCE_SW_AREA",
     accessOptions: [
-      [
-        "DARK_CAVE_VIOLET_ENTRANCE_NORTH_AREA_CAVE_IN",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
+      "DARK_CAVE_VIOLET_ENTRANCE_NORTH_AREA_CAVE_IN",
       "DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA",
     ],
   },
@@ -1843,76 +1815,36 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROCK_TUNNEL_1F_CERULEAN_SIDE: {
     id: "ROCK_TUNNEL_1F_CERULEAN_SIDE",
     accessOptions: [
-      [
-        "ROUTE_9_CAVE_IN",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
-      [
-        "ROCK_TUNNEL_B1F_SE_AREA_SOUTH_LADDER_UP",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
+      "ROUTE_9_CAVE_IN",
+      "ROCK_TUNNEL_B1F_SE_AREA_SOUTH_LADDER_UP",
     ],
   },
   ROCK_TUNNEL_1F_LAVENDER_SIDE: {
     id: "ROCK_TUNNEL_1F_LAVENDER_SIDE",
     accessOptions: [
-      [
-        "ROUTE_10_SOUTH_CAVE_IN",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
-      [
-        "ROCK_TUNNEL_B1F_NW_AREA_NW_LADDER_UP",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
+      "ROUTE_10_SOUTH_CAVE_IN",
+      "ROCK_TUNNEL_B1F_NW_AREA_NW_LADDER_UP",
     ],
   },
   ROCK_TUNNEL_1F_INNER_AREA: {
     id: "ROCK_TUNNEL_1F_INNER_AREA",
     accessOptions: [
-      [
-        "ROCK_TUNNEL_B1F_NW_AREA_EAST_LADDER_UP",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
-      [
-        "ROCK_TUNNEL_B1F_SE_AREA_NORTH_LADDER_UP",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
+      "ROCK_TUNNEL_B1F_NW_AREA_EAST_LADDER_UP",
+      "ROCK_TUNNEL_B1F_SE_AREA_NORTH_LADDER_UP",
     ],
   },
   ROCK_TUNNEL_B1F_NW_AREA: {
     id: "ROCK_TUNNEL_B1F_NW_AREA",
     accessOptions: [
-      [
-        "ROCK_TUNNEL_1F_LAVENDER_SIDE_LADDER_DOWN",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
-      [
-        "ROCK_TUNNEL_1F_INNER_AREA_SE_LADDER_DOWN",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
+      "ROCK_TUNNEL_1F_LAVENDER_SIDE_LADDER_DOWN",
+      "ROCK_TUNNEL_1F_INNER_AREA_SE_LADDER_DOWN",
     ],
   },
   ROCK_TUNNEL_B1F_SE_AREA: {
     id: "ROCK_TUNNEL_B1F_SE_AREA",
     accessOptions: [
-      [
-        "ROCK_TUNNEL_1F_INNER_AREA_NW_LADDER_DOWN",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
-      [
-        "ROCK_TUNNEL_1F_CERULEAN_SIDE_LADDER_DOWN",
-        "ZEPHYRBADGE",
-        "HM05",
-      ],
+      "ROCK_TUNNEL_1F_INNER_AREA_NW_LADDER_DOWN",
+      "ROCK_TUNNEL_1F_CERULEAN_SIDE_LADDER_DOWN",
     ],
   },
   SAFARI_ZONE_FUCHSIA_GATE_BETA: {

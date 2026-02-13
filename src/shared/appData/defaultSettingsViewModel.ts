@@ -1085,7 +1085,7 @@ export const defaultSettingsViewModel = () => {
               + "In addition, a set of rules about how the game works are used to make sure that items that are required in order to progress the game "
               + "will be never be placed in locations that could make it impossible to obtain them. "
               + "Areas or item locations that require owning or registering certain Pokémon are considered accessible if "
-              + "the player has access to at least 7 badges as well as the ability to use all HMs except for Fly "
+              + "the player has access to at least 7 badges as well as the ability to use all HMs except for Fly and Flash "
               + "and has access to the Bicycle, Squirtbottle, Pass, S.S.Ticket, Card Key, Clear Bell, Rainbow Wing, TM02 (Headbutt), TM08 (Rock Smash) and all 3 Fishing Rods.",
             viewModels: [
               createGroupMultiSelectorViewModel({

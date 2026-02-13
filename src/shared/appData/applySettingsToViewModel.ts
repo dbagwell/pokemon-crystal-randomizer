@@ -264,7 +264,7 @@ const applySettingsToSingleSelectorViewModel = (settings: any, viewModel: Single
   const expectedValueType = `one of [${optionIds[0]}, ${optionIds[1]}, ${optionIds[2]}, ${elipsis}${optionIds[optionIds.length - 1]}]`
   const expectedSettingsType = `${expectedValueType}${hasConfigurableOptions ? "or a dictionary with a 'VALUE' and 'SETTINGS'" : ""}`
   
-  const selectedOptionId = isString(settings) ? settings : settings?.VALUE
+  const selectedOptionId = isString(settings) || isNumber(settings) ? settings : settings?.VALUE
   
   if (!hasConfigurableOptions && isObject(settings)) {
     warnings.push(invalidValueWarning(path, expectedSettingsType, selectedOptionId))
@@ -273,7 +273,7 @@ const applySettingsToSingleSelectorViewModel = (settings: any, viewModel: Single
   } else if (isNullish(settings)) {
     warnings.push(missingValueWarning(path, expectedSettingsType))
     return
-  } else if (isString(settings) || !hasConfigurableOptions || !isObject(settings)) {
+  } else if (isString(settings) || isNumber(settings) || !hasConfigurableOptions || !isObject(settings)) {
     warnings.push(invalidValueWarning(path, expectedSettingsType, selectedOptionId))
   } else if (isNullish(settings.VALUE)) {
     warnings.push(missingValueWarning(`${path}.VALUE`, expectedValueType))
@@ -358,7 +358,7 @@ const applySettingsToSimpleMultiSelectorViewModel = (settings: any, viewModel: S
       
       if (isNullish(value)) {
         return undefined
-      } else if (isString(value) && optionIds.includes(value)) {
+      } else if ((isString(value) || isNumber(value)) && optionIds.includes(value)) {
         numberOfSelections++
         return value
       } else {
@@ -427,7 +427,7 @@ const applySettingsToGroupMultiSelectorViewModel = (settings: any, viewModel: Gr
         return group.forEach((value, innerIndex) => {
           if (isNullish(value)) {
             return
-          } else if (isString(value) && optionIds.includes(value)) {
+          } else if ((isString(value) || isNumber(value)) && optionIds.includes(value)) {
             if (viewModel.selectedOptionIds.flat().includes(value)) {
               warnings.push(duplicateValueWarning(path, value))
             } else {
