@@ -485,7 +485,7 @@ const generalItemLocations = (gameData: GameData): GeneralItemLocation[] => {
   const convertAccessRequirements = (requirements: AccessRequirement[]) => {
     return requirements.flatMap((requirement) => {
       if (isPokemonId(requirement)) {
-        // This currently checks accessiblity of all the items required (with vanilla warps) to see all the random encounter slots
+        // This currently checks accessiblity of all the items required (with vanilla warps) to see all the random encounter slots (except mount silver)
         // It will need to be updated once we shuffle warps, also if we want to add an option to just check if specific pokemon are accessible
         return [
           7,
@@ -511,10 +511,8 @@ const generalItemLocations = (gameData: GameData): GeneralItemLocation[] => {
           "POKEGEAR",
           "RADIO_CARD",
           "EXPN_CARD",
-          "POKEDEX",
           "TM02",
           "TM08",
-          "TM12",
           "OLD_ROD",
           "GOOD_ROD",
           "SUPER_ROD",

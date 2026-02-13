@@ -1084,12 +1084,9 @@ export const defaultSettingsViewModel = () => {
               + "this can result in some odd behaviour sometimes, but small changes are made to make sure that everything normally accessible in the vanilla game is still accessible with reasonable conditions.\n"
               + "In addition, a set of rules about how the game works are used to make sure that items that are required in order to progress the game "
               + "will be never be placed in locations that could make it impossible to obtain them. "
-              + "The following are included in these rules by default:\n"
-              + "- Zephyrbadge and HM05 (Flash) are expected to be obtained before having to enter any dark areas.\n"
-              + "- Areas or item locations that require owning or registering certain Pokémon are considered accessible if "
-              + "the Pokédex and TM12 (Sweet Scent) are accessible and all random pokemon encounters are accessible "
-              + "(this means having access to at least 7 badges as well as the ability to use all HMs except for Fly "
-              + "and having access to the Bicycle, Squirtbottle, Pass, S.S.Ticket, Card Key, Clear Bell, Rainbow Wing, TM02 (Headbutt), TM08 (Rock Smash) and all 3 Fishing Rods).",
+              + "Areas or item locations that require owning or registering certain Pokémon are considered accessible if "
+              + "the player has access to at least 7 badges as well as the ability to use all HMs except for Fly "
+              + "and has access to the Bicycle, Squirtbottle, Pass, S.S.Ticket, Card Key, Clear Bell, Rainbow Wing, TM02 (Headbutt), TM08 (Rock Smash) and all 3 Fishing Rods.",
             viewModels: [
               createGroupMultiSelectorViewModel({
                 id: "GROUPS" as const,

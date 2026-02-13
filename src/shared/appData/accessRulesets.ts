@@ -4,6 +4,7 @@ import { flyForPokemon } from "@shared/appData/accessRulesets/flyForPokemon"
 import { healingItemsForRed } from "@shared/appData/accessRulesets/healingItemsForRed"
 import { noVanillaBasement } from "@shared/appData/accessRulesets/noEarlyBasement"
 import { noEarlySabrina } from "@shared/appData/accessRulesets/noEarlySabrina"
+import { pokedexAndSweetScentForPokemon } from "@shared/appData/accessRulesets/pokedexAndSweetScentForPokemon"
 import { xItemsForHardFights } from "@shared/appData/accessRulesets/xItemsForHardFights"
 import type { AccessRequirement } from "@shared/types/gameData/warp"
 import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
@@ -24,6 +25,7 @@ export const accessRulesetIds = [
   "NO_EARLY_SABRINA",
   "FLY_FOR_PHONE_CALLS",
   "FLY_FOR_POKEMON",
+  "POKEDEX_AND_SWEET_SCENT_FOR_POKEMON",
   "X_ITEMS_FOR_HARD_FIGHTS",
   "HEALING_ITEMS_FOR_RED",
 ] as const
@@ -71,6 +73,12 @@ export const accessRulsetsMap: IdMap<AccessRulesetId, AccessRuleset> = {
     name: "Fly for Pokémon Checks",
     description: "Makes it so that both Stormbadge and HM02 (Fly) must be obtainable before having get items that require obtaining specific species of Pokémon.",
     accessModifiers: flyForPokemon,
+  },
+  POKEDEX_AND_SWEET_SCENT_FOR_POKEMON: {
+    id: "POKEDEX_AND_SWEET_SCENT_FOR_POKEMON",
+    name: "Pokédex and Sweet Scent for Pokémon",
+    description: "Makes it so that both the Pokédex and TM12 (Sweet Scent) must be obtainable before having get items that require obtaining specific species of Pokémon.",
+    accessModifiers: pokedexAndSweetScentForPokemon,
   },
   X_ITEMS_FOR_HARD_FIGHTS: {
     id: "X_ITEMS_FOR_HARD_FIGHTS",
