@@ -31,6 +31,8 @@ export const updateMarts = (
   }
   
   if (settings.BUYABLE_TM12) {
+    romInfo.gameData.martGroups.GOLDENROD_DEPT_STORE_5F_SHOP.primaryMartId = "GOLDENROD_DEPT_STORE_5F_SHOP_8"
+    
     romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_5.items = [
       ...romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_1.items,
       "TM12",
@@ -56,9 +58,14 @@ export const updateMarts = (
     romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_1.items = []
     romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_2.items = []
     romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_3.items = []
-    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_4.items = []
     romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_5.items = []
     romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_6.items = []
     romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_7.items = []
+    
+    if (settings.BUYABLE_TM12) {
+      romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_4.items = []
+    } else {
+      romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_8.items = []
+    }
   }
 }

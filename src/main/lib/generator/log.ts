@@ -15,7 +15,8 @@ import { fishingGroupIds } from "@shared/types/gameDataIds/fishingGroups"
 import { fishingRodIds } from "@shared/types/gameDataIds/fishingRods"
 import { badgeLocationIds, fruitTreeLocationIds, hmGiftLocationIds, hmItemBallLocationIds, keyItemGiftLocationIds, keyItemHiddenItemLocationIds, keyItemItemBallLocationIds, menuItemGiftLocationIds, regularGiftLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmGiftLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { isItemId, tmItemIds } from "@shared/types/gameDataIds/items"
-import { type MartId, martIds, specialShopIds } from "@shared/types/gameDataIds/marts"
+import { martGroupIds } from "@shared/types/gameDataIds/martGroups"
+import { specialShopIds } from "@shared/types/gameDataIds/marts"
 import { isMoveId } from "@shared/types/gameDataIds/moves"
 import { isPokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
@@ -612,22 +613,9 @@ export const generatorLog = (params: {
         "PRICE",
       ],
       sections: [
-        ...martIds.filter((martId) => {
-          const ignoredMartIds: MartId[] = [
-            "CHERRYGROVE_MART_SHOP_1",
-            "GOLDENROD_DEPT_STORE_5F_SHOP_1",
-            "GOLDENROD_DEPT_STORE_5F_SHOP_2",
-            "GOLDENROD_DEPT_STORE_5F_SHOP_3",
-            "GOLDENROD_DEPT_STORE_5F_SHOP_5",
-            "GOLDENROD_DEPT_STORE_5F_SHOP_6",
-            "GOLDENROD_DEPT_STORE_5F_SHOP_7",
-            settings.BUYABLE_TM12 ? "GOLDENROD_DEPT_STORE_5F_SHOP_4" : "GOLDENROD_DEPT_STORE_5F_SHOP_8",
-          ]
-        
-          return gameData.marts[martId].items.length > 0 && !ignoredMartIds.includes(martId)
-        }).map((martId) => {
-          const mart = gameData.marts[martId]
-        
+        ...martGroupIds.map((martGroupId) => {
+          return gameData.marts[gameData.martGroups[martGroupId].primaryMartId]
+        }).map((mart) => {
           return {
             rows: mart.items.map((itemId, index) => {
               return [

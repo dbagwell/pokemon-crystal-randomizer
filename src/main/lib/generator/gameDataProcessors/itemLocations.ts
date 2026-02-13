@@ -165,7 +165,7 @@ export const shuffleItems = (
     return group.includes("SHOPS")
   })
   
-  let allItemLocations = generalItemLocations(romInfo.gameData, settings)
+  let allItemLocations = generalItemLocations(romInfo.gameData)
   const locationsToShuffle: GeneralItemLocation[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   const startingAccessibleItems = startingItemIds(settings).map((itemId) => {
@@ -482,18 +482,7 @@ const getAccessibleLocations = (params: {
   return accessibleItemLocations
 }
 
-const generalItemLocations = (gameData: GameData, settings: Settings): GeneralItemLocation[] => {
-  const ignoredMartIds: MartId[] = [
-    "CHERRYGROVE_MART_SHOP_1",
-    "GOLDENROD_DEPT_STORE_5F_SHOP_1",
-    "GOLDENROD_DEPT_STORE_5F_SHOP_2",
-    "GOLDENROD_DEPT_STORE_5F_SHOP_3",
-    "GOLDENROD_DEPT_STORE_5F_SHOP_5",
-    "GOLDENROD_DEPT_STORE_5F_SHOP_6",
-    "GOLDENROD_DEPT_STORE_5F_SHOP_7",
-    settings.BUYABLE_TM12 ? "GOLDENROD_DEPT_STORE_5F_SHOP_4" : "GOLDENROD_DEPT_STORE_5F_SHOP_8",
-  ]
-  
+const generalItemLocations = (gameData: GameData): GeneralItemLocation[] => {
   const convertAccessRequirements = (requirements: AccessRequirement[]) => {
     return requirements.flatMap((requirement) => {
       if (isPokemonId(requirement)) {
@@ -560,7 +549,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
   const accessInfoObjects = [
     ...accessInfoFrom(Object.values(gameData.itemLocations), "ITEM_LOCATION" as const),
     ...accessInfoFrom(Object.values(gameData.warps), "WARP" as const),
-    ...accessInfoFrom(Object.values(gameData.marts), "MART" as const),
+    ...accessInfoFrom(Object.values(gameData.martGroups).map((group) => { return gameData.marts[group.primaryMartId] }), "MART" as const),
     ...accessInfoFrom(Object.values(gameData.specialShops), "SPECIAL_SHOP" as const),
     ...Object.values(gameData.areas).map((area) => {
       return {
@@ -654,11 +643,10 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
         },
       ] as GeneralItemLocation[]
     } else if (object.type === "MART") {
-      return ignoredMartIds.includes(object.id as MartId) ? [] : gameData.marts[object.id as MartId].items.map((itemId, index) => {
+      return gameData.marts[object.id as MartId].items.map((itemId, index) => {
         return {
           ...object,
           id: JSON.stringify({
-            martId: object.id,
             groupId: gameData.marts[object.id as MartId].groupId,
             itemIndex: index,
           }),

@@ -1216,17 +1216,7 @@ export const defaultSettingsViewModel = () => {
                     })
                   }),
                   ...martGroupIds.map((martGroupId) => {
-                    const itemNames = Object.values(martsMap).filter((mart) => {
-                      return mart.groupId === martGroupId
-                    }).reduce((result, mart) => {
-                      mart.items.forEach((itemId) => {
-                        if (!result.includes(itemId)) {
-                          result.push(itemId)
-                        }
-                      })
-                      
-                      return result
-                    }, [] as ItemId[]).map((itemId) => {
+                    const itemNames = martsMap[martGroupsMap[martGroupId].primaryMartId].items.map((itemId) => {
                       return itemsMap[itemId].name
                     }).join("\n")
                     

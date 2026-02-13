@@ -1141,7 +1141,7 @@ const createPatches = (
   
   if (settings.BUYABLE_TM12) {
     const numericMartIdFrom = (martId: MartId) => {
-      const updatedMartId = settings.EARLY_GOLDENROD_MART_TMS ? "GOLDENROD_5F_8" : martId
+      const updatedMartId = settings.EARLY_GOLDENROD_MART_TMS ? "GOLDENROD_DEPT_STORE_5F_SHOP_8" : martId
       return hexStringFrom([martIds.findIndex((martId) => { return martId === updatedMartId })!])
     }
     

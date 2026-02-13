@@ -1,0 +1,125 @@
+import type { MartGroup } from "@shared/types/gameData/martGroup"
+import type { MartGroupId } from "@shared/types/gameDataIds/martGroups"
+
+export const martGroupsMap: IdMap<MartGroupId, MartGroup> = {
+  CHERRYGROVE_MART_SHOP: {
+    id: "CHERRYGROVE_MART_SHOP",
+    primaryMartId: "CHERRYGROVE_MART_SHOP_2",
+  },
+  VIOLET_MART_SHOP: {
+    id: "VIOLET_MART_SHOP",
+    primaryMartId: "VIOLET_MART_SHOP",
+  },
+  AZALEA_MART_SHOP: {
+    id: "AZALEA_MART_SHOP",
+    primaryMartId: "AZALEA_MART_SHOP",
+  },
+  CIANWOOD_PHARMACY_SHOP: {
+    id: "CIANWOOD_PHARMACY_SHOP",
+    primaryMartId: "CIANWOOD_PHARMACY_SHOP",
+  },
+  GOLDENROD_DEPT_STORE_2F_SHOP_1: {
+    id: "GOLDENROD_DEPT_STORE_2F_SHOP_1",
+    primaryMartId: "GOLDENROD_DEPT_STORE_2F_SHOP_1",
+  },
+  GOLDENROD_DEPT_STORE_2F_SHOP_2: {
+    id: "GOLDENROD_DEPT_STORE_2F_SHOP_2",
+    primaryMartId: "GOLDENROD_DEPT_STORE_2F_SHOP_2",
+  },
+  GOLDENROD_DEPT_STORE_3F_SHOP: {
+    id: "GOLDENROD_DEPT_STORE_3F_SHOP",
+    primaryMartId: "GOLDENROD_DEPT_STORE_3F_SHOP",
+  },
+  GOLDENROD_DEPT_STORE_4F_SHOP: {
+    id: "GOLDENROD_DEPT_STORE_4F_SHOP",
+    primaryMartId: "GOLDENROD_DEPT_STORE_4F_SHOP",
+  },
+  GOLDENROD_DEPT_STORE_5F_SHOP: {
+    id: "GOLDENROD_DEPT_STORE_5F_SHOP",
+    primaryMartId: "GOLDENROD_DEPT_STORE_5F_SHOP_4",
+  },
+  OLIVINE_MART_SHOP: {
+    id: "OLIVINE_MART_SHOP",
+    primaryMartId: "OLIVINE_MART_SHOP",
+  },
+  ECRUTEAK_MART_SHOP: {
+    id: "ECRUTEAK_MART_SHOP",
+    primaryMartId: "ECRUTEAK_MART_SHOP",
+  },
+  MAHOGANY_MART_1F_SHOP_1: {
+    id: "MAHOGANY_MART_1F_SHOP_1",
+    primaryMartId: "MAHOGANY_MART_1F_SHOP_1",
+  },
+  MAHOGANY_MART_1F_SHOP_2: {
+    id: "MAHOGANY_MART_1F_SHOP_2",
+    primaryMartId: "MAHOGANY_MART_1F_SHOP_2",
+  },
+  BLACKTHORN_MART_SHOP: {
+    id: "BLACKTHORN_MART_SHOP",
+    primaryMartId: "BLACKTHORN_MART_SHOP",
+  },
+  VIRIDIAN_MART_SHOP: {
+    id: "VIRIDIAN_MART_SHOP",
+    primaryMartId: "VIRIDIAN_MART_SHOP",
+  },
+  PEWTER_MART_SHOP: {
+    id: "PEWTER_MART_SHOP",
+    primaryMartId: "PEWTER_MART_SHOP",
+  },
+  CERULEAN_MART_SHOP: {
+    id: "CERULEAN_MART_SHOP",
+    primaryMartId: "CERULEAN_MART_SHOP",
+  },
+  LAVENDER_MART_SHOP: {
+    id: "LAVENDER_MART_SHOP",
+    primaryMartId: "LAVENDER_MART_SHOP",
+  },
+  VERMILION_MART_SHOP: {
+    id: "VERMILION_MART_SHOP",
+    primaryMartId: "VERMILION_MART_SHOP",
+  },
+  CELADON_DEPT_STORE_2F_SHOP_1: {
+    id: "CELADON_DEPT_STORE_2F_SHOP_1",
+    primaryMartId: "CELADON_DEPT_STORE_2F_SHOP_1",
+  },
+  CELADON_DEPT_STORE_2F_SHOP_2: {
+    id: "CELADON_DEPT_STORE_2F_SHOP_2",
+    primaryMartId: "CELADON_DEPT_STORE_2F_SHOP_2",
+  },
+  CELADON_DEPT_STORE_3F_SHOP: {
+    id: "CELADON_DEPT_STORE_3F_SHOP",
+    primaryMartId: "CELADON_DEPT_STORE_3F_SHOP",
+  },
+  CELADON_DEPT_STORE_4F_SHOP: {
+    id: "CELADON_DEPT_STORE_4F_SHOP",
+    primaryMartId: "CELADON_DEPT_STORE_4F_SHOP",
+  },
+  CELADON_DEPT_STORE_5F_SHOP_1: {
+    id: "CELADON_DEPT_STORE_5F_SHOP_1",
+    primaryMartId: "CELADON_DEPT_STORE_5F_SHOP_1",
+  },
+  CELADON_DEPT_STORE_5F_SHOP_2: {
+    id: "CELADON_DEPT_STORE_5F_SHOP_2",
+    primaryMartId: "CELADON_DEPT_STORE_5F_SHOP_2",
+  },
+  FUCHSIA_MART_SHOP: {
+    id: "FUCHSIA_MART_SHOP",
+    primaryMartId: "FUCHSIA_MART_SHOP",
+  },
+  SAFFRON_MART_SHOP: {
+    id: "SAFFRON_MART_SHOP",
+    primaryMartId: "SAFFRON_MART_SHOP",
+  },
+  MT_MOON_GIFT_SHOP_SHOP: {
+    id: "MT_MOON_GIFT_SHOP_SHOP",
+    primaryMartId: "MOUNT_MOON_GIFT_SHOP_SHOP",
+  },
+  INDIGO_PLATEAU_POKECENTER_1F_SHOP: {
+    id: "INDIGO_PLATEAU_POKECENTER_1F_SHOP",
+    primaryMartId: "INDIGO_PLATEAU_POKECENTER_1F_SHOP",
+  },
+  GOLDENROD_UNDERGROUND_HERB_SHOP: {
+    id: "GOLDENROD_UNDERGROUND_HERB_SHOP",
+    primaryMartId: "GOLDENROD_UNDERGROUND_HERB_SHOP",
+  },
+} as const
