@@ -614,14 +614,14 @@ export const generatorLog = (params: {
       sections: [
         ...martIds.filter((martId) => {
           const ignoredMartIds: MartId[] = [
-            "CHERRYGROVE_1",
-            "GOLDENROD_5F_1",
-            "GOLDENROD_5F_2",
-            "GOLDENROD_5F_3",
-            "GOLDENROD_5F_5",
-            "GOLDENROD_5F_6",
-            "GOLDENROD_5F_7",
-            settings.BUYABLE_TM12 ? "GOLDENROD_5F_4" : "GOLDENROD_5F_8",
+            "CHERRYGROVE_MART_SHOP_1",
+            "GOLDENROD_DEPT_STORE_5F_SHOP_1",
+            "GOLDENROD_DEPT_STORE_5F_SHOP_2",
+            "GOLDENROD_DEPT_STORE_5F_SHOP_3",
+            "GOLDENROD_DEPT_STORE_5F_SHOP_5",
+            "GOLDENROD_DEPT_STORE_5F_SHOP_6",
+            "GOLDENROD_DEPT_STORE_5F_SHOP_7",
+            settings.BUYABLE_TM12 ? "GOLDENROD_DEPT_STORE_5F_SHOP_4" : "GOLDENROD_DEPT_STORE_5F_SHOP_8",
           ]
         
           return gameData.marts[martId].items.length > 0 && !ignoredMartIds.includes(martId)

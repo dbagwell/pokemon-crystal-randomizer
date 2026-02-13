@@ -1044,18 +1044,18 @@ const createPatches = (
       "progressiveRods.yml",
       {},
       {
-        goldenrodGameCornerItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER.items[0].itemId].numericId]),
-        goldenrodGameCornerItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER.items[1].itemId].numericId]),
-        goldenrodGameCornerItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER.items[2].itemId].numericId]),
-        goldenrodVendingMachinesItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_VENDING_MACHINES.items[0].itemId].numericId]),
-        goldenrodVendingMachinesItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_VENDING_MACHINES.items[1].itemId].numericId]),
-        goldenrodVendingMachinesItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_VENDING_MACHINES.items[2].itemId].numericId]),
-        celadonGameCornerItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_GAME_CORNER.items[0].itemId].numericId]),
-        celadonGameCornerItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_GAME_CORNER.items[1].itemId].numericId]),
-        celadonGameCornerItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_GAME_CORNER.items[2].itemId].numericId]),
-        celadonVendingMachinesItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_VENDING_MACHINES.items[0].itemId].numericId]),
-        celadonVendingMachinesItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_VENDING_MACHINES.items[1].itemId].numericId]),
-        celadonVendingMachinesItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_VENDING_MACHINES.items[2].itemId].numericId]),
+        goldenrodGameCornerItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER_ITEM_SHOP.items[0].itemId].numericId]),
+        goldenrodGameCornerItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER_ITEM_SHOP.items[1].itemId].numericId]),
+        goldenrodGameCornerItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER_ITEM_SHOP.items[2].itemId].numericId]),
+        goldenrodVendingMachinesItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES.items[0].itemId].numericId]),
+        goldenrodVendingMachinesItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES.items[1].itemId].numericId]),
+        goldenrodVendingMachinesItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES.items[2].itemId].numericId]),
+        celadonGameCornerItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_GAME_CORNER_ITEM_SHOP.items[0].itemId].numericId]),
+        celadonGameCornerItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_GAME_CORNER_ITEM_SHOP.items[1].itemId].numericId]),
+        celadonGameCornerItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_GAME_CORNER_ITEM_SHOP.items[2].itemId].numericId]),
+        celadonVendingMachinesItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_DEPT_STORE_6F_VENDING_MACHINES.items[0].itemId].numericId]),
+        celadonVendingMachinesItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_DEPT_STORE_6F_VENDING_MACHINES.items[1].itemId].numericId]),
+        celadonVendingMachinesItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.CELADON_DEPT_STORE_6F_VENDING_MACHINES.items[2].itemId].numericId]),
       },
     ).hunks)
   }
@@ -1151,19 +1151,19 @@ const createPatches = (
         "buyableSweetScent.yml",
         {},
         {
-          mart1Id: numericMartIdFrom("GOLDENROD_5F_1"),
-          mart2Id: numericMartIdFrom("GOLDENROD_5F_2"),
-          mart3Id: numericMartIdFrom("GOLDENROD_5F_3"),
-          mart4Id: numericMartIdFrom("GOLDENROD_5F_4"),
-          mart5Id: numericMartIdFrom("GOLDENROD_5F_5"),
-          mart6Id: numericMartIdFrom("GOLDENROD_5F_6"),
-          mart7Id: numericMartIdFrom("GOLDENROD_5F_7"),
-          mart8Id: numericMartIdFrom("GOLDENROD_5F_8"),
+          mart1Id: numericMartIdFrom("GOLDENROD_DEPT_STORE_5F_SHOP_1"),
+          mart2Id: numericMartIdFrom("GOLDENROD_DEPT_STORE_5F_SHOP_2"),
+          mart3Id: numericMartIdFrom("GOLDENROD_DEPT_STORE_5F_SHOP_3"),
+          mart4Id: numericMartIdFrom("GOLDENROD_DEPT_STORE_5F_SHOP_4"),
+          mart5Id: numericMartIdFrom("GOLDENROD_DEPT_STORE_5F_SHOP_5"),
+          mart6Id: numericMartIdFrom("GOLDENROD_DEPT_STORE_5F_SHOP_6"),
+          mart7Id: numericMartIdFrom("GOLDENROD_DEPT_STORE_5F_SHOP_7"),
+          mart8Id: numericMartIdFrom("GOLDENROD_DEPT_STORE_5F_SHOP_8"),
         },
       ).hunks,
     ]
   } else if (settings.EARLY_GOLDENROD_MART_TMS) {
-    const numericMartId = martIds.findIndex((martId) => { return martId === "GOLDENROD_5F_4" })!
+    const numericMartId = martIds.findIndex((martId) => { return martId === "GOLDENROD_DEPT_STORE_5F_SHOP_4" })!
     
     romInfo.patchHunks.push(...[
       new DataHunk(ROMOffset.fromBankAddress(21, 0x60B8), [numericMartId]),
@@ -1225,7 +1225,7 @@ const createPatches = (
     romInfo.patchHunks.push(...[
       new DataHunk(
         ROMOffset.fromBankAddress(34, 0x715E),
-        romInfo.gameData.specialShops.BLUE_CARD_REWARD_LADY.items.flatMap((itemInfo) => {
+        romInfo.gameData.specialShops.RADIO_TOWER_2F_BLUE_CARD_SHOP.items.flatMap((itemInfo) => {
           return [
             romInfo.gameData.items[itemInfo.itemId].numericId,
             itemInfo.price,
@@ -1240,20 +1240,20 @@ const createPatches = (
       return itemCategoriesMap[specialShopItem(shopId, index).category].slotSize === 1
     }
     
-    const mooMooItemInfo = specialShopItemInfo("MOOMOO_FARM", 0)
-    const mooMooItem = specialShopItem("MOOMOO_FARM", 0)
-    const mooMooItemName = specialShopItemName("MOOMOO_FARM", 0)
+    const mooMooItemInfo = specialShopItemInfo("ROUTE_39_FARMHOUSE_SHOP", 0)
+    const mooMooItem = specialShopItem("ROUTE_39_FARMHOUSE_SHOP", 0)
+    const mooMooItemName = specialShopItemName("ROUTE_39_FARMHOUSE_SHOP", 0)
     
-    const mahoganyItemInfo = specialShopItemInfo("MAHOGANY_STREET_VENDOR", 0)
-    const mahoganyItem = specialShopItem("MAHOGANY_STREET_VENDOR", 0)
-    const mahoganyItemName = specialShopItemName("MAHOGANY_STREET_VENDOR", 0)
+    const mahoganyItemInfo = specialShopItemInfo("MAHOGANY_TOWN_STREET_VENDOR", 0)
+    const mahoganyItem = specialShopItem("MAHOGANY_TOWN_STREET_VENDOR", 0)
+    const mahoganyItemName = specialShopItemName("MAHOGANY_TOWN_STREET_VENDOR", 0)
     
     romInfo.patchHunks.push(...[
       // Bargain Shop
       new DataHunk(
         ROMOffset.fromBankAddress(5, 0x5C52),
         [
-          ...romInfo.gameData.specialShops.UNDERGROUND_BARGAIN_SHOP.items.flatMap((itemInfo) => {
+          ...romInfo.gameData.specialShops.GOLDENROD_UNDERGROUND_BARGAIN_SHOP.items.flatMap((itemInfo) => {
             return [
               romInfo.gameData.items[itemInfo.itemId].numericId,
               ...bytesFrom(itemInfo.price, 2),
@@ -1265,7 +1265,7 @@ const createPatches = (
       new DataHunk(
         ROMOffset.fromBankAddress(5, 0x5AEF),
         [
-          ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_1.items.flatMap((itemInfo) => {
+          ...romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_ROOF_SHOP_1.items.flatMap((itemInfo) => {
             return [
               romInfo.gameData.items[itemInfo.itemId].numericId,
               ...bytesFrom(itemInfo.price, 2),
@@ -1279,8 +1279,8 @@ const createPatches = (
         {},
         {
           itemData: hexStringFrom([
-            romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items.length,
-            ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items.flatMap((itemInfo) => {
+            romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_ROOF_SHOP_2.items.length,
+            ...romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_ROOF_SHOP_2.items.flatMap((itemInfo) => {
               return [
                 romInfo.gameData.items[itemInfo.itemId].numericId,
                 ...bytesFrom(itemInfo.price, 2),
@@ -1310,7 +1310,7 @@ const createPatches = (
       new DataHunk(ROMOffset.fromBankAddress(100, 0x404E), bytesFrom(mahoganyItemInfo.price, 2, true)),
       new DataHunk(ROMOffset.fromBankAddress(100, 0x4061), bytesFrom(mahoganyItemInfo.price, 2, true)),
       new DataHunk(ROMOffset.fromBankAddress(100, 0x413B), bytesFromTextData(`${mahoganyItemInfo.price}!`.padEnd(14, " "))),
-      shouldLimitItemStock("MAHOGANY_STREET_VENDOR", 0) ? new DataHunk(ROMOffset.fromBankAddress(100, 0x402F), [0x31, ...bytesFrom(eventFlagsMap.GOT_RAGECANDYBAR.numericId, 2)]) : new DataHunk(ROMOffset.fromBankAddress(100, 0x4032), [0x18, 0x18, 0x18]),
+      shouldLimitItemStock("MAHOGANY_TOWN_STREET_VENDOR", 0) ? new DataHunk(ROMOffset.fromBankAddress(100, 0x402F), [0x31, ...bytesFrom(eventFlagsMap.GOT_RAGECANDYBAR.numericId, 2)]) : new DataHunk(ROMOffset.fromBankAddress(100, 0x4032), [0x18, 0x18, 0x18]),
       new DataHunk(ROMOffset.fromBankAddress(100, 0x405A), [0x33, ...bytesFrom(eventFlagsMap.GOT_RAGECANDYBAR.numericId, 2), 0x18]),
       // Vending Machines
       ...Patch.fromYAML(
@@ -1318,24 +1318,24 @@ const createPatches = (
         "vendingMachineItems.yml",
         {},
         {
-          goldenrodItem1NameAndPrice: specialShopMenuItemNameAndPriceText("GOLDENROD_VENDING_MACHINES", 0),
-          goldenrodItem2NameAndPrice: specialShopMenuItemNameAndPriceText("GOLDENROD_VENDING_MACHINES", 1),
-          goldenrodItem3NameAndPrice: specialShopMenuItemNameAndPriceText("GOLDENROD_VENDING_MACHINES", 2),
-          celadonItem1NameAndPrice: specialShopMenuItemNameAndPriceText("CELADON_VENDING_MACHINES", 0),
-          celadonItem2NameAndPrice: specialShopMenuItemNameAndPriceText("CELADON_VENDING_MACHINES", 1),
-          celadonItem3NameAndPrice: specialShopMenuItemNameAndPriceText("CELADON_VENDING_MACHINES", 2),
-          goldenrodItem1Id: hexStringFrom([specialShopItem("GOLDENROD_VENDING_MACHINES", 0).numericId]),
-          goldenrodItem1Price: hexStringFrom(bytesFrom(specialShopItemInfo("GOLDENROD_VENDING_MACHINES", 0).price, 2, true)),
-          goldenrodItem2Id: hexStringFrom([specialShopItem("GOLDENROD_VENDING_MACHINES", 1).numericId]),
-          goldenrodItem2Price: hexStringFrom(bytesFrom(specialShopItemInfo("GOLDENROD_VENDING_MACHINES", 1).price, 2, true)),
-          goldenrodItem3Id: hexStringFrom([specialShopItem("GOLDENROD_VENDING_MACHINES", 2).numericId]),
-          goldenrodItem3Price: hexStringFrom(bytesFrom(specialShopItemInfo("GOLDENROD_VENDING_MACHINES", 2).price, 2, true)),
-          celadonItem1Id: hexStringFrom([specialShopItem("CELADON_VENDING_MACHINES", 0).numericId]),
-          celadonItem1Price: hexStringFrom(bytesFrom(specialShopItemInfo("CELADON_VENDING_MACHINES", 0).price, 2, true)),
-          celadonItem2Id: hexStringFrom([specialShopItem("CELADON_VENDING_MACHINES", 1).numericId]),
-          celadonItem2Price: hexStringFrom(bytesFrom(specialShopItemInfo("CELADON_VENDING_MACHINES", 1).price, 2, true)),
-          celadonItem3Id: hexStringFrom([specialShopItem("CELADON_VENDING_MACHINES", 2).numericId]),
-          celadonItem3Price: hexStringFrom(bytesFrom(specialShopItemInfo("CELADON_VENDING_MACHINES", 2).price, 2, true)),
+          goldenrodItem1NameAndPrice: specialShopMenuItemNameAndPriceText("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 0),
+          goldenrodItem2NameAndPrice: specialShopMenuItemNameAndPriceText("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 1),
+          goldenrodItem3NameAndPrice: specialShopMenuItemNameAndPriceText("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 2),
+          celadonItem1NameAndPrice: specialShopMenuItemNameAndPriceText("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 0),
+          celadonItem2NameAndPrice: specialShopMenuItemNameAndPriceText("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 1),
+          celadonItem3NameAndPrice: specialShopMenuItemNameAndPriceText("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 2),
+          goldenrodItem1Id: hexStringFrom([specialShopItem("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 0).numericId]),
+          goldenrodItem1Price: hexStringFrom(bytesFrom(specialShopItemInfo("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 0).price, 2, true)),
+          goldenrodItem2Id: hexStringFrom([specialShopItem("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 1).numericId]),
+          goldenrodItem2Price: hexStringFrom(bytesFrom(specialShopItemInfo("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 1).price, 2, true)),
+          goldenrodItem3Id: hexStringFrom([specialShopItem("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 2).numericId]),
+          goldenrodItem3Price: hexStringFrom(bytesFrom(specialShopItemInfo("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 2).price, 2, true)),
+          celadonItem1Id: hexStringFrom([specialShopItem("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 0).numericId]),
+          celadonItem1Price: hexStringFrom(bytesFrom(specialShopItemInfo("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 0).price, 2, true)),
+          celadonItem2Id: hexStringFrom([specialShopItem("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 1).numericId]),
+          celadonItem2Price: hexStringFrom(bytesFrom(specialShopItemInfo("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 1).price, 2, true)),
+          celadonItem3Id: hexStringFrom([specialShopItem("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 2).numericId]),
+          celadonItem3Price: hexStringFrom(bytesFrom(specialShopItemInfo("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 2).price, 2, true)),
         },
       ).hunks,
       // Limit Unique Item Purchases
@@ -1344,17 +1344,17 @@ const createPatches = (
         "limitSpecialShopItemStock.yml",
         {
           goldenrodVendingMachineOptions: compact([
-            shouldLimitItemStock("GOLDENROD_VENDING_MACHINES", 0) ? "limitSpecialShopItemStockOptions/goldenrodVendingMachineItem1.yml" : undefined,
-            shouldLimitItemStock("GOLDENROD_VENDING_MACHINES", 1) ? "limitSpecialShopItemStockOptions/goldenrodVendingMachineItem2.yml" : undefined,
-            shouldLimitItemStock("GOLDENROD_VENDING_MACHINES", 2) ? "limitSpecialShopItemStockOptions/goldenrodVendingMachineItem3.yml" : undefined,
+            shouldLimitItemStock("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 0) ? "limitSpecialShopItemStockOptions/goldenrodVendingMachineItem1.yml" : undefined,
+            shouldLimitItemStock("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 1) ? "limitSpecialShopItemStockOptions/goldenrodVendingMachineItem2.yml" : undefined,
+            shouldLimitItemStock("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 2) ? "limitSpecialShopItemStockOptions/goldenrodVendingMachineItem3.yml" : undefined,
           ]),
           celadonVendingMachineOptions: compact([
-            shouldLimitItemStock("CELADON_VENDING_MACHINES", 0) ? "limitSpecialShopItemStockOptions/celadonVendingMachineItem1.yml" : undefined,
-            shouldLimitItemStock("CELADON_VENDING_MACHINES", 1) ? "limitSpecialShopItemStockOptions/celadonVendingMachineItem2.yml" : undefined,
-            shouldLimitItemStock("CELADON_VENDING_MACHINES", 2) ? "limitSpecialShopItemStockOptions/celadonVendingMachineItem3.yml" : undefined,
+            shouldLimitItemStock("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 0) ? "limitSpecialShopItemStockOptions/celadonVendingMachineItem1.yml" : undefined,
+            shouldLimitItemStock("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 1) ? "limitSpecialShopItemStockOptions/celadonVendingMachineItem2.yml" : undefined,
+            shouldLimitItemStock("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 2) ? "limitSpecialShopItemStockOptions/celadonVendingMachineItem3.yml" : undefined,
           ]),
           mooMooFarmOptions: compact([
-            shouldLimitItemStock("MOOMOO_FARM", 0) ? "limitSpecialShopItemStockOptions/mooMooFarmItem.yml" : undefined,
+            shouldLimitItemStock("ROUTE_39_FARMHOUSE_SHOP", 0) ? "limitSpecialShopItemStockOptions/mooMooFarmItem.yml" : undefined,
           ]),
         },
         {
@@ -1385,14 +1385,14 @@ const createPatches = (
         "limitGameCornerItemStock.yml",
         {
           goldenrodGameCornerOptions: compact([
-            shouldLimitItemStock("GOLDENROD_GAME_CORNER", 0) ? "limitGameCornerItemStockOptions/goldenrodGameCornerItem1.yml" : undefined,
-            shouldLimitItemStock("GOLDENROD_GAME_CORNER", 1) ? "limitGameCornerItemStockOptions/goldenrodGameCornerItem2.yml" : undefined,
-            shouldLimitItemStock("GOLDENROD_GAME_CORNER", 2) ? "limitGameCornerItemStockOptions/goldenrodGameCornerItem3.yml" : undefined,
+            shouldLimitItemStock("GOLDENROD_GAME_CORNER_ITEM_SHOP", 0) ? "limitGameCornerItemStockOptions/goldenrodGameCornerItem1.yml" : undefined,
+            shouldLimitItemStock("GOLDENROD_GAME_CORNER_ITEM_SHOP", 1) ? "limitGameCornerItemStockOptions/goldenrodGameCornerItem2.yml" : undefined,
+            shouldLimitItemStock("GOLDENROD_GAME_CORNER_ITEM_SHOP", 2) ? "limitGameCornerItemStockOptions/goldenrodGameCornerItem3.yml" : undefined,
           ]),
           celadonGameCornerOptions: compact([
-            shouldLimitItemStock("CELADON_GAME_CORNER", 0) ? "limitGameCornerItemStockOptions/celadonGameCornerItem1.yml" : undefined,
-            shouldLimitItemStock("CELADON_GAME_CORNER", 1) ? "limitGameCornerItemStockOptions/celadonGameCornerItem2.yml" : undefined,
-            shouldLimitItemStock("CELADON_GAME_CORNER", 2) ? "limitGameCornerItemStockOptions/celadonGameCornerItem3.yml" : undefined,
+            shouldLimitItemStock("CELADON_GAME_CORNER_ITEM_SHOP", 0) ? "limitGameCornerItemStockOptions/celadonGameCornerItem1.yml" : undefined,
+            shouldLimitItemStock("CELADON_GAME_CORNER_ITEM_SHOP", 1) ? "limitGameCornerItemStockOptions/celadonGameCornerItem2.yml" : undefined,
+            shouldLimitItemStock("CELADON_GAME_CORNER_ITEM_SHOP", 2) ? "limitGameCornerItemStockOptions/celadonGameCornerItem3.yml" : undefined,
           ]),
         },
         {
@@ -1431,24 +1431,24 @@ const createPatches = (
         "gameCornerItems.yml",
         {},
         {
-          goldenrodItem1NameAndPrice: specialShopMenuItemNameAndPriceText("GOLDENROD_GAME_CORNER", 0),
-          goldenrodItem2NameAndPrice: specialShopMenuItemNameAndPriceText("GOLDENROD_GAME_CORNER", 1),
-          goldenrodItem3NameAndPrice: specialShopMenuItemNameAndPriceText("GOLDENROD_GAME_CORNER", 2),
-          celadonItem1NameAndPrice: specialShopMenuItemNameAndPriceText("CELADON_GAME_CORNER", 0),
-          celadonItem2NameAndPrice: specialShopMenuItemNameAndPriceText("CELADON_GAME_CORNER", 1),
-          celadonItem3NameAndPrice: specialShopMenuItemNameAndPriceText("CELADON_GAME_CORNER", 2),
-          goldenrodItem1Id: hexStringFrom([specialShopItem("GOLDENROD_GAME_CORNER", 0).numericId]),
-          goldenrodItem1Price: hexStringFrom(bytesFrom(specialShopItemInfo("GOLDENROD_GAME_CORNER", 0).price, 2)),
-          goldenrodItem2Id: hexStringFrom([specialShopItem("GOLDENROD_GAME_CORNER", 1).numericId]),
-          goldenrodItem2Price: hexStringFrom(bytesFrom(specialShopItemInfo("GOLDENROD_GAME_CORNER", 1).price, 2)),
-          goldenrodItem3Id: hexStringFrom([specialShopItem("GOLDENROD_GAME_CORNER", 2).numericId]),
-          goldenrodItem3Price: hexStringFrom(bytesFrom(specialShopItemInfo("GOLDENROD_GAME_CORNER", 2).price, 2)),
-          celadonItem1Id: hexStringFrom([specialShopItem("CELADON_GAME_CORNER", 0).numericId]),
-          celadonItem1Price: hexStringFrom(bytesFrom(specialShopItemInfo("CELADON_GAME_CORNER", 0).price, 2)),
-          celadonItem2Id: hexStringFrom([specialShopItem("CELADON_GAME_CORNER", 1).numericId]),
-          celadonItem2Price: hexStringFrom(bytesFrom(specialShopItemInfo("CELADON_GAME_CORNER", 1).price, 2)),
-          celadonItem3Id: hexStringFrom([specialShopItem("CELADON_GAME_CORNER", 2).numericId]),
-          celadonItem3Price: hexStringFrom(bytesFrom(specialShopItemInfo("CELADON_GAME_CORNER", 2).price, 2)),
+          goldenrodItem1NameAndPrice: specialShopMenuItemNameAndPriceText("GOLDENROD_GAME_CORNER_ITEM_SHOP", 0),
+          goldenrodItem2NameAndPrice: specialShopMenuItemNameAndPriceText("GOLDENROD_GAME_CORNER_ITEM_SHOP", 1),
+          goldenrodItem3NameAndPrice: specialShopMenuItemNameAndPriceText("GOLDENROD_GAME_CORNER_ITEM_SHOP", 2),
+          celadonItem1NameAndPrice: specialShopMenuItemNameAndPriceText("CELADON_GAME_CORNER_ITEM_SHOP", 0),
+          celadonItem2NameAndPrice: specialShopMenuItemNameAndPriceText("CELADON_GAME_CORNER_ITEM_SHOP", 1),
+          celadonItem3NameAndPrice: specialShopMenuItemNameAndPriceText("CELADON_GAME_CORNER_ITEM_SHOP", 2),
+          goldenrodItem1Id: hexStringFrom([specialShopItem("GOLDENROD_GAME_CORNER_ITEM_SHOP", 0).numericId]),
+          goldenrodItem1Price: hexStringFrom(bytesFrom(specialShopItemInfo("GOLDENROD_GAME_CORNER_ITEM_SHOP", 0).price, 2)),
+          goldenrodItem2Id: hexStringFrom([specialShopItem("GOLDENROD_GAME_CORNER_ITEM_SHOP", 1).numericId]),
+          goldenrodItem2Price: hexStringFrom(bytesFrom(specialShopItemInfo("GOLDENROD_GAME_CORNER_ITEM_SHOP", 1).price, 2)),
+          goldenrodItem3Id: hexStringFrom([specialShopItem("GOLDENROD_GAME_CORNER_ITEM_SHOP", 2).numericId]),
+          goldenrodItem3Price: hexStringFrom(bytesFrom(specialShopItemInfo("GOLDENROD_GAME_CORNER_ITEM_SHOP", 2).price, 2)),
+          celadonItem1Id: hexStringFrom([specialShopItem("CELADON_GAME_CORNER_ITEM_SHOP", 0).numericId]),
+          celadonItem1Price: hexStringFrom(bytesFrom(specialShopItemInfo("CELADON_GAME_CORNER_ITEM_SHOP", 0).price, 2)),
+          celadonItem2Id: hexStringFrom([specialShopItem("CELADON_GAME_CORNER_ITEM_SHOP", 1).numericId]),
+          celadonItem2Price: hexStringFrom(bytesFrom(specialShopItemInfo("CELADON_GAME_CORNER_ITEM_SHOP", 1).price, 2)),
+          celadonItem3Id: hexStringFrom([specialShopItem("CELADON_GAME_CORNER_ITEM_SHOP", 2).numericId]),
+          celadonItem3Price: hexStringFrom(bytesFrom(specialShopItemInfo("CELADON_GAME_CORNER_ITEM_SHOP", 2).price, 2)),
         },
       ).hunks,
     ])
@@ -1456,18 +1456,18 @@ const createPatches = (
   
   if (shouldApplyShopItemChanges && !settings.PROGRESSIVE_RODS) {
     romInfo.patchHunks.push(...[
-      new DataHunk(ROMOffset.fromBankAddress(21, 0x6C56), [specialShopItem("GOLDENROD_GAME_CORNER", 0).numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(21, 0x6C72), [specialShopItem("GOLDENROD_GAME_CORNER", 1).numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(21, 0x6C8E), [specialShopItem("GOLDENROD_GAME_CORNER", 2).numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(21, 0x6424), [specialShopItem("GOLDENROD_VENDING_MACHINES", 0).numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(21, 0x643E), [specialShopItem("GOLDENROD_VENDING_MACHINES", 1).numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(21, 0x6458), [specialShopItem("GOLDENROD_VENDING_MACHINES", 2).numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(28, 0x671D), [specialShopItem("CELADON_GAME_CORNER", 0).numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(28, 0x6739), [specialShopItem("CELADON_GAME_CORNER", 1).numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(28, 0x6755), [specialShopItem("CELADON_GAME_CORNER", 2).numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(28, 0x51AD), [specialShopItem("CELADON_VENDING_MACHINES", 0).numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(28, 0x51C9), [specialShopItem("CELADON_VENDING_MACHINES", 1).numericId]),
-      new DataHunk(ROMOffset.fromBankAddress(28, 0x51E3), [specialShopItem("CELADON_VENDING_MACHINES", 2).numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x6C56), [specialShopItem("GOLDENROD_GAME_CORNER_ITEM_SHOP", 0).numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x6C72), [specialShopItem("GOLDENROD_GAME_CORNER_ITEM_SHOP", 1).numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x6C8E), [specialShopItem("GOLDENROD_GAME_CORNER_ITEM_SHOP", 2).numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x6424), [specialShopItem("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 0).numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x643E), [specialShopItem("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 1).numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(21, 0x6458), [specialShopItem("GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES", 2).numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(28, 0x671D), [specialShopItem("CELADON_GAME_CORNER_ITEM_SHOP", 0).numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(28, 0x6739), [specialShopItem("CELADON_GAME_CORNER_ITEM_SHOP", 1).numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(28, 0x6755), [specialShopItem("CELADON_GAME_CORNER_ITEM_SHOP", 2).numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(28, 0x51AD), [specialShopItem("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 0).numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(28, 0x51C9), [specialShopItem("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 1).numericId]),
+      new DataHunk(ROMOffset.fromBankAddress(28, 0x51E3), [specialShopItem("CELADON_DEPT_STORE_6F_VENDING_MACHINES", 2).numericId]),
     ])
   }
   

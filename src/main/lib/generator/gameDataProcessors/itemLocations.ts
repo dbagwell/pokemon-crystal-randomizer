@@ -283,7 +283,7 @@ export const shuffleItems = (
       const remainingMartGroupIds = [...martGroupIds.filter((martGroupId) => { return !shuffleItemsSettings.EXCLUDE_LOCATIONS.includes(martGroupId) })]
       
       while (remainingMartGroupIds.length > 0) {
-        const shopId = remainingMartGroupIds.find((id) => { return id === "CHERRYGROVE" }) ?? random.element({ array: remainingMartGroupIds })
+        const shopId = remainingMartGroupIds.find((id) => { return id === "CHERRYGROVE_MART_SHOP" }) ?? random.element({ array: remainingMartGroupIds })
         const shopIndex = remainingMartGroupIds.indexOf(shopId)
         remainingMartGroupIds.splice(shopIndex, 1)
       
@@ -452,9 +452,9 @@ export const shuffleItems = (
   })
   
   if (shuffleItemsSettings.GROUPS.some((group) => { return group.includes("SHOPS") })) {
-    romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items = [
-      ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_1.items,
-      ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items,
+    romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_ROOF_SHOP_2.items = [
+      ...romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_ROOF_SHOP_1.items,
+      ...romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_ROOF_SHOP_2.items,
     ]
   }
 }
@@ -484,14 +484,14 @@ const getAccessibleLocations = (params: {
 
 const generalItemLocations = (gameData: GameData, settings: Settings): GeneralItemLocation[] => {
   const ignoredMartIds: MartId[] = [
-    "CHERRYGROVE_1",
-    "GOLDENROD_5F_1",
-    "GOLDENROD_5F_2",
-    "GOLDENROD_5F_3",
-    "GOLDENROD_5F_5",
-    "GOLDENROD_5F_6",
-    "GOLDENROD_5F_7",
-    settings.BUYABLE_TM12 ? "GOLDENROD_5F_4" : "GOLDENROD_5F_8",
+    "CHERRYGROVE_MART_SHOP_1",
+    "GOLDENROD_DEPT_STORE_5F_SHOP_1",
+    "GOLDENROD_DEPT_STORE_5F_SHOP_2",
+    "GOLDENROD_DEPT_STORE_5F_SHOP_3",
+    "GOLDENROD_DEPT_STORE_5F_SHOP_5",
+    "GOLDENROD_DEPT_STORE_5F_SHOP_6",
+    "GOLDENROD_DEPT_STORE_5F_SHOP_7",
+    settings.BUYABLE_TM12 ? "GOLDENROD_DEPT_STORE_5F_SHOP_4" : "GOLDENROD_DEPT_STORE_5F_SHOP_8",
   ]
   
   const convertAccessRequirements = (requirements: AccessRequirement[]) => {
@@ -1258,7 +1258,7 @@ export const updateAccessLogic = (
     { item: "BERRY", number: romInfo.gameData.numberOfMiltankBerries },
   ] : undefined
   
-  romInfo.gameData.specialShops.MOOMOO_FARM.accessRequirements = romInfo.gameData.numberOfMiltankBerries > 0 ? [
+  romInfo.gameData.specialShops.ROUTE_39_FARMHOUSE_SHOP.accessRequirements = romInfo.gameData.numberOfMiltankBerries > 0 ? [
     "ROUTE_39_BARN",
     { item: "BERRY", number: romInfo.gameData.numberOfMiltankBerries },
   ] : undefined
@@ -1358,19 +1358,19 @@ export const updateAccessLogic = (
   }
   
   if (settings.EARLY_CHERRYGROVE_MART_POKE_BALLS) {
-    romInfo.gameData.marts.CHERRYGROVE_2.accessRequirements = []
+    romInfo.gameData.marts.CHERRYGROVE_MART_SHOP_2.accessRequirements = []
   }
   
   if (settings.EARLY_GOLDENROD_MART_TMS) {
-    romInfo.gameData.marts.GOLDENROD_5F_8.accessRequirements = []
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_8.accessRequirements = []
   }
   
   if (settings.SHUFFLE_ITEMS.VALUE && settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
-    romInfo.gameData.marts.MAHOGANY_1.accessRequirements = []
+    romInfo.gameData.marts.MAHOGANY_MART_1F_SHOP_1.accessRequirements = []
   }
   
   if (settings.BLUE_CARD_REWARDS_ALWAYS_ACCESSIBLE) {
-    romInfo.gameData.specialShops.BLUE_CARD_REWARD_LADY.accessRequirements = ["BLUE_CARD"]
+    romInfo.gameData.specialShops.RADIO_TOWER_2F_BLUE_CARD_SHOP.accessRequirements = ["BLUE_CARD"]
   }
   
   if (settings.EARLY_MOUNT_SILVER.VALUE) {

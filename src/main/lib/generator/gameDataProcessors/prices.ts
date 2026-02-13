@@ -17,38 +17,38 @@ export const updatePrices = (
     return
   }
   
-  romInfo.gameData.specialShops.UNDERGROUND_BARGAIN_SHOP.items.forEach((itemInfo) => {
+  romInfo.gameData.specialShops.GOLDENROD_UNDERGROUND_BARGAIN_SHOP.items.forEach((itemInfo) => {
     itemInfo.price = Math.round(romInfo.gameData.items[itemInfo.itemId].price * 0.45)
   })
   
   ;[
-    ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_1.items,
-    ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items,
+    ...romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_ROOF_SHOP_1.items,
+    ...romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_ROOF_SHOP_2.items,
   ].forEach((itemInfo) => {
     itemInfo.price = Math.round(romInfo.gameData.items[itemInfo.itemId].price * 0.8)
   })
   
   ;[
-    ...romInfo.gameData.specialShops.MOOMOO_FARM.items,
-    ...romInfo.gameData.specialShops.MAHOGANY_STREET_VENDOR.items,
-    ...romInfo.gameData.specialShops.GOLDENROD_VENDING_MACHINES.items,
-    ...romInfo.gameData.specialShops.CELADON_VENDING_MACHINES.items,
+    ...romInfo.gameData.specialShops.ROUTE_39_FARMHOUSE_SHOP.items,
+    ...romInfo.gameData.specialShops.MAHOGANY_TOWN_STREET_VENDOR.items,
+    ...romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES.items,
+    ...romInfo.gameData.specialShops.CELADON_DEPT_STORE_6F_VENDING_MACHINES.items,
   ].forEach((itemInfo) => {
     itemInfo.price = romInfo.gameData.items[itemInfo.itemId].price
   })
   
   if (settings.RANDOMIZE_BLUE_CARD_REWARD_COSTS.VALUE) {
-    romInfo.gameData.specialShops.BLUE_CARD_REWARD_LADY.items.forEach((itemInfo) => {
+    romInfo.gameData.specialShops.RADIO_TOWER_2F_BLUE_CARD_SHOP.items.forEach((itemInfo) => {
       itemInfo.price = random.int(settings.RANDOMIZE_BLUE_CARD_REWARD_COSTS.SETTINGS.RANGE.MIN, settings.RANDOMIZE_BLUE_CARD_REWARD_COSTS.SETTINGS.RANGE.MAX)
     })
   }
   
   if (settings.RANDOMIZE_GAME_CORNER_ITEM_PRICES.VALUE) {
-    romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER.items.forEach((itemInfo) => {
+    romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER_ITEM_SHOP.items.forEach((itemInfo) => {
       itemInfo.price = random.int(settings.RANDOMIZE_GAME_CORNER_ITEM_PRICES.SETTINGS.RANGE.MIN, settings.RANDOMIZE_GAME_CORNER_ITEM_PRICES.SETTINGS.RANGE.MAX)
     })
     
-    romInfo.gameData.specialShops.CELADON_GAME_CORNER.items.forEach((itemInfo) => {
+    romInfo.gameData.specialShops.CELADON_GAME_CORNER_ITEM_SHOP.items.forEach((itemInfo) => {
       itemInfo.price = random.int(settings.RANDOMIZE_GAME_CORNER_ITEM_PRICES.SETTINGS.RANGE.MIN, settings.RANDOMIZE_GAME_CORNER_ITEM_PRICES.SETTINGS.RANGE.MAX)
     })
   }
@@ -94,7 +94,7 @@ const updateDefaultItemPrices = (
       throw new Error(`Error randomizing price of '${item.name}'. The minimum price '${min}' is greater than the maximum price '${max}'.`)
     }
     
-    if (randomSettings.LIMIT_CHERRYGROVE_PRICES.VALUE && (romInfo.gameData.marts.CHERRYGROVE_1.items.includes(itemId) || romInfo.gameData.marts.CHERRYGROVE_2.items.includes(itemId))) {
+    if (randomSettings.LIMIT_CHERRYGROVE_PRICES.VALUE && (romInfo.gameData.marts.CHERRYGROVE_MART_SHOP_1.items.includes(itemId) || romInfo.gameData.marts.CHERRYGROVE_MART_SHOP_2.items.includes(itemId))) {
       const newMin = Math.max(min, cherrygroveSettings.RANGE.MIN)
       const newMax = Math.min(max, cherrygroveSettings.RANGE.MAX)
       

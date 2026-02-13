@@ -1232,7 +1232,7 @@ export const defaultSettingsViewModel = () => {
                     
                     return createSimpleSelectorOption({
                       id: martGroupId,
-                      name: `${martGroupId}_MART`,
+                      name: martGroupId,
                       description: itemNames,
                       extraKeywords: itemNames,
                     })
