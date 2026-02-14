@@ -75,7 +75,7 @@
       style:overflow="auto"
     >
       {#each settingsViewModel.tabViewModels as tabViewModel (tabViewModel.id)}
-        {#if settingsViewModel.selectedTabId === tabViewModel.id}
+        <div style:display={settingsViewModel.selectedTabId === tabViewModel.id ? "block" : "none"}>
           <Stack
             alignment="start"
             direction="vertical"
@@ -88,7 +88,7 @@
               <SettingsInputView bind:viewModel={tabViewModel.viewModels[index]}/>
             {/each}
           </Stack>
-        {/if}
+        </div>
       {/each}
     </div>
     <div
@@ -299,6 +299,10 @@
   }
   
   const currentSettings = () => {
+    return settingsFromViewModel(settingsViewModel)
+  }
+  
+  const currentSettingsSnapshot = () => {
     return settingsFromViewModel($state.snapshot(settingsViewModel) as typeof settingsViewModel)
   }
   
@@ -407,7 +411,7 @@
   const exportSettingsButtonClicked = async () => {
     try {
       showProgressIndicator()
-      const response = await window.mainAPI.exportSettings(currentSettings())
+      const response = await window.mainAPI.exportSettings(currentSettingsSnapshot())
       showSuccessDialog(response.message)
     } catch (error) {
       showErrorDialog(error)
@@ -459,7 +463,7 @@
       onSubmit: async (name) => {
         try {
           showProgressIndicator()
-          const response = await window.mainAPI.saveSettings(currentSettings(), name)
+          const response = await window.mainAPI.saveSettings(currentSettingsSnapshot(), name)
           
           customPresetNames = [
             ...customPresetNames,
@@ -480,7 +484,7 @@
   }
   
   const generateROMButtonClicked = async () => {
-    const settings = currentSettings()
+    const settings = currentSettingsSnapshot()
     
     let recommendation = ""
     
