@@ -1442,8 +1442,8 @@ export const defaultSettingsViewModel = () => {
         ] as const,
       }), // END ITEM_PROPERTIES
       createTabViewModel({
-        id: "MARTS" as const,
-        name: "Marts",
+        id: "SHOPS" as const,
+        name: "Shops",
         viewModels: [
           createSimpleToggleViewModel({
             id: "EARLY_CHERRYGROVE_MART_POKE_BALLS" as const,
@@ -1676,7 +1676,7 @@ export const defaultSettingsViewModel = () => {
             ],
           }),
         ] as const,
-      }), // END MARTS
+      }), // END SHOPS
       createTabViewModel({
         id: "OTHER" as const,
         name: "Other",
