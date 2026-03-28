@@ -2,9 +2,9 @@ import type { Mart, SpecialShop } from "@shared/types/gameData/mart"
 import type { MartId, SpecialShopId } from "@shared/types/gameDataIds/marts"
 
 export const martsMap: IdMap<MartId, Mart> = {
-  CHERRYGROVE_1: {
-    id: "CHERRYGROVE_1",
-    groupId: "CHERRYGROVE",
+  CHERRYGROVE_MART_SHOP_1: {
+    id: "CHERRYGROVE_MART_SHOP_1",
+    groupId: "CHERRYGROVE_MART_SHOP",
     areaId: "CHERRYGROVE_MART",
     items: [
       "POTION",
@@ -13,9 +13,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "AWAKENING",
     ],
   },
-  CHERRYGROVE_2: {
-    id: "CHERRYGROVE_2",
-    groupId: "CHERRYGROVE",
+  CHERRYGROVE_MART_SHOP_2: {
+    id: "CHERRYGROVE_MART_SHOP_2",
+    groupId: "CHERRYGROVE_MART_SHOP",
     areaId: "CHERRYGROVE_MART",
     items: [
       "POKE_BALL",
@@ -29,9 +29,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "ELMS_LAB",
     ],
   },
-  VIOLET: {
-    id: "VIOLET",
-    groupId: "VIOLET",
+  VIOLET_MART_SHOP: {
+    id: "VIOLET_MART_SHOP",
+    groupId: "VIOLET_MART_SHOP",
     areaId: "VIOLET_MART",
     items: [
       "POKE_BALL",
@@ -46,9 +46,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "FLOWER_MAIL",
     ],
   },
-  AZALEA: {
-    id: "AZALEA",
-    groupId: "AZALEA",
+  AZALEA_MART_SHOP: {
+    id: "AZALEA_MART_SHOP",
+    groupId: "AZALEA_MART_SHOP",
     areaId: "AZALEA_MART",
     items: [
       "CHARCOAL",
@@ -62,9 +62,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "FLOWER_MAIL",
     ],
   },
-  CIANWOOD: {
-    id: "CIANWOOD",
-    groupId: "CIANWOOD",
+  CIANWOOD_PHARMACY_SHOP: {
+    id: "CIANWOOD_PHARMACY_SHOP",
+    groupId: "CIANWOOD_PHARMACY_SHOP",
     areaId: "CIANWOOD_PHARMACY",
     items: [
       "POTION",
@@ -74,9 +74,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "REVIVE",
     ],
   },
-  GOLDENROD_2F_1: {
-    id: "GOLDENROD_2F_1",
-    groupId: "GOLDENROD_2F_1",
+  GOLDENROD_DEPT_STORE_2F_SHOP_1: {
+    id: "GOLDENROD_DEPT_STORE_2F_SHOP_1",
+    groupId: "GOLDENROD_DEPT_STORE_2F_SHOP_1",
     areaId: "GOLDENROD_DEPT_STORE_2F",
     items: [
       "POTION",
@@ -88,9 +88,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "ICE_HEAL",
     ],
   },
-  GOLDENROD_2F_2: {
-    id: "GOLDENROD_2F_2",
-    groupId: "GOLDENROD_2F_2",
+  GOLDENROD_DEPT_STORE_2F_SHOP_2: {
+    id: "GOLDENROD_DEPT_STORE_2F_SHOP_2",
+    groupId: "GOLDENROD_DEPT_STORE_2F_SHOP_2",
     areaId: "GOLDENROD_DEPT_STORE_2F",
     items: [
       "POKE_BALL",
@@ -103,9 +103,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "FLOWER_MAIL",
     ],
   },
-  GOLDENROD_3F: {
-    id: "GOLDENROD_3F",
-    groupId: "GOLDENROD_3F",
+  GOLDENROD_DEPT_STORE_3F_SHOP: {
+    id: "GOLDENROD_DEPT_STORE_3F_SHOP",
+    groupId: "GOLDENROD_DEPT_STORE_3F_SHOP",
     areaId: "GOLDENROD_DEPT_STORE_3F",
     items: [
       "X_SPEED",
@@ -117,9 +117,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "X_ACCURACY",
     ],
   },
-  GOLDENROD_4F: {
-    id: "GOLDENROD_4F",
-    groupId: "GOLDENROD_4F",
+  GOLDENROD_DEPT_STORE_4F_SHOP: {
+    id: "GOLDENROD_DEPT_STORE_4F_SHOP",
+    groupId: "GOLDENROD_DEPT_STORE_4F_SHOP",
     areaId: "GOLDENROD_DEPT_STORE_4F",
     items: [
       "PROTEIN",
@@ -129,9 +129,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "HP_UP",
     ],
   },
-  GOLDENROD_5F_1: {
-    id: "GOLDENROD_5F_1",
-    groupId: "GOLDENROD_5F",
+  GOLDENROD_DEPT_STORE_5F_SHOP_1: {
+    id: "GOLDENROD_DEPT_STORE_5F_SHOP_1",
+    groupId: "GOLDENROD_DEPT_STORE_5F_SHOP",
     areaId: "GOLDENROD_DEPT_STORE_5F",
     items: [
       "TM41",
@@ -139,9 +139,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "TM33",
     ],
   },
-  GOLDENROD_5F_2: {
-    id: "GOLDENROD_5F_2",
-    groupId: "GOLDENROD_5F",
+  GOLDENROD_DEPT_STORE_5F_SHOP_2: {
+    id: "GOLDENROD_DEPT_STORE_5F_SHOP_2",
+    groupId: "GOLDENROD_DEPT_STORE_5F_SHOP",
     areaId: "GOLDENROD_DEPT_STORE_5F",
     items: [
       "TM41",
@@ -153,9 +153,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "ILEX_FOREST_NORTH_AREA",
     ],
   },
-  GOLDENROD_5F_3: {
-    id: "GOLDENROD_5F_3",
-    groupId: "GOLDENROD_5F",
+  GOLDENROD_DEPT_STORE_5F_SHOP_3: {
+    id: "GOLDENROD_DEPT_STORE_5F_SHOP_3",
+    groupId: "GOLDENROD_DEPT_STORE_5F_SHOP",
     areaId: "GOLDENROD_DEPT_STORE_5F",
     items: [
       "TM41",
@@ -168,9 +168,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "ROUTE_36_EAST_AREA",
     ],
   },
-  GOLDENROD_5F_4: {
-    id: "GOLDENROD_5F_4",
-    groupId: "GOLDENROD_5F",
+  GOLDENROD_DEPT_STORE_5F_SHOP_4: {
+    id: "GOLDENROD_DEPT_STORE_5F_SHOP_4",
+    groupId: "GOLDENROD_DEPT_STORE_5F_SHOP",
     areaId: "GOLDENROD_DEPT_STORE_5F",
     items: [
       "TM41",
@@ -185,9 +185,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "ROUTE_36_EAST_AREA",
     ],
   },
-  OLIVINE: {
-    id: "OLIVINE",
-    groupId: "OLIVINE",
+  OLIVINE_MART_SHOP: {
+    id: "OLIVINE_MART_SHOP",
+    groupId: "OLIVINE_MART_SHOP",
     areaId: "OLIVINE_MART",
     items: [
       "GREAT_BALL",
@@ -201,9 +201,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "SURF_MAIL",
     ],
   },
-  ECRUTEAK: {
-    id: "ECRUTEAK",
-    groupId: "ECRUTEAK",
+  ECRUTEAK_MART_SHOP: {
+    id: "ECRUTEAK_MART_SHOP",
+    groupId: "ECRUTEAK_MART_SHOP",
     areaId: "ECRUTEAK_MART",
     items: [
       "POKE_BALL",
@@ -218,9 +218,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "REVIVE",
     ],
   },
-  MAHOGANY_1: {
-    id: "MAHOGANY_1",
-    groupId: "MAHOGANY_1",
+  MAHOGANY_MART_1F_SHOP_1: {
+    id: "MAHOGANY_MART_1F_SHOP_1",
+    groupId: "MAHOGANY_MART_1F_SHOP_1",
     areaId: "MAHOGANY_MART_1F",
     items: [
       "TINYMUSHROOM",
@@ -232,9 +232,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "INACCESSIBLE",
     ],
   },
-  MAHOGANY_2: {
-    id: "MAHOGANY_2",
-    groupId: "MAHOGANY_2",
+  MAHOGANY_MART_1F_SHOP_2: {
+    id: "MAHOGANY_MART_1F_SHOP_2",
+    groupId: "MAHOGANY_MART_1F_SHOP_2",
     areaId: "MAHOGANY_MART_1F",
     items: [
       "RAGECANDYBAR",
@@ -251,9 +251,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
     ],
   },
-  BLACKTHORN: {
-    id: "BLACKTHORN",
-    groupId: "BLACKTHORN",
+  BLACKTHORN_MART_SHOP: {
+    id: "BLACKTHORN_MART_SHOP",
+    groupId: "BLACKTHORN_MART_SHOP",
     areaId: "BLACKTHORN_MART",
     items: [
       "GREAT_BALL",
@@ -267,9 +267,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "X_ATTACK",
     ],
   },
-  VIRIDIAN: {
-    id: "VIRIDIAN",
-    groupId: "VIRIDIAN",
+  VIRIDIAN_MART_SHOP: {
+    id: "VIRIDIAN_MART_SHOP",
+    groupId: "VIRIDIAN_MART_SHOP",
     areaId: "VIRIDIAN_MART",
     items: [
       "ULTRA_BALL",
@@ -283,9 +283,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "FLOWER_MAIL",
     ],
   },
-  PEWTER: {
-    id: "PEWTER",
-    groupId: "PEWTER",
+  PEWTER_MART_SHOP: {
+    id: "PEWTER_MART_SHOP",
+    groupId: "PEWTER_MART_SHOP",
     areaId: "PEWTER_MART",
     items: [
       "GREAT_BALL",
@@ -297,9 +297,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "BURN_HEAL",
     ],
   },
-  CERULEAN: {
-    id: "CERULEAN",
-    groupId: "CERULEAN",
+  CERULEAN_MART_SHOP: {
+    id: "CERULEAN_MART_SHOP",
+    groupId: "CERULEAN_MART_SHOP",
     areaId: "CERULEAN_MART",
     items: [
       "GREAT_BALL",
@@ -313,9 +313,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "SURF_MAIL",
     ],
   },
-  LAVENDER: {
-    id: "LAVENDER",
-    groupId: "LAVENDER",
+  LAVENDER_MART_SHOP: {
+    id: "LAVENDER_MART_SHOP",
+    groupId: "LAVENDER_MART_SHOP",
     areaId: "LAVENDER_MART",
     items: [
       "GREAT_BALL",
@@ -328,9 +328,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "BURN_HEAL",
     ],
   },
-  VERMILION: {
-    id: "VERMILION",
-    groupId: "VERMILION",
+  VERMILION_MART_SHOP: {
+    id: "VERMILION_MART_SHOP",
+    groupId: "VERMILION_MART_SHOP",
     areaId: "VERMILION_MART",
     items: [
       "ULTRA_BALL",
@@ -343,9 +343,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "LITEBLUEMAIL",
     ],
   },
-  CELADON_2F_1: {
-    id: "CELADON_2F_1",
-    groupId: "CELADON_2F_1",
+  CELADON_DEPT_STORE_2F_SHOP_1: {
+    id: "CELADON_DEPT_STORE_2F_SHOP_1",
+    groupId: "CELADON_DEPT_STORE_2F_SHOP_1",
     areaId: "CELADON_DEPT_STORE_2F",
     items: [
       "POTION",
@@ -357,9 +357,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "MAX_REPEL",
     ],
   },
-  CELADON_2F_2: {
-    id: "CELADON_2F_2",
-    groupId: "CELADON_2F_2",
+  CELADON_DEPT_STORE_2F_SHOP_2: {
+    id: "CELADON_DEPT_STORE_2F_SHOP_2",
+    groupId: "CELADON_DEPT_STORE_2F_SHOP_2",
     areaId: "CELADON_DEPT_STORE_2F",
     items: [
       "POKE_BALL",
@@ -374,9 +374,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "PARLYZ_HEAL",
     ],
   },
-  CELADON_3F: {
-    id: "CELADON_3F",
-    groupId: "CELADON_3F",
+  CELADON_DEPT_STORE_3F_SHOP: {
+    id: "CELADON_DEPT_STORE_3F_SHOP",
+    groupId: "CELADON_DEPT_STORE_3F_SHOP",
     areaId: "CELADON_DEPT_STORE_3F",
     items: [
       "TM10",
@@ -386,9 +386,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "TM37",
     ],
   },
-  CELADON_4F: {
-    id: "CELADON_4F",
-    groupId: "CELADON_4F",
+  CELADON_DEPT_STORE_4F_SHOP: {
+    id: "CELADON_DEPT_STORE_4F_SHOP",
+    groupId: "CELADON_DEPT_STORE_4F_SHOP",
     areaId: "CELADON_DEPT_STORE_4F",
     items: [
       "POKE_DOLL",
@@ -396,9 +396,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "SURF_MAIL",
     ],
   },
-  CELADON_5F_1: {
-    id: "CELADON_5F_1",
-    groupId: "CELADON_5F_1",
+  CELADON_DEPT_STORE_5F_SHOP_1: {
+    id: "CELADON_DEPT_STORE_5F_SHOP_1",
+    groupId: "CELADON_DEPT_STORE_5F_SHOP_1",
     areaId: "CELADON_DEPT_STORE_5F",
     items: [
       "HP_UP",
@@ -408,9 +408,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "CALCIUM",
     ],
   },
-  CELADON_5F_2: {
-    id: "CELADON_5F_2",
-    groupId: "CELADON_5F_2",
+  CELADON_DEPT_STORE_5F_SHOP_2: {
+    id: "CELADON_DEPT_STORE_5F_SHOP_2",
+    groupId: "CELADON_DEPT_STORE_5F_SHOP_2",
     areaId: "CELADON_DEPT_STORE_5F",
     items: [
       "X_ACCURACY",
@@ -422,9 +422,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "X_SPECIAL",
     ],
   },
-  FUCHSIA: {
-    id: "FUCHSIA",
-    groupId: "FUCHSIA",
+  FUCHSIA_MART_SHOP: {
+    id: "FUCHSIA_MART_SHOP",
+    groupId: "FUCHSIA_MART_SHOP",
     areaId: "FUCHSIA_MART",
     items: [
       "GREAT_BALL",
@@ -436,9 +436,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "FLOWER_MAIL",
     ],
   },
-  SAFFRON: {
-    id: "SAFFRON",
-    groupId: "SAFFRON",
+  SAFFRON_MART_SHOP: {
+    id: "SAFFRON_MART_SHOP",
+    groupId: "SAFFRON_MART_SHOP",
     areaId: "SAFFRON_MART",
     items: [
       "GREAT_BALL",
@@ -451,9 +451,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "FLOWER_MAIL",
     ],
   },
-  MT_MOON: {
-    id: "MT_MOON",
-    groupId: "MT_MOON",
+  MOUNT_MOON_GIFT_SHOP_SHOP: {
+    id: "MOUNT_MOON_GIFT_SHOP_SHOP",
+    groupId: "MT_MOON_GIFT_SHOP_SHOP",
     areaId: "MOUNT_MOON_GIFT_SHOP",
     items: [
       "POKE_DOLL",
@@ -464,9 +464,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "PORTRAITMAIL",
     ],
   },
-  INDIGO_PLATEAU: {
-    id: "INDIGO_PLATEAU",
-    groupId: "INDIGO_PLATEAU",
+  INDIGO_PLATEAU_POKECENTER_1F_SHOP: {
+    id: "INDIGO_PLATEAU_POKECENTER_1F_SHOP",
+    groupId: "INDIGO_PLATEAU_POKECENTER_1F_SHOP",
     areaId: "INDIGO_PLATEAU_POKECENTER_1F",
     items: [
       "ULTRA_BALL",
@@ -478,9 +478,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "FULL_HEAL",
     ],
   },
-  UNDERGROUND: {
-    id: "UNDERGROUND",
-    groupId: "UNDERGROUND",
+  GOLDENROD_UNDERGROUND_HERB_SHOP: {
+    id: "GOLDENROD_UNDERGROUND_HERB_SHOP",
+    groupId: "GOLDENROD_UNDERGROUND_HERB_SHOP",
     areaId: "GOLDENROD_UNDERGROUND",
     items: [
       "ENERGYPOWDER",
@@ -489,18 +489,18 @@ export const martsMap: IdMap<MartId, Mart> = {
       "REVIVAL_HERB",
     ],
   },
-  GOLDENROD_5F_5: {
-    id: "GOLDENROD_5F_5",
-    groupId: "GOLDENROD_5F",
+  GOLDENROD_DEPT_STORE_5F_SHOP_5: {
+    id: "GOLDENROD_DEPT_STORE_5F_SHOP_5",
+    groupId: "GOLDENROD_DEPT_STORE_5F_SHOP",
     areaId: "GOLDENROD_DEPT_STORE_5F",
     items: [],
     accessRequirements: [
       "ROUTE_34_ILEX_FOREST_GATE",
     ],
   },
-  GOLDENROD_5F_6: {
-    id: "GOLDENROD_5F_6",
-    groupId: "GOLDENROD_5F",
+  GOLDENROD_DEPT_STORE_5F_SHOP_6: {
+    id: "GOLDENROD_DEPT_STORE_5F_SHOP_6",
+    groupId: "GOLDENROD_DEPT_STORE_5F_SHOP",
     areaId: "GOLDENROD_DEPT_STORE_5F",
     items: [],
     accessRequirements: [
@@ -508,9 +508,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "ILEX_FOREST_NORTH_AREA",
     ],
   },
-  GOLDENROD_5F_7: {
-    id: "GOLDENROD_5F_7",
-    groupId: "GOLDENROD_5F",
+  GOLDENROD_DEPT_STORE_5F_SHOP_7: {
+    id: "GOLDENROD_DEPT_STORE_5F_SHOP_7",
+    groupId: "GOLDENROD_DEPT_STORE_5F_SHOP",
     areaId: "GOLDENROD_DEPT_STORE_5F",
     items: [],
     accessRequirements: [
@@ -519,9 +519,9 @@ export const martsMap: IdMap<MartId, Mart> = {
       "ROUTE_36_EAST_AREA",
     ],
   },
-  GOLDENROD_5F_8: {
-    id: "GOLDENROD_5F_8",
-    groupId: "GOLDENROD_5F",
+  GOLDENROD_DEPT_STORE_5F_SHOP_8: {
+    id: "GOLDENROD_DEPT_STORE_5F_SHOP_8",
+    groupId: "GOLDENROD_DEPT_STORE_5F_SHOP",
     areaId: "GOLDENROD_DEPT_STORE_5F",
     items: [],
     accessRequirements: [
@@ -534,8 +534,8 @@ export const martsMap: IdMap<MartId, Mart> = {
 } as const
 
 export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
-  GOLDENROD_VENDING_MACHINES: {
-    id: "GOLDENROD_VENDING_MACHINES",
+  GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES: {
+    id: "GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES",
     areaId: "GOLDENROD_DEPT_STORE_6F",
     items: [
       {
@@ -552,8 +552,8 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
       },
     ],
   },
-  CELADON_VENDING_MACHINES: {
-    id: "CELADON_VENDING_MACHINES",
+  CELADON_DEPT_STORE_6F_VENDING_MACHINES: {
+    id: "CELADON_DEPT_STORE_6F_VENDING_MACHINES",
     areaId: "CELADON_DEPT_STORE_6F",
     items: [
       {
@@ -570,8 +570,8 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
       },
     ],
   },
-  UNDERGROUND_BARGAIN_SHOP: {
-    id: "UNDERGROUND_BARGAIN_SHOP",
+  GOLDENROD_UNDERGROUND_BARGAIN_SHOP: {
+    id: "GOLDENROD_UNDERGROUND_BARGAIN_SHOP",
     areaId: "GOLDENROD_UNDERGROUND",
     items: [
       {
@@ -596,8 +596,8 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
       },
     ],
   },
-  GOLDENROD_ROOFTOP_VENDOR_1: {
-    id: "GOLDENROD_ROOFTOP_VENDOR_1",
+  GOLDENROD_DEPT_STORE_ROOF_SHOP_1: {
+    id: "GOLDENROD_DEPT_STORE_ROOF_SHOP_1",
     areaId: "GOLDENROD_DEPT_STORE_ROOF",
     items: [
       {
@@ -626,8 +626,8 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
       "POKEGEAR",
     ],
   },
-  GOLDENROD_ROOFTOP_VENDOR_2: {
-    id: "GOLDENROD_ROOFTOP_VENDOR_2",
+  GOLDENROD_DEPT_STORE_ROOF_SHOP_2: {
+    id: "GOLDENROD_DEPT_STORE_ROOF_SHOP_2",
     areaId: "GOLDENROD_DEPT_STORE_ROOF",
     items: [
       {
@@ -657,8 +657,8 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
       "HALL_OF_FAME",
     ],
   },
-  MOOMOO_FARM: {
-    id: "MOOMOO_FARM",
+  ROUTE_39_FARMHOUSE_SHOP: {
+    id: "ROUTE_39_FARMHOUSE_SHOP",
     areaId: "ROUTE_39_FARMHOUSE",
     items: [
       {
@@ -671,8 +671,8 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
       { item: "BERRY", number: 7 },
     ],
   },
-  MAHOGANY_STREET_VENDOR: {
-    id: "MAHOGANY_STREET_VENDOR",
+  MAHOGANY_TOWN_STREET_VENDOR: {
+    id: "MAHOGANY_TOWN_STREET_VENDOR",
     areaId: "MAHOGANY_TOWN",
     items: [
       {
@@ -681,8 +681,8 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
       },
     ],
   },
-  GOLDENROD_GAME_CORNER: {
-    id: "GOLDENROD_GAME_CORNER",
+  GOLDENROD_GAME_CORNER_ITEM_SHOP: {
+    id: "GOLDENROD_GAME_CORNER_ITEM_SHOP",
     areaId: "GOLDENROD_GAME_CORNER",
     items: [
       {
@@ -702,8 +702,8 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
       "COIN_CASE",
     ],
   },
-  CELADON_GAME_CORNER: {
-    id: "CELADON_GAME_CORNER",
+  CELADON_GAME_CORNER_ITEM_SHOP: {
+    id: "CELADON_GAME_CORNER_ITEM_SHOP",
     areaId: "CELADON_GAME_CORNER_PRIZE_ROOM",
     items: [
       {
@@ -723,8 +723,8 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
       "COIN_CASE",
     ],
   },
-  BLUE_CARD_REWARD_LADY: {
-    id: "BLUE_CARD_REWARD_LADY",
+  RADIO_TOWER_2F_BLUE_CARD_SHOP: {
+    id: "RADIO_TOWER_2F_BLUE_CARD_SHOP",
     areaId: "RADIO_TOWER_2F",
     items: [
       {

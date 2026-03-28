@@ -74,13 +74,13 @@
     })?.name ?? ""
   })
   
-  const previousSelection: Option | undefined = $derived.by(() => {
+  const previousSelection: Option<string | number> | undefined = $derived.by(() => {
     return viewModel.options.find((option) => {
       return option.id === viewModel.selectedOptionId
-    }) as Option
+    }) as Option<string | number>
   })
   
-  const handleAutocompleteSelection = (optionId: string | undefined) => {
+  const handleAutocompleteSelection = (optionId: string | number | undefined) => {
     if (isNotNullish(optionId)) {
       viewModel.selectedOptionId = optionId
     } else {

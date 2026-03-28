@@ -7,20 +7,20 @@ export const updateMarts = (
   romInfo: ROMInfo,
 ) => {
   if (settings.CHERRYGROVE_MART_REPELS) {
-    romInfo.gameData.marts.CHERRYGROVE_1.items.splice(1, 0, "REPEL")
-    romInfo.gameData.marts.CHERRYGROVE_2.items.splice(2, 0, "REPEL")
+    romInfo.gameData.marts.CHERRYGROVE_MART_SHOP_1.items.splice(1, 0, "REPEL")
+    romInfo.gameData.marts.CHERRYGROVE_MART_SHOP_2.items.splice(2, 0, "REPEL")
   }
   
   if (settings.EARLY_CHERRYGROVE_MART_POKE_BALLS) {
-    romInfo.gameData.marts.CHERRYGROVE_1.items = []
+    romInfo.gameData.marts.CHERRYGROVE_MART_SHOP_1.items = []
   }
   
   if (settings.VIOLET_MART_REPELS) {
-    romInfo.gameData.marts.VIOLET.items.splice(2, 0, "REPEL")
+    romInfo.gameData.marts.VIOLET_MART_SHOP.items.splice(2, 0, "REPEL")
   }
   
   if (settings.BUYABLE_EVOLUTION_STONES) {
-    romInfo.gameData.marts.GOLDENROD_4F.items.splice(0, 0, ...([
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_4F_SHOP.items.splice(0, 0, ...([
       "FIRE_STONE",
       "WATER_STONE",
       "LEAF_STONE",
@@ -31,34 +31,41 @@ export const updateMarts = (
   }
   
   if (settings.BUYABLE_TM12) {
-    romInfo.gameData.marts.GOLDENROD_5F_5.items = [
-      ...romInfo.gameData.marts.GOLDENROD_5F_1.items,
+    romInfo.gameData.martGroups.GOLDENROD_DEPT_STORE_5F_SHOP.primaryMartId = "GOLDENROD_DEPT_STORE_5F_SHOP_8"
+    
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_5.items = [
+      ...romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_1.items,
       "TM12",
     ]
     
-    romInfo.gameData.marts.GOLDENROD_5F_6.items = [
-      ...romInfo.gameData.marts.GOLDENROD_5F_2.items,
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_6.items = [
+      ...romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_2.items,
       "TM12",
     ]
     
-    romInfo.gameData.marts.GOLDENROD_5F_7.items = [
-      ...romInfo.gameData.marts.GOLDENROD_5F_3.items,
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_7.items = [
+      ...romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_3.items,
       "TM12",
     ]
     
-    romInfo.gameData.marts.GOLDENROD_5F_8.items = [
-      ...romInfo.gameData.marts.GOLDENROD_5F_4.items,
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_8.items = [
+      ...romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_4.items,
       "TM12",
     ]
   }
   
   if (settings.EARLY_GOLDENROD_MART_TMS) {
-    romInfo.gameData.marts.GOLDENROD_5F_1.items = []
-    romInfo.gameData.marts.GOLDENROD_5F_2.items = []
-    romInfo.gameData.marts.GOLDENROD_5F_3.items = []
-    romInfo.gameData.marts.GOLDENROD_5F_4.items = []
-    romInfo.gameData.marts.GOLDENROD_5F_5.items = []
-    romInfo.gameData.marts.GOLDENROD_5F_6.items = []
-    romInfo.gameData.marts.GOLDENROD_5F_7.items = []
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_1.items = []
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_2.items = []
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_3.items = []
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_5.items = []
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_6.items = []
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_7.items = []
+    
+    if (settings.BUYABLE_TM12) {
+      romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_4.items = []
+    } else {
+      romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_8.items = []
+    }
   }
 }

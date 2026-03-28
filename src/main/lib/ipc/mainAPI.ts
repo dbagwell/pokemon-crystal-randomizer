@@ -3,13 +3,14 @@ import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
 import { getPreference, setPreference } from "@lib/userData/preferences"
 import { getPlayerOptions, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setPlayerOptions, setPreviousSettings } from "@lib/userData/userData"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
+import type { MainAPIInterface } from "@shared/types/ipc/mainAPIInterface"
 import { isNullish } from "@shared/utils"
 import { app, dialog } from "electron"
 import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
 import fs from "fs"
 import yaml from "yaml"
 
-export class MainAPI implements ElectronMainApi<MainAPI> {
+export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
   
   readonly getPresetSettings = async (presetId: string): Promise<APIResponse<unknown | undefined>> => {
     return {

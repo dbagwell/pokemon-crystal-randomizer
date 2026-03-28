@@ -1,21 +1,20 @@
 import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
-import { getYAML } from "@lib/utils/yamlUtils"
+import { accessRulsetsMap } from "@shared/appData/accessRulesets"
 import type { Settings } from "@shared/appData/settingsFromViewModel"
 import type { GameData } from "@shared/types/gameData/gameData"
 import type { ItemLocation } from "@shared/types/gameData/itemLocation"
 import type { Mart, SpecialShop } from "@shared/types/gameData/mart"
-import { type AccessRequirement, isAccessRequirement, type Warp } from "@shared/types/gameData/warp"
+import { type AccessRequirement, type Warp } from "@shared/types/gameData/warp"
 import type { ItemLocationGroupId } from "@shared/types/gameDataIds/itemLocationGroups"
-import { type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
+import { isItemLocationId, type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { type BadgeItemId, badgeItemIds, ballItemIds, type HoldableItemId, holdableItemIds, isItemId, type ItemId, type KeyItemId, keyItemIds, type MenuItemId, menuItemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
-import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
-import { martGroupIds } from "@shared/types/gameDataIds/martGroups"
-import { type MartId, martIds, type SpecialShopId, specialShopIds } from "@shared/types/gameDataIds/marts"
+import { isLogicalAccessAreaId, type LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
+import { isMartGroupId, martGroupIds } from "@shared/types/gameDataIds/martGroups"
+import { type MartId, type SpecialShopId } from "@shared/types/gameDataIds/marts"
 import { isPokemonId } from "@shared/types/gameDataIds/pokemon"
-import { type WarpId, warpIds } from "@shared/types/gameDataIds/warps"
+import { isWarpId } from "@shared/types/gameDataIds/warps"
 import { getAllCombinations, isNotNullish, isNullish, isNumber, isObject, isString, removeFirstElementFromArrayWhere, removeSupersets } from "@shared/utils"
-import path from "path"
 
 export const updateItems = (
   settings: Settings,
@@ -165,7 +164,7 @@ export const shuffleItems = (
     return group.includes("SHOPS")
   })
   
-  let allItemLocations = generalItemLocations(romInfo.gameData, settings)
+  let allItemLocations = generalItemLocations(romInfo.gameData)
   const locationsToShuffle: GeneralItemLocation[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   const startingAccessibleItems = startingItemIds(settings).map((itemId) => {
@@ -283,7 +282,7 @@ export const shuffleItems = (
       const remainingMartGroupIds = [...martGroupIds.filter((martGroupId) => { return !shuffleItemsSettings.EXCLUDE_LOCATIONS.includes(martGroupId) })]
       
       while (remainingMartGroupIds.length > 0) {
-        const shopId = remainingMartGroupIds.find((id) => { return id === "CHERRYGROVE" }) ?? random.element({ array: remainingMartGroupIds })
+        const shopId = remainingMartGroupIds.find((id) => { return id === "CHERRYGROVE_MART_SHOP" }) ?? random.element({ array: remainingMartGroupIds })
         const shopIndex = remainingMartGroupIds.indexOf(shopId)
         remainingMartGroupIds.splice(shopIndex, 1)
       
@@ -367,21 +366,24 @@ export const shuffleItems = (
     let foundLocation = false
     
     while (!foundLocation) {
-      const location = random.element({
-        array: getAccessibleLocations({
-          accessibleItems: [
-            ...startingAccessibleItems,
-            ...allRemainingProgressionItems.map((item) => {
-              return {
-                itemId: item.itemId,
-                isFromMart: true, // Might not always be correct, but is always correct when it matters.
-              }
-            }),
-          ],
-          allItemLocations: allItemLocations,
-          allowNormalConsumables: !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
-        }).filter((location) => {
-          return isNullish(location.itemId)
+      let location
+      
+      try {
+        location = random.element({
+          array: getAccessibleLocations({
+            accessibleItems: [
+              ...startingAccessibleItems,
+              ...allRemainingProgressionItems.map((item) => {
+                return {
+                  itemId: item.itemId,
+                  isFromMart: true, // Might not always be correct, but is always correct when it matters.
+                }
+              }),
+            ],
+            allItemLocations: allItemLocations,
+            allowNormalConsumables: !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
+          }).filter((location) => {
+            return isNullish(location.itemId)
             && !invalidLocations.includes(location.id)
             && location.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
             && (!(holdableItemIds as readonly ItemId[]).includes(selectedItemInfo.itemId) || !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC || location.type === "MART")
@@ -391,8 +393,11 @@ export const shuffleItems = (
                 return bannedShopLocation.id === location.id
               })
             )
-        }),
-      })
+          }),
+        })
+      } catch {
+        throw new Error("Unable to shuffle items. Not enough valid locations to place items. Try updating 'SHUFFLE_ITEMS' subsettings to be less restrictive.")
+      }
       
       location.itemId = selectedItemInfo.itemId
       
@@ -452,9 +457,9 @@ export const shuffleItems = (
   })
   
   if (shuffleItemsSettings.GROUPS.some((group) => { return group.includes("SHOPS") })) {
-    romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items = [
-      ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_1.items,
-      ...romInfo.gameData.specialShops.GOLDENROD_ROOFTOP_VENDOR_2.items,
+    romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_ROOF_SHOP_2.items = [
+      ...romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_ROOF_SHOP_1.items,
+      ...romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_ROOF_SHOP_2.items,
     ]
   }
 }
@@ -482,35 +487,22 @@ const getAccessibleLocations = (params: {
   return accessibleItemLocations
 }
 
-const generalItemLocations = (gameData: GameData, settings: Settings): GeneralItemLocation[] => {
-  const ignoredMartIds: MartId[] = [
-    "CHERRYGROVE_1",
-    "GOLDENROD_5F_1",
-    "GOLDENROD_5F_2",
-    "GOLDENROD_5F_3",
-    "GOLDENROD_5F_5",
-    "GOLDENROD_5F_6",
-    "GOLDENROD_5F_7",
-    settings.BUYABLE_TM12 ? "GOLDENROD_5F_4" : "GOLDENROD_5F_8",
-  ]
-  
+const generalItemLocations = (gameData: GameData): GeneralItemLocation[] => {
   const convertAccessRequirements = (requirements: AccessRequirement[]) => {
     return requirements.flatMap((requirement) => {
       if (isPokemonId(requirement)) {
-        // This currently checks accessiblity of all the items required (with vanilla warps) to see all the random encounter slots
+        // This currently checks accessiblity of all the items required (with vanilla warps) to see all the random encounter slots (except mount silver)
         // It will need to be updated once we shuffle warps, also if we want to add an option to just check if specific pokemon are accessible
         return [
           7,
           "HIVEBADGE",
           "FOGBADGE",
           "PLAINBADGE",
-          "ZEPHYRBADGE",
           "GLACIERBADGE",
           "RISINGBADGE",
           "HM01",
           "HM03",
           "HM04",
-          "HM05",
           "HM06",
           "HM07",
           "SQUIRTBOTTLE",
@@ -523,10 +515,8 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
           "POKEGEAR",
           "RADIO_CARD",
           "EXPN_CARD",
-          "POKEDEX",
           "TM02",
           "TM08",
-          "TM12",
           "OLD_ROD",
           "GOOD_ROD",
           "SUPER_ROD",
@@ -560,7 +550,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
   const accessInfoObjects = [
     ...accessInfoFrom(Object.values(gameData.itemLocations), "ITEM_LOCATION" as const),
     ...accessInfoFrom(Object.values(gameData.warps), "WARP" as const),
-    ...accessInfoFrom(Object.values(gameData.marts), "MART" as const),
+    ...accessInfoFrom(Object.values(gameData.martGroups).map((group) => { return gameData.marts[group.primaryMartId] }), "MART" as const),
     ...accessInfoFrom(Object.values(gameData.specialShops), "SPECIAL_SHOP" as const),
     ...Object.values(gameData.areas).map((area) => {
       return {
@@ -654,11 +644,10 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
         },
       ] as GeneralItemLocation[]
     } else if (object.type === "MART") {
-      return ignoredMartIds.includes(object.id as MartId) ? [] : gameData.marts[object.id as MartId].items.map((itemId, index) => {
+      return gameData.marts[object.id as MartId].items.map((itemId, index) => {
         return {
           ...object,
           id: JSON.stringify({
-            martId: object.id,
             groupId: gameData.marts[object.id as MartId].groupId,
             itemIndex: index,
           }),
@@ -1073,8 +1062,17 @@ export const updateAccessLogic = (
       const area = romInfo.gameData.areas[areaId]
       area.accessOptions = area.accessOptions.map((option) => {
         const optionArray = [option].flat()
+        const stringRequirements = new Set(optionArray.filter((option) => {
+          return isString(option)
+        })) as Set<string>
         
-        if (new Set(optionArray).isSupersetOf(new Set(matchingRequirements)) && (!(modifyMutualAccess ?? false) || new Set(optionArray.filter((option) => { return isString(option) })).intersection(new Set(areaIds)).size > 0)) {
+        if (
+          new Set(optionArray).isSupersetOf(new Set(matchingRequirements))
+          && (
+            !(modifyMutualAccess ?? false)
+            || stringRequirements.intersection(new Set(areaIds)).size > 0
+          )
+        ) {
           optionArray.push(...requirements)
           return optionArray
         } else {
@@ -1101,8 +1099,17 @@ export const updateAccessLogic = (
       const area = romInfo.gameData.areas[areaId]
       area.accessOptions = area.accessOptions.map((option) => {
         const optionArray = [option].flat()
+        const stringRequirements = new Set(optionArray.filter((option) => {
+          return isString(option)
+        })) as Set<string>
       
-        if (new Set(optionArray).isSupersetOf(new Set(matchingRequirements)) && (!(modifyMutualAccess ?? false) || new Set(optionArray.filter((option) => { return isString(option) })).intersection(new Set(areaIds)).size > 0)) {
+        if (
+          new Set(optionArray).isSupersetOf(new Set(matchingRequirements))
+          && (
+            !(modifyMutualAccess ?? false)
+            || stringRequirements.intersection(new Set(areaIds)).size > 0
+          )
+        ) {
           return optionArray.filter((requirement) => {
             return !requirements.includes(requirement)
           })
@@ -1258,7 +1265,7 @@ export const updateAccessLogic = (
     { item: "BERRY", number: romInfo.gameData.numberOfMiltankBerries },
   ] : undefined
   
-  romInfo.gameData.specialShops.MOOMOO_FARM.accessRequirements = romInfo.gameData.numberOfMiltankBerries > 0 ? [
+  romInfo.gameData.specialShops.ROUTE_39_FARMHOUSE_SHOP.accessRequirements = romInfo.gameData.numberOfMiltankBerries > 0 ? [
     "ROUTE_39_BARN",
     { item: "BERRY", number: romInfo.gameData.numberOfMiltankBerries },
   ] : undefined
@@ -1358,19 +1365,19 @@ export const updateAccessLogic = (
   }
   
   if (settings.EARLY_CHERRYGROVE_MART_POKE_BALLS) {
-    romInfo.gameData.marts.CHERRYGROVE_2.accessRequirements = []
+    romInfo.gameData.marts.CHERRYGROVE_MART_SHOP_2.accessRequirements = []
   }
   
   if (settings.EARLY_GOLDENROD_MART_TMS) {
-    romInfo.gameData.marts.GOLDENROD_5F_8.accessRequirements = []
+    romInfo.gameData.marts.GOLDENROD_DEPT_STORE_5F_SHOP_8.accessRequirements = []
   }
   
   if (settings.SHUFFLE_ITEMS.VALUE && settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
-    romInfo.gameData.marts.MAHOGANY_1.accessRequirements = []
+    romInfo.gameData.marts.MAHOGANY_MART_1F_SHOP_1.accessRequirements = []
   }
   
   if (settings.BLUE_CARD_REWARDS_ALWAYS_ACCESSIBLE) {
-    romInfo.gameData.specialShops.BLUE_CARD_REWARD_LADY.accessRequirements = ["BLUE_CARD"]
+    romInfo.gameData.specialShops.RADIO_TOWER_2F_BLUE_CARD_SHOP.accessRequirements = ["BLUE_CARD"]
   }
   
   if (settings.EARLY_MOUNT_SILVER.VALUE) {
@@ -1417,92 +1424,51 @@ export const updateAccessLogic = (
     romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements?.push(romInfo.gameData.eventPokemon.TOGEPI)
   }
   
-  settings.SHUFFLE_ITEMS.SETTINGS.ACCESS_MODIFIERS.forEach((rulesetId) => {
-    let rulesetInfo: any
+  const accessModifiers = [
+    ...settings.SHUFFLE_ITEMS.SETTINGS.ACCESS_MODIFIERS.flatMap((rulesetId) => {
+      return accessRulsetsMap[rulesetId].accessModifiers
+    }),
+    ...settings.SHUFFLE_ITEMS.SETTINGS.CUSTOM_ACCESS_MODIFIERS,
+  ]
+  
+  accessModifiers.forEach((modifier) => {
+    const areaIds: LogicalAccessAreaId[] = []
     
-    try {
-      rulesetInfo = getYAML([path.resolve(__dirname, "accessRulesets", `${rulesetId}.yml`)])
-    } catch (error) {
-      throw new Error(`Cannot find selected ruleset of additional access modifiers '${rulesetId}'.`)
-    }
-    
-    if (!isObject(rulesetInfo)) {
-      throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
-    }
-    
-    if (isNotNullish(rulesetInfo.addedAreaRequirements)) {
-      if (!Array.isArray(rulesetInfo.addedAreaRequirements)) {
-        throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
+    modifier.LOCATIONS.forEach((id) => {
+      if (isLogicalAccessAreaId(id)) {
+        areaIds.push(id)
+      } else if (isItemLocationId(id)) {
+        romInfo.gameData.itemLocations[id].accessRequirements = [
+          ...romInfo.gameData.itemLocations[id].accessRequirements ?? [],
+          ...modifier.ADDED_REQUIREMENTS,
+        ]
+      } else if (isWarpId(id)) {
+        romInfo.gameData.warps[id].accessRequirements = [
+          ...romInfo.gameData.warps[id].accessRequirements ?? [],
+          ...modifier.ADDED_REQUIREMENTS,
+        ]
+      } else if (isMartGroupId(id)) {
+        Object.values(romInfo.gameData.marts).filter((mart) => {
+          return mart.groupId === id
+        }).forEach((mart) => {
+          mart.accessRequirements = [
+            ...mart.accessRequirements ?? [],
+            ...modifier.ADDED_REQUIREMENTS,
+          ]
+        })
+      } else {
+        romInfo.gameData.specialShops[id].accessRequirements = [
+          ...romInfo.gameData.specialShops[id].accessRequirements ?? [],
+          ...modifier.ADDED_REQUIREMENTS,
+        ]
       }
-      
-      rulesetInfo.addedAreaRequirements.forEach((rule: any) => {
-        if (!(
-          isObject(rule)
-        && Array.isArray(rule.requirements)
-        && Array.isArray(rule.areaIds)
-        && (Array.isArray(rule.matchingRequirements) || isNullish(rule.matchingRequirements))
-        && rule.requirements.every((requirement: any) => {
-          return isAccessRequirement(requirement)
-        })
-        && rule.areaIds.every((id: any) => {
-          return logicalAccessAreaIds.includes(id)
-        })
-        && (rule.matchingRequirements?.every((requirement: any) => {
-          return isAccessRequirement(requirement)
-        }) ?? true)
-        )) {
-          throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
-        }
+    })
     
-        addAccessRequirements(rule)
-      })
-    }
-    
-    if (isNotNullish(rulesetInfo.addedItemLocationRequirements)) {
-      if (!Array.isArray(rulesetInfo.addedItemLocationRequirements)) {
-        throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
-      }
-      
-      rulesetInfo.addedItemLocationRequirements.forEach((rule: any) => {
-        if (!(
-          isObject(rule)
-        && Array.isArray(rule.requirements)
-        && Array.isArray(rule.itemLocationIds)
-        && rule.requirements.every((requirement: any) => {
-          return isAccessRequirement(requirement)
-        })
-        && rule.itemLocationIds.every((id: any) => {
-          return itemLocationIds.includes(id) || warpIds.includes(id) || martIds.includes(id) || specialShopIds.includes(id)
-        })
-        )) {
-          throw new Error(`Access modifier ruleset '${rulesetId} is in an incorrect format.`)
-        }
-    
-        rule.itemLocationIds.forEach((id: any) => {
-          if (itemLocationIds.includes(id)) {
-            romInfo.gameData.itemLocations[id as ItemLocationId].accessRequirements = [
-              ...romInfo.gameData.itemLocations[id as ItemLocationId].accessRequirements ?? [],
-              ...rule.requirements,
-            ]
-          } else if (warpIds.includes(id)) {
-            romInfo.gameData.warps[id as WarpId].accessRequirements = [
-              ...romInfo.gameData.warps[id as WarpId].accessRequirements ?? [],
-              ...rule.requirements,
-            ]
-          } else if (martIds.includes(id)) {
-            romInfo.gameData.marts[id as MartId].accessRequirements = [
-              ...romInfo.gameData.marts[id as MartId].accessRequirements ?? [],
-              ...rule.requirements,
-            ]
-          } else {
-            romInfo.gameData.specialShops[id as SpecialShopId].accessRequirements = [
-              ...romInfo.gameData.specialShops[id as SpecialShopId].accessRequirements ?? [],
-              ...rule.requirements,
-            ]
-          }
-        })
-      })
-    }
+    addAccessRequirements({
+      areaIds: areaIds,
+      requirements: modifier.ADDED_REQUIREMENTS,
+      matchingRequirements: modifier.MATCHING_REQUIREMENTS,
+    })
   })
 }
 

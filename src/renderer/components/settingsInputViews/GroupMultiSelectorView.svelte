@@ -203,7 +203,7 @@
     viewModel.selectedOptionIds = viewModel.selectedOptionIds
   }
   
-  const handleAutocompleteSelection = (groupIndex: number, optionId: string | undefined) => {
+  const handleAutocompleteSelection = (groupIndex: number, optionId: string | number | undefined) => {
     const option = viewModel.options.find((option) => {
       return option.id === optionId
     })

@@ -4,8 +4,7 @@
     "paths": {
       "@shared/*": ["../shared/*"],
       "@utils": ["../shared/utils/index.ts"],
-      "@lib/*": ["./lib/*"],
-      "@rendererAPI": ["../renderer/scripts/ipc/rendererAPI.ts"]
+      "@lib/*": ["./lib/*"]
     },
     "types": [
       "vite/client"

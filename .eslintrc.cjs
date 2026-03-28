@@ -24,7 +24,6 @@ module.exports = {
     ],
   },
   rules: {
-    "@html-eslint/id-naming-convention": ["error", "camelCase"],
     "@html-eslint/indent": ["error", 2],
     "@html-eslint/lowercase": "error",
     "@html-eslint/no-extra-spacing-attrs": ["error", { disallowMissing: true }],
@@ -66,7 +65,6 @@ module.exports = {
     "func-call-spacing": "error",
     "function-call-argument-newline": ["error", "consistent"],
     "function-paren-newline": "error",
-    "html-eslint/id-naming-convention": "never",
     "implicit-arrow-linebreak": "error",
     "indent": ["error", 2],
     "key-spacing": "error",
