@@ -89,12 +89,15 @@
   </div>
 </div>
 
+<ProgressIndicator/>
+
 <script lang="ts">
   import Button from "@components/buttons/Button.svelte"
   import Stack from "@components/layout/Stack.svelte"
   import { colors } from "@scripts/colors"
   import { textStyle } from "@scripts/textStyle"
   import DOMPurify from "dompurify"
+  import ProgressIndicator, { showProgressIndicator } from "@components/utility/ProgressIndicator.svelte"
   
   let container: HTMLElement
   let currentVersionNumber = ""
@@ -124,7 +127,10 @@
     releaseNotes = releaseNotesArray
     currentVersionNumber = currentVersionNumberValue
     newVersionNumber = newVersionNumberValue
-    performAction = performSelectedAction
+    performAction = (response: "UPDATE" | "IGNORE" | "SKIP") => {
+      showProgressIndicator()
+      performSelectedAction(response)
+    }
   }
 </script>
 
