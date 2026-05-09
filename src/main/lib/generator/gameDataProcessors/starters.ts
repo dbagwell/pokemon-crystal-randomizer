@@ -4,7 +4,6 @@ import type { Settings } from "@shared/appData/settingsFromViewModel"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { baseStatTotal, hasPreEvolution, maxNumberOfEvolutionStages } from "@shared/gameData/pokemonHelpers"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
-import { trainerGroupsMap } from "@shared/gameData/trainerGroups"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
 import { holdableItemIds } from "@shared/types/gameDataIds/items"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
@@ -94,7 +93,7 @@ export const updateStarters = (
       let newPokemon = pokemonMap[newPokemonId]
       
       const rivalPokemon = romInfo.gameData.trainers.filter((trainer) => {
-        return trainerGroupsMap[trainer.groupId].classId === "RIVAL"
+        return trainer.classId === "RIVAL_1" || trainer.classId === "RIVAL_2"
       }).flatMap((trainer) => {
         return trainer.pokemon
       })

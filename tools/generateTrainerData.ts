@@ -2,7 +2,7 @@ import type { Trainer } from "@shared/types/gameData/trainer"
 import type { HoldableItemId } from "@shared/types/gameDataIds/items"
 import type { MoveId } from "@shared/types/gameDataIds/moves"
 import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
-import type { TrainerGroupId } from "@shared/types/gameDataIds/trainerGroups"
+import type { TrainerClassId } from "@shared/types/gameDataIds/trainerClasses"
 import fs from "fs"
 import path from "path"
 
@@ -11,11 +11,10 @@ const trainerClassNamesFileText = fs.readFileSync(path.resolve(pokecrystalPath, 
 const trainerPartiesFileText = fs.readFileSync(path.resolve(pokecrystalPath, "data/trainers/parties.asm"), "utf-8")
 
 const trainerClassNames = [...trainerClassNamesFileText.matchAll(/li\s+"(.+)"/g)].map((match) => {
-  return match[1].replace("#", "POKÉ").replace("<PKMN>", "PKMN")
+  return match[1].replace("#", "<POKé>")
 })
 
 const trainerClasses: any = {}
-const trainerGroups: any = {}
 
 const trainers = [...trainerPartiesFileText.matchAll(/(\S+)Group([\s\S]*?)((?=\n.*Group)|$)/g)].flatMap((groupMatch, groupIndex) => {
   const groupId = groupMatch[1].match(/PKMN|[A-Z]+[a-z]*|[0-9]+/g)!.map((string) => {
@@ -23,15 +22,18 @@ const trainers = [...trainerPartiesFileText.matchAll(/(\S+)Group([\s\S]*?)((?=\n
   }).join("_")
   
   const className = trainerClassNames[groupIndex]
-  const classId = className.replaceAll("É", "E").replaceAll(" ", "_").replaceAll(".", "").replaceAll("♂", "M").replaceAll("♀", "F")
+  const classId = className
+    .replaceAll("é", "E")
+    .replaceAll(" ", "_")
+    .replaceAll(".", "")
+    .replaceAll("♂", "_M")
+    .replaceAll("♀", "_F")
+    .replaceAll("<", "")
+    .replaceAll(">", "")
+    
   trainerClasses[classId] = {
     id: classId,
     name: className,
-  }
-  
-  trainerGroups[groupId] = {
-    id: groupId,
-    classId: classId,
   }
   
   let rivalsFound = 0
@@ -41,7 +43,7 @@ const trainers = [...trainerPartiesFileText.matchAll(/(\S+)Group([\s\S]*?)((?=\n
   
     const trainer: Trainer = {
       name: trainerMatch[1] === "?" ? `??? (${rivalsFound / 3 + 1})` : trainerMatch[1],
-      groupId: groupId as TrainerGroupId,
+      classId: groupId as TrainerClassId,
       pokemon: trainerMatch[3].split("\n").map((pokemonLine) => {
         const lineMatches = pokemonLine.match(/db\s+(\S+)\s*,\s*(\S+)(?:\s*,\s*|$)(.*)/)!
         const itemAndMoves = lineMatches[3].replaceAll(/\s/g, "").split(",")
@@ -80,6 +82,4 @@ const outputPath: string = process.env.outputPath!
 
 fs.writeFileSync(path.resolve(outputPath, "trainerClassIds.json"), JSON.stringify(Object.keys(trainerClasses), null, 2), "utf-8")
 fs.writeFileSync(path.resolve(outputPath, "trainerClasses.json"), JSON.stringify(trainerClasses, null, 2), "utf-8")
-fs.writeFileSync(path.resolve(outputPath, "trainerGroupIds.json"), JSON.stringify(Object.keys(trainerGroups), null, 2), "utf-8")
-fs.writeFileSync(path.resolve(outputPath, "trainerGroups.json"), JSON.stringify(trainerGroups, null, 2), "utf-8")
 fs.writeFileSync(path.resolve(outputPath, "trainers.json"), JSON.stringify(trainers, null, 2), "utf-8")

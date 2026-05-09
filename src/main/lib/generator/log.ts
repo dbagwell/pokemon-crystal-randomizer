@@ -7,7 +7,7 @@ import { oddEggs } from "@shared/gameData/oddEggs"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { trainerClassesMap } from "@shared/gameData/trainerClasses"
-import { trainerGroupsMap } from "@shared/gameData/trainerGroups"
+import { trainers } from "@shared/gameData/trainers"
 import { eventPokemonMap } from "@shared/types/gameData/eventPokemon"
 import type { GameData } from "@shared/types/gameData/gameData"
 import { eventPokemonIds } from "@shared/types/gameDataIds/eventPokemon"
@@ -393,13 +393,17 @@ export const generatorLog = (params: {
       ],
       sections: trainerClassIds.flatMap((classId) => {
         return gameData.trainers.filter((trainer) => {
-          return trainerGroupsMap[trainer.groupId].classId === classId
+          return !(trainer.unused ?? false) && trainer.classId === classId
         })
       }).map((trainer) => {
         return {
           rows: trainer.pokemon.map((pokemon, index) => {
             return [
-              index === 0 ? `${trainerClassesMap[trainerGroupsMap[trainer.groupId].classId].name} ${trainer.name}` : "",
+              index === 0 ? compact([
+                trainerClassesMap[trainer.classId].name,
+                trainer.name,
+                isNotNullish(trainer.party) ? `(${trainer.party})` : undefined,
+              ]).join(" ") : "",
               pokemon.id,
               `Lv. ${pokemon.level}`,
             ]

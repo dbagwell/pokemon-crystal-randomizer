@@ -3,7 +3,7 @@ import type { Trainer } from "@shared/types/gameData/trainer"
 export const trainers: Trainer[] = [
   {
     name: "FALKNER",
-    groupId: "FALKNER",
+    classId: "FALKNER",
     pokemon: [
       {
         id: "PIDGEY",
@@ -26,7 +26,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WHITNEY",
-    groupId: "WHITNEY",
+    classId: "WHITNEY",
     pokemon: [
       {
         id: "CLEFAIRY",
@@ -52,7 +52,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BUGSY",
-    groupId: "BUGSY",
+    classId: "BUGSY",
     pokemon: [
       {
         id: "METAPOD",
@@ -85,7 +85,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MORTY",
-    groupId: "MORTY",
+    classId: "MORTY",
     pokemon: [
       {
         id: "GASTLY",
@@ -131,7 +131,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PRYCE",
-    groupId: "PRYCE",
+    classId: "PRYCE",
     pokemon: [
       {
         id: "SEEL",
@@ -167,7 +167,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JASMINE",
-    groupId: "JASMINE",
+    classId: "JASMINE",
     pokemon: [
       {
         id: "MAGNEMITE",
@@ -203,7 +203,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CHUCK",
-    groupId: "CHUCK",
+    classId: "CHUCK",
     pokemon: [
       {
         id: "PRIMEAPE",
@@ -229,7 +229,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CLAIR",
-    groupId: "CLAIR",
+    classId: "CLAIR",
     pokemon: [
       {
         id: "DRAGONAIR",
@@ -274,8 +274,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (1)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 1,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "CHIKORITA",
@@ -285,8 +286,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (1)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 1,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "CYNDAQUIL",
@@ -296,8 +298,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (1)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 1,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "TOTODILE",
@@ -307,8 +310,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (2)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 2,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "GASTLY",
@@ -328,8 +332,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (2)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 2,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "GASTLY",
@@ -349,8 +354,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (2)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 2,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "GASTLY",
@@ -370,8 +376,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (3)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 3,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "HAUNTER",
@@ -416,8 +423,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (3)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 3,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "HAUNTER",
@@ -462,8 +470,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (3)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 3,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "HAUNTER",
@@ -508,8 +517,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (4)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 4,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "GOLBAT",
@@ -564,8 +574,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (4)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 4,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "GOLBAT",
@@ -620,8 +631,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (4)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 4,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "GOLBAT",
@@ -676,8 +688,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (5)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 5,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "SNEASEL",
@@ -742,8 +755,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (5)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 5,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "SNEASEL",
@@ -808,8 +822,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (5)",
-    groupId: "RIVAL_1",
+    name: "???",
+    party: 5,
+    classId: "RIVAL_1",
     pokemon: [
       {
         id: "SNEASEL",
@@ -875,7 +890,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WILL",
-    groupId: "WILL",
+    classId: "WILL",
     pokemon: [
       {
         id: "XATU",
@@ -931,7 +946,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CAL",
-    groupId: "PKMN_TRAINER",
+    classId: "CAL",
     pokemon: [
       {
         id: "CHIKORITA",
@@ -952,7 +967,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CAL",
-    groupId: "PKMN_TRAINER",
+    classId: "CAL",
     pokemon: [
       {
         id: "BAYLEEF",
@@ -973,7 +988,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CAL",
-    groupId: "PKMN_TRAINER",
+    classId: "CAL",
     pokemon: [
       {
         id: "MEGANIUM",
@@ -994,7 +1009,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRUNO",
-    groupId: "BRUNO",
+    classId: "BRUNO",
     pokemon: [
       {
         id: "HITMONTOP",
@@ -1050,7 +1065,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KAREN",
-    groupId: "KAREN",
+    classId: "KAREN",
     pokemon: [
       {
         id: "UMBREON",
@@ -1106,7 +1121,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KOGA",
-    groupId: "KOGA",
+    classId: "KOGA",
     pokemon: [
       {
         id: "ARIADOS",
@@ -1162,7 +1177,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LANCE",
-    groupId: "CHAMPION",
+    classId: "CHAMPION",
     pokemon: [
       {
         id: "GYARADOS",
@@ -1228,7 +1243,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BROCK",
-    groupId: "BROCK",
+    classId: "BROCK",
     pokemon: [
       {
         id: "GRAVELER",
@@ -1284,7 +1299,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MISTY",
-    groupId: "MISTY",
+    classId: "MISTY",
     pokemon: [
       {
         id: "GOLDUCK",
@@ -1330,7 +1345,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LT.SURGE",
-    groupId: "LT_SURGE",
+    classId: "LT_SURGE",
     pokemon: [
       {
         id: "RAICHU",
@@ -1386,7 +1401,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ROSS",
-    groupId: "SCIENTIST",
+    classId: "SCIENTIST",
     pokemon: [
       {
         id: "KOFFING",
@@ -1402,7 +1417,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MITCH",
-    groupId: "SCIENTIST",
+    classId: "SCIENTIST",
     pokemon: [
       {
         id: "DITTO",
@@ -1413,7 +1428,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JED",
-    groupId: "SCIENTIST",
+    classId: "SCIENTIST",
     pokemon: [
       {
         id: "MAGNEMITE",
@@ -1434,7 +1449,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MARC",
-    groupId: "SCIENTIST",
+    classId: "SCIENTIST",
     pokemon: [
       {
         id: "MAGNEMITE",
@@ -1455,7 +1470,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RICH",
-    groupId: "SCIENTIST",
+    classId: "SCIENTIST",
     pokemon: [
       {
         id: "PORYGON",
@@ -1471,7 +1486,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ERIKA",
-    groupId: "ERIKA",
+    classId: "ERIKA",
     pokemon: [
       {
         id: "TANGELA",
@@ -1517,7 +1532,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOEY",
-    groupId: "YOUNGSTER",
+    party: 1,
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "RATTATA",
@@ -1528,7 +1544,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MIKEY",
-    groupId: "YOUNGSTER",
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "PIDGEY",
@@ -1544,7 +1560,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ALBERT",
-    groupId: "YOUNGSTER",
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "RATTATA",
@@ -1560,7 +1576,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GORDON",
-    groupId: "YOUNGSTER",
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "WOOPER",
@@ -1571,7 +1587,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SAMUEL",
-    groupId: "YOUNGSTER",
+    classId: "YOUNGSTER",
+    isContestTrainer: true,
     pokemon: [
       {
         id: "RATTATA",
@@ -1597,7 +1614,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "IAN",
-    groupId: "YOUNGSTER",
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "MANKEY",
@@ -1613,7 +1630,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOEY",
-    groupId: "YOUNGSTER",
+    party: 2,
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "RATTATA",
@@ -1624,7 +1642,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOEY",
-    groupId: "YOUNGSTER",
+    party: 3,
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "RATICATE",
@@ -1640,7 +1659,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WARREN",
-    groupId: "YOUNGSTER",
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "FEAROW",
@@ -1651,7 +1670,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JIMMY",
-    groupId: "YOUNGSTER",
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "RATICATE",
@@ -1667,7 +1686,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "OWEN",
-    groupId: "YOUNGSTER",
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "GROWLITHE",
@@ -1678,7 +1697,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JASON",
-    groupId: "YOUNGSTER",
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "SANDSLASH",
@@ -1694,7 +1713,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOEY",
-    groupId: "YOUNGSTER",
+    party: 4,
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "RATICATE",
@@ -1710,7 +1730,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOEY",
-    groupId: "YOUNGSTER",
+    party: 5,
+    classId: "YOUNGSTER",
     pokemon: [
       {
         id: "RATICATE",
@@ -1726,7 +1747,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JACK",
-    groupId: "SCHOOLBOY",
+    party: 1,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "ODDISH",
@@ -1742,7 +1764,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KIPP",
-    groupId: "SCHOOLBOY",
+    classId: "SCHOOLBOY",
+    isContestTrainer: true,
     pokemon: [
       {
         id: "VOLTORB",
@@ -1768,7 +1791,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ALAN",
-    groupId: "SCHOOLBOY",
+    party: 1,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "TANGELA",
@@ -1779,7 +1803,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOHNNY",
-    groupId: "SCHOOLBOY",
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "BELLSPROUT",
@@ -1800,7 +1824,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DANNY",
-    groupId: "SCHOOLBOY",
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "JYNX",
@@ -1821,7 +1845,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TOMMY",
-    groupId: "SCHOOLBOY",
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "XATU",
@@ -1837,7 +1861,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DUDLEY",
-    groupId: "SCHOOLBOY",
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "ODDISH",
@@ -1848,7 +1872,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOE",
-    groupId: "SCHOOLBOY",
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "TANGELA",
@@ -1864,7 +1888,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BILLY",
-    groupId: "SCHOOLBOY",
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "PARAS",
@@ -1890,7 +1914,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CHAD",
-    groupId: "SCHOOLBOY",
+    party: 1,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "MR_MIME",
@@ -1901,7 +1926,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NATE",
-    groupId: "SCHOOLBOY",
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "LEDIAN",
@@ -1917,7 +1942,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RICKY",
-    groupId: "SCHOOLBOY",
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "AIPOM",
@@ -1933,7 +1958,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JACK",
-    groupId: "SCHOOLBOY",
+    party: 2,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "ODDISH",
@@ -1949,7 +1975,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JACK",
-    groupId: "SCHOOLBOY",
+    party: 3,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "GLOOM",
@@ -1965,7 +1992,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ALAN",
-    groupId: "SCHOOLBOY",
+    party: 2,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "TANGELA",
@@ -1981,7 +2009,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ALAN",
-    groupId: "SCHOOLBOY",
+    party: 3,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "NATU",
@@ -2007,7 +2036,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CHAD",
-    groupId: "SCHOOLBOY",
+    party: 2,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "MR_MIME",
@@ -2023,7 +2053,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CHAD",
-    groupId: "SCHOOLBOY",
+    party: 3,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "MR_MIME",
@@ -2039,7 +2070,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JACK",
-    groupId: "SCHOOLBOY",
+    party: 4,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "GLOOM",
@@ -2060,7 +2092,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JACK",
-    groupId: "SCHOOLBOY",
+    party: 5,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "ELECTRODE",
@@ -2096,7 +2129,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ALAN",
-    groupId: "SCHOOLBOY",
+    party: 4,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "NATU",
@@ -2122,7 +2156,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ALAN",
-    groupId: "SCHOOLBOY",
+    party: 5,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "XATU",
@@ -2168,7 +2203,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CHAD",
-    groupId: "SCHOOLBOY",
+    party: 4,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "MR_MIME",
@@ -2184,7 +2220,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CHAD",
-    groupId: "SCHOOLBOY",
+    party: 5,
+    classId: "SCHOOLBOY",
     pokemon: [
       {
         id: "MR_MIME",
@@ -2210,7 +2247,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ROD",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "PIDGEY",
@@ -2226,7 +2263,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ABE",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "SPEAROW",
@@ -2237,7 +2274,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRYAN",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "PIDGEY",
@@ -2253,7 +2290,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "THEO",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "PIDGEY",
@@ -2284,7 +2321,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TOBY",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "DODUO",
@@ -2305,7 +2342,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DENIS",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "SPEAROW",
@@ -2326,7 +2363,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "VANCE",
-    groupId: "BIRD_KEEPER",
+    party: 1,
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "PIDGEOTTO",
@@ -2342,7 +2380,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HANK",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "PIDGEY",
@@ -2358,7 +2396,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ROY",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "FEAROW",
@@ -2374,7 +2412,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BORIS",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "DODUO",
@@ -2395,7 +2433,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BOB",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "NOCTOWL",
@@ -2406,7 +2444,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOSE",
-    groupId: "BIRD_KEEPER",
+    party: 2,
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "FARFETCH_D",
@@ -2417,7 +2456,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PETER",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "PIDGEY",
@@ -2438,7 +2477,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOSE",
-    groupId: "BIRD_KEEPER",
+    party: 1,
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "FARFETCH_D",
@@ -2449,7 +2489,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PERRY",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "FARFETCH_D",
@@ -2460,7 +2500,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRET",
-    groupId: "BIRD_KEEPER",
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "PIDGEOTTO",
@@ -2476,7 +2516,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOSE",
-    groupId: "BIRD_KEEPER",
+    party: 3,
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "FARFETCH_D",
@@ -2492,7 +2533,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "VANCE",
-    groupId: "BIRD_KEEPER",
+    party: 2,
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "PIDGEOTTO",
@@ -2508,7 +2550,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "VANCE",
-    groupId: "BIRD_KEEPER",
+    party: 3,
+    classId: "BIRD_KEEPER",
     pokemon: [
       {
         id: "PIDGEOT",
@@ -2534,7 +2577,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CARRIE",
-    groupId: "LASS",
+    classId: "LASS",
     pokemon: [
       {
         id: "SNUBBULL",
@@ -2550,7 +2593,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRIDGET",
-    groupId: "LASS",
+    classId: "LASS",
     pokemon: [
       {
         id: "JIGGLYPUFF",
@@ -2571,7 +2614,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ALICE",
-    groupId: "LASS",
+    classId: "LASS",
     pokemon: [
       {
         id: "GLOOM",
@@ -2592,7 +2635,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KRISE",
-    groupId: "LASS",
+    classId: "LASS",
     pokemon: [
       {
         id: "ODDISH",
@@ -2608,7 +2651,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CONNIE",
-    groupId: "LASS",
+    classId: "LASS",
     pokemon: [
       {
         id: "MARILL",
@@ -2619,7 +2662,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LINDA",
-    groupId: "LASS",
+    classId: "LASS",
     pokemon: [
       {
         id: "BULBASAUR",
@@ -2640,7 +2683,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LAURA",
-    groupId: "LASS",
+    classId: "LASS",
     pokemon: [
       {
         id: "GLOOM",
@@ -2661,7 +2704,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SHANNON",
-    groupId: "LASS",
+    classId: "LASS",
     pokemon: [
       {
         id: "PARAS",
@@ -2682,7 +2725,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MICHELLE",
-    groupId: "LASS",
+    classId: "LASS",
     pokemon: [
       {
         id: "SKIPLOOM",
@@ -2703,7 +2746,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DANA",
-    groupId: "LASS",
+    party: 1,
+    classId: "LASS",
     pokemon: [
       {
         id: "FLAAFFY",
@@ -2729,7 +2773,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ELLEN",
-    groupId: "LASS",
+    classId: "LASS",
     pokemon: [
       {
         id: "WIGGLYTUFF",
@@ -2745,7 +2789,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CONNIE",
-    groupId: "LASS",
+    unused: true,
+    classId: "LASS",
     pokemon: [
       {
         id: "MARILL",
@@ -2756,7 +2801,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CONNIE",
-    groupId: "LASS",
+    unused: true,
+    classId: "LASS",
     pokemon: [
       {
         id: "MARILL",
@@ -2767,7 +2813,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DANA",
-    groupId: "LASS",
+    party: 2,
+    classId: "LASS",
     pokemon: [
       {
         id: "FLAAFFY",
@@ -2793,7 +2840,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DANA",
-    groupId: "LASS",
+    party: 3,
+    classId: "LASS",
     pokemon: [
       {
         id: "PSYDUCK",
@@ -2819,7 +2867,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DANA",
-    groupId: "LASS",
+    party: 4,
+    classId: "LASS",
     pokemon: [
       {
         id: "PSYDUCK",
@@ -2845,7 +2894,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DANA",
-    groupId: "LASS",
+    party: 5,
+    classId: "LASS",
     pokemon: [
       {
         id: "AMPHAROS",
@@ -2871,7 +2921,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JANINE",
-    groupId: "JANINE",
+    classId: "JANINE",
     pokemon: [
       {
         id: "CROBAT",
@@ -2927,7 +2977,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NICK",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
+    isContestTrainer: true,
     pokemon: [
       {
         id: "CHARMANDER",
@@ -2963,7 +3014,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "AARON",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "IVYSAUR",
@@ -2984,7 +3035,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PAUL",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "DRATINI",
@@ -3005,7 +3056,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CODY",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "HORSEA",
@@ -3021,7 +3072,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MIKE",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "DRAGONAIR",
@@ -3032,7 +3083,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GAVEN",
-    groupId: "COOLTRAINER_M",
+    party: 2,
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "VICTREEBEL",
@@ -3068,7 +3120,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GAVEN",
-    groupId: "COOLTRAINER_M",
+    party: 3,
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "VICTREEBEL",
@@ -3105,7 +3158,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RYAN",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "PIDGEOT",
@@ -3131,7 +3184,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JAKE",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "PARASECT",
@@ -3157,7 +3210,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GAVEN",
-    groupId: "COOLTRAINER_M",
+    party: 1,
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "VICTREEBEL",
@@ -3193,7 +3247,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BLAKE",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "MAGNETON",
@@ -3229,7 +3283,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRIAN",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "SANDSLASH",
@@ -3245,7 +3299,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ERICK",
-    groupId: "COOLTRAINER_M",
+    unused: true,
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "BULBASAUR",
@@ -3266,7 +3321,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ANDY",
-    groupId: "COOLTRAINER_M",
+    unused: true,
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "BULBASAUR",
@@ -3287,7 +3343,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TYLER",
-    groupId: "COOLTRAINER_M",
+    unused: true,
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "BULBASAUR",
@@ -3308,7 +3365,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SEAN",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "FLAREON",
@@ -3329,7 +3386,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KEVIN",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "RHYHORN",
@@ -3350,7 +3407,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "STEVE",
-    groupId: "COOLTRAINER_M",
+    unused: true,
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "BULBASAUR",
@@ -3371,7 +3429,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ALLEN",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "CHARMELEON",
@@ -3387,7 +3445,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DARIN",
-    groupId: "COOLTRAINER_M",
+    classId: "COOLTRAINER_M",
     pokemon: [
       {
         id: "DRAGONAIR",
@@ -3403,7 +3461,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GWEN",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "EEVEE",
@@ -3429,7 +3487,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LOIS",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "SKIPLOOM",
@@ -3455,7 +3513,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "FRAN",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "SEADRA",
@@ -3466,7 +3524,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LOLA",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "DRATINI",
@@ -3482,7 +3540,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KATE",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "SHELLDER",
@@ -3498,7 +3556,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "IRENE",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "GOLDEEN",
@@ -3514,7 +3572,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KELLY",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "MARILL",
@@ -3535,7 +3593,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOYCE",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "PIKACHU",
@@ -3561,7 +3619,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BETH",
-    groupId: "COOLTRAINER_F",
+    party: 1,
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "RAPIDASH",
@@ -3577,7 +3636,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "REENA",
-    groupId: "COOLTRAINER_F",
+    party: 1,
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "STARMIE",
@@ -3598,7 +3658,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MEGAN",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "BULBASAUR",
@@ -3634,7 +3694,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BETH",
-    groupId: "COOLTRAINER_F",
+    party: 2,
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "RAPIDASH",
@@ -3650,7 +3711,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CAROL",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "ELECTRODE",
@@ -3671,7 +3732,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "QUINN",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "IVYSAUR",
@@ -3687,7 +3748,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EMMA",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "POLIWHIRL",
@@ -3698,7 +3759,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CYBIL",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "BUTTERFREE",
@@ -3724,7 +3785,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JENN",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "STARYU",
@@ -3740,7 +3801,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BETH",
-    groupId: "COOLTRAINER_F",
+    party: 3,
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "RAPIDASH",
@@ -3757,7 +3819,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "REENA",
-    groupId: "COOLTRAINER_F",
+    party: 2,
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "STARMIE",
@@ -3778,7 +3841,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "REENA",
-    groupId: "COOLTRAINER_F",
+    party: 3,
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "STARMIE",
@@ -3815,7 +3879,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CARA",
-    groupId: "COOLTRAINER_F",
+    classId: "COOLTRAINER_F",
     pokemon: [
       {
         id: "HORSEA",
@@ -3851,7 +3915,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "VICTORIA",
-    groupId: "BEAUTY",
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "SENTRET",
@@ -3872,7 +3936,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SAMANTHA",
-    groupId: "BEAUTY",
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "MEOWTH",
@@ -3898,7 +3962,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JULIE",
-    groupId: "BEAUTY",
+    unused: true,
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "SENTRET",
@@ -3909,7 +3974,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JACLYN",
-    groupId: "BEAUTY",
+    unused: true,
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "SENTRET",
@@ -3920,7 +3986,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRENDA",
-    groupId: "BEAUTY",
+    unused: true,
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "FURRET",
@@ -3931,7 +3998,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CASSIE",
-    groupId: "BEAUTY",
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "VILEPLUME",
@@ -3947,7 +4014,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CAROLINE",
-    groupId: "BEAUTY",
+    unused: true,
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "MARILL",
@@ -3968,7 +4036,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CARLENE",
-    groupId: "BEAUTY",
+    unused: true,
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "SENTRET",
@@ -3979,7 +4048,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JESSICA",
-    groupId: "BEAUTY",
+    unused: true,
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "SENTRET",
@@ -3990,7 +4060,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RACHAEL",
-    groupId: "BEAUTY",
+    unused: true,
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "SENTRET",
@@ -4001,7 +4072,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ANGELICA",
-    groupId: "BEAUTY",
+    unused: true,
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "SENTRET",
@@ -4012,7 +4084,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KENDRA",
-    groupId: "BEAUTY",
+    unused: true,
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "SENTRET",
@@ -4023,7 +4096,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "VERONICA",
-    groupId: "BEAUTY",
+    unused: true,
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "SENTRET",
@@ -4034,7 +4108,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JULIA",
-    groupId: "BEAUTY",
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "PARAS",
@@ -4055,7 +4129,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "THERESA",
-    groupId: "BEAUTY",
+    unused: true,
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "SENTRET",
@@ -4066,7 +4141,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "VALERIE",
-    groupId: "BEAUTY",
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "HOPPIP",
@@ -4092,7 +4167,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "OLIVIA",
-    groupId: "BEAUTY",
+    classId: "BEAUTY",
     pokemon: [
       {
         id: "CORSOLA",
@@ -4103,7 +4178,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LARRY",
-    groupId: "POKEMANIAC",
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "SLOWPOKE",
@@ -4114,7 +4189,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ANDREW",
-    groupId: "POKEMANIAC",
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "MAROWAK",
@@ -4130,7 +4205,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CALVIN",
-    groupId: "POKEMANIAC",
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "KANGASKHAN",
@@ -4141,7 +4216,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SHANE",
-    groupId: "POKEMANIAC",
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "NIDORINA",
@@ -4157,7 +4232,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BEN",
-    groupId: "POKEMANIAC",
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "SLOWBRO",
@@ -4168,7 +4243,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRENT",
-    groupId: "POKEMANIAC",
+    party: 1,
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "LICKITUNG",
@@ -4179,7 +4255,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RON",
-    groupId: "POKEMANIAC",
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "NIDOKING",
@@ -4190,7 +4266,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ETHAN",
-    groupId: "POKEMANIAC",
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "RHYHORN",
@@ -4206,7 +4282,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRENT",
-    groupId: "POKEMANIAC",
+    party: 2,
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "KANGASKHAN",
@@ -4217,7 +4294,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRENT",
-    groupId: "POKEMANIAC",
+    party: 3,
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "PORYGON",
@@ -4233,7 +4311,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ISSAC",
-    groupId: "POKEMANIAC",
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "LICKITUNG",
@@ -4248,7 +4326,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DONALD",
-    groupId: "POKEMANIAC",
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "SLOWPOKE",
@@ -4264,7 +4342,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ZACH",
-    groupId: "POKEMANIAC",
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "RHYHORN",
@@ -4275,7 +4353,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRENT",
-    groupId: "POKEMANIAC",
+    party: 4,
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "CHANSEY",
@@ -4291,7 +4370,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MILLER",
-    groupId: "POKEMANIAC",
+    classId: "POKEMANIAC",
     pokemon: [
       {
         id: "NIDOKING",
@@ -4307,7 +4386,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "KOFFING",
@@ -4318,7 +4397,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "RATTATA",
@@ -4339,7 +4418,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "RATICATE",
@@ -4355,7 +4434,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "GRIMER",
@@ -4376,7 +4455,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "RATTATA",
@@ -4407,7 +4486,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "ZUBAT",
@@ -4423,7 +4502,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "KOFFING",
@@ -4449,7 +4528,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "WEEZING",
@@ -4460,7 +4539,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "RATICATE",
@@ -4476,7 +4555,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "ZUBAT",
@@ -4497,7 +4576,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "MUK",
@@ -4518,7 +4597,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EXECUTIVE",
-    groupId: "GRUNT_M",
+    unused: true,
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "HOUNDOUR",
@@ -4529,7 +4609,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "RATTATA",
@@ -4540,7 +4620,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "RATICATE",
@@ -4556,7 +4636,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "GRIMER",
@@ -4572,7 +4652,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "RATTATA",
@@ -4598,7 +4678,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "GOLBAT",
@@ -4609,7 +4689,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "RATTATA",
@@ -4630,7 +4710,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "VENONAT",
@@ -4646,7 +4726,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "DROWZEE",
@@ -4662,7 +4742,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "ZUBAT",
@@ -4683,7 +4763,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EXECUTIVE",
-    groupId: "GRUNT_M",
+    unused: true,
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "GOLBAT",
@@ -4694,7 +4775,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EXECUTIVE",
-    groupId: "GRUNT_M",
+    unused: true,
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "KOFFING",
@@ -4705,7 +4787,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "KOFFING",
@@ -4721,7 +4803,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "KOFFING",
@@ -4737,7 +4819,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    unused: true,
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "RATTATA",
@@ -4753,7 +4836,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EXECUTIVE",
-    groupId: "GRUNT_M",
+    unused: true,
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "ZUBAT",
@@ -4764,7 +4848,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "RATICATE",
@@ -4775,7 +4859,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "RATTATA",
@@ -4791,7 +4875,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    unused: true,
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "GOLBAT",
@@ -4812,7 +4897,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_M",
+    classId: "ROCKET_GRUNT_M",
     pokemon: [
       {
         id: "GOLBAT",
@@ -4823,7 +4908,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PRESTON",
-    groupId: "GENTLEMAN",
+    classId: "GENTLEMAN",
     pokemon: [
       {
         id: "GROWLITHE",
@@ -4839,7 +4924,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EDWARD",
-    groupId: "GENTLEMAN",
+    classId: "GENTLEMAN",
     pokemon: [
       {
         id: "PERSIAN",
@@ -4850,7 +4935,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GREGORY",
-    groupId: "GENTLEMAN",
+    classId: "GENTLEMAN",
     pokemon: [
       {
         id: "PIKACHU",
@@ -4866,7 +4951,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "VIRGIL",
-    groupId: "GENTLEMAN",
+    unused: true,
+    classId: "GENTLEMAN",
     pokemon: [
       {
         id: "PONYTA",
@@ -4877,7 +4963,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ALFRED",
-    groupId: "GENTLEMAN",
+    classId: "GENTLEMAN",
     pokemon: [
       {
         id: "NOCTOWL",
@@ -4888,7 +4974,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ROXANNE",
-    groupId: "SKIER",
+    classId: "SKIER",
     pokemon: [
       {
         id: "JYNX",
@@ -4899,7 +4985,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CLARISSA",
-    groupId: "SKIER",
+    classId: "SKIER",
     pokemon: [
       {
         id: "DEWGONG",
@@ -4910,7 +4996,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "COLETTE",
-    groupId: "TEACHER",
+    classId: "TEACHER",
     pokemon: [
       {
         id: "CLEFAIRY",
@@ -4921,7 +5007,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HILLARY",
-    groupId: "TEACHER",
+    classId: "TEACHER",
     pokemon: [
       {
         id: "AIPOM",
@@ -4937,7 +5023,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SHIRLEY",
-    groupId: "TEACHER",
+    classId: "TEACHER",
     pokemon: [
       {
         id: "JIGGLYPUFF",
@@ -4948,7 +5034,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SABRINA",
-    groupId: "SABRINA",
+    classId: "SABRINA",
     pokemon: [
       {
         id: "ESPEON",
@@ -4984,7 +5070,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DON",
-    groupId: "BUG_CATCHER",
+    classId: "BUG_CATCHER",
+    isContestTrainer: true,
     pokemon: [
       {
         id: "CATERPIE",
@@ -5000,7 +5087,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ROB",
-    groupId: "BUG_CATCHER",
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "BEEDRILL",
@@ -5016,7 +5103,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ED",
-    groupId: "BUG_CATCHER",
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "BEEDRILL",
@@ -5037,7 +5124,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WADE",
-    groupId: "BUG_CATCHER",
+    party: 1,
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "CATERPIE",
@@ -5063,7 +5151,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BENNY",
-    groupId: "BUG_CATCHER",
+    classId: "BUG_CATCHER",
+    isContestTrainer: true,
     pokemon: [
       {
         id: "WEEDLE",
@@ -5084,7 +5173,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "AL",
-    groupId: "BUG_CATCHER",
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "CATERPIE",
@@ -5100,7 +5189,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOSH",
-    groupId: "BUG_CATCHER",
+    classId: "BUG_CATCHER",
+    isContestTrainer: true,
     pokemon: [
       {
         id: "PARAS",
@@ -5111,7 +5201,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ARNIE",
-    groupId: "BUG_CATCHER",
+    party: 1,
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "VENONAT",
@@ -5122,7 +5213,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KEN",
-    groupId: "BUG_CATCHER",
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "ARIADOS",
@@ -5138,7 +5229,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WADE",
-    groupId: "BUG_CATCHER",
+    party: 2,
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "METAPOD",
@@ -5164,7 +5256,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WADE",
-    groupId: "BUG_CATCHER",
+    party: 3,
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "BUTTERFREE",
@@ -5190,7 +5283,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DOUG",
-    groupId: "BUG_CATCHER",
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "ARIADOS",
@@ -5201,7 +5294,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ARNIE",
-    groupId: "BUG_CATCHER",
+    party: 2,
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "VENONAT",
@@ -5212,7 +5306,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ARNIE",
-    groupId: "BUG_CATCHER",
+    party: 3,
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "VENOMOTH",
@@ -5228,7 +5323,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WADE",
-    groupId: "BUG_CATCHER",
+    party: 4,
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "BUTTERFREE",
@@ -5274,7 +5370,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WADE",
-    groupId: "BUG_CATCHER",
+    party: 5,
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "BUTTERFREE",
@@ -5320,7 +5417,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ARNIE",
-    groupId: "BUG_CATCHER",
+    party: 4,
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "VENOMOTH",
@@ -5336,7 +5434,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ARNIE",
-    groupId: "BUG_CATCHER",
+    party: 5,
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "VENOMOTH",
@@ -5352,7 +5451,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WAYNE",
-    groupId: "BUG_CATCHER",
+    classId: "BUG_CATCHER",
     pokemon: [
       {
         id: "LEDYBA",
@@ -5368,7 +5467,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JUSTIN",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "MAGIKARP",
@@ -5394,7 +5493,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RALPH",
-    groupId: "FISHER",
+    party: 1,
+    classId: "FISHER",
     pokemon: [
       {
         id: "GOLDEEN",
@@ -5405,7 +5505,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ARNOLD",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "TENTACRUEL",
@@ -5416,7 +5516,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KYLE",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "SEAKING",
@@ -5437,7 +5537,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HENRY",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "POLIWAG",
@@ -5453,7 +5553,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MARVIN",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "MAGIKARP",
@@ -5479,7 +5579,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TULLY",
-    groupId: "FISHER",
+    party: 1,
+    classId: "FISHER",
     pokemon: [
       {
         id: "QWILFISH",
@@ -5490,7 +5591,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ANDRE",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "GYARADOS",
@@ -5501,7 +5602,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RAYMOND",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "MAGIKARP",
@@ -5527,7 +5628,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WILTON",
-    groupId: "FISHER",
+    party: 1,
+    classId: "FISHER",
     pokemon: [
       {
         id: "GOLDEEN",
@@ -5548,7 +5650,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EDGAR",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "REMORAID",
@@ -5574,7 +5676,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JONAH",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "SHELLDER",
@@ -5600,7 +5702,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MARTIN",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "REMORAID",
@@ -5616,7 +5718,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "STEPHEN",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "MAGIKARP",
@@ -5642,7 +5744,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BARNEY",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "GYARADOS",
@@ -5663,7 +5765,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RALPH",
-    groupId: "FISHER",
+    party: 2,
+    classId: "FISHER",
     pokemon: [
       {
         id: "GOLDEEN",
@@ -5674,7 +5777,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RALPH",
-    groupId: "FISHER",
+    party: 3,
+    classId: "FISHER",
     pokemon: [
       {
         id: "QWILFISH",
@@ -5690,7 +5794,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TULLY",
-    groupId: "FISHER",
+    party: 2,
+    classId: "FISHER",
     pokemon: [
       {
         id: "QWILFISH",
@@ -5701,7 +5806,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TULLY",
-    groupId: "FISHER",
+    party: 3,
+    classId: "FISHER",
     pokemon: [
       {
         id: "GOLDEEN",
@@ -5722,7 +5828,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WILTON",
-    groupId: "FISHER",
+    party: 2,
+    classId: "FISHER",
     pokemon: [
       {
         id: "GOLDEEN",
@@ -5743,7 +5850,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SCOTT",
-    groupId: "FISHER",
+    classId: "FISHER",
     pokemon: [
       {
         id: "QWILFISH",
@@ -5764,7 +5871,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WILTON",
-    groupId: "FISHER",
+    party: 3,
+    classId: "FISHER",
     pokemon: [
       {
         id: "SEAKING",
@@ -5800,7 +5908,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RALPH",
-    groupId: "FISHER",
+    party: 4,
+    classId: "FISHER",
     pokemon: [
       {
         id: "QWILFISH",
@@ -5816,7 +5925,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RALPH",
-    groupId: "FISHER",
+    party: 5,
+    classId: "FISHER",
     pokemon: [
       {
         id: "QWILFISH",
@@ -5842,7 +5952,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TULLY",
-    groupId: "FISHER",
+    party: 4,
+    classId: "FISHER",
     pokemon: [
       {
         id: "SEAKING",
@@ -5878,7 +5989,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HAROLD",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "REMORAID",
@@ -5894,7 +6005,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SIMON",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "TENTACOOL",
@@ -5910,7 +6021,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RANDALL",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "SHELLDER",
@@ -5931,7 +6042,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CHARLIE",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "SHELLDER",
@@ -5952,7 +6063,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GEORGE",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "TENTACOOL",
@@ -5988,7 +6099,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BERKE",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "QWILFISH",
@@ -5999,7 +6110,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KIRK",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "GYARADOS",
@@ -6015,7 +6126,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MATHEW",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "KRABBY",
@@ -6026,7 +6137,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HAL",
-    groupId: "SWIMMER_M",
+    unused: true,
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "SEEL",
@@ -6047,7 +6159,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PATON",
-    groupId: "SWIMMER_M",
+    unused: true,
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "PILOSWINE",
@@ -6063,7 +6176,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DARYL",
-    groupId: "SWIMMER_M",
+    unused: true,
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "SHELLDER",
@@ -6084,7 +6198,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WALTER",
-    groupId: "SWIMMER_M",
+    unused: true,
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "HORSEA",
@@ -6105,7 +6220,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TONY",
-    groupId: "SWIMMER_M",
+    unused: true,
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "STARYU",
@@ -6126,7 +6242,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JEROME",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "SEADRA",
@@ -6152,7 +6268,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TUCKER",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "SHELLDER",
@@ -6168,7 +6284,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RICK",
-    groupId: "SWIMMER_M",
+    unused: true,
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "STARYU",
@@ -6189,7 +6306,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CAMERON",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "MARILL",
@@ -6200,7 +6317,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SETH",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "QUAGSIRE",
@@ -6221,7 +6338,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JAMES",
-    groupId: "SWIMMER_M",
+    unused: true,
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "STARYU",
@@ -6242,7 +6360,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LEWIS",
-    groupId: "SWIMMER_M",
+    unused: true,
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "STARYU",
@@ -6263,7 +6382,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PARKER",
-    groupId: "SWIMMER_M",
+    classId: "SWIMMER_M",
     pokemon: [
       {
         id: "HORSEA",
@@ -6284,7 +6403,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ELAINE",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "STARYU",
@@ -6295,7 +6414,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PAULA",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "STARYU",
@@ -6311,7 +6430,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KAYLEE",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "GOLDEEN",
@@ -6332,7 +6451,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SUSIE",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "PSYDUCK",
@@ -6358,7 +6477,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DENISE",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "SEEL",
@@ -6369,7 +6488,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KARA",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "STARYU",
@@ -6385,7 +6504,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WENDY",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "HORSEA",
@@ -6411,7 +6530,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LISA",
-    groupId: "SWIMMER_F",
+    unused: true,
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "JYNX",
@@ -6422,7 +6542,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JILL",
-    groupId: "SWIMMER_F",
+    unused: true,
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "DEWGONG",
@@ -6433,7 +6554,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MARY",
-    groupId: "SWIMMER_F",
+    unused: true,
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "SEAKING",
@@ -6444,7 +6566,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KATIE",
-    groupId: "SWIMMER_F",
+    unused: true,
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "DEWGONG",
@@ -6455,7 +6578,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DAWN",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "SEAKING",
@@ -6466,7 +6589,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TARA",
-    groupId: "SWIMMER_F",
+    unused: true,
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "SEAKING",
@@ -6477,7 +6601,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NICOLE",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "MARILL",
@@ -6498,7 +6622,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LORI",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "STARMIE",
@@ -6514,7 +6638,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JODY",
-    groupId: "SWIMMER_F",
+    unused: true,
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "SEAKING",
@@ -6525,7 +6650,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NIKKI",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "SEEL",
@@ -6551,7 +6676,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DIANA",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "GOLDUCK",
@@ -6562,7 +6687,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRIANA",
-    groupId: "SWIMMER_F",
+    classId: "SWIMMER_F",
     pokemon: [
       {
         id: "SEAKING",
@@ -6578,7 +6703,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EUGENE",
-    groupId: "SAILOR",
+    classId: "SAILOR",
     pokemon: [
       {
         id: "POLIWHIRL",
@@ -6599,7 +6724,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HUEY",
-    groupId: "SAILOR",
+    party: 1,
+    classId: "SAILOR",
     pokemon: [
       {
         id: "POLIWAG",
@@ -6615,7 +6741,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TERRELL",
-    groupId: "SAILOR",
+    classId: "SAILOR",
     pokemon: [
       {
         id: "POLIWHIRL",
@@ -6626,7 +6752,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KENT",
-    groupId: "SAILOR",
+    classId: "SAILOR",
     pokemon: [
       {
         id: "KRABBY",
@@ -6652,7 +6778,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ERNEST",
-    groupId: "SAILOR",
+    classId: "SAILOR",
     pokemon: [
       {
         id: "MACHOP",
@@ -6673,7 +6799,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JEFF",
-    groupId: "SAILOR",
+    classId: "SAILOR",
     pokemon: [
       {
         id: "RATICATE",
@@ -6689,7 +6815,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GARRETT",
-    groupId: "SAILOR",
+    classId: "SAILOR",
     pokemon: [
       {
         id: "KINGLER",
@@ -6700,7 +6826,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KENNETH",
-    groupId: "SAILOR",
+    classId: "SAILOR",
     pokemon: [
       {
         id: "MACHOP",
@@ -6726,7 +6852,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "STANLY",
-    groupId: "SAILOR",
+    classId: "SAILOR",
     pokemon: [
       {
         id: "MACHOP",
@@ -6747,7 +6873,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HARRY",
-    groupId: "SAILOR",
+    classId: "SAILOR",
     pokemon: [
       {
         id: "WOOPER",
@@ -6758,7 +6884,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HUEY",
-    groupId: "SAILOR",
+    party: 2,
+    classId: "SAILOR",
     pokemon: [
       {
         id: "POLIWHIRL",
@@ -6774,7 +6901,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HUEY",
-    groupId: "SAILOR",
+    party: 3,
+    classId: "SAILOR",
     pokemon: [
       {
         id: "POLIWHIRL",
@@ -6790,7 +6918,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HUEY",
-    groupId: "SAILOR",
+    party: 4,
+    classId: "SAILOR",
     pokemon: [
       {
         id: "POLITOED",
@@ -6816,7 +6945,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "STAN",
-    groupId: "SUPER_NERD",
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "GRIMER",
@@ -6827,7 +6956,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ERIC",
-    groupId: "SUPER_NERD",
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "GRIMER",
@@ -6843,7 +6972,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GREGG",
-    groupId: "SUPER_NERD",
+    unused: true,
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "MAGNEMITE",
@@ -6864,7 +6994,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JAY",
-    groupId: "SUPER_NERD",
+    unused: true,
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "KOFFING",
@@ -6880,7 +7011,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DAVE",
-    groupId: "SUPER_NERD",
+    unused: true,
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "DITTO",
@@ -6891,7 +7023,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SAM",
-    groupId: "SUPER_NERD",
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "GRIMER",
@@ -6907,7 +7039,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TOM",
-    groupId: "SUPER_NERD",
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "MAGNEMITE",
@@ -6928,7 +7060,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PAT",
-    groupId: "SUPER_NERD",
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "PORYGON",
@@ -6939,7 +7071,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SHAWN",
-    groupId: "SUPER_NERD",
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "MAGNEMITE",
@@ -6960,7 +7092,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TERU",
-    groupId: "SUPER_NERD",
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "MAGNEMITE",
@@ -6986,7 +7118,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RUSS",
-    groupId: "SUPER_NERD",
+    unused: true,
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "MAGNEMITE",
@@ -7007,7 +7140,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NORTON",
-    groupId: "SUPER_NERD",
+    unused: true,
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "PORYGON",
@@ -7023,7 +7157,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HUGH",
-    groupId: "SUPER_NERD",
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "SEADRA",
@@ -7039,7 +7173,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MARKUS",
-    groupId: "SUPER_NERD",
+    classId: "SUPER_NERD",
     pokemon: [
       {
         id: "SLOWPOKE",
@@ -7054,8 +7188,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (6)",
-    groupId: "RIVAL_2",
+    name: "???",
+    party: 6,
+    classId: "RIVAL_2",
     pokemon: [
       {
         id: "SNEASEL",
@@ -7120,8 +7255,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (6)",
-    groupId: "RIVAL_2",
+    name: "???",
+    party: 6,
+    classId: "RIVAL_2",
     pokemon: [
       {
         id: "SNEASEL",
@@ -7186,8 +7322,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (6)",
-    groupId: "RIVAL_2",
+    name: "???",
+    party: 6,
+    classId: "RIVAL_2",
     pokemon: [
       {
         id: "SNEASEL",
@@ -7252,8 +7389,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (7)",
-    groupId: "RIVAL_2",
+    name: "???",
+    party: 7,
+    classId: "RIVAL_2",
     pokemon: [
       {
         id: "SNEASEL",
@@ -7318,8 +7456,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (7)",
-    groupId: "RIVAL_2",
+    name: "???",
+    party: 7,
+    classId: "RIVAL_2",
     pokemon: [
       {
         id: "SNEASEL",
@@ -7384,8 +7523,9 @@ export const trainers: Trainer[] = [
     ],
   },
   {
-    name: "??? (7)",
-    groupId: "RIVAL_2",
+    name: "???",
+    party: 7,
+    classId: "RIVAL_2",
     pokemon: [
       {
         id: "SNEASEL",
@@ -7451,7 +7591,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CLYDE",
-    groupId: "GUITARIST",
+    classId: "GUITARIST",
     pokemon: [
       {
         id: "ELECTABUZZ",
@@ -7462,7 +7602,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "VINCENT",
-    groupId: "GUITARIST",
+    classId: "GUITARIST",
     pokemon: [
       {
         id: "MAGNEMITE",
@@ -7488,7 +7628,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ANTHONY",
-    groupId: "HIKER",
+    party: 2,
+    classId: "HIKER",
     pokemon: [
       {
         id: "GEODUDE",
@@ -7504,7 +7645,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RUSSELL",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "GEODUDE",
@@ -7525,7 +7666,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PHILLIP",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "GEODUDE",
@@ -7546,7 +7687,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LEONARD",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "GEODUDE",
@@ -7562,7 +7703,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ANTHONY",
-    groupId: "HIKER",
+    party: 1,
+    classId: "HIKER",
     pokemon: [
       {
         id: "GEODUDE",
@@ -7578,7 +7720,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BENJAMIN",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "DIGLETT",
@@ -7599,7 +7741,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ERIK",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "MACHOP",
@@ -7620,7 +7762,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MICHAEL",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "GEODUDE",
@@ -7641,7 +7783,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PARRY",
-    groupId: "HIKER",
+    party: 2,
+    classId: "HIKER",
     pokemon: [
       {
         id: "ONIX",
@@ -7657,7 +7800,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TIMOTHY",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "DIGLETT",
@@ -7683,7 +7826,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BAILEY",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "GEODUDE",
@@ -7714,7 +7857,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ANTHONY",
-    groupId: "HIKER",
+    party: 3,
+    classId: "HIKER",
     pokemon: [
       {
         id: "GRAVELER",
@@ -7735,7 +7879,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TIM",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "GRAVELER",
@@ -7756,7 +7900,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NOLAND",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "SANDSLASH",
@@ -7772,7 +7916,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SIDNEY",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "DUGTRIO",
@@ -7788,7 +7932,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KENNY",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "SANDSLASH",
@@ -7814,7 +7958,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JIM",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "MACHAMP",
@@ -7825,7 +7969,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DANIEL",
-    groupId: "HIKER",
+    classId: "HIKER",
     pokemon: [
       {
         id: "ONIX",
@@ -7836,7 +7980,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PARRY",
-    groupId: "HIKER",
+    party: 3,
+    classId: "HIKER",
     pokemon: [
       {
         id: "PILOSWINE",
@@ -7872,7 +8017,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PARRY",
-    groupId: "HIKER",
+    party: 1,
+    classId: "HIKER",
     pokemon: [
       {
         id: "ONIX",
@@ -7883,7 +8029,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ANTHONY",
-    groupId: "HIKER",
+    party: 4,
+    classId: "HIKER",
     pokemon: [
       {
         id: "GRAVELER",
@@ -7904,7 +8051,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ANTHONY",
-    groupId: "HIKER",
+    party: 5,
+    classId: "HIKER",
     pokemon: [
       {
         id: "GRAVELER",
@@ -7940,7 +8088,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BENNY",
-    groupId: "BIKER",
+    unused: true,
+    classId: "BIKER",
     pokemon: [
       {
         id: "KOFFING",
@@ -7961,7 +8110,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KAZU",
-    groupId: "BIKER",
+    unused: true,
+    classId: "BIKER",
     pokemon: [
       {
         id: "KOFFING",
@@ -7982,7 +8132,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DWAYNE",
-    groupId: "BIKER",
+    classId: "BIKER",
     pokemon: [
       {
         id: "KOFFING",
@@ -8008,7 +8158,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HARRIS",
-    groupId: "BIKER",
+    classId: "BIKER",
     pokemon: [
       {
         id: "FLAREON",
@@ -8019,7 +8169,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ZEKE",
-    groupId: "BIKER",
+    classId: "BIKER",
     pokemon: [
       {
         id: "KOFFING",
@@ -8035,7 +8185,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CHARLES",
-    groupId: "BIKER",
+    classId: "BIKER",
     pokemon: [
       {
         id: "KOFFING",
@@ -8056,7 +8206,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RILEY",
-    groupId: "BIKER",
+    classId: "BIKER",
     pokemon: [
       {
         id: "WEEZING",
@@ -8067,7 +8217,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOEL",
-    groupId: "BIKER",
+    classId: "BIKER",
     pokemon: [
       {
         id: "MAGMAR",
@@ -8083,7 +8233,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GLENN",
-    groupId: "BIKER",
+    classId: "BIKER",
     pokemon: [
       {
         id: "KOFFING",
@@ -8104,7 +8254,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BLAINE",
-    groupId: "BLAINE",
+    classId: "BLAINE",
     pokemon: [
       {
         id: "MAGCARGO",
@@ -8140,7 +8290,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DUNCAN",
-    groupId: "BURGLAR",
+    classId: "BURGLAR",
     pokemon: [
       {
         id: "KOFFING",
@@ -8161,7 +8311,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EDDIE",
-    groupId: "BURGLAR",
+    classId: "BURGLAR",
     pokemon: [
       {
         id: "GROWLITHE",
@@ -8187,7 +8337,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "COREY",
-    groupId: "BURGLAR",
+    classId: "BURGLAR",
     pokemon: [
       {
         id: "KOFFING",
@@ -8213,7 +8363,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "OTIS",
-    groupId: "FIREBREATHER",
+    classId: "FIREBREATHER",
     pokemon: [
       {
         id: "MAGMAR",
@@ -8234,7 +8384,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DICK",
-    groupId: "FIREBREATHER",
+    unused: true,
+    classId: "FIREBREATHER",
     pokemon: [
       {
         id: "CHARMELEON",
@@ -8245,7 +8396,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NED",
-    groupId: "FIREBREATHER",
+    unused: true,
+    classId: "FIREBREATHER",
     pokemon: [
       {
         id: "KOFFING",
@@ -8266,7 +8418,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BURT",
-    groupId: "FIREBREATHER",
+    classId: "FIREBREATHER",
     pokemon: [
       {
         id: "KOFFING",
@@ -8282,7 +8434,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BILL",
-    groupId: "FIREBREATHER",
+    classId: "FIREBREATHER",
     pokemon: [
       {
         id: "KOFFING",
@@ -8298,7 +8450,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WALT",
-    groupId: "FIREBREATHER",
+    classId: "FIREBREATHER",
     pokemon: [
       {
         id: "MAGMAR",
@@ -8314,7 +8466,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RAY",
-    groupId: "FIREBREATHER",
+    classId: "FIREBREATHER",
     pokemon: [
       {
         id: "VULPIX",
@@ -8325,7 +8477,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LYLE",
-    groupId: "FIREBREATHER",
+    classId: "FIREBREATHER",
     pokemon: [
       {
         id: "KOFFING",
@@ -8346,7 +8498,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "IRWIN",
-    groupId: "JUGGLER",
+    classId: "JUGGLER",
     pokemon: [
       {
         id: "VOLTORB",
@@ -8372,7 +8524,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "FRITZ",
-    groupId: "JUGGLER",
+    classId: "JUGGLER",
     pokemon: [
       {
         id: "MR_MIME",
@@ -8393,7 +8545,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HORTON",
-    groupId: "JUGGLER",
+    classId: "JUGGLER",
     pokemon: [
       {
         id: "ELECTRODE",
@@ -8419,7 +8571,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "IRWIN",
-    groupId: "JUGGLER",
+    unused: true,
+    classId: "JUGGLER",
     pokemon: [
       {
         id: "VOLTORB",
@@ -8445,7 +8598,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "IRWIN",
-    groupId: "JUGGLER",
+    unused: true,
+    classId: "JUGGLER",
     pokemon: [
       {
         id: "VOLTORB",
@@ -8471,7 +8625,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "IRWIN",
-    groupId: "JUGGLER",
+    unused: true,
+    classId: "JUGGLER",
     pokemon: [
       {
         id: "VOLTORB",
@@ -8497,7 +8652,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KENJI",
-    groupId: "BLACKBELT",
+    unused: true,
+    classId: "BLACKBELT",
     pokemon: [
       {
         id: "ONIX",
@@ -8523,7 +8679,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "YOSHI",
-    groupId: "BLACKBELT",
+    classId: "BLACKBELT",
     pokemon: [
       {
         id: "HITMONLEE",
@@ -8539,7 +8695,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KENJI",
-    groupId: "BLACKBELT",
+    unused: true,
+    classId: "BLACKBELT",
     pokemon: [
       {
         id: "ONIX",
@@ -8585,7 +8742,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LAO",
-    groupId: "BLACKBELT",
+    classId: "BLACKBELT",
     pokemon: [
       {
         id: "HITMONCHAN",
@@ -8601,7 +8758,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NOB",
-    groupId: "BLACKBELT",
+    classId: "BLACKBELT",
     pokemon: [
       {
         id: "MACHOP",
@@ -8627,7 +8784,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KIYO",
-    groupId: "BLACKBELT",
+    classId: "BLACKBELT",
     pokemon: [
       {
         id: "HITMONLEE",
@@ -8643,7 +8800,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LUNG",
-    groupId: "BLACKBELT",
+    classId: "BLACKBELT",
     pokemon: [
       {
         id: "MANKEY",
@@ -8664,7 +8821,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KENJI",
-    groupId: "BLACKBELT",
+    classId: "BLACKBELT",
     pokemon: [
       {
         id: "MACHOKE",
@@ -8675,7 +8832,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WAI",
-    groupId: "BLACKBELT",
+    classId: "BLACKBELT",
     pokemon: [
       {
         id: "MACHOKE",
@@ -8696,7 +8853,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EXECUTIVE",
-    groupId: "EXECUTIVE_M",
+    classId: "ROCKET_EXECUTIVE_M",
     pokemon: [
       {
         id: "HOUNDOUR",
@@ -8732,7 +8889,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EXECUTIVE",
-    groupId: "EXECUTIVE_M",
+    classId: "ROCKET_EXECUTIVE_M",
     pokemon: [
       {
         id: "GOLBAT",
@@ -8748,7 +8905,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EXECUTIVE",
-    groupId: "EXECUTIVE_M",
+    classId: "ROCKET_EXECUTIVE_M",
     pokemon: [
       {
         id: "KOFFING",
@@ -8814,7 +8971,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EXECUTIVE",
-    groupId: "EXECUTIVE_M",
+    classId: "ROCKET_EXECUTIVE_M",
     pokemon: [
       {
         id: "ZUBAT",
@@ -8835,7 +8992,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NATHAN",
-    groupId: "PSYCHIC",
+    classId: "PSYCHIC",
     pokemon: [
       {
         id: "GIRAFARIG",
@@ -8846,7 +9003,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "FRANKLIN",
-    groupId: "PSYCHIC",
+    classId: "PSYCHIC",
     pokemon: [
       {
         id: "KADABRA",
@@ -8857,7 +9014,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HERMAN",
-    groupId: "PSYCHIC",
+    classId: "PSYCHIC",
     pokemon: [
       {
         id: "EXEGGCUTE",
@@ -8878,7 +9035,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "FIDEL",
-    groupId: "PSYCHIC",
+    classId: "PSYCHIC",
     pokemon: [
       {
         id: "XATU",
@@ -8889,7 +9046,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GREG",
-    groupId: "PSYCHIC",
+    classId: "PSYCHIC",
     pokemon: [
       {
         id: "DROWZEE",
@@ -8904,7 +9061,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NORMAN",
-    groupId: "PSYCHIC",
+    classId: "PSYCHIC",
     pokemon: [
       {
         id: "SLOWPOKE",
@@ -8929,7 +9086,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MARK",
-    groupId: "PSYCHIC",
+    classId: "PSYCHIC",
     pokemon: [
       {
         id: "ABRA",
@@ -8960,7 +9117,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PHIL",
-    groupId: "PSYCHIC",
+    classId: "PSYCHIC",
     pokemon: [
       {
         id: "NATU",
@@ -8986,7 +9143,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RICHARD",
-    groupId: "PSYCHIC",
+    classId: "PSYCHIC",
     pokemon: [
       {
         id: "ESPEON",
@@ -8997,7 +9154,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GILBERT",
-    groupId: "PSYCHIC",
+    classId: "PSYCHIC",
     pokemon: [
       {
         id: "STARMIE",
@@ -9018,7 +9175,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JARED",
-    groupId: "PSYCHIC",
+    classId: "PSYCHIC",
     pokemon: [
       {
         id: "MR_MIME",
@@ -9039,7 +9196,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RODNEY",
-    groupId: "PSYCHIC",
+    classId: "PSYCHIC",
     pokemon: [
       {
         id: "DROWZEE",
@@ -9055,7 +9212,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LIZ",
-    groupId: "PICNICKER",
+    party: 1,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "NIDORAN_F",
@@ -9066,7 +9224,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GINA",
-    groupId: "PICNICKER",
+    party: 1,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "HOPPIP",
@@ -9087,7 +9246,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BROOKE",
-    groupId: "PICNICKER",
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "PIKACHU",
@@ -9103,7 +9262,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KIM",
-    groupId: "PICNICKER",
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "VULPIX",
@@ -9114,7 +9273,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CINDY",
-    groupId: "PICNICKER",
+    classId: "PICNICKER",
+    isContestTrainer: true,
     pokemon: [
       {
         id: "NIDOQUEEN",
@@ -9125,7 +9285,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HOPE",
-    groupId: "PICNICKER",
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "FLAAFFY",
@@ -9136,7 +9296,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SHARON",
-    groupId: "PICNICKER",
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "FURRET",
@@ -9152,7 +9312,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DEBRA",
-    groupId: "PICNICKER",
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "SEAKING",
@@ -9163,7 +9323,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GINA",
-    groupId: "PICNICKER",
+    party: 2,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "HOPPIP",
@@ -9184,7 +9345,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ERIN",
-    groupId: "PICNICKER",
+    party: 1,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "PONYTA",
@@ -9200,7 +9362,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LIZ",
-    groupId: "PICNICKER",
+    party: 2,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "WEEPINBELL",
@@ -9216,7 +9379,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LIZ",
-    groupId: "PICNICKER",
+    party: 3,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "WEEPINBELL",
@@ -9237,7 +9401,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HEIDI",
-    groupId: "PICNICKER",
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "SKIPLOOM",
@@ -9253,7 +9417,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EDNA",
-    groupId: "PICNICKER",
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "NIDORINA",
@@ -9269,7 +9433,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GINA",
-    groupId: "PICNICKER",
+    party: 3,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "SKIPLOOM",
@@ -9290,7 +9455,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TIFFANY",
-    groupId: "PICNICKER",
+    party: 2,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "CLEFAIRY",
@@ -9306,7 +9472,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TIFFANY",
-    groupId: "PICNICKER",
+    party: 3,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "CLEFAIRY",
@@ -9322,7 +9489,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ERIN",
-    groupId: "PICNICKER",
+    party: 2,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "PONYTA",
@@ -9338,7 +9506,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TANYA",
-    groupId: "PICNICKER",
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "EXEGGUTOR",
@@ -9349,7 +9517,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TIFFANY",
-    groupId: "PICNICKER",
+    party: 1,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "CLEFAIRY",
@@ -9365,7 +9534,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ERIN",
-    groupId: "PICNICKER",
+    party: 3,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "PONYTA",
@@ -9401,7 +9571,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LIZ",
-    groupId: "PICNICKER",
+    party: 4,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "WEEPINBELL",
@@ -9422,7 +9593,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LIZ",
-    groupId: "PICNICKER",
+    party: 5,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "WEEPINBELL",
@@ -9458,7 +9630,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GINA",
-    groupId: "PICNICKER",
+    party: 4,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "SKIPLOOM",
@@ -9479,7 +9652,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GINA",
-    groupId: "PICNICKER",
+    party: 5,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "JUMPLUFF",
@@ -9515,7 +9689,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TIFFANY",
-    groupId: "PICNICKER",
+    party: 4,
+    classId: "PICNICKER",
     pokemon: [
       {
         id: "CLEFAIRY",
@@ -9531,7 +9706,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ROLAND",
-    groupId: "CAMPER",
+    classId: "CAMPER",
     pokemon: [
       {
         id: "NIDORAN_M",
@@ -9542,7 +9717,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TODD",
-    groupId: "CAMPER",
+    party: 1,
+    classId: "CAMPER",
     pokemon: [
       {
         id: "PSYDUCK",
@@ -9553,7 +9729,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "IVAN",
-    groupId: "CAMPER",
+    classId: "CAMPER",
     pokemon: [
       {
         id: "DIGLETT",
@@ -9574,7 +9750,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ELLIOT",
-    groupId: "CAMPER",
+    classId: "CAMPER",
     pokemon: [
       {
         id: "SANDSHREW",
@@ -9590,7 +9766,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BARRY",
-    groupId: "CAMPER",
+    classId: "CAMPER",
+    isContestTrainer: true,
     pokemon: [
       {
         id: "NIDOKING",
@@ -9601,7 +9778,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LLOYD",
-    groupId: "CAMPER",
+    classId: "CAMPER",
     pokemon: [
       {
         id: "NIDOKING",
@@ -9612,7 +9789,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DEAN",
-    groupId: "CAMPER",
+    classId: "CAMPER",
     pokemon: [
       {
         id: "GOLDUCK",
@@ -9628,7 +9805,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SID",
-    groupId: "CAMPER",
+    classId: "CAMPER",
     pokemon: [
       {
         id: "DUGTRIO",
@@ -9649,7 +9826,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "HARVEY",
-    groupId: "CAMPER",
+    unused: true,
+    classId: "CAMPER",
     pokemon: [
       {
         id: "NIDORINO",
@@ -9660,7 +9838,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DALE",
-    groupId: "CAMPER",
+    unused: true,
+    classId: "CAMPER",
     pokemon: [
       {
         id: "NIDORINO",
@@ -9671,7 +9850,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TED",
-    groupId: "CAMPER",
+    classId: "CAMPER",
     pokemon: [
       {
         id: "MANKEY",
@@ -9682,7 +9861,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TODD",
-    groupId: "CAMPER",
+    party: 2,
+    classId: "CAMPER",
     pokemon: [
       {
         id: "GEODUDE",
@@ -9703,7 +9883,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TODD",
-    groupId: "CAMPER",
+    party: 3,
+    classId: "CAMPER",
     pokemon: [
       {
         id: "GEODUDE",
@@ -9724,7 +9905,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "THOMAS",
-    groupId: "CAMPER",
+    unused: true,
+    classId: "CAMPER",
     pokemon: [
       {
         id: "GRAVELER",
@@ -9750,7 +9932,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LEROY",
-    groupId: "CAMPER",
+    unused: true,
+    classId: "CAMPER",
     pokemon: [
       {
         id: "GRAVELER",
@@ -9776,7 +9959,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DAVID",
-    groupId: "CAMPER",
+    unused: true,
+    classId: "CAMPER",
     pokemon: [
       {
         id: "GRAVELER",
@@ -9802,7 +9986,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOHN",
-    groupId: "CAMPER",
+    unused: true,
+    classId: "CAMPER",
     pokemon: [
       {
         id: "GRAVELER",
@@ -9828,7 +10013,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JERRY",
-    groupId: "CAMPER",
+    classId: "CAMPER",
     pokemon: [
       {
         id: "SANDSLASH",
@@ -9839,7 +10024,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SPENCER",
-    groupId: "CAMPER",
+    classId: "CAMPER",
     pokemon: [
       {
         id: "SANDSHREW",
@@ -9860,7 +10045,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TODD",
-    groupId: "CAMPER",
+    party: 4,
+    classId: "CAMPER",
     pokemon: [
       {
         id: "GRAVELER",
@@ -9886,7 +10072,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TODD",
-    groupId: "CAMPER",
+    party: 5,
+    classId: "CAMPER",
     pokemon: [
       {
         id: "GRAVELER",
@@ -9932,7 +10119,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "QUENTIN",
-    groupId: "CAMPER",
+    classId: "CAMPER",
     pokemon: [
       {
         id: "FEAROW",
@@ -9953,7 +10140,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EXECUTIVE",
-    groupId: "EXECUTIVE_F",
+    classId: "ROCKET_EXECUTIVE_F",
     pokemon: [
       {
         id: "ARBOK",
@@ -9989,7 +10176,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EXECUTIVE",
-    groupId: "EXECUTIVE_F",
+    classId: "ROCKET_EXECUTIVE_F",
     pokemon: [
       {
         id: "ARBOK",
@@ -10024,7 +10211,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CHOW",
-    groupId: "SAGE",
+    classId: "SAGE",
     pokemon: [
       {
         id: "BELLSPROUT",
@@ -10045,7 +10232,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NICO",
-    groupId: "SAGE",
+    classId: "SAGE",
     pokemon: [
       {
         id: "BELLSPROUT",
@@ -10066,7 +10253,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JIN",
-    groupId: "SAGE",
+    classId: "SAGE",
     pokemon: [
       {
         id: "BELLSPROUT",
@@ -10077,7 +10264,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TROY",
-    groupId: "SAGE",
+    classId: "SAGE",
     pokemon: [
       {
         id: "BELLSPROUT",
@@ -10093,7 +10280,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JEFFREY",
-    groupId: "SAGE",
+    classId: "SAGE",
     pokemon: [
       {
         id: "HAUNTER",
@@ -10104,7 +10291,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "PING",
-    groupId: "SAGE",
+    classId: "SAGE",
     pokemon: [
       {
         id: "GASTLY",
@@ -10135,7 +10322,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EDMOND",
-    groupId: "SAGE",
+    classId: "SAGE",
     pokemon: [
       {
         id: "BELLSPROUT",
@@ -10156,7 +10343,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NEAL",
-    groupId: "SAGE",
+    classId: "SAGE",
     pokemon: [
       {
         id: "BELLSPROUT",
@@ -10167,7 +10354,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LI",
-    groupId: "SAGE",
+    classId: "SAGE",
     pokemon: [
       {
         id: "BELLSPROUT",
@@ -10188,7 +10375,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GAKU",
-    groupId: "SAGE",
+    classId: "SAGE",
     pokemon: [
       {
         id: "NOCTOWL",
@@ -10204,7 +10391,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MASA",
-    groupId: "SAGE",
+    classId: "SAGE",
     pokemon: [
       {
         id: "NOCTOWL",
@@ -10220,7 +10407,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KOJI",
-    groupId: "SAGE",
+    classId: "SAGE",
     pokemon: [
       {
         id: "NOCTOWL",
@@ -10236,7 +10423,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MARTHA",
-    groupId: "MEDIUM",
+    classId: "MEDIUM",
     pokemon: [
       {
         id: "GASTLY",
@@ -10257,7 +10444,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRACE",
-    groupId: "MEDIUM",
+    classId: "MEDIUM",
     pokemon: [
       {
         id: "HAUNTER",
@@ -10273,7 +10460,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BETHANY",
-    groupId: "MEDIUM",
+    unused: true,
+    classId: "MEDIUM",
     pokemon: [
       {
         id: "HAUNTER",
@@ -10284,7 +10472,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MARGRET",
-    groupId: "MEDIUM",
+    unused: true,
+    classId: "MEDIUM",
     pokemon: [
       {
         id: "HAUNTER",
@@ -10295,7 +10484,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ETHEL",
-    groupId: "MEDIUM",
+    unused: true,
+    classId: "MEDIUM",
     pokemon: [
       {
         id: "HAUNTER",
@@ -10306,7 +10496,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "REBECCA",
-    groupId: "MEDIUM",
+    classId: "MEDIUM",
     pokemon: [
       {
         id: "DROWZEE",
@@ -10322,7 +10512,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DORIS",
-    groupId: "MEDIUM",
+    classId: "MEDIUM",
     pokemon: [
       {
         id: "SLOWPOKE",
@@ -10338,7 +10528,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RONALD",
-    groupId: "BOARDER",
+    classId: "BOARDER",
     pokemon: [
       {
         id: "SEEL",
@@ -10359,7 +10549,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRAD",
-    groupId: "BOARDER",
+    classId: "BOARDER",
     pokemon: [
       {
         id: "SWINUB",
@@ -10375,7 +10565,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DOUGLAS",
-    groupId: "BOARDER",
+    classId: "BOARDER",
     pokemon: [
       {
         id: "SHELLDER",
@@ -10396,7 +10586,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "WILLIAM",
-    groupId: "POKEFAN_M",
+    classId: "POKEFAN_M",
+    isContestTrainer: true,
     pokemon: [
       {
         id: "RAICHU",
@@ -10408,7 +10599,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DEREK",
-    groupId: "POKEFAN_M",
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "PIKACHU",
@@ -10420,7 +10611,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ROBERT",
-    groupId: "POKEFAN_M",
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "QUAGSIRE",
@@ -10432,7 +10623,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JOSHUA",
-    groupId: "POKEFAN_M",
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "PIKACHU",
@@ -10474,7 +10665,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "CARTER",
-    groupId: "POKEFAN_M",
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "BULBASAUR",
@@ -10498,7 +10689,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "TREVOR",
-    groupId: "POKEFAN_M",
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "PSYDUCK",
@@ -10510,7 +10701,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BRANDON",
-    groupId: "POKEFAN_M",
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "SNUBBULL",
@@ -10522,7 +10713,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JEREMY",
-    groupId: "POKEFAN_M",
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "MEOWTH",
@@ -10546,7 +10737,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "COLIN",
-    groupId: "POKEFAN_M",
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "DELIBIRD",
@@ -10558,7 +10749,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DEREK",
-    groupId: "POKEFAN_M",
+    unused: true,
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "PIKACHU",
@@ -10570,7 +10762,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DEREK",
-    groupId: "POKEFAN_M",
+    unused: true,
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "PIKACHU",
@@ -10582,7 +10775,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ALEX",
-    groupId: "POKEFAN_M",
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "NIDOKING",
@@ -10606,7 +10799,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "REX",
-    groupId: "POKEFAN_M",
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "PHANPY",
@@ -10618,7 +10811,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ALLAN",
-    groupId: "POKEFAN_M",
+    classId: "POKEFAN_M",
     pokemon: [
       {
         id: "TEDDIURSA",
@@ -10630,7 +10823,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NAOKO",
-    groupId: "KIMONO_GIRL",
+    unused: true,
+    classId: "KIMONO_GIRL",
     pokemon: [
       {
         id: "SKIPLOOM",
@@ -10651,7 +10845,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "NAOKO",
-    groupId: "KIMONO_GIRL",
+    classId: "KIMONO_GIRL",
     pokemon: [
       {
         id: "FLAREON",
@@ -10662,7 +10856,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "SAYO",
-    groupId: "KIMONO_GIRL",
+    classId: "KIMONO_GIRL",
     pokemon: [
       {
         id: "ESPEON",
@@ -10673,7 +10867,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ZUKI",
-    groupId: "KIMONO_GIRL",
+    classId: "KIMONO_GIRL",
     pokemon: [
       {
         id: "UMBREON",
@@ -10684,7 +10878,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KUNI",
-    groupId: "KIMONO_GIRL",
+    classId: "KIMONO_GIRL",
     pokemon: [
       {
         id: "VAPOREON",
@@ -10695,7 +10889,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MIKI",
-    groupId: "KIMONO_GIRL",
+    classId: "KIMONO_GIRL",
     pokemon: [
       {
         id: "JOLTEON",
@@ -10706,7 +10900,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "AMY & MAY",
-    groupId: "TWINS",
+    party: 1,
+    classId: "TWINS",
     pokemon: [
       {
         id: "SPINARAK",
@@ -10722,7 +10917,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ANN & ANNE",
-    groupId: "TWINS",
+    party: 1,
+    classId: "TWINS",
     pokemon: [
       {
         id: "CLEFAIRY",
@@ -10748,7 +10944,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "ANN & ANNE",
-    groupId: "TWINS",
+    party: 2,
+    classId: "TWINS",
     pokemon: [
       {
         id: "JIGGLYPUFF",
@@ -10774,7 +10971,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "AMY & MAY",
-    groupId: "TWINS",
+    party: 2,
+    classId: "TWINS",
     pokemon: [
       {
         id: "LEDYBA",
@@ -10790,7 +10988,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JO & ZOE",
-    groupId: "TWINS",
+    party: 1,
+    classId: "TWINS",
     pokemon: [
       {
         id: "VICTREEBEL",
@@ -10806,7 +11005,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JO & ZOE",
-    groupId: "TWINS",
+    party: 2,
+    classId: "TWINS",
     pokemon: [
       {
         id: "VILEPLUME",
@@ -10822,7 +11022,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MEG & PEG",
-    groupId: "TWINS",
+    party: 1,
+    classId: "TWINS",
     pokemon: [
       {
         id: "TEDDIURSA",
@@ -10838,7 +11039,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "MEG & PEG",
-    groupId: "TWINS",
+    party: 2,
+    classId: "TWINS",
     pokemon: [
       {
         id: "PHANPY",
@@ -10854,7 +11056,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LEA & PIA",
-    groupId: "TWINS",
+    classId: "TWINS",
     pokemon: [
       {
         id: "DRATINI",
@@ -10880,7 +11082,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "LEA & PIA",
-    groupId: "TWINS",
+    unused: true,
+    classId: "TWINS",
     pokemon: [
       {
         id: "DRATINI",
@@ -10906,7 +11109,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BEVERLY",
-    groupId: "POKEFAN_F",
+    classId: "POKEFAN_F",
     pokemon: [
       {
         id: "SNUBBULL",
@@ -10918,7 +11121,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RUTH",
-    groupId: "POKEFAN_F",
+    classId: "POKEFAN_F",
     pokemon: [
       {
         id: "PIKACHU",
@@ -10930,7 +11133,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BEVERLY",
-    groupId: "POKEFAN_F",
+    unused: true,
+    classId: "POKEFAN_F",
     pokemon: [
       {
         id: "SNUBBULL",
@@ -10942,7 +11146,8 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BEVERLY",
-    groupId: "POKEFAN_F",
+    unused: true,
+    classId: "POKEFAN_F",
     pokemon: [
       {
         id: "GRANBULL",
@@ -10954,7 +11159,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GEORGIA",
-    groupId: "POKEFAN_F",
+    classId: "POKEFAN_F",
     pokemon: [
       {
         id: "SENTRET",
@@ -10990,7 +11195,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "JAIME",
-    groupId: "POKEFAN_F",
+    classId: "POKEFAN_F",
     pokemon: [
       {
         id: "MEOWTH",
@@ -11002,7 +11207,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "RED",
-    groupId: "RED",
+    classId: "RED",
     pokemon: [
       {
         id: "PIKACHU",
@@ -11068,7 +11273,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "BLUE",
-    groupId: "BLUE",
+    classId: "BLUE",
     pokemon: [
       {
         id: "PIDGEOT",
@@ -11134,7 +11339,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "KEITH",
-    groupId: "OFFICER",
+    classId: "OFFICER",
     pokemon: [
       {
         id: "GROWLITHE",
@@ -11145,7 +11350,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "DIRK",
-    groupId: "OFFICER",
+    classId: "OFFICER",
     pokemon: [
       {
         id: "GROWLITHE",
@@ -11161,7 +11366,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_F",
+    classId: "ROCKET_GRUNT_F",
     pokemon: [
       {
         id: "ZUBAT",
@@ -11177,7 +11382,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_F",
+    classId: "ROCKET_GRUNT_F",
     pokemon: [
       {
         id: "ARBOK",
@@ -11188,7 +11393,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_F",
+    classId: "ROCKET_GRUNT_F",
     pokemon: [
       {
         id: "GLOOM",
@@ -11204,7 +11409,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_F",
+    classId: "ROCKET_GRUNT_F",
     pokemon: [
       {
         id: "EKANS",
@@ -11230,7 +11435,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "GRUNT",
-    groupId: "GRUNT_F",
+    classId: "ROCKET_GRUNT_F",
     pokemon: [
       {
         id: "EKANS",
@@ -11256,7 +11461,7 @@ export const trainers: Trainer[] = [
   },
   {
     name: "EUSINE",
-    groupId: "MYSTICALMAN",
+    classId: "MYSTICALMAN",
     pokemon: [
       {
         id: "DROWZEE",

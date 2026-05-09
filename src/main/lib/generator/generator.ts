@@ -49,7 +49,7 @@ import { type ItemId } from "@shared/types/gameDataIds/items"
 import { type MartId, martIds, type SpecialShopId } from "@shared/types/gameDataIds/marts"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import type { TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
-import { trainerGroupIds } from "@shared/types/gameDataIds/trainerGroups"
+import { trainerClassIds } from "@shared/types/gameDataIds/trainerClasses"
 import { bytesFromTextData, bytesFromTextScript } from "@shared/utils/textConverters"
 import { bytesFrom, compact, hexStringFrom, isNotNullish, isNullish } from "@utils"
 import crypto from "crypto"
@@ -1521,12 +1521,12 @@ const createPatches = (
     romInfo,
     "trainers.yml",
     {
-      trainerGroups: trainerGroupIds.map((groupId) => {
+      trainerGroups: trainerClassIds.map((classId) => {
         return {
           path: "trainerGroup.yml",
           extraIncludes: {
             trainers: romInfo.gameData.trainers.filter((trainer) => {
-              return trainer.groupId === groupId
+              return trainer.classId === classId
             }).map((trainer) => {
               const hasItems = trainer.pokemon.reduce((result, pokemon) => {
                 return result || isNotNullish(pokemon.itemId)
@@ -1546,7 +1546,7 @@ const createPatches = (
                 trainerType = 2
               }
               
-              const trainerName = trainer.groupId === "RIVAL_1" || trainer.groupId === "RIVAL_2" ? "?" : trainer.name
+              const trainerName = trainer.classId === "RIVAL_1" || trainer.classId === "RIVAL_2" ? "?" : trainer.name
                 
               return {
                 path: "trainerNameAndPokemon.yml",
