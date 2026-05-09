@@ -122,6 +122,7 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
       
       if (createPatch) {
         generatePatch({
+          checkValue: data.checkValue,
           settings: data.settings,
           inputROMData: fileInfo.inputFileData,
           sharedOutputROMData: fileInfo.sharedOutputFileData,

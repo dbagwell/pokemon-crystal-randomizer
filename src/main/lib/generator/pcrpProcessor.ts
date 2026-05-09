@@ -17,11 +17,13 @@ export const createPCRP = (params: {
   inputROMData: Buffer
   sharedOutputROMData: Buffer
   settings: Settings
+  checkValue: string
 }) => {
   const {
     inputROMData,
     sharedOutputROMData,
     settings,
+    checkValue,
   } = params
   
   const encode = (value: number) => {
@@ -47,6 +49,7 @@ export const createPCRP = (params: {
     settingsVersion: app.getVersion(),
     minimumSupportedVersion: "0.3.0",
     settings: settings,
+    checkValue: checkValue,
   })))
   
   const buffers: Buffer[] = []
@@ -310,10 +313,12 @@ export const handlePCRPFile = async (filePath: string) => {
       }
     
       applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
+      const actualPlayerOptions = playerOptionsFromViewModel(playerOptionsViewModel)
     
-      applyPlayerOptionsToROM({
+      const playerSpecificGameData = applyPlayerOptionsToROM({
+        seed: info.checkValue ?? filePath,
         settings: info.settings as Settings,
-        playerOptions: playerOptionsFromViewModel(playerOptionsViewModel),
+        playerOptions: actualPlayerOptions,
         romData: newROMData,
       })
     }

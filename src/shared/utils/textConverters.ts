@@ -85,3 +85,29 @@ export const inGameStringLength = (string: string) => {
     }
   }, 0)
 }
+
+export const truncateToInGameStringLength = (string: string, length: number) => {
+  let result = string
+  
+  while (inGameStringLength(result) > length) {
+    if ([...result.matchAll(/<POKé>$|<PKMN>$/g)][0]) {
+      result = result.substring(0, result.length - 6)
+    } else {
+      result = result.substring(0, result.length - 1)
+    }
+  }
+  
+  return result
+}
+
+export const stringFrom = (bytes: number[]) => {
+  return bytes.map((byte) => {
+    return Object.entries({
+      ...characterMap,
+      ...terminatorCharacterMap,
+      ...controlCharacterMap,
+    }).find((entry) => {
+      return entry[1] === byte
+    })?.[0] ?? "<?>"
+  }).join("")
+}

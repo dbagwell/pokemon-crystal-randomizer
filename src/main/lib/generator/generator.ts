@@ -23,6 +23,7 @@ import { updatePrices } from "@lib/generator/gameDataProcessors/prices"
 import { updateStarterItems, updateStarters } from "@lib/generator/gameDataProcessors/starters"
 import { updateTeachableMoves } from "@lib/generator/gameDataProcessors/teachableMoves"
 import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
+import { updateTrainerClassNames, updateTrainerNames } from "@lib/generator/gameDataProcessors/trainerNames"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { updateUnownSets } from "@lib/generator/gameDataProcessors/unownSets"
 import { generatorLog } from "@lib/generator/log"
@@ -40,8 +41,11 @@ import { movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
+import { trainerClassesMap } from "@shared/gameData/trainerClasses"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
+import { trainers } from "@shared/gameData/trainers"
 import { unownLetters } from "@shared/gameData/unownLetters"
+import type { PlayerSpecificGameData } from "@shared/types/gameData/gameData"
 import { itemHoldEffectsMap, itemMenuActionsMap } from "@shared/types/gameData/item"
 import type { EventFlagId } from "@shared/types/gameDataIds/eventFlags"
 import { type EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
@@ -134,7 +138,8 @@ export const generateROM = async (params: {
   
   const outputFileData = Buffer.from(sharedOutputFileData)
   
-  applyPlayerOptionsToROM({
+  const playerSpecificGameData = applyPlayerOptionsToROM({
+    seed: data.checkValue,
     settings: data.settings,
     playerOptions: playerOptions,
     romData: outputFileData,
@@ -143,6 +148,7 @@ export const generateROM = async (params: {
   return {
     inputFileData: inputFileData,
     sharedOutputFileData: sharedOutputFileData,
+    playerSpecificGameData: playerSpecificGameData,
     ...writeRomData({
       fileData: outputFileData,
       defaultFileName: defaultFileName ?? data.checkValue,
@@ -155,19 +161,38 @@ export const generateROM = async (params: {
 }
 
 export const applyPlayerOptionsToROM = (params: {
+  seed: string
   settings: Settings
   playerOptions: PlayerOptions
   romData: Buffer
 }) => {
   const {
+    seed,
     settings,
     playerOptions,
     romData,
   } = params
   
-  createPlayerOptionsPatches(settings, playerOptions).forEach((hunk) => {
+  const random = new Random(seed)
+  
+  const gameData = {
+    trainerClasses: JSON.parse(JSON.stringify(trainerClassesMap)) as typeof trainerClassesMap,
+    trainers: JSON.parse(JSON.stringify(trainers)) as typeof trainers,
+  }
+  
+  updateTrainerClassNames(playerOptions, gameData, random)
+  updateTrainerNames(playerOptions, gameData, random) // Must be after updateTrainerClassNames
+  
+  createPlayerOptionsPatches({
+    settings: settings,
+    playerOptions: playerOptions,
+    romData: romData,
+    gameData: gameData,
+  }).forEach((hunk) => {
     romData.set(hunk.values, hunk.offset.bank() * ROMInfo.bankSize + (hunk.offset.bankAddress() - (hunk.offset.bank() === 0 ? 0 : ROMInfo.bankSize)))
   })
+  
+  return gameData
 }
 
 export const writeRomData = (params: {
@@ -254,6 +279,7 @@ export const generateLog = (params: {
 }
 
 export const generatePatch = (params: {
+  checkValue: string
   settings: Settings
   inputROMData: Buffer
   sharedOutputROMData: Buffer
@@ -262,6 +288,7 @@ export const generatePatch = (params: {
   throwErrorOnWriteFailure?: boolean
 }) => {
   const {
+    checkValue,
     settings,
     inputROMData,
     sharedOutputROMData,
@@ -271,6 +298,7 @@ export const generatePatch = (params: {
   } = params
   
   const pcrpData = createPCRP({
+    checkValue: checkValue,
     settings: settings,
     inputROMData: inputROMData,
     sharedOutputROMData: sharedOutputROMData,
@@ -2499,10 +2527,19 @@ const createPatches = (
   }
 }
 
-const createPlayerOptionsPatches = (
-  settings: Settings,
-  playerOptions: PlayerOptions,
-) => {
+const createPlayerOptionsPatches = (params: {
+  settings: Settings
+  playerOptions: PlayerOptions
+  romData: Buffer
+  gameData: PlayerSpecificGameData
+}) => {
+  const {
+    settings,
+    playerOptions,
+    romData,
+    gameData,
+  } = params
+  
   const patchHunks: DataHunk[] = []
   
   // Skip Gender
@@ -2562,6 +2599,89 @@ const createPlayerOptionsPatches = (
     new DataHunk(ROMOffset.fromBankAddress(5, 0x4F7E), [frameTypeValue(playerOptions.FRAME_TYPE)]),
     new DataHunk(ROMOffset.fromBankAddress(5, 0x4F80), [printToneValue(playerOptions.PRINT_TONE)]),
   ])
+  
+  // Class Names
+  
+  if (playerOptions.CHANGE_TRAINER_CLASS_NAMES.VALUE) {
+    patchHunks.push(new DataHunk(
+      ROMOffset.fromBankAddress(11, 0x41EF),
+      Object.values(gameData.trainerClasses).flatMap((trainerClass) => {
+        return [
+          ...bytesFromTextData(trainerClass.name),
+          0x50,
+        ]
+      }),
+    ))
+  }
+  
+  // Trainer Names
+  
+  if (playerOptions.CHANGE_TRAINER_NAMES.VALUE) {
+    const trainerDataOffset = ROMOffset.fromBankAddress(14, 0x5A1F)
+    let trainerIndex = 0
+    let readOffset = trainerDataOffset.absoluteOffset
+    let writeOffset = trainerDataOffset.absoluteOffset
+    const trainerGroupOffsets: number[] = []
+    let trainerData: number[] = []
+    let lastClassId = ""
+    
+    while (trainerIndex < gameData.trainers.length) {
+      if (lastClassId !== gameData.trainers[trainerIndex].classId) {
+        const trainerClassIndex = Object.values(gameData.trainerClasses).findIndex((trainerClass) => {
+          return trainerClass.id === gameData.trainers[trainerIndex].classId
+        })
+        
+        while (trainerClassIndex >= trainerGroupOffsets.length) {
+          trainerGroupOffsets.push(writeOffset)
+        }
+        
+        lastClassId = gameData.trainers[trainerIndex].classId
+      }
+      
+      const nameBytes = bytesFromTextData(`${gameData.trainers[trainerIndex].name}@`)
+      
+      trainerData = [
+        ...trainerData,
+        ...nameBytes,
+      ]
+      
+      writeOffset += nameBytes.length
+      
+      let isBeyondName = false
+      
+      while (romData[readOffset] !== 0xFF) {
+        if (isBeyondName) {
+          trainerData = [...trainerData, romData[readOffset]]
+          writeOffset++
+        } else if (romData[readOffset] === 0x50) {
+          isBeyondName = true
+        }
+        readOffset++
+      }
+      
+      trainerData = [
+        ...trainerData,
+        romData[readOffset],
+      ]
+      
+      readOffset++
+      writeOffset++
+      trainerIndex++
+    }
+    
+    patchHunks.push(...[
+      new DataHunk(
+        ROMOffset.fromBankAddress(14, 0x5999),
+        trainerGroupOffsets.flatMap((offset) => {
+          return bytesFrom(new ROMOffset(offset).bankAddress(), 2)
+        }),
+      ),
+      new DataHunk(
+        trainerDataOffset,
+        trainerData,
+      ),
+    ])
+  }
   
   return patchHunks
 }

@@ -103,9 +103,11 @@ export const generateFromCLI = async (args: string[]) => {
   
   if (shouldGenerateROM || shouldGeneratePatch) {
     try {
+      const playerOptions = playerOptionsFromViewModel(playerOptionsViewModel)
+      
       romFileData = await generateROM({
         data: generatorData,
-        playerOptions: playerOptionsFromViewModel(playerOptionsViewModel),
+        playerOptions: playerOptions,
         showInputInRenderer: false,
         defaultFileName: baseFilePath,
         inputROM: inputROMData,
@@ -134,6 +136,7 @@ export const generateFromCLI = async (args: string[]) => {
   if (shouldGeneratePatch && isNotNullish(romFileData)) {
     try {
       generatePatch({
+        checkValue: generatorData.checkValue,
         settings: generatorData.settings,
         inputROMData: romFileData.inputFileData,
         sharedOutputROMData: romFileData.sharedOutputFileData,
