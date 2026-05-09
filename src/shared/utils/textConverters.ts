@@ -6,6 +6,7 @@ const characterMapFrom = (characters: string, startingValue: number) => {
 }
 
 const characterMap: Record<string, number> = {
+  "<PKMN>": 0x4A,
   "<POKé>": 0x54,
   "…": 0x75,
   " ": 0x7F,
@@ -75,7 +76,9 @@ export const bytesFromTextScript = (script: string) => {
 
 export const inGameStringLength = (string: string) => {
   return bytesFromString(string, characterMap).reduce((result, value) => {
-    if (value === 0x54) {
+    if (value === 0x4A) {
+      return result + 2
+    } else if (value === 0x54) {
       return result + 4
     } else {
       return result + 1
