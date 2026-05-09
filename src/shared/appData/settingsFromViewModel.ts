@@ -7,6 +7,7 @@ import type {
   IntegerInputGroupViewModel,
   IntegerInputViewModel,
   IntegerRangeInputViewModel,
+  MultilineTextInputViewModel,
   PlayerOptionsViewModel,
   SelectorOption,
   SettingsViewModel,
@@ -97,6 +98,11 @@ const settingsFromTextInputViewModel = <ViewModelType extends TextInputViewModel
   return viewModel.value as SettingsFromTextInputViewModel<ViewModelType>
 }
 
+type SettingsFromMultilineTextInputViewModel = string | undefined
+const settingsFromMultilineTextInputViewModel = <ViewModelType extends MultilineTextInputViewModel>(viewModel: ViewModelType): SettingsFromMultilineTextInputViewModel => {
+  return viewModel.value as SettingsFromMultilineTextInputViewModel
+}
+
 type SettingsFromSelectorViewModel<ViewModelType extends SingleSelectorViewModel> =
   keyof SettingsFromArrayOfSelectorOptions<ViewModelType["options"]> extends never ? ViewModelType["options"][number]["id"]
   : {
@@ -176,6 +182,7 @@ type SettingsFromInputViewModel<ViewModelType extends InputViewModel> =
   : ViewModelType extends IntegerInputGroupViewModel ? SettingsFromIntegerInputGroupViewModel
   : ViewModelType extends IntegerRangeInputViewModel ? SettingsFromIntegerRangeInputViewModel
   : ViewModelType extends TextInputViewModel ? SettingsFromTextInputViewModel<ViewModelType>
+  : ViewModelType extends MultilineTextInputViewModel ? SettingsFromMultilineTextInputViewModel
   : ViewModelType extends SingleSelectorViewModel ? SettingsFromSelectorViewModel<ViewModelType>
   : ViewModelType extends SimpleMultiSelectorViewModel ? SettingsFromSimpleMultiSelectorViewModel<ViewModelType>
   : ViewModelType extends ConfigurableMultiSelectorViewModel ? SettingsFromConfigurableMultiSelectorViewModel<ViewModelType>
@@ -196,6 +203,9 @@ const settingsFromInputViewModel = <ViewModelType extends InputViewModel>(viewMo
   }
   case "TEXT_INPUT": {
     return settingsFromTextInputViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
+  }
+  case "MULTILINE_TEXT_INPUT": {
+    return settingsFromMultilineTextInputViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
   case "SINGLE_SELECTOR": {
     return settingsFromSelectorViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>

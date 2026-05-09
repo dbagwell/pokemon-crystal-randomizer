@@ -1,4 +1,4 @@
-import type { ConfigurableMultiSelectorViewModel, GroupMultiSelectorViewModel, InputGroupListViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, IntegerRangeInputViewModel, PlayerOptionsViewModel, SettingsViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
+import type { ConfigurableMultiSelectorViewModel, GroupMultiSelectorViewModel, InputGroupListViewModel, InputViewModel, IntegerInputGroupViewModel, IntegerInputViewModel, IntegerRangeInputViewModel, MultilineTextInputViewModel, PlayerOptionsViewModel, SettingsViewModel, SimpleMultiSelectorViewModel, SingleSelectorViewModel, TextInputViewModel, ToggleViewModel } from "@shared/types/viewModels"
 import { compact, isBoolean, isNotNullish, isNullish, isNumber, isObject, isString } from "@shared/utils"
 
 export const applyPlayerOptionsToViewModel = (playerOptions: any, viewModel: PlayerOptionsViewModel, warnings: string[]) => {
@@ -47,6 +47,10 @@ const applySettingsToInputViewModel = (settings: any, viewModel: InputViewModel,
   }
   case "TEXT_INPUT": {
     applySettingsToTextInputViewModel(settings, viewModel, path, warnings)
+    break
+  }
+  case "MULTILINE_TEXT_INPUT": {
+    applySettingsToMultilineTextInputViewModel(settings, viewModel, path, warnings)
     break
   }
   case "SINGLE_SELECTOR": {
@@ -193,6 +197,16 @@ const applySettingsToTextInputViewModel = (settings: any, viewModel: TextInputVi
     } else {
       viewModel.value = undefined
     }
+  } else if (isString(settings)) {
+    viewModel.value = settings
+  } else {
+    warnings.push(invalidValueWarning(path, "string", settings))
+  }
+}
+
+const applySettingsToMultilineTextInputViewModel = (settings: any, viewModel: MultilineTextInputViewModel, path: string, warnings: string[]) => {
+  if (isNullish(settings)) {
+    viewModel.value = undefined
   } else if (isString(settings)) {
     viewModel.value = settings
   } else {
