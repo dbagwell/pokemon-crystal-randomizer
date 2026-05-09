@@ -26,7 +26,7 @@ import { updateTrades } from "@lib/generator/gameDataProcessors/trades"
 import { updateTrainerClassNames, updateTrainerNames } from "@lib/generator/gameDataProcessors/trainerNames"
 import { updateTrainers } from "@lib/generator/gameDataProcessors/trainers"
 import { updateUnownSets } from "@lib/generator/gameDataProcessors/unownSets"
-import { generatorLog } from "@lib/generator/log"
+import { generatorLog, playerSpecificLog } from "@lib/generator/log"
 import { DataHunk, Patch } from "@lib/generator/patch"
 import { createPCRP } from "@lib/generator/pcrpProcessor"
 import { Random } from "@lib/generator/random"
@@ -272,6 +272,40 @@ export const generateLog = (params: {
     dialogTitle: "Save log to:",
     fileType: "text",
     defaultFilePath: `${defaultFileName}.log.txt`,
+    data: log,
+    forceOverwrite: forceOverwrite,
+    throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+  })
+}
+
+export const generatePlayerSpecificLog = (params: {
+  playerOptions: PlayerOptions
+  gameData: PlayerSpecificGameData
+  defaultFileName?: string
+  forceOverwrite?: boolean
+  throwErrorOnWriteFailure?: boolean
+}) => {
+  const {
+    playerOptions,
+    gameData,
+    defaultFileName,
+    forceOverwrite,
+    throwErrorOnWriteFailure,
+  } = params
+  
+  if (
+    (!playerOptions.CHANGE_TRAINER_CLASS_NAMES.VALUE || !playerOptions.CHANGE_TRAINER_CLASS_NAMES.SETTINGS.CREATE_LOG)
+    && (!playerOptions.CHANGE_TRAINER_NAMES.VALUE || !playerOptions.CHANGE_TRAINER_NAMES.SETTINGS.CREATE_LOG)
+  ) {
+    return
+  }
+  
+  const log = playerSpecificLog(gameData)
+  
+  attemptWriteFile({
+    dialogTitle: "Save names log to:",
+    fileType: "text",
+    defaultFilePath: `${defaultFileName}.names.log.txt`,
     data: log,
     forceOverwrite: forceOverwrite,
     throwErrorOnWriteFailure: throwErrorOnWriteFailure,

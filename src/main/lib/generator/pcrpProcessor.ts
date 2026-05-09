@@ -1,4 +1,4 @@
-import { applyPlayerOptionsToROM, writeRomData } from "@lib/generator/generator"
+import { applyPlayerOptionsToROM, generatePlayerSpecificLog, writeRomData } from "@lib/generator/generator"
 import { getPlayerOptions, listenForPlayerOptions } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import { forceCloseWindow, showWindow } from "@lib/utils/windowManager"
@@ -266,6 +266,8 @@ export const handlePCRPFile = async (filePath: string) => {
       throw new Error("Unable to apply patch. Patch is corrupted.")
     }
     
+    let generatePlayerSpecificLogBlock = (_: string) => {}
+    
     if (shouldApplyPlayerOptions) {
       let playerOptions = getPlayerOptions()
       const playerOptionsViewModel = defaultPlayerOptionsViewModel()
@@ -321,6 +323,14 @@ export const handlePCRPFile = async (filePath: string) => {
         playerOptions: actualPlayerOptions,
         romData: newROMData,
       })
+      
+      generatePlayerSpecificLogBlock = (defaultFileName: string) => {
+        generatePlayerSpecificLog({
+          playerOptions: actualPlayerOptions,
+          gameData: playerSpecificGameData,
+          defaultFileName: defaultFileName,
+        })
+      }
     }
     
     const fileInfo = writeRomData({
@@ -328,6 +338,8 @@ export const handlePCRPFile = async (filePath: string) => {
       forcePromptForLocation: false,
       defaultFileName: filePath.replace(new RegExp(`${path.basename(filePath)}$`), path.basename(filePath, ".pcrp")),
     })
+    
+    generatePlayerSpecificLogBlock(fileInfo.outputPathWithoutExtension)
     
     shell.openPath(fileInfo.fullOutputFilePath)
   } catch (error) {

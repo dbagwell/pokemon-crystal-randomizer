@@ -9,7 +9,7 @@ import { starterLocationsMap } from "@shared/gameData/starterLocations"
 import { trainerClassesMap } from "@shared/gameData/trainerClasses"
 import { trainers } from "@shared/gameData/trainers"
 import { eventPokemonMap } from "@shared/types/gameData/eventPokemon"
-import type { GameData } from "@shared/types/gameData/gameData"
+import type { GameData, PlayerSpecificGameData } from "@shared/types/gameData/gameData"
 import { eventPokemonIds } from "@shared/types/gameDataIds/eventPokemon"
 import { fishingGroupIds } from "@shared/types/gameDataIds/fishingGroups"
 import { fishingRodIds } from "@shared/types/gameDataIds/fishingRods"
@@ -24,7 +24,7 @@ import { moveTutorIds } from "@shared/types/gameDataIds/teachableMoves"
 import { trainerClassIds } from "@shared/types/gameDataIds/trainerClasses"
 import { treeGroupIds } from "@shared/types/gameDataIds/treeGroups"
 import type { UnownSetId } from "@shared/types/gameDataIds/unownSets"
-import { compact, isNotNullish } from "@shared/utils"
+import { compact, isNotNullish, isNullish } from "@shared/utils"
 import { app } from "electron"
 import yaml from "yaml"
 
@@ -683,6 +683,36 @@ export const generatorLog = (params: {
     sectionHeaders.join("\n"),
     ...sections,
   ].join("\n\n")
+}
+
+export const playerSpecificLog = (gameData: PlayerSpecificGameData) => {
+  return logTable({
+    headers: [
+      "ORIGINAL",
+      "NEW",
+    ],
+    sections: [
+      {
+        rows: trainers.map((trainer, index) => {
+          return [trainer, gameData.trainers[index]]
+        }).filter((pair) => {
+          return !(pair[0].unused ?? false) && (isNullish(pair[0].party) || pair[0].party === 1) && pair[0].name !== "???"
+        }).toSorted((a, b) => {
+          const classResult = a[0].classId.localeCompare(b[0].classId)
+          if (classResult === 0) {
+            return a[0].name.localeCompare(b[0].name)
+          } else {
+            return classResult
+          }
+        }).map((pair) => {
+          return [
+            `${trainerClassesMap[pair[0].classId].name} ${pair[0].name}`,
+            `${gameData.trainerClasses[pair[1].classId].name} ${pair[1].name}`,
+          ]
+        }),
+      },
+    ],
+  })
 }
 
 const logTable = (params: {

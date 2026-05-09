@@ -1,4 +1,4 @@
-import { generateLog, generatePatch, generateROM, generatorDataFrom } from "@lib/generator/generator"
+import { generateLog, generatePatch, generatePlayerSpecificLog, generateROM, generatorDataFrom } from "@lib/generator/generator"
 import { getPlayerOptions, getSettingsForPresetId } from "@lib/userData/userData"
 import { getVanillaROM, getVanillaROMData, hasVanillaROM } from "@lib/userData/vanillaROM"
 import { getYAML } from "@lib/utils/yamlUtils"
@@ -114,6 +114,12 @@ export const generateFromCLI = async (args: string[]) => {
         forceOverwrite: force,
         throwErrorOnWriteFailure: true,
         skipWritingOutputFile: !shouldGenerateROM,
+      })
+      
+      generatePlayerSpecificLog({
+        playerOptions: playerOptions,
+        gameData: romFileData.playerSpecificGameData,
+        defaultFileName: romFileData.outputPathWithoutExtension,
       })
     } catch (error) {
       console.error(`${error}`)
