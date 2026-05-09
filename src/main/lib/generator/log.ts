@@ -395,6 +395,18 @@ export const generatorLog = (params: {
         return gameData.trainers.filter((trainer) => {
           return !(trainer.unused ?? false) && trainer.classId === classId
         })
+      }).toSorted((a, b) => {
+        const classResult = a.classId.localeCompare(b.classId)
+        const nameResult = a.name.localeCompare(b.name)
+        if (classResult === 0) {
+          if (nameResult === 0) {
+            return (a.party ?? 0) - (b.party ?? 0)
+          } else {
+            return nameResult
+          }
+        } else {
+          return classResult
+        }
       }).map((trainer) => {
         return {
           rows: trainer.pokemon.map((pokemon, index) => {
