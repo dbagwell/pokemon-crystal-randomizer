@@ -3,9 +3,9 @@ const path = require("path")
 
 module.exports = {
   packagerConfig: {
-    ignore: [
-      "(?!^/package\\.json$|^/\\.vite$|^/\\.vite/.*$)^.+$",
-    ],
+    ignore: (path) => {
+      return path.match("(?!^/package\\.json$|^/\\.vite$|^/\\.vite/.*$)^.+$")
+    },
     icon: "src/main/resources/icons/icon",
     extendInfo: {
       CFBundleDocumentTypes: [

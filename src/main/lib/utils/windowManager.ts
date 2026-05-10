@@ -4,7 +4,6 @@ import { BrowserWindow, nativeTheme } from "electron"
 import path from "path"
 
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string
-declare const MAIN_WINDOW_VITE_NAME: string
 
 export const showWindow = async (params: {
   windowType: WindowType
@@ -37,7 +36,7 @@ export const showWindow = async (params: {
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     window.loadURL(`${MAIN_WINDOW_VITE_DEV_SERVER_URL}/window.html?windowType=${windowType}`)
   } else {
-    window.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/window.html`), {
+    window.loadFile(path.join(__dirname, `../renderer/window.html`), {
       query: {
         windowType: windowType,
       },
