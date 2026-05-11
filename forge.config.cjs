@@ -38,6 +38,10 @@ module.exports = {
             entry: "src/preload/preloadWindow.ts",
             config: "vite.preload.config.mjs",
           },
+          {
+            entry: "src/generator/generatorDataFromWorker.ts",
+            config: "vite.main.config.mjs",
+          },
         ],
         renderer: [
           {

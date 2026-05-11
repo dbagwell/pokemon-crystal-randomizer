@@ -1,4 +1,3 @@
-import { ROMInfo } from "@lib/gameData/romInfo"
 import { rendererAPIS } from "@lib/ipc/rendererAPIUtils"
 import { makeRendererAPIRequest } from "@lib/ipc/rendererAPIUtils"
 import { userDataPath } from "@lib/userData/userData"
@@ -10,6 +9,7 @@ import path from "path"
 
 const romsPath = path.resolve(userDataPath, "roms")
 const vanilla11ROMPath = path.resolve(romsPath, "vanilla11.gbc")
+const vanillaMD5Hash = "301899b8087289a6436b0a241fbbb474"
 
 const storedVanillaROM = (): Buffer | undefined => {
   try {
@@ -20,7 +20,7 @@ const storedVanillaROM = (): Buffer | undefined => {
 }
 
 export const setVanillaROM = async (data: Buffer) => {
-  if (crypto.createHash("md5").update(data).digest("hex") !== ROMInfo.vanillaMD5Hash) {
+  if (crypto.createHash("md5").update(data).digest("hex") !== vanillaMD5Hash) {
     throw new Error("The provided file is not a valid ROM of Pokémon Crystal Version 1.1.")
   }
   

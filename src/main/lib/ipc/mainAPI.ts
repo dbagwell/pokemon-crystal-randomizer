@@ -1,4 +1,4 @@
-import { generateLog, generatePatch, generatePlayerSpecificLog, generateROM, generatorDataFrom } from "@lib/generator/generator"
+import { dispatchWorker, generateLog, generatePatch, generatePlayerSpecificLog, generateROM } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
 import { getPreference, setPreference } from "@lib/userData/preferences"
 import { getPlayerOptions, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setPlayerOptions, setPreviousSettings } from "@lib/userData/userData"
@@ -102,9 +102,12 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
       setPreference("logPreference", shouldGenerateLog)
       setPreference("createPatch", createPatch)
       
-      const data = generatorDataFrom({
-        customSeed: seed,
-        settings: settings,
+      const data = await dispatchWorker({
+        method: "generatorDataFrom",
+        params: {
+          customSeed: seed,
+          settings: settings,
+        },
       })
       
       const fileInfo = await generateROM({

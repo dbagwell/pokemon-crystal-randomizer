@@ -2,18 +2,12 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@mainShared/*": ["../mainShared/*"],
       "@shared/*": ["../shared/*"],
       "@utils": ["../shared/utils/index.ts"],
-      "@lib/*": ["./lib/*"]
     },
-    "types": [
-      "vite/client"
-    ]
   },
   "include": [
     "./**/*",
-    "../shared/**/*",
-    "../mainShared/**/*"
+    "../shared/**/*"
   ]
 }

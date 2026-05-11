@@ -1,10 +1,11 @@
-import { applyPlayerOptionsToROM, generatePlayerSpecificLog, writeRomData } from "@lib/generator/generator"
+import { dispatchWorker, generatePlayerSpecificLog, writeRomData } from "@lib/generator/generator"
 import { getPlayerOptions, listenForPlayerOptions } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import { forceCloseWindow, showWindow } from "@lib/utils/windowManager"
 import { applyPlayerOptionsToViewModel } from "@shared/appData/applySettingsToViewModel"
 import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
 import { playerOptionsFromViewModel, type Settings } from "@shared/appData/settingsFromViewModel"
+import { bankAddressOfROMOffset, bankOfROMOffset, romBankSize } from "@shared/romUtils/romInfo"
 import { bytesFrom, isNotNullish, isNullish, isObject, isSemanticVersion, isSemanticVersionLower, numberFrom } from "@shared/utils"
 import { app, dialog, shell } from "electron"
 import fs from "fs"
@@ -146,6 +147,7 @@ export const handlePCRPFile = async (filePath: string) => {
       let value = 0
       let shift = 1
       
+      // eslint-disable-next-line no-useless-assignment
       let byte = 0
       do {
         byte = getBytes(1)[0]
@@ -317,11 +319,21 @@ export const handlePCRPFile = async (filePath: string) => {
       applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
       const actualPlayerOptions = playerOptionsFromViewModel(playerOptionsViewModel)
     
-      const playerSpecificGameData = applyPlayerOptionsToROM({
-        seed: info.checkValue ?? filePath,
-        settings: info.settings as Settings,
-        playerOptions: actualPlayerOptions,
-        romData: newROMData,
+      const {
+        playerSpecificGameData,
+        hunks,
+      } = await dispatchWorker({
+        method: "applyPlayerOptionsToROM",
+        params: {
+          seed: info.checkValue ?? filePath,
+          settings: info.settings as Settings,
+          playerOptions: actualPlayerOptions,
+          romData: newROMData,
+        },
+      })
+      
+      hunks.forEach((hunk) => {
+        newROMData.set(hunk.values, bankOfROMOffset(hunk.offset) * romBankSize + (bankAddressOfROMOffset(hunk.offset) - (bankOfROMOffset(hunk.offset) === 0 ? 0 : romBankSize)))
       })
       
       generatePlayerSpecificLogBlock = (defaultFileName: string) => {
@@ -343,6 +355,6 @@ export const handlePCRPFile = async (filePath: string) => {
     
     shell.openPath(fileInfo.fullOutputFilePath)
   } catch (error) {
-    throw new Error(`Error patching ROM:\n\n${error}`)
+    throw new Error(`Error patching ROM:\n\n${error}`, { cause: error })
   }
 }

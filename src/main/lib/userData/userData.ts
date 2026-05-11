@@ -1,4 +1,4 @@
-import { getYAML } from "@lib/utils/yamlUtils"
+import { getYAML } from "@mainShared/yamlUtils"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import crypto from "crypto"
 import { app } from "electron"

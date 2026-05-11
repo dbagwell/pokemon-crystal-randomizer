@@ -7,9 +7,6 @@
       "@utils": ["../shared/utils/index.ts"],
       "@lib/*": ["./lib/*"]
     },
-    "types": [
-      "vite/client"
-    ]
   },
   "include": [
     "./**/*",

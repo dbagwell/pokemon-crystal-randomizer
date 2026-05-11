@@ -1,7 +1,7 @@
-import { generateLog, generatePatch, generatePlayerSpecificLog, generateROM, generatorDataFrom } from "@lib/generator/generator"
+import { dispatchWorker, generateLog, generatePatch, generatePlayerSpecificLog, generateROM } from "@lib/generator/generator"
 import { getPlayerOptions, getSettingsForPresetId } from "@lib/userData/userData"
 import { getVanillaROM, getVanillaROMData, hasVanillaROM } from "@lib/userData/vanillaROM"
-import { getYAML } from "@lib/utils/yamlUtils"
+import { getYAML } from "@mainShared/yamlUtils"
 import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
 import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
 import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
@@ -93,9 +93,12 @@ export const generateFromCLI = async (args: string[]) => {
     console.log(warning)
   })
   
-  const generatorData = generatorDataFrom({
-    customSeed: seed,
-    settings: settingsFromViewModel(settingsViewModel),
+  const generatorData = await dispatchWorker({
+    method: "generatorDataFrom",
+    params: {
+      customSeed: seed,
+      settings: settingsFromViewModel(settingsViewModel),
+    },
   })
   
   const baseFilePath = path.resolve(outputDir, name ?? generatorData.checkValue)

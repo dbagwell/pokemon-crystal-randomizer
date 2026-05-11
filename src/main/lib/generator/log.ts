@@ -1,4 +1,4 @@
-import { encountersGroupedByType } from "@lib/generator/dataConverters/encounters"
+import { encountersGroupedByType } from "@mainShared/encounterUtils"
 import type { Settings } from "@shared/appData/settingsFromViewModel"
 import { gameMapsMap } from "@shared/gameData/gameMaps"
 import { itemsMap } from "@shared/gameData/items"

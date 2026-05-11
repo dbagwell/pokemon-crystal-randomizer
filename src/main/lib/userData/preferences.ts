@@ -1,5 +1,5 @@
 import { userDataPath } from "@lib/userData/userData"
-import { getYAML } from "@lib/utils/yamlUtils"
+import { getYAML } from "@mainShared/yamlUtils"
 import { isBoolean, isNullish, isNumber, isString } from "@shared/utils"
 import fs from "fs"
 import path from "path"
