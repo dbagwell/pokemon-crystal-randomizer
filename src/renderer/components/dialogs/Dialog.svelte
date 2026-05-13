@@ -51,6 +51,7 @@
     onCancel,
     onSubmit,
     onDismiss,
+  // svelte-ignore state_referenced_locally
   } = props
   
   const contentProps = $derived({

@@ -243,11 +243,13 @@
   let mainContentContainer: HTMLElement
   let seed = $state("")
   let settingsViewModel = $state(defaultSettingsViewModel())
+  // svelte-ignore state_referenced_locally
   let playerOptions = $state(initialPlayerOptions)
   let generateLogToggleViewModel = $state(createSimpleToggleViewModel({
     id: "CREATE_LOG" as const,
     name: "Generate Log File",
     description: "Creates a file that contains a record of all the settings that were used and all the random assignments that were made when generating the game.",
+    // svelte-ignore state_referenced_locally
     isOn: logPreference,
   }))
   
@@ -255,6 +257,7 @@
     id: "CREATE_PATCH",
     name: "Generate Patch File",
     description: "Creates a '.pcrp' file that can be shared with others to generate the same game with the same settings and randomization.",
+    // svelte-ignore state_referenced_locally
     isOn: createPatchPreference,
   }))
   

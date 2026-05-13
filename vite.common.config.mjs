@@ -1,7 +1,6 @@
 import { defineConfig } from "vite"
-import tsconfigPaths from "vite-tsconfig-paths"
 
-export default ({ root, publicDir, rollupOptions, plugins }) => {
+export default ({ root, outdir, publicDir, copyPublicDir, rolldownOptions, plugins }) => {
   const pluginsArray = plugins ? plugins : []
   return defineConfig(({ mode }) => {
     const isDev = mode === "development"
@@ -9,15 +8,17 @@ export default ({ root, publicDir, rollupOptions, plugins }) => {
       root: root,
       publicDir: publicDir,
       build: {
-        rollupOptions: rollupOptions,
+        outDir: outdir,
+        emptyOutDir: false,
+        copyPublicDir: copyPublicDir ?? false,
+        rolldownOptions: rolldownOptions,
         sourcemap: isDev,
         minify: !isDev,
       },
-      esbuild: {
-        keepNames: true, // This is required for electron-affinity ipc to work.
+      resolve: {
+        tsconfigPaths: true,
       },
       plugins: [
-        tsconfigPaths(),
         ...pluginsArray,
       ],
     }
