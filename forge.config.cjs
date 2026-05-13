@@ -6,7 +6,7 @@ module.exports = {
     ignore: (path) => {
       return path.match("(?!^/package\\.json$|^/\\.vite$|^/\\.vite/.*$)^.+$")
     },
-    icon: "src/main/resources/icons/icon",
+    icon: "src/resources/icons/icon",
     extendInfo: {
       CFBundleDocumentTypes: [
         {
@@ -39,7 +39,7 @@ module.exports = {
             config: "vite.preload.config.mjs",
           },
           {
-            entry: "src/generator/generatorDataFromWorker.ts",
+            entry: "src/worker/worker.ts",
             config: "vite.main.config.mjs",
           },
         ],

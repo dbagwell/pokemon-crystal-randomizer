@@ -32,7 +32,7 @@ export const hasVanillaROM = () => {
   return fs.existsSync(vanilla11ROMPath)
 }
 
-export const getVanillaROM = async (showInputInRenderer: boolean): Promise<Buffer | undefined> => {
+export const getVanillaROM = async (showInputInRenderer: boolean): Promise<Buffer> => {
   const existingVanillaROM = storedVanillaROM()
   
   if (isNotNullish(existingVanillaROM)) {
@@ -72,7 +72,7 @@ export const getVanillaROM = async (showInputInRenderer: boolean): Promise<Buffe
     )
   
     if (isNullish(fileData)) {
-      return undefined
+      throw new Error("Pokémon Crystal Version 1.1 ROM is required.")
     }
   
     setVanillaROM(fileData)

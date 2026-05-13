@@ -221,8 +221,7 @@ export default defineConfig([
     // unless they are generated files
     "**/*-lock.json",
     "src/renderer/css/*",
-    "src/main/lib/grammars/*",
-    "src/shared/typeValidators/*",
+    "src/worker/grammars/*",
     "tools/build/*",
     "tools/output/*",
     // or tsconfig files

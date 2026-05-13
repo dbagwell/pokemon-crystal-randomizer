@@ -36,7 +36,7 @@ export const showWindow = async (params: {
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     window.loadURL(`${MAIN_WINDOW_VITE_DEV_SERVER_URL}/window.html?windowType=${windowType}`)
   } else {
-    window.loadFile(path.join(__dirname, `../renderer/window.html`), {
+    window.loadFile(path.join(__dirname, "../renderer/window.html"), {
       query: {
         windowType: windowType,
       },

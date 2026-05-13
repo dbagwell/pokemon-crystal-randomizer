@@ -11,7 +11,7 @@ export const applyPlayerOptionsToViewModel = (playerOptions: any, viewModel: Pla
       applySettingsToInputViewModel(playerOptions[subViewModel.id], subViewModel, subViewModel.id, warnings)
     })
   } catch (error) {
-    throw new Error(`Unable to apply player options: ${error}`)
+    throw new Error(`Unable to apply player options: ${error}`, { cause: error })
   }
 }
 
@@ -27,7 +27,7 @@ export const applySettingsToViewModel = (settings: any, viewModel: SettingsViewM
       })
     })
   } catch (error) {
-    throw new Error(`Unable to apply settings: ${error}`)
+    throw new Error(`Unable to apply settings: ${error}`, { cause: error })
   }
 }
 

@@ -1,141 +1,97 @@
-
-import { generatorLog, playerSpecificLog } from "@lib/generator/log"
-import { createPCRP } from "@lib/generator/pcrpProcessor"
-import { getVanillaROM } from "@lib/userData/vanillaROM"
+import { performJob } from "@lib/generator/worker"
 import { attemptWriteFile, getFilePathFromUserInput } from "@lib/utils/dialogUtils"
-import type { GeneratorMethod, GeneratorParams, PlayerOptionsParams } from "@mainShared/generatorUtils"
-import { Patch } from "@mainShared/patch"
-import { type PlayerOptions, type Settings } from "@shared/appData/settingsFromViewModel"
-import type { DataHunk } from "@shared/romUtils/dataHunk"
-import { bankAddressOfROMOffset, bankOfROMOffset, romBankSize, type ROMInfo } from "@shared/romUtils/romInfo"
-import type { PlayerSpecificGameData } from "@shared/types/gameData/gameData"
-import { bytesFromTextData } from "@shared/utils/textConverters"
-import { hexStringFrom, isNotNullish, isNullish } from "@utils"
-import { app } from "electron"
+import type { GenerateParams } from "@shared/appData/workerTypes"
+import { isNotNullish, isNullish } from "@utils"
 import fs from "fs"
 import path from "path"
-import { Worker } from "worker_threads"
 
-type GeneratorData = {
-  romInfo: ROMInfo
-  settings: Settings
-  seed: string
-  checkValue: string
-}
-
-type PlayerOptionsResponse = {
-  playerSpecificGameData: PlayerSpecificGameData
-  hunks: DataHunk[]
-}
-
-export const dispatchWorker = async <GeneratorMethodType extends GeneratorMethod>(params: {
-  method: GeneratorMethodType
-  params: GeneratorMethodType extends "generatorDataFrom" ? GeneratorParams : GeneratorMethodType extends "applyPlayerOptionsToROM" ? PlayerOptionsParams : never
-}): Promise<GeneratorMethodType extends "generatorDataFrom" ? GeneratorData : GeneratorMethodType extends "applyPlayerOptionsToROM" ? PlayerOptionsResponse : never> => {
-  return new Promise((resolve, reject) => {
-    const worker = new Worker(path.resolve(__dirname, "generatorDataFromWorker.js"), { workerData: params })
-    worker.on("message", resolve)
-    worker.on("error", reject)
-    worker.on("exit", (code) => {
-      if (code !== 0) { reject(new Error(`Worker stopped with exit code ${code}`)) }
-    })
-  })
-}
-
-export const generateROM = async (params: {
-  data: GeneratorData
-  playerOptions: PlayerOptions
-  showInputInRenderer: boolean
+export const generate = async (params: {
+  generateParams: GenerateParams
+  outputDirPath?: string
   defaultFileName?: string
-  inputROM?: Buffer
-  forceOverwrite?: boolean
-  throwErrorOnWriteFailure?: boolean
-  skipWritingOutputFile?: boolean
+  forceOverwrite: boolean
+  throwErrorOnWriteFailure: boolean
 }) => {
   const {
-    data,
-    playerOptions,
-    showInputInRenderer,
+    generateParams,
+    outputDirPath,
     defaultFileName,
-    inputROM,
     forceOverwrite,
     throwErrorOnWriteFailure,
-    skipWritingOutputFile,
   } = params
   
-  const inputFileData = inputROM ?? await getVanillaROM(showInputInRenderer)
-  
-  if (isNullish(inputFileData)) {
-    throw new Error("A Pokémon Crystal Version 1.1 ROM is required.")
-  }
-  
-  const sharedOutputFileData = Buffer.from(inputFileData)
-  
-  const basePatch = Patch.fromYAML(
-    data.romInfo,
-    "randomizerBase.yml",
-    {},
-    {
-      versionNumber: hexStringFrom(bytesFromTextData(app.getVersion())),
-      checkValue: hexStringFrom(bytesFromTextData(data.checkValue)),
-    },
-  )
-  
-  data.romInfo.patchHunks.push(...basePatch.hunks)
-  
-  data.romInfo.patchHunks.forEach((hunk) => {
-    sharedOutputFileData.set(hunk.values, bankOfROMOffset(hunk.offset) * romBankSize + (bankAddressOfROMOffset(hunk.offset) - (bankOfROMOffset(hunk.offset) === 0 ? 0 : romBankSize)))
+  const generateResult = await performJob({
+    jobId: "generate",
+    jobParams: generateParams,
   })
   
-  const outputFileData = Buffer.from(sharedOutputFileData)
+  let defaultFilePathWithoutExtension = isNullish(outputDirPath) ? generateResult.checkValue : path.resolve(outputDirPath, defaultFileName ?? generateResult.checkValue)
   
-  const {
-    playerSpecificGameData,
-    hunks,
-  } = await dispatchWorker({
-    method: "applyPlayerOptionsToROM",
-    params: {
-      seed: data.checkValue,
-      settings: data.settings,
-      playerOptions: playerOptions,
-      romData: outputFileData,
-    },
-  })
-  
-  hunks.forEach((hunk) => {
-    outputFileData.set(hunk.values, bankOfROMOffset(hunk.offset) * romBankSize + (bankAddressOfROMOffset(hunk.offset) - (bankOfROMOffset(hunk.offset) === 0 ? 0 : romBankSize)))
-  })
-  
-  return {
-    inputFileData: inputFileData,
-    sharedOutputFileData: sharedOutputFileData,
-    playerSpecificGameData: playerSpecificGameData,
-    ...writeRomData({
-      fileData: outputFileData,
-      defaultFileName: defaultFileName ?? data.checkValue,
-      forcePromptForLocation: isNullish(defaultFileName),
+  if (generateParams.shouldCreateROM) {
+    if (isNullish(generateResult.rom)) {
+      throw new Error("Worker failed to return ROM when requested.")
+    }
+    
+    const fileInfo = attemptWriteROMFile({
+      fileData: generateResult.rom,
+      defaultFilePathWithoutExtension: defaultFilePathWithoutExtension,
+      forcePromptForLocation: isNullish(outputDirPath),
       forceOverwrite: forceOverwrite,
       throwErrorOnWriteFailure: throwErrorOnWriteFailure,
-      skipWritingOutputFile: skipWritingOutputFile,
-    }),
+    })
+    
+    defaultFilePathWithoutExtension = fileInfo.outputPathWithoutExtension
+  }
+  
+  if (generateParams.shouldCreateLog) {
+    if (isNullish(generateResult.log)) {
+      throw new Error("Worker failed to return log when requested.")
+    }
+    
+    attemptWriteLogFile({
+      log: generateResult.log,
+      defaultFilePathWithoutExtension: defaultFilePathWithoutExtension,
+      forceOverwrite: forceOverwrite,
+      throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+    })
+  }
+  
+  if (generateParams.shouldCreateROM && isNotNullish(generateResult.namesLog)) {
+    attemptWriteNamesLogFile({
+      log: generateResult.namesLog,
+      defaultFilePathWithoutExtension: defaultFilePathWithoutExtension,
+      forceOverwrite: forceOverwrite,
+      throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+    })
+  }
+  
+  if (generateParams.shouldCreatePatch) {
+    if (isNullish(generateResult.patch)) {
+      throw new Error("Worker failed to return patch when requested.")
+    }
+    
+    attemptWritePatchFile({
+      patchFileData: generateResult.patch,
+      defaultFilePathWithoutExtension: defaultFilePathWithoutExtension,
+      forceOverwrite: forceOverwrite,
+      throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+    })
   }
 }
 
-export const writeRomData = (params: {
-  fileData: Buffer
-  defaultFileName: string
+export const attemptWriteROMFile = (params: {
+  fileData: Uint8Array
+  defaultFilePathWithoutExtension: string
   forcePromptForLocation: boolean
-  forceOverwrite?: boolean
-  throwErrorOnWriteFailure?: boolean
-  skipWritingOutputFile?: boolean
+  forceOverwrite: boolean
+  throwErrorOnWriteFailure: boolean
 }) => {
   const {
     fileData,
-    defaultFileName,
+    defaultFilePathWithoutExtension,
     forcePromptForLocation,
     forceOverwrite,
     throwErrorOnWriteFailure,
-    skipWritingOutputFile,
   } = params
   
   let filePath: string | undefined
@@ -144,28 +100,26 @@ export const writeRomData = (params: {
     title: "Save Generated ROM to:",
     buttonLabel: "Generate",
     fileType: "gbc" as const,
-    defaultFilePath: `${defaultFileName}.gbc`,
+    defaultFilePath: `${defaultFilePathWithoutExtension}.gbc`,
   }
   
-  if (!(skipWritingOutputFile ?? false)) {
-    if (!forcePromptForLocation) {
-      filePath = attemptWriteFile({
-        ...dialogParams,
-        data: fileData,
-        forceOverwrite: forceOverwrite,
-        throwErrorOnWriteFailure: throwErrorOnWriteFailure,
-      })
-    } else {
-      filePath = getFilePathFromUserInput(dialogParams)
+  if (!forcePromptForLocation) {
+    filePath = attemptWriteFile({
+      ...dialogParams,
+      data: fileData,
+      forceOverwrite: forceOverwrite,
+      throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+    })
+  } else {
+    filePath = getFilePathFromUserInput(dialogParams)
         
-      if (isNotNullish(filePath)) {
-        fs.writeFileSync(filePath, fileData)
-      }
+    if (isNotNullish(filePath)) {
+      fs.writeFileSync(filePath, fileData)
     }
+  }
     
-    if (isNullish(filePath)) {
-      throw new Error("A save location must be specified.")
-    }
+  if (isNullish(filePath)) {
+    throw new Error("A save location must be specified.")
   }
   
   return {
@@ -174,101 +128,70 @@ export const writeRomData = (params: {
   }
 }
 
-export const generateLog = (params: {
-  data: GeneratorData
-  defaultFileName?: string
-  forceOverwrite?: boolean
-  throwErrorOnWriteFailure?: boolean
+export const attemptWriteLogFile = (params: {
+  log: string
+  defaultFilePathWithoutExtension: string
+  forceOverwrite: boolean
+  throwErrorOnWriteFailure: boolean
 }) => {
   const {
-    data,
-    defaultFileName,
+    log,
+    defaultFilePathWithoutExtension,
     forceOverwrite,
     throwErrorOnWriteFailure,
   } = params
-  
-  const log = generatorLog({
-    seed: data.seed,
-    checkValue: data.checkValue,
-    settings: data.settings,
-    gameData: data.romInfo.gameData,
-  })
   
   attemptWriteFile({
     dialogTitle: "Save log to:",
     fileType: "text",
-    defaultFilePath: `${defaultFileName}.log.txt`,
+    defaultFilePath: `${defaultFilePathWithoutExtension}.log.txt`,
     data: log,
     forceOverwrite: forceOverwrite,
     throwErrorOnWriteFailure: throwErrorOnWriteFailure,
   })
 }
 
-export const generatePlayerSpecificLog = (params: {
-  playerOptions: PlayerOptions
-  gameData: PlayerSpecificGameData
-  defaultFileName?: string
-  forceOverwrite?: boolean
-  throwErrorOnWriteFailure?: boolean
+export const attemptWriteNamesLogFile = (params: {
+  log: string
+  defaultFilePathWithoutExtension: string
+  forceOverwrite: boolean
+  throwErrorOnWriteFailure: boolean
 }) => {
   const {
-    playerOptions,
-    gameData,
-    defaultFileName,
+    log,
+    defaultFilePathWithoutExtension,
     forceOverwrite,
     throwErrorOnWriteFailure,
   } = params
-  
-  if (
-    (!playerOptions.CHANGE_TRAINER_CLASS_NAMES.VALUE || !playerOptions.CHANGE_TRAINER_CLASS_NAMES.SETTINGS.CREATE_LOG)
-    && (!playerOptions.CHANGE_TRAINER_NAMES.VALUE || !playerOptions.CHANGE_TRAINER_NAMES.SETTINGS.CREATE_LOG)
-  ) {
-    return
-  }
-  
-  const log = playerSpecificLog(gameData)
   
   attemptWriteFile({
     dialogTitle: "Save names log to:",
     fileType: "text",
-    defaultFilePath: `${defaultFileName}.names.log.txt`,
+    defaultFilePath: `${defaultFilePathWithoutExtension}.names.log.txt`,
     data: log,
     forceOverwrite: forceOverwrite,
     throwErrorOnWriteFailure: throwErrorOnWriteFailure,
   })
 }
 
-export const generatePatch = (params: {
-  checkValue: string
-  settings: Settings
-  inputROMData: Buffer
-  sharedOutputROMData: Buffer
-  defaultFileName?: string
-  forceOverwrite?: boolean
-  throwErrorOnWriteFailure?: boolean
+export const attemptWritePatchFile = (params: {
+  patchFileData: Uint8Array,
+  defaultFilePathWithoutExtension: string
+  forceOverwrite: boolean
+  throwErrorOnWriteFailure: boolean
 }) => {
   const {
-    checkValue,
-    settings,
-    inputROMData,
-    sharedOutputROMData,
-    defaultFileName,
+    patchFileData,
+    defaultFilePathWithoutExtension,
     forceOverwrite,
     throwErrorOnWriteFailure,
   } = params
-  
-  const pcrpData = createPCRP({
-    checkValue: checkValue,
-    settings: settings,
-    inputROMData: inputROMData,
-    sharedOutputROMData: sharedOutputROMData,
-  })
             
   attemptWriteFile({
     dialogTitle: "Save patch to:",
     fileType: "pcrp",
-    defaultFilePath: `${defaultFileName}.pcrp`,
-    data: pcrpData,
+    defaultFilePath: `${defaultFilePathWithoutExtension}.pcrp`,
+    data: patchFileData,
     forceOverwrite: forceOverwrite,
     throwErrorOnWriteFailure: throwErrorOnWriteFailure,
   })

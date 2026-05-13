@@ -2,14 +2,11 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "paths": {
+      "@worker/*": ["./*"],
       "@yamlUtils/*": ["../yamlUtils/*"],
       "@shared/*": ["../shared/*"],
-      "@utils": ["../shared/utils/index.ts"],
-      "@lib/*": ["./lib/*"]
+      "@utils": ["../shared/utils/index.ts"]
     },
-    "types": [
-      "vite/client"
-    ]
   },
   "include": [
     "./**/*",
