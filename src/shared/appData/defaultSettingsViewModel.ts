@@ -1176,6 +1176,43 @@ export const defaultSettingsViewModel = () => {
                   })
                 }),
               }),
+              createInputGroupListViewModel({
+                id: "PREVENT_ITEM_PLACEMENTS" as const,
+                name: "Prevent Item Placements",
+                description: "Choose items in the shuffled item pool and a set of locations where those items should not be placed.",
+                itemName: "Rule",
+                createGroupFunction: () => {
+                  return [
+                    createSimpleMultiSelectorViewModel({
+                      id: "ITEMS" as const,
+                      name: "Items",
+                      description: "The items that will be prevented from being place in the selected locations.",
+                      options: itemIds.map((itemId) => {
+                        return createSimpleSelectorOption({
+                          id: itemId,
+                          name: itemsMap[itemId].name,
+                        })
+                      }),
+                    }),
+                    createSimpleMultiSelectorViewModel({
+                      id: "LOCATIONS" as const,
+                      name: "Prevented Locations",
+                      description: "Item locations and shops that will be prevented from having the selected items.",
+                      options: [
+                        ...itemLocationIds,
+                        ...martGroupIds,
+                        ...specialShopIds,
+                      ].map((id) => {
+                        return createSimpleSelectorOption({
+                          id: id,
+                          name: id,
+                        })
+                      }),
+                    }),
+                  ]
+                },
+                groups: [],
+              }), // END PREVENT_ITEM_PLACEMENTS
               createConfigurableToggleViewModel({
                 id: "DECREASE_PROGRESS_IN_SHOPS" as const,
                 name: "Decrease Progress in Shops",

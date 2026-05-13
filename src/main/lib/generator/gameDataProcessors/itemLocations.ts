@@ -11,7 +11,7 @@ import { isItemLocationId, type ItemLocationId, itemLocationIds, regularHiddenIt
 import { type BadgeItemId, badgeItemIds, ballItemIds, type HoldableItemId, holdableItemIds, isItemId, type ItemId, type KeyItemId, keyItemIds, type MenuItemId, menuItemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { isLogicalAccessAreaId, type LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
 import { isMartGroupId, martGroupIds } from "@shared/types/gameDataIds/martGroups"
-import { type MartId, type SpecialShopId } from "@shared/types/gameDataIds/marts"
+import { isSpecialShopId, type MartId, type SpecialShopId } from "@shared/types/gameDataIds/marts"
 import { isPokemonId } from "@shared/types/gameDataIds/pokemon"
 import { isWarpId } from "@shared/types/gameDataIds/warps"
 import { getAllCombinations, isNotNullish, isNullish, isNumber, isObject, isString, removeFirstElementFromArrayWhere, removeSupersets } from "@shared/utils"
@@ -362,7 +362,35 @@ export const shuffleItems = (
       ...remainingKeyProgressionItems,
     ]
     
-    const invalidLocations: string[] = []
+    const invalidLocations = shuffleItemsSettings.PREVENT_ITEM_PLACEMENTS.reduce((result, info) => {
+      if (info.ITEMS.includes(selectedItemInfo.itemId)) {
+        info.LOCATIONS.forEach((location) => {
+          if (isItemLocationId(location)) {
+            result.push(location)
+          } else if (isMartGroupId(location)) {
+            const martId = romInfo.gameData.martGroups[location].primaryMartId
+            const mart = romInfo.gameData.marts[martId]
+            result.push(...mart.items.map((_, index) => {
+              return JSON.stringify({
+                groupId: location,
+                itemIndex: index,
+              })
+            }))
+          } else if (isSpecialShopId(location)) {
+            const shop = romInfo.gameData.specialShops[location]
+            result.push(...shop.items.map((_, index) => {
+              return JSON.stringify({
+                shopId: location,
+                itemIndex: index,
+              })
+            }))
+          }
+        })
+      }
+      
+      return result
+    }, [] as string[])
+    
     let foundLocation = false
     
     while (!foundLocation) {
