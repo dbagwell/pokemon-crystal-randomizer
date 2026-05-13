@@ -1,4 +1,4 @@
-import { applyPlayerOptionsToROM, writeRomData } from "@lib/generator/generator"
+import { applyPlayerOptionsToROM, generatePlayerSpecificLog, writeRomData } from "@lib/generator/generator"
 import { getPlayerOptions, listenForPlayerOptions } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import { forceCloseWindow, showWindow } from "@lib/utils/windowManager"
@@ -17,11 +17,13 @@ export const createPCRP = (params: {
   inputROMData: Buffer
   sharedOutputROMData: Buffer
   settings: Settings
+  checkValue: string
 }) => {
   const {
     inputROMData,
     sharedOutputROMData,
     settings,
+    checkValue,
   } = params
   
   const encode = (value: number) => {
@@ -47,6 +49,7 @@ export const createPCRP = (params: {
     settingsVersion: app.getVersion(),
     minimumSupportedVersion: "0.3.0",
     settings: settings,
+    checkValue: checkValue,
   })))
   
   const buffers: Buffer[] = []
@@ -263,6 +266,8 @@ export const handlePCRPFile = async (filePath: string) => {
       throw new Error("Unable to apply patch. Patch is corrupted.")
     }
     
+    let generatePlayerSpecificLogBlock = (_: string) => {}
+    
     if (shouldApplyPlayerOptions) {
       let playerOptions = getPlayerOptions()
       const playerOptionsViewModel = defaultPlayerOptionsViewModel()
@@ -310,12 +315,22 @@ export const handlePCRPFile = async (filePath: string) => {
       }
     
       applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
+      const actualPlayerOptions = playerOptionsFromViewModel(playerOptionsViewModel)
     
-      applyPlayerOptionsToROM({
+      const playerSpecificGameData = applyPlayerOptionsToROM({
+        seed: info.checkValue ?? filePath,
         settings: info.settings as Settings,
-        playerOptions: playerOptionsFromViewModel(playerOptionsViewModel),
+        playerOptions: actualPlayerOptions,
         romData: newROMData,
       })
+      
+      generatePlayerSpecificLogBlock = (defaultFileName: string) => {
+        generatePlayerSpecificLog({
+          playerOptions: actualPlayerOptions,
+          gameData: playerSpecificGameData,
+          defaultFileName: defaultFileName,
+        })
+      }
     }
     
     const fileInfo = writeRomData({
@@ -323,6 +338,8 @@ export const handlePCRPFile = async (filePath: string) => {
       forcePromptForLocation: false,
       defaultFileName: filePath.replace(new RegExp(`${path.basename(filePath)}$`), path.basename(filePath, ".pcrp")),
     })
+    
+    generatePlayerSpecificLogBlock(fileInfo.outputPathWithoutExtension)
     
     shell.openPath(fileInfo.fullOutputFilePath)
   } catch (error) {

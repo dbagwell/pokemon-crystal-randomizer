@@ -232,6 +232,10 @@
       ],
     })
     
+    if (isNullish(optionsContainer)) {
+      return // For some reason optionsContainer can be undefined after computing the position
+    }
+    
     optionsContainer.style.left = `${position.x}px`
     optionsContainer.style.top = `${position.y}px`
     optionsPlacement = position.placement

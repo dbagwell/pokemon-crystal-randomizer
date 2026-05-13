@@ -1,6 +1,6 @@
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
-import { createIntegerInputViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createSingleSelectorViewModel, createTextInputViewModel } from "@shared/types/viewModels"
+import { createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputViewModel, createMultilineTextInputViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createSingleSelectorViewModel, createTextInputViewModel } from "@shared/types/viewModels"
 
 export const defaultPlayerOptionsViewModel = () => {
   return {
@@ -17,6 +17,8 @@ export const defaultPlayerOptionsViewModel = () => {
       menuAccountOption(),
       printerToneOption(),
       frameTypeOption(),
+      trainerClassNamesOption(),
+      trainerNamesOption(),
     ],
   }
 }
@@ -233,5 +235,90 @@ const frameTypeOption = () => {
     max: 8,
     isRequired: true,
     value: 1,
+  })
+}
+
+const trainerClassNamesOption = () => {
+  return createConfigurableToggleViewModel({
+    id: "CHANGE_TRAINER_CLASS_NAMES" as const,
+    name: "Change Trainer Class Names",
+    description: "Changes the names of the trainer classes.\n"
+      + "Note: The combined character count of a trainer's name and class name can never exceed 17 (16 for certain trainers).",
+    viewModels: [
+      createSingleSelectorViewModel({
+        id: "METHOD" as const,
+        selectedOptionId: "SHUFFLED",
+        options: [
+          createSimpleSelectorOption({
+            id: "SHUFFLED" as const,
+            name: "Shuffled",
+            description: "Shuffles the vanilla names of the trainers classes around.",
+          }),
+          createConfigurableSelectorOption({
+            id: "CUSTOM_LIST" as const,
+            name: "Custom List",
+            description: "Switches each trainer class name for a random one from the supplied list.\n"
+              + "Each name should be on its own line and names in the list should be no longer than 13 'in-game characters' or they will be truncated. "
+              + "The list must also contain at least 1 name that is no larger than 7 'character tokens' long. "
+              + "(For best results it is recommended to have a variety of names ranging from 4-13 characters).",
+            viewModels: [
+              createMultilineTextInputViewModel({
+                id: "ClASS_NAMES" as const,
+              }),
+            ] as const,
+          }),
+        ] as const,
+      }),
+      createSimpleToggleViewModel({
+        id: "CREATE_LOG" as const,
+        name: "Create Log File of Changed Names",
+        description: "Creates a log file whenever a ROM is generated that shows what each trainer name has become.",
+      }),
+    ] as const,
+  })
+}
+
+const trainerNamesOption = () => {
+  return createConfigurableToggleViewModel({
+    id: "CHANGE_TRAINER_NAMES" as const,
+    name: "Change Trainer Names",
+    description: "Changes the names of the trainers that can be fought throughout the game.\n"
+      + "Note: The combined character count of a trainer's name and class name can never exceed 17 (16 for certain trainers).",
+    viewModels: [
+      createSingleSelectorViewModel({
+        id: "METHOD" as const,
+        selectedOptionId: "SHUFFLED",
+        options: [
+          createSimpleSelectorOption({
+            id: "SHUFFLED" as const,
+            name: "Shuffled",
+            description: "Shuffles the vanilla names of the trainers around. (The names of trainers in the 'TWINS' trainer class will only be shuffled amongs the other 'TWINS'.)",
+          }),
+          createConfigurableSelectorOption({
+            id: "CUSTOM_LIST" as const,
+            name: "Custom List",
+            description: "Switches each trainer name for a random one from the supplied list.\n"
+              + "Each name should be on its own line and names in the list should be no longer than 10 'in-game characters' or they will be truncated. "
+              + "(The lengths of trainer's names may also be limited by the length of their class name).\n"
+              + "There is a separate list for the names of trainers in the 'TWINS' trainer class since thematically they should be 2 separate names, but are treated as only 1 name in the game.",
+            viewModels: [
+              createMultilineTextInputViewModel({
+                id: "TRAINER_NAMES" as const,
+                name: "Single Trainer Names",
+              }),
+              createMultilineTextInputViewModel({
+                id: "TWIN_NAMES" as const,
+                name: "Twin Trainer Names",
+              }),
+            ] as const,
+          }),
+        ] as const,
+      }),
+      createSimpleToggleViewModel({
+        id: "CREATE_LOG" as const,
+        name: "Create Log File of Changed Names",
+        description: "Creates a log file whenever a ROM is generated that shows what each trainer name has become.",
+      }),
+    ] as const,
   })
 }

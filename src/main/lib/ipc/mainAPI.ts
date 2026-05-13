@@ -1,4 +1,4 @@
-import { generateLog, generatePatch, generateROM, generatorDataFrom } from "@lib/generator/generator"
+import { generateLog, generatePatch, generatePlayerSpecificLog, generateROM, generatorDataFrom } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
 import { getPreference, setPreference } from "@lib/userData/preferences"
 import { getPlayerOptions, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setPlayerOptions, setPreviousSettings } from "@lib/userData/userData"
@@ -120,8 +120,15 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
         })
       }
       
+      generatePlayerSpecificLog({
+        playerOptions: playerOptions,
+        gameData: fileInfo.playerSpecificGameData,
+        defaultFileName: fileInfo.outputPathWithoutExtension,
+      })
+      
       if (createPatch) {
         generatePatch({
+          checkValue: data.checkValue,
           settings: data.settings,
           inputROMData: fileInfo.inputFileData,
           sharedOutputROMData: fileInfo.sharedOutputFileData,

@@ -10,6 +10,7 @@ import type { Pokemon } from "@shared/types/gameData/pokemon"
 import type { TeachableMove } from "@shared/types/gameData/teachableMove"
 import type { Trade } from "@shared/types/gameData/trade"
 import type { Trainer } from "@shared/types/gameData/trainer"
+import type { TrainerClass } from "@shared/types/gameData/trainerClass"
 import type { Warp } from "@shared/types/gameData/warp"
 import type { EventPokemonId } from "@shared/types/gameDataIds/eventPokemon"
 import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
@@ -22,6 +23,7 @@ import type { PokemonId } from "@shared/types/gameDataIds/pokemon"
 import type { StarterLocationId } from "@shared/types/gameDataIds/starterLocations"
 import type { TeachableMoveId } from "@shared/types/gameDataIds/teachableMoves"
 import type { TradeId } from "@shared/types/gameDataIds/trades"
+import type { TrainerClassId } from "@shared/types/gameDataIds/trainerClasses"
 import type { UnownLetterId } from "@shared/types/gameDataIds/unownLetters"
 import type { UnownSetId } from "@shared/types/gameDataIds/unownSets"
 import type { WarpId } from "@shared/types/gameDataIds/warps"
@@ -58,4 +60,9 @@ export type GameData = {
   areas: IdMap<LogicalAccessAreaId, LogicalAccessArea>
   numberOfBadgesForOak: number
   items: IdMap<ItemId, Item>
+}
+
+export type PlayerSpecificGameData = {
+  trainerClasses: IdMap<TrainerClassId, TrainerClass>
+  trainers: Trainer[]
 }

@@ -2,7 +2,6 @@ import type { ROMInfo } from "@lib/gameData/romInfo"
 import type { Random } from "@lib/generator/random"
 import type { Settings } from "@shared/appData/settingsFromViewModel"
 import { pokemonMap } from "@shared/gameData/pokemon"
-import { trainerGroupsMap } from "@shared/gameData/trainerGroups"
 import type { Pokemon } from "@shared/types/gameData/pokemon"
 import { pokemonTypeIds } from "@shared/types/gameDataIds/pokemonTypes"
 import { isNullish } from "@shared/utils"
@@ -36,7 +35,7 @@ export const updateTrainers = (
         return isNullish(pokemon.evolutions)
       }) : nonBannedAndTypeFilteredPokemon
       
-      if (trainerGroupsMap[trainer.groupId].classId !== "RIVAL" || !randomTeamsSettings.INGORE_RIVALS_STARTER || index !== trainer.pokemon.length - 1) {
+      if (trainer.classId !== "RIVAL_1" && trainer.classId !== "RIVAL_2" || !randomTeamsSettings.INGORE_RIVALS_STARTER || index !== trainer.pokemon.length - 1) {
         pokemon.id = random.element({
           array: availablePokemon,
           errorInfo: {

@@ -73,6 +73,20 @@ export const createTextInputViewModel = <IdType extends string, IsRequiredType e
   }
 }
 
+// Multiline Text Input View Model
+
+export type MultilineTextInputViewModel = ReturnType<typeof createMultilineTextInputViewModel>
+export const createMultilineTextInputViewModel = <IdType extends string>(params: {
+  id: IdType
+  name?: string
+  value?: string
+}) => {
+  return {
+    ...params,
+    type: "MULTILINE_TEXT_INPUT" as const,
+  }
+}
+
 // Single Selector View Model
 
 export type SingleSelectorViewModel = ReturnType<typeof createSingleSelectorViewModel>
@@ -219,6 +233,7 @@ export type InputViewModel =
   | IntegerInputGroupViewModel
   | IntegerRangeInputViewModel
   | TextInputViewModel
+  | MultilineTextInputViewModel
   | SingleSelectorViewModel
   | SimpleMultiSelectorViewModel
   | ConfigurableMultiSelectorViewModel

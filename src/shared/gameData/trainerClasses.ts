@@ -2,33 +2,89 @@ import type { TrainerClass } from "@shared/types/gameData/trainerClass"
 import type { TrainerClassId } from "@shared/types/gameDataIds/trainerClasses"
 
 export const trainerClassesMap: IdMap<TrainerClassId, TrainerClass> = {
-  LEADER: {
-    id: "LEADER",
+  FALKNER: {
+    id: "FALKNER",
     name: "LEADER",
   },
-  RIVAL: {
-    id: "RIVAL",
+  WHITNEY: {
+    id: "WHITNEY",
+    name: "LEADER",
+  },
+  BUGSY: {
+    id: "BUGSY",
+    name: "LEADER",
+  },
+  MORTY: {
+    id: "MORTY",
+    name: "LEADER",
+  },
+  PRYCE: {
+    id: "PRYCE",
+    name: "LEADER",
+  },
+  JASMINE: {
+    id: "JASMINE",
+    name: "LEADER",
+  },
+  CHUCK: {
+    id: "CHUCK",
+    name: "LEADER",
+  },
+  CLAIR: {
+    id: "CLAIR",
+    name: "LEADER",
+  },
+  RIVAL_1: {
+    id: "RIVAL_1",
     name: "RIVAL",
   },
   POKEMON_PROF: {
     id: "POKEMON_PROF",
-    name: "POKÉMON PROF.",
+    name: "<POKé>MON PROF.",
   },
-  ELITE_FOUR: {
-    id: "ELITE_FOUR",
+  WILL: {
+    id: "WILL",
     name: "ELITE FOUR",
   },
-  PKMN_TRAINER: {
-    id: "PKMN_TRAINER",
-    name: "PKMN TRAINER",
+  CAL: {
+    id: "CAL",
+    name: "<PKMN> TRAINER",
+  },
+  BRUNO: {
+    id: "BRUNO",
+    name: "ELITE FOUR",
+  },
+  KAREN: {
+    id: "KAREN",
+    name: "ELITE FOUR",
+  },
+  KOGA: {
+    id: "KOGA",
+    name: "ELITE FOUR",
   },
   CHAMPION: {
     id: "CHAMPION",
     name: "CHAMPION",
   },
+  BROCK: {
+    id: "BROCK",
+    name: "LEADER",
+  },
+  MISTY: {
+    id: "MISTY",
+    name: "LEADER",
+  },
+  LT_SURGE: {
+    id: "LT_SURGE",
+    name: "LEADER",
+  },
   SCIENTIST: {
     id: "SCIENTIST",
     name: "SCIENTIST",
+  },
+  ERIKA: {
+    id: "ERIKA",
+    name: "LEADER",
   },
   YOUNGSTER: {
     id: "YOUNGSTER",
@@ -46,8 +102,16 @@ export const trainerClassesMap: IdMap<TrainerClassId, TrainerClass> = {
     id: "LASS",
     name: "LASS",
   },
-  COOLTRAINER: {
-    id: "COOLTRAINER",
+  JANINE: {
+    id: "JANINE",
+    name: "LEADER",
+  },
+  COOLTRAINER_M: {
+    id: "COOLTRAINER_M",
+    name: "COOLTRAINER",
+  },
+  COOLTRAINER_F: {
+    id: "COOLTRAINER_F",
     name: "COOLTRAINER",
   },
   BEAUTY: {
@@ -56,10 +120,10 @@ export const trainerClassesMap: IdMap<TrainerClassId, TrainerClass> = {
   },
   POKEMANIAC: {
     id: "POKEMANIAC",
-    name: "POKÉMANIAC",
+    name: "<POKé>MANIAC",
   },
-  ROCKET: {
-    id: "ROCKET",
+  ROCKET_GRUNT_M: {
+    id: "ROCKET_GRUNT_M",
     name: "ROCKET",
   },
   GENTLEMAN: {
@@ -74,6 +138,10 @@ export const trainerClassesMap: IdMap<TrainerClassId, TrainerClass> = {
     id: "TEACHER",
     name: "TEACHER",
   },
+  SABRINA: {
+    id: "SABRINA",
+    name: "LEADER",
+  },
   BUG_CATCHER: {
     id: "BUG_CATCHER",
     name: "BUG CATCHER",
@@ -82,12 +150,12 @@ export const trainerClassesMap: IdMap<TrainerClassId, TrainerClass> = {
     id: "FISHER",
     name: "FISHER",
   },
-  SWIMMERM: {
-    id: "SWIMMERM",
+  SWIMMER_M: {
+    id: "SWIMMER_M",
     name: "SWIMMER♂",
   },
-  SWIMMERF: {
-    id: "SWIMMERF",
+  SWIMMER_F: {
+    id: "SWIMMER_F",
     name: "SWIMMER♀",
   },
   SAILOR: {
@@ -97,6 +165,10 @@ export const trainerClassesMap: IdMap<TrainerClassId, TrainerClass> = {
   SUPER_NERD: {
     id: "SUPER_NERD",
     name: "SUPER NERD",
+  },
+  RIVAL_2: {
+    id: "RIVAL_2",
+    name: "RIVAL",
   },
   GUITARIST: {
     id: "GUITARIST",
@@ -109,6 +181,10 @@ export const trainerClassesMap: IdMap<TrainerClassId, TrainerClass> = {
   BIKER: {
     id: "BIKER",
     name: "BIKER",
+  },
+  BLAINE: {
+    id: "BLAINE",
+    name: "LEADER",
   },
   BURGLAR: {
     id: "BURGLAR",
@@ -126,6 +202,10 @@ export const trainerClassesMap: IdMap<TrainerClassId, TrainerClass> = {
     id: "BLACKBELT",
     name: "BLACKBELT",
   },
+  ROCKET_EXECUTIVE_M: {
+    id: "ROCKET_EXECUTIVE_M",
+    name: "ROCKET",
+  },
   PSYCHIC: {
     id: "PSYCHIC",
     name: "PSYCHIC",
@@ -137,6 +217,10 @@ export const trainerClassesMap: IdMap<TrainerClassId, TrainerClass> = {
   CAMPER: {
     id: "CAMPER",
     name: "CAMPER",
+  },
+  ROCKET_EXECUTIVE_F: {
+    id: "ROCKET_EXECUTIVE_F",
+    name: "ROCKET",
   },
   SAGE: {
     id: "SAGE",
@@ -150,9 +234,9 @@ export const trainerClassesMap: IdMap<TrainerClassId, TrainerClass> = {
     id: "BOARDER",
     name: "BOARDER",
   },
-  POKEFAN: {
-    id: "POKEFAN",
-    name: "POKÉFAN",
+  POKEFAN_M: {
+    id: "POKEFAN_M",
+    name: "<POKé>FAN",
   },
   KIMONO_GIRL: {
     id: "KIMONO_GIRL",
@@ -162,9 +246,25 @@ export const trainerClassesMap: IdMap<TrainerClassId, TrainerClass> = {
     id: "TWINS",
     name: "TWINS",
   },
+  POKEFAN_F: {
+    id: "POKEFAN_F",
+    name: "<POKé>FAN",
+  },
+  RED: {
+    id: "RED",
+    name: "<PKMN> TRAINER",
+  },
+  BLUE: {
+    id: "BLUE",
+    name: "LEADER",
+  },
   OFFICER: {
     id: "OFFICER",
     name: "OFFICER",
+  },
+  ROCKET_GRUNT_F: {
+    id: "ROCKET_GRUNT_F",
+    name: "ROCKET",
   },
   MYSTICALMAN: {
     id: "MYSTICALMAN",
