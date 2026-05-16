@@ -8,7 +8,7 @@
   "main": ".vite/build/main.js",
   "scripts": {
     "gen:styles": "sass src/sass/global.scss src/renderer/css/global.css",
-    "gen:grammars": "nearleyc src/nearley/data.ne -o src/main/lib/grammars/dataGrammar.mjs",
+    "gen:grammars": "nearleyc src/nearley/data.ne -o src/worker/grammars/dataGrammar.mjs",
     "gen:data": "set -a; source .tools.env; set +a; vite-node -c vite.tools.config.ts tools/generateAllData.ts",
     "lint": "eslint --fix .",
     "dev": "electron-forge start",

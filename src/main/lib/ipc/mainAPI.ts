@@ -1,7 +1,8 @@
-import { generateLog, generatePatch, generatePlayerSpecificLog, generateROM, generatorDataFrom } from "@lib/generator/generator"
+import { generate } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
 import { getPreference, setPreference } from "@lib/userData/preferences"
 import { getPlayerOptions, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setPlayerOptions, setPreviousSettings } from "@lib/userData/userData"
+import { getVanillaROM } from "@lib/userData/vanillaROM"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 import type { MainAPIInterface } from "@shared/types/ipc/mainAPIInterface"
 import { isNullish } from "@shared/utils"
@@ -102,39 +103,22 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
       setPreference("logPreference", shouldGenerateLog)
       setPreference("createPatch", createPatch)
       
-      const data = generatorDataFrom({
-        customSeed: seed,
-        settings: settings,
+      const vanillaROM = await getVanillaROM(true)
+      
+      await generate({
+        generateParams: {
+          appVersion: app.getVersion(),
+          seed: seed,
+          settings: settings,
+          playerOptions: playerOptions,
+          inputROM: vanillaROM,
+          shouldCreateROM: true,
+          shouldCreateLog: shouldGenerateLog,
+          shouldCreatePatch: createPatch,
+        },
+        forceOverwrite: false,
+        throwErrorOnWriteFailure: false,
       })
-      
-      const fileInfo = await generateROM({
-        data: data,
-        playerOptions: playerOptions,
-        showInputInRenderer: true,
-      })
-      
-      if (shouldGenerateLog) {
-        generateLog({
-          data: data,
-          defaultFileName: fileInfo.outputPathWithoutExtension,
-        })
-      }
-      
-      generatePlayerSpecificLog({
-        playerOptions: playerOptions,
-        gameData: fileInfo.playerSpecificGameData,
-        defaultFileName: fileInfo.outputPathWithoutExtension,
-      })
-      
-      if (createPatch) {
-        generatePatch({
-          checkValue: data.checkValue,
-          settings: data.settings,
-          inputROMData: fileInfo.inputFileData,
-          sharedOutputROMData: fileInfo.sharedOutputFileData,
-          defaultFileName: fileInfo.outputPathWithoutExtension,
-        })
-      }
       
       return {
         message: "ROM Generated!",

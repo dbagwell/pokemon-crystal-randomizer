@@ -164,6 +164,7 @@ export default defineConfig([
     files: ["**/*.cjs"],
     rules: {
       "@typescript-eslint/no-var-requires": "off",
+      "@typescript-eslint/no-require-imports": "off",
     },
   },
   {
@@ -220,8 +221,7 @@ export default defineConfig([
     // unless they are generated files
     "**/*-lock.json",
     "src/renderer/css/*",
-    "src/main/lib/grammars/*",
-    "src/shared/typeValidators/*",
+    "src/worker/grammars/*",
     "tools/build/*",
     "tools/output/*",
     // or tsconfig files

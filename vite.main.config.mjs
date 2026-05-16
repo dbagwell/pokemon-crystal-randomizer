@@ -1,7 +1,7 @@
 import viteCommonConfig from "./vite.common.config.mjs"
 
 export default viteCommonConfig({
-  publicDir: "src/main/resources",
+  publicDir: "src/resources",
   copyPublicDir: true,
   rolldownOptions: {
     output: {

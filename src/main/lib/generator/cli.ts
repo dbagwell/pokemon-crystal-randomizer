@@ -1,13 +1,13 @@
-import { generateLog, generatePatch, generatePlayerSpecificLog, generateROM, generatorDataFrom } from "@lib/generator/generator"
+import { generate } from "@lib/generator/generator"
 import { getPlayerOptions, getSettingsForPresetId } from "@lib/userData/userData"
 import { getVanillaROM, getVanillaROMData, hasVanillaROM } from "@lib/userData/vanillaROM"
-import { getYAML } from "@lib/utils/yamlUtils"
 import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
 import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
 import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
 import { playerOptionsFromViewModel, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
 import { isNotNullish, isNullish } from "@shared/utils"
-import path from "path"
+import { getYAML } from "@yamlUtils/yamlUtils"
+import { app } from "electron"
 
 export const generateFromCLI = async (args: string[]) => {
   const getBooleanArg = (name: string) => {
@@ -47,20 +47,18 @@ export const generateFromCLI = async (args: string[]) => {
     return
   }
   
-  if (shouldGenerateROM) {
-    if (isNotNullish(vanillaROMPath)) {
-      try {
-        inputROMData = getVanillaROMData(vanillaROMPath)
-      } catch (error) {
-        console.error(`${error}`)
-        return
-      }
-    } else if (!hasVanillaROM()) {
-      console.error("Unable to find Vanilla Pokémon Crystal Version 1.1 ROM and no '--inputROM' was specified.")
+  if (isNotNullish(vanillaROMPath)) {
+    try {
+      inputROMData = getVanillaROMData(vanillaROMPath)
+    } catch (error) {
+      console.error(`${error}`)
       return
-    } else {
-      inputROMData = await getVanillaROM(false)
     }
+  } else if (!hasVanillaROM()) {
+    console.error("Unable to find Vanilla Pokémon Crystal Version 1.1 ROM and no '--inputROM' was specified.")
+    return
+  } else {
+    inputROMData = await getVanillaROM(false)
   }
   
   let settings: Settings | undefined
@@ -84,74 +82,35 @@ export const generateFromCLI = async (args: string[]) => {
   const warnings: string[] = []
   const settingsViewModel = defaultSettingsViewModel()
   applySettingsToViewModel(settings, settingsViewModel, warnings)
+  const validatedSettings = settingsFromViewModel(settingsViewModel)
   
   const playerOptions = getPlayerOptions()
   const playerOptionsViewModel = defaultPlayerOptionsViewModel()
   applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, warnings)
+  const validatedPlayerOptions = playerOptionsFromViewModel(playerOptionsViewModel)
   
   warnings.forEach((warning) => {
     console.log(warning)
   })
   
-  const generatorData = generatorDataFrom({
-    customSeed: seed,
-    settings: settingsFromViewModel(settingsViewModel),
-  })
-  
-  const baseFilePath = path.resolve(outputDir, name ?? generatorData.checkValue)
-  let romFileData: Awaited<ReturnType<typeof generateROM>> | undefined
-  
-  if (shouldGenerateROM || shouldGeneratePatch) {
-    try {
-      const playerOptions = playerOptionsFromViewModel(playerOptionsViewModel)
-      
-      romFileData = await generateROM({
-        data: generatorData,
-        playerOptions: playerOptions,
-        showInputInRenderer: false,
-        defaultFileName: baseFilePath,
+  try {
+    await generate({
+      generateParams: {
+        appVersion: app.getVersion(),
+        seed: seed,
+        settings: validatedSettings,
+        playerOptions: validatedPlayerOptions,
         inputROM: inputROMData,
-        forceOverwrite: force,
-        throwErrorOnWriteFailure: true,
-        skipWritingOutputFile: !shouldGenerateROM,
-      })
-      
-      generatePlayerSpecificLog({
-        playerOptions: playerOptions,
-        gameData: romFileData.playerSpecificGameData,
-        defaultFileName: romFileData.outputPathWithoutExtension,
-      })
-    } catch (error) {
-      console.error(`${error}`)
-    }
-  }
-  
-  if (shouldGenerateLog) {
-    try {
-      generateLog({
-        data: generatorData,
-        defaultFileName: baseFilePath,
-        forceOverwrite: force,
-        throwErrorOnWriteFailure: true,
-      })
-    } catch (error) {
-      console.error(`${error}`)
-    }
-  }
-  
-  if (shouldGeneratePatch && isNotNullish(romFileData)) {
-    try {
-      generatePatch({
-        checkValue: generatorData.checkValue,
-        settings: generatorData.settings,
-        inputROMData: romFileData.inputFileData,
-        sharedOutputROMData: romFileData.sharedOutputFileData,
-        defaultFileName: baseFilePath,
-        forceOverwrite: force,
-        throwErrorOnWriteFailure: true,
-      })
-    } catch (error) {
-      console.error(`${error}`)
-    }
+        shouldCreateROM: shouldGenerateROM,
+        shouldCreateLog: shouldGenerateLog,
+        shouldCreatePatch: shouldGeneratePatch,
+      },
+      outputDirPath: outputDir,
+      defaultFileName: name,
+      forceOverwrite: force,
+      throwErrorOnWriteFailure: true,
+    })
+  } catch (error) {
+    console.error(`${error}`)
   }
 }
