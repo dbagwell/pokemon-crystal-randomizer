@@ -49,7 +49,7 @@ import { updatePrices } from "@worker/gameDataProcessors/prices"
 import { updateStarterItems, updateStarters } from "@worker/gameDataProcessors/starters"
 import { updateTeachableMoves } from "@worker/gameDataProcessors/teachableMoves"
 import { updateTrades } from "@worker/gameDataProcessors/trades"
-import { updateTrainerClassNames, updateTrainerNames } from "@worker/gameDataProcessors/trainerNames"
+import { updateTrainerNames } from "@worker/gameDataProcessors/trainerNames"
 import { updateTrainers } from "@worker/gameDataProcessors/trainers"
 import { updateUnownSets } from "@worker/gameDataProcessors/unownSets"
 import { generatorLog, playerSpecificLog } from "@worker/log"
@@ -137,8 +137,7 @@ export const applyPlayerOptions = (params: ApplyPlayerOptionsParams) => {
     trainers: JSON.parse(JSON.stringify(trainers)) as typeof trainers,
   }
   
-  updateTrainerClassNames(playerOptions, gameData, random)
-  updateTrainerNames(playerOptions, gameData, random) // Must be after updateTrainerClassNames
+  updateTrainerNames(playerOptions, gameData, random)
   
   const hunks = createPlayerOptionsPatches({
     settings: settings,
@@ -149,10 +148,7 @@ export const applyPlayerOptions = (params: ApplyPlayerOptionsParams) => {
   
   applyDataHunks(rom, hunks)
   
-  const shouldLogTrainerClassNames = playerOptions.CHANGE_TRAINER_CLASS_NAMES.VALUE && playerOptions.CHANGE_TRAINER_CLASS_NAMES.SETTINGS.CREATE_LOG
-  const shouldLogTrainerNames = playerOptions.CHANGE_TRAINER_NAMES.VALUE && playerOptions.CHANGE_TRAINER_NAMES.SETTINGS.CREATE_LOG
-  
-  if (shouldLogTrainerClassNames || shouldLogTrainerNames) {
+  if (playerOptions.CHANGE_TRAINER_NAMES.VALUE && playerOptions.CHANGE_TRAINER_NAMES.SETTINGS.CREATE_LOG) {
     return playerSpecificLog(gameData)
   } else {
     return undefined
@@ -2481,9 +2477,11 @@ const createPlayerOptionsPatches = (params: {
     { offset: romOffsetFromBankAddress(5, 0x4F80), values: [printToneValue(playerOptions.PRINT_TONE)] },
   ])
   
-  // Class Names
+  // Trainer Names
   
-  if (playerOptions.CHANGE_TRAINER_CLASS_NAMES.VALUE) {
+  if (playerOptions.CHANGE_TRAINER_NAMES.VALUE) {
+    // Class names
+    
     patchHunks.push({
       offset: romOffsetFromBankAddress(11, 0x41EF),
       values: Object.values(gameData.trainerClasses).flatMap((trainerClass) => {
@@ -2493,11 +2491,9 @@ const createPlayerOptionsPatches = (params: {
         ]
       }),
     })
-  }
-  
-  // Trainer Names
-  
-  if (playerOptions.CHANGE_TRAINER_NAMES.VALUE) {
+    
+    // Trainer names
+    
     const trainerDataOffset = romOffsetFromBankAddress(14, 0x5A1F)
     let trainerIndex = 0
     let readOffset = trainerDataOffset
