@@ -397,7 +397,7 @@ export const generatorLog = (params: {
           return !(trainer.unused ?? false) && trainer.classId === classId
         })
       }).toSorted((a, b) => {
-        const classResult = a.classId.localeCompare(b.classId)
+        const classResult = trainerClassesMap[a.classId].name.localeCompare(trainerClassesMap[b.classId].name)
         const nameResult = a.name.localeCompare(b.name)
         if (classResult === 0) {
           if (nameResult === 0) {
@@ -699,7 +699,7 @@ export const playerSpecificLog = (gameData: PlayerSpecificGameData) => {
         }).filter((pair) => {
           return !(pair[0].unused ?? false) && (isNullish(pair[0].party) || pair[0].party === 1) && pair[0].name !== "???"
         }).toSorted((a, b) => {
-          const classResult = a[0].classId.localeCompare(b[0].classId)
+          const classResult = trainerClassesMap[a[0].classId].name.localeCompare(trainerClassesMap[b[0].classId].name)
           if (classResult === 0) {
             return a[0].name.localeCompare(b[0].name)
           } else {
@@ -740,6 +740,8 @@ const logTable = (params: {
           return movesMap[value].name.toUpperCase()
         } else {
           return value
+            .replaceAll("<PKMN>", "PKMN")
+            .replaceAll("<POKé>", "POKé")
         }
       })
     })
