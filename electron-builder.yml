@@ -2,11 +2,11 @@ appId: com.dbagwell.pokemon-crystal-randomizer
 files:
 - .vite/**/*
 - package.json
-icon: src/main/resources/icons/icon
+icon: src/resources/icons/icon
 fileAssociations:
 - name: Pokemon Crystal Randomizer Patch
   ext: pcrp
-  icon: src/main/resources/icons/patchIcon
+  icon: src/resources/icons/patchIcon
   role: Editor
 mac:
   artifactName: Pokemon-Crystal-Randomizer-${version}-macOS-${arch}.${ext}
@@ -39,4 +39,4 @@ nsis:
   createDesktopShortcut: false
   createStartMenuShortcut: false
   include: customNSISOptions.nsh
-  installerIcon: src/main/resources/icons/installerIcon.ico
+  installerIcon: src/resources/icons/installerIcon.ico
