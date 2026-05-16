@@ -3,10 +3,10 @@ const path = require("path")
 
 module.exports = {
   packagerConfig: {
-    ignore: [
-      "(?!^/package\\.json$|^/\\.vite$|^/\\.vite/.*$)^.+$",
-    ],
-    icon: "src/main/resources/icons/icon",
+    ignore: (path) => {
+      return path.match("(?!^/package\\.json$|^/\\.vite$|^/\\.vite/.*$)^.+$")
+    },
+    icon: "src/resources/icons/icon",
     extendInfo: {
       CFBundleDocumentTypes: [
         {
@@ -37,6 +37,10 @@ module.exports = {
           {
             entry: "src/preload/preloadWindow.ts",
             config: "vite.preload.config.mjs",
+          },
+          {
+            entry: "src/worker/worker.ts",
+            config: "vite.main.config.mjs",
           },
         ],
         renderer: [

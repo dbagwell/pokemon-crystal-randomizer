@@ -73,6 +73,20 @@ export const createTextInputViewModel = <IdType extends string, IsRequiredType e
   }
 }
 
+// Multiline Text Input View Model
+
+export type MultilineTextInputViewModel = ReturnType<typeof createMultilineTextInputViewModel>
+export const createMultilineTextInputViewModel = <IdType extends string>(params: {
+  id: IdType
+  name?: string
+  value?: string
+}) => {
+  return {
+    ...params,
+    type: "MULTILINE_TEXT_INPUT" as const,
+  }
+}
+
 // Single Selector View Model
 
 export type SingleSelectorViewModel = ReturnType<typeof createSingleSelectorViewModel>
@@ -140,7 +154,7 @@ export const createGroupMultiSelectorViewModel = <IdType extends string, Selecte
 export type SelectorOption = SimpleSelectorOption | ConfigurableSelectorOption
 
 export type SimpleSelectorOption = ReturnType<typeof createSimpleSelectorOption>
-export const createSimpleSelectorOption = <IdType extends string>(params: {
+export const createSimpleSelectorOption = <IdType extends string | number>(params: {
   id: IdType
   name: string
   description?: string
@@ -195,6 +209,23 @@ export const createConfigurableToggleViewModel = <IdType extends string, ViewMod
   }
 }
 
+// Stuff Selector
+
+export type InputGroupListViewModel = ReturnType<typeof createInputGroupListViewModel>
+export const createInputGroupListViewModel = <IdType extends string, ViewModelsType extends InputViewModelArray>(params: {
+  id: IdType
+  name: string
+  description?: string
+  itemName: string
+  createGroupFunction: () => ViewModelsType
+  groups: ViewModelsType[]
+}) => {
+  return {
+    ...params,
+    type: "INPUT_GROUP_LIST" as const,
+  }
+}
+
 // Input View Models
 
 export type InputViewModel =
@@ -202,11 +233,13 @@ export type InputViewModel =
   | IntegerInputGroupViewModel
   | IntegerRangeInputViewModel
   | TextInputViewModel
+  | MultilineTextInputViewModel
   | SingleSelectorViewModel
   | SimpleMultiSelectorViewModel
   | ConfigurableMultiSelectorViewModel
   | GroupMultiSelectorViewModel
   | ToggleViewModel
+  | InputGroupListViewModel
 type InputViewModelArray = InputViewModel[] | [] // Workaround to suppress circular type reference error
 
 // Tab View Model

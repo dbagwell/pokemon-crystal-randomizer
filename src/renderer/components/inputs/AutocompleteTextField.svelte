@@ -82,8 +82,8 @@
   lang="ts"
   module
 >
-  export type Option = {
-    id: string
+  export type Option<OptionId extends string | number> = {
+    id: OptionId
     name: string
     description?: string
     keywords: string
@@ -91,12 +91,12 @@
     isRemovable?: boolean
   }
   
-  export const optionFrom = (value: {
-    id: string
+  export const optionFrom = <OptionId extends string | number>(value: {
+    id: OptionId
     name: string
     description?: string
     isRemovable?: boolean
-  }): Option => {
+  }): Option<OptionId> => {
     return {
       ...value,
       keywords: value.name,
@@ -106,7 +106,10 @@
   
 </script>
 
-<script lang="ts">
+<script
+  generics="OptionId extends string | number"
+  lang="ts"
+>
   import Button from "@components/buttons/Button.svelte"
   import TextField from "@components/inputs/TextField.svelte"
   import Stack from "@components/layout/Stack.svelte"
@@ -120,14 +123,14 @@
   
   type Props = {
     title: string | undefined
-    options: Option[]
+    options: Option<OptionId>[]
     clearOnFocus: boolean
     clearOnSelect: boolean
     restoreOnBlur: boolean
     filter?: string
-    previousSelection?: Option
-    onSelect: (optionId: string | undefined) => void
-    onRemove?: (optionId: string) => void
+    previousSelection?: Option<OptionId>
+    onSelect: (optionId: OptionId | undefined) => void
+    onRemove?: (optionId: OptionId) => void
   }
   
   /* eslint-disable prefer-const */
@@ -146,13 +149,13 @@
   
   let textField: TextField<string, "text">
   let optionsContainer: HTMLElement
-  const optionElements: Record<string, HTMLDivElement> = $state({})
+  const optionElements: Record<OptionId, HTMLDivElement> = $state({} as Record<OptionId, HTMLDivElement>)
   
   let hoveredOptionIndex: number | undefined = $state()
   let optionsPlacement: Placement | undefined
   let removeOptionsContainerAutoUpdates: (() => void) | undefined
   
-  const filteredOptions: Option[] = $derived.by(() => {
+  const filteredOptions: Option<OptionId>[] = $derived.by(() => {
     return options.filter((option) => {
       return option.keywords.toLowerCase().includes(filter.toLowerCase())
     })
@@ -198,7 +201,7 @@
     removeOptionsContainerAutoUpdates = undefined
   }
   
-  const selectOption = (option: Option | undefined) => {
+  const selectOption = (option: Option<OptionId> | undefined) => {
     hideOptions()
     
     if (clearOnSelect) {
@@ -228,6 +231,10 @@
         }),
       ],
     })
+    
+    if (isNullish(optionsContainer)) {
+      return // For some reason optionsContainer can be undefined after computing the position
+    }
     
     optionsContainer.style.left = `${position.x}px`
     optionsContainer.style.top = `${position.y}px`

@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@worker/*": ["./*"],
+      "@yamlUtils/*": ["../yamlUtils/*"],
+      "@shared/*": ["../shared/*"],
+      "@utils": ["../shared/utils/index.ts"]
+    },
+  },
+  "include": [
+    "./**/*",
+    "../shared/**/*",
+    "../yamlUtils/**/*"
+  ]
+}

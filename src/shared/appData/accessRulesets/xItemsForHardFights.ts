@@ -1,0 +1,149 @@
+import type { AccessModifier } from "@shared/appData/accessRulesets"
+
+export const xItemsForHardFights: AccessModifier[] = [
+  {
+    LOCATIONS: [
+      "PEWTER_GYM_BADGE",
+      "CERULEAN_GYM_BADGE",
+      "VERMILION_GYM_BADGE",
+      "CELADON_GYM_BADGE",
+      "CELADON_GYM_ERIKAS_GIFT",
+      "FUCHSIA_GYM_BADGE",
+      "FUCHSIA_GYM_JANINES_GIFT",
+      "SAFFRON_GYM_BADGE",
+      "SEAFOAM_GYM_BADGE",
+      "VIRIDIAN_GYM_BADGE",
+      "ROUTE_25_CUT_AREA_ITEM_BALL",
+      "ROUTE_25_KEVINS_GIFT",
+      "RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_ITEM_BALL",
+      "WILLS_ROOM_DOOR_OUT_LEFT",
+      "WILLS_ROOM_DOOR_OUT_RIGHT",
+      "KOGAS_ROOM_NORTH_DOOR_OUT_LEFT",
+      "KOGAS_ROOM_NORTH_DOOR_OUT_RIGHT",
+      "BRUNOS_ROOM_NORTH_DOOR_OUT_LEFT",
+      "BRUNOS_ROOM_NORTH_DOOR_OUT_RIGHT",
+      "KARENS_ROOM_NORTH_DOOR_OUT_LEFT",
+      "KARENS_ROOM_NORTH_DOOR_OUT_RIGHT",
+      "LANCES_ROOM_NORTH_DOOR_OUT_LEFT",
+      "LANCES_ROOM_NORTH_DOOR_OUT_RIGHT",
+      "ROUTE_25_BILLS_HOUSE_DOOR_IN",
+      "WISE_TRIOS_ROOM_DOOR_OUT_UPPER",
+      "WISE_TRIOS_ROOM_DOOR_OUT_LOWER",
+      "WISE_TRIOS_ROOM_STAIRS_DOWN",
+      "SILVER_CAVE_ROOM_3_CAVE_OUT",
+    ],
+    ADDED_REQUIREMENTS: [
+      "X_ATTACK",
+      "X_SPECIAL",
+      "X_DEFEND",
+      "X_SPEED",
+      "X_ACCURACY",
+      "GUARD_SPEC",
+      "DIRE_HIT",
+    ],
+  },
+  {
+    LOCATIONS: [
+      "VICTORY_ROAD_3F_NORTH_AREA",
+    ],
+    MATCHING_REQUIREMENTS: [
+      "VICTORY_ROAD_3F_NORTH_EXIT_AREA",
+    ],
+    ADDED_REQUIREMENTS: [
+      "X_ATTACK",
+      "X_SPECIAL",
+      "X_DEFEND",
+      "X_SPEED",
+      "X_ACCURACY",
+      "GUARD_SPEC",
+      "DIRE_HIT",
+    ],
+  },
+  {
+    LOCATIONS: [
+      "VICTORY_ROAD_3F_NORTH_EXIT_AREA",
+    ],
+    MATCHING_REQUIREMENTS: [
+      "VICTORY_ROAD_3F_NORTH_AREA",
+    ],
+    ADDED_REQUIREMENTS: [
+      "X_ATTACK",
+      "X_SPECIAL",
+      "X_DEFEND",
+      "X_SPEED",
+      "X_ACCURACY",
+      "GUARD_SPEC",
+      "DIRE_HIT",
+    ],
+  },
+  {
+    LOCATIONS: [
+      "GOLDENROD_UNDERGROUND_SWITCH_ROOM_STAIRS_AREA",
+    ],
+    MATCHING_REQUIREMENTS: [
+      "GOLDENROD_UNDERGROUND_SWITCH_ROOM",
+    ],
+    ADDED_REQUIREMENTS: [
+      "X_ATTACK",
+      "X_SPECIAL",
+      "X_DEFEND",
+      "X_SPEED",
+      "X_ACCURACY",
+      "GUARD_SPEC",
+      "DIRE_HIT",
+    ],
+  },
+  {
+    LOCATIONS: [
+      "GOLDENROD_UNDERGROUND_SWITCH_ROOM",
+    ],
+    MATCHING_REQUIREMENTS: [
+      "GOLDENROD_UNDERGROUND_SWITCH_ROOM_STAIRS_AREA",
+    ],
+    ADDED_REQUIREMENTS: [
+      "X_ATTACK",
+      "X_SPECIAL",
+      "X_DEFEND",
+      "X_SPEED",
+      "X_ACCURACY",
+      "GUARD_SPEC",
+      "DIRE_HIT",
+    ],
+  },
+  {
+    LOCATIONS: [
+      "MOUNT_MOON_MAIN_AREA",
+    ],
+    MATCHING_REQUIREMENTS: [
+      "MOUNT_MOON_MAIN_AREA_WEST_EXIT_AREA",
+    ],
+    ADDED_REQUIREMENTS: [
+      "X_ATTACK",
+      "X_SPECIAL",
+      "X_DEFEND",
+      "X_SPEED",
+      "X_ACCURACY",
+      "GUARD_SPEC",
+      "DIRE_HIT",
+    ],
+  },
+  {
+    LOCATIONS: [
+      "MOUNT_MOON_MAIN_AREA_WEST_EXIT_AREA",
+    ],
+    MATCHING_REQUIREMENTS: [
+      "MOUNT_MOON_MAIN_AREA",
+    ],
+    ADDED_REQUIREMENTS: [
+      "X_ATTACK",
+      "X_SPECIAL",
+      "X_DEFEND",
+      "X_SPEED",
+      "X_ACCURACY",
+      "GUARD_SPEC",
+      "DIRE_HIT",
+    ],
+  },
+]

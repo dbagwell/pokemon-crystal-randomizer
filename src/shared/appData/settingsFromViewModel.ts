@@ -2,10 +2,12 @@ import type {
   ConfigurableMultiSelectorViewModel,
   ConfigurableSelectorOption,
   GroupMultiSelectorViewModel,
+  InputGroupListViewModel,
   InputViewModel,
   IntegerInputGroupViewModel,
   IntegerInputViewModel,
   IntegerRangeInputViewModel,
+  MultilineTextInputViewModel,
   PlayerOptionsViewModel,
   SelectorOption,
   SettingsViewModel,
@@ -96,6 +98,11 @@ const settingsFromTextInputViewModel = <ViewModelType extends TextInputViewModel
   return viewModel.value as SettingsFromTextInputViewModel<ViewModelType>
 }
 
+type SettingsFromMultilineTextInputViewModel = string | undefined
+const settingsFromMultilineTextInputViewModel = <ViewModelType extends MultilineTextInputViewModel>(viewModel: ViewModelType): SettingsFromMultilineTextInputViewModel => {
+  return viewModel.value as SettingsFromMultilineTextInputViewModel
+}
+
 type SettingsFromSelectorViewModel<ViewModelType extends SingleSelectorViewModel> =
   keyof SettingsFromArrayOfSelectorOptions<ViewModelType["options"]> extends never ? ViewModelType["options"][number]["id"]
   : {
@@ -163,16 +170,25 @@ const settingsFromConfigurableSelectorOption = <OptionType extends ConfigurableS
   }) as SettingsFromConfigurableSelectorOption<OptionType>
 }
 
+type SettingsFromInputGroupListViewModel<ViewModelType extends InputGroupListViewModel> = SettingsFromArrayOfInputViewModels<ViewModelType["groups"][number]>[]
+const settingsFromInputGroupListViewModel = <ViewModelType extends InputGroupListViewModel>(viewModel: ViewModelType): SettingsFromInputGroupListViewModel<ViewModelType> => {
+  return viewModel.groups.map((group) => {
+    return settingsFromArrayOfInputViewModels(group)
+  }) as SettingsFromInputGroupListViewModel<ViewModelType>
+}
+
 type SettingsFromInputViewModel<ViewModelType extends InputViewModel> =
   ViewModelType extends IntegerInputViewModel ? SettingsFromIntegerInputViewModel<ViewModelType>
   : ViewModelType extends IntegerInputGroupViewModel ? SettingsFromIntegerInputGroupViewModel
   : ViewModelType extends IntegerRangeInputViewModel ? SettingsFromIntegerRangeInputViewModel
   : ViewModelType extends TextInputViewModel ? SettingsFromTextInputViewModel<ViewModelType>
+  : ViewModelType extends MultilineTextInputViewModel ? SettingsFromMultilineTextInputViewModel
   : ViewModelType extends SingleSelectorViewModel ? SettingsFromSelectorViewModel<ViewModelType>
   : ViewModelType extends SimpleMultiSelectorViewModel ? SettingsFromSimpleMultiSelectorViewModel<ViewModelType>
   : ViewModelType extends ConfigurableMultiSelectorViewModel ? SettingsFromConfigurableMultiSelectorViewModel<ViewModelType>
   : ViewModelType extends GroupMultiSelectorViewModel ? SettingsFromGroupMultiSelectorViewModel<ViewModelType>
   : ViewModelType extends ToggleViewModel ? SettingsFromToggleViewModel<ViewModelType>
+  : ViewModelType extends InputGroupListViewModel ? SettingsFromInputGroupListViewModel<ViewModelType>
   : never
 const settingsFromInputViewModel = <ViewModelType extends InputViewModel>(viewModel: ViewModelType): SettingsFromInputViewModel<ViewModelType> => {
   switch (viewModel.type) {
@@ -188,6 +204,9 @@ const settingsFromInputViewModel = <ViewModelType extends InputViewModel>(viewMo
   case "TEXT_INPUT": {
     return settingsFromTextInputViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
+  case "MULTILINE_TEXT_INPUT": {
+    return settingsFromMultilineTextInputViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
+  }
   case "SINGLE_SELECTOR": {
     return settingsFromSelectorViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
@@ -202,6 +221,9 @@ const settingsFromInputViewModel = <ViewModelType extends InputViewModel>(viewMo
   }
   case "TOGGLE": {
     return settingsFromToggleViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
+  }
+  case "INPUT_GROUP_LIST": {
+    return settingsFromInputGroupListViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
   }
   default: {
     const unhandledCase: never = viewModel

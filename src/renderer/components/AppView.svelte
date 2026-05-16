@@ -75,7 +75,7 @@
       style:overflow="auto"
     >
       {#each settingsViewModel.tabViewModels as tabViewModel (tabViewModel.id)}
-        {#if settingsViewModel.selectedTabId === tabViewModel.id}
+        <div style:display={settingsViewModel.selectedTabId === tabViewModel.id ? "block" : "none"}>
           <Stack
             alignment="start"
             direction="vertical"
@@ -88,7 +88,7 @@
               <SettingsInputView bind:viewModel={tabViewModel.viewModels[index]}/>
             {/each}
           </Stack>
-        {/if}
+        </div>
       {/each}
     </div>
     <div
@@ -116,7 +116,7 @@
               onRemove={showRemovePresetConfirmation}
               onSelect={(presetId) => { presetSelected(presetId ?? "VANILLA") }}
               options={presetOptions}
-              previousSelection={optionFrom(currentPreset)}
+              previousSelection={optionFrom(currentPreset as Preset)}
               restoreOnBlur={true}
               title="Choose Preset"
             />
@@ -211,7 +211,7 @@
   import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
   import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
   import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
-  import { presetsMap } from "@shared/appData/presets"
+  import { type Preset, presetsMap } from "@shared/appData/presets"
   import { type PlayerOptions, playerOptionsFromViewModel, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
   import { createSimpleToggleViewModel } from "@shared/types/viewModels"
   import { isNullish } from "@shared/utils"
@@ -243,11 +243,13 @@
   let mainContentContainer: HTMLElement
   let seed = $state("")
   let settingsViewModel = $state(defaultSettingsViewModel())
+  // svelte-ignore state_referenced_locally
   let playerOptions = $state(initialPlayerOptions)
   let generateLogToggleViewModel = $state(createSimpleToggleViewModel({
     id: "CREATE_LOG" as const,
     name: "Generate Log File",
     description: "Creates a file that contains a record of all the settings that were used and all the random assignments that were made when generating the game.",
+    // svelte-ignore state_referenced_locally
     isOn: logPreference,
   }))
   
@@ -255,6 +257,7 @@
     id: "CREATE_PATCH",
     name: "Generate Patch File",
     description: "Creates a '.pcrp' file that can be shared with others to generate the same game with the same settings and randomization.",
+    // svelte-ignore state_referenced_locally
     isOn: createPatchPreference,
   }))
   
@@ -299,6 +302,10 @@
   }
   
   const currentSettings = () => {
+    return settingsFromViewModel(settingsViewModel)
+  }
+  
+  const currentSettingsSnapshot = () => {
     return settingsFromViewModel($state.snapshot(settingsViewModel) as typeof settingsViewModel)
   }
   
@@ -407,7 +414,7 @@
   const exportSettingsButtonClicked = async () => {
     try {
       showProgressIndicator()
-      const response = await window.mainAPI.exportSettings(currentSettings())
+      const response = await window.mainAPI.exportSettings(currentSettingsSnapshot())
       showSuccessDialog(response.message)
     } catch (error) {
       showErrorDialog(error)
@@ -459,7 +466,7 @@
       onSubmit: async (name) => {
         try {
           showProgressIndicator()
-          const response = await window.mainAPI.saveSettings(currentSettings(), name)
+          const response = await window.mainAPI.saveSettings(currentSettingsSnapshot(), name)
           
           customPresetNames = [
             ...customPresetNames,
@@ -480,7 +487,7 @@
   }
   
   const generateROMButtonClicked = async () => {
-    const settings = currentSettings()
+    const settings = currentSettingsSnapshot()
     
     let recommendation = ""
     

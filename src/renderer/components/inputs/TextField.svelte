@@ -61,6 +61,7 @@
       style:height="2px"
       style:width="100%"
     >
+    </div>
   </Stack>
 </div>
 

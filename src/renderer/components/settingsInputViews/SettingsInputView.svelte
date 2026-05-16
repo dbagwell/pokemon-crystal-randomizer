@@ -6,6 +6,8 @@
   <IntegerRangeInputView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "TEXT_INPUT"}
   <TextInputView bind:viewModel={viewModel}/>
+{:else if viewModel.type === "MULTILINE_TEXT_INPUT"}
+  <MultilineTextInputView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "SINGLE_SELECTOR"}
   <SingleSelectorView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "SIMPLE_MULTI_SELECTOR"}
@@ -16,6 +18,8 @@
   <GroupMultiSelectorView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "TOGGLE"}
   <ToggleView bind:viewModel={viewModel}/>
+{:else if viewModel.type === "INPUT_GROUP_LIST"}
+  <InputGroupListView bind:viewModel={viewModel}/>
 {:else}
   <Never neverValue={viewModel}/>
 {/if}
@@ -23,9 +27,11 @@
 <script lang="ts">
   import ConfigurableMultiSelectorView from "@components/settingsInputViews/ConfigurableMultiSelectorView.svelte"
   import GroupMultiSelectorView from "@components/settingsInputViews/GroupMultiSelectorView.svelte"
+  import InputGroupListView from "@components/settingsInputViews/InputGroupListView.svelte"
   import IntegerInputGroupView from "@components/settingsInputViews/IntegerInputGroupView.svelte"
   import IntegerInputView from "@components/settingsInputViews/IntegerInputView.svelte"
   import IntegerRangeInputView from "@components/settingsInputViews/IntegerRangeInputView.svelte"
+  import MultilineTextInputView from "@components/settingsInputViews/MultilineTextInputView.svelte"
   import SimpleMultiSelectorView from "@components/settingsInputViews/SimpleMultiSelectorView.svelte"
   import SingleSelectorView from "@components/settingsInputViews/SingleSelectorView.svelte"
   import TextInputView from "@components/settingsInputViews/TextInputView.svelte"

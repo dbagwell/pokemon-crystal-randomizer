@@ -1,5 +1,5 @@
-import { getYAML } from "@lib/utils/yamlUtils"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
+import { getYAML } from "@yamlUtils/yamlUtils"
 import crypto from "crypto"
 import { app } from "electron"
 import fs from "fs"

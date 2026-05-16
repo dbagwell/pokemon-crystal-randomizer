@@ -2,10 +2,10 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "paths": {
+      "@yamlUtils/*": ["../yamlUtils/*"],
       "@shared/*": ["../shared/*"],
       "@utils": ["../shared/utils/index.ts"],
-      "@lib/*": ["./lib/*"],
-      "@rendererAPI": ["../renderer/scripts/ipc/rendererAPI.ts"]
+      "@lib/*": ["./lib/*"]
     },
     "types": [
       "vite/client"
@@ -13,6 +13,7 @@
   },
   "include": [
     "./**/*",
-    "../shared/**/*"
+    "../shared/**/*",
+    "../yamlUtils/**/*"
   ]
 }

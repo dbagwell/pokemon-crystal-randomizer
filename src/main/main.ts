@@ -58,6 +58,7 @@ const checkForUpdates = async () => {
   autoUpdater.autoInstallOnAppQuit = false
   autoUpdater.autoDownload = false
   autoUpdater.fullChangelog = true
+  autoUpdater.logger = null
   const updateInfo = await autoUpdater.checkForUpdates()
   
   if (isNotNullish(updateInfo) && updateInfo.isUpdateAvailable && !getPreference("ignoredUpdateVersions").includes(updateInfo.updateInfo.version)) {
