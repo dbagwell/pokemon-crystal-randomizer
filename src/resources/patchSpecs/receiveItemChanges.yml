@@ -88,6 +88,7 @@ values:
   checkGaveKenya: "31 51 00 09 A6 55 31 50 00 03 7B 55"
   maybeGivePokegear: "13 08 @$continueMomScript 31 $gotPokegearEventFlagId 09 @$continueMomScript 47 9E $pokegearItemId 01 49 08 @$continueMomScript 33 $gotPokegearEventFlagId $continueMomScript"
   continueMomScript: "33 01 00 91"
+  updateElmsAide: "32 00 07 33 01 07 9C 03 00 91"
 changes:
 - description: "makes it so you the man on route 31 gives his item if you failed to get it when you gave him kenya"
   locations:
@@ -401,7 +402,16 @@ changes:
   locations:
   - bank: 26
     address: 0x43DC
-  value: "33 FB 03 33 FC 03 12 18 05 02 9C 03 00 47 31 $gotZephyrbadgeEventFlagId 09 F9 43 9E 87 01 08 F9 43 33 $gotZephyrbadgeEventFlagId 31 08 00 09 12 44"
+  value: "33 FB 03 33 FC 03 12 18 05 02 00 @$updateElmsAide 47 31 $gotZephyrbadgeEventFlagId 09 F9 43 9E 87 01 08 F9 43 33 $gotZephyrbadgeEventFlagId 31 08 00 09 12 44"
+- description: "Moves elm's aide to the violet pokecenter and sets up elm's phone call about it."
+  locations:
+  - bank: 26
+  value: "$updateElmsAide"
+- description: "Removes the code that moves elm's aide when getting elm's phone call."
+  locations:
+  - bank: 47
+    address: 0x50b1
+  value: "91"
 - description: "Changes a jump due to other changes."
   locations:
   - bank: 99
