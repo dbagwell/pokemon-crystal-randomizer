@@ -19,12 +19,15 @@ export const updatePokemonInfo = (
     })
   }
   
-  if (settings.STANDARDIZE_POKEMON_GROWTH_RATES.VALUE) {
-    const growthRatesSettings = settings.STANDARDIZE_POKEMON_GROWTH_RATES.SETTINGS
+  if (settings.CHANGE_POKEMON_GROWTH_RATES.VALUE) {
+    const growthRatesSettings = settings.CHANGE_POKEMON_GROWTH_RATES.SETTINGS
     
     Object.values(romInfo.gameData.pokemon).forEach((pokemon) => {
-      if (!growthRatesSettings.EXCLUDE.includes(pokemon.id)) {
-        pokemon.growthRate = growthRatesSettings.GROWTH_RATE
+      const customRate = growthRatesSettings.POKEMON[pokemon.id]?.GROWTH_RATE
+      if (isNotNullish(customRate)) {
+        pokemon.growthRate = customRate
+      } else if (growthRatesSettings.STANDARDIZE_REMAINING.VALUE) {
+        pokemon.growthRate = growthRatesSettings.STANDARDIZE_REMAINING.SETTINGS.GROWTH_RATE
       }
     })
   }
