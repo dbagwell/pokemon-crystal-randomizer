@@ -1,0 +1,48 @@
+description: "Makes it so pressing select on the pokemon stats screen toggles between the pokemon's full stats and their dvs."
+values:
+  setPalette: "21 6A 4F FA 64 CF E6 07 FE 07 C2 91 4C 21 @$dvPalette C3 96 4C"
+  dvPalette: "39 67"
+  checkStatsPage: "E6 03 4F FE 03 C2 5B 5E F1 CB 57 CA 5C 5E FA 64 CF E6 04 EE 04 EA 64 CF C3 CF 5E"
+  printStatsPage: "FA 64 CF CB 57 20 06 3E 28 CD 83 2D C9 3E 14 21 @$printStatNames CF 21 66 C5 01 02 01 AF E0 B7 FA 23 D1 E6 F0 CB 3F CB 3F CB 3F CB 3F CD @$printStat 28 05 3E 08 CD @$updateHP FA 23 D1 E6 0F CD @$printStat 28 05 3E 04 CD @$updateHP FA 24 D1 E6 0F CD @$printStat 28 05 3E 02 CD @$updateHP FA 24 D1 E6 0F CD @$printStat FA 24 D1 E6 F0 CB 3F CB 3F CB 3F CB 3F CD @$printStat 28 05 3E 01 CD @$updateHP F0 B7 21 FC C5 CD @$printStat 21 CC C5 11 @$hpStatName CD 78 10 C9"
+  printStat: "E0 B8 11 B8 FF E5 CD 98 31 E1 11 28 00 19 F0 B8 CB 47 C9"
+  updateHP: "E5 21 B7 FF 86 77 E1 C9"
+  hpStatName: "83 95 B2 F3 4F 7F 7F 87 8F 50"
+  printStatNames: "21 4B C5 11 B5 4B CD 78 10 C9"
+changes:
+- description: "Adds code"
+  locations:
+  - bank: 2
+  value: "$setPalette $dvPalette"
+- description: "Calls new code to determine the palette for page 3"
+  locations:
+  - bank: 2
+    address: 0x4C8E
+  value: "C3 @$setPalette"
+- description: "Adds code"
+  locations:
+  - bank: 19
+  value: "$checkStatsPage $printStatsPage $printStat $updateHP $hpStatName"
+- description: "Adds select to the list of buttons that can perform actions on the stats screen from your party"
+  locations:
+  - bank: 19
+    address: 0x5DE2
+  value: "F7"
+- description: "Calls new code to determine which stats page to show"
+  locations:
+  - bank: 19
+    address: 0x5E58
+  value: "C3 @$checkStatsPage"
+- description: "Calls new code to print the stats to to the screen"
+  locations:
+  - bank: 19
+    address: 0x61C6
+  value: "CD @$printStatsPage C9"
+- description: "Adds code"
+  locations:
+  - bank: 20
+  value: "$printStatNames"
+- description: "Adds select to the list of buttons that can perform actions on the stats screen from the PC"
+  locations:
+  - bank: 56
+    address: 0x6F9A
+  value: "37"

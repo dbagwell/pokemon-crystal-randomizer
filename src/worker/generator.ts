@@ -2372,6 +2372,12 @@ const createPatches = (
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...additionalOptionsPatch.hunks]
   }
+  
+  // Viewable DV'S
+  
+  if (settings.ADD_DV_TOGGLE_TO_STATS) {
+    romInfo.patchHunks.push(...Patch.fromYAML(romInfo, "viewableDVs.yml").hunks)
+  }
 }
 
 const createBasePatch = (params: {
