@@ -541,35 +541,55 @@ export const defaultSettingsViewModel = () => {
             ] as const,
           }), // END INCREASE_POKEMON_CATCH_RATES
           createConfigurableToggleViewModel({
-            id: "STANDARDIZE_POKEMON_GROWTH_RATES" as const,
-            name: "Standardize Pokémon Growth Rates",
-            description: "Makes it so that all Pokémon require the same amount of experience for each level.",
+            id: "CHANGE_POKEMON_GROWTH_RATES" as const,
+            name: "Change Pokémon Growth Rates",
+            description: "Changes the amount of experience each Pokémon requires to level up.",
             viewModels: [
-              createSingleSelectorViewModel({
-                id: "GROWTH_RATE" as const,
-                name: "Growth Rate",
-                description: "Determines how much experience is required for each level.",
-                selectedOptionId: "MEDIUM_FAST",
-                options: growthRateIds.map((growthRateId) => {
-                  return createSimpleSelectorOption({
-                    id: growthRateId,
-                    name: growthRatesMap[growthRateId].name,
-                  })
-                }),
-              }), // END GROWTH_RATE
-              createSimpleMultiSelectorViewModel({
-                id: "EXCLUDE" as const,
-                name: "Exclude",
-                description: "A list of Pokémon that should keep their 'vanilla' growth rates.",
+              createConfigurableMultiSelectorViewModel({
+                id: "POKEMON" as const,
+                name: "Pokémon",
                 options: pokemonIds.map((pokemonId) => {
-                  return createSimpleSelectorOption({
+                  return createConfigurableSelectorOption({
                     id: pokemonId,
                     name: pokemonMap[pokemonId].name,
+                    viewModels: [
+                      createSingleSelectorViewModel({
+                        id: "GROWTH_RATE" as const,
+                        name: "Growth Rate",
+                        description: "Determines how much experience is required for each level.",
+                        selectedOptionId: "MEDIUM_FAST",
+                        options: growthRateIds.map((growthRateId) => {
+                          return createSimpleSelectorOption({
+                            id: growthRateId,
+                            name: growthRatesMap[growthRateId].name,
+                          })
+                        }),
+                      }),
+                    ],
                   })
                 }),
-              }), // END EXCLUDE
+              }),
+              createConfigurableToggleViewModel({
+                id: "STANDARDIZE_REMAINING" as const,
+                name: "Standardize Remaining Pokémon",
+                description: "Changes the growth rate of all Pokémon not specified above.",
+                viewModels: [
+                  createSingleSelectorViewModel({
+                    id: "GROWTH_RATE" as const,
+                    name: "Growth Rate",
+                    description: "Determines how much experience is required for each level.",
+                    selectedOptionId: "MEDIUM_FAST",
+                    options: growthRateIds.map((growthRateId) => {
+                      return createSimpleSelectorOption({
+                        id: growthRateId,
+                        name: growthRatesMap[growthRateId].name,
+                      })
+                    }),
+                  }),
+                ],
+              }),
             ] as const,
-          }), // END STANDARDIZE_POKEMON_GROWTH_RATES
+          }), // END CHANGE_POKEMON_GROWTH_RATES
           createSimpleToggleViewModel({
             id: "USE_UPDATED_BASE_EXP" as const,
             name: "Use Updated Base Experience",
