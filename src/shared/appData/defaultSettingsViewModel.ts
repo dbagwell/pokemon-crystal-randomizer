@@ -692,6 +692,11 @@ export const defaultSettingsViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_HO_OH_LEVEL
+          createSimpleToggleViewModel({
+            id: "ADD_DV_TOGGLE_TO_STATS" as const,
+            name: "Add DV Toggle to Stats Screen",
+            description: "Adds the ability to press Select on the stats page of the Pokémon information menu to toggle between viewing the Pokémon's full stats and their determinant values.",
+          }),
         ] as const,
       }), // END POKEMON_PROPERTIES
       createTabViewModel({
