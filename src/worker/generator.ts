@@ -349,7 +349,7 @@ const createPatches = (
     ]
   }
   
-  if (settings.RANDOMIZE_EVENT_POKEMON || settings.RANDOMIZE_RANDOM_ENCOUNTERS) {
+  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE || settings.RANDOMIZE_RANDOM_ENCOUNTERS.VALUE) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       ...Patch.fromYAML(
