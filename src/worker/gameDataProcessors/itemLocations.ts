@@ -798,7 +798,7 @@ const areAreCurrentAssignmentsValid = (params: {
                 return item.itemId === requirement.item
               })
               
-              if (isNotNullish(martItem)) {
+              if (isNotNullish(martItem) && martItem.itemId !== "GS_BALL") {
                 numberOfRequiredItems++
               } else {
                 numberOfRequiredItems += Math.max(requirement.number - accessibleItems.filter((accessibleItem) => {
@@ -806,7 +806,14 @@ const areAreCurrentAssignmentsValid = (params: {
                 }).length, 0)
               }
             } else {
-              numberOfRequiredItems++
+              if (requirement.item === "GS_BALL") {
+                numberOfRequiredItems += Math.max(requirement.number - accessibleItems.filter((accessibleItem) => {
+                  return accessibleItem.itemId === requirement.item
+                }).length, 0)
+              } else {
+                numberOfRequiredItems++
+              }
+              
               selectedItemFromRequirements = validItems.find((item) => {
                 return item.itemId === requirement.item
               })
@@ -1033,7 +1040,7 @@ const isAccessRequirementSatisfied = (params: {
   
   if (isObject(requirement)) {
     return accessibleItems.some((item) => {
-      return item.isFromMart
+      return item.isFromMart && item.itemId !== "GS_BALL"
     }) || accessibleItems.filter((item) => {
       return item.itemId === requirement.item
     }).length >= requirement.number
@@ -1450,6 +1457,17 @@ export const updateAccessLogic = (
     })
     
     romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements?.push(romInfo.gameData.eventPokemon.TOGEPI)
+  }
+  
+  if (settings.SKIP_KURT_FOR_ILEX_SHRINE && !settings.KEEP_GS_BALL_AFTER_CELEBI_EVENT) {
+    const index = romInfo.gameData.itemLocations.AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL.accessRequirements!.findIndex((requirement) => {
+      return requirement === "GS_BALL"
+    })!
+    
+    romInfo.gameData.itemLocations.AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL.accessRequirements![index] = {
+      item: "GS_BALL",
+      number: 2,
+    }
   }
   
   const accessModifiers = [
