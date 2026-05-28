@@ -8,6 +8,7 @@ import { movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
+import { tradesMap } from "@shared/gameData/trades"
 import { trainerClassesMap } from "@shared/gameData/trainerClasses"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
 import { trainers } from "@shared/gameData/trainers"
@@ -45,6 +46,7 @@ import { updateMoveTutorCost } from "@worker/gameDataProcessors/moveTutorCost"
 import { updateNumberOfBadgesForOak } from "@worker/gameDataProcessors/numberOfBadgesForOak"
 import { updateNumberOfMiltankBerries } from "@worker/gameDataProcessors/numberOfMiltankBerries"
 import { updatePokemonInfo } from "@worker/gameDataProcessors/pokemonInfo"
+import { updatePokemonNicknames } from "@worker/gameDataProcessors/pokemonNicknames"
 import { updatePrices } from "@worker/gameDataProcessors/prices"
 import { updateStarterItems, updateStarters } from "@worker/gameDataProcessors/starters"
 import { updateTeachableMoves } from "@worker/gameDataProcessors/teachableMoves"
@@ -135,9 +137,12 @@ export const applyPlayerOptions = (params: ApplyPlayerOptionsParams) => {
   const gameData = {
     trainerClasses: JSON.parse(JSON.stringify(trainerClassesMap)) as typeof trainerClassesMap,
     trainers: JSON.parse(JSON.stringify(trainers)) as typeof trainers,
+    trades: JSON.parse(JSON.stringify(tradesMap)) as typeof tradesMap,
+    kenyaNickname: "KENYA",
   }
   
   updateTrainerNames(playerOptions, gameData, random)
+  updatePokemonNicknames(playerOptions, gameData, random)
   
   const hunks = createPlayerOptionsPatches({
     settings: settings,
@@ -148,7 +153,7 @@ export const applyPlayerOptions = (params: ApplyPlayerOptionsParams) => {
   
   applyDataHunks(rom, hunks)
   
-  if (playerOptions.CHANGE_TRAINER_NAMES.VALUE && playerOptions.CHANGE_TRAINER_NAMES.SETTINGS.CREATE_LOG) {
+  if (playerOptions.CHANGE_NAMES.VALUE && playerOptions.CHANGE_NAMES.SETTINGS.CREATE_LOG) {
     return playerSpecificLog(gameData)
   } else {
     return undefined
@@ -2501,7 +2506,7 @@ const createPlayerOptionsPatches = (params: {
   
   // Trainer Names
   
-  if (playerOptions.CHANGE_TRAINER_NAMES.VALUE) {
+  if (playerOptions.CHANGE_NAMES.VALUE) {
     // Class names
     
     patchHunks.push({
@@ -2581,6 +2586,23 @@ const createPlayerOptionsPatches = (params: {
       },
     ])
   }
+  
+  // Pokémon Nicknames
+  
+  const firstTradeNicknameOffset = romOffsetFromBankAddress(63, 0x4E5A)
+  
+  patchHunks.push(...[
+    ...Object.values(gameData.trades).map((trade, index) => {
+      return {
+        offset: firstTradeNicknameOffset + 32 * index,
+        values: bytesFromTextData(trade.nickname.padEnd(11, "@")),
+      }
+    }),
+    {
+      offset: romOffsetFromBankAddress(26, 0x5DB9),
+      values: bytesFromTextData(gameData.kenyaNickname.padEnd(6, "@")),
+    },
+  ])
   
   return patchHunks
 }

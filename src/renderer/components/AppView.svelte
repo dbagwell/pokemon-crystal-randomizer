@@ -450,7 +450,7 @@
         title: "Preset Name",
         type: "text",
         validator: (text) => {
-          const nameExists = presetOptions.find((option) => {
+          const nameExists = presetOptions.some((option) => {
             return option.id === text
           })
           

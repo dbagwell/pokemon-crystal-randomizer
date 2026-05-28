@@ -57,7 +57,7 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
       }
     } catch (error: any) {
       console.log(error.stack)
-      if (error.message.includes("EEXIST")) {
+      if (error.message.includes("EEXIST") as boolean) {
         throw new RelayedError(`Preset name '${name}' already exists.`)
       } else {
         throw new RelayedError(`${error}`)

@@ -239,44 +239,53 @@ const frameTypeOption = () => {
 
 const trainerNamesOption = () => {
   return createConfigurableToggleViewModel({
-    id: "CHANGE_TRAINER_NAMES" as const,
-    name: "Change Trainer Names",
-    description: "Changes the names and class names of the trainers that can be fought throughout the game.\n"
-      + "Note: The combined character count of a trainer's name and class name can never exceed 17 (16 for certain trainers).",
+    id: "CHANGE_NAMES" as const,
+    name: "Change Trainer Names and Pokémon Nicknames",
+    description: "Changes the names and class names of the trainers that can be fought throughout the game, as well as the nicknames of gift/trade Pokémon.",
     viewModels: [
       createSingleSelectorViewModel({
         id: "METHOD" as const,
-        selectedOptionId: "SHUFFLED",
+        selectedOptionId: "SHUFFLED_TRAINERS",
         options: [
           createSimpleSelectorOption({
-            id: "SHUFFLED" as const,
-            name: "Shuffled",
-            description: "Class names are shuffled amongst each other and trainer names are shuffled amongst each other (the names of trainers in the vanilla 'TWINS' trainer class are only shuffled amongst each other).",
+            id: "SHUFFLED_TRAINERS" as const,
+            name: "Shuffled Trainers",
+            description: "Class names are shuffled amongst each other and trainer names are shuffled amongst each other (the names of trainers in the vanilla 'TWINS' trainer class are only shuffled amongst each other).\n"
+             + "Pokémon Nicknames are unaffected.",
           }),
           createConfigurableSelectorOption({
             id: "CUSTOM_LIST" as const,
             name: "Custom List",
-            description: "Switches each trainer name for a random one from the supplied list.\n"
-              + "Each name in the lists should be on its own line.\n"
-              + "Class names should be no longer than 13 'in-game characters' or they will be truncated. "
-              + "The list of class names must also contain at least 1 name that is no larger than 7 'character tokens' long. "
-              + "If the list of class names is empty, they won't be changed. "
-              + "(For best results it is recommended to have a variety of class names ranging from 4-13 characters).\n"
-              + "Each trainer name should be no longer than 10 'in-game characters' or they will be truncated. "
-              + "(The lengths of trainer's names may also be limited by the length of their assigned class name).\n"
-              + "There is a separate list for the names of trainers in the 'TWINS' trainer class since thematically they should be 2 separate names, but are treated as only 1 name in the game.",
+            description: "Switches each trainer class and name and Pokémon nickname for a random one from the corresponding list. "
+              + "If any of lists are empty, those names won't be changed.\n"
+              + "Each name in the lists should be on its own line. "
+              + "Class names should be no longer than 13 'in-game characters'. "
+              + "Trainer names should be no longer than 10 'in-game characters'. "
+              + "Pokémon nicknames should be no longer than 10 'in-game characters' and no longer than 10 'character tokens' with at least 1 name that is no longer than 5 'character tokens'.\n"
+              + "If names are too long, they will be truncated. "
+              + "Also, the combined character count of a trainer's name and class name can never exceed 17 (16 for certain trainers) - "
+              + "names may also get truncated if it is not possible to satisfy this length restriction for all trainers. "
+              + "For best results, it is recommended to have a variety of names ranging from 4 characters long to the max length in each list.",
             viewModels: [
               createMultilineTextInputViewModel({
                 id: "ClASS_NAMES" as const,
                 name: "Class Names",
               }),
               createMultilineTextInputViewModel({
-                id: "TRAINER_NAMES" as const,
-                name: "Single Trainer Names",
+                id: "TWINS_CLASS_NAMES" as const,
+                name: "Twins Class Names",
               }),
               createMultilineTextInputViewModel({
-                id: "TWIN_NAMES" as const,
-                name: "Twin Trainer Names",
+                id: "TRAINER_NAMES" as const,
+                name: "Trainer Names",
+              }),
+              createMultilineTextInputViewModel({
+                id: "TWINS_TRAINER_NAMES" as const,
+                name: "Twins Trainer Names",
+              }),
+              createMultilineTextInputViewModel({
+                id: "POKEMON_NICKNAMES" as const,
+                name: "Pokémon Nicknames",
               }),
             ] as const,
           }),

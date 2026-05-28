@@ -1,3 +1,5 @@
+import { isNotNullish } from "@shared/utils/commonUtils"
+
 const characterMapFrom = (characters: string, startingValue: number) => {
   return characters.split("").reduce((map, character, index) => {
     map[character] = startingValue + index
@@ -90,7 +92,7 @@ export const truncateToInGameStringLength = (string: string, length: number) => 
   let result = string
   
   while (inGameStringLength(result) > length) {
-    if ([...result.matchAll(/<POKé>$|<PKMN>$/g)][0]) {
+    if (isNotNullish([...result.matchAll(/<POKé>$|<PKMN>$/g)][0])) {
       result = result.substring(0, result.length - 6)
     } else {
       result = result.substring(0, result.length - 1)
