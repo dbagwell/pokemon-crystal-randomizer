@@ -85,6 +85,18 @@ export const updateTrainerNames = (
       break
     }
     case "CUSTOM_LIST": {
+      // Randomize Twins Class Name
+      
+      const availableTwinsClassNames = method.SETTINGS.CUSTOM_LIST.TWINS_CLASS_NAMES?.split("\n").map((name) => {
+        return truncateToInGameStringLength(name, 13)
+      }).filter((name) => {
+        return name.length > 0
+      }) ?? []
+      
+      if (availableTwinsClassNames.length > 0) {
+        gameData.trainerClasses.TWINS.name = random.element({ array: availableTwinsClassNames })
+      }
+      
       // Randomize class names
       
       const allAvailableClassNames = method.SETTINGS.CUSTOM_LIST.CLASS_NAMES?.split("\n").map((name) => {
@@ -102,7 +114,7 @@ export const updateTrainerNames = (
           allAvailableClassNames.unshift("TRAINER")
         }
       
-        let availableBytes = 502
+        let availableBytes = 488 - bytesFromTextData(gameData.trainerClasses.TWINS.name).length
         
         const trainerClassIndices = trainerClasses.map((_, index) => { return index })
         let availableClassNameIndices = allAvailableClassNames.map((_, index) => { return index })
@@ -139,18 +151,6 @@ export const updateTrainerNames = (
           trainerClasses[trainerClassIndex].name = allAvailableClassNames[classNameIndex]
           availableBytes -= trainerClasses[trainerClassIndex].name.length
         }
-      }
-      
-      // Randomize Twins Class Name
-      
-      const availableTwinsClassNames = method.SETTINGS.CUSTOM_LIST.TWINS_CLASS_NAMES?.split("\n").map((name) => {
-        return truncateToInGameStringLength(name, 13)
-      }).filter((name) => {
-        return name.length > 0
-      }) ?? []
-      
-      if (availableTwinsClassNames.length > 0) {
-        gameData.trainerClasses.TWINS.name = random.element({ array: availableTwinsClassNames })
       }
       
       // Randomize Trainer Names
