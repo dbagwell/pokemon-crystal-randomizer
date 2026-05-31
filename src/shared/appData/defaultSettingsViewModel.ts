@@ -1111,7 +1111,9 @@ export const defaultSettingsViewModel = () => {
               + "will be never be placed in locations that could make it impossible to obtain them. "
               + "Areas or item locations that require owning or registering certain Pokémon are considered accessible if "
               + "the player has access to at least 7 badges as well as the ability to use all HMs except for Fly and Flash "
-              + "and has access to the Bicycle, Squirtbottle, Pass, S.S.Ticket, Card Key, Clear Bell, Rainbow Wing, TM02 (Headbutt), TM08 (Rock Smash) and all 3 Fishing Rods.",
+              + "and has access to the Bicycle, Squirtbottle, Pass, S.S.Ticket, Card Key, Clear Bell and Rainbow Wing, "
+              + "and, if random Pokémon encounters aren't being randomized with the 'Pokédex Searchable' or 'Regional' availability options, "
+              + "TM02 (Headbutt), TM08 (Rock Smash) and all 3 Fishing Rods.",
             viewModels: [
               createGroupMultiSelectorViewModel({
                 id: "GROUPS" as const,
