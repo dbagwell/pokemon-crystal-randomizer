@@ -351,6 +351,26 @@ export const generatorLog = (params: {
       ],
     }),
   })
+    
+  addSection({
+    header: "SHOW AND TELL POKEMON",
+    content: logTable({
+      headers: [
+        "ORIGINAL",
+        "NEW",
+      ],
+      sections: [
+        {
+          rows: Object.entries(gameData.showAndTellPokemon).map(([originalPokemon, newPokemonId]) => {
+            return [
+              originalPokemon,
+              newPokemonId,
+            ]
+          }),
+        },
+      ],
+    }),
+  })
   
   addSection({
     header: "IN GAME TRADES",

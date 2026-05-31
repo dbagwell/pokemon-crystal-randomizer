@@ -42,6 +42,18 @@ export type GameData = {
   oddEggs: OddEgg[]
   eventPokemon: Record<EventPokemonId, PokemonId>
   unownSets: Record<UnownSetId, UnownLetterId[]>
+  showAndTellPokemon: {
+    TOGEPI: PokemonId
+    MARILL: PokemonId
+    PIKACHU: PokemonId
+    CLEFAIRY: PokemonId
+    MAGIKARP: PokemonId
+    LICKITUNG: PokemonId
+    ODDISH: PokemonId
+    STARYU: PokemonId
+    GROWLITHE: PokemonId
+    PICHU: PokemonId
+  }
   dratiniMoves: {
     regular: MoveId[]
     special: MoveId[]
