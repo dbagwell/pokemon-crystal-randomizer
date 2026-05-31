@@ -5,6 +5,7 @@ import { movesMap } from "@shared/gameData/moves"
 import { oddEggs } from "@shared/gameData/oddEggs"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
+import { tradesMap } from "@shared/gameData/trades"
 import { trainerClassesMap } from "@shared/gameData/trainerClasses"
 import { trainers } from "@shared/gameData/trainers"
 import { eventPokemonMap } from "@shared/types/gameData/eventPokemon"
@@ -20,6 +21,7 @@ import { isMoveId } from "@shared/types/gameDataIds/moves"
 import { isPokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { starterLocationIds } from "@shared/types/gameDataIds/starterLocations"
 import { moveTutorIds } from "@shared/types/gameDataIds/teachableMoves"
+import { tradeIds } from "@shared/types/gameDataIds/trades"
 import { trainerClassIds } from "@shared/types/gameDataIds/trainerClasses"
 import { treeGroupIds } from "@shared/types/gameDataIds/treeGroups"
 import type { UnownSetId } from "@shared/types/gameDataIds/unownSets"
@@ -182,7 +184,7 @@ export const generatorLog = (params: {
               showTimeColumn ? encounter.type === "WATER" ? "ANY" : encounter.time : undefined,
               encounter.pokemonId,
               `Lv. ${encounter.level}`,
-              `${ratios[encounter.slot]}% ${encounter.type === "LAND" && encounter.isSwarm ? " (SWARM)" : ""}`,
+              `${ratios[encounter.slot]}% ${encounter.type === "LAND" && (encounter.isSwarm ?? false) ? " (SWARM)" : ""}`,
             ])
           }),
         }
@@ -343,6 +345,26 @@ export const generatorLog = (params: {
             return [
               setId,
               settings.CHANGE_UNOWN_SETS.VALUE && settings.CHANGE_UNOWN_SETS.SETTINGS.METHOD.VALUE === "SINGLE_SET" ? gameData.unownSets.KABUTO_PUZZLE.join(", ") : gameData.unownSets[setId as UnownSetId].join(", "),
+            ]
+          }),
+        },
+      ],
+    }),
+  })
+    
+  addSection({
+    header: "SHOW AND TELL POKEMON",
+    content: logTable({
+      headers: [
+        "ORIGINAL",
+        "NEW",
+      ],
+      sections: [
+        {
+          rows: Object.entries(gameData.showAndTellPokemon).map(([originalPokemon, newPokemonId]) => {
+            return [
+              originalPokemon,
+              newPokemonId,
             ]
           }),
         },
@@ -687,7 +709,11 @@ export const generatorLog = (params: {
 }
 
 export const playerSpecificLog = (gameData: PlayerSpecificGameData) => {
-  return logTable({
+  const sections: string[] = []
+  
+  sections.push("----- TRAINER NAMES -----")
+  
+  sections.push(logTable({
     headers: [
       "ORIGINAL",
       "NEW",
@@ -713,7 +739,34 @@ export const playerSpecificLog = (gameData: PlayerSpecificGameData) => {
         }),
       },
     ],
-  })
+  }))
+  
+  sections.push("----- POKEMON NICKNAMES -----")
+  
+  sections.push(logTable({
+    headers: [
+      "ORIGINAL",
+      "NEW",
+    ],
+    sections: [
+      {
+        rows: [
+          ...tradeIds.map((tradeId) => {
+            return [
+              tradesMap[tradeId].nickname,
+              gameData.trades[tradeId].nickname,
+            ]
+          }),
+          [
+            "KENYA",
+            gameData.kenyaNickname,
+          ],
+        ],
+      },
+    ],
+  }))
+  
+  return sections.join("\n\n")
 }
 
 const logTable = (params: {

@@ -20,6 +20,8 @@
   <ToggleView bind:viewModel={viewModel}/>
 {:else if viewModel.type === "INPUT_GROUP_LIST"}
   <InputGroupListView bind:viewModel={viewModel}/>
+{:else if viewModel.type === "BUTTON"}
+  <SettingsButtonView bind:viewModel={viewModel}/>
 {:else}
   <Never neverValue={viewModel}/>
 {/if}
@@ -32,6 +34,7 @@
   import IntegerInputView from "@components/settingsInputViews/IntegerInputView.svelte"
   import IntegerRangeInputView from "@components/settingsInputViews/IntegerRangeInputView.svelte"
   import MultilineTextInputView from "@components/settingsInputViews/MultilineTextInputView.svelte"
+  import SettingsButtonView from "@components/settingsInputViews/SettingsButtonView.svelte"
   import SimpleMultiSelectorView from "@components/settingsInputViews/SimpleMultiSelectorView.svelte"
   import SingleSelectorView from "@components/settingsInputViews/SingleSelectorView.svelte"
   import TextInputView from "@components/settingsInputViews/TextInputView.svelte"

@@ -3,9 +3,10 @@ import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
 import { getPreference, setPreference } from "@lib/userData/preferences"
 import { getPlayerOptions, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setPlayerOptions, setPreviousSettings } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
-import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
+import { type NameListId, nameListIds, nameLists } from "@shared/appData/nameListIds"
+import { type PlayerOptions, type Settings } from "@shared/appData/settingsFromViewModel"
 import type { MainAPIInterface } from "@shared/types/ipc/mainAPIInterface"
-import { isNullish } from "@shared/utils"
+import { isNotNullish, isNullish, numberFrom } from "@shared/utils"
 import { app, dialog } from "electron"
 import { type ElectronMainApi, RelayedError } from "electron-affinity/main"
 import fs from "fs"
@@ -57,7 +58,7 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
       }
     } catch (error: any) {
       console.log(error.stack)
-      if (error.message.includes("EEXIST")) {
+      if (error.message.includes("EEXIST") as boolean) {
         throw new RelayedError(`Preset name '${name}' already exists.`)
       } else {
         throw new RelayedError(`${error}`)
@@ -159,6 +160,103 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
       
       return {
         message: "Settings exported!",
+      }
+    } catch (error: any) {
+      console.log(error.stack)
+      throw new RelayedError(`${error}`)
+    }
+  }
+  
+  readonly importCustomNames = async (): Promise<APIResponse<Partial<Record<NameListId, string>>>> => {
+    try {
+      const filePath = dialog.showOpenDialogSync({
+        title: "Import Custom Names from:",
+        filters: [
+          {
+            name: "text",
+            extensions: [
+              "txt",
+              "rncn",
+            ],
+          },
+        ],
+        buttonLabel: "Import",
+
+      })
+        
+      if (isNullish(filePath)) {
+        throw new Error("No file selected.")
+      }
+      
+      const fileData = fs.readFileSync(filePath[0])
+      const importedLists: Partial<Record<NameListId, string>> = {}
+      
+      if (isNotNullish(filePath[0].match(/.rncn$/))) {
+        let currentIndex = 1
+        nameLists.toSorted((a, b) => {
+          return a.rncnSortOrder - b.rncnSortOrder
+        }).forEach((list) => {
+          if (currentIndex >= fileData.length) {
+            return
+          }
+          
+          const size = numberFrom([...fileData.subarray(currentIndex, currentIndex + 4)], true)
+          currentIndex += 4
+          const listData = fileData.subarray(currentIndex, currentIndex + size)
+          currentIndex += size
+          
+          importedLists[list.id] = listData.toString().replaceAll("\r\n", "\n")
+        })
+      } else {
+        const fileText = fileData.toString().replaceAll(/\n\n+/g, "\n")
+        nameListIds.forEach((id) => {
+          importedLists[id] = fileText.match(`##### ${id} #####\n([\\s\\S]*?)(\n?#####|$)`)?.[1]
+        })
+      }
+      
+      return {
+        result: importedLists,
+      }
+    } catch (error: any) {
+      console.log(error.stack)
+      throw new RelayedError(`${error}`)
+    }
+  }
+  
+  readonly exportCustomNames = async (lists: Partial<Record<NameListId, string>>): Promise<VoidAPIResponse> => {
+    try {
+      const filePath = dialog.showSaveDialogSync({
+        title: "Save Exported Names to:",
+        defaultPath: "names.txt",
+        filters: [
+          {
+            name: "text",
+            extensions: [
+              "txt",
+            ],
+          },
+        ],
+        buttonLabel: "Export",
+        properties: [
+          "showOverwriteConfirmation",
+        ],
+      })
+        
+      if (isNullish(filePath)) {
+        throw new Error("A save location must be specified.")
+      }
+      
+      const text = Object.entries(lists).flatMap(([id, names]) => {
+        return [
+          `##### ${id} #####`,
+          names ?? "",
+        ]
+      }).join("\n\n")
+      
+      fs.writeFileSync(filePath, text)
+      
+      return {
+        message: "Names exported!",
       }
     } catch (error: any) {
       console.log(error.stack)

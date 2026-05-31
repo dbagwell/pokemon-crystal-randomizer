@@ -188,7 +188,12 @@ export const defaultSettingsViewModel = () => {
                   createSimpleSelectorOption({
                     id: "MATCH_EGG" as const,
                     name: "Match Egg",
-                    description: "Makes it so you must show Prof. Elm a Pokémon that is the same species as the one that hatches from the Mystery Egg to get his Everston gift.",
+                    description: "Makes it so you must show Prof. Elm a Pokémon that is the same species as the one that hatches from the Mystery Egg to get his Everstone gift.",
+                  }),
+                  createSimpleSelectorOption({
+                    id: "RANDOM" as const,
+                    name: "Random",
+                    description: "Makes it so the Pokémon you must show Prof. Elm to get his Everstone gift is a random Pokémon chosen separately from the one in the Mystery Egg.",
                   }),
                 ] as const,
               }), // END MYSTERY_EGG_RESEARCH_REQUEST
@@ -416,6 +421,15 @@ export const defaultSettingsViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_UNOWN_SETS
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_SHOW_AND_TELL_POKEMON" as const,
+            name: "Randomize Show and Tell Pokémon",
+            description: "Randomizes the Pokémon that certain NPC's will request to see in exchange for items and phone numbers. (Does not include the Pokémon you show to Prof. Elm to get his Everstone gift or the 3 Unown forms required to get the Unown Dex.)",
+            viewModels: [
+              createUniquePokemonSelectorViewModel(),
+              createBannedPokemonSelectorViewModel(),
+            ],
+          }), // END RANDOMIZE_SHOW_AND_TELL_POKEMON
           createSimpleMultiSelectorViewModel({
             id: "BANNED_POKEMON" as const,
             name: "Globally Banned Pokémon",
@@ -541,35 +555,55 @@ export const defaultSettingsViewModel = () => {
             ] as const,
           }), // END INCREASE_POKEMON_CATCH_RATES
           createConfigurableToggleViewModel({
-            id: "STANDARDIZE_POKEMON_GROWTH_RATES" as const,
-            name: "Standardize Pokémon Growth Rates",
-            description: "Makes it so that all Pokémon require the same amount of experience for each level.",
+            id: "CHANGE_POKEMON_GROWTH_RATES" as const,
+            name: "Change Pokémon Growth Rates",
+            description: "Changes the amount of experience each Pokémon requires to level up.",
             viewModels: [
-              createSingleSelectorViewModel({
-                id: "GROWTH_RATE" as const,
-                name: "Growth Rate",
-                description: "Determines how much experience is required for each level.",
-                selectedOptionId: "MEDIUM_FAST",
-                options: growthRateIds.map((growthRateId) => {
-                  return createSimpleSelectorOption({
-                    id: growthRateId,
-                    name: growthRatesMap[growthRateId].name,
-                  })
-                }),
-              }), // END GROWTH_RATE
-              createSimpleMultiSelectorViewModel({
-                id: "EXCLUDE" as const,
-                name: "Exclude",
-                description: "A list of Pokémon that should keep their 'vanilla' growth rates.",
+              createConfigurableMultiSelectorViewModel({
+                id: "POKEMON" as const,
+                name: "Pokémon",
                 options: pokemonIds.map((pokemonId) => {
-                  return createSimpleSelectorOption({
+                  return createConfigurableSelectorOption({
                     id: pokemonId,
                     name: pokemonMap[pokemonId].name,
+                    viewModels: [
+                      createSingleSelectorViewModel({
+                        id: "GROWTH_RATE" as const,
+                        name: "Growth Rate",
+                        description: "Determines how much experience is required for each level.",
+                        selectedOptionId: "MEDIUM_FAST",
+                        options: growthRateIds.map((growthRateId) => {
+                          return createSimpleSelectorOption({
+                            id: growthRateId,
+                            name: growthRatesMap[growthRateId].name,
+                          })
+                        }),
+                      }),
+                    ],
                   })
                 }),
-              }), // END EXCLUDE
+              }),
+              createConfigurableToggleViewModel({
+                id: "STANDARDIZE_REMAINING" as const,
+                name: "Standardize Remaining Pokémon",
+                description: "Changes the growth rate of all Pokémon not specified above.",
+                viewModels: [
+                  createSingleSelectorViewModel({
+                    id: "GROWTH_RATE" as const,
+                    name: "Growth Rate",
+                    description: "Determines how much experience is required for each level.",
+                    selectedOptionId: "MEDIUM_FAST",
+                    options: growthRateIds.map((growthRateId) => {
+                      return createSimpleSelectorOption({
+                        id: growthRateId,
+                        name: growthRatesMap[growthRateId].name,
+                      })
+                    }),
+                  }),
+                ],
+              }),
             ] as const,
-          }), // END STANDARDIZE_POKEMON_GROWTH_RATES
+          }), // END CHANGE_POKEMON_GROWTH_RATES
           createSimpleToggleViewModel({
             id: "USE_UPDATED_BASE_EXP" as const,
             name: "Use Updated Base Experience",
@@ -672,6 +706,11 @@ export const defaultSettingsViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_HO_OH_LEVEL
+          createSimpleToggleViewModel({
+            id: "ADD_DV_TOGGLE_TO_STATS" as const,
+            name: "Add DV Toggle to Stats Screen",
+            description: "Adds the ability to press Select on the stats page of the Pokémon information menu to toggle between viewing the Pokémon's full stats and their determinant values.",
+          }),
         ] as const,
       }), // END POKEMON_PROPERTIES
       createTabViewModel({
@@ -1086,7 +1125,9 @@ export const defaultSettingsViewModel = () => {
               + "will be never be placed in locations that could make it impossible to obtain them. "
               + "Areas or item locations that require owning or registering certain Pokémon are considered accessible if "
               + "the player has access to at least 7 badges as well as the ability to use all HMs except for Fly and Flash "
-              + "and has access to the Bicycle, Squirtbottle, Pass, S.S.Ticket, Card Key, Clear Bell, Rainbow Wing, TM02 (Headbutt), TM08 (Rock Smash) and all 3 Fishing Rods.",
+              + "and has access to the Bicycle, Squirtbottle, Pass, S.S.Ticket, Card Key, Clear Bell and Rainbow Wing, "
+              + "and, if random Pokémon encounters aren't being randomized with the 'Pokédex Searchable' or 'Regional' availability options, "
+              + "TM02 (Headbutt), TM08 (Rock Smash) and all 3 Fishing Rods.",
             viewModels: [
               createGroupMultiSelectorViewModel({
                 id: "GROUPS" as const,
@@ -1947,6 +1988,18 @@ export const defaultSettingsViewModel = () => {
             id: "SKIP_GS_BALL_INSPECTION" as const,
             name: "Skip GS Ball Inspection",
             description: "Kurt will immeditatly notice the GS Ball starting to shake after you give it to him, instead of having to wait until the next day.",
+          }),
+          createSimpleToggleViewModel({
+            id: "SKIP_KURT_FOR_ILEX_SHRINE" as const,
+            name: "Skip Kurt for Ilex Shrine",
+            description: "Makes it so, if you have a GS Ball, you can activate the Celebi event at the Ilex Forest Shrine before giving Kurt the GS Ball.\n"
+              + "If 'Shuffle Items' is enabled, then enabling this without also enabling 'Keep GS Ball After Celebi Event' will make it so the item you get from Kurt "
+              + "for giving hime a GS Ball will be considered as inaccessible by the item shuffle logic until you have access to two GS Balls.",
+          }),
+          createSimpleToggleViewModel({
+            id: "KEEP_GS_BALL_AFTER_CELEBI_EVENT" as const,
+            name: "Keep GS Ball After Celebi Event",
+            description: "Make it so that you don't lose the GS Ball after triggering the Celebi event at the Ilex Forest Shrine.",
           }),
           createSimpleMultiSelectorViewModel({
             id: "CHANGE_SS_AQUA_REQUIREMENTS" as const,

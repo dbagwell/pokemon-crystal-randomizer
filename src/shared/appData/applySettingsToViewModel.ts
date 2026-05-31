@@ -77,6 +77,10 @@ const applySettingsToInputViewModel = (settings: any, viewModel: InputViewModel,
     applySettingsToInputGroupListViewModel(settings, viewModel, path, warnings)
     break
   }
+  case "BUTTON": {
+    // Do nothing
+    break
+  }
   default: {
     const unhandledCase: never = viewModel
     throw new Error(`Unhandled case: ${unhandledCase}`)
@@ -221,15 +225,19 @@ const applySettingsToToggleViewModel = (settings: any, viewModel: ToggleViewMode
   
   if (isBoolean(value)) {
     viewModel.isOn = value
-  } else if (!hasConfigurableSettings || !isObject(settings)) {
-    warnings.push(invalidValueWarning(path, expectedSettingsType, value))
-  } else if (isNullish(settings.VALUE)) {
-    warnings.push(missingValueWarning(`${path}.VALUE`, "boolean"))
   } else {
-    warnings.push(invalidValueWarning(`${path}.VALUE`, "boolean", value))
+    if (!hasConfigurableSettings || !isObject(settings)) {
+      warnings.push(invalidValueWarning(path, expectedSettingsType, value))
+    } else if (isNullish(settings.VALUE)) {
+      warnings.push(missingValueWarning(`${path}.VALUE`, "boolean"))
+    } else {
+      warnings.push(invalidValueWarning(`${path}.VALUE`, "boolean", value))
+    }
+    
+    return
   }
   
-  if (isNullish(settings) || !value) {
+  if (isNullish(settings) || !value && !path.includes("CHANGE_NAMES")) { // We want to keep the player's list of custom names even when they disable the CHANGE_NAMES option
     return
   }
   
@@ -254,7 +262,7 @@ const applySettingsToToggleViewModel = (settings: any, viewModel: ToggleViewMode
       return subViewModel.id
     })
     
-    Object.keys(settings.SETTINGS).find((key) => {
+    Object.keys(settings.SETTINGS).forEach((key) => {
       if (!subViewModelIds.includes(key)) {
         warnings.push(unexpectedKeyWarning(`${path}.SETTINGS`, key))
       }
@@ -269,7 +277,7 @@ const applySettingsToToggleViewModel = (settings: any, viewModel: ToggleViewMode
 }
 
 const applySettingsToSingleSelectorViewModel = (settings: any, viewModel: SingleSelectorViewModel, path: string, warnings: string[]) => {
-  const hasConfigurableOptions = viewModel.options.find((option) => {
+  const hasConfigurableOptions = viewModel.options.some((option) => {
     return "viewModels" in option
   })
   
@@ -312,7 +320,7 @@ const applySettingsToSingleSelectorViewModel = (settings: any, viewModel: Single
   }
   
   if (isObject(settings.SETTINGS)) {
-    Object.keys(settings.SETTINGS).find((key) => {
+    Object.keys(settings.SETTINGS).forEach((key) => {
       if (!optionIds.includes(key)) {
         warnings.push(unexpectedKeyWarning(`${path}.SETTINGS`, key))
       }

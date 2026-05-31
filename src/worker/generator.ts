@@ -8,6 +8,7 @@ import { movesMap } from "@shared/gameData/moves"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { pokemonMap } from "@shared/gameData/pokemon"
 import { starterLocationsMap } from "@shared/gameData/starterLocations"
+import { tradesMap } from "@shared/gameData/trades"
 import { trainerClassesMap } from "@shared/gameData/trainerClasses"
 import { trainerMovementBehavioursMap } from "@shared/gameData/trainerMovementBehaviours"
 import { trainers } from "@shared/gameData/trainers"
@@ -45,7 +46,9 @@ import { updateMoveTutorCost } from "@worker/gameDataProcessors/moveTutorCost"
 import { updateNumberOfBadgesForOak } from "@worker/gameDataProcessors/numberOfBadgesForOak"
 import { updateNumberOfMiltankBerries } from "@worker/gameDataProcessors/numberOfMiltankBerries"
 import { updatePokemonInfo } from "@worker/gameDataProcessors/pokemonInfo"
+import { updatePokemonNicknames } from "@worker/gameDataProcessors/pokemonNicknames"
 import { updatePrices } from "@worker/gameDataProcessors/prices"
+import { updateShowAndTellPokemon } from "@worker/gameDataProcessors/showAndTellPokemon"
 import { updateStarterItems, updateStarters } from "@worker/gameDataProcessors/starters"
 import { updateTeachableMoves } from "@worker/gameDataProcessors/teachableMoves"
 import { updateTrades } from "@worker/gameDataProcessors/trades"
@@ -135,9 +138,12 @@ export const applyPlayerOptions = (params: ApplyPlayerOptionsParams) => {
   const gameData = {
     trainerClasses: JSON.parse(JSON.stringify(trainerClassesMap)) as typeof trainerClassesMap,
     trainers: JSON.parse(JSON.stringify(trainers)) as typeof trainers,
+    trades: JSON.parse(JSON.stringify(tradesMap)) as typeof tradesMap,
+    kenyaNickname: "KENYA",
   }
   
   updateTrainerNames(playerOptions, gameData, random)
+  updatePokemonNicknames(playerOptions, gameData, random)
   
   const hunks = createPlayerOptionsPatches({
     settings: settings,
@@ -148,7 +154,7 @@ export const applyPlayerOptions = (params: ApplyPlayerOptionsParams) => {
   
   applyDataHunks(rom, hunks)
   
-  if (playerOptions.CHANGE_TRAINER_NAMES.VALUE && playerOptions.CHANGE_TRAINER_NAMES.SETTINGS.CREATE_LOG) {
+  if (playerOptions.CHANGE_NAMES.VALUE && playerOptions.CHANGE_NAMES.SETTINGS.CREATE_LOG) {
     return playerSpecificLog(gameData)
   } else {
     return undefined
@@ -172,6 +178,7 @@ const updateGameData = (
   updateEventPokemon(settings, romInfo, random)
   updateRandomEncounters(settings, romInfo, random)
   updateUnownSets(settings, romInfo, random)
+  updateShowAndTellPokemon(settings, romInfo, random) // Must be after updateEventPokemon
   updateEncounterRates(settings, romInfo)
   updateTrades(settings, romInfo, random)
   updateEvolutionMethods(settings, romInfo)
@@ -186,7 +193,7 @@ const updateGameData = (
   updateMapObjectEvents(settings, romInfo)
   updateItems(settings, romInfo, random)
   updateNumberOfBadgesForOak(settings, romInfo, random) // Must be before updateAccessLogic
-  updateAccessLogic(settings, romInfo)
+  updateAccessLogic(settings, romInfo) // Must be after updateShowAndTellPokemon
   shuffleItems(settings, romInfo, random) // Must be after updateItems, updateMarts and updateAccessLogic
   updatePrices(settings, romInfo, random) // Must be after updateMarts, updateItems, and shuffleItems
 }
@@ -349,7 +356,7 @@ const createPatches = (
     ]
   }
   
-  if (settings.RANDOMIZE_EVENT_POKEMON || settings.RANDOMIZE_RANDOM_ENCOUNTERS) {
+  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE || settings.RANDOMIZE_RANDOM_ENCOUNTERS.VALUE) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       ...Patch.fromYAML(
@@ -569,6 +576,7 @@ const createPatches = (
     || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.VALUE
     || settings.SHUFFLE_ITEMS.VALUE
     || settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.VALUE
+    || settings.SKIP_KURT_FOR_ILEX_SHRINE
   
   if (shouldApplyReceiveItemsChanges) {
     romInfo.patchHunks = [
@@ -703,6 +711,17 @@ const createPatches = (
         },
       ).hunks)
     }
+    
+    if (settings.SKIP_KURT_FOR_ILEX_SHRINE) {
+      romInfo.patchHunks.push(...Patch.fromYAML(
+        romInfo,
+        "earlyCelebiEvent.yml",
+        {},
+        {
+          receivedGSBallEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.RECEIVED_GS_BALL.numericId, 2)),
+        },
+      ).hunks)
+    }
   } else if (settings.FASTER_ITEM_PICKUP_SFX) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
@@ -710,6 +729,10 @@ const createPatches = (
       { offset: romOffsetFromBankAddress(37, 0x6FF5), values: [0x90] },
       { offset: romOffsetFromBankAddress(47, 0x4DBF), values: [0x90] },
     ]
+  }
+  
+  if (settings.KEEP_GS_BALL_AFTER_CELEBI_EVENT) {
+    romInfo.patchHunks.push({ offset: romOffsetFromBankAddress(27, 0x6E42), values: [0x18, 0x18, 0x18] })
   }
   
   if (settings.SINGLE_USE_FRUIT_TREES) {
@@ -1167,10 +1190,9 @@ const createPatches = (
       ).hunks,
       // MooMoo Milk Vendor
       { offset: romOffsetFromBankAddress(39, 0x4EDD), values: [0x9E, mooMooItem.numericId] },
-      { offset: romOffsetFromBankAddress(39, 0x4FF3), values: bytesFromTextData(`${mooMooItemName}?`.padEnd(12, " ").substring(0, 12)) },
+      { offset: romOffsetFromBankAddress(39, 0x4FF3), values: bytesFromTextScript(`${mooMooItemName}\tfer just ¥${mooMooItemInfo.price}?\f`) },
       { offset: romOffsetFromBankAddress(39, 0x4ED7), values: bytesFrom(mooMooItemInfo.price, 2, true) },
       { offset: romOffsetFromBankAddress(39, 0x4EE6), values: bytesFrom(mooMooItemInfo.price, 2, true) },
-      { offset: romOffsetFromBankAddress(39, 0x504E), values: bytesFromTextData(`fer ¥${mooMooItemInfo.price}.`.padEnd(14, " ")) },
       { offset: romOffsetFromBankAddress(39, 0x4EC5), values: [0x18, 0x18] },
       { offset: romOffsetFromBankAddress(39, 0x4EEB), values: [0x33, ...bytesFrom(eventFlagsMap.GOT_MOOMOO_MILK.numericId, 2), 0x18] },
       { offset: romOffsetFromBankAddress(39, 0x4EF3), values: [0x18] },
@@ -1180,11 +1202,10 @@ const createPatches = (
         "moveMahoganyStreetVendor.yml",
       ).hunks,
       { offset: romOffsetFromBankAddress(100, 0x4054), values: [0x9E, mahoganyItem.numericId] },
-      { offset: romOffsetFromBankAddress(100, 0x4100), values: bytesFromTextScript(`${mahoganyItemName},`.padEnd(16, " ") + "\nyum!") },
+      { offset: romOffsetFromBankAddress(100, 0x4100), values: bytesFromTextScript(`yummy\n${mahoganyItemName}\tfor just ¥${mahoganyItemInfo.price}!\f`) },
       { offset: romOffsetFromBankAddress(100, 0x41A7), values: bytesFromTextScript(`${mahoganyItemName}<'s>`.padEnd(16, " ")) },
       { offset: romOffsetFromBankAddress(100, 0x404E), values: bytesFrom(mahoganyItemInfo.price, 2, true) },
       { offset: romOffsetFromBankAddress(100, 0x4061), values: bytesFrom(mahoganyItemInfo.price, 2, true) },
-      { offset: romOffsetFromBankAddress(100, 0x413B), values: bytesFromTextData(`${mahoganyItemInfo.price}!`.padEnd(14, " ")) },
       shouldLimitItemStock("MAHOGANY_TOWN_STREET_VENDOR", 0) ? { offset: romOffsetFromBankAddress(100, 0x402F), values: [0x31, ...bytesFrom(eventFlagsMap.GOT_RAGECANDYBAR.numericId, 2)] } : { offset: romOffsetFromBankAddress(100, 0x4032), values: [0x18, 0x18, 0x18] },
       { offset: romOffsetFromBankAddress(100, 0x405A), values: [0x33, ...bytesFrom(eventFlagsMap.GOT_RAGECANDYBAR.numericId, 2), 0x18] },
       // Vending Machines
@@ -1638,8 +1659,8 @@ const createPatches = (
   
   // Elm Everstone Requirements
   
-  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE && settings.RANDOMIZE_EVENT_POKEMON.SETTINGS.MYSTERY_EGG_RESEARCH_REQUEST === "MATCH_EGG") {
-    const numericId = pokemonMap[romInfo.gameData.eventPokemon.TOGEPI].numericId
+  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE) {
+    const numericId = pokemonMap[romInfo.gameData.showAndTellPokemon.TOGEPI].numericId
     
     romInfo.patchHunks.push(...[
       {
@@ -1666,6 +1687,49 @@ const createPatches = (
       {
         offset: romOffsetFromBankAddress(5, 0x6FB5),
         values: [0, 0],
+      },
+    ])
+  }
+  
+  // Show and Tell Pokemon
+  
+  if (settings.RANDOMIZE_SHOW_AND_TELL_POKEMON.VALUE) {
+    romInfo.patchHunks.push(...[
+      {
+        offset: romOffsetFromBankAddress(23, 0x4149),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.MARILL].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(105, 0x5B1C),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.PIKACHU].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(103, 0x5193),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.CLEFAIRY].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(102, 0x66E1),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.MAGIKARP].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(98, 0x5586),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.LICKITUNG].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(98, 0x55A7),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.ODDISH].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(98, 0x55C8),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.STARYU].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(98, 0x55ED),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.GROWLITHE].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(98, 0x562F),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.PICHU].numericId],
       },
     ])
   }
@@ -1728,7 +1792,16 @@ const createPatches = (
       "improvedPokemonRequests.yml",
       {},
       {
-        togepiId: hexStringFrom([pokemonMap[romInfo.gameData.eventPokemon.TOGEPI].numericId]),
+        togepiId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.TOGEPI].numericId]),
+        marillId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.MARILL].numericId]),
+        pikachuId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.PIKACHU].numericId]),
+        clefairyId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.CLEFAIRY].numericId]),
+        magikarpId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.MAGIKARP].numericId]),
+        lickitungId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.LICKITUNG].numericId]),
+        oddishId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.ODDISH].numericId]),
+        staryuId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.STARYU].numericId]),
+        growlitheId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.GROWLITHE].numericId]),
+        pichuId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.PICHU].numericId]),
       },
     ).hunks)
   }
@@ -2372,6 +2445,12 @@ const createPatches = (
     
     romInfo.patchHunks = [...romInfo.patchHunks, ...additionalOptionsPatch.hunks]
   }
+  
+  // Viewable DV'S
+  
+  if (settings.ADD_DV_TOGGLE_TO_STATS) {
+    romInfo.patchHunks.push(...Patch.fromYAML(romInfo, "viewableDVs.yml").hunks)
+  }
 }
 
 const createBasePatch = (params: {
@@ -2479,7 +2558,7 @@ const createPlayerOptionsPatches = (params: {
   
   // Trainer Names
   
-  if (playerOptions.CHANGE_TRAINER_NAMES.VALUE) {
+  if (playerOptions.CHANGE_NAMES.VALUE) {
     // Class names
     
     patchHunks.push({
@@ -2559,6 +2638,23 @@ const createPlayerOptionsPatches = (params: {
       },
     ])
   }
+  
+  // Pokémon Nicknames
+  
+  const firstTradeNicknameOffset = romOffsetFromBankAddress(63, 0x4E5A)
+  
+  patchHunks.push(...[
+    ...Object.values(gameData.trades).map((trade, index) => {
+      return {
+        offset: firstTradeNicknameOffset + 32 * index,
+        values: bytesFromTextData(trade.nickname.padEnd(11, "@")),
+      }
+    }),
+    {
+      offset: romOffsetFromBankAddress(26, 0x5DB9),
+      values: bytesFromTextData(gameData.kenyaNickname.padEnd(6, "@")),
+    },
+  ])
   
   return patchHunks
 }

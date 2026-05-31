@@ -1,6 +1,6 @@
 <DialogContent
   extraContent={playerOptionsView}
-  message={"Customize your individual game experience.\nThe selected options will be used as the default options for all patches going forward, but can be changed from within the main randomizer application at any time.\nCertain options may not be used depending on the settings used to generate the patch."}
+  message="Customize your individual game experience.\nThe selected options will be used as the default options for all patches going forward, but can be changed from within the main randomizer application at any time.\nCertain options may not be used depending on the settings used to generate the patch."
   onSubmit={savePlayerOptions}
   submitButtonLabel="Continue"
   title="Player Options"

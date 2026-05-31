@@ -47,6 +47,11 @@ export default defineConfig([
         destructuredArrayIgnorePattern: "^_",
         varsIgnorePattern: "^_",
       }],
+      "@typescript-eslint/strict-boolean-expressions": ["error", {
+        allowNullableObject: false,
+        allowNumber: false,
+        allowString: false,
+      }],
       "array-bracket-newline": ["error", "consistent"],
       "array-bracket-spacing": "error",
       "array-element-newline": ["error", "consistent"],

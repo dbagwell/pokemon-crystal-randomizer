@@ -164,7 +164,7 @@ export const shuffleItems = (
     return group.includes("SHOPS")
   })
   
-  let allItemLocations = generalItemLocations(romInfo.gameData)
+  let allItemLocations = generalItemLocations(romInfo.gameData, settings)
   const locationsToShuffle: GeneralItemLocation[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   const startingAccessibleItems = startingItemIds(settings).map((itemId) => {
@@ -515,10 +515,13 @@ const getAccessibleLocations = (params: {
   return accessibleItemLocations
 }
 
-const generalItemLocations = (gameData: GameData): GeneralItemLocation[] => {
+const generalItemLocations = (gameData: GameData, settings: Settings): GeneralItemLocation[] => {
   const convertAccessRequirements = (requirements: AccessRequirement[]) => {
     return requirements.flatMap((requirement) => {
       if (isPokemonId(requirement)) {
+        const encounterSettings = settings.RANDOMIZE_RANDOM_ENCOUNTERS
+        const availability = encounterSettings.SETTINGS.AVAILABILITY
+        const areAllPokemonSearchable = encounterSettings.VALUE && (availability === "SEARCHABLE" || availability === "REGIONAL")
         // This currently checks accessiblity of all the items required (with vanilla warps) to see all the random encounter slots (except mount silver)
         // It will need to be updated once we shuffle warps, also if we want to add an option to just check if specific pokemon are accessible
         return [
@@ -543,11 +546,13 @@ const generalItemLocations = (gameData: GameData): GeneralItemLocation[] => {
           "POKEGEAR",
           "RADIO_CARD",
           "EXPN_CARD",
-          "TM02",
-          "TM08",
-          "OLD_ROD",
-          "GOOD_ROD",
-          "SUPER_ROD",
+          ...areAllPokemonSearchable ? [
+            "TM02",
+            "TM08",
+            "OLD_ROD",
+            "GOOD_ROD",
+            "SUPER_ROD",
+          ] as const : [],
         ] as const
       } else {
         return [
@@ -798,7 +803,7 @@ const areAreCurrentAssignmentsValid = (params: {
                 return item.itemId === requirement.item
               })
               
-              if (isNotNullish(martItem)) {
+              if (isNotNullish(martItem) && martItem.itemId !== "GS_BALL") {
                 numberOfRequiredItems++
               } else {
                 numberOfRequiredItems += Math.max(requirement.number - accessibleItems.filter((accessibleItem) => {
@@ -806,7 +811,14 @@ const areAreCurrentAssignmentsValid = (params: {
                 }).length, 0)
               }
             } else {
-              numberOfRequiredItems++
+              if (requirement.item === "GS_BALL") {
+                numberOfRequiredItems += Math.max(requirement.number - accessibleItems.filter((accessibleItem) => {
+                  return accessibleItem.itemId === requirement.item
+                }).length, 0)
+              } else {
+                numberOfRequiredItems++
+              }
+              
               selectedItemFromRequirements = validItems.find((item) => {
                 return item.itemId === requirement.item
               })
@@ -1033,7 +1045,7 @@ const isAccessRequirementSatisfied = (params: {
   
   if (isObject(requirement)) {
     return accessibleItems.some((item) => {
-      return item.isFromMart
+      return item.isFromMart && item.itemId !== "GS_BALL"
     }) || accessibleItems.filter((item) => {
       return item.itemId === requirement.item
     }).length >= requirement.number
@@ -1444,12 +1456,71 @@ export const updateAccessLogic = (
     })
   }
   
-  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE && settings.RANDOMIZE_EVENT_POKEMON.SETTINGS.MYSTERY_EGG_RESEARCH_REQUEST === "MATCH_EGG") {
+  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE) {
     romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements = romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements?.filter((requirement) => {
       return requirement !== "TOGEPI"
     })
     
-    romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements?.push(romInfo.gameData.eventPokemon.TOGEPI)
+    romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.TOGEPI)
+  }
+  
+  if (settings.RANDOMIZE_SHOW_AND_TELL_POKEMON.VALUE) {
+    romInfo.gameData.itemLocations.NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL.accessRequirements = romInfo.gameData.itemLocations.NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL.accessRequirements?.filter((requirement) => {
+      return requirement !== "MARILL"
+    })
+    
+    romInfo.gameData.itemLocations.ROUTE_39_DEREKS_GIFT_FOR_PIKACHU.accessRequirements = romInfo.gameData.itemLocations.ROUTE_39_DEREKS_GIFT_FOR_PIKACHU.accessRequirements?.filter((requirement) => {
+      return requirement !== "PIKACHU"
+    })
+    
+    romInfo.gameData.itemLocations.ROUTE_43_TIFFANY_GIFT_FOR_CLEFARIY.accessRequirements = romInfo.gameData.itemLocations.ROUTE_43_TIFFANY_GIFT_FOR_CLEFARIY.accessRequirements?.filter((requirement) => {
+      return requirement !== "CLEFAIRY"
+    })
+    
+    romInfo.gameData.itemLocations.LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP.accessRequirements = romInfo.gameData.itemLocations.LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP.accessRequirements?.filter((requirement) => {
+      return requirement !== "MAGIKARP"
+    })
+    
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG.accessRequirements = romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG.accessRequirements?.filter((requirement) => {
+      return requirement !== "LICKITUNG"
+    })
+    
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH.accessRequirements = romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH.accessRequirements?.filter((requirement) => {
+      return requirement !== "ODDISH"
+    })
+    
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU.accessRequirements = romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU.accessRequirements?.filter((requirement) => {
+      return requirement !== "STARYU"
+    })
+    
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE.accessRequirements = romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE.accessRequirements?.filter((requirement) => {
+      return requirement !== "GROWLITHE"
+    })
+    
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_PICHU.accessRequirements = romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_PICHU.accessRequirements?.filter((requirement) => {
+      return requirement !== "PICHU"
+    })
+    
+    romInfo.gameData.itemLocations.NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.MARILL)
+    romInfo.gameData.itemLocations.ROUTE_39_DEREKS_GIFT_FOR_PIKACHU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.PIKACHU)
+    romInfo.gameData.itemLocations.ROUTE_43_TIFFANY_GIFT_FOR_CLEFARIY.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.CLEFAIRY)
+    romInfo.gameData.itemLocations.LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.MAGIKARP)
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.LICKITUNG)
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.ODDISH)
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.STARYU)
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.GROWLITHE)
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_PICHU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.PICHU)
+  }
+  
+  if (settings.SKIP_KURT_FOR_ILEX_SHRINE && !settings.KEEP_GS_BALL_AFTER_CELEBI_EVENT) {
+    const index = romInfo.gameData.itemLocations.AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL.accessRequirements!.findIndex((requirement) => {
+      return requirement === "GS_BALL"
+    })!
+    
+    romInfo.gameData.itemLocations.AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL.accessRequirements![index] = {
+      item: "GS_BALL",
+      number: 2,
+    }
   }
   
   const accessModifiers = [
