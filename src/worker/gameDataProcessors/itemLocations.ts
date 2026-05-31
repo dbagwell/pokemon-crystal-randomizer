@@ -164,7 +164,7 @@ export const shuffleItems = (
     return group.includes("SHOPS")
   })
   
-  let allItemLocations = generalItemLocations(romInfo.gameData)
+  let allItemLocations = generalItemLocations(romInfo.gameData, settings)
   const locationsToShuffle: GeneralItemLocation[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   const startingAccessibleItems = startingItemIds(settings).map((itemId) => {
@@ -515,10 +515,13 @@ const getAccessibleLocations = (params: {
   return accessibleItemLocations
 }
 
-const generalItemLocations = (gameData: GameData): GeneralItemLocation[] => {
+const generalItemLocations = (gameData: GameData, settings: Settings): GeneralItemLocation[] => {
   const convertAccessRequirements = (requirements: AccessRequirement[]) => {
     return requirements.flatMap((requirement) => {
       if (isPokemonId(requirement)) {
+        const encounterSettings = settings.RANDOMIZE_RANDOM_ENCOUNTERS
+        const availability = encounterSettings.SETTINGS.AVAILABILITY
+        const areAllPokemonSearchable = encounterSettings.VALUE && (availability === "SEARCHABLE" || availability === "REGIONAL")
         // This currently checks accessiblity of all the items required (with vanilla warps) to see all the random encounter slots (except mount silver)
         // It will need to be updated once we shuffle warps, also if we want to add an option to just check if specific pokemon are accessible
         return [
@@ -543,11 +546,13 @@ const generalItemLocations = (gameData: GameData): GeneralItemLocation[] => {
           "POKEGEAR",
           "RADIO_CARD",
           "EXPN_CARD",
-          "TM02",
-          "TM08",
-          "OLD_ROD",
-          "GOOD_ROD",
-          "SUPER_ROD",
+          ...areAllPokemonSearchable ? [
+            "TM02",
+            "TM08",
+            "OLD_ROD",
+            "GOOD_ROD",
+            "SUPER_ROD",
+          ] as const : [],
         ] as const
       } else {
         return [
