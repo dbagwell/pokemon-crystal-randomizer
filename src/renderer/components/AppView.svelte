@@ -313,8 +313,13 @@
     applyNewSettings(lastSelectedSettings)
   })
   
+  let savePlayerOptionsDebounceTimeout: NodeJS.Timeout
   const onPlayerOptionsUpdated = (updatedPlayerOptons: PlayerOptions) => {
     playerOptions = updatedPlayerOptons
+    clearTimeout(savePlayerOptionsDebounceTimeout)
+    savePlayerOptionsDebounceTimeout = setTimeout(() => {
+      savePlayerOptions()
+    }, 3000)
   }
   
   const applyNewSettings = (settings: unknown | undefined) => {
@@ -424,20 +429,18 @@
   }
   
   const playerOptionsButtonClicked = () => {
-    const savePlayerOptions = async () => {
-      showProgressIndicator()
-      await window.mainAPI.savePlayerOptions($state.snapshot(playerOptions))
-      hideProgressIndicator()
-    }
-    
     showDialog({
       title: "Player Options",
       message: "The following options are meant to be customized on a per player basis and are not included when exporting settings or sharing patches with others.",
       extraContent: playerOptionsView,
       submitButtonLabel: "Done",
-      onSubmit: savePlayerOptions,
-      onCancel: savePlayerOptions,
     })
+  }
+  
+  const savePlayerOptions = async () => {
+    showProgressIndicator()
+    await window.mainAPI.savePlayerOptions($state.snapshot(playerOptions))
+    hideProgressIndicator()
   }
   
   const createNewPresetButtonClicked = () => {
@@ -450,7 +453,7 @@
         title: "Preset Name",
         type: "text",
         validator: (text) => {
-          const nameExists = presetOptions.find((option) => {
+          const nameExists = presetOptions.some((option) => {
             return option.id === text
           })
           
