@@ -171,6 +171,18 @@ export const defaultROMInfo = (): ROMInfo => {
         AERODACTYL_PUZZLE: ["S", "T", "U", "V", "W"],
         HO_OH_PUZZLE: ["X", "Y", "Z"],
       },
+      showAndTellPokemon: {
+        TOGEPI: "TOGEPI",
+        MARILL: "MARILL",
+        PIKACHU: "PIKACHU",
+        CLEFAIRY: "CLEFAIRY",
+        MAGIKARP: "MAGIKARP",
+        LICKITUNG: "LICKITUNG",
+        ODDISH: "ODDISH",
+        STARYU: "STARYU",
+        GROWLITHE: "GROWLITHE",
+        PICHU: "PICHU",
+      },
       dratiniMoves: {
         regular: [
           "WRAP",

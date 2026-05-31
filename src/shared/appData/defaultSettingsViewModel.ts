@@ -188,7 +188,12 @@ export const defaultSettingsViewModel = () => {
                   createSimpleSelectorOption({
                     id: "MATCH_EGG" as const,
                     name: "Match Egg",
-                    description: "Makes it so you must show Prof. Elm a Pokémon that is the same species as the one that hatches from the Mystery Egg to get his Everston gift.",
+                    description: "Makes it so you must show Prof. Elm a Pokémon that is the same species as the one that hatches from the Mystery Egg to get his Everstone gift.",
+                  }),
+                  createSimpleSelectorOption({
+                    id: "RANDOM" as const,
+                    name: "Random",
+                    description: "Makes it so the Pokémon you must show Prof. Elm to get his Everstone gift is a random Pokémon chosen separately from the one in the Mystery Egg.",
                   }),
                 ] as const,
               }), // END MYSTERY_EGG_RESEARCH_REQUEST
@@ -416,6 +421,15 @@ export const defaultSettingsViewModel = () => {
               }),
             ] as const,
           }), // END CHANGE_UNOWN_SETS
+          createConfigurableToggleViewModel({
+            id: "RANDOMIZE_SHOW_AND_TELL_POKEMON" as const,
+            name: "Randomize Show and Tell Pokémon",
+            description: "Randomizes the Pokémon that certain NPC's will request to see in exchange for items and phone numbers. (Does not include the Pokémon you show to Prof. Elm to get his Everstone gift or the 3 Unown forms required to get the Unown Dex.)",
+            viewModels: [
+              createUniquePokemonSelectorViewModel(),
+              createBannedPokemonSelectorViewModel(),
+            ],
+          }), // END RANDOMIZE_SHOW_AND_TELL_POKEMON
           createSimpleMultiSelectorViewModel({
             id: "BANNED_POKEMON" as const,
             name: "Globally Banned Pokémon",

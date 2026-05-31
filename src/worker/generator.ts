@@ -48,6 +48,7 @@ import { updateNumberOfMiltankBerries } from "@worker/gameDataProcessors/numberO
 import { updatePokemonInfo } from "@worker/gameDataProcessors/pokemonInfo"
 import { updatePokemonNicknames } from "@worker/gameDataProcessors/pokemonNicknames"
 import { updatePrices } from "@worker/gameDataProcessors/prices"
+import { updateShowAndTellPokemon } from "@worker/gameDataProcessors/showAndTellPokemon"
 import { updateStarterItems, updateStarters } from "@worker/gameDataProcessors/starters"
 import { updateTeachableMoves } from "@worker/gameDataProcessors/teachableMoves"
 import { updateTrades } from "@worker/gameDataProcessors/trades"
@@ -177,6 +178,7 @@ const updateGameData = (
   updateEventPokemon(settings, romInfo, random)
   updateRandomEncounters(settings, romInfo, random)
   updateUnownSets(settings, romInfo, random)
+  updateShowAndTellPokemon(settings, romInfo, random) // Must be after updateEventPokemon
   updateEncounterRates(settings, romInfo)
   updateTrades(settings, romInfo, random)
   updateEvolutionMethods(settings, romInfo)
@@ -191,7 +193,7 @@ const updateGameData = (
   updateMapObjectEvents(settings, romInfo)
   updateItems(settings, romInfo, random)
   updateNumberOfBadgesForOak(settings, romInfo, random) // Must be before updateAccessLogic
-  updateAccessLogic(settings, romInfo)
+  updateAccessLogic(settings, romInfo) // Must be after updateShowAndTellPokemon
   shuffleItems(settings, romInfo, random) // Must be after updateItems, updateMarts and updateAccessLogic
   updatePrices(settings, romInfo, random) // Must be after updateMarts, updateItems, and shuffleItems
 }
@@ -1657,8 +1659,8 @@ const createPatches = (
   
   // Elm Everstone Requirements
   
-  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE && settings.RANDOMIZE_EVENT_POKEMON.SETTINGS.MYSTERY_EGG_RESEARCH_REQUEST === "MATCH_EGG") {
-    const numericId = pokemonMap[romInfo.gameData.eventPokemon.TOGEPI].numericId
+  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE) {
+    const numericId = pokemonMap[romInfo.gameData.showAndTellPokemon.TOGEPI].numericId
     
     romInfo.patchHunks.push(...[
       {
@@ -1685,6 +1687,49 @@ const createPatches = (
       {
         offset: romOffsetFromBankAddress(5, 0x6FB5),
         values: [0, 0],
+      },
+    ])
+  }
+  
+  // Show and Tell Pokemon
+  
+  if (settings.RANDOMIZE_SHOW_AND_TELL_POKEMON.VALUE) {
+    romInfo.patchHunks.push(...[
+      {
+        offset: romOffsetFromBankAddress(23, 0x4149),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.MARILL].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(105, 0x5B1C),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.PIKACHU].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(103, 0x5193),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.CLEFAIRY].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(102, 0x66E1),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.MAGIKARP].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(98, 0x5586),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.LICKITUNG].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(98, 0x55A7),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.ODDISH].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(98, 0x55C8),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.STARYU].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(98, 0x55ED),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.GROWLITHE].numericId],
+      },
+      {
+        offset: romOffsetFromBankAddress(98, 0x562F),
+        values: [pokemonMap[romInfo.gameData.showAndTellPokemon.PICHU].numericId],
       },
     ])
   }
@@ -1747,7 +1792,16 @@ const createPatches = (
       "improvedPokemonRequests.yml",
       {},
       {
-        togepiId: hexStringFrom([pokemonMap[romInfo.gameData.eventPokemon.TOGEPI].numericId]),
+        togepiId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.TOGEPI].numericId]),
+        marillId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.MARILL].numericId]),
+        pikachuId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.PIKACHU].numericId]),
+        clefairyId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.CLEFAIRY].numericId]),
+        magikarpId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.MAGIKARP].numericId]),
+        lickitungId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.LICKITUNG].numericId]),
+        oddishId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.ODDISH].numericId]),
+        staryuId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.STARYU].numericId]),
+        growlitheId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.GROWLITHE].numericId]),
+        pichuId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.PICHU].numericId]),
       },
     ).hunks)
   }
