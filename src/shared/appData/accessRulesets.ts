@@ -4,6 +4,7 @@ import { flashForPokemon } from "@shared/appData/accessRulesets/flashForPokemon"
 import { flyForPhoneCalls } from "@shared/appData/accessRulesets/flyForPhoneCalls"
 import { flyForPokemon } from "@shared/appData/accessRulesets/flyForPokemon"
 import { healingItemsForRed } from "@shared/appData/accessRulesets/healingItemsForRed"
+import { newEarlyFly } from "@shared/appData/accessRulesets/newEarlyFly"
 import { noVanillaBasement } from "@shared/appData/accessRulesets/noEarlyBasement"
 import { noEarlySabrina } from "@shared/appData/accessRulesets/noEarlySabrina"
 import { pokedexAndSweetScentForPokemon } from "@shared/appData/accessRulesets/pokedexAndSweetScentForPokemon"
@@ -24,6 +25,7 @@ export type AccessModifier = {
 export const accessRulesetIds = [
   "FLASH_FOR_DARK_AREAS",
   "CLASSIC_EARLY_FLY",
+  "NEW_EARLY_FLY",
   "NO_VANILLA_BASEMENT",
   "NO_EARLY_SABRINA",
   "FLY_FOR_PHONE_CALLS",
@@ -59,6 +61,16 @@ export const accessRulsetsMap: IdMap<AccessRulesetId, AccessRuleset> = {
       + "- entering the Power Plant\n"
       + "- entering the Vermilion entrance of Diglett's Cave.",
     accessModifiers: classicEarlyFly,
+  },
+  NEW_EARLY_FLY: {
+    id: "NEW_EARLY_FLY",
+    name: "New Early Fly",
+    description: "Makes it so that both Stormbadge and HM02 (Fly) must be obtainable before:\n"
+      + "- going to Route 44 from Mahogany Town\n"
+      + "- climbing the left waterfall in Tohjo Falls\n"
+      + "- entering the Power Plant\n"
+      + "- entering the Vermilion entrance of Diglett's Cave.",
+    accessModifiers: newEarlyFly,
   },
   NO_VANILLA_BASEMENT: {
     id: "NO_VANILLA_BASEMENT",
