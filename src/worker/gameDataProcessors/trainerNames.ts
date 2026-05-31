@@ -87,7 +87,7 @@ export const updateTrainerNames = (
     case "CUSTOM_LIST": {
       // Randomize class names
       
-      const allAvailableClassNames = method.SETTINGS.CUSTOM_LIST.ClASS_NAMES?.split("\n").map((name) => {
+      const allAvailableClassNames = method.SETTINGS.CUSTOM_LIST.CLASS_NAMES?.split("\n").map((name) => {
         return truncateToInGameStringLength(name, 13)
       }).filter((name) => {
         return name.length > 0

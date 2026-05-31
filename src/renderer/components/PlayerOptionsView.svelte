@@ -67,4 +67,40 @@
       hasMounted = true
     }
   })
+  
+  handleButton = async (id: ButtonId) => {
+    switch (id) {
+    case "IMPORT_CUSTOM_NAMES": {
+      const namesLists = (await window.mainAPI.importCustomNames()).result
+      playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.CLASS_NAMES = namesLists.CLASS_NAMES
+      playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.TWINS_CLASS_NAMES = namesLists.TWINS_CLASS_NAMES
+      playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.TRAINER_NAMES = namesLists.TRAINER_NAMES
+      playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.TWINS_TRAINER_NAMES = namesLists.TWINS_TRAINER_NAMES
+      playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.POKEMON_NICKNAMES = namesLists.POKEMON_NICKNAMES
+      applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
+      
+      break
+    }
+    case "EXPORT_CUSTOM_NAMES": {
+      window.mainAPI.exportCustomNames({
+        CLASS_NAMES: playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.CLASS_NAMES,
+        TWINS_CLASS_NAMES: playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.TWINS_CLASS_NAMES,
+        TRAINER_NAMES: playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.TRAINER_NAMES,
+        TWINS_TRAINER_NAMES: playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.TWINS_TRAINER_NAMES,
+        POKEMON_NICKNAMES: playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.POKEMON_NICKNAMES,
+      })
+      break
+    }
+    }
+  }
+</script>
+
+<script
+  lang="ts"
+  module
+>
+  import type { ButtonId } from "@shared/appData/buttonIds"
+  
+  export let handleButton: (id: ButtonId) => void
+
 </script>

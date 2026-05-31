@@ -1,6 +1,7 @@
+import { nameLists } from "@shared/appData/nameListIds"
 import { playerSpriteMap } from "@shared/gameData/playerSprite"
 import { playerSpriteIds } from "@shared/types/gameDataIds/playerSprites"
-import { createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputViewModel, createMultilineTextInputViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createSingleSelectorViewModel, createTextInputViewModel } from "@shared/types/viewModels"
+import { createButtonViewModel, createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputViewModel, createMultilineTextInputViewModel, createSimpleSelectorOption, createSimpleToggleViewModel, createSingleSelectorViewModel, createTextInputViewModel } from "@shared/types/viewModels"
 
 export const defaultPlayerOptionsViewModel = () => {
   return {
@@ -267,25 +268,19 @@ const trainerNamesOption = () => {
               + "names may also get truncated if it is not possible to satisfy this length restriction for all trainers. "
               + "For best results, it is recommended to have a variety of names ranging from 4 characters long to the max length in each list.",
             viewModels: [
-              createMultilineTextInputViewModel({
-                id: "ClASS_NAMES" as const,
-                name: "Class Names",
+              createButtonViewModel({
+                id: "IMPORT_CUSTOM_NAMES",
+                name: "Import Custom Names",
               }),
-              createMultilineTextInputViewModel({
-                id: "TWINS_CLASS_NAMES" as const,
-                name: "Twins Class Names",
+              createButtonViewModel({
+                id: "EXPORT_CUSTOM_NAMES",
+                name: "Export Custom Names",
               }),
-              createMultilineTextInputViewModel({
-                id: "TRAINER_NAMES" as const,
-                name: "Trainer Names",
-              }),
-              createMultilineTextInputViewModel({
-                id: "TWINS_TRAINER_NAMES" as const,
-                name: "Twins Trainer Names",
-              }),
-              createMultilineTextInputViewModel({
-                id: "POKEMON_NICKNAMES" as const,
-                name: "Pokémon Nicknames",
+              ...nameLists.map((listInfo) => {
+                return createMultilineTextInputViewModel({
+                  id: listInfo.id,
+                  name: listInfo.name,
+                })
               }),
             ] as const,
           }),

@@ -1,3 +1,4 @@
+import type { ButtonId } from "@shared/appData/buttonIds"
 import type { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
 import type { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
 
@@ -209,7 +210,7 @@ export const createConfigurableToggleViewModel = <IdType extends string, ViewMod
   }
 }
 
-// Stuff Selector
+// Input Group List
 
 export type InputGroupListViewModel = ReturnType<typeof createInputGroupListViewModel>
 export const createInputGroupListViewModel = <IdType extends string, ViewModelsType extends InputViewModelArray>(params: {
@@ -223,6 +224,19 @@ export const createInputGroupListViewModel = <IdType extends string, ViewModelsT
   return {
     ...params,
     type: "INPUT_GROUP_LIST" as const,
+  }
+}
+
+// Button
+
+export type ButtonViewModel = ReturnType<typeof createButtonViewModel>
+export const createButtonViewModel = (params: {
+  id: ButtonId
+  name: string
+}) => {
+  return {
+    ...params,
+    type: "BUTTON" as const,
   }
 }
 
@@ -240,12 +254,13 @@ export type InputViewModel =
   | GroupMultiSelectorViewModel
   | ToggleViewModel
   | InputGroupListViewModel
+  | ButtonViewModel
 type InputViewModelArray = InputViewModel[] | [] // Workaround to suppress circular type reference error
 
 // Tab View Model
 
 export type TabViewModel = ReturnType<typeof createTabViewModel>
-export const createTabViewModel = <ViewModelType extends InputViewModel>(params: {
+export const createTabViewModel = <ViewModelType extends ToggleViewModel | SimpleMultiSelectorViewModel>(params: {
   id: string
   name: string
   viewModels: ViewModelType[]

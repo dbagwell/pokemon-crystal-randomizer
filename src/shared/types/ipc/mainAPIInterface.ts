@@ -1,3 +1,4 @@
+import type { NameListId } from "@shared/appData/nameListIds"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 
 export interface MainAPIInterface {
@@ -34,6 +35,10 @@ export interface MainAPIInterface {
   ): Promise<VoidAPIResponse>
   
   exportSettings(settings: Settings): Promise<VoidAPIResponse>
+  
+  importCustomNames(): Promise<APIResponse<Partial<Record<NameListId, string>>>>
+  
+  exportCustomNames(lists: Partial<Record<NameListId, string>>): Promise<VoidAPIResponse>
   
   processInput(params: ProcessInputRequestParams): Promise<void>
   

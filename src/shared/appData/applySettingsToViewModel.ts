@@ -77,6 +77,10 @@ const applySettingsToInputViewModel = (settings: any, viewModel: InputViewModel,
     applySettingsToInputGroupListViewModel(settings, viewModel, path, warnings)
     break
   }
+  case "BUTTON": {
+    // Do nothing
+    break
+  }
   default: {
     const unhandledCase: never = viewModel
     throw new Error(`Unhandled case: ${unhandledCase}`)

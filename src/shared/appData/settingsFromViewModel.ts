@@ -1,4 +1,5 @@
 import type {
+  ButtonViewModel,
   ConfigurableMultiSelectorViewModel,
   ConfigurableSelectorOption,
   GroupMultiSelectorViewModel,
@@ -189,6 +190,7 @@ type SettingsFromInputViewModel<ViewModelType extends InputViewModel> =
   : ViewModelType extends GroupMultiSelectorViewModel ? SettingsFromGroupMultiSelectorViewModel<ViewModelType>
   : ViewModelType extends ToggleViewModel ? SettingsFromToggleViewModel<ViewModelType>
   : ViewModelType extends InputGroupListViewModel ? SettingsFromInputGroupListViewModel<ViewModelType>
+  : ViewModelType extends ButtonViewModel ? undefined
   : never
 const settingsFromInputViewModel = <ViewModelType extends InputViewModel>(viewModel: ViewModelType): SettingsFromInputViewModel<ViewModelType> => {
   switch (viewModel.type) {
@@ -224,6 +226,9 @@ const settingsFromInputViewModel = <ViewModelType extends InputViewModel>(viewMo
   }
   case "INPUT_GROUP_LIST": {
     return settingsFromInputGroupListViewModel(viewModel) as SettingsFromInputViewModel<ViewModelType>
+  }
+  case "BUTTON": {
+    return undefined as SettingsFromInputViewModel<ViewModelType>
   }
   default: {
     const unhandledCase: never = viewModel
