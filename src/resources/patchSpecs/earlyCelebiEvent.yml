@@ -1,0 +1,35 @@
+description: "Activates the celebi event in ilex forest as soon as the player receives a gs Ball"
+values:
+  checkGSBall: "FE 73 20 0B 06 03 11 @$maybeSetIlexFlags 3E 25 21 CB 74 CF 21 BC D8 C9"
+  maybeSetIlexFlags: "31 $receivedGSBallEventFlagId 09 @$endMaybeSetIlexFlags 33 $receivedGSBallEventFlagId 33 EB 06 33 C0 00 32 ED 06 36 64 00 $endMaybeSetIlexFlags"
+  endMaybeSetIlexFlags: "31 $receivedGSBallEventFlagId 91"
+changes:
+- description: "adds code"
+  locations:
+  - bank: 3
+  value: "$checkGSBall $maybeSetIlexFlags"
+- description: "calls code to check if you got a gs ball"
+  locations:
+  - bank: 3
+    address: 0x536C
+  value: "CD @$checkGSBall"
+- description: "changes some code to check if kurt is outside his house instead of checking if the forest is restless"
+  locations:
+  - bank: 99
+    address: 0x615B
+  value: "A4 07 08"
+- description: "removes some flag updates during the kurt cutscene"
+  locations:
+  - bank: 99
+    address: 0x637D
+  value: "18 18 18"
+- description: "changes some code to check if kurt is outside his house instead of checking if the forest is restless"
+  locations:
+  - bank: 99
+    address: 0x63FB
+  value: "A4 07 08"
+- description: "removes some flag updates during the kurt cutscene"
+  locations:
+  - bank: 102
+    address: 0x40FF
+  value: "18 18 18 18 18 18 18 18 18"

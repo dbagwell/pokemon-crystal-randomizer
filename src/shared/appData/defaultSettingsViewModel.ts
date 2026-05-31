@@ -1973,6 +1973,18 @@ export const defaultSettingsViewModel = () => {
             name: "Skip GS Ball Inspection",
             description: "Kurt will immeditatly notice the GS Ball starting to shake after you give it to him, instead of having to wait until the next day.",
           }),
+          createSimpleToggleViewModel({
+            id: "SKIP_KURT_FOR_ILEX_SHRINE" as const,
+            name: "Skip Kurt for Ilex Shrine",
+            description: "Makes it so, if you have a GS Ball, you can activate the Celebi event at the Ilex Forest Shrine before giving Kurt the GS Ball.\n"
+              + "If 'Shuffle Items' is enabled, then enabling this without also enabling 'Keep GS Ball After Celebi Event' will make it so the item you get from Kurt "
+              + "for giving hime a GS Ball will be considered as inaccessible by the item shuffle logic until you have access to two GS Balls.",
+          }),
+          createSimpleToggleViewModel({
+            id: "KEEP_GS_BALL_AFTER_CELEBI_EVENT" as const,
+            name: "Keep GS Ball After Celebi Event",
+            description: "Make it so that you don't lose the GS Ball after triggering the Celebi event at the Ilex Forest Shrine.",
+          }),
           createSimpleMultiSelectorViewModel({
             id: "CHANGE_SS_AQUA_REQUIREMENTS" as const,
             name: "Change S.S. Aqua Requirements",

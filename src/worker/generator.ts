@@ -349,7 +349,7 @@ const createPatches = (
     ]
   }
   
-  if (settings.RANDOMIZE_EVENT_POKEMON || settings.RANDOMIZE_RANDOM_ENCOUNTERS) {
+  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE || settings.RANDOMIZE_RANDOM_ENCOUNTERS.VALUE) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
       ...Patch.fromYAML(
@@ -569,6 +569,7 @@ const createPatches = (
     || settings.RANDOMIZE_REGULAR_HIDDEN_ITEMS.VALUE
     || settings.SHUFFLE_ITEMS.VALUE
     || settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.VALUE
+    || settings.SKIP_KURT_FOR_ILEX_SHRINE
   
   if (shouldApplyReceiveItemsChanges) {
     romInfo.patchHunks = [
@@ -703,6 +704,17 @@ const createPatches = (
         },
       ).hunks)
     }
+    
+    if (settings.SKIP_KURT_FOR_ILEX_SHRINE) {
+      romInfo.patchHunks.push(...Patch.fromYAML(
+        romInfo,
+        "earlyCelebiEvent.yml",
+        {},
+        {
+          receivedGSBallEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.RECEIVED_GS_BALL.numericId, 2)),
+        },
+      ).hunks)
+    }
   } else if (settings.FASTER_ITEM_PICKUP_SFX) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
@@ -710,6 +722,10 @@ const createPatches = (
       { offset: romOffsetFromBankAddress(37, 0x6FF5), values: [0x90] },
       { offset: romOffsetFromBankAddress(47, 0x4DBF), values: [0x90] },
     ]
+  }
+  
+  if (settings.KEEP_GS_BALL_AFTER_CELEBI_EVENT) {
+    romInfo.patchHunks.push({ offset: romOffsetFromBankAddress(27, 0x6E42), values: [0x18, 0x18, 0x18] })
   }
   
   if (settings.SINGLE_USE_FRUIT_TREES) {

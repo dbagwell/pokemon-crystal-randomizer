@@ -2222,6 +2222,10 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "GOT_ELIXER_FOR_MAGIKARP",
     numericId: 935,
   },
+  RECEIVED_GS_BALL: {
+    id: "RECEIVED_GS_BALL",
+    numericId: 936,
+  },
   BEAT_SWIMMERF_ELAINE: {
     id: "BEAT_SWIMMERF_ELAINE",
     numericId: 1000,
