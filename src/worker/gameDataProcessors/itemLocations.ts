@@ -282,7 +282,10 @@ export const shuffleItems = (
       const remainingMartGroupIds = [...martGroupIds.filter((martGroupId) => { return !shuffleItemsSettings.EXCLUDE_LOCATIONS.includes(martGroupId) })]
       
       while (remainingMartGroupIds.length > 0) {
-        const shopId = remainingMartGroupIds.find((id) => { return id === "CHERRYGROVE_MART_SHOP" }) ?? random.element({ array: remainingMartGroupIds })
+        const shopId = remainingMartGroupIds.find((id) => { return id === "CHERRYGROVE_MART_SHOP" })
+          ?? remainingMartGroupIds.find((id) => { return id === "VIOLET_MART_SHOP" })
+          ?? remainingMartGroupIds.find((id) => { return id === "AZALEA_MART_SHOP" })
+          ?? random.element({ array: remainingMartGroupIds })
         const shopIndex = remainingMartGroupIds.indexOf(shopId)
         remainingMartGroupIds.splice(shopIndex, 1)
       
