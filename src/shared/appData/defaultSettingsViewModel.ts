@@ -1187,7 +1187,7 @@ export const defaultSettingsViewModel = () => {
               createSimpleMultiSelectorViewModel({
                 id: "GUARANTEED_SHOP_ITEMS" as const,
                 name: "Guaranteed Shop Items",
-                description: "If shops items are being shuffled, as many regular shops as possible (with a priority on the Cherrygrove Mart) will contain at least 1 variant of each of the selected item types.",
+                description: "If shops items are being shuffled, as many regular shops as possible (with a priority on the Cherrygrove, Violet and Azalea Marts) will contain at least 1 variant of each of the selected item types.",
                 options: [
                   createSimpleSelectorOption({
                     id: "BALL" as const,

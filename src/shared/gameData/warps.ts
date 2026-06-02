@@ -3027,6 +3027,10 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     type: "CAVE",
     polarity: "IN",
     direction: "UP",
+    accessRequirements: [
+      "ZEPHYRBADGE",
+      "HM05",
+    ],
     coordinate: [
       4,
       0,

@@ -38,7 +38,7 @@ export const updateTrainerNames = (
       const maxNameLength = (trainer: Trainer) => {
         const className = gameData.trainerClasses[trainer.classId].name
         const combinedMaxLength = trainer.isContestTrainer ?? false ? 16 : 17
-        return combinedMaxLength - inGameStringLength(className)
+        return Math.min(combinedMaxLength - inGameStringLength(className), trainer.maxNameLength ?? 10)
       }
       
       const singleTrainers = gameData.trainers.filter((trainer) => {
@@ -186,13 +186,13 @@ export const updateTrainerNames = (
         }
         
         const maxCombinedLength = trainer.isContestTrainer ?? false ? 16 : 17
-        const maxNameLength = maxCombinedLength - inGameStringLength(className)
+        const maxNameLength = Math.min(maxCombinedLength - inGameStringLength(className), trainer.maxNameLength ?? 10)
         const namesList = trainer.classId === "TWINS" ? twinsTrainerNames : singleTrainerNames
         let newName = truncateToInGameStringLength(trainer.name, maxNameLength)
         
         if (namesList.length > 0) {
           const validNames = namesList.filter((name) => {
-            return inGameStringLength(className) + inGameStringLength(name) <= maxCombinedLength
+            return inGameStringLength(name) <= maxNameLength
           })
         
           newName = truncateToInGameStringLength(random.element({

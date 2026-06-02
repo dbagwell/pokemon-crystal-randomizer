@@ -9,6 +9,7 @@ export type Trainer = {
   unused?: boolean
   classId: TrainerClassId
   isContestTrainer?: boolean
+  maxNameLength?: number
   pokemon: {
     id: PokemonId
     level: number
