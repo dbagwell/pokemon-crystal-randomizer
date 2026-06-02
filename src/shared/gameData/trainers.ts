@@ -1534,6 +1534,7 @@ export const trainers: Trainer[] = [
     name: "JOEY",
     party: 1,
     classId: "YOUNGSTER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "RATTATA",
@@ -1632,6 +1633,7 @@ export const trainers: Trainer[] = [
     name: "JOEY",
     party: 2,
     classId: "YOUNGSTER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "RATTATA",
@@ -1644,6 +1646,7 @@ export const trainers: Trainer[] = [
     name: "JOEY",
     party: 3,
     classId: "YOUNGSTER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "RATICATE",
@@ -1715,6 +1718,7 @@ export const trainers: Trainer[] = [
     name: "JOEY",
     party: 4,
     classId: "YOUNGSTER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "RATICATE",
@@ -1732,6 +1736,7 @@ export const trainers: Trainer[] = [
     name: "JOEY",
     party: 5,
     classId: "YOUNGSTER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "RATICATE",
@@ -1749,6 +1754,7 @@ export const trainers: Trainer[] = [
     name: "JACK",
     party: 1,
     classId: "SCHOOLBOY",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "ODDISH",
@@ -1793,6 +1799,7 @@ export const trainers: Trainer[] = [
     name: "ALAN",
     party: 1,
     classId: "SCHOOLBOY",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "TANGELA",
@@ -1960,6 +1967,7 @@ export const trainers: Trainer[] = [
     name: "JACK",
     party: 2,
     classId: "SCHOOLBOY",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "ODDISH",
@@ -1977,6 +1985,7 @@ export const trainers: Trainer[] = [
     name: "JACK",
     party: 3,
     classId: "SCHOOLBOY",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "GLOOM",
@@ -1994,6 +2003,7 @@ export const trainers: Trainer[] = [
     name: "ALAN",
     party: 2,
     classId: "SCHOOLBOY",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "TANGELA",
@@ -2011,6 +2021,7 @@ export const trainers: Trainer[] = [
     name: "ALAN",
     party: 3,
     classId: "SCHOOLBOY",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "NATU",
@@ -2072,6 +2083,7 @@ export const trainers: Trainer[] = [
     name: "JACK",
     party: 4,
     classId: "SCHOOLBOY",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "GLOOM",
@@ -2094,6 +2106,7 @@ export const trainers: Trainer[] = [
     name: "JACK",
     party: 5,
     classId: "SCHOOLBOY",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "ELECTRODE",
@@ -2131,6 +2144,7 @@ export const trainers: Trainer[] = [
     name: "ALAN",
     party: 4,
     classId: "SCHOOLBOY",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "NATU",
@@ -2158,6 +2172,7 @@ export const trainers: Trainer[] = [
     name: "ALAN",
     party: 5,
     classId: "SCHOOLBOY",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "XATU",
@@ -2748,6 +2763,7 @@ export const trainers: Trainer[] = [
     name: "DANA",
     party: 1,
     classId: "LASS",
+    maxNameLength: 7,
     pokemon: [
       {
         id: "FLAAFFY",
@@ -2815,6 +2831,7 @@ export const trainers: Trainer[] = [
     name: "DANA",
     party: 2,
     classId: "LASS",
+    maxNameLength: 7,
     pokemon: [
       {
         id: "FLAAFFY",
@@ -2842,6 +2859,7 @@ export const trainers: Trainer[] = [
     name: "DANA",
     party: 3,
     classId: "LASS",
+    maxNameLength: 7,
     pokemon: [
       {
         id: "PSYDUCK",
@@ -2869,6 +2887,7 @@ export const trainers: Trainer[] = [
     name: "DANA",
     party: 4,
     classId: "LASS",
+    maxNameLength: 7,
     pokemon: [
       {
         id: "PSYDUCK",
@@ -2896,6 +2915,7 @@ export const trainers: Trainer[] = [
     name: "DANA",
     party: 5,
     classId: "LASS",
+    maxNameLength: 7,
     pokemon: [
       {
         id: "AMPHAROS",
@@ -3085,6 +3105,7 @@ export const trainers: Trainer[] = [
     name: "GAVEN",
     party: 2,
     classId: "COOLTRAINER_M",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "VICTREEBEL",
@@ -3122,6 +3143,7 @@ export const trainers: Trainer[] = [
     name: "GAVEN",
     party: 3,
     classId: "COOLTRAINER_M",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "VICTREEBEL",
@@ -3212,6 +3234,7 @@ export const trainers: Trainer[] = [
     name: "GAVEN",
     party: 1,
     classId: "COOLTRAINER_M",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "VICTREEBEL",
@@ -3621,6 +3644,7 @@ export const trainers: Trainer[] = [
     name: "BETH",
     party: 1,
     classId: "COOLTRAINER_F",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "RAPIDASH",
@@ -3638,6 +3662,7 @@ export const trainers: Trainer[] = [
     name: "REENA",
     party: 1,
     classId: "COOLTRAINER_F",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "STARMIE",
@@ -3696,6 +3721,7 @@ export const trainers: Trainer[] = [
     name: "BETH",
     party: 2,
     classId: "COOLTRAINER_F",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "RAPIDASH",
@@ -3803,6 +3829,7 @@ export const trainers: Trainer[] = [
     name: "BETH",
     party: 3,
     classId: "COOLTRAINER_F",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "RAPIDASH",
@@ -3821,6 +3848,7 @@ export const trainers: Trainer[] = [
     name: "REENA",
     party: 2,
     classId: "COOLTRAINER_F",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "STARMIE",
@@ -3843,6 +3871,7 @@ export const trainers: Trainer[] = [
     name: "REENA",
     party: 3,
     classId: "COOLTRAINER_F",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "STARMIE",
@@ -4245,6 +4274,7 @@ export const trainers: Trainer[] = [
     name: "BRENT",
     party: 1,
     classId: "POKEMANIAC",
+    maxNameLength: 7,
     pokemon: [
       {
         id: "LICKITUNG",
@@ -4284,6 +4314,7 @@ export const trainers: Trainer[] = [
     name: "BRENT",
     party: 2,
     classId: "POKEMANIAC",
+    maxNameLength: 7,
     pokemon: [
       {
         id: "KANGASKHAN",
@@ -4296,6 +4327,7 @@ export const trainers: Trainer[] = [
     name: "BRENT",
     party: 3,
     classId: "POKEMANIAC",
+    maxNameLength: 7,
     pokemon: [
       {
         id: "PORYGON",
@@ -4355,6 +4387,7 @@ export const trainers: Trainer[] = [
     name: "BRENT",
     party: 4,
     classId: "POKEMANIAC",
+    maxNameLength: 7,
     pokemon: [
       {
         id: "CHANSEY",
@@ -5126,6 +5159,7 @@ export const trainers: Trainer[] = [
     name: "WADE",
     party: 1,
     classId: "BUG_CATCHER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "CATERPIE",
@@ -5203,6 +5237,7 @@ export const trainers: Trainer[] = [
     name: "ARNIE",
     party: 1,
     classId: "BUG_CATCHER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "VENONAT",
@@ -5231,6 +5266,7 @@ export const trainers: Trainer[] = [
     name: "WADE",
     party: 2,
     classId: "BUG_CATCHER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "METAPOD",
@@ -5258,6 +5294,7 @@ export const trainers: Trainer[] = [
     name: "WADE",
     party: 3,
     classId: "BUG_CATCHER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "BUTTERFREE",
@@ -5296,6 +5333,7 @@ export const trainers: Trainer[] = [
     name: "ARNIE",
     party: 2,
     classId: "BUG_CATCHER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "VENONAT",
@@ -5308,6 +5346,7 @@ export const trainers: Trainer[] = [
     name: "ARNIE",
     party: 3,
     classId: "BUG_CATCHER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "VENOMOTH",
@@ -5325,6 +5364,7 @@ export const trainers: Trainer[] = [
     name: "WADE",
     party: 4,
     classId: "BUG_CATCHER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "BUTTERFREE",
@@ -5372,6 +5412,7 @@ export const trainers: Trainer[] = [
     name: "WADE",
     party: 5,
     classId: "BUG_CATCHER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "BUTTERFREE",
@@ -5419,6 +5460,7 @@ export const trainers: Trainer[] = [
     name: "ARNIE",
     party: 4,
     classId: "BUG_CATCHER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "VENOMOTH",
@@ -5436,6 +5478,7 @@ export const trainers: Trainer[] = [
     name: "ARNIE",
     party: 5,
     classId: "BUG_CATCHER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "VENOMOTH",
@@ -5630,6 +5673,7 @@ export const trainers: Trainer[] = [
     name: "WILTON",
     party: 1,
     classId: "FISHER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "GOLDEEN",
@@ -5830,6 +5874,7 @@ export const trainers: Trainer[] = [
     name: "WILTON",
     party: 2,
     classId: "FISHER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "GOLDEEN",
@@ -5873,6 +5918,7 @@ export const trainers: Trainer[] = [
     name: "WILTON",
     party: 3,
     classId: "FISHER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "SEAKING",
@@ -6726,6 +6772,7 @@ export const trainers: Trainer[] = [
     name: "HUEY",
     party: 1,
     classId: "SAILOR",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "POLIWAG",
@@ -6886,6 +6933,7 @@ export const trainers: Trainer[] = [
     name: "HUEY",
     party: 2,
     classId: "SAILOR",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "POLIWHIRL",
@@ -6903,6 +6951,7 @@ export const trainers: Trainer[] = [
     name: "HUEY",
     party: 3,
     classId: "SAILOR",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "POLIWHIRL",
@@ -6920,6 +6969,7 @@ export const trainers: Trainer[] = [
     name: "HUEY",
     party: 4,
     classId: "SAILOR",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "POLITOED",
@@ -7630,6 +7680,7 @@ export const trainers: Trainer[] = [
     name: "ANTHONY",
     party: 2,
     classId: "HIKER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "GEODUDE",
@@ -7705,6 +7756,7 @@ export const trainers: Trainer[] = [
     name: "ANTHONY",
     party: 1,
     classId: "HIKER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "GEODUDE",
@@ -7859,6 +7911,7 @@ export const trainers: Trainer[] = [
     name: "ANTHONY",
     party: 3,
     classId: "HIKER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "GRAVELER",
@@ -8031,6 +8084,7 @@ export const trainers: Trainer[] = [
     name: "ANTHONY",
     party: 4,
     classId: "HIKER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "GRAVELER",
@@ -8053,6 +8107,7 @@ export const trainers: Trainer[] = [
     name: "ANTHONY",
     party: 5,
     classId: "HIKER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "GRAVELER",
@@ -8654,6 +8709,7 @@ export const trainers: Trainer[] = [
     name: "KENJI",
     unused: true,
     classId: "BLACKBELT",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "ONIX",
@@ -8697,6 +8753,7 @@ export const trainers: Trainer[] = [
     name: "KENJI",
     unused: true,
     classId: "BLACKBELT",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "ONIX",
@@ -8822,6 +8879,7 @@ export const trainers: Trainer[] = [
   {
     name: "KENJI",
     classId: "BLACKBELT",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "MACHOKE",
@@ -9214,6 +9272,7 @@ export const trainers: Trainer[] = [
     name: "LIZ",
     party: 1,
     classId: "PICNICKER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "NIDORAN_F",
@@ -9364,6 +9423,7 @@ export const trainers: Trainer[] = [
     name: "LIZ",
     party: 2,
     classId: "PICNICKER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "WEEPINBELL",
@@ -9381,6 +9441,7 @@ export const trainers: Trainer[] = [
     name: "LIZ",
     party: 3,
     classId: "PICNICKER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "WEEPINBELL",
@@ -9457,6 +9518,7 @@ export const trainers: Trainer[] = [
     name: "TIFFANY",
     party: 2,
     classId: "PICNICKER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "CLEFAIRY",
@@ -9474,6 +9536,7 @@ export const trainers: Trainer[] = [
     name: "TIFFANY",
     party: 3,
     classId: "PICNICKER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "CLEFAIRY",
@@ -9519,6 +9582,7 @@ export const trainers: Trainer[] = [
     name: "TIFFANY",
     party: 1,
     classId: "PICNICKER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "CLEFAIRY",
@@ -9573,6 +9637,7 @@ export const trainers: Trainer[] = [
     name: "LIZ",
     party: 4,
     classId: "PICNICKER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "WEEPINBELL",
@@ -9595,6 +9660,7 @@ export const trainers: Trainer[] = [
     name: "LIZ",
     party: 5,
     classId: "PICNICKER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "WEEPINBELL",
@@ -9691,6 +9757,7 @@ export const trainers: Trainer[] = [
     name: "TIFFANY",
     party: 4,
     classId: "PICNICKER",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "CLEFAIRY",
@@ -9719,6 +9786,7 @@ export const trainers: Trainer[] = [
     name: "TODD",
     party: 1,
     classId: "CAMPER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "PSYDUCK",
@@ -9863,6 +9931,7 @@ export const trainers: Trainer[] = [
     name: "TODD",
     party: 2,
     classId: "CAMPER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "GEODUDE",
@@ -9885,6 +9954,7 @@ export const trainers: Trainer[] = [
     name: "TODD",
     party: 3,
     classId: "CAMPER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "GEODUDE",
@@ -10047,6 +10117,7 @@ export const trainers: Trainer[] = [
     name: "TODD",
     party: 4,
     classId: "CAMPER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "GRAVELER",
@@ -10074,6 +10145,7 @@ export const trainers: Trainer[] = [
     name: "TODD",
     party: 5,
     classId: "CAMPER",
+    maxNameLength: 8,
     pokemon: [
       {
         id: "GRAVELER",
@@ -10600,6 +10672,7 @@ export const trainers: Trainer[] = [
   {
     name: "DEREK",
     classId: "POKEFAN_M",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "PIKACHU",
@@ -10751,6 +10824,7 @@ export const trainers: Trainer[] = [
     name: "DEREK",
     unused: true,
     classId: "POKEFAN_M",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "PIKACHU",
@@ -10764,6 +10838,7 @@ export const trainers: Trainer[] = [
     name: "DEREK",
     unused: true,
     classId: "POKEFAN_M",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "PIKACHU",
@@ -11110,6 +11185,7 @@ export const trainers: Trainer[] = [
   {
     name: "BEVERLY",
     classId: "POKEFAN_F",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "SNUBBULL",
@@ -11135,6 +11211,7 @@ export const trainers: Trainer[] = [
     name: "BEVERLY",
     unused: true,
     classId: "POKEFAN_F",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "SNUBBULL",
@@ -11148,6 +11225,7 @@ export const trainers: Trainer[] = [
     name: "BEVERLY",
     unused: true,
     classId: "POKEFAN_F",
+    maxNameLength: 9,
     pokemon: [
       {
         id: "GRANBULL",

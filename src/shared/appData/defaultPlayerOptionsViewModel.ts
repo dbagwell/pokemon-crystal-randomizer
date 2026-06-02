@@ -261,7 +261,7 @@ const trainerNamesOption = () => {
               + "If any of lists are empty, those names won't be changed.\n"
               + "Each name in the lists should be on its own line. "
               + "Class names should be no longer than 13 'in-game characters'. "
-              + "Trainer names should be no longer than 10 'in-game characters'. "
+              + "Trainer names should be no longer than 10 'in-game characters' (though some trainers require even shorter names). "
               + "Pokémon nicknames should be no longer than 10 'in-game characters' and no longer than 10 'character tokens' with at least 1 name that is no longer than 5 'character tokens'.\n"
               + "If names are too long, they will be truncated. "
               + "Also, the combined character count of a trainer's name and class name can never exceed 17 (16 for certain trainers) - "
