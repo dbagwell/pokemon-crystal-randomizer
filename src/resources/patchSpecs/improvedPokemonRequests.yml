@@ -52,27 +52,27 @@ changes:
   locations:
   - bank: 98
     address: 0x5571
-  value: "00 @$lickitungScript"
+  value: "00 @$lickitungScript 18"
 - description: "Calls code"
   locations:
   - bank: 98
     address: 0x5592
-  value: "00 @$oddishScript"
+  value: "00 @$oddishScript 18"
 - description: "Calls code"
   locations:
   - bank: 98
     address: 0x55B3
-  value: "00 @$staryuScript"
+  value: "00 @$staryuScript 18"
 - description: "Calls code"
   locations:
   - bank: 98
     address: 0x55D8
-  value: "00 @$growlitheScript"
+  value: "00 @$growlitheScript 18"
 - description: "Calls code"
   locations:
   - bank: 98
     address: 0x561A
-  value: "00 @$pichuScript"
+  value: "00 @$pichuScript 18"
 - description: "Adds code"
   locations:
   - bank: 102
