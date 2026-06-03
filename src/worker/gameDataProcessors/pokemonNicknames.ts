@@ -36,21 +36,26 @@ export const updatePokemonNicknames = (
     })
   })
   
-  let kenyaNameOptions = availableNicknames.filter((name) => {
-    return bytesFromTextData(name).length <= 5
-  })
-  
-  if (kenyaNameOptions.length === 0) {
-    kenyaNameOptions = allNicknames.filter((name) => {
-      return bytesFromTextData(name).length <= 5
+  const getRandomNicknameWithMaxLength = (maxLength: number) => {
+    let options = availableNicknames.filter((name) => {
+      return bytesFromTextData(name).length <= maxLength
     })
+  
+    if (options.length === 0) {
+      options = allNicknames.filter((name) => {
+        return bytesFromTextData(name).length <= maxLength
+      })
+    }
+  
+    if (options.length === 0) {
+      options = (availableNicknames.length !== 0 ? availableNicknames : allNicknames).map((name) => {
+        return stringFrom(bytesFromTextData(name).slice(0, maxLength))
+      })
+    }
+    
+    return random.element({ array: options })
   }
   
-  if (kenyaNameOptions.length === 0) {
-    kenyaNameOptions = (availableNicknames.length !== 0 ? availableNicknames : allNicknames).map((name) => {
-      return stringFrom(bytesFromTextData(name).slice(0, 5))
-    })
-  }
-  
-  gameData.kenyaNickname = random.element({ array: kenyaNameOptions })
+  gameData.shuckieNickname = getRandomNicknameWithMaxLength(7)
+  gameData.kenyaNickname = getRandomNicknameWithMaxLength(5)
 }
