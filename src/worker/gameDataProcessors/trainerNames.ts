@@ -2,7 +2,7 @@ import type { PlayerOptions } from "@shared/appData/settingsFromViewModel"
 import type { PlayerSpecificGameData } from "@shared/types/gameData/gameData"
 import type { Trainer } from "@shared/types/gameData/trainer"
 import { isNotNullish } from "@shared/utils"
-import { bytesFromTextData, inGameStringLength, truncateToInGameStringLength } from "@shared/utils/textConverters"
+import { bytesFromTextData, inGameStringLength, sanitizedNameList, truncateToInGameStringLength } from "@shared/utils/textConverters"
 import type { Random } from "@worker/random"
 
 export const updateTrainerNames = (
@@ -87,11 +87,7 @@ export const updateTrainerNames = (
     case "CUSTOM_LIST": {
       // Randomize Twins Class Name
       
-      const availableTwinsClassNames = method.SETTINGS.CUSTOM_LIST.TWINS_CLASS_NAMES?.split("\n").map((name) => {
-        return truncateToInGameStringLength(name, 13)
-      }).filter((name) => {
-        return name.length > 0
-      }) ?? []
+      const availableTwinsClassNames = sanitizedNameList(method.SETTINGS.CUSTOM_LIST.TWINS_CLASS_NAMES, 13, true)
       
       if (availableTwinsClassNames.length > 0) {
         gameData.trainerClasses.TWINS.name = random.element({ array: availableTwinsClassNames })
@@ -99,11 +95,7 @@ export const updateTrainerNames = (
       
       // Randomize class names
       
-      const allAvailableClassNames = method.SETTINGS.CUSTOM_LIST.CLASS_NAMES?.split("\n").map((name) => {
-        return truncateToInGameStringLength(name, 13)
-      }).filter((name) => {
-        return name.length > 0
-      }) ?? []
+      const allAvailableClassNames = sanitizedNameList(method.SETTINGS.CUSTOM_LIST.CLASS_NAMES, 13, true)
       
       if (allAvailableClassNames.length > 0) {
         allAvailableClassNames.sort((a, b) => {
@@ -155,17 +147,8 @@ export const updateTrainerNames = (
       
       // Randomize Trainer Names
       
-      const singleTrainerNames = method.SETTINGS.CUSTOM_LIST.TRAINER_NAMES?.split("\n").map((name) => {
-        return truncateToInGameStringLength(name, 10)
-      }).filter((name) => {
-        return name.length > 0
-      }) ?? []
-      
-      const twinsTrainerNames = method.SETTINGS.CUSTOM_LIST.TWINS_TRAINER_NAMES?.split("\n").map((name) => {
-        return truncateToInGameStringLength(name, 10)
-      }).filter((name) => {
-        return name.length > 0
-      }) ?? []
+      const singleTrainerNames = sanitizedNameList(method.SETTINGS.CUSTOM_LIST.TRAINER_NAMES, 10, false)
+      const twinsTrainerNames = sanitizedNameList(method.SETTINGS.CUSTOM_LIST.TWINS_TRAINER_NAMES, 10, false)
       
       const changedNames: Record<string, string> = {}
       

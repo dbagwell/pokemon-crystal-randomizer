@@ -1,6 +1,6 @@
 import type { PlayerOptions } from "@shared/appData/settingsFromViewModel"
 import type { PlayerSpecificGameData } from "@shared/types/gameData/gameData"
-import { bytesFromTextData, stringFrom, truncateToInGameStringLength } from "@shared/utils/textConverters"
+import { bytesFromTextData, sanitizedNameList, stringFrom } from "@shared/utils/textConverters"
 import type { Random } from "@worker/random"
 
 export const updatePokemonNicknames = (
@@ -18,11 +18,7 @@ export const updatePokemonNicknames = (
     return
   }
   
-  const allNicknames = method.SETTINGS.CUSTOM_LIST.POKEMON_NICKNAMES?.split("\n").map((name) => {
-    return truncateToInGameStringLength(name, 10)
-  }).filter((name) => {
-    return name.length > 0
-  }) ?? []
+  const allNicknames = sanitizedNameList(method.SETTINGS.CUSTOM_LIST.POKEMON_NICKNAMES, 10, true)
   
   let availableNicknames: string[] = []
   Object.values(gameData.trades).forEach((trade) => {
