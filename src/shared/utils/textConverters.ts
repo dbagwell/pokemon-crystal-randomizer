@@ -31,7 +31,11 @@ const characterMap: Record<string, number> = {
   "×": 0xF1,
   "/": 0xF3,
   ",": 0xF4,
-  ...characterMapFrom("0123456789", 0xF6),
+  ...characterMapFrom("012345678", 0xF6),
+}
+
+const nineMap = {
+  9: 0xFF, // Needs to be separate so we can filter it out in cases where it could be confused with arbitrary data terminators
 }
 
 const terminatorCharacterMap = {
@@ -64,6 +68,7 @@ const bytesFromString = (string: string, characterMap: Record<string, number>) =
 export const bytesFromTextData = (textData: string) => {
   return bytesFromString(textData, {
     ...characterMap,
+    ...nineMap,
     ...terminatorCharacterMap,
   })
 }
@@ -71,9 +76,23 @@ export const bytesFromTextData = (textData: string) => {
 export const bytesFromTextScript = (script: string) => {
   return bytesFromString(script, {
     ...characterMap,
+    ...nineMap,
     ...terminatorCharacterMap,
     ...controlCharacterMap,
   })
+}
+
+export const stringFrom = (bytes: number[]) => {
+  return bytes.map((byte) => {
+    return Object.entries({
+      ...characterMap,
+      ...nineMap,
+      ...terminatorCharacterMap,
+      ...controlCharacterMap,
+    }).find((entry) => {
+      return entry[1] === byte
+    })?.[0] ?? "<?>"
+  }).join("")
 }
 
 export const inGameStringLength = (string: string) => {
@@ -88,6 +107,19 @@ export const inGameStringLength = (string: string) => {
   }, 0)
 }
 
+export const sanitizedNameList = (text: string | undefined, maxNameLength: number, allowNine: boolean) => {
+  const map = {
+    ...characterMap,
+    ...allowNine ? nineMap : {},
+  }
+  
+  return (text ?? "").split("\n").map((name) => {
+    return truncateToInGameStringLength(stringFrom(bytesFromString(name, map)), maxNameLength)
+  }).filter((name) => {
+    return name.length > 0
+  })
+}
+
 export const truncateToInGameStringLength = (string: string, length: number) => {
   let result = string
   
@@ -100,16 +132,4 @@ export const truncateToInGameStringLength = (string: string, length: number) => 
   }
   
   return result
-}
-
-export const stringFrom = (bytes: number[]) => {
-  return bytes.map((byte) => {
-    return Object.entries({
-      ...characterMap,
-      ...terminatorCharacterMap,
-      ...controlCharacterMap,
-    }).find((entry) => {
-      return entry[1] === byte
-    })?.[0] ?? "<?>"
-  }).join("")
 }

@@ -140,6 +140,7 @@ export const applyPlayerOptions = (params: ApplyPlayerOptionsParams) => {
     trainers: JSON.parse(JSON.stringify(trainers)) as typeof trainers,
     trades: JSON.parse(JSON.stringify(tradesMap)) as typeof tradesMap,
     kenyaNickname: "KENYA",
+    shuckieNickname: "SHUCKIE",
   }
   
   updateTrainerNames(playerOptions, gameData, random)
@@ -2653,6 +2654,10 @@ const createPlayerOptionsPatches = (params: {
     {
       offset: romOffsetFromBankAddress(26, 0x5DB9),
       values: bytesFromTextData(gameData.kenyaNickname.padEnd(6, "@")),
+    },
+    {
+      offset: romOffsetFromBankAddress(1, 0x7376),
+      values: bytesFromTextData(gameData.shuckieNickname.padEnd(8, "@")),
     },
   ])
   

@@ -79,4 +79,5 @@ export type PlayerSpecificGameData = {
   trainers: Trainer[]
   trades: IdMap<TradeId, Trade>
   kenyaNickname: string
+  shuckieNickname: string
 }
