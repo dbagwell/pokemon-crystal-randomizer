@@ -53,7 +53,7 @@ The app can also be used to generate ROMs, logs and patches without having to us
   - CLASSIC_CRAZY_FIR
   - CLASSIC_MAX
   - MAXIMUM_PLUS
-- `--settings`: **string (optional)** - The path to a `.yml` file that contains the desired settings to used when generating the changes.
+- `--settings`: **string (optional)** - The path to a `.yml` file that contains the desired settings to be used when generating the changes.
 - `--seed`: **string (optional)** - The seed to use for all the random choices when generating the changes. If not specified, a random seed will be used.
 - `--inputROM`: **string (optional)** - The path to a `.gbc` file that contains the vanilla Pokémon Crystal Version 1.1 ROM. Required if no vanilla ROM has been provided to the app before.
 - `--outputDir`: **string (required)** - The path to a directory where all generated files will be saved.
@@ -66,13 +66,13 @@ The app can also be used to generate ROMs, logs and patches without having to us
 
 ## Feature Requests and Bug Reports
 
-Please submit all feature requests and bug reports in the issues section of this repository and label them with the `enhancement` and `bug` labels respectively.
+Please submit all feature requests and bug reports in the [issues section of this repository](https://github.com/dbagwell/pokemon-crystal-randomizer/issues) and label them with the `enhancement` and `bug` labels respectively.
 
 When reporting bugs, please include any error messages (or screenshots of error states) and as much information as possible to help narrow down the issue. If the bug is related to a generated ROM, please also attach the log (.log.txt) and patch (.pcrp) files if available - ***do NOT include the ROM file***.
 
 ## Contributing
 
-See [contributing](contributing.md).
+See [contributing](https://github.com/dbagwell/pokemon-crystal-randomizer/blob/main/contributing.md).
 
 ## Acknowledgements
 
