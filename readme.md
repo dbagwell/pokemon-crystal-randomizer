@@ -8,7 +8,7 @@ Download the latest release of the application from [here](https://dbagwell.gith
 
 ## Usage
 
-### Generating ROM's
+### Generating ROMs
 
 1. Launch the Pokemon Crystal Randomizer Application.
 1. Select a preset and or customize the changes you would like to make.
