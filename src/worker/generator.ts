@@ -2642,7 +2642,7 @@ const createPlayerOptionsPatches = (params: {
   
   // Pokémon Nicknames
   
-  const firstTradeNicknameOffset = romOffsetFromBankAddress(63, 0x4E5A)
+  const firstTradeNicknameOffset = romOffsetFromBankAddress(63, 0x4E5B)
   
   patchHunks.push(...[
     ...Object.values(gameData.trades).map((trade, index) => {
