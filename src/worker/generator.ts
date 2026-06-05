@@ -1660,25 +1660,36 @@ const createPatches = (
   
   // Elm Everstone Requirements
   
-  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE) {
-    const numericId = pokemonMap[romInfo.gameData.showAndTellPokemon.TOGEPI].numericId
+  if (settings.RANDOMIZE_EVENT_POKEMON.VALUE || settings.ELM_IGNORES_TRAINER_ID) {
+    const shouldOverwriteId = settings.RANDOMIZE_EVENT_POKEMON.VALUE && settings.RANDOMIZE_EVENT_POKEMON.SETTINGS.MYSTERY_EGG_RESEARCH_REQUEST !== "TOGEPI_TOGETIC"
+    const togepiBytes = [
+      ...settings.ELM_IGNORES_TRAINER_ID ? [0x18, 0x18, 0x18, 0x2c] : [],
+      shouldOverwriteId ? pokemonMap[romInfo.gameData.showAndTellPokemon.TOGEPI].numericId : pokemonMap.TOGEPI.numericId,
+    ]
+    
+    const togeticBytes = [
+      ...settings.ELM_IGNORES_TRAINER_ID ? [0x18, 0x18, 0x18, 0x2c] : [],
+      shouldOverwriteId ? pokemonMap[romInfo.gameData.showAndTellPokemon.TOGEPI].numericId : pokemonMap.TOGETIC.numericId,
+    ]
+    
+    const offsetOffset = settings.ELM_IGNORES_TRAINER_ID ? 0 : 1
     
     romInfo.patchHunks.push(...[
       {
-        offset: romOffsetFromBankAddress(30, 0x4C0D),
-        values: [numericId],
+        offset: romOffsetFromBankAddress(30, 0x4C0C + offsetOffset),
+        values: togepiBytes,
       },
       {
-        offset: romOffsetFromBankAddress(30, 0x4C15),
-        values: [numericId],
+        offset: romOffsetFromBankAddress(30, 0x4C14 + offsetOffset),
+        values: togeticBytes,
       },
       {
-        offset: romOffsetFromBankAddress(30, 0x4C23),
-        values: [numericId],
+        offset: romOffsetFromBankAddress(30, 0x4C22 + offsetOffset),
+        values: togepiBytes,
       },
       {
-        offset: romOffsetFromBankAddress(30, 0x4C2B),
-        values: [numericId],
+        offset: romOffsetFromBankAddress(30, 0x4C2A + offsetOffset),
+        values: togeticBytes,
       },
     ])
   }
@@ -2642,7 +2653,7 @@ const createPlayerOptionsPatches = (params: {
   
   // Pokémon Nicknames
   
-  const firstTradeNicknameOffset = romOffsetFromBankAddress(63, 0x4E5A)
+  const firstTradeNicknameOffset = romOffsetFromBankAddress(63, 0x4E5B)
   
   patchHunks.push(...[
     ...Object.values(gameData.trades).map((trade, index) => {

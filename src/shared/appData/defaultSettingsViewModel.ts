@@ -711,6 +711,11 @@ export const defaultSettingsViewModel = () => {
             name: "Add DV Toggle to Stats Screen",
             description: "Adds the ability to press Select on the stats page of the Pokémon information menu to toggle between viewing the Pokémon's full stats and their determinant values.",
           }),
+          createSimpleToggleViewModel({
+            id: "ELM_IGNORES_TRAINER_ID" as const,
+            name: "Elm Ignores Trainer ID",
+            description: "Makes it so when you don't need to be the original trainer of the Pokémon you show to Prof. Elm to get his Everstone Gift.",
+          }),
         ] as const,
       }), // END POKEMON_PROPERTIES
       createTabViewModel({
