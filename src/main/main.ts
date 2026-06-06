@@ -129,11 +129,11 @@ app.on("ready", async () => {
   exposeMainApi(mainAPI)
   
   if (!quitAfterGenerating) {
-    if (process.argv[import.meta.env.DEV ? 2 : 1] === "generate") {
+    if (process.argv.includes("generate")) {
       await generateFromCLI(process.argv)
       app.quit()
-    } else if (isNotNullish(process.argv[1]) && process.argv[1].endsWith(".pcrp")) {
-      await handlePCRPFile(process.argv[1])
+    } else if (process.argv.some((arg) => { return arg.endsWith(".pcrp") })) {
+      await handlePCRPFile(process.argv.find((arg) => { return arg.endsWith(".pcrp") })!)
       app.quit()
     } else {
       await showGeneratorWindow()
