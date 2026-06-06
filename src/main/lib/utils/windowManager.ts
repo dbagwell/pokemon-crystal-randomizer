@@ -1,5 +1,6 @@
 import { bindRendererAPI } from "@lib/ipc/rendererAPIUtils"
 import type { WindowType } from "@shared/appData/windowTypes"
+import { isNotNullish } from "@shared/utils"
 import { BrowserWindow, nativeTheme } from "electron"
 import path from "path"
 
@@ -33,7 +34,7 @@ export const showWindow = async (params: {
     icon: path.join(__dirname, "icons/icon.png"),
   })
   
-  if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+  if (isNotNullish(MAIN_WINDOW_VITE_DEV_SERVER_URL)) {
     window.loadURL(`${MAIN_WINDOW_VITE_DEV_SERVER_URL}/window.html?windowType=${windowType}`)
   } else {
     window.loadFile(path.join(__dirname, "../renderer/window.html"), {
