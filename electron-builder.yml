@@ -40,3 +40,5 @@ nsis:
   createStartMenuShortcut: false
   include: customNSISOptions.nsh
   installerIcon: src/resources/icons/installerIcon.ico
+toolsets:
+  appimage: 1.0.3
