@@ -35,7 +35,7 @@
     "dompurify": "^3.4.2",
     "electron": "42.0.1",
     "electron-affinity": "^1.2.4",
-    "electron-builder": "^26.8.1",
+    "electron-builder": "^26.9.0",
     "electron-updater": "^6.8.3",
     "eslint": "^10.3.0",
     "eslint-plugin-simple-import-sort": "^13.0.0",
