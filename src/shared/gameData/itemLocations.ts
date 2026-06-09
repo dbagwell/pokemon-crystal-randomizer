@@ -3940,8 +3940,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
       ],
     ],
   },
-  ROUTE_43_TIFFANY_GIFT_FOR_CLEFARIY: {
-    id: "ROUTE_43_TIFFANY_GIFT_FOR_CLEFARIY",
+  ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY: {
+    id: "ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY",
     type: "GIFT",
     groupId: "REGULAR_GIFTS",
     itemId: "PINK_BOW",

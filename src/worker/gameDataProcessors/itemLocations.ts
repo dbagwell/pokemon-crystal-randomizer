@@ -1476,7 +1476,7 @@ export const updateAccessLogic = (
       return requirement !== "PIKACHU"
     })
     
-    romInfo.gameData.itemLocations.ROUTE_43_TIFFANY_GIFT_FOR_CLEFARIY.accessRequirements = romInfo.gameData.itemLocations.ROUTE_43_TIFFANY_GIFT_FOR_CLEFARIY.accessRequirements?.filter((requirement) => {
+    romInfo.gameData.itemLocations.ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY.accessRequirements = romInfo.gameData.itemLocations.ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY.accessRequirements?.filter((requirement) => {
       return requirement !== "CLEFAIRY"
     })
     
@@ -1506,7 +1506,7 @@ export const updateAccessLogic = (
     
     romInfo.gameData.itemLocations.NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.MARILL)
     romInfo.gameData.itemLocations.ROUTE_39_DEREKS_GIFT_FOR_PIKACHU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.PIKACHU)
-    romInfo.gameData.itemLocations.ROUTE_43_TIFFANY_GIFT_FOR_CLEFARIY.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.CLEFAIRY)
+    romInfo.gameData.itemLocations.ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.CLEFAIRY)
     romInfo.gameData.itemLocations.LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.MAGIKARP)
     romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.LICKITUNG)
     romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.ODDISH)
