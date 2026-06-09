@@ -190,6 +190,23 @@ RANDOMIZE_LEVEL_UP_MOVES:
       SETTINGS:
         PERCENTAGE: 25
         POWER: 50
+        INCLUDE:
+          - DOUBLE_KICK
+          - SPIKE_CANNON
+        EXCLUDE:
+          - MEGA_PUNCH
+          - RAZOR_WIND
+          - SLAM
+          - ROLLING_KICK
+          - TAKE_DOWN
+          - SUBMISSION
+          - BONE_CLUB
+          - CRABHAMMER
+          - OCTAZOOKA
+          - SELFDESTRUCT
+          - DREAM_EATER
+          - EXPLOSION
+          - FUTURE_SIGHT
     GUARANTEE_LEVEL_ONE_MOVES:
       VALUE: true
       SETTINGS:
