@@ -12,6 +12,12 @@ import { app, BrowserWindow, dialog, Menu, type MenuItemConstructorOptions } fro
 import { exposeMainApi } from "electron-affinity/main"
 import { autoUpdater } from "electron-updater"
 
+if (process.platform === "linux") {
+  app.disableHardwareAcceleration()
+  app.commandLine.appendSwitch("disable-gpu")
+  app.commandLine.appendSwitch("disable-gpu-sandbox")
+}
+
 let ready = false
 let quitAfterGenerating = false
 let filePathToOpen: string | undefined
