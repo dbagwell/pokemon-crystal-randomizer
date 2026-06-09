@@ -25,7 +25,7 @@ export const showWindow = async (params: {
     y: position?.[1],
     width: width,
     height: height,
-    show: false,
+    show: process.platform === "linux", // Linux can fail to trigger the ready-to-show event if this is initialized to false
     webPreferences: {
       preload: path.join(__dirname, "preloadWindow.js"),
       devTools: import.meta.env.DEV,
