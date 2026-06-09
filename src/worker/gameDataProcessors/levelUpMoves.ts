@@ -37,7 +37,8 @@ export const updateLevelUpMoves = (
       
     const matchesForcedGoodMovesConditions = (move: Move, index: number) => {
       if (indicesOfForcedGoodMoves.includes(index)) {
-        return move.power >= minPowerForForcedGoodMoves
+        return move.power >= minPowerForForcedGoodMoves && levelUpMovesSettings.GOOD_DAMAGING_MOVES.SETTINGS.EXCLUDE.includes(move.id)
+          || levelUpMovesSettings.GOOD_DAMAGING_MOVES.SETTINGS.INCLUDE.includes(move.id)
       } else {
         return true
       }

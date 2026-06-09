@@ -2322,6 +2322,28 @@ const createGoodDamagingMovesToggleViewModel = (distinguisher: string = "") => {
         max: 250,
         value: 50,
       }),
+      createSimpleMultiSelectorViewModel({
+        id: "INCLUDE" as const,
+        name: "Include",
+        description: "Moves that should count as 'Good Damaging Moves' even if their Power isn't high enough.",
+        options: moveIds.map((moveId) => {
+          return createSimpleSelectorOption({
+            id: moveId,
+            name: movesMap[moveId].name,
+          })
+        }),
+      }),
+      createSimpleMultiSelectorViewModel({
+        id: "EXCLUDE" as const,
+        name: "Exclude",
+        description: "Moves that should not count as 'Good Damaging Moves' even if their Power is high enough.",
+        options: moveIds.map((moveId) => {
+          return createSimpleSelectorOption({
+            id: moveId,
+            name: movesMap[moveId].name,
+          })
+        }),
+      }),
     ] as const,
   })
 }
