@@ -11,3 +11,14 @@ changes:
   - bank: 5
     address: 0x5B3D
   value: "@$martData"
+- description: "Skip code checking number of marts."
+  locations:
+  - bank: 5
+    address: 0x5B32
+    maxSize: 10
+    freeUnused: true
+  value: "18 08"
+freeSpaces:
+  - bank: 5
+    address: 0x60A9
+    size: 367
