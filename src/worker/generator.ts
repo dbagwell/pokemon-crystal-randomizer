@@ -1118,7 +1118,15 @@ const createPatches = (
     return hexStringFrom(bytesFromTextData(specialShopItemName(shopId, index).padEnd(12, " ") + `${specialShopItemInfo(shopId, index).price}`.padStart(5, " ")))
   }
   
-  const shouldApplyShopItemChanges = settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS") || settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.VALUE
+  const shouldApplyShopItemChanges = settings.SHUFFLE_ITEMS.VALUE && settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")
+    || settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.VALUE
+  
+  if (shouldApplyShopItemChanges) {
+    romInfo.patchHunks.push({
+      offset: romOffsetFromBankAddress(31, 0x415D),
+      values: [martIds.length],
+    })
+  }
   
   if (shouldApplyShopItemChanges || settings.RANDOMIZE_BLUE_CARD_REWARD_COSTS.VALUE) {
     romInfo.patchHunks.push(...[

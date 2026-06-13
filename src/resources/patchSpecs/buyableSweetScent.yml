@@ -20,10 +20,3 @@ changes:
     maxSize: 50
     freeUnused: true
   value: "03 @$clerkScript"
-- description: "Skip code checking number of marts."
-  locations:
-  - bank: 5
-    address: 0x5B32
-    maxSize: 10
-    freeUnused: true
-  value: "18 08"
