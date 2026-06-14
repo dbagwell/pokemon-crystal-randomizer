@@ -29,7 +29,6 @@ values:
   checkGotBlainesItem: "08 25 75 33 $gotVolcanobadgeEventFlagId 03 25 75"
   checkAlreadyGotBluesItem: "31 $gotEarthbadgeEventFlagId 09 51 6A 03 45 6A"
   checkGotBluesItem: "08 4B 6A 33 $gotEarthbadgeEventFlagId 03 4B 6A"
-  clearUndergroundWarehouseDirectorEventFlag: "33 CF 06 32 $directorInUndergroundWarehouseEventFlagId 91"
   fruitTreeSoundEffectScript: "86 88 45 03 3F 40"
   elmMysteryEggCheck: "21 45 09 A2 4D 31 24 00 03 E5 4B"
   elmAfterTurningInMysteryEgg: "14 06 33 $elmsAideHasPokeBallsEventFlagId 03 E0 4B"
@@ -733,15 +732,6 @@ changes:
   - bank: 101
     address: 0x6E6C
   value: "9E 45 01 08 78 6E 33 $gotMysteryEggEventFlagId 18 18 18"
-- description: "Adds code to clear the underground warehouse director event flag."
-  locations:
-  - bank: 47
-  value: "$clearUndergroundWarehouseDirectorEventFlag"
-- description: "Calls code to clear the underground warehouse director event flag."
-  locations:
-  - bank: 47
-    address: 0x4245
-  value: "00 @$clearUndergroundWarehouseDirectorEventFlag"
 - description: "Only sets the card key event if you actually got the item"
   locations:
   - bank: 31

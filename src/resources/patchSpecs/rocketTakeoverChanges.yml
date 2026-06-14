@@ -1,0 +1,13 @@
+description: ""
+values:
+  clearUndergroundWarehouseDirectorEventFlag: "36 13 00 32 $directorInUndergroundWarehouseEventFlagId 91"
+changes:
+- description: "Adds code to clear the underground warehouse director event flag."
+  locations:
+  - bank: 47
+  value: "$clearUndergroundWarehouseDirectorEventFlag"
+- description: "Calls code to clear the underground warehouse director event flag."
+  locations:
+  - bank: 47
+    address: 0x4242
+  value: "00 @$clearUndergroundWarehouseDirectorEventFlag"
