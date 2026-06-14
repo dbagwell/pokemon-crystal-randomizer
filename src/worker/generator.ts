@@ -723,6 +723,17 @@ const createPatches = (
         },
       ).hunks)
     }
+    
+    if (!settings.SKIP_GOLDENROD_ROCKETS) {
+      romInfo.patchHunks.push(...Patch.fromYAML(
+        romInfo,
+        "rocketTakeoverChanges.yml",
+        {},
+        {
+          directorInUndergroundWarehouseEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.DIRECTOR_IN_UNDERGROUND_WAREHOUSE.numericId, 2)),
+        },
+      ).hunks)
+    }
   } else if (settings.FASTER_ITEM_PICKUP_SFX) {
     romInfo.patchHunks = [
       ...romInfo.patchHunks,
@@ -1931,10 +1942,6 @@ const createPatches = (
         "earlyGSBall.yml",
       ).hunks,
       {
-        offset: romOffsetFromBankAddress(24, 0x6D65),
-        values: [0x31, 0x7A, 0x00, 0x08, 0x71, 0x6D, 0x31, 0xC0, 0x00, 0x09, 0x84, 0x6D],
-      }, // Allow getting sweet scent item even while the ilex forest is restless
-      {
         offset: romOffsetFromBankAddress(24, 0x6D40),
         values: [0x03],
       }, // Allow leaving the Route 34 - Ilex Forest Gate via the south exit while the Ilex forest is restless
@@ -2031,9 +2038,59 @@ const createPatches = (
   
   // Initialize events
   
+  const shouldInitializeRestlessForest = settings.START_WITH_ITEMS.VALUE && settings.START_WITH_ITEMS.SETTINGS.KEY_ITEMS.includes("GS_BALL") && settings.SKIP_KURT_FOR_ILEX_SHRINE
+  const shouldInitializeGoldenrodRockets = settings.START_WITH_ITEMS.VALUE && settings.START_WITH_ITEMS.SETTINGS.BADGES.length === 6 && !settings.SKIP_GOLDENROD_ROCKETS
+  const shouldInitializeRadioRockets = settings.START_WITH_ITEMS.VALUE && settings.START_WITH_ITEMS.SETTINGS.BADGES.length > 6 && !settings.SKIP_GOLDENROD_ROCKETS
+  
+  if (shouldInitializeRestlessForest) {
+    romInfo.patchHunks.push({
+      offset: romOffsetFromBankAddress(47, 0x4501), // ILEX_FOREST_LASS
+      values: [0x18, 0x18, 0x18],
+    })
+  }
+  
+  if (shouldInitializeGoldenrodRockets) {
+    romInfo.patchHunks.push({
+      offset: romOffsetFromBankAddress(47, 0x43E1), // GOLDENROD_CITY_ROCKET_TAKEOVER
+      values: [0x18, 0x18, 0x18],
+    })
+  }
+  
+  if (shouldInitializeRadioRockets) {
+    romInfo.patchHunks.push(...[
+      {
+        offset: romOffsetFromBankAddress(47, 0x43DE), // RADIO_TOWER_ROCKET_TAKEOVER
+        values: [0x18, 0x18, 0x18],
+      },
+      {
+        offset: romOffsetFromBankAddress(47, 0x4402), // USED_THE_CARD_KEY_IN_THE_RADIO_TOWER
+        values: [0x18, 0x18, 0x18],
+      },
+    ])
+  }
+  
   const eventFlagsToInitialize: EventFlagId[] = compact([
-    settings.SHUFFLE_ITEMS.VALUE ? "DIRECTOR_IN_UNDERGROUND_WAREHOUSE" : undefined,
+    settings.SHUFFLE_ITEMS.VALUE && !shouldInitializeRadioRockets ? "DIRECTOR_IN_UNDERGROUND_WAREHOUSE" : undefined,
     romInfo.gameData.numberOfMiltankBerries === 0 ? "HEALED_MOOMOO" : undefined,
+    ...shouldInitializeRestlessForest ? [
+      "RECEIVED_GS_BALL",
+      "ROUTE_34_ILEX_FOREST_GATE_LASS",
+      "FOREST_IS_RESTLESS",
+    ] as EventFlagId[] : [],
+    ...shouldInitializeRadioRockets ? [
+      "GOLDENROD_CITY_CIVILIANS",
+      "RADIO_TOWER_BLACKBELT_BLOCKS_STAIRS",
+      "MAHOGANY_TOWN_POKEFAN_M_BLOCKS_EAST",
+    ] as EventFlagId[] : [],
+  ])
+  
+  const engineFlagsToInitialize: number[] = compact([
+    shouldInitializeRestlessForest ? 0x64 : undefined, // FOREST_IS_RESTLESS
+    shouldInitializeRadioRockets ? 0x13 : undefined, // ROCKETS_IN_RADIO_TOWER
+  ])
+  
+  const extraInitializationCode = hexStringFrom([
+    ...shouldInitializeRadioRockets ? [0x12, 0x02, 0x07, 0x01] : [], // Mahogany Town Map Scene
   ])
   
   if (eventFlagsToInitialize.length > 0) {
@@ -2050,6 +2107,18 @@ const createPatches = (
             },
           }
         }),
+        engineFlags: engineFlagsToInitialize.map((flag) => {
+          return {
+            path: "initializeEngineFlag.yml",
+            extraIncludes: {},
+            extraValues: {
+              flagId: hexStringFrom(bytesFrom(flag, 2)),
+            },
+          }
+        }),
+      },
+      {
+        extraCode: extraInitializationCode,
       },
     ).hunks)
   }

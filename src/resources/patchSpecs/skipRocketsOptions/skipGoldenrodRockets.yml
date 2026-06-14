@@ -9,29 +9,15 @@ values:
   noRoomForClearBell: "33 00 00"
   checkOtherFlags: "31 21 00 09 @$skipOtherFlags 33 4A 00 33 CE 06 33 D1 06 33 25 00 33 71 05 33 73 05 33 21 00 33 61 07 33 04 03 33 CC 06 33 CD 06 33 E3 06 32 05 03 32 06 03 32 E4 06 32 D0 06 32 36 07 35 13 00 12 03 15 02 12 04 01 00"
   skipOtherFlags: ""
-  goldenrodRocketsScript: "31 21 00 09 41 42 32 CD 06 91"
-  rocketTakeoverScript: "31 21 00 09 5B 42 36 13 00 03 45 42"
 changes:
-- description: "Skip code that adds more rockets to Goldenrod City."
+- description: "Skip code that adds more rockets to Goldenrod City and triggers the radio tower takeover."
   locations:
   - bank: 47
     address: 0x423E
-  value: "91"
-- description: "New scripts that make changes to the script that cause the rockets to take over the Goldenrod/radio tower."
-  locations:
-  - bank: 47
-  value: "$goldenrodRocketsScript $rocketTakeoverScript"
-- description: "Calls the new script that causes the rockets to take over."
-  locations:
-  - bank: 47
-    address: 0x423E
-  value: "03 @$goldenrodRocketsScript"
-- description: "Calls the new script that causes the rockets to take over."
-  locations:
   - bank: 47
     address: 0x4242
-  value: "03 @$rocketTakeoverScript"
+  value: "91"
 freeSpaces:
 - bank: 47
-  address: 0x4245
+  address: 0x4243
   size: 23
