@@ -95,6 +95,9 @@ export const updateItems = (
   
   if (settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.VALUE) {
     const startingItems = startingItemIds(settings)
+    const validItems = holdableItemIds.filter((itemId) => {
+      return !settings.BANNED_ITEMS.includes(itemId)
+    })
     
     itemLocationIds.forEach((locationId) => {
       if (
@@ -108,7 +111,7 @@ export const updateItems = (
         const replacement = settings.START_WITH_ITEMS.SETTINGS.REPLACE_EXISTING_ITEMS.SETTINGS.REPLACEMENT
         
         if (replacement === "RANDOM") {
-          romInfo.gameData.itemLocations[locationId].itemId = random.element({ array: [...holdableItemIds] })
+          romInfo.gameData.itemLocations[locationId].itemId = random.element({ array: validItems })
         } else {
           romInfo.gameData.itemLocations[locationId].itemId = replacement
         }
@@ -200,6 +203,10 @@ export const shuffleItems = (
   
   if (settings.SHUFFLE_ITEMS.VALUE) {
     const replacements = settings.SHUFFLE_ITEMS.SETTINGS.REPLACE_ITEMS
+    const validItems = holdableItemIds.filter((itemId) => {
+      return !settings.BANNED_ITEMS.includes(itemId)
+    })
+    
     itemsToShuffle.filter((itemInfo) => {
       return Object.keys(replacements).includes(itemInfo.itemId)
     }).forEach((itemInfo) => {
@@ -208,7 +215,7 @@ export const shuffleItems = (
         const replacement = replacements[itemInfo.itemId]!.REPLACEMENT
         
         if (replacement === "RANDOM") {
-          itemInfo.itemId = random.element({ array: [...holdableItemIds] })
+          itemInfo.itemId = random.element({ array: validItems })
         } else {
           itemInfo.itemId = replacement
         }
