@@ -1931,10 +1931,6 @@ const createPatches = (
         "earlyGSBall.yml",
       ).hunks,
       {
-        offset: romOffsetFromBankAddress(24, 0x6D65),
-        values: [0x31, 0x7A, 0x00, 0x08, 0x71, 0x6D, 0x31, 0xC0, 0x00, 0x09, 0x84, 0x6D],
-      }, // Allow getting sweet scent item even while the ilex forest is restless
-      {
         offset: romOffsetFromBankAddress(24, 0x6D40),
         values: [0x03],
       }, // Allow leaving the Route 34 - Ilex Forest Gate via the south exit while the Ilex forest is restless
