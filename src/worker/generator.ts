@@ -1534,20 +1534,22 @@ const createPatches = (
     
   // Scale Experience
     
-  if (settings.SCALE_EXPERIENCE || settings.USE_UPDATED_BASE_EXP) {
+  if (settings.SCALE_EXPERIENCE.VALUE || settings.USE_UPDATED_BASE_EXP) {
     const experiencePatch = Patch.fromYAML(
       romInfo,
       "experienceCalculation.yml",
       {
         options: compact([
           settings.USE_UPDATED_BASE_EXP ? "updatedBaseExperience.yml" : undefined,
-          settings.SCALE_EXPERIENCE ? "scaleExperience.yml" : undefined,
+          settings.SCALE_EXPERIENCE.VALUE ? "scaleExperience.yml" : undefined,
         ]),
       },
       {
         gen5BaseExpTable: settings.USE_UPDATED_BASE_EXP ? hexStringFrom(Object.values(gen5BaseExpMap).flatMap((value) => {
           return bytesFrom(value, 2)
         })) : "",
+        checkIfHigherLevel1: settings.SCALE_EXPERIENCE.SETTINGS.DONT_SCALE_DOWN ? "48 B9 30 01 47" : "",
+        checkIfHigherLevel2: settings.SCALE_EXPERIENCE.SETTINGS.DONT_SCALE_DOWN ? "FA 13 D2 B9 30 04 3E 07 18 02" : "",
       },
     )
     
