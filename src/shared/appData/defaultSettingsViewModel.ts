@@ -1848,7 +1848,7 @@ export const defaultSettingsViewModel = () => {
           createSimpleToggleViewModel({
             id: "CLEAR_GOLDENROD_STORE_BASEMENT" as const,
             name: "Clear Goldenrod Store Basement",
-            description: "Removes permanently removes the boxes blocking the paths to the items in the Goldenrod Department Store Basement allowing them to all be obtained without having to use the elevator multiple times.",
+            description: "Permanently removes the boxes blocking the paths to the items in the Goldenrod Department Store Basement allowing them to all be obtained without having to use the elevator multiple times.",
           }),
           createSimpleToggleViewModel({
             id: "CHANGE_MYSTERY_GIFT" as const,
