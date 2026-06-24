@@ -1786,12 +1786,19 @@ export const defaultSettingsViewModel = () => {
             name: "Show Move Stats in Battle",
             description: "Shows the Power and Accuracy of a move while it is selected in the Fight menu of a battle.",
           }),
-          createSimpleToggleViewModel({
+          createConfigurableToggleViewModel({
             id: "SCALE_EXPERIENCE" as const,
             name: "Scale Experience Gain",
             description: "Changes the battle experience calculation to more closely match that of generations 5 and 7+, "
               + "where the experience earned is curved up or down based on the difference in level "
               + "between the fainted Pokémon and the Pokémon earning the experience.",
+            viewModels: [
+              createSimpleToggleViewModel({
+                id: "DONT_SCALE_DOWN" as const,
+                name: "Don't Scale Down",
+                description: "If enabled, experience won't be scaled down when the Pokémon earning the experience is a higher level than the fainted Pokémon. (Experience will still be scaled up when the fainted Pokémon is a higher level.)",
+              }),
+            ],
           }),
           createConfigurableToggleViewModel({
             id: "CHANGE_OVERWORLD_TRAINER_MOVEMENT" as const,
@@ -1848,7 +1855,7 @@ export const defaultSettingsViewModel = () => {
           createSimpleToggleViewModel({
             id: "CLEAR_GOLDENROD_STORE_BASEMENT" as const,
             name: "Clear Goldenrod Store Basement",
-            description: "Removes permanently removes the boxes blocking the paths to the items in the Goldenrod Department Store Basement allowing them to all be obtained without having to use the elevator multiple times.",
+            description: "Permanently removes the boxes blocking the paths to the items in the Goldenrod Department Store Basement allowing them to all be obtained without having to use the elevator multiple times.",
           }),
           createSimpleToggleViewModel({
             id: "CHANGE_MYSTERY_GIFT" as const,

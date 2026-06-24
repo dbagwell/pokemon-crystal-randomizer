@@ -34,7 +34,7 @@ export const updateTeachableMoves = (
       
     const matchesForcedGoodMovesConditions = (move: Move, index: number) => {
       if (indicesOfForcedGoodMoves.includes(index)) {
-        return move.power >= minPowerForForcedGoodMoves && tmsSettings.GOOD_DAMAGING_MOVES.SETTINGS.EXCLUDE.includes(move.id)
+        return move.power >= minPowerForForcedGoodMoves && !tmsSettings.GOOD_DAMAGING_MOVES.SETTINGS.EXCLUDE.includes(move.id)
           || tmsSettings.GOOD_DAMAGING_MOVES.SETTINGS.INCLUDE.includes(move.id)
       } else {
         return true
@@ -109,7 +109,7 @@ export const updateTeachableMoves = (
       
     const matchesForcedGoodMovesConditions = (move: Move, index: number) => {
       if (indicesOfForcedGoodMoves.includes(index)) {
-        return move.power >= minPowerForForcedGoodMoves && moveTutorSettings.GOOD_DAMAGING_MOVES.SETTINGS.EXCLUDE.includes(move.id)
+        return move.power >= minPowerForForcedGoodMoves && !moveTutorSettings.GOOD_DAMAGING_MOVES.SETTINGS.EXCLUDE.includes(move.id)
           || moveTutorSettings.GOOD_DAMAGING_MOVES.SETTINGS.INCLUDE.includes(move.id)
       } else {
         return true
