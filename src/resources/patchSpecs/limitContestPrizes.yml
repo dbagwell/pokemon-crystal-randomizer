@@ -70,15 +70,15 @@ changes:
 - description: "Sets the event flag for receiving the backup second place prize"
   locations:
   - bank: 26
-    address: 0x6CB9
+    address: 0x6CC8
   value: "00 @$backupSecondPlacePrizeEvent"
 - description: "Sets the event flag for receiving the backup third place prize"
   locations:
   - bank: 26
-    address: 0x6CB9
+    address: 0x6CD7
   value: "00 @$backupThirdPlacePrizeEvent"
 - description: "Sets the event flag for receiving the backup consolation prize"
   locations:
   - bank: 26
-    address: 0x6CB9
+    address: 0x6CE6
   value: "00 @$backupConsolationPrizeEvent"
