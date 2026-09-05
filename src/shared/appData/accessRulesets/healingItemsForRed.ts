@@ -3,7 +3,7 @@ import type { AccessModifier } from "@shared/appData/accessRulesets"
 export const healingItemsForRed: AccessModifier[] = [
   {
     LOCATIONS: [
-      "SILVER_CAVE_ROOM_3",
+      "SILVER_CAVE_ROOM_3_DEFEATED_RED",
     ],
     ADDED_REQUIREMENTS: [
       "POTION",

@@ -33,6 +33,6 @@ export const martGroupIds = [
 
 export type MartGroupId = typeof martGroupIds[number]
 
-export const isMartGroupId = (value: string): value is MartGroupId => {
+export const isMartGroupId = (value: any): value is MartGroupId => {
   return (martGroupIds as readonly string[]).includes(value)
 }

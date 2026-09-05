@@ -263,7 +263,7 @@ const applySettingsToToggleViewModel = (settings: any, viewModel: ToggleViewMode
     })
     
     Object.keys(settings.SETTINGS).forEach((key) => {
-      if (!subViewModelIds.includes(key)) {
+      if (!subViewModelIds.includes(key) && (!Array.isArray(settings.SETTINGS[key]) || settings.SETTINGS[key].length > 0)) {
         warnings.push(unexpectedKeyWarning(`${path}.SETTINGS`, key))
       }
     })

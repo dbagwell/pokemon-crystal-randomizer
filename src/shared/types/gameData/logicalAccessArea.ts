@@ -8,6 +8,10 @@ export type LogicalAccessArea = {
 }
 
 export type LogicalAreaAccessOption =
+  | []
   | WarpId
   | LogicalAccessAreaId
-  | AccessRequirement[]
+  | {
+    area: LogicalAccessAreaId
+    requirements: AccessRequirement[]
+  }

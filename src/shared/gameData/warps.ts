@@ -1093,7 +1093,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "IN",
     direction: "UP",
     accessRequirements: [
-      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_DISABLED_TRANSMITTER",
     ],
     coordinate: [
       6,
@@ -2004,7 +2004,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "DOWN",
     direction: "ANY",
     accessRequirements: [
-      "BURNED_TOWER_B1F",
+      "BURNED_TOWER_B1F_AWOKE_LEGENDARY_BEASTS",
     ],
     coordinate: [
       7,
@@ -4752,7 +4752,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "DOWN",
     direction: "ANY",
     accessRequirements: [
-      "LAKE_OF_RAGE_SURF_AREA",
+      "LAKE_OF_RAGE_SURF_AREA_FOUGHT_SHINY",
     ],
     coordinate: [
       7,
@@ -6301,8 +6301,8 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "WHIRL_ISLAND_B1F_NORTH_AREA_EAST_LADDER_UP",
   },
-  WHIRL_ISLAND_SW_ENTRANCE_AREA_CAVE_OUT: {
-    id: "WHIRL_ISLAND_SW_ENTRANCE_AREA_CAVE_OUT",
+  WHIRL_ISLAND_SW_ENTRANCE_WEST_AREA_CAVE_OUT: {
+    id: "WHIRL_ISLAND_SW_ENTRANCE_WEST_AREA_CAVE_OUT",
     mapId: "WHIRL_ISLAND_SW",
     index: 1,
     areaId: "WHIRL_ISLAND_SW_ENTRANCE_WEST_AREA",
@@ -7891,8 +7891,8 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     ],
     linkedWarpId: "VICTORY_ROAD_3F_NORTH_AREA_HOLE",
   },
-  VICTORY_ROAD_3F_NORTH_AREA_CAVE_OUT: {
-    id: "VICTORY_ROAD_3F_NORTH_AREA_CAVE_OUT",
+  VICTORY_ROAD_3F_NORTH_EXIT_AREA_CAVE_OUT: {
+    id: "VICTORY_ROAD_3F_NORTH_EXIT_AREA_CAVE_OUT",
     mapId: "VICTORY_ROAD",
     index: 10,
     areaId: "VICTORY_ROAD_3F_NORTH_AREA",
@@ -8010,6 +8010,9 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "OUT",
     distinguisher: "UPPER",
     direction: "RIGHT",
+    accessRequirements: [
+      "CLEAR_BELL",
+    ],
     coordinate: [
       7,
       4,
@@ -8029,6 +8032,9 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "OUT",
     distinguisher: "LOWER",
     direction: "RIGHT",
+    accessRequirements: [
+      "CLEAR_BELL",
+    ],
     coordinate: [
       7,
       5,
@@ -9585,7 +9591,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "IN",
     direction: "UP",
     accessRequirements: [
-      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
     ],
     coordinate: [
       18,
@@ -9714,7 +9720,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "IN",
     direction: "UP",
     accessRequirements: [
-      "BLACKTHORN_GYM_1F_BACK_AREA",
+      "BLACKTHORN_GYM_1F_BACK_AREA_DEFEATED_CLAIR",
     ],
     coordinate: [
       20,
@@ -10867,7 +10873,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "IN",
     direction: "UP",
     accessRequirements: [
-      "SLOWPOKE_WELL_B1F_EAST_AREA",
+      "SLOWPOKE_WELL_B1F_EAST_AREA_DEFEATED_ROCKETS",
     ],
     coordinate: [
       10,
@@ -13778,8 +13784,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "IN",
     direction: "UP",
     accessRequirements: [
-      "POWER_PLANT",
-      "MACHINE_PART",
+      "POWER_PLANT_RESTORED_POWER",
     ],
     coordinate: [
       17,
@@ -15844,7 +15849,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       107,
       25988,
     ],
-    linkedWarpId: "VICTORY_ROAD_3F_NORTH_AREA_CAVE_OUT",
+    linkedWarpId: "VICTORY_ROAD_3F_NORTH_EXIT_AREA_CAVE_OUT",
   },
   ROUTE_23_CAVE_IN_RIGHT: {
     id: "ROUTE_23_CAVE_IN_RIGHT",
@@ -15863,7 +15868,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       107,
       25992,
     ],
-    linkedWarpId: "VICTORY_ROAD_3F_NORTH_AREA_CAVE_OUT",
+    linkedWarpId: "VICTORY_ROAD_3F_NORTH_EXIT_AREA_CAVE_OUT",
   },
   INDIGO_PLATEAU_POKECENTER_1F_DOOR_OUT_LEFT: {
     id: "INDIGO_PLATEAU_POKECENTER_1F_DOOR_OUT_LEFT",
@@ -19562,7 +19567,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
       105,
       28445,
     ],
-    linkedWarpId: "WHIRL_ISLAND_SW_ENTRANCE_AREA_CAVE_OUT",
+    linkedWarpId: "WHIRL_ISLAND_SW_ENTRANCE_WEST_AREA_CAVE_OUT",
   },
   ROUTE_41_SE_ISLAND_AREA_CAVE_IN: {
     id: "ROUTE_41_SE_ISLAND_AREA_CAVE_IN",
@@ -21697,8 +21702,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     polarity: "IN",
     direction: "UP",
     accessRequirements: [
-      "POWER_PLANT",
-      "MACHINE_PART",
+      "POWER_PLANT_RESTORED_POWER",
     ],
     coordinate: [
       17,

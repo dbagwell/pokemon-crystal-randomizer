@@ -1,6 +1,6 @@
-import type { AccessModifier } from "@shared/appData/accessRulesets"
+import type { AccessModifier, AreaTransitionAccessModifier } from "@shared/appData/accessRulesets"
 
-export const xItemsForHardFights: AccessModifier[] = [
+export const xItemsForHardFights: (AccessModifier | AreaTransitionAccessModifier)[] = [
   {
     LOCATIONS: [
       "PEWTER_GYM_BADGE",
@@ -32,7 +32,7 @@ export const xItemsForHardFights: AccessModifier[] = [
       "WISE_TRIOS_ROOM_DOOR_OUT_UPPER",
       "WISE_TRIOS_ROOM_DOOR_OUT_LOWER",
       "WISE_TRIOS_ROOM_STAIRS_DOWN",
-      "SILVER_CAVE_ROOM_3_CAVE_OUT",
+      "SILVER_CAVE_ROOM_3_DEFEATED_RED",
     ],
     ADDED_REQUIREMENTS: [
       "X_ATTACK",
@@ -45,12 +45,9 @@ export const xItemsForHardFights: AccessModifier[] = [
     ],
   },
   {
-    LOCATIONS: [
-      "VICTORY_ROAD_3F_NORTH_AREA",
-    ],
-    MATCHING_REQUIREMENTS: [
-      "VICTORY_ROAD_3F_NORTH_EXIT_AREA",
-    ],
+    TO_AREA: "GOLDENROD_UNDERGROUND_SWITCH_ROOM",
+    FROM_AREA: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_STAIRS_AREA",
+    IS_MUTUAL: true,
     ADDED_REQUIREMENTS: [
       "X_ATTACK",
       "X_SPECIAL",
@@ -62,12 +59,9 @@ export const xItemsForHardFights: AccessModifier[] = [
     ],
   },
   {
-    LOCATIONS: [
-      "VICTORY_ROAD_3F_NORTH_EXIT_AREA",
-    ],
-    MATCHING_REQUIREMENTS: [
-      "VICTORY_ROAD_3F_NORTH_AREA",
-    ],
+    TO_AREA: "VICTORY_ROAD_3F_NORTH_EXIT_AREA",
+    FROM_AREA: "VICTORY_ROAD_3F_NORTH_AREA",
+    IS_MUTUAL: true,
     ADDED_REQUIREMENTS: [
       "X_ATTACK",
       "X_SPECIAL",
@@ -79,63 +73,9 @@ export const xItemsForHardFights: AccessModifier[] = [
     ],
   },
   {
-    LOCATIONS: [
-      "GOLDENROD_UNDERGROUND_SWITCH_ROOM_STAIRS_AREA",
-    ],
-    MATCHING_REQUIREMENTS: [
-      "GOLDENROD_UNDERGROUND_SWITCH_ROOM",
-    ],
-    ADDED_REQUIREMENTS: [
-      "X_ATTACK",
-      "X_SPECIAL",
-      "X_DEFEND",
-      "X_SPEED",
-      "X_ACCURACY",
-      "GUARD_SPEC",
-      "DIRE_HIT",
-    ],
-  },
-  {
-    LOCATIONS: [
-      "GOLDENROD_UNDERGROUND_SWITCH_ROOM",
-    ],
-    MATCHING_REQUIREMENTS: [
-      "GOLDENROD_UNDERGROUND_SWITCH_ROOM_STAIRS_AREA",
-    ],
-    ADDED_REQUIREMENTS: [
-      "X_ATTACK",
-      "X_SPECIAL",
-      "X_DEFEND",
-      "X_SPEED",
-      "X_ACCURACY",
-      "GUARD_SPEC",
-      "DIRE_HIT",
-    ],
-  },
-  {
-    LOCATIONS: [
-      "MOUNT_MOON_MAIN_AREA",
-    ],
-    MATCHING_REQUIREMENTS: [
-      "MOUNT_MOON_MAIN_AREA_WEST_EXIT_AREA",
-    ],
-    ADDED_REQUIREMENTS: [
-      "X_ATTACK",
-      "X_SPECIAL",
-      "X_DEFEND",
-      "X_SPEED",
-      "X_ACCURACY",
-      "GUARD_SPEC",
-      "DIRE_HIT",
-    ],
-  },
-  {
-    LOCATIONS: [
-      "MOUNT_MOON_MAIN_AREA_WEST_EXIT_AREA",
-    ],
-    MATCHING_REQUIREMENTS: [
-      "MOUNT_MOON_MAIN_AREA",
-    ],
+    TO_AREA: "MOUNT_MOON_MAIN_AREA",
+    FROM_AREA: "MOUNT_MOON_MAIN_AREA_WEST_EXIT_AREA",
+    IS_MUTUAL: true,
     ADDED_REQUIREMENTS: [
       "X_ATTACK",
       "X_SPECIAL",

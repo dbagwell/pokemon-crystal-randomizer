@@ -1,0 +1,436 @@
+import type { LogicalEvent } from "@shared/types/gameData/logicalEvent"
+import type { LogicalEventId } from "@shared/types/gameDataIds/logicalEvents"
+
+export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
+  ELMS_LAB_GOT_STARTER: {
+    id: "ELMS_LAB_GOT_STARTER",
+    eventFlagId: "GOT_A_POKEMON_FROM_ELM",
+    areaId: "ELMS_LAB",
+  },
+  ELMS_LAB_GAVE_MYSTERY_EGG: {
+    id: "ELMS_LAB_GAVE_MYSTERY_EGG",
+    eventFlagId: "GAVE_MYSTERY_EGG_TO_ELM",
+    areaId: "ELMS_LAB",
+    accessRequirements: [
+      "ELMS_LAB_GOT_STARTER",
+      "MYSTERY_EGG",
+    ],
+  },
+  VIOLET_GYM_DEFEATED_FALKNER: {
+    id: "VIOLET_GYM_DEFEATED_FALKNER",
+    eventFlagId: "BEAT_FALKNER",
+    areaId: "VIOLET_GYM",
+  },
+  VIOLET_POKECENTER_1F_GOT_MYSTERY_EGG: {
+    id: "VIOLET_POKECENTER_1F_GOT_MYSTERY_EGG",
+    eventFlagId: "GOT_TOGEPI_EGG_FROM_ELMS_AIDE",
+    areaId: "VIOLET_POKECENTER_1F",
+    accessRequirements: [
+      "VIOLET_GYM_DEFEATED_FALKNER",
+    ],
+  },
+  RUINS_OF_ALPH_SOLVED_PUZZLE: {
+    id: "RUINS_OF_ALPH_SOLVED_PUZZLE",
+    eventFlagId: "MADE_UNOWN_APPEAR_IN_RUINS",
+    areaId: "RUINS_OF_ALPH_PUZZLES_GROUP",
+  },
+  RUINS_OF_ALPH_RESEARCH_CENTER_GOT_UNOWN_INFO: {
+    id: "RUINS_OF_ALPH_RESEARCH_CENTER_GOT_UNOWN_INFO",
+    eventFlagId: "GOT_UNOWN_DEX", // TODO: MAKE ACTUAL EVENT AND UPDATE PATCH TO SET IT
+    areaId: "RUINS_OF_ALPH_RESEARCH_CENTER",
+    accessRequirements: [
+      "RUINS_OF_ALPH_SOLVED_PUZZLE",
+    ],
+  },
+  KURTS_HOUSE_TALKED_TO_KURT: {
+    id: "KURTS_HOUSE_TALKED_TO_KURT",
+    eventFlagId: "AZALEA_TOWN_SLOWPOKETAIL_ROCKET",
+    areaId: "KURTS_HOUSE",
+  },
+  SLOWPOKE_WELL_B1F_EAST_AREA_DEFEATED_ROCKETS: {
+    id: "SLOWPOKE_WELL_B1F_EAST_AREA_DEFEATED_ROCKETS",
+    eventFlagId: "CLEARED_SLOWPOKE_WELL",
+    areaId: "SLOWPOKE_WELL_B1F_EAST_AREA",
+  },
+  KURTS_HOUSE_GAVE_GS_BALL: {
+    id: "KURTS_HOUSE_GAVE_GS_BALL",
+    eventFlagId: "GAVE_GS_BALL_TO_KURT",
+    areaId: "KURTS_HOUSE",
+    accessRequirements: [
+      "SLOWPOKE_WELL_B1F_EAST_AREA_DEFEATED_ROCKETS",
+      "GS_BALL",
+    ],
+  },
+  ILEX_FOREST_SOUTH_AREA_TALKED_TO_CHARCOAL_BOSS: {
+    id: "ILEX_FOREST_SOUTH_AREA_TALKED_TO_CHARCOAL_BOSS",
+    eventFlagId: "GOT_HM01_CUT",
+    areaId: "ILEX_FOREST_SOUTH_AREA",
+    accessRequirements: [
+      "SLOWPOKE_WELL_B1F_EAST_AREA_DEFEATED_ROCKETS",
+    ],
+  },
+  ILEX_FOREST_NORTH_AREA_GOT_HEADBUTT_GUYS_GIFT: {
+    id: "ILEX_FOREST_NORTH_AREA_GOT_HEADBUTT_GUYS_GIFT",
+    eventFlagId: "GOT_TM02_HEADBUTT",
+    areaId: "ILEX_FOREST_NORTH_AREA",
+  },
+  ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT: {
+    id: "ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT",
+    eventFlagId: "GOT_TM12_SWEET_SCENT",
+    areaId: "ROUTE_34_ILEX_FOREST_GATE",
+  },
+  ROUTE_34_DEFEATED_TODD: {
+    id: "ROUTE_34_DEFEATED_TODD",
+    eventFlagId: "BEAT_CAMPER_TODD",
+    areaId: "ROUTE_34_MAIN_AREA",
+  },
+  GOLDENROD_CITY_GOT_FLYPOINT: {
+    id: "GOLDENROD_CITY_GOT_FLYPOINT",
+    engineFlagId: "GOLDENROD_FLYPOINT",
+    areaId: "GOLDENROD_CITY_FLYPOINT_GROUP",
+  },
+  GOLDENROD_DEPT_STORE_B1F_VISITED: {
+    id: "GOLDENROD_DEPT_STORE_B1F_VISITED",
+    eventFlagId: "GOLDENROD_UNDERGROUND_WAREHOUSE_BLOCKED_OFF",
+    inverseFlag: true,
+    areaId: "GOLDENROD_DEPT_STORE_B1F_GROUP",
+  },
+  GOLDENROD_DEPT_STORE_ELEVATOR_USED_ELEVATOR: {
+    id: "GOLDENROD_DEPT_STORE_ELEVATOR_USED_ELEVATOR",
+    eventFlagId: "GOLDENROD_DEPT_STORE_B1F_LAYOUT_1",
+    areaId: "GOLDENROD_DEPT_STORE_ELEVATOR",
+    accessRequirements: [
+      "GOLDENROD_DEPT_STORE_B1F_VISITED",
+    ],
+  },
+  ROUTE_35_GOLDENROD_GATE_GOT_KENYA: {
+    id: "ROUTE_35_GOLDENROD_GATE_GOT_KENYA",
+    eventFlagId: "GOT_KENYA",
+    areaId: "ROUTE_35_GOLDENROD_GATE",
+  },
+  ROUTE_36_WEST_AREA_TALKED_TO_FLORIA: {
+    id: "ROUTE_36_WEST_AREA_TALKED_TO_FLORIA",
+    eventFlagId: "MET_FLORIA",
+    areaId: "ROUTE_36_WEST_AREA",
+    accessRequirements: [
+      "GOLDENROD_CITY_GOT_FLYPOINT",
+    ],
+  },
+  ROUTE_36_EAST_AREA_GOT_ROCK_SMASH_GUYS_GIFT: {
+    id: "ROUTE_36_EAST_AREA_GOT_ROCK_SMASH_GUYS_GIFT",
+    eventFlagId: "GOT_TM08_ROCK_SMASH",
+    areaId: "ROUTE_36_EAST_AREA",
+    accessRequirements: [
+      "SQUIRTBOTTLE",
+    ],
+  },
+  ROUTE_31_GAVE_MAIL: {
+    id: "ROUTE_31_GAVE_MAIL",
+    eventFlagId: "GAVE_KENYA",
+    areaId: "ROUTE_31",
+    accessRequirements: [
+      "ROUTE_35_GOLDENROD_GATE_GOT_KENYA",
+    ],
+  },
+  BURNED_TOWER_B1F_AWOKE_LEGENDARY_BEASTS: {
+    id: "BURNED_TOWER_B1F_AWOKE_LEGENDARY_BEASTS",
+    eventFlagId: "RELEASED_THE_BEASTS",
+    areaId: "BURNED_TOWER_B1F",
+  },
+  ECRUTEAK_GYM_DEFEATED_MORTY: {
+    id: "ECRUTEAK_GYM_DEFEATED_MORTY",
+    eventFlagId: "BEAT_MORTY",
+    areaId: "ECRUTEAK_GYM",
+  },
+  ROUTE_39_BARN_HEALED_MILTANK: {
+    id: "ROUTE_39_BARN_HEALED_MILTANK",
+    eventFlagId: "HEALED_MOOMOO",
+    areaId: "ROUTE_39_BARN",
+    accessRequirements: [
+      { item: "BERRY", number: 7 },
+    ],
+  },
+  OLIVINE_CITY_GOT_FLYPOINT: {
+    id: "OLIVINE_CITY_GOT_FLYPOINT",
+    engineFlagId: "OLIVINE_FLYPOINT",
+    areaId: "OLIVINE_CITY_FLYPOINT_GROUP",
+  },
+  OLIVINE_LIGHTHOUSE_6F_TALKED_TO_JASMINE: {
+    id: "OLIVINE_LIGHTHOUSE_6F_TALKED_TO_JASMINE",
+    eventFlagId: "JASMINE_EXPLAINED_AMPHYS_SICKNESS",
+    areaId: "OLIVINE_LIGHTHOUSE_6F",
+  },
+  CIANWOOD_GYM_STRENGTH_AREA_DEFEATED_CHUCK: {
+    id: "CIANWOOD_GYM_STRENGTH_AREA_DEFEATED_CHUCK",
+    eventFlagId: "BEAT_CHUCK",
+    areaId: "CIANWOOD_GYM_STRENGTH_AREA",
+  },
+  OLIVINE_LIGHTHOUSE_6F_HEALED_AMPHY: {
+    id: "OLIVINE_LIGHTHOUSE_6F_HEALED_AMPHY",
+    eventFlagId: "JASMINE_RETURNED_TO_GYM",
+    areaId: "OLIVINE_LIGHTHOUSE_6F",
+    accessRequirements: [
+      "SECRETPOTION",
+    ],
+  },
+  LAKE_OF_RAGE_SURF_AREA_FOUGHT_SHINY: {
+    id: "LAKE_OF_RAGE_SURF_AREA_FOUGHT_SHINY",
+    eventFlagId: "BEAT_RED_GYARADOS",
+    areaId: "LAKE_OF_RAGE_SURF_AREA",
+  },
+  TEAM_ROCKET_BASE_B3F_SE_AREA_GOT_FEMALE_GRUNTS_PASSWORD: {
+    id: "TEAM_ROCKET_BASE_B3F_SE_AREA_GOT_FEMALE_GRUNTS_PASSWORD",
+    eventFlagId: "LEARNED_SLOWPOKETAIL",
+    areaId: "TEAM_ROCKET_BASE_B3F_SE_AREA",
+  },
+  TEAM_ROCKET_BASE_B3F_SE_AREA_GOT_SW_GRUNTS_PASSWORD: {
+    id: "TEAM_ROCKET_BASE_B3F_SE_AREA_GOT_SW_GRUNTS_PASSWORD",
+    eventFlagId: "LEARNED_RATICATE_TAIL",
+    areaId: "TEAM_ROCKET_BASE_B3F_SE_AREA",
+  },
+  TEAM_ROCKET_BASE_B3F_ADMIN_AREA_GOT_MURKROWS_PASSWORD: {
+    id: "TEAM_ROCKET_BASE_B3F_ADMIN_AREA_GOT_MURKROWS_PASSWORD",
+    eventFlagId: "LEARNED_HAIL_GIOVANNI",
+    areaId: "TEAM_ROCKET_BASE_B3F_ADMIN_AREA",
+  },
+  TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_DISABLED_TRANSMITTER: {
+    id: "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_DISABLED_TRANSMITTER",
+    eventFlagId: "CLEARED_ROCKET_HIDEOUT",
+    areaId: "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA",
+  },
+  GOLDENROD_UNDERGROUND_WAREHOUSE_TALKED_TO_DIRECTOR: {
+    id: "GOLDENROD_UNDERGROUND_WAREHOUSE_TALKED_TO_DIRECTOR",
+    eventFlagId: "GOT_CARD_KEY",
+    areaId: "GOLDENROD_UNDERGROUND_WAREHOUSE",
+    accessRequirements: [
+      7,
+    ],
+  },
+  RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS: {
+    id: "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+    eventFlagId: "CLEARED_RADIO_TOWER",
+    areaId: "RADIO_TOWER_5F_EAST_AREA",
+  },
+  TIN_TOWER_ROOF_FOUGHT_HO_OH: {
+    id: "TIN_TOWER_ROOF_FOUGHT_HO_OH",
+    eventFlagId: "FOUGHT_HO_OH",
+    areaId: "TIN_TOWER_ROOF",
+  },
+  ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_NE_BOULDER: {
+    id: "ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_NE_BOULDER",
+    eventFlagId: "BOULDER_IN_ICE_PATH_1",
+    areaId: "ICE_PATH_B1F_MAHOGANY_SIDE",
+    accessRequirements: [
+      "PLAINBADGE",
+      "HM04",
+    ],
+  },
+  ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_SE_BOULDER: {
+    id: "ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_SE_BOULDER",
+    eventFlagId: "BOULDER_IN_ICE_PATH_4",
+    areaId: "ICE_PATH_B1F_MAHOGANY_SIDE",
+    accessRequirements: [
+      "PLAINBADGE",
+      "HM04",
+    ],
+  },
+  ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_SW_BOULDER: {
+    id: "ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_SW_BOULDER",
+    eventFlagId: "BOULDER_IN_ICE_PATH_3",
+    areaId: "ICE_PATH_B1F_MAHOGANY_SIDE",
+    accessRequirements: [
+      "PLAINBADGE",
+      "HM04",
+    ],
+  },
+  ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_NW_BOULDER: {
+    id: "ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_NW_BOULDER",
+    eventFlagId: "BOULDER_IN_ICE_PATH_2",
+    areaId: "ICE_PATH_B1F_MAHOGANY_SIDE",
+    accessRequirements: [
+      "PLAINBADGE",
+      "HM04",
+    ],
+  },
+  BLACKTHORN_GYM_2F_FRONT_AREA_DROPPED_SE_BOULDER: {
+    id: "BLACKTHORN_GYM_2F_FRONT_AREA_DROPPED_SE_BOULDER",
+    eventFlagId: "BOULDER_IN_BLACKTHORN_GYM_3",
+    areaId: "BLACKTHORN_GYM_2F_FRONT_AREA",
+    accessRequirements: [
+      "PLAINBADGE",
+      "HM04",
+    ],
+  },
+  BLACKTHORN_GYM_2F_FRONT_AREA_DROPPED_NE_BOULDER: {
+    id: "BLACKTHORN_GYM_2F_FRONT_AREA_DROPPED_NE_BOULDER",
+    eventFlagId: "BOULDER_IN_BLACKTHORN_GYM_1",
+    areaId: "BLACKTHORN_GYM_2F_FRONT_AREA",
+    accessRequirements: [
+      "PLAINBADGE",
+      "HM04",
+    ],
+  },
+  BLACKTHORN_GYM_1F_BACK_AREA_DEFEATED_CLAIR: {
+    id: "BLACKTHORN_GYM_1F_BACK_AREA_DEFEATED_CLAIR",
+    eventFlagId: "BEAT_CLAIR",
+    areaId: "BLACKTHORN_GYM_1F_BACK_AREA",
+  },
+  DRAGON_SHRINE_PASSED_TEST: {
+    id: "DRAGON_SHRINE_PASSED_TEST",
+    eventFlagId: "GOT_RISINGBADGE",
+    areaId: "DRAGON_SHRINE",
+  },
+  HALL_OF_FAME_ENTERED: {
+    id: "HALL_OF_FAME_ENTERED",
+    eventFlagId: "BEAT_ELITE_FOUR",
+    areaId: "HALL_OF_FAME",
+  },
+  OLIVINE_PORT_NORTH_AREA_BOARDED_SHIP: {
+    id: "OLIVINE_PORT_NORTH_AREA_BOARDED_SHIP",
+    eventFlagId: "FAST_SHIP_DESTINATION_OLIVINE", // TODO: For Tracking proper purposes we may need to make a new event for this
+    inverseFlag: true,
+    areaId: "OLIVINE_PORT_NORTH_AREA",
+    accessRequirements: [
+      "HALL_OF_FAME_ENTERED",
+      "S_S_TICKET",
+    ],
+  },
+  FAST_SHIP_B1F_EAST_AREA_TALKED_TO_SAILOR: {
+    id: "FAST_SHIP_B1F_EAST_AREA_TALKED_TO_SAILOR",
+    eventFlagId: "FAST_SHIP_INFORMED_ABOUT_LAZY_SAILOR",
+    areaId: "FAST_SHIP_B1F_EAST_AREA",
+  },
+  FAST_SHIP_CABINS_NNW_FOUGHT_SAILOR: {
+    id: "FAST_SHIP_CABINS_NNW_FOUGHT_SAILOR",
+    eventFlagId: "FAST_SHIP_LAZY_SAILOR",
+    areaId: "FAST_SHIP_CABINS_NNW",
+    accessRequirements: [
+      "FAST_SHIP_B1F_EAST_AREA_TALKED_TO_SAILOR",
+    ],
+  },
+  FAST_SHIP_CABINS_CAPTAINS_CABIN_TALKED_TO_GIRL: {
+    id: "FAST_SHIP_CABINS_CAPTAINS_CABIN_TALKED_TO_GIRL",
+    eventFlagId: "FAST_SHIP_FOUND_GIRL",
+    areaId: "FAST_SHIP_CABINS_CAPTAINS_CABIN",
+  },
+  VERMILION_PORT_NORTH_AREA_BOARDED_SHIP: {
+    id: "VERMILION_PORT_NORTH_AREA_BOARDED_SHIP",
+    eventFlagId: "FAST_SHIP_DESTINATION_OLIVINE",
+    areaId: "VERMILION_PORT_NORTH_AREA",
+    accessRequirements: [
+      "S_S_TICKET",
+    ],
+  },
+  FAST_SHIP_CABINS_NW_SLEPT: {
+    id: "FAST_SHIP_CABINS_NW_SLEPT",
+    eventFlagId: "FAST_SHIP_HAS_ARRIVED", // TODO: For proper tracking purposes, this needs to be a different event that is not also set the first time you take the boat
+    areaId: "FAST_SHIP_CABINS_NW",
+  },
+  POWER_PLANT_TALKED_TO_MANAGER: {
+    id: "POWER_PLANT_TALKED_TO_MANAGER",
+    eventFlagId: "MET_MANAGER_AT_POWER_PLANT",
+    areaId: "POWER_PLANT",
+  },
+  CERULEAN_GYM_CONFRONTED_ROCKET: {
+    id: "CERULEAN_GYM_CONFRONTED_ROCKET",
+    eventFlagId: "MET_ROCKET_GRUNT_AT_CERULEAN_GYM",
+    areaId: "CERULEAN_GYM",
+    accessRequirements: [
+      "POWER_PLANT_TALKED_TO_MANAGER",
+    ],
+  },
+  ROUTE_25_MET_MISTY: {
+    id: "ROUTE_25_MET_MISTY",
+    eventFlagId: "TRAINERS_IN_CERULEAN_GYM",
+    inverseFlag: true,
+    areaId: "ROUTE_25",
+    accessRequirements: [
+      "CERULEAN_GYM_CONFRONTED_ROCKET",
+    ],
+  },
+  BILLS_HOUSE_SHOWED_LICKITUNG: {
+    id: "BILLS_HOUSE_SHOWED_LICKITUNG",
+    eventFlagId: "SHOWED_LICKITUNG_TO_BILLS_GRANDPA",
+    areaId: "BILLS_HOUSE",
+    accessRequirements: [
+      "LICKITUNG",
+    ],
+  },
+  BILLS_HOUSE_SHOWED_ODDISH: {
+    id: "BILLS_HOUSE_SHOWED_ODDISH",
+    eventFlagId: "SHOWED_ODDISH_TO_BILLS_GRANDPA",
+    areaId: "BILLS_HOUSE",
+    accessRequirements: [
+      "BILLS_HOUSE_SHOWED_LICKITUNG",
+      "ODDISH",
+    ],
+  },
+  BILLS_HOUSE_SHOWED_STARYU: {
+    id: "BILLS_HOUSE_SHOWED_STARYU",
+    eventFlagId: "SHOWED_STARYU_TO_BILLS_GRANDPA",
+    areaId: "BILLS_HOUSE",
+    accessRequirements: [
+      "BILLS_HOUSE_SHOWED_ODDISH",
+      "STARYU",
+    ],
+  },
+  BILLS_HOUSE_SHOWED_GROWLITHE: {
+    id: "BILLS_HOUSE_SHOWED_GROWLITHE",
+    eventFlagId: "SHOWED_GROWLITHE_VULPIX_TO_BILLS_GRANDPA",
+    areaId: "BILLS_HOUSE",
+    accessRequirements: [
+      "BILLS_HOUSE_SHOWED_STARYU",
+      "GROWLITHE",
+    ],
+  },
+  BILLS_HOUSE_SHOWED_PICHU: {
+    id: "BILLS_HOUSE_SHOWED_PICHU",
+    eventFlagId: "SHOWED_PICHU_TO_BILLS_GRANDPA",
+    areaId: "BILLS_HOUSE",
+    accessRequirements: [
+      "BILLS_HOUSE_SHOWED_GROWLITHE",
+      "PICHU",
+    ],
+  },
+  POWER_PLANT_RESTORED_POWER: {
+    id: "POWER_PLANT_RESTORED_POWER",
+    eventFlagId: "RESTORED_POWER_TO_KANTO",
+    areaId: "POWER_PLANT",
+    accessRequirements: [
+      "MACHINE_PART",
+    ],
+  },
+  VERMILION_CITY_WOKE_SNORLAX: {
+    id: "VERMILION_CITY_WOKE_SNORLAX",
+    eventFlagId: "FOUGHT_SNORLAX",
+    areaId: "VERMILION_CITY_SNORLAX_GROUP",
+    accessRequirements: [
+      "POKEGEAR",
+      "RADIO_CARD",
+      "EXPN_CARD",
+    ],
+  },
+  CINNABAR_ISLAND_TALKED_TO_BLUE: {
+    id: "CINNABAR_ISLAND_TALKED_TO_BLUE",
+    eventFlagId: "BLUE_IN_CINNABAR",
+    areaId: "CINNABAR_ISLAND",
+  },
+  ROUTE_20_VISITED: {
+    id: "ROUTE_20_VISITED",
+    eventFlagId: "CINNABAR_ROCKS_CLEARED",
+    areaId: "ROUTE_20",
+  },
+  OAKS_LAB_GOT_OAKS_APPROVAL: {
+    id: "OAKS_LAB_GOT_OAKS_APPROVAL",
+    eventFlagId: "OPENED_MT_SILVER",
+    areaId: "OAKS_LAB",
+    accessRequirements: [
+      16,
+    ],
+  },
+  SILVER_CAVE_ROOM_3_DEFEATED_RED: {
+    id: "SILVER_CAVE_ROOM_3_DEFEATED_RED",
+    eventFlagId: "RED_IN_MT_SILVER", // TODO: Make proper event flag for this
+    areaId: "SILVER_CAVE_ROOM_3",
+  },
+}

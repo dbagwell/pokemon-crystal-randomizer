@@ -1273,34 +1273,43 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       0x4148,
     ]],
   },
-  GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_NW_ITEM_BALL: {
-    id: "GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_NW_ITEM_BALL",
+  GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_NW_ITEM_BALL: {
+    id: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_NW_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "BURN_HEAL",
     areaId: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA",
+    accessRequirements: [
+      "GOLDENROD_DEPT_STORE_ELEVATOR_USED_ELEVATOR",
+    ],
     romOffsets: [[
       31,
       0x57C7,
     ]],
   },
-  GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_SW_ITEM_BALL: {
-    id: "GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_SW_ITEM_BALL",
+  GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SW_ITEM_BALL: {
+    id: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SW_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ETHER",
     areaId: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA",
+    accessRequirements: [
+      "GOLDENROD_DEPT_STORE_ELEVATOR_USED_ELEVATOR",
+    ],
     romOffsets: [[
       31,
       0x57C3,
     ]],
   },
-  GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_SE_ITEM_BALL: {
-    id: "GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_SE_ITEM_BALL",
+  GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SE_ITEM_BALL: {
+    id: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SE_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "ULTRA_BALL",
     areaId: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA",
+    accessRequirements: [
+      "GOLDENROD_DEPT_STORE_ELEVATOR_USED_ELEVATOR",
+    ],
     romOffsets: [[
       31,
       0x57C9,
@@ -2933,7 +2942,7 @@ export const keyItemHiddenItemLocationsMap: IdMap<KeyItemHiddenItemLocationId, I
     itemId: "MACHINE_PART",
     areaId: "CERULEAN_GYM",
     accessRequirements: [
-      "POWER_PLANT",
+      "POWER_PLANT_TALKED_TO_MANAGER",
     ],
     romOffsets: [[
       98,
@@ -3357,9 +3366,9 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     areaId: "OLIVINE_LIGHTHOUSE_2F",
     accessRequirements: [
       "POKEGEAR",
-      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
-      "HALL_OF_FAME",
-      "POWER_PLANT_MANAGERS_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+      "HALL_OF_FAME_ENTERED",
+      "POWER_PLANT_RESTORED_POWER",
     ],
     romOffsets: [
       [
@@ -3409,7 +3418,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "PINK_BOW",
     areaId: "RADIO_TOWER_4F_EAST_AREA",
     accessRequirements: [
-      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
     ],
     romOffsets: [
       [
@@ -3441,7 +3450,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "HP_UP",
     areaId: "ROUTE_35_GOLDENROD_GATE",
     accessRequirements: [
-      "ROUTE_31",
+      "ROUTE_31_GAVE_MAIL",
     ],
     romOffsets: [
       [
@@ -3538,7 +3547,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "METAL_COAT",
     areaId: "FAST_SHIP_CABINS_SE",
     accessRequirements: [
-      "FAST_SHIP_CABINS_CAPTAINS_CABIN",
+      "FAST_SHIP_CABINS_CAPTAINS_CABIN_TALKED_TO_GIRL",
     ],
     romOffsets: [
       [
@@ -3559,7 +3568,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     areaId: "ROUTE_34_MAIN_AREA",
     accessRequirements: [
       "POKEGEAR",
-      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
     ],
     romOffsets: [
       [
@@ -3588,8 +3597,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "EVERSTONE",
     areaId: "ELMS_LAB",
     accessRequirements: [
-      "VIOLET_GYM_BADGE",
-      "VIOLET_POKECENTER_1F",
+      "ELMS_LAB_GOT_STARTER",
+      "VIOLET_POKECENTER_1F_GOT_MYSTERY_EGG",
       "TOGEPI",
     ],
     romOffsets: [
@@ -3606,6 +3615,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "MASTER_BALL",
     areaId: "ELMS_LAB",
     accessRequirements: [
+      "ELMS_LAB_GOT_STARTER",
       "RISINGBADGE",
     ],
     romOffsets: [
@@ -3621,6 +3631,9 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     groupId: "REGULAR_GIFTS",
     itemId: "POTION",
     areaId: "ELMS_LAB",
+    accessRequirements: [
+      "ELMS_LAB_GOT_STARTER",
+    ],
     romOffsets: [
       [
         30,
@@ -3635,7 +3648,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "POKE_BALL",
     areaId: "ELMS_LAB",
     accessRequirements: [
-      "MYSTERY_EGG",
+      "ELMS_LAB_GAVE_MYSTERY_EGG",
     ],
     romOffsets: [],
   },
@@ -3659,7 +3672,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "EVERSTONE",
     areaId: "BILLS_HOUSE",
     accessRequirements: [
-      "LICKITUNG",
+      "BILLS_HOUSE_SHOWED_LICKITUNG",
     ],
     romOffsets: [
       [
@@ -3675,8 +3688,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "LEAF_STONE",
     areaId: "BILLS_HOUSE",
     accessRequirements: [
-      "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG",
-      "ODDISH",
+      "BILLS_HOUSE_SHOWED_ODDISH",
     ],
     romOffsets: [
       [
@@ -3692,8 +3704,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "WATER_STONE",
     areaId: "BILLS_HOUSE",
     accessRequirements: [
-      "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH",
-      "STARYU",
+      "BILLS_HOUSE_SHOWED_STARYU",
     ],
     romOffsets: [
       [
@@ -3709,8 +3720,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "FIRE_STONE",
     areaId: "BILLS_HOUSE",
     accessRequirements: [
-      "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU",
-      "GROWLITHE",
+      "BILLS_HOUSE_SHOWED_GROWLITHE",
     ],
     romOffsets: [
       [
@@ -3726,8 +3736,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "THUNDERSTONE",
     areaId: "BILLS_HOUSE",
     accessRequirements: [
-      "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE",
-      "PICHU",
+      "BILLS_HOUSE_SHOWED_PICHU",
     ],
     romOffsets: [
       [
@@ -3782,8 +3791,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "CHARCOAL",
     areaId: "CHARCOAL_KILN",
     accessRequirements: [
-      "SLOWPOKE_WELL_B1F_EAST_AREA",
-      "ILEX_FOREST_SOUTH_AREA_CHARCOAL_BOSSS_GIFT",
+      "ILEX_FOREST_SOUTH_AREA_TALKED_TO_CHARCOAL_BOSS",
     ],
     romOffsets: [
       [
@@ -3799,7 +3807,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "LURE_BALL",
     areaId: "KURTS_HOUSE",
     accessRequirements: [
-      "SLOWPOKE_WELL_B1F_EAST_AREA",
+      "SLOWPOKE_WELL_B1F_EAST_AREA_DEFEATED_ROCKETS",
     ],
     romOffsets: [
       [
@@ -3816,8 +3824,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     areaId: "ROUTE_32_NORTH_AREA",
     accessRequirements: [
       "ZEPHYRBADGE",
-      "VIOLET_GYM_BADGE",
-      "VIOLET_POKECENTER_1F",
+      "VIOLET_GYM_DEFEATED_FALKNER",
+      "VIOLET_POKECENTER_1F_GOT_MYSTERY_EGG",
     ],
     romOffsets: [
       [
@@ -3917,7 +3925,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "ELIXER",
     areaId: "LAKE_OF_RAGE_MAGIKARP_HOUSE",
     accessRequirements: [
-      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_DISABLED_TRANSMITTER",
       "MAGIKARP",
     ],
     romOffsets: [
@@ -3965,8 +3973,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     areaId: "ROUTE_44",
     accessRequirements: [
       "POKEGEAR",
-      "HALL_OF_FAME",
-      "POWER_PLANT_MANAGERS_GIFT",
+      "HALL_OF_FAME_ENTERED",
+      "POWER_PLANT_RESTORED_POWER",
     ],
     romOffsets: [
       [
@@ -4051,8 +4059,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     areaId: "ROUTE_45",
     accessRequirements: [
       "POKEGEAR",
-      "HALL_OF_FAME",
-      "POWER_PLANT_MANAGERS_GIFT",
+      "HALL_OF_FAME_ENTERED",
+      "POWER_PLANT_RESTORED_POWER",
     ],
     romOffsets: [
       [
@@ -4118,12 +4126,11 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     areaId: "ROUTE_30_CHERRYGROVE_SIDE",
     accessRequirements: [
       "POKEGEAR",
-      "HALL_OF_FAME",
-      "GOLDENROD_CITY_MAIN_AREA",
-      "OLIVINE_CITY",
-      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
-      "MYSTERY_EGG",
-      "ELMS_LAB",
+      "HALL_OF_FAME_ENTERED",
+      "GOLDENROD_CITY_GOT_FLYPOINT",
+      "OLIVINE_CITY_GOT_FLYPOINT",
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+      "ELMS_LAB_GAVE_MYSTERY_EGG",
     ],
     romOffsets: [
       [
@@ -4296,8 +4303,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     areaId: "ROUTE_46_NORTH_AREA",
     accessRequirements: [
       "POKEGEAR",
-      "HALL_OF_FAME",
-      "POWER_PLANT_MANAGERS_GIFT",
+      "HALL_OF_FAME_ENTERED",
+      "POWER_PLANT_RESTORED_POWER",
     ],
     romOffsets: [
       [
@@ -4386,7 +4393,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
     itemId: "TM11",
     areaId: "RADIO_TOWER_3F_WEST_AREA",
     accessRequirements: [
-      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
     ],
     romOffsets: [
       [
@@ -4401,6 +4408,9 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
     groupId: "TM_GIFTS",
     itemId: "TM12",
     areaId: "ROUTE_34_ILEX_FOREST_GATE",
+    accessRequirements: [
+      "ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT",
+    ],
     romOffsets: [
       [
         24,
@@ -4493,8 +4503,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
     itemId: "TM23",
     areaId: "OLIVINE_GYM",
     accessRequirements: [
-      "SECRETPOTION",
-      "OLIVINE_LIGHTHOUSE_6F",
+      "OLIVINE_LIGHTHOUSE_6F_HEALED_AMPHY",
     ],
     romOffsets: [
       [
@@ -4510,8 +4519,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
     itemId: "TM13",
     areaId: "ROUTE_39_FARMHOUSE",
     accessRequirements: [
-      "ROUTE_39_BARN",
-      { item: "BERRY", number: 7 },
+      "ROUTE_39_BARN_HEALED_MILTANK",
     ],
     romOffsets: [
       [
@@ -4595,7 +4603,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
     itemId: "TM08",
     areaId: "ROUTE_36_EAST_AREA",
     accessRequirements: [
-      "SQUIRTBOTTLE",
+      "ROUTE_36_EAST_AREA_GOT_ROCK_SMASH_GUYS_GIFT",
     ],
     romOffsets: [
       [
@@ -4650,7 +4658,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
     itemId: "TM36",
     areaId: "ROUTE_43_GATE",
     accessRequirements: [
-      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_DISABLED_TRANSMITTER",
     ],
     romOffsets: [
       [
@@ -4666,7 +4674,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
     itemId: "TM50",
     areaId: "ROUTE_31",
     accessRequirements: [
-      "ROUTE_35_GOLDENROD_GATE",
+      "ROUTE_35_GOLDENROD_GATE_GOT_KENYA",
     ],
     romOffsets: [
       [
@@ -4708,7 +4716,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
     itemId: "TM24",
     areaId: "DRAGONS_DEN_B1F_SOUTH_AREA",
     accessRequirements: [
-      "DRAGON_SHRINE_BADGE",
+      "DRAGON_SHRINE_PASSED_TEST",
     ],
     romOffsets: [],
   },
@@ -4722,7 +4730,7 @@ export const hmGiftLocationsMap: IdMap<HMGiftLocationId, ItemLocation> = {
     itemId: "HM01",
     areaId: "ILEX_FOREST_SOUTH_AREA",
     accessRequirements: [
-      "SLOWPOKE_WELL_B1F_EAST_AREA",
+      "SLOWPOKE_WELL_B1F_EAST_AREA_DEFEATED_ROCKETS",
     ],
     romOffsets: [[
       27,
@@ -4736,7 +4744,7 @@ export const hmGiftLocationsMap: IdMap<HMGiftLocationId, ItemLocation> = {
     itemId: "HM02",
     areaId: "CIANWOOD_CITY",
     accessRequirements: [
-      "CIANWOOD_GYM_STRENGTH_AREA",
+      "CIANWOOD_GYM_STRENGTH_AREA_DEFEATED_CHUCK",
     ],
     romOffsets: [[
       104,
@@ -4797,7 +4805,8 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     itemId: "S_S_TICKET",
     areaId: "ELMS_LAB",
     accessRequirements: [
-      "HALL_OF_FAME",
+      "ELMS_LAB_GOT_STARTER",
+      "HALL_OF_FAME_ENTERED",
     ],
     romOffsets: [[
       30,
@@ -4833,10 +4842,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     itemId: "GS_BALL",
     areaId: "AZALEA_TOWN",
     accessRequirements: [
-      "GS_BALL",
-      "KURTS_HOUSE",
-      "SLOWPOKE_WELL_B1F_EAST_AREA",
-      "AZALEA_TOWN",
+      "KURTS_HOUSE_GAVE_GS_BALL",
     ],
     romOffsets: [[
       102,
@@ -4861,7 +4867,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     itemId: "BLUE_CARD",
     areaId: "RADIO_TOWER_2F",
     accessRequirements: [
-      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
     ],
     romOffsets: [],
   },
@@ -4872,9 +4878,8 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     itemId: "SQUIRTBOTTLE",
     areaId: "GOLDENROD_FLOWER_SHOP",
     accessRequirements: [
-      "ROUTE_36_WEST_AREA",
+      "ROUTE_36_WEST_AREA_TALKED_TO_FLORIA",
       "PLAINBADGE",
-      "GOLDENROD_CITY_MAIN_AREA",
     ],
     romOffsets: [[
       21,
@@ -4955,7 +4960,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     itemId: "RAINBOW_WING",
     areaId: "TIN_TOWER_1F",
     accessRequirements: [
-      "HALL_OF_FAME",
+      "HALL_OF_FAME_ENTERED",
       "SUICUNE",
       "ENTEI",
       "RAIKOU",
@@ -4980,7 +4985,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     itemId: "SECRETPOTION",
     areaId: "CIANWOOD_PHARMACY",
     accessRequirements: [
-      "OLIVINE_LIGHTHOUSE_6F",
+      "OLIVINE_LIGHTHOUSE_6F_TALKED_TO_JASMINE",
     ],
     romOffsets: [[
       39,
@@ -5002,8 +5007,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     itemId: "LOST_ITEM",
     areaId: "POKEMON_FAN_CLUB",
     accessRequirements: [
-      "POWER_PLANT",
-      "MACHINE_PART",
+      "POWER_PLANT_RESTORED_POWER",
     ],
     romOffsets: [[
       100,
@@ -5086,7 +5090,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
     itemId: "UNONWNDEX",
     areaId: "RUINS_OF_ALPH_OUTSIDE_MAIN_AREA",
     accessRequirements: [
-      "RUINS_OF_ALPH_RESEARCH_CENTER",
+      "RUINS_OF_ALPH_SOLVED_PUZZLE",
       "UNOWN",
     ],
     romOffsets: [],
@@ -5098,7 +5102,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
     itemId: "RADIO_CARD",
     areaId: "RADIO_TOWER_1F",
     accessRequirements: [
-      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
     ],
     romOffsets: [[
       23,
@@ -5112,8 +5116,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
     itemId: "EXPN_CARD",
     areaId: "LAV_RADIO_TOWER_1F",
     accessRequirements: [
-      "POWER_PLANT",
-      "MACHINE_PART",
+      "POWER_PLANT_RESTORED_POWER",
     ],
     romOffsets: [[
       31,
@@ -5185,8 +5188,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
     itemId: "MINERALBADGE",
     areaId: "OLIVINE_GYM",
     accessRequirements: [
-      "OLIVINE_LIGHTHOUSE_6F",
-      "SECRETPOTION",
+      "OLIVINE_LIGHTHOUSE_6F_HEALED_AMPHY",
     ],
     romOffsets: [[
       39,
@@ -5233,8 +5235,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
     itemId: "CASCADEBADGE",
     areaId: "CERULEAN_GYM",
     accessRequirements: [
-      "ROUTE_25",
-      "POWER_PLANT",
+      "ROUTE_25_MET_MISTY",
     ],
     romOffsets: [[
       98,
@@ -5303,7 +5304,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
     itemId: "EARTHBADGE",
     areaId: "VIRIDIAN_GYM",
     accessRequirements: [
-      "CINNABAR_ISLAND",
+      "CINNABAR_ISLAND_TALKED_TO_BLUE",
     ],
     romOffsets: [[
       38,

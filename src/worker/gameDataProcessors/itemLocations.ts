@@ -3,16 +3,18 @@ import type { Settings } from "@shared/appData/settingsFromViewModel"
 import type { ROMInfo } from "@shared/romUtils/romInfo"
 import type { GameData } from "@shared/types/gameData/gameData"
 import type { ItemLocation } from "@shared/types/gameData/itemLocation"
+import type { LogicalEvent } from "@shared/types/gameData/logicalEvent"
 import type { Mart, SpecialShop } from "@shared/types/gameData/mart"
 import { type AccessRequirement, type Warp } from "@shared/types/gameData/warp"
 import type { ItemLocationGroupId } from "@shared/types/gameDataIds/itemLocationGroups"
 import { isItemLocationId, type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { type BadgeItemId, badgeItemIds, ballItemIds, type HoldableItemId, holdableItemIds, isItemId, type ItemId, type KeyItemId, keyItemIds, type MenuItemId, menuItemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { isLogicalAccessAreaId, type LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
+import { isLogicalEventId, type LogicalEventId } from "@shared/types/gameDataIds/logicalEvents"
 import { isMartGroupId, martGroupIds } from "@shared/types/gameDataIds/martGroups"
-import { isSpecialShopId, type MartId, type SpecialShopId } from "@shared/types/gameDataIds/marts"
+import { isMartId, isSpecialShopId, type MartId, type SpecialShopId } from "@shared/types/gameDataIds/marts"
 import { isPokemonId } from "@shared/types/gameDataIds/pokemon"
-import { isWarpId } from "@shared/types/gameDataIds/warps"
+import { isWarpId, type WarpId } from "@shared/types/gameDataIds/warps"
 import { getAllCombinations, isNotNullish, isNullish, isNumber, isObject, isString, removeFirstElementFromArrayWhere, removeSupersets } from "@shared/utils"
 import type { Random } from "@worker/random"
 
@@ -526,7 +528,7 @@ const getAccessibleLocations = (params: {
 }
 
 const generalItemLocations = (gameData: GameData, settings: Settings): GeneralItemLocation[] => {
-  const convertAccessRequirements = (requirements: AccessRequirement[]) => {
+  const convertAccessRequirements = (requirements: (AccessRequirement | LogicalAccessAreaId | WarpId)[]) => {
     return requirements.flatMap((requirement) => {
       if (isPokemonId(requirement)) {
         const encounterSettings = settings.RANDOMIZE_RANDOM_ENCOUNTERS
@@ -574,7 +576,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
     })
   }
   
-  const accessInfoFrom = (objects: ItemLocation[] | Warp[] | Mart[] | SpecialShop[], type: string) => {
+  const accessInfoFrom = (objects: ItemLocation[] | Warp[] | Mart[] | SpecialShop[] | LogicalEvent[], type: string) => {
     return objects.map((object) => {
       return {
         type: type,
@@ -595,6 +597,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
     ...accessInfoFrom(Object.values(gameData.warps), "WARP" as const),
     ...accessInfoFrom(Object.values(gameData.martGroups).map((group) => { return gameData.marts[group.primaryMartId] }), "MART" as const),
     ...accessInfoFrom(Object.values(gameData.specialShops), "SPECIAL_SHOP" as const),
+    ...accessInfoFrom(Object.values(gameData.events), "EVENT" as const),
     ...Object.values(gameData.areas).map((area) => {
       return {
         type: "AREA" as const,
@@ -602,6 +605,11 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
         accessOptions: area.accessOptions.map((option) => {
           if (Array.isArray(option)) {
             return convertAccessRequirements(option)
+          } else if (isObject(option)) {
+            return convertAccessRequirements([
+              option.area,
+              ...option.requirements,
+            ])
           } else {
             return convertAccessRequirements([
               option,
@@ -1095,102 +1103,66 @@ export const updateAccessLogic = (
     return
   }
   
-  const addAccessRequirements = (params: {
-    areaIds: LogicalAccessAreaId[]
+  const removeRequirements = (params: {
+    ids: (ItemLocationId | WarpId | MartId | SpecialShopId | LogicalEventId | LogicalAccessAreaId)[]
     requirements: AccessRequirement[]
-    matchingRequirements?: AccessRequirement[]
-    modifyMutualAccess?: boolean
+    fromAreas?: LogicalAccessAreaId[]
   }) => {
     const {
-      areaIds,
+      ids,
       requirements,
-      matchingRequirements,
-      modifyMutualAccess,
+      fromAreas,
     } = params
-  
-    areaIds.forEach((areaId) => {
-      const area = romInfo.gameData.areas[areaId]
-      area.accessOptions = area.accessOptions.map((option) => {
-        const optionArray = [option].flat()
-        const stringRequirements = new Set(optionArray.filter((option) => {
-          return isString(option)
-        })) as Set<string>
-        
-        if (
-          new Set(optionArray).isSupersetOf(new Set(matchingRequirements))
-          && (
-            !(modifyMutualAccess ?? false)
-            || stringRequirements.intersection(new Set(areaIds)).size > 0
-          )
-        ) {
-          optionArray.push(...requirements)
-          return optionArray
-        } else {
-          return option
-        }
-      })
-    })
-  }
-  
-  const removeAccessRequirements = (params: {
-    areaIds: LogicalAccessAreaId[]
-    requirements: AccessRequirement[]
-    matchingRequirements?: AccessRequirement[]
-    modifyMutualAccess?: boolean
-  }) => {
-    const {
-      areaIds,
-      requirements,
-      matchingRequirements,
-      modifyMutualAccess,
-    } = params
-  
-    areaIds.forEach((areaId) => {
-      const area = romInfo.gameData.areas[areaId]
-      area.accessOptions = area.accessOptions.map((option) => {
-        const optionArray = [option].flat()
-        const stringRequirements = new Set(optionArray.filter((option) => {
-          return isString(option)
-        })) as Set<string>
-      
-        if (
-          new Set(optionArray).isSupersetOf(new Set(matchingRequirements))
-          && (
-            !(modifyMutualAccess ?? false)
-            || stringRequirements.intersection(new Set(areaIds)).size > 0
-          )
-        ) {
-          return optionArray.filter((requirement) => {
-            return !requirements.includes(requirement)
-          })
-        } else {
-          return option
-        }
-      })
+    
+    ids.forEach((id) => {
+      if (isItemLocationId(id)) {
+        romInfo.gameData.itemLocations[id].accessRequirements = romInfo.gameData.itemLocations[id].accessRequirements?.filter((existingRequirement) => {
+          return !requirements.includes(existingRequirement)
+        })
+      } else if (isWarpId(id)) {
+        romInfo.gameData.warps[id].accessRequirements = romInfo.gameData.warps[id].accessRequirements?.filter((existingRequirement) => {
+          return !requirements.includes(existingRequirement)
+        })
+      } else if (isMartId(id)) {
+        romInfo.gameData.marts[id].accessRequirements = romInfo.gameData.marts[id].accessRequirements?.filter((existingRequirement) => {
+          return !requirements.includes(existingRequirement)
+        })
+      } else if (isSpecialShopId(id)) {
+        romInfo.gameData.specialShops[id].accessRequirements = romInfo.gameData.specialShops[id].accessRequirements?.filter((existingRequirement) => {
+          return !requirements.includes(existingRequirement)
+        })
+      } else if (isLogicalEventId(id)) {
+        romInfo.gameData.events[id].accessRequirements = romInfo.gameData.events[id].accessRequirements?.filter((existingRequirement) => {
+          return !requirements.includes(existingRequirement)
+        })
+      } else {
+        romInfo.gameData.areas[id].accessOptions.forEach((option) => {
+          if (!Array.isArray(option) && isObject(option) && (isNullish(fromAreas) || fromAreas.includes(option.area))) {
+            option.requirements = option.requirements.filter((existingRequirement) => {
+              return !requirements.includes(existingRequirement)
+            })
+          }
+        })
+      }
     })
   }
   
   if (settings.REMOVE_ROUTE_30_ROADBLOCK) {
-    removeAccessRequirements({
-      areaIds: [
+    removeRequirements({
+      ids: [
         "ROUTE_30_CHERRYGROVE_SIDE",
         "ROUTE_30_VIOLET_SIDE",
+        "ROUTE_30_CHERRYGROVE_SIDE_JOEYS_GIFT",
       ],
       requirements: [
-        "ELMS_LAB",
-        "MYSTERY_EGG",
+        "ELMS_LAB_GAVE_MYSTERY_EGG",
       ],
-      modifyMutualAccess: true,
-    })
-    
-    romInfo.gameData.itemLocations["ROUTE_30_CHERRYGROVE_SIDE_JOEYS_GIFT"].accessRequirements = romInfo.gameData.itemLocations["ROUTE_30_CHERRYGROVE_SIDE_JOEYS_GIFT"].accessRequirements?.filter((requirement) => {
-      return requirement !== "ELMS_LAB" && requirement !== "MYSTERY_EGG"
     })
   }
   
   if (settings.REMOVE_ILEX_CUT_TREE) {
-    removeAccessRequirements({
-      areaIds: [
+    removeRequirements({
+      ids: [
         "ILEX_FOREST_SOUTH_AREA",
         "ILEX_FOREST_NORTH_AREA",
       ],
@@ -1198,36 +1170,61 @@ export const updateAccessLogic = (
         "HIVEBADGE",
         "HM01",
       ],
-      modifyMutualAccess: true,
     })
   }
   
   if (settings.CLEAR_GOLDENROD_STORE_BASEMENT) {
-    removeAccessRequirements({
-      areaIds: [
-        "GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA",
+    removeRequirements({
+      ids: [
+        "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA",
+        "GOLDENROD_DEPT_STORE_B1F_STAIRS_AREA",
+        "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_NW_ITEM_BALL",
+        "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SW_ITEM_BALL",
+        "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SE_ITEM_BALL",
       ],
       requirements: [
-        "GOLDENROD_DEPT_STORE_ELEVATOR",
-      ],
-      matchingRequirements: [
-        "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA",
+        "GOLDENROD_DEPT_STORE_ELEVATOR_USED_ELEVATOR",
       ],
     })
   }
   
   if (settings.SKIP_FLORIA) {
-    romInfo.gameData.itemLocations.GOLDENROD_FLOWER_SHOP_OWNERS_GIFT.accessRequirements = romInfo.gameData.itemLocations.GOLDENROD_FLOWER_SHOP_OWNERS_GIFT.accessRequirements?.filter((requirement) => {
-      return requirement !== "ROUTE_36_WEST_AREA" && requirement !== "GOLDENROD_CITY_MAIN_AREA"
+    removeRequirements({
+      ids: [
+        "GOLDENROD_FLOWER_SHOP_OWNERS_GIFT",
+      ],
+      requirements: [
+        "ROUTE_36_WEST_AREA_TALKED_TO_FLORIA",
+      ],
     })
   }
   
   if (settings.SKIP_MAHOGANY_ROCKETS) {
-    const itemLocation = romInfo.gameData.itemLocations["TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT"]
+    const itemLocation = romInfo.gameData.itemLocations.TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT
     itemLocation.areaId = "LAKE_OF_RAGE_MAIN_AREA"
     itemLocation.accessRequirements = [
-      "LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT",
+      "LAKE_OF_RAGE_SURF_AREA_FOUGHT_SHINY",
     ]
+    
+    const event = romInfo.gameData.events.TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_DISABLED_TRANSMITTER
+    event.areaId = "LAKE_OF_RAGE_MAIN_AREA"
+    event.accessRequirements = [
+      "LAKE_OF_RAGE_SURF_AREA_FOUGHT_SHINY",
+    ]
+    
+    romInfo.gameData.areas.TEAM_ROCKET_BASE_B2F_CENTRAL_AREA.accessOptions.push({
+      area: "TEAM_ROCKET_BASE_B2F_SOUTH_AREA",
+      requirements: [
+        "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_DISABLED_TRANSMITTER",
+      ],
+    })
+    
+    romInfo.gameData.areas.TEAM_ROCKET_BASE_B3F_ADMIN_AREA.accessOptions.push({
+      area: "TEAM_ROCKET_BASE_B3F_NW_AREA",
+      requirements: [
+        "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_DISABLED_TRANSMITTER",
+      ],
+    })
   }
   
   if (settings.SKIP_GOLDENROD_ROCKETS) {
@@ -1241,51 +1238,63 @@ export const updateAccessLogic = (
       const itemLocation = romInfo.gameData.itemLocations[locationId]
       itemLocation.areaId = "LAKE_OF_RAGE_MAIN_AREA"
       itemLocation.accessRequirements = [
-        "LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT",
+        "LAKE_OF_RAGE_SURF_AREA_FOUGHT_SHINY",
       ]
     })
     
-    romInfo.gameData.areas.TEAM_ROCKET_BASE_B2F_CENTRAL_AREA.accessOptions.push([
-      "TEAM_ROCKET_BASE_B2F_SOUTH_AREA",
-      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
-    ])
-    
-    romInfo.gameData.areas.TEAM_ROCKET_BASE_B3F_ADMIN_AREA.accessOptions.push([
-      "TEAM_ROCKET_BASE_B3F_NW_AREA",
-      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
-    ])
-    
-    romInfo.gameData.areas.ROUTE_44.accessOptions.push([
-      "MAHOGANY_TOWN",
-      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
-    ])
-    
-    // TODO: This should acutally be added an additional separate access option, instead of just replacing the previous requirement, but we don't currently support that for warps
-    romInfo.gameData.warps.RADIO_TOWER_2F_STAIRS_UP.accessRequirements = [
-      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
+    const eventsToChange: LogicalEventId[] = [
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+      "GOLDENROD_UNDERGROUND_WAREHOUSE_TALKED_TO_DIRECTOR",
     ]
     
-    romInfo.gameData.areas.RADIO_TOWER_3F_EAST_AREA.accessOptions.push([
-      "RADIO_TOWER_3F_WEST_AREA",
-      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
-    ])
+    eventsToChange.forEach((eventId) => {
+      const event = romInfo.gameData.events[eventId]
+      event.areaId = "LAKE_OF_RAGE_MAIN_AREA"
+      event.accessRequirements = [
+        "LAKE_OF_RAGE_SURF_AREA_FOUGHT_SHINY",
+      ]
+    })
     
-    romInfo.gameData.areas.RADIO_TOWER_3F_WEST_AREA.accessOptions.push([
-      "RADIO_TOWER_3F_EAST_AREA",
-      "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
-    ])
+    romInfo.gameData.areas.ROUTE_44.accessOptions.push({
+      area: "MAHOGANY_TOWN",
+      requirements: [
+        "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+      ],
+    })
+    
+    // TODO: This should acutally be added an additional separate access option, instead of just replacing the previous requirement, but we don't currently support that for warps, make a separate area for this
+    romInfo.gameData.warps.RADIO_TOWER_2F_STAIRS_UP.accessRequirements = [
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+    ]
+    
+    romInfo.gameData.areas.RADIO_TOWER_3F_EAST_AREA.accessOptions.push({
+      area: "RADIO_TOWER_3F_WEST_AREA",
+      requirements: [
+        "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+      ],
+    })
+    
+    romInfo.gameData.areas.RADIO_TOWER_3F_WEST_AREA.accessOptions.push({
+      area: "RADIO_TOWER_3F_EAST_AREA",
+      requirements: [
+        "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+      ],
+    })
   }
   
   if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_FLOWER_SHOP")) {
-    removeAccessRequirements({
-      areaIds: [
+    removeRequirements({
+      ids: [
         "GOLDENROD_CITY_FLOWER_SHOP_AREA",
         "GOLDENROD_CITY_MAIN_AREA",
       ],
       requirements: [
-        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+        "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
       ],
-      modifyMutualAccess: true,
+      fromAreas: [
+        "GOLDENROD_CITY_FLOWER_SHOP_AREA",
+        "GOLDENROD_CITY_MAIN_AREA",
+      ],
     })
   }
   
@@ -1298,66 +1307,83 @@ export const updateAccessLogic = (
   }
   
   if (settings.REMOVE_ROCKET_GRUNTS.includes("GOLDENROD_SE_AREA")) {
-    removeAccessRequirements({
-      areaIds: [
+    removeRequirements({
+      ids: [
         "GOLDENROD_CITY_EAST_AREA",
         "GOLDENROD_CITY_MAIN_AREA",
       ],
       requirements: [
-        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+        "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
       ],
-      modifyMutualAccess: true,
+      fromAreas: [
+        "GOLDENROD_CITY_EAST_AREA",
+        "GOLDENROD_CITY_MAIN_AREA",
+      ],
     })
   }
   
-  romInfo.gameData.itemLocations.ROUTE_39_FARMHOUSE_LADYS_GIFT.accessRequirements = romInfo.gameData.numberOfMiltankBerries > 0 ? [
-    "ROUTE_39_BARN",
-    { item: "BERRY", number: romInfo.gameData.numberOfMiltankBerries },
-  ] : undefined
-  
-  romInfo.gameData.specialShops.ROUTE_39_FARMHOUSE_SHOP.accessRequirements = romInfo.gameData.numberOfMiltankBerries > 0 ? [
-    "ROUTE_39_BARN",
+  romInfo.gameData.events.ROUTE_39_BARN_HEALED_MILTANK.accessRequirements = romInfo.gameData.numberOfMiltankBerries > 0 ? [
     { item: "BERRY", number: romInfo.gameData.numberOfMiltankBerries },
   ] : undefined
   
   if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("SKIP_BEASTS")) {
-    romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements = romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements?.filter((requirement) => {
-      return requirement !== "SUICUNE" && requirement !== "RAIKOU" && requirement !== "ENTEI"
+    removeRequirements({
+      ids: [
+        "TIN_TOWER_1F_NORTH_SAGES_GIFT",
+      ],
+      requirements: [
+        "SUICUNE",
+        "RAIKOU",
+        "ENTEI",
+      ],
     })
   }
   
   if (settings.CHANGE_TIN_TOWER_REQUIREMENTS.includes("SKIP_E4")) {
-    romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements = romInfo.gameData.itemLocations["TIN_TOWER_1F_NORTH_SAGES_GIFT"].accessRequirements?.filter((requirement) => {
-      return requirement !== "HALL_OF_FAME"
+    removeRequirements({
+      ids: [
+        "TIN_TOWER_1F_NORTH_SAGES_GIFT",
+      ],
+      requirements: [
+        "HALL_OF_FAME_ENTERED",
+      ],
     })
   }
   
   if (settings.CLIMB_TIN_TOWER_FOR_HO_OH_CHAMBER) {
-    romInfo.gameData.warps.RUINS_OF_ALPH_HO_OH_CHAMBER_TOP_CAVE_IN.accessRequirements = ["TIN_TOWER_ROOF"]
+    romInfo.gameData.warps.RUINS_OF_ALPH_HO_OH_CHAMBER_TOP_CAVE_IN.accessRequirements = ["TIN_TOWER_ROOF_FOUGHT_HO_OH"]
   }
   
-  if (settings.SKIP_GOLDENROD_ROCKETS) {
+  if (settings.SKIP_CLAIR_BADGE_TEST) {
     const locationsToChange: ItemLocationId[] = [
       "DRAGON_SHRINE_BADGE",
+      "DRAGONS_DEN_B1F_SOUTH_AREA_CLAIRS_GIFT",
     ]
     
     locationsToChange.forEach((locationId) => {
       const itemLocation = romInfo.gameData.itemLocations[locationId]
       itemLocation.areaId = "BLACKTHORN_GYM_1F_BACK_AREA"
+      
+      removeRequirements({
+        ids: [
+          locationId,
+        ],
+        requirements: [
+          "DRAGON_SHRINE_PASSED_TEST",
+        ],
+      })
     })
   }
   
   if (settings.RIDE_TRAIN_WITHOUT_POWER) {
-    removeAccessRequirements({
-      areaIds: [
+    removeRequirements({
+      ids: [
         "GOLDENROD_MAGNET_TRAIN_STATION",
         "SAFFRON_MAGNET_TRAIN_STATION",
       ],
       requirements: [
-        "POWER_PLANT",
-        "MACHINE_PART",
+        "POWER_PLANT_RESTORED_POWER",
       ],
-      modifyMutualAccess: true,
     })
   }
   
@@ -1367,41 +1393,38 @@ export const updateAccessLogic = (
   
   if (settings.ENABLE_GS_BALL_EVENT) {
     romInfo.gameData.itemLocations.GOLDENROD_POKECENTER_1F_LINK_RECEPTIONISTS_GIFT.accessRequirements = [
-      "HALL_OF_FAME",
+      "HALL_OF_FAME_ENTERED",
     ]
   }
   
   if (settings.CHANGE_SS_AQUA_REQUIREMENTS.includes("SKIP_E4")) {
-    removeAccessRequirements({
-      areaIds: [
-        "FAST_SHIP_1F_MAIN_AREA",
+    removeRequirements({
+      ids: [
         "OLIVINE_PORT_NORTH_AREA",
-        "VERMILION_PORT_SOUTH_AREA",
       ],
       requirements: [
-        "HALL_OF_FAME",
+        "HALL_OF_FAME_ENTERED",
+      ],
+    })
+    
+    removeRequirements({
+      ids: [
+        "OLIVINE_PORT_NORTH_AREA_BOARDED_SHIP",
+      ],
+      requirements: [
+        "HALL_OF_FAME_ENTERED",
       ],
     })
   }
   
   if (settings.FLY_TO_OLIVINE_FROM_PORT) {
-    romInfo.gameData.areas.OLIVINE_CITY.accessOptions.push([
-      "OLIVINE_PORT_NORTH_AREA",
-      "STORMBADGE",
-      "HM02",
-    ])
-    
-    romInfo.gameData.areas.OLIVINE_CITY.accessOptions.push([
-      "OLIVINE_PORT_SOUTH_AREA",
-      "STORMBADGE",
-      "HM02",
-    ])
+    romInfo.gameData.areas.OLIVINE_CITY_FLYPOINT_GROUP.accessOptions.push("OLIVINE_PORT_SOUTH_AREA")
   }
   
   if (settings.CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR.includes("SKIP_TO_STRONGEST_AVAILABLE_REMATCH")) {
     const powerPlantRequirements: AccessRequirement[] = [
       "POKEGEAR",
-      "POWER_PLANT_MANAGERS_GIFT",
+      "POWER_PLANT_RESTORED_POWER",
     ]
     
     romInfo.gameData.itemLocations.OLIVINE_LIGHTHOUSE_2F_HUEYS_GIFT.accessRequirements = [...powerPlantRequirements]
@@ -1410,7 +1433,7 @@ export const updateAccessLogic = (
     romInfo.gameData.itemLocations.ROUTE_46_NORTH_AREA_ERINS_GIFT.accessRequirements = [...powerPlantRequirements]
     romInfo.gameData.itemLocations.ROUTE_30_CHERRYGROVE_SIDE_JOEYS_GIFT.accessRequirements = [
       "POKEGEAR",
-      "HALL_OF_FAME",
+      "HALL_OF_FAME_ENTERED",
     ]
   }
   
@@ -1431,95 +1454,67 @@ export const updateAccessLogic = (
   }
   
   if (settings.EARLY_MOUNT_SILVER.VALUE) {
-    removeAccessRequirements({
-      areaIds: [
+    removeRequirements({
+      ids: [
         "VICTORY_ROAD_GATE_WEST_AREA",
         "VICTORY_ROAD_GATE_NORTH_AREA",
       ],
       requirements: [
-        "OAKS_LAB",
-        16,
+        "OAKS_LAB_GOT_OAKS_APPROVAL",
       ],
-      modifyMutualAccess: true,
     })
   } else if (settings.RANDOMIZE_NUMBER_OF_BADGES_FOR_OAK.VALUE) {
-    removeAccessRequirements({
-      areaIds: [
-        "VICTORY_ROAD_GATE_WEST_AREA",
-        "VICTORY_ROAD_GATE_NORTH_AREA",
-      ],
-      requirements: [
-        16,
-      ],
-      modifyMutualAccess: true,
-    })
-    
-    addAccessRequirements({
-      areaIds: [
-        "VICTORY_ROAD_GATE_WEST_AREA",
-        "VICTORY_ROAD_GATE_NORTH_AREA",
-      ],
-      requirements: [
-        romInfo.gameData.numberOfBadgesForOak,
-      ],
-      modifyMutualAccess: true,
-    })
+    romInfo.gameData.events.OAKS_LAB_GOT_OAKS_APPROVAL.accessRequirements = [romInfo.gameData.numberOfBadgesForOak]
   }
   
   if (settings.RANDOMIZE_EVENT_POKEMON.VALUE) {
-    romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements = romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements?.filter((requirement) => {
-      return requirement !== "TOGEPI"
+    removeRequirements({
+      ids: [
+        "ELMS_LAB_ELMS_GIFT_FOR_TOGEPI",
+      ],
+      requirements: [
+        "TOGEPI",
+      ],
     })
     
     romInfo.gameData.itemLocations.ELMS_LAB_ELMS_GIFT_FOR_TOGEPI.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.TOGEPI)
   }
   
   if (settings.RANDOMIZE_SHOW_AND_TELL_POKEMON.VALUE) {
-    romInfo.gameData.itemLocations.NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL.accessRequirements = romInfo.gameData.itemLocations.NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL.accessRequirements?.filter((requirement) => {
-      return requirement !== "MARILL"
-    })
-    
-    romInfo.gameData.itemLocations.ROUTE_39_DEREKS_GIFT_FOR_PIKACHU.accessRequirements = romInfo.gameData.itemLocations.ROUTE_39_DEREKS_GIFT_FOR_PIKACHU.accessRequirements?.filter((requirement) => {
-      return requirement !== "PIKACHU"
-    })
-    
-    romInfo.gameData.itemLocations.ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY.accessRequirements = romInfo.gameData.itemLocations.ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY.accessRequirements?.filter((requirement) => {
-      return requirement !== "CLEFAIRY"
-    })
-    
-    romInfo.gameData.itemLocations.LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP.accessRequirements = romInfo.gameData.itemLocations.LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP.accessRequirements?.filter((requirement) => {
-      return requirement !== "MAGIKARP"
-    })
-    
-    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG.accessRequirements = romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG.accessRequirements?.filter((requirement) => {
-      return requirement !== "LICKITUNG"
-    })
-    
-    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH.accessRequirements = romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH.accessRequirements?.filter((requirement) => {
-      return requirement !== "ODDISH"
-    })
-    
-    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU.accessRequirements = romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU.accessRequirements?.filter((requirement) => {
-      return requirement !== "STARYU"
-    })
-    
-    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE.accessRequirements = romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE.accessRequirements?.filter((requirement) => {
-      return requirement !== "GROWLITHE"
-    })
-    
-    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_PICHU.accessRequirements = romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_PICHU.accessRequirements?.filter((requirement) => {
-      return requirement !== "PICHU"
+    removeRequirements({
+      ids: [
+        "NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL",
+        "ROUTE_39_DEREKS_GIFT_FOR_PIKACHU",
+        "ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY",
+        "LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP",
+        "BILLS_HOUSE_SHOWED_LICKITUNG",
+        "BILLS_HOUSE_SHOWED_ODDISH",
+        "BILLS_HOUSE_SHOWED_STARYU",
+        "BILLS_HOUSE_SHOWED_GROWLITHE",
+        "BILLS_HOUSE_SHOWED_PICHU",
+      ],
+      requirements: [
+        "MARILL",
+        "PIKACHU",
+        "CLEFAIRY",
+        "MAGIKARP",
+        "LICKITUNG",
+        "ODDISH",
+        "STARYU",
+        "GROWLITHE",
+        "PICHU",
+      ],
     })
     
     romInfo.gameData.itemLocations.NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.MARILL)
     romInfo.gameData.itemLocations.ROUTE_39_DEREKS_GIFT_FOR_PIKACHU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.PIKACHU)
     romInfo.gameData.itemLocations.ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.CLEFAIRY)
     romInfo.gameData.itemLocations.LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.MAGIKARP)
-    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.LICKITUNG)
-    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.ODDISH)
-    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.STARYU)
-    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.GROWLITHE)
-    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_PICHU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.PICHU)
+    romInfo.gameData.events.BILLS_HOUSE_SHOWED_LICKITUNG.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.LICKITUNG)
+    romInfo.gameData.events.BILLS_HOUSE_SHOWED_ODDISH.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.ODDISH)
+    romInfo.gameData.events.BILLS_HOUSE_SHOWED_STARYU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.STARYU)
+    romInfo.gameData.events.BILLS_HOUSE_SHOWED_GROWLITHE.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.GROWLITHE)
+    romInfo.gameData.events.BILLS_HOUSE_SHOWED_PICHU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.PICHU)
   }
   
   if (settings.SKIP_KURT_FOR_ILEX_SHRINE && !settings.KEEP_GS_BALL_AFTER_CELEBI_EVENT) {
@@ -1535,13 +1530,14 @@ export const updateAccessLogic = (
   
   if (
     settings.SHUFFLE_ITEMS.VALUE
-    && !settings.SHUFFLE_ITEMS.SETTINGS.EXCLUDE_LOCATIONS.includes("GOLDENROD_POKECENTER_1F_LINK_RECEPTIONISTS_GIFT")
-    && !settings.SHUFFLE_ITEMS.SETTINGS.EXCLUDE_LOCATIONS.includes("AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL")
-    || settings.START_WITH_ITEMS.VALUE
-    && settings.START_WITH_ITEMS.SETTINGS.KEY_ITEMS.includes("GS_BALL")
+    && (
+      !settings.SHUFFLE_ITEMS.SETTINGS.EXCLUDE_LOCATIONS.includes("GOLDENROD_POKECENTER_1F_LINK_RECEPTIONISTS_GIFT")
+      || !settings.SHUFFLE_ITEMS.SETTINGS.EXCLUDE_LOCATIONS.includes("AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL")
+    )
+    || settings.START_WITH_ITEMS.VALUE && settings.START_WITH_ITEMS.SETTINGS.KEY_ITEMS.includes("GS_BALL")
     || settings.ENABLE_GS_BALL_EVENT
   ) {
-    romInfo.gameData.itemLocations.ROUTE_34_ILEX_FOREST_GATE_LADYS_GIFT.accessRequirements = [
+    romInfo.gameData.events.ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT.accessRequirements = [
       {
         item: "GS_BALL",
         number: 2,
@@ -1553,47 +1549,63 @@ export const updateAccessLogic = (
     ...settings.SHUFFLE_ITEMS.SETTINGS.ACCESS_MODIFIERS.flatMap((rulesetId) => {
       return accessRulsetsMap[rulesetId].accessModifiers
     }),
-    ...settings.SHUFFLE_ITEMS.SETTINGS.CUSTOM_ACCESS_MODIFIERS,
+    ...settings.SHUFFLE_ITEMS.SETTINGS.CUSTOM_LOCATION_ACCESS_MODIFIERS,
+    ...settings.SHUFFLE_ITEMS.SETTINGS.CUSTOM_TRANSITION_ACCESS_MODIFIERS,
   ]
   
   accessModifiers.forEach((modifier) => {
-    const areaIds: LogicalAccessAreaId[] = []
-    
-    modifier.LOCATIONS.forEach((id) => {
-      if (isLogicalAccessAreaId(id)) {
-        areaIds.push(id)
-      } else if (isItemLocationId(id)) {
-        romInfo.gameData.itemLocations[id].accessRequirements = [
-          ...romInfo.gameData.itemLocations[id].accessRequirements ?? [],
-          ...modifier.ADDED_REQUIREMENTS,
-        ]
-      } else if (isWarpId(id)) {
-        romInfo.gameData.warps[id].accessRequirements = [
-          ...romInfo.gameData.warps[id].accessRequirements ?? [],
-          ...modifier.ADDED_REQUIREMENTS,
-        ]
-      } else if (isMartGroupId(id)) {
-        Object.values(romInfo.gameData.marts).filter((mart) => {
-          return mart.groupId === id
-        }).forEach((mart) => {
-          mart.accessRequirements = [
-            ...mart.accessRequirements ?? [],
+    if ("LOCATIONS" in modifier) {
+      modifier.LOCATIONS.forEach((id) => {
+        if (isItemLocationId(id)) {
+          romInfo.gameData.itemLocations[id].accessRequirements = [
+            ...romInfo.gameData.itemLocations[id].accessRequirements ?? [],
             ...modifier.ADDED_REQUIREMENTS,
           ]
-        })
-      } else {
-        romInfo.gameData.specialShops[id].accessRequirements = [
-          ...romInfo.gameData.specialShops[id].accessRequirements ?? [],
-          ...modifier.ADDED_REQUIREMENTS,
-        ]
-      }
-    })
-    
-    addAccessRequirements({
-      areaIds: areaIds,
-      requirements: modifier.ADDED_REQUIREMENTS,
-      matchingRequirements: modifier.MATCHING_REQUIREMENTS,
-    })
+        } else if (isWarpId(id)) {
+          romInfo.gameData.warps[id].accessRequirements = [
+            ...romInfo.gameData.warps[id].accessRequirements ?? [],
+            ...modifier.ADDED_REQUIREMENTS,
+          ]
+        } else if (isMartGroupId(id)) {
+          Object.values(romInfo.gameData.marts).filter((mart) => {
+            return mart.groupId === id
+          }).forEach((mart) => {
+            mart.accessRequirements = [
+              ...mart.accessRequirements ?? [],
+              ...modifier.ADDED_REQUIREMENTS,
+            ]
+          })
+        } else if (isSpecialShopId(id)) {
+          romInfo.gameData.specialShops[id].accessRequirements = [
+            ...romInfo.gameData.specialShops[id].accessRequirements ?? [],
+            ...modifier.ADDED_REQUIREMENTS,
+          ]
+        } else {
+          romInfo.gameData.events[id].accessRequirements = [
+            ...romInfo.gameData.events[id].accessRequirements ?? [],
+            ...modifier.ADDED_REQUIREMENTS,
+          ]
+        }
+      })
+    } else {
+      romInfo.gameData.areas[modifier.TO_AREA].accessOptions = romInfo.gameData.areas[modifier.TO_AREA].accessOptions.map((option) => {
+        if (isLogicalAccessAreaId(option) && option === modifier.FROM_AREA) {
+          return {
+            area: option,
+            requirements: modifier.ADDED_REQUIREMENTS,
+          }
+        } else if (!Array.isArray(option) && isObject(option) && option.area === modifier.FROM_AREA) {
+          option.requirements = [
+            ...option.requirements,
+            ...modifier.ADDED_REQUIREMENTS,
+          ]
+          
+          return option
+        } else {
+          return option
+        }
+      })
+    }
   })
 }
 

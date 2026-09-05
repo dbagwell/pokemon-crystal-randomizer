@@ -16,6 +16,7 @@ import { itemLocationGroupIds } from "@shared/types/gameDataIds/itemLocationGrou
 import { itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { ballItemIds, holdableItemIds, type ItemId, itemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
+import { logicalEventIds } from "@shared/types/gameDataIds/logicalEvents"
 import { martGroupIds } from "@shared/types/gameDataIds/martGroups"
 import { specialShopIds } from "@shared/types/gameDataIds/marts"
 import { moveIds } from "@shared/types/gameDataIds/moves"
@@ -1285,8 +1286,8 @@ export const defaultSettingsViewModel = () => {
                 }),
               }),
               createInputGroupListViewModel({
-                id: "CUSTOM_ACCESS_MODIFIERS" as const,
-                name: "Custom Access Modifiers",
+                id: "CUSTOM_LOCATION_ACCESS_MODIFIERS" as const,
+                name: "Custom Location Access Modifiers",
                 description: "Additional rules to use when determining valid locations for the shuffled items.",
                 itemName: "Modifier",
                 createGroupFunction: () => {
@@ -1295,7 +1296,7 @@ export const defaultSettingsViewModel = () => {
                       id: "LOCATIONS" as const,
                       name: "Locations",
                       description: "The locations that should have their access requirements modified.\n"
-                        + "These can either be specific item locations, shops, or entire areas in the overworld.",
+                        + "These can either be specific item locations, shops, events or warps.",
                       options: [
                         ...itemLocationIds.map((locationId) => {
                           return createSimpleSelectorOption({
@@ -1315,16 +1316,16 @@ export const defaultSettingsViewModel = () => {
                             name: shopId,
                           })
                         }),
-                        ...logicalAccessAreaIds.map((areaId) => {
-                          return createSimpleSelectorOption({
-                            id: areaId,
-                            name: areaId,
-                          })
-                        }),
                         ...warpIds.map((warpId) => {
                           return createSimpleSelectorOption({
                             id: warpId,
                             name: warpId,
+                          })
+                        }),
+                        ...logicalEventIds.map((eventId) => {
+                          return createSimpleSelectorOption({
+                            id: eventId,
+                            name: eventId,
                           })
                         }),
                       ],
@@ -1335,10 +1336,53 @@ export const defaultSettingsViewModel = () => {
                       description: "A list of Items, Pokémon, Locations, Areas, and Warps that the player must already have access to in order to be able to access the locations specified above.",
                       options: createAllRequirementsOptions(),
                     }),
+                  ]
+                },
+                groups: [],
+              }),
+              createInputGroupListViewModel({
+                id: "CUSTOM_TRANSITION_ACCESS_MODIFIERS" as const,
+                name: "Custom Transition Access Modifiers",
+                description: "Additional rules to use when determining valid locations for the shuffled items.\n\n"
+                  + "The selected 'To Area' will be change to only logically be accessible via the 'From Area' with the selected 'Additional Access Requirements'.",
+                itemName: "Modifier",
+                createGroupFunction: () => {
+                  return [
+                    createSingleSelectorViewModel({
+                      id: "TO_AREA" as const,
+                      name: "To Area",
+                      selectedOptionId: "PLAYERS_HOUSE_1F",
+                      options: [
+                        ...logicalAccessAreaIds.map((areaId) => {
+                          return createSimpleSelectorOption({
+                            id: areaId,
+                            name: areaId,
+                          })
+                        }),
+                      ],
+                    }),
+                    createSingleSelectorViewModel({
+                      id: "FROM_AREA" as const,
+                      name: "From Area",
+                      selectedOptionId: "PLAYERS_HOUSE_2F",
+                      options: [
+                        ...logicalAccessAreaIds.map((areaId) => {
+                          return createSimpleSelectorOption({
+                            id: areaId,
+                            name: areaId,
+                          })
+                        }),
+                      ],
+                    }),
+                    createSimpleToggleViewModel({
+                      id: "IS_MUTUAL" as const,
+                      name: "Apply in Both Directions",
+                      description: "If selected, the logical access to the 'From Area' via the 'To Area' will also be changed to require the selected 'Additional Access Requirements'.",
+                    }),
                     createSimpleMultiSelectorViewModel({
-                      id: "MATCHING_REQUIREMENTS" as const,
-                      name: "Matching Requirements",
-                      description: "Locations could have multiple methods of being accessed that have different requirements. The additional access requirements specified above will only be added to the access methods of each location that already have all of the following requirements.",
+                      id: "ADDED_REQUIREMENTS" as const,
+                      name: "Additional Access Requirements",
+                      description: "A list of Items, Pokémon, Locations, Areas, and Warps that the player must already have access to in order to be able to access the locations specified above.",
                       options: createAllRequirementsOptions(),
                     }),
                   ]
@@ -1885,8 +1929,7 @@ export const defaultSettingsViewModel = () => {
               + "and shut down their radio transmission from there (but the Electrodes will still be there). "
               + "This causes the following notable changes:\n"
               + "- the Rocket Base and Route 43 Gatehouse will be fully accessible and will have no trainers or cutscenes\n"
-              + "- the NPC blocking the entrance to the Mahogany Gym will move out of the way\n"
-              + "- the NPC who stops you from going from Mahogany Town to Route 44 will let you go past\n",
+              + "- the NPC blocking the entrance to the Mahogany Gym will move out of the way\n",
           }),
           createSimpleToggleViewModel({
             id: "SKIP_GOLDENROD_ROCKETS" as const,
@@ -1896,6 +1939,7 @@ export const defaultSettingsViewModel = () => {
               + "This causes the following notable changes:\n"
               + "- the Goldenrod Radio Tower and underground warehouse will be fully accessible and will have no trainers (other than the Rival) or cutscenes\n"
               + "- the NPC blocking the entrance to the Blackthorn Gym will move out of the way\n"
+              + "- the NPC who stops you from going from Mahogany Town to Route 44 will let you go past\n"
               + "- the shady shopkeeper in the Mahogany Town Mart will be replaced with the real one",
           }),
           createSimpleToggleViewModel({
@@ -2438,22 +2482,10 @@ const createAllRequirementsOptions = () => {
     ...pokemonIds.map((pokemonId) => {
       return createSimpleSelectorOption(pokemonMap[pokemonId])
     }),
-    ...itemLocationIds.map((locationId) => {
+    ...logicalEventIds.map((eventId) => {
       return createSimpleSelectorOption({
-        id: locationId,
-        name: locationId,
-      })
-    }),
-    ...logicalAccessAreaIds.map((areaId) => {
-      return createSimpleSelectorOption({
-        id: areaId,
-        name: areaId,
-      })
-    }),
-    ...warpIds.map((warpId) => {
-      return createSimpleSelectorOption({
-        id: warpId,
-        name: warpId,
+        id: eventId,
+        name: eventId,
       })
     }),
     ...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map((number) => {

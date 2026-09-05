@@ -12,14 +12,21 @@ import { xItemsForHardFights } from "@shared/appData/accessRulesets/xItemsForHar
 import type { AccessRequirement } from "@shared/types/gameData/warp"
 import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
 import type { LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
+import type { LogicalEventId } from "@shared/types/gameDataIds/logicalEvents"
 import type { MartGroupId } from "@shared/types/gameDataIds/martGroups"
 import type { SpecialShopId } from "@shared/types/gameDataIds/marts"
 import type { WarpId } from "@shared/types/gameDataIds/warps"
 
 export type AccessModifier = {
-  LOCATIONS: (LogicalAccessAreaId | WarpId | ItemLocationId | MartGroupId | SpecialShopId)[]
+  LOCATIONS: (WarpId | ItemLocationId | MartGroupId | SpecialShopId | LogicalEventId)[]
   ADDED_REQUIREMENTS: AccessRequirement[]
-  MATCHING_REQUIREMENTS?: AccessRequirement[]
+}
+
+export type AreaTransitionAccessModifier = {
+  TO_AREA: LogicalAccessAreaId
+  FROM_AREA: LogicalAccessAreaId
+  IS_MUTUAL: boolean
+  ADDED_REQUIREMENTS: AccessRequirement[]
 }
 
 export const accessRulesetIds = [
@@ -41,7 +48,7 @@ export type AccessRuleset = {
   id: AccessRulesetId
   name: string
   description?: string
-  accessModifiers: AccessModifier[]
+  accessModifiers: (AccessModifier | AreaTransitionAccessModifier)[]
 }
 
 export const accessRulsetsMap: IdMap<AccessRulesetId, AccessRuleset> = {
@@ -59,7 +66,7 @@ export const accessRulsetsMap: IdMap<AccessRulesetId, AccessRuleset> = {
       + "- climbing the left waterfall in Tohjo Falls\n"
       + "- getting on the S.S. Aqua from either the Olivine or Vermilion Port\n"
       + "- entering the Power Plant\n"
-      + "- entering the Vermilion entrance of Diglett's Cave.",
+      + "- waking the Snorlax in Vermilion City.",
     accessModifiers: classicEarlyFly,
   },
   NEW_EARLY_FLY: {
@@ -69,7 +76,7 @@ export const accessRulsetsMap: IdMap<AccessRulesetId, AccessRuleset> = {
       + "- going to Route 44 from Mahogany Town\n"
       + "- climbing the left waterfall in Tohjo Falls\n"
       + "- entering the Power Plant\n"
-      + "- entering the Vermilion entrance of Diglett's Cave.",
+      + "- waking the Snorlax in Vermilion City.",
     accessModifiers: newEarlyFly,
   },
   NO_VANILLA_BASEMENT: {

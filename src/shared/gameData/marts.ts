@@ -25,8 +25,7 @@ export const martsMap: IdMap<MartId, Mart> = {
       "AWAKENING",
     ],
     accessRequirements: [
-      "MYSTERY_EGG",
-      "ELMS_LAB",
+      "ELMS_LAB_GAVE_MYSTERY_EGG",
     ],
   },
   VIOLET_MART_SHOP: {
@@ -150,7 +149,7 @@ export const martsMap: IdMap<MartId, Mart> = {
       "TM02",
     ],
     accessRequirements: [
-      "ILEX_FOREST_NORTH_AREA",
+      "ILEX_FOREST_NORTH_AREA_GOT_HEADBUTT_GUYS_GIFT",
     ],
   },
   GOLDENROD_DEPT_STORE_5F_SHOP_3: {
@@ -164,8 +163,7 @@ export const martsMap: IdMap<MartId, Mart> = {
       "TM08",
     ],
     accessRequirements: [
-      "SQUIRTBOTTLE",
-      "ROUTE_36_EAST_AREA",
+      "ROUTE_36_EAST_AREA_GOT_ROCK_SMASH_GUYS_GIFT",
     ],
   },
   GOLDENROD_DEPT_STORE_5F_SHOP_4: {
@@ -180,9 +178,8 @@ export const martsMap: IdMap<MartId, Mart> = {
       "TM08",
     ],
     accessRequirements: [
-      "ILEX_FOREST_NORTH_AREA",
-      "SQUIRTBOTTLE",
-      "ROUTE_36_EAST_AREA",
+      "ILEX_FOREST_NORTH_AREA_GOT_HEADBUTT_GUYS_GIFT",
+      "ROUTE_36_EAST_AREA_GOT_ROCK_SMASH_GUYS_GIFT",
     ],
   },
   OLIVINE_MART_SHOP: {
@@ -248,7 +245,7 @@ export const martsMap: IdMap<MartId, Mart> = {
       "FLOWER_MAIL",
     ],
     accessRequirements: [
-      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
     ],
   },
   BLACKTHORN_MART_SHOP: {
@@ -495,7 +492,7 @@ export const martsMap: IdMap<MartId, Mart> = {
     areaId: "GOLDENROD_DEPT_STORE_5F",
     items: [],
     accessRequirements: [
-      "ROUTE_34_ILEX_FOREST_GATE",
+      "ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT",
     ],
   },
   GOLDENROD_DEPT_STORE_5F_SHOP_6: {
@@ -504,8 +501,8 @@ export const martsMap: IdMap<MartId, Mart> = {
     areaId: "GOLDENROD_DEPT_STORE_5F",
     items: [],
     accessRequirements: [
-      "ROUTE_34_ILEX_FOREST_GATE",
-      "ILEX_FOREST_NORTH_AREA",
+      "ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT",
+      "ILEX_FOREST_NORTH_AREA_GOT_HEADBUTT_GUYS_GIFT",
     ],
   },
   GOLDENROD_DEPT_STORE_5F_SHOP_7: {
@@ -514,9 +511,8 @@ export const martsMap: IdMap<MartId, Mart> = {
     areaId: "GOLDENROD_DEPT_STORE_5F",
     items: [],
     accessRequirements: [
-      "ROUTE_34_ILEX_FOREST_GATE",
-      "SQUIRTBOTTLE",
-      "ROUTE_36_EAST_AREA",
+      "ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT",
+      "ROUTE_36_EAST_AREA_GOT_ROCK_SMASH_GUYS_GIFT",
     ],
   },
   GOLDENROD_DEPT_STORE_5F_SHOP_8: {
@@ -525,10 +521,9 @@ export const martsMap: IdMap<MartId, Mart> = {
     areaId: "GOLDENROD_DEPT_STORE_5F",
     items: [],
     accessRequirements: [
-      "ROUTE_34_ILEX_FOREST_GATE",
-      "ILEX_FOREST_NORTH_AREA",
-      "SQUIRTBOTTLE",
-      "ROUTE_36_EAST_AREA",
+      "ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT",
+      "ILEX_FOREST_NORTH_AREA_GOT_HEADBUTT_GUYS_GIFT",
+      "ROUTE_36_EAST_AREA_GOT_ROCK_SMASH_GUYS_GIFT",
     ],
   },
 } as const
@@ -622,7 +617,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
       },
     ],
     accessRequirements: [
-      "ROUTE_34_MAIN_AREA",
+      "ROUTE_34_DEFEATED_TODD",
       "POKEGEAR",
     ],
   },
@@ -652,9 +647,9 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
       },
     ],
     accessRequirements: [
-      "ROUTE_34_MAIN_AREA",
+      "ROUTE_34_DEFEATED_TODD",
       "POKEGEAR",
-      "HALL_OF_FAME",
+      "HALL_OF_FAME_ENTERED",
     ],
   },
   ROUTE_39_FARMHOUSE_SHOP: {
@@ -667,8 +662,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
       },
     ],
     accessRequirements: [
-      "ROUTE_39_BARN",
-      { item: "BERRY", number: 7 },
+      "ROUTE_39_BARN_HEALED_MILTANK",
     ],
   },
   MAHOGANY_TOWN_STREET_VENDOR: {
@@ -766,7 +760,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
     ],
     accessRequirements: [
       "BLUE_CARD",
-      "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
     ],
   },
 }

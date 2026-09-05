@@ -1,7 +1,8 @@
 import type { GameMapId } from "@shared/types/gameDataIds/gameMaps"
-import { type ItemLocationId, itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
+import { itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { type HoldableItemId, type ItemId, itemIds } from "@shared/types/gameDataIds/items"
 import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
+import type { LogicalEventId } from "@shared/types/gameDataIds/logicalEvents"
 import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
 import { type WarpId, warpIds } from "@shared/types/gameDataIds/warps"
 import { isNumber } from "@shared/utils"
@@ -22,9 +23,7 @@ export type Warp = {
 }
   
 export type AccessRequirement =
-  | WarpId
-  | LogicalAccessAreaId
-  | ItemLocationId
+  | LogicalEventId
   | PokemonId
   | ItemId
   | { item: HoldableItemId | "GS_BALL", number: number }

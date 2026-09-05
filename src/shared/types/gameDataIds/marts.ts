@@ -41,7 +41,7 @@ export const martIds = [
 
 export type MartId = typeof martIds[number]
 
-export const isMartId = (value: string): value is MartId => {
+export const isMartId = (value: any): value is MartId => {
   return (martIds as readonly string[]).includes(value)
 }
 
@@ -60,6 +60,6 @@ export const specialShopIds = [
 
 export type SpecialShopId = typeof specialShopIds[number]
 
-export const isSpecialShopId = (value: string): value is SpecialShopId => {
+export const isSpecialShopId = (value: any): value is SpecialShopId => {
   return (specialShopIds as readonly string[]).includes(value)
 }

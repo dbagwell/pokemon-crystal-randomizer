@@ -2,6 +2,7 @@ import { encounters } from "@shared/gameData/encounters"
 import { itemLocationsMap } from "@shared/gameData/itemLocations"
 import { itemsMap } from "@shared/gameData/items"
 import { logicalAccessAreasMap } from "@shared/gameData/logicalAccessAreas"
+import { logicalEventsMap } from "@shared/gameData/logicalEvents"
 import { mapObjectEvents } from "@shared/gameData/mapObjectEvents"
 import { martGroupsMap } from "@shared/gameData/martGroups"
 import { martsMap, specialShopsMap } from "@shared/gameData/marts"
@@ -209,6 +210,7 @@ export const defaultROMInfo = (): ROMInfo => {
       itemLocations: JSON.parse(JSON.stringify(itemLocationsMap)),
       warps: JSON.parse(JSON.stringify(warpsMap)),
       areas: JSON.parse(JSON.stringify(logicalAccessAreasMap)),
+      events: JSON.parse(JSON.stringify(logicalEventsMap)),
       numberOfBadgesForOak: 16,
       items: JSON.parse(JSON.stringify(itemsMap)),
     },

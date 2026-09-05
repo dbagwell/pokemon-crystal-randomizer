@@ -114,6 +114,19 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "OLIVINE_PORT_PASSAGE_ENTRANCE_AREA_DOOR_OUT_RIGHT",
       "ROUTE_39",
       "ROUTE_40",
+      {
+        area: "OLIVINE_CITY_FLYPOINT_GROUP",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
+    ],
+  },
+  OLIVINE_CITY_FLYPOINT_GROUP: {
+    id: "OLIVINE_CITY_FLYPOINT_GROUP",
+    accessOptions: [
+      "OLIVINE_CITY",
     ],
   },
   MAHOGANY_RED_GYARADOS_SPEECH_HOUSE: {
@@ -162,11 +175,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_42_MIDDLE_CUT_AREA: {
     id: "ROUTE_42_MIDDLE_CUT_AREA",
     accessOptions: [
-      [
-        "ROUTE_42_MIDDLE_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_42_MIDDLE_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ROUTE_42_MAHOGANY_SIDE: {
@@ -180,41 +195,51 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_42_SURF_AREA: {
     id: "ROUTE_42_SURF_AREA",
     accessOptions: [
-      [
-        "ROUTE_42_ECRUTEAK_SIDE",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "ROUTE_42_MIDDLE_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "ROUTE_42_MAHOGANY_SIDE",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_42_ECRUTEAK_SIDE",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "ROUTE_42_MIDDLE_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "ROUTE_42_MAHOGANY_SIDE",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_44: {
     id: "ROUTE_44",
     accessOptions: [
       "ICE_PATH_1F_MAHOGANY_SIDE_CAVE_OUT",
-      [
-        "MAHOGANY_TOWN",
-        7,
-      ],
+      {
+        area: "MAHOGANY_TOWN",
+        requirements: [
+          7,
+        ],
+      },
     ],
   },
   ROUTE_44_SURF_AREA: {
     id: "ROUTE_44_SURF_AREA",
     accessOptions: [
-      [
-        "ROUTE_44",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_44",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   MAHOGANY_TOWN: {
@@ -406,10 +431,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   BURNED_TOWER_1F_ROCK_SMASH_AREA: {
     id: "BURNED_TOWER_1F_ROCK_SMASH_AREA",
     accessOptions: [
-      [
-        "BURNED_TOWER_1F",
-        "TM08",
-      ],
+      {
+        area: "BURNED_TOWER_1F",
+        requirements: [
+          "TM08",
+        ],
+      },
     ],
   },
   BURNED_TOWER_B1F: {
@@ -422,11 +449,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   BURNED_TOWER_B1F_STRENGTH_AREA: {
     id: "BURNED_TOWER_B1F_STRENGTH_AREA",
     accessOptions: [
-      [
-        "BURNED_TOWER_B1F",
-        "PLAINBADGE",
-        "HM04",
-      ],
+      {
+        area: "BURNED_TOWER_B1F",
+        requirements: [
+          "PLAINBADGE",
+          "HM04",
+        ],
+      },
     ],
   },
   NATIONAL_PARK: {
@@ -478,10 +507,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "RADIO_TOWER_3F_EAST_AREA",
     accessOptions: [
       "RADIO_TOWER_4F_EAST_AREA_STAIRS_DOWN",
-      [
-        "RADIO_TOWER_3F_WEST_AREA",
-        "CARD_KEY",
-      ],
+      {
+        area: "RADIO_TOWER_3F_WEST_AREA",
+        requirements: [
+          "CARD_KEY",
+        ],
+      },
     ],
   },
   RADIO_TOWER_4F_WEST_AREA: {
@@ -530,11 +561,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_36_RUINS_OF_ALPH_GATE_SOUTH_DOOR_OUT_RIGHT",
       "ROUTE_32_RUINS_OF_ALPH_GATE_WEST_DOOR_OUT_UPPER",
       "ROUTE_32_RUINS_OF_ALPH_GATE_WEST_DOOR_OUT_LOWER",
-      [
-        "RUINS_OF_ALPH_OUTSIDE_BOTTOM_LEDGE_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "RUINS_OF_ALPH_OUTSIDE_BOTTOM_LEDGE_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   RUINS_OF_ALPH_OUTSIDE_MIDDLE_LEDGE_AREA: {
@@ -667,88 +700,113 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_CAVE_OUT_RIGHT",
     ],
   },
+  RUINS_OF_ALPH_PUZZLES_GROUP: {
+    id: "RUINS_OF_ALPH_PUZZLES_GROUP",
+    accessOptions: [
+      "RUINS_OF_ALPH_KABUTO_CHAMBER",
+      "RUINS_OF_ALPH_HO_OH_CHAMBER",
+      "RUINS_OF_ALPH_OMANYTE_CHAMBER",
+      "RUINS_OF_ALPH_AERODACTYL_CHAMBER",
+    ],
+  },
   UNION_CAVE_1F: {
     id: "UNION_CAVE_1F",
     accessOptions: [
       "UNION_CAVE_B1F_MIDDLE_AREA_LADDER_UP",
       "ROUTE_33_CAVE_IN",
       "ROUTE_32_SOUTH_AREA_CAVE_IN",
-      [
-        "UNION_CAVE_1F_SW_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "UNION_CAVE_1F_SW_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   UNION_CAVE_1F_SW_AREA: {
     id: "UNION_CAVE_1F_SW_AREA",
     accessOptions: [
       "UNION_CAVE_B1F_SW_AREA_LADDER_UP",
-      [
-        "UNION_CAVE_1F",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "UNION_CAVE_1F",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   UNION_CAVE_B1F_NORTH_AREA: {
     id: "UNION_CAVE_B1F_NORTH_AREA",
     accessOptions: [
       "RUINS_OF_ALPH_OUTSIDE_GRASS_AREA_RIGHT_CAVE_IN",
-      [
-        "UNION_CAVE_B1F_MIDDLE_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "UNION_CAVE_B1F_NORTH_MIDDLE_AREA",
-        "PLAINBADGE",
-        "HM04",
-      ],
+      {
+        area: "UNION_CAVE_B1F_MIDDLE_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "UNION_CAVE_B1F_NORTH_MIDDLE_AREA",
+        requirements: [
+          "PLAINBADGE",
+          "HM04",
+        ],
+      },
     ],
   },
   UNION_CAVE_B1F_NORTH_MIDDLE_AREA: {
     id: "UNION_CAVE_B1F_NORTH_MIDDLE_AREA",
     accessOptions: [
       "RUINS_OF_ALPH_OUTSIDE_TOP_LEDGE_AREA_CAVE_IN",
-      [
-        "UNION_CAVE_B1F_NORTH_AREA",
-        "PLAINBADGE",
-        "HM04",
-      ],
+      {
+        area: "UNION_CAVE_B1F_NORTH_AREA",
+        requirements: [
+          "PLAINBADGE",
+          "HM04",
+        ],
+      },
     ],
   },
   UNION_CAVE_B1F_MIDDLE_AREA: {
     id: "UNION_CAVE_B1F_MIDDLE_AREA",
     accessOptions: [
       "UNION_CAVE_1F_LADDER_DOWN",
-      [
-        "UNION_CAVE_B1F_NORTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "UNION_CAVE_B1F_NORTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   UNION_CAVE_B1F_SW_AREA: {
     id: "UNION_CAVE_B1F_SW_AREA",
     accessOptions: [
       "UNION_CAVE_1F_SW_AREA_LADDER_DOWN",
-      [
-        "UNION_CAVE_B1F_SE_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "UNION_CAVE_B1F_SE_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   UNION_CAVE_B1F_SE_AREA: {
     id: "UNION_CAVE_B1F_SE_AREA",
     accessOptions: [
       "UNION_CAVE_B2F_LADDER_UP",
-      [
-        "UNION_CAVE_B1F_SW_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "UNION_CAVE_B1F_SW_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   UNION_CAVE_B2F: {
@@ -760,11 +818,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   UNION_CAVE_B2F_SURF_AREA: {
     id: "UNION_CAVE_B2F_SURF_AREA",
     accessOptions: [
-      [
-        "UNION_CAVE_B2F",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "UNION_CAVE_B2F",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   SLOWPOKE_WELL_B1F_EAST_AREA: {
@@ -777,13 +837,15 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "SLOWPOKE_WELL_B1F_WEST_AREA",
     accessOptions: [
       "SLOWPOKE_WELL_B2F_LADDER_UP",
-      [
-        "SLOWPOKE_WELL_B1F_EAST_AREA",
-        "PLAINBADGE",
-        "FOGBADGE",
-        "HM03",
-        "HM04",
-      ],
+      {
+        area: "SLOWPOKE_WELL_B1F_EAST_AREA",
+        requirements: [
+          "PLAINBADGE",
+          "FOGBADGE",
+          "HM03",
+          "HM04",
+        ],
+      },
     ],
   },
   SLOWPOKE_WELL_B2F: {
@@ -795,11 +857,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   SLOWPOKE_WELL_B2F_SURF_AREA: {
     id: "SLOWPOKE_WELL_B2F_SURF_AREA",
     accessOptions: [
-      [
-        "SLOWPOKE_WELL_B2F",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "SLOWPOKE_WELL_B2F",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   OLIVINE_LIGHTHOUSE_1F: {
@@ -919,10 +983,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   TEAM_ROCKET_BASE_B2F_CENTRAL_AREA: {
     id: "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA",
     accessOptions: [
-      [
-        "TEAM_ROCKET_BASE_B2F_SOUTH_AREA",
-        "TEAM_ROCKET_BASE_B3F_ADMIN_AREA",
-      ],
+      {
+        area: "TEAM_ROCKET_BASE_B2F_SOUTH_AREA",
+        requirements: [
+          "TEAM_ROCKET_BASE_B3F_ADMIN_AREA_GOT_MURKROWS_PASSWORD",
+        ],
+      },
     ],
   },
   TEAM_ROCKET_BASE_B3F_NW_AREA: {
@@ -942,10 +1008,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   TEAM_ROCKET_BASE_B3F_ADMIN_AREA: {
     id: "TEAM_ROCKET_BASE_B3F_ADMIN_AREA",
     accessOptions: [
-      [
-        "TEAM_ROCKET_BASE_B3F_NW_AREA",
-        "TEAM_ROCKET_BASE_B3F_SE_AREA",
-      ],
+      {
+        area: "TEAM_ROCKET_BASE_B3F_NW_AREA",
+        requirements: [
+          "TEAM_ROCKET_BASE_B3F_SE_AREA_GOT_FEMALE_GRUNTS_PASSWORD",
+          "TEAM_ROCKET_BASE_B3F_SE_AREA_GOT_SW_GRUNTS_PASSWORD",
+        ],
+      },
     ],
   },
   ILEX_FOREST_NORTH_AREA: {
@@ -953,11 +1022,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_34_ILEX_FOREST_GATE_SOUTH_DOOR_OUT_LEFT",
       "ROUTE_34_ILEX_FOREST_GATE_SOUTH_DOOR_OUT_RIGHT",
-      [
-        "ILEX_FOREST_SOUTH_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ILEX_FOREST_SOUTH_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ILEX_FOREST_SOUTH_AREA: {
@@ -965,11 +1036,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ILEX_FOREST_AZALEA_GATE_WEST_DOOR_OUT_UPPER",
       "ILEX_FOREST_AZALEA_GATE_WEST_DOOR_OUT_LOWER",
-      [
-        "ILEX_FOREST_NORTH_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ILEX_FOREST_NORTH_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   GOLDENROD_UNDERGROUND_NORTH_ENTRANCE: {
@@ -1029,30 +1102,34 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "GOLDENROD_DEPT_STORE_B1F_STAIRS_AREA",
     accessOptions: [
       "GOLDENROD_UNDERGROUND_WAREHOUSE_STAIRS_UP",
-      [
-        "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA",
-        "GOLDENROD_UNDERGROUND_WAREHOUSE",
-        7,
-      ],
+      {
+        area: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA",
+        requirements: [
+          "GOLDENROD_UNDERGROUND_WAREHOUSE_TALKED_TO_DIRECTOR",
+          "GOLDENROD_DEPT_STORE_ELEVATOR_USED_ELEVATOR",
+        ],
+      },
     ],
   },
   GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA: {
     id: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA",
     accessOptions: [
-      [
-        "GOLDENROD_DEPT_STORE_B1F_STAIRS_AREA",
-        "GOLDENROD_UNDERGROUND_WAREHOUSE",
-        7,
-      ],
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
+      {
+        area: "GOLDENROD_DEPT_STORE_B1F_STAIRS_AREA",
+        requirements: [
+          "GOLDENROD_UNDERGROUND_WAREHOUSE_TALKED_TO_DIRECTOR",
+          "GOLDENROD_DEPT_STORE_ELEVATOR_USED_ELEVATOR",
+        ],
+      },
     ],
   },
-  GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA: {
-    id: "GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA",
+  GOLDENROD_DEPT_STORE_B1F_GROUP: {
+    id: "GOLDENROD_DEPT_STORE_B1F_GROUP",
     accessOptions: [
-      [
-        "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA",
-        "GOLDENROD_DEPT_STORE_ELEVATOR",
-      ],
+      "GOLDENROD_DEPT_STORE_B1F_STAIRS_AREA",
+      "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA",
     ],
   },
   MOUNT_MORTAR_FRONT_ECRUTEAK_SIDE: {
@@ -1067,11 +1144,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_42_MIDDLE_AREA_CAVE_IN",
       "MOUNT_MORTAR_B1F_SOUTH_AREA_LADDER_UP",
-      [
-        "MOUNT_MORTAR_FRONT_UPPER_MIDDLE_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "MOUNT_MORTAR_FRONT_UPPER_MIDDLE_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   MOUNT_MORTAR_FRONT_MAHOGANY_SIDE: {
@@ -1085,13 +1164,15 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "MOUNT_MORTAR_FRONT_UPPER_MIDDLE_AREA",
     accessOptions: [
       "MOUNT_MORTAR_BACK_2F_SOUTH_AREA_CAVE_OUT",
-      [
-        "MOUNT_MORTAR_FRONT_LOWER_MIDDLE_AREA",
-        "FOGBADGE",
-        "RISINGBADGE",
-        "HM03",
-        "HM07",
-      ],
+      {
+        area: "MOUNT_MORTAR_FRONT_LOWER_MIDDLE_AREA",
+        requirements: [
+          "FOGBADGE",
+          "RISINGBADGE",
+          "HM03",
+          "HM07",
+        ],
+      },
     ],
   },
   MOUNT_MORTAR_FRONT_EAST_LADDER_AREA: {
@@ -1120,11 +1201,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "MOUNT_MORTAR_BACK_1F_MIDDLE_AREA",
     accessOptions: [
       "MOUNT_MORTAR_BACK_1F_NORTH_AREA",
-      [
-        "MOUNT_MORTAR_BACK_1F_SOUTH_AREA",
-        "PLAINBADGE",
-        "HM04",
-      ],
+      {
+        area: "MOUNT_MORTAR_BACK_1F_SOUTH_AREA",
+        requirements: [
+          "PLAINBADGE",
+          "HM04",
+        ],
+      },
     ],
   },
   MOUNT_MORTAR_BACK_1F_NORTH_AREA: {
@@ -1151,16 +1234,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   MOUNT_MORTAR_BACK_2F_SURF_AREA: {
     id: "MOUNT_MORTAR_BACK_2F_SURF_AREA",
     accessOptions: [
-      [
-        "MOUNT_MORTAR_BACK_2F_SOUTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "MOUNT_MORTAR_BACK_2F_NORTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "MOUNT_MORTAR_BACK_2F_SOUTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "MOUNT_MORTAR_BACK_2F_NORTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   MOUNT_MORTAR_B1F_NW_AREA: {
@@ -1179,18 +1266,22 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   MOUNT_MORTAR_B1F_SURF_AREA: {
     id: "MOUNT_MORTAR_B1F_SURF_AREA",
     accessOptions: [
-      [
-        "MOUNT_MORTAR_B1F_SOUTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "MOUNT_MORTAR_B1F_NW_AREA",
-        "PLAINBADGE",
-        "FOGBADGE",
-        "HM03",
-        "HM04",
-      ],
+      {
+        area: "MOUNT_MORTAR_B1F_SOUTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "MOUNT_MORTAR_B1F_NW_AREA",
+        requirements: [
+          "PLAINBADGE",
+          "FOGBADGE",
+          "HM03",
+          "HM04",
+        ],
+      },
     ],
   },
   ICE_PATH_1F_MAHOGANY_SIDE: {
@@ -1227,21 +1318,46 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ICE_PATH_B1F_MAHOGANY_SIDE_LADDER_DOWN",
       "ICE_PATH_B1F_MAHOGANY_SIDE_TOP_RIGHT_HOLE",
       "ICE_PATH_B1F_MAHOGANY_SIDE_TOP_LEFT_HOLE",
-      "ICE_PATH_B1F_MAHOGANY_SIDE_BOTTOM_LEFT_HOLE",
-      "ICE_PATH_B1F_MAHOGANY_SIDE_BOTTOM_RIGHT_HOLE",
+      "ICE_PATH_B2F_MAHOGANY_SIDE_SW_DROPDOWN_AREA",
+      "ICE_PATH_B2F_MAHOGANY_SIDE_SE_DROPDOWN_AREA",
       "ICE_PATH_B2F_MAHOGANY_SIDE_CENTRAL_AREA",
+    ],
+  },
+  ICE_PATH_B2F_MAHOGANY_SIDE_SE_DROPDOWN_AREA: {
+    id: "ICE_PATH_B2F_MAHOGANY_SIDE_SE_DROPDOWN_AREA",
+    accessOptions: [
+      "ICE_PATH_B1F_MAHOGANY_SIDE_BOTTOM_RIGHT_HOLE",
+      {
+        area: "ICE_PATH_B2F_MAHOGANY_SIDE_OUTER_AREA",
+        requirements: [
+          "ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_NE_BOULDER",
+          "ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_SE_BOULDER",
+        ],
+      },
+    ],
+  },
+  ICE_PATH_B2F_MAHOGANY_SIDE_SW_DROPDOWN_AREA: {
+    id: "ICE_PATH_B2F_MAHOGANY_SIDE_SW_DROPDOWN_AREA",
+    accessOptions: [
+      "ICE_PATH_B1F_MAHOGANY_SIDE_BOTTOM_LEFT_HOLE",
+      {
+        area: "ICE_PATH_B2F_MAHOGANY_SIDE_SE_DROPDOWN_AREA",
+        requirements: [
+          "ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_SW_BOULDER",
+        ],
+      },
     ],
   },
   ICE_PATH_B2F_MAHOGANY_SIDE_CENTRAL_AREA: {
     id: "ICE_PATH_B2F_MAHOGANY_SIDE_CENTRAL_AREA",
     accessOptions: [
       "ICE_PATH_B3F_WEST_LADDER_UP",
-      [
-        "ICE_PATH_B2F_MAHOGANY_SIDE_OUTER_AREA",
-        "ICE_PATH_B1F_MAHOGANY_SIDE",
-        "PLAINBADGE",
-        "HM04",
-      ],
+      {
+        area: "ICE_PATH_B2F_MAHOGANY_SIDE_SW_DROPDOWN_AREA",
+        requirements: [
+          "ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_NW_BOULDER",
+        ],
+      },
     ],
   },
   ICE_PATH_B2F_BLACKTHORN_SIDE: {
@@ -1296,11 +1412,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "WHIRL_ISLAND_SW_ENTRANCE_EAST_AREA",
     accessOptions: [
       "WHIRL_ISLAND_B1F_SE_AREA_LEFT_LADDER_UP",
-      [
-        "WHIRL_ISLAND_SW_ENTRANCE_WEST_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "WHIRL_ISLAND_SW_ENTRANCE_WEST_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   WHIRL_ISLAND_SW_ENTRANCE_WEST_AREA: {
@@ -1308,33 +1426,39 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_41_SW_ISLAND_AREA_CAVE_IN",
       "WHIRL_ISLAND_B1F_SW_AREA_LADDER_UP",
-      [
-        "WHIRL_ISLAND_SW_ENTRANCE_EAST_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "WHIRL_ISLAND_SW_ENTRANCE_EAST_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   WHIRL_ISLAND_SW_WEST_ISOLATED_AREA: {
     id: "WHIRL_ISLAND_SW_WEST_ISOLATED_AREA",
     accessOptions: [
       "WHIRL_ISLAND_NW_ISOLATED_AREA_LADDER_DOWN",
-      [
-        "WHIRL_ISLAND_SW_EAST_ISOLATED_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "WHIRL_ISLAND_SW_EAST_ISOLATED_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   WHIRL_ISLAND_SW_EAST_ISOLATED_AREA: {
     id: "WHIRL_ISLAND_SW_EAST_ISOLATED_AREA",
     accessOptions: [
       "WHIRL_ISLAND_B2F_BELOW_WATERFALL_SOUTH_AREA_LADDER_UP",
-      [
-        "WHIRL_ISLAND_SW_WEST_ISOLATED_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "WHIRL_ISLAND_SW_WEST_ISOLATED_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   WHIRL_ISLAND_CAVE: {
@@ -1372,11 +1496,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "WHIRL_ISLAND_SW_ENTRANCE_WEST_AREA_LADDER_DOWN",
       "WHIRL_ISLAND_B1F_NORTH_AREA",
       "WHIRL_ISLAND_B1F_CENTRAL_AREA",
-      [
-        "WHIRL_ISLAND_B1F_SE_AREA",
-        "PLAINBADGE",
-        "HM04",
-      ],
+      {
+        area: "WHIRL_ISLAND_B1F_SE_AREA",
+        requirements: [
+          "PLAINBADGE",
+          "HM04",
+        ],
+      },
     ],
   },
   WHIRL_ISLAND_B1F_SE_AREA: {
@@ -1402,16 +1528,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   WHIRL_ISLAND_B2F_ABOVE_WATERFALL_SURF_AREA: {
     id: "WHIRL_ISLAND_B2F_ABOVE_WATERFALL_SURF_AREA",
     accessOptions: [
-      [
-        "WHIRL_ISLAND_B2F_ABOVE_WATERFALL_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "WHIRL_ISLAND_B2F_BELOW_WATERFALL_SURF_AREA",
-        "RISINGBADGE",
-        "HM07",
-      ],
+      {
+        area: "WHIRL_ISLAND_B2F_ABOVE_WATERFALL_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "WHIRL_ISLAND_B2F_BELOW_WATERFALL_SURF_AREA",
+        requirements: [
+          "RISINGBADGE",
+          "HM07",
+        ],
+      },
     ],
   },
   WHIRL_ISLAND_B2F_ISOLATED_AREA: {
@@ -1438,16 +1568,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "WHIRL_ISLAND_B2F_BELOW_WATERFALL_SURF_AREA",
     accessOptions: [
       "WHIRL_ISLAND_B2F_ABOVE_WATERFALL_SURF_AREA",
-      [
-        "WHIRL_ISLAND_B2F_BELOW_WATERFALL_NORTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "WHIRL_ISLAND_B2F_BELOW_WATERFALL_SOUTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "WHIRL_ISLAND_B2F_BELOW_WATERFALL_NORTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "WHIRL_ISLAND_B2F_BELOW_WATERFALL_SOUTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   WHIRL_ISLAND_LUGIA_CHAMBER: {
@@ -1476,11 +1610,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "SILVER_CAVE_ROOM_2_BELOW_SW_WATERFALL_SURF_AREA",
     accessOptions: [
       "SILVER_CAVE_ROOM_2_ABOVE_SW_WATERFALL_SURF_AREA",
-      [
-        "SILVER_CAVE_ROOM_2_MAIN_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "SILVER_CAVE_ROOM_2_MAIN_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   SILVER_CAVE_ROOM_2_ABOVE_SW_WATERFALL_AREA: {
@@ -1493,27 +1629,33 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   SILVER_CAVE_ROOM_2_ABOVE_SW_WATERFALL_SURF_AREA: {
     id: "SILVER_CAVE_ROOM_2_ABOVE_SW_WATERFALL_SURF_AREA",
     accessOptions: [
-      [
-        "SILVER_CAVE_ROOM_2_ABOVE_SW_WATERFALL_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "SILVER_CAVE_ROOM_2_BELOW_SW_WATERFALL_SURF_AREA",
-        "RISINGBADGE",
-        "HM07",
-      ],
+      {
+        area: "SILVER_CAVE_ROOM_2_ABOVE_SW_WATERFALL_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "SILVER_CAVE_ROOM_2_BELOW_SW_WATERFALL_SURF_AREA",
+        requirements: [
+          "RISINGBADGE",
+          "HM07",
+        ],
+      },
     ],
   },
   SILVER_CAVE_ROOM_2_BELOW_NE_WATERFALL_SURF_AREA: {
     id: "SILVER_CAVE_ROOM_2_BELOW_NE_WATERFALL_SURF_AREA",
     accessOptions: [
       "SILVER_CAVE_ROOM_2_ABOVE_NE_WATERFALL_SURF_AREA",
-      [
-        "SILVER_CAVE_ROOM_2_MAIN_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "SILVER_CAVE_ROOM_2_MAIN_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   SILVER_CAVE_ROOM_2_ABOVE_NE_WATERFALL_AREA: {
@@ -1526,16 +1668,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   SILVER_CAVE_ROOM_2_ABOVE_NE_WATERFALL_SURF_AREA: {
     id: "SILVER_CAVE_ROOM_2_ABOVE_NE_WATERFALL_SURF_AREA",
     accessOptions: [
-      [
-        "SILVER_CAVE_ROOM_2_ABOVE_NE_WATERFALL_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "SILVER_CAVE_ROOM_2_BELOW_NE_WATERFALL_SURF_AREA",
-        "RISINGBADGE",
-        "HM07",
-      ],
+      {
+        area: "SILVER_CAVE_ROOM_2_ABOVE_NE_WATERFALL_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "SILVER_CAVE_ROOM_2_BELOW_NE_WATERFALL_SURF_AREA",
+        requirements: [
+          "RISINGBADGE",
+          "HM07",
+        ],
+      },
     ],
   },
   SILVER_CAVE_ROOM_3: {
@@ -1581,38 +1727,50 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA: {
     id: "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA",
     accessOptions: [
-      [
-        "DARK_CAVE_VIOLET_ENTRANCE_SE_AREA",
-        "TM08",
-      ],
-      [
-        "DARK_CAVE_VIOLET_ENTRANCE_WEST_AREA",
-        "TM08",
-      ],
-      [
-        "DARK_CAVE_VIOLET_ENTRANCE_SURF_AREA",
-        "TM08",
-      ],
+      {
+        area: "DARK_CAVE_VIOLET_ENTRANCE_SE_AREA",
+        requirements: [
+          "TM08",
+        ],
+      },
+      {
+        area: "DARK_CAVE_VIOLET_ENTRANCE_WEST_AREA",
+        requirements: [
+          "TM08",
+        ],
+      },
+      {
+        area: "DARK_CAVE_VIOLET_ENTRANCE_SURF_AREA",
+        requirements: [
+          "TM08",
+        ],
+      },
     ],
   },
   DARK_CAVE_VIOLET_ENTRANCE_SURF_AREA: {
     id: "DARK_CAVE_VIOLET_ENTRANCE_SURF_AREA",
     accessOptions: [
-      [
-        "DARK_CAVE_VIOLET_ENTRANCE_WEST_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "DARK_CAVE_VIOLET_ENTRANCE_NORTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "DARK_CAVE_VIOLET_ENTRANCE_WEST_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "DARK_CAVE_VIOLET_ENTRANCE_NORTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   DARK_CAVE_BLACKTHORN_ENTRANCE_NE_AREA: {
@@ -1632,11 +1790,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA: {
     id: "DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA",
     accessOptions: [
-      [
-        "DARK_CAVE_BLACKTHORN_ENTRANCE_NE_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "DARK_CAVE_BLACKTHORN_ENTRANCE_NE_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   DRAGONS_DEN_1F_ENTRANCE_AREA: {
@@ -1663,16 +1823,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   DRAGONS_DEN_B1F_NORTH_SURF_AREA: {
     id: "DRAGONS_DEN_B1F_NORTH_SURF_AREA",
     accessOptions: [
-      [
-        "DRAGONS_DEN_B1F_NORTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "DRAGONS_DEN_B1F_SOUTH_SURF_AREA",
-        "GLACIERBADGE",
-        "HM06",
-      ],
+      {
+        area: "DRAGONS_DEN_B1F_NORTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "DRAGONS_DEN_B1F_SOUTH_SURF_AREA",
+        requirements: [
+          "GLACIERBADGE",
+          "HM06",
+        ],
+      },
     ],
   },
   DRAGONS_DEN_B1F_SOUTH_AREA: {
@@ -1686,16 +1850,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   DRAGONS_DEN_B1F_SOUTH_SURF_AREA: {
     id: "DRAGONS_DEN_B1F_SOUTH_SURF_AREA",
     accessOptions: [
-      [
-        "DRAGONS_DEN_B1F_SOUTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "DRAGONS_DEN_B1F_NORTH_SURF_AREA",
-        "GLACIERBADGE",
-        "HM06",
-      ],
+      {
+        area: "DRAGONS_DEN_B1F_SOUTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "DRAGONS_DEN_B1F_NORTH_SURF_AREA",
+        requirements: [
+          "GLACIERBADGE",
+          "HM06",
+        ],
+      },
     ],
   },
   DRAGON_SHRINE: {
@@ -1714,16 +1882,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   TOHJO_FALLS_WEST_SURF_AREA: {
     id: "TOHJO_FALLS_WEST_SURF_AREA",
     accessOptions: [
-      [
-        "TOHJO_FALLS_WEST_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "TOHJO_FALLS_EAST_SURF_AREA",
-        "RISINGBADGE",
-        "HM07",
-      ],
+      {
+        area: "TOHJO_FALLS_WEST_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "TOHJO_FALLS_EAST_SURF_AREA",
+        requirements: [
+          "RISINGBADGE",
+          "HM07",
+        ],
+      },
     ],
   },
   TOHJO_FALLS_EAST_AREA: {
@@ -1736,16 +1908,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   TOHJO_FALLS_EAST_SURF_AREA: {
     id: "TOHJO_FALLS_EAST_SURF_AREA",
     accessOptions: [
-      [
-        "TOHJO_FALLS_EAST_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "TOHJO_FALLS_WEST_SURF_AREA",
-        "RISINGBADGE",
-        "HM07",
-      ],
+      {
+        area: "TOHJO_FALLS_EAST_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "TOHJO_FALLS_WEST_SURF_AREA",
+        requirements: [
+          "RISINGBADGE",
+          "HM07",
+        ],
+      },
     ],
   },
   DIGLETTS_CAVE_VERMILION_ENTRANCE_AREA: {
@@ -1924,16 +2100,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ECRUTEAK_TIN_TOWER_GATE_BACK_AREA",
     accessOptions: [
       "ECRUTEAK_TIN_TOWER_GATE_HALLWAY_AREA_SOUTH_STAIRS_UP",
-      [
-        "ECRUTEAK_TIN_TOWER_GATE_FRONT_AREA",
-        "ECRUTEAK_GYM",
-        "CLEAR_BELL",
-      ],
-      [
-        "ECRUTEAK_TIN_TOWER_GATE_FRONT_AREA",
-        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
-        "CLEAR_BELL",
-      ],
+      {
+        area: "ECRUTEAK_TIN_TOWER_GATE_FRONT_AREA",
+        requirements: [
+          "ECRUTEAK_GYM_DEFEATED_MORTY",
+          "CLEAR_BELL",
+        ],
+      },
+      {
+        area: "ECRUTEAK_TIN_TOWER_GATE_FRONT_AREA",
+        requirements: [
+          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+          "CLEAR_BELL",
+        ],
+      },
     ],
   },
   ECRUTEAK_TIN_TOWER_GATE_HALLWAY_AREA: {
@@ -1978,10 +2158,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ECRUTEAK_GYM: {
     id: "ECRUTEAK_GYM",
     accessOptions: [
-      [
-        "ECRUTEAK_GYM_WARPS_GROUP",
-        "BURNED_TOWER_B1F",
-      ],
+      {
+        area: "ECRUTEAK_GYM_WARPS_GROUP",
+        requirements: [
+          "BURNED_TOWER_B1F_AWOKE_LEGENDARY_BEASTS",
+        ],
+      },
     ],
   },
   ECRUTEAK_GYM_WARPS_GROUP: {
@@ -2047,11 +2229,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_38_ECRUTEAK_GATE_EAST_DOOR_OUT_UPPER",
       "ROUTE_38_ECRUTEAK_GATE_EAST_DOOR_OUT_LOWER",
       "ROUTE_37",
-      [
-        "ECRUTEAK_CITY_BACK_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
+      {
+        area: "ECRUTEAK_CITY_BACK_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
     ],
   },
   ECRUTEAK_CITY_BACK_AREA: {
@@ -2067,14 +2251,18 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_37",
     accessOptions: [
       "ECRUTEAK_CITY",
-      [
-        "ROUTE_36_EAST_AREA",
-        "SQUIRTBOTTLE",
-      ],
-      [
-        "ROUTE_36_WEST_AREA",
-        "SQUIRTBOTTLE",
-      ],
+      {
+        area: "ROUTE_36_EAST_AREA",
+        requirements: [
+          "SQUIRTBOTTLE",
+        ],
+      },
+      {
+        area: "ROUTE_36_WEST_AREA",
+        requirements: [
+          "SQUIRTBOTTLE",
+        ],
+      },
     ],
   },
   BLACKTHORN_GYM_1F_FRONT_AREA: {
@@ -2096,12 +2284,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   BLACKTHORN_GYM_1F_BACK_AREA: {
     id: "BLACKTHORN_GYM_1F_BACK_AREA",
     accessOptions: [
-      [
-        "BLACKTHORN_GYM_1F_MIDDLE_AREA",
-        "BLACKTHORN_GYM_2F_FRONT_AREA",
-        "PLAINBADGE",
-        "HM04",
-      ],
+      {
+        area: "BLACKTHORN_GYM_1F_MIDDLE_AREA",
+        requirements: [
+          "BLACKTHORN_GYM_2F_FRONT_AREA_DROPPED_SE_BOULDER",
+          "BLACKTHORN_GYM_2F_FRONT_AREA_DROPPED_NE_BOULDER",
+        ],
+      },
     ],
   },
   BLACKTHORN_GYM_2F_FRONT_AREA: {
@@ -2114,11 +2303,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   BLACKTHORN_GYM_2F_BACK_AREA: {
     id: "BLACKTHORN_GYM_2F_BACK_AREA",
     accessOptions: [
-      [
-        "BLACKTHORN_GYM_2F_FRONT_AREA",
-        "PLAINBADGE",
-        "HM04",
-      ],
+      {
+        area: "BLACKTHORN_GYM_2F_FRONT_AREA",
+        requirements: [
+          "PLAINBADGE",
+          "HM04",
+        ],
+      },
     ],
   },
   BLACKTHORN_DRAGON_SPEECH_HOUSE: {
@@ -2161,11 +2352,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_45_SURF_AREA: {
     id: "ROUTE_45_SURF_AREA",
     accessOptions: [
-      [
-        "ROUTE_45",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_45",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_46_SOUTH_AREA: {
@@ -2201,27 +2394,33 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "MOVE_DELETERS_HOUSE_DOOR_OUT_RIGHT",
       "ICE_PATH_1F_BLACKTHORN_SIDE_CAVE_OUT",
       "ROUTE_45",
-      [
-        "BLACKTHORN_CITY_NORTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "BLACKTHORN_CITY_NORTH_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
+      {
+        area: "BLACKTHORN_CITY_NORTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "BLACKTHORN_CITY_NORTH_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
     ],
   },
   BLACKTHORN_CITY_NORTH_AREA: {
     id: "BLACKTHORN_CITY_NORTH_AREA",
     accessOptions: [
       "DRAGONS_DEN_1F_ENTRANCE_AREA_CAVE_OUT",
-      [
-        "BLACKTHORN_CITY",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "BLACKTHORN_CITY",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   CINNABAR_POKECENTER_1F: {
@@ -2260,12 +2459,14 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_19_SURF_AREA",
     accessOptions: [
       "ROUTE_20_SURF_AREA",
-      [
-        "ROUTE_19",
-        "ROUTE_20",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_19",
+        requirements: [
+          "ROUTE_20_VISITED",
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_20: {
@@ -2280,11 +2481,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_19_SURF_AREA",
       "CINNABAR_ISLAND_SURF_AREA",
-      [
-        "ROUTE_20",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_20",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   CINNABAR_ISLAND: {
@@ -2300,22 +2503,26 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_20_SURF_AREA",
       "ROUTE_21",
-      [
-        "CINNABAR_ISLAND",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "CINNABAR_ISLAND",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_21: {
     id: "ROUTE_21",
     accessOptions: [
       "CINNABAR_ISLAND_SURF_AREA",
-      [
-        "PALLET_TOWN",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "PALLET_TOWN",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   CERULEAN_GYM_BADGE_SPEECH_HOUSE: {
@@ -2398,16 +2605,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROCK_TUNNEL_1F_CERULEAN_SIDE_CAVE_OUT",
       "ROUTE_10_NORTH_MAIN_AREA",
-      [
-        "CERULEAN_CITY",
-        "HIVEBADGE",
-        "HM01",
-      ],
-      [
-        "ROUTE_10_NORTH_POWER_PLANT_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "CERULEAN_CITY",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
+      {
+        area: "ROUTE_10_NORTH_POWER_PLANT_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_10_NORTH_MAIN_AREA: {
@@ -2423,11 +2634,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "POWER_PLANT_DOOR_OUT_LEFT",
       "POWER_PLANT_DOOR_OUT_RIGHT",
-      [
-        "ROUTE_9",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_9",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_24: {
@@ -2442,11 +2655,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_24_SURF_AREA",
     accessOptions: [
       "CERULEAN_CITY_SURF_AREA",
-      [
-        "ROUTE_24",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_24",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_25: {
@@ -2460,11 +2675,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_25_CUT_AREA: {
     id: "ROUTE_25_CUT_AREA",
     accessOptions: [
-      [
-        "ROUTE_25",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_25",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   CERULEAN_CITY: {
@@ -2485,11 +2702,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_24",
       "ROUTE_5",
       "ROUTE_4_EAST_AREA",
-      [
-        "ROUTE_9",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_9",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   CERULEAN_CITY_SURF_AREA: {
@@ -2551,25 +2770,31 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ILEX_FOREST_AZALEA_GATE_EAST_DOOR_OUT_UPPER",
       "ILEX_FOREST_AZALEA_GATE_EAST_DOOR_OUT_LOWER",
       "ROUTE_33",
-      [
-        "AZALEA_TOWN_WELL_AREA",
-        "KURTS_HOUSE",
-      ],
-      [
-        "AZALEA_TOWN_WELL_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
+      {
+        area: "AZALEA_TOWN_WELL_AREA",
+        requirements: [
+          "KURTS_HOUSE_TALKED_TO_KURT",
+        ],
+      },
+      {
+        area: "AZALEA_TOWN_WELL_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
     ],
   },
   AZALEA_TOWN_WELL_AREA: {
     id: "AZALEA_TOWN_WELL_AREA",
     accessOptions: [
       "SLOWPOKE_WELL_B1F_EAST_AREA_LADDER_UP",
-      [
-        "AZALEA_TOWN",
-        "KURTS_HOUSE",
-      ],
+      {
+        area: "AZALEA_TOWN",
+        requirements: [
+          "KURTS_HOUSE_TALKED_TO_KURT",
+        ],
+      },
     ],
   },
   LAKE_OF_RAGE_HIDDEN_POWER_HOUSE: {
@@ -2617,13 +2842,15 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_43_SURF_CUT_AREA: {
     id: "ROUTE_43_SURF_CUT_AREA",
     accessOptions: [
-      [
-        "ROUTE_43",
-        "HIVEBADGE",
-        "FOGBADGE",
-        "HM01",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_43",
+        requirements: [
+          "HIVEBADGE",
+          "FOGBADGE",
+          "HM01",
+          "HM03",
+        ],
+      },
     ],
   },
   LAKE_OF_RAGE_NW_AREA: {
@@ -2641,36 +2868,44 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "LAKE_OF_RAGE_MAGIKARP_HOUSE_DOOR_OUT_RIGHT",
       "LAKE_OF_RAGE_CUT_AREA",
       "ROUTE_43",
-      [
-        "LAKE_OF_RAGE_NW_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
+      {
+        area: "LAKE_OF_RAGE_NW_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
     ],
   },
   LAKE_OF_RAGE_CUT_AREA: {
     id: "LAKE_OF_RAGE_CUT_AREA",
     accessOptions: [
-      [
-        "LAKE_OF_RAGE_NW_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
-      [
-        "LAKE_OF_RAGE_MAIN_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "LAKE_OF_RAGE_NW_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
+      {
+        area: "LAKE_OF_RAGE_MAIN_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   LAKE_OF_RAGE_SURF_AREA: {
     id: "LAKE_OF_RAGE_SURF_AREA",
     accessOptions: [
-      [
-        "LAKE_OF_RAGE_MAIN_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "LAKE_OF_RAGE_MAIN_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_32_NORTH_AREA: {
@@ -2688,21 +2923,25 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_32_POKECENTER_1F_DOOR_OUT_RIGHT",
       "UNION_CAVE_1F_NORTH_CAVE_OUT",
       "ROUTE_32_CUT_AREA",
-      [
-        "ROUTE_32_NORTH_AREA",
-        "VIOLET_GYM",
-        "VIOLET_POKECENTER_1F",
-      ],
+      {
+        area: "ROUTE_32_NORTH_AREA",
+        requirements: [
+          "VIOLET_GYM_DEFEATED_FALKNER",
+          "VIOLET_POKECENTER_1F_GOT_MYSTERY_EGG",
+        ],
+      },
     ],
   },
   ROUTE_32_CUT_AREA: {
     id: "ROUTE_32_CUT_AREA",
     accessOptions: [
-      [
-        "ROUTE_32_SOUTH_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_32_SOUTH_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ROUTE_35: {
@@ -2713,21 +2952,25 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_35_GOLDENROD_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_35_NATIONAL_PARK_GATE_SOUTH_DOOR_OUT_LEFT",
       "ROUTE_35_NATIONAL_PARK_GATE_SOUTH_DOOR_OUT_RIGHT",
-      [
-        "ROUTE_36_WEST_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_36_WEST_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ROUTE_35_SURF_AREA: {
     id: "ROUTE_35_SURF_AREA",
     accessOptions: [
-      [
-        "ROUTE_35",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_35",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_36_WEST_AREA: {
@@ -2735,19 +2978,25 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_36_NATIONAL_PARK_GATE_EAST_DOOR_OUT_UPPER",
       "ROUTE_36_NATIONAL_PARK_GATE_EAST_DOOR_OUT_LOWER",
-      [
-        "ROUTE_35",
-        "HIVEBADGE",
-        "HM01",
-      ],
-      [
-        "ROUTE_36_EAST_AREA",
-        "SQUIRTBOTTLE",
-      ],
-      [
-        "ROUTE_37",
-        "SQUIRTBOTTLE",
-      ],
+      {
+        area: "ROUTE_35",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
+      {
+        area: "ROUTE_36_EAST_AREA",
+        requirements: [
+          "SQUIRTBOTTLE",
+        ],
+      },
+      {
+        area: "ROUTE_37",
+        requirements: [
+          "SQUIRTBOTTLE",
+        ],
+      },
     ],
   },
   ROUTE_36_EAST_AREA: {
@@ -2757,14 +3006,18 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_36_RUINS_OF_ALPH_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_36_RUINS_OF_ALPH_GATE_NORTH_DOOR_OUT_RIGHT",
       "VIOLET_CITY",
-      [
-        "ROUTE_36_WEST_AREA",
-        "SQUIRTBOTTLE",
-      ],
-      [
-        "ROUTE_37",
-        "SQUIRTBOTTLE",
-      ],
+      {
+        area: "ROUTE_36_WEST_AREA",
+        requirements: [
+          "SQUIRTBOTTLE",
+        ],
+      },
+      {
+        area: "ROUTE_37",
+        requirements: [
+          "SQUIRTBOTTLE",
+        ],
+      },
     ],
   },
   VIOLET_CITY: {
@@ -2793,21 +3046,25 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   VIOLET_CITY_SURF_AREA: {
     id: "VIOLET_CITY_SURF_AREA",
     accessOptions: [
-      [
-        "VIOLET_CITY",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "VIOLET_CITY",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   VIOLET_CITY_CUT_AREA: {
     id: "VIOLET_CITY_CUT_AREA",
     accessOptions: [
-      [
-        "VIOLET_CITY",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "VIOLET_CITY",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   VIOLET_MART: {
@@ -2916,11 +3173,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_34_SURF_AREA: {
     id: "ROUTE_34_SURF_AREA",
     accessOptions: [
-      [
-        "ROUTE_34_MAIN_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_34_MAIN_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   GOLDENROD_CITY_MAIN_AREA: {
@@ -2942,42 +3201,58 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "GOLDENROD_UNDERGROUND_NORTH_ENTRANCE_DOOR_OUT_LEFT",
       "GOLDENROD_UNDERGROUND_NORTH_ENTRANCE_DOOR_OUT_RIGHT",
       "ROUTE_34_MAIN_AREA",
-      [
-        "GOLDENROD_CITY_EAST_AREA",
-        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
-      ],
-      [
-        "GOLDENROD_CITY_SW_AREA",
-        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
-      ],
-      [
-        "GOLDENROD_CITY_FLOWER_SHOP_AREA",
-        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
-      ],
-      [
-        "GOLDENROD_CITY_NE_HOUSE_AREA",
-        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
-      ],
-      [
-        "GOLDENROD_CITY_EAST_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
-      [
-        "GOLDENROD_CITY_SW_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
-      [
-        "GOLDENROD_CITY_FLOWER_SHOP_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
-      [
-        "GOLDENROD_CITY_NE_HOUSE_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
+      {
+        area: "GOLDENROD_CITY_EAST_AREA",
+        requirements: [
+          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+        ],
+      },
+      {
+        area: "GOLDENROD_CITY_SW_AREA",
+        requirements: [
+          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+        ],
+      },
+      {
+        area: "GOLDENROD_CITY_FLOWER_SHOP_AREA",
+        requirements: [
+          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+        ],
+      },
+      {
+        area: "GOLDENROD_CITY_NE_HOUSE_AREA",
+        requirements: [
+          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+        ],
+      },
+      {
+        area: "GOLDENROD_CITY_EAST_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
+      {
+        area: "GOLDENROD_CITY_SW_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
+      {
+        area: "GOLDENROD_CITY_FLOWER_SHOP_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
+      {
+        area: "GOLDENROD_CITY_NE_HOUSE_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
     ],
   },
   GOLDENROD_CITY_EAST_AREA: {
@@ -2987,10 +3262,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "GOLDENROD_BIKE_SHOP_DOOR_OUT_RIGHT",
       "GOLDENROD_HAPPINESS_RATER_DOOR_OUT_LEFT",
       "GOLDENROD_HAPPINESS_RATER_DOOR_OUT_RIGHT",
-      [
-        "GOLDENROD_CITY_MAIN_AREA",
-        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
-      ],
+      {
+        area: "GOLDENROD_CITY_MAIN_AREA",
+        requirements: [
+          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+        ],
+      },
     ],
   },
   GOLDENROD_CITY_SW_AREA: {
@@ -3002,10 +3279,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "GOLDENROD_GAME_CORNER_DOOR_OUT_RIGHT",
       "GOLDENROD_UNDERGROUND_SOUTH_ENTRANCE_DOOR_OUT_LEFT",
       "GOLDENROD_UNDERGROUND_SOUTH_ENTRANCE_DOOR_OUT_RIGHT",
-      [
-        "GOLDENROD_CITY_MAIN_AREA",
-        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
-      ],
+      {
+        area: "GOLDENROD_CITY_MAIN_AREA",
+        requirements: [
+          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+        ],
+      },
     ],
   },
   GOLDENROD_CITY_FLOWER_SHOP_AREA: {
@@ -3013,10 +3292,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "GOLDENROD_FLOWER_SHOP_DOOR_OUT_LEFT",
       "GOLDENROD_FLOWER_SHOP_DOOR_OUT_RIGHT",
-      [
-        "GOLDENROD_CITY_MAIN_AREA",
-        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
-      ],
+      {
+        area: "GOLDENROD_CITY_MAIN_AREA",
+        requirements: [
+          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+        ],
+      },
     ],
   },
   GOLDENROD_CITY_NE_HOUSE_AREA: {
@@ -3024,10 +3305,22 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "GOLDENROD_PP_SPEECH_HOUSE_DOOR_OUT_LEFT",
       "GOLDENROD_PP_SPEECH_HOUSE_DOOR_OUT_RIGHT",
-      [
-        "GOLDENROD_CITY_MAIN_AREA",
-        "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
-      ],
+      {
+        area: "GOLDENROD_CITY_MAIN_AREA",
+        requirements: [
+          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+        ],
+      },
+    ],
+  },
+  GOLDENROD_CITY_FLYPOINT_GROUP: {
+    id: "GOLDENROD_CITY_FLYPOINT_GROUP",
+    accessOptions: [
+      "GOLDENROD_CITY_MAIN_AREA",
+      "GOLDENROD_CITY_EAST_AREA",
+      "GOLDENROD_CITY_FLOWER_SHOP_AREA",
+      "GOLDENROD_CITY_SW_AREA",
+      "GOLDENROD_CITY_NE_HOUSE_AREA",
     ],
   },
   GOLDENROD_GYM: {
@@ -3058,12 +3351,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "GOLDENROD_MAGNET_TRAIN_STATION",
     accessOptions: [
       "GOLDENROD_CITY_MAIN_AREA_TRAIN_STATION_DOOR_IN",
-      [
-        "SAFFRON_MAGNET_TRAIN_STATION",
-        "PASS",
-        "POWER_PLANT",
-        "MACHINE_PART",
-      ],
+      {
+        area: "SAFFRON_MAGNET_TRAIN_STATION",
+        requirements: [
+          "PASS",
+          "POWER_PLANT_RESTORED_POWER",
+        ],
+      },
     ],
   },
   GOLDENROD_FLOWER_SHOP: {
@@ -3089,6 +3383,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "GOLDENROD_CITY_MAIN_AREA_DEPT_STORE_DOOR_IN",
       "GOLDENROD_DEPT_STORE_2F_STAIRS_DOWN",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   GOLDENROD_DEPT_STORE_2F: {
@@ -3096,6 +3392,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "GOLDENROD_DEPT_STORE_3F_STAIRS_DOWN",
       "GOLDENROD_DEPT_STORE_1F_STAIRS_UP",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   GOLDENROD_DEPT_STORE_3F: {
@@ -3103,6 +3401,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "GOLDENROD_DEPT_STORE_2F_STAIRS_UP",
       "GOLDENROD_DEPT_STORE_4F_STAIRS_DOWN",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   GOLDENROD_DEPT_STORE_4F: {
@@ -3110,6 +3410,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "GOLDENROD_DEPT_STORE_5F_STAIRS_DOWN",
       "GOLDENROD_DEPT_STORE_3F_STAIRS_UP",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   GOLDENROD_DEPT_STORE_5F: {
@@ -3117,6 +3419,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "GOLDENROD_DEPT_STORE_4F_STAIRS_UP",
       "GOLDENROD_DEPT_STORE_6F_STAIRS_DOWN",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   GOLDENROD_DEPT_STORE_6F: {
@@ -3124,6 +3428,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "GOLDENROD_DEPT_STORE_5F_STAIRS_UP",
       "GOLDENROD_DEPT_STORE_ROOF_STAIRS_DOWN",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "GOLDENROD_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   GOLDENROD_DEPT_STORE_ELEVATOR: {
@@ -3214,47 +3520,67 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "VERMILION_PORT_PASSAGE_ENTRANCE_AREA_DOOR_OUT_LEFT",
       "VERMILION_PORT_PASSAGE_ENTRANCE_AREA_DOOR_OUT_RIGHT",
       "ROUTE_6",
-      [
-        "VERMILION_CITY_GYM_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "VERMILION_CITY_GYM_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
-      [
-        "VERMILION_CITY_SNORLAX_AREA",
-        "POKEGEAR",
-        "RADIO_CARD",
-        "EXPN_CARD",
-      ],
-      [
-        "VERMILION_CITY_GYM_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
-      [
-        "VERMILION_CITY_SNORLAX_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
-      [
-        "ROUTE_11",
-        "STORMBADGE",
-        "HM02",
-      ],
-      [
-        "VERMILION_PORT_SOUTH_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
-      [
-        "VERMILION_PORT_NORTH_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
+      {
+        area: "VERMILION_CITY_GYM_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "VERMILION_CITY_GYM_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
+      {
+        area: "VERMILION_CITY_GYM_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
+      {
+        area: "VERMILION_CITY_SNORLAX_AREA",
+        requirements: [
+          "VERMILION_CITY_WOKE_SNORLAX",
+        ],
+      },
+      {
+        area: "VERMILION_CITY_SNORLAX_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
+      {
+        area: "ROUTE_11",
+        requirements: [
+          "VERMILION_CITY_WOKE_SNORLAX",
+        ],
+      },
+      {
+        area: "ROUTE_11",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
+      {
+        area: "VERMILION_PORT_SOUTH_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
+      {
+        area: "VERMILION_PORT_NORTH_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
     ],
   },
   VERMILION_CITY_GYM_AREA: {
@@ -3262,34 +3588,46 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "VERMILION_GYM_DOOR_OUT_LEFT",
       "VERMILION_GYM_DOOR_OUT_RIGHT",
-      [
-        "VERMILION_CITY",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "VERMILION_CITY",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "VERMILION_CITY",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "VERMILION_CITY",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   VERMILION_CITY_SNORLAX_AREA: {
     id: "VERMILION_CITY_SNORLAX_AREA",
     accessOptions: [
       "DIGLETTS_CAVE_VERMILION_ENTRANCE_AREA_CAVE_OUT",
-      [
-        "VERMILION_CITY",
-        "POKEGEAR",
-        "RADIO_CARD",
-        "EXPN_CARD",
-      ],
-      [
-        "ROUTE_11",
-        "POKEGEAR",
-        "RADIO_CARD",
-        "EXPN_CARD",
-      ],
+      {
+        area: "VERMILION_CITY",
+        requirements: [
+          "VERMILION_CITY_WOKE_SNORLAX",
+        ],
+      },
+      {
+        area: "ROUTE_11",
+        requirements: [
+          "VERMILION_CITY_WOKE_SNORLAX",
+        ],
+      },
+    ],
+  },
+  VERMILION_CITY_SNORLAX_GROUP: {
+    id: "VERMILION_CITY_SNORLAX_GROUP",
+    accessOptions: [
+      "VERMILION_CITY",
+      "VERMILION_CITY_SNORLAX_AREA",
+      "ROUTE_11",
     ],
   },
   VERMILION_FISHING_SPEECH_HOUSE: {
@@ -3357,12 +3695,18 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_11",
     accessOptions: [
       "ROUTE_12",
-      [
-        "VERMILION_CITY_SNORLAX_AREA",
-        "POKEGEAR",
-        "RADIO_CARD",
-        "EXPN_CARD",
-      ],
+      {
+        area: "VERMILION_CITY_SNORLAX_AREA",
+        requirements: [
+          "VERMILION_CITY_WOKE_SNORLAX",
+        ],
+      },
+      {
+        area: "VERMILION_CITY",
+        requirements: [
+          "VERMILION_CITY_WOKE_SNORLAX",
+        ],
+      },
     ],
   },
   ROUTE_1: {
@@ -3382,11 +3726,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "OAKS_LAB_DOOR_OUT_LEFT",
       "OAKS_LAB_DOOR_OUT_RIGHT",
       "ROUTE_1",
-      [
-        "ROUTE_21",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_21",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   REDS_HOUSE_1F: {
@@ -3476,41 +3822,49 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "OLIVINE_PORT_NORTH_AREA",
     accessOptions: [
       "OLIVINE_PORT_PASSAGE_TUNNEL_AREA_SOUTH_STAIRS_UP",
-      [
-        "OLIVINE_PORT_SOUTH_AREA",
-        "HALL_OF_FAME",
-      ],
+      {
+        area: "OLIVINE_PORT_SOUTH_AREA",
+        requirements: [
+          "HALL_OF_FAME_ENTERED",
+        ],
+      },
     ],
   },
   OLIVINE_PORT_NORTH_SURF_AREA: {
     id: "OLIVINE_PORT_NORTH_SURF_AREA",
     accessOptions: [
-      [
-        "OLIVINE_PORT_NORTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "OLIVINE_PORT_NORTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   OLIVINE_PORT_SOUTH_AREA: {
     id: "OLIVINE_PORT_SOUTH_AREA",
     accessOptions: [
-      [
-        "VERMILION_PORT_NORTH_AREA",
-        "FAST_SHIP_1F_MAIN_AREA",
-        "FAST_SHIP_CABINS_CAPTAINS_CABIN",
-        "S_S_TICKET",
-      ],
+      {
+        area: "FAST_SHIP_1F_MAIN_AREA",
+        requirements: [
+          "VERMILION_PORT_NORTH_AREA_BOARDED_SHIP",
+          "FAST_SHIP_CABINS_CAPTAINS_CABIN_TALKED_TO_GIRL",
+          "FAST_SHIP_CABINS_NW_SLEPT",
+        ],
+      },
     ],
   },
   OLIVINE_PORT_SOUTH_SURF_AREA: {
     id: "OLIVINE_PORT_SOUTH_SURF_AREA",
     accessOptions: [
-      [
-        "OLIVINE_PORT_SOUTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "OLIVINE_PORT_SOUTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   VERMILION_PORT_NORTH_AREA: {
@@ -3523,47 +3877,55 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   VERMILION_PORT_NORTH_SURF_AREA: {
     id: "VERMILION_PORT_NORTH_SURF_AREA",
     accessOptions: [
-      [
-        "VERMILION_PORT_NORTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "VERMILION_PORT_NORTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   VERMILION_PORT_SOUTH_AREA: {
     id: "VERMILION_PORT_SOUTH_AREA",
     accessOptions: [
-      [
-        "OLIVINE_PORT_NORTH_AREA",
-        "FAST_SHIP_1F_MAIN_AREA",
-        "FAST_SHIP_CABINS_CAPTAINS_CABIN",
-        "S_S_TICKET",
-        "HALL_OF_FAME",
-      ],
+      {
+        area: "FAST_SHIP_1F_MAIN_AREA",
+        requirements: [
+          "OLIVINE_PORT_NORTH_AREA_BOARDED_SHIP",
+          "FAST_SHIP_CABINS_CAPTAINS_CABIN_TALKED_TO_GIRL",
+          "FAST_SHIP_CABINS_NW_SLEPT",
+        ],
+      },
     ],
   },
   VERMILION_PORT_SOUTH_SURF_AREA: {
     id: "VERMILION_PORT_SOUTH_SURF_AREA",
     accessOptions: [
-      [
-        "VERMILION_PORT_SOUTH_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "VERMILION_PORT_SOUTH_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   FAST_SHIP_1F_MAIN_AREA: {
     id: "FAST_SHIP_1F_MAIN_AREA",
     accessOptions: [
-      [
-        "VERMILION_PORT_NORTH_AREA",
-        "S_S_TICKET",
-      ],
-      [
-        "OLIVINE_PORT_NORTH_AREA",
-        "S_S_TICKET",
-        "HALL_OF_FAME",
-      ],
+      {
+        area: "VERMILION_PORT_NORTH_AREA",
+        requirements: [
+          "VERMILION_PORT_NORTH_AREA_BOARDED_SHIP",
+        ],
+      },
+      {
+        area: "OLIVINE_PORT_NORTH_AREA",
+        requirements: [
+          "OLIVINE_PORT_NORTH_AREA_BOARDED_SHIP",
+        ],
+      },
       "FAST_SHIP_CABINS_NE_DOOR_OUT",
       "FAST_SHIP_CABINS_NNE_DOOR_OUT",
       "FAST_SHIP_CABINS_NNW_DOOR_OUT",
@@ -3651,10 +4013,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "FAST_SHIP_B1F_WEST_AREA",
     accessOptions: [
       "FAST_SHIP_1F_ISOLATED_AREA_STAIRS_DOWN",
-      [
-        "FAST_SHIP_B1F_EAST_AREA",
-        "FAST_SHIP_CABINS_NNW",
-      ],
+      {
+        area: "FAST_SHIP_B1F_EAST_AREA",
+        requirements: [
+          "FAST_SHIP_CABINS_NNW_FOUGHT_SAILOR",
+        ],
+      },
     ],
   },
   OLIVINE_PORT_PASSAGE_ENTRANCE_AREA: {
@@ -3714,7 +4078,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "INDIGO_PLATEAU_POKECENTER_1F_DOOR_OUT_LEFT",
       "INDIGO_PLATEAU_POKECENTER_1F_DOOR_OUT_RIGHT",
       "INDIGO_PLATEAU_POKECENTER_1F_DOOR_OUT_RIGHT",
-      "VICTORY_ROAD_3F_NORTH_AREA_CAVE_OUT",
+      "VICTORY_ROAD_3F_NORTH_EXIT_AREA_CAVE_OUT",
     ],
   },
   INDIGO_PLATEAU_POKECENTER_1F: {
@@ -3810,11 +4174,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_15_CUT_AREA: {
     id: "ROUTE_15_CUT_AREA",
     accessOptions: [
-      [
-        "ROUTE_15",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_15",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ROUTE_18: {
@@ -3844,16 +4210,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_19_FUCHSIA_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_19_FUCHSIA_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_18",
-      [
-        "FUCHSIA_CITY_CUT_AREA",
-        "STORMBADGE",
-        "HM02",
-      ],
-      [
-        "FUCHSIA_CITY_CUT_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "FUCHSIA_CITY_CUT_AREA",
+        requirements: [
+          "STORMBADGE",
+          "HM02",
+        ],
+      },
+      {
+        area: "FUCHSIA_CITY_CUT_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   FUCHSIA_CITY_CUT_AREA: {
@@ -3861,11 +4231,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "FUCHSIA_MART_DOOR_OUT_LEFT",
       "FUCHSIA_MART_DOOR_OUT_RIGHT",
-      [
-        "FUCHSIA_CITY",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "FUCHSIA_CITY",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   FUCHSIA_MART: {
@@ -3938,31 +4310,37 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_12_SURF_AREA: {
     id: "ROUTE_12_SURF_AREA",
     accessOptions: [
-      [
-        "ROUTE_12",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_12",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_12_CUT_AREA: {
     id: "ROUTE_12_CUT_AREA",
     accessOptions: [
-      [
-        "ROUTE_12",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_12",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ROUTE_12_SURF_CUT_AREA: {
     id: "ROUTE_12_SURF_CUT_AREA",
     accessOptions: [
-      [
-        "ROUTE_12_SURF_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_12_SURF_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ROUTE_10_SOUTH: {
@@ -4068,11 +4446,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_28_STEEL_WING_HOUSE_DOOR_OUT_LEFT",
       "ROUTE_28_STEEL_WING_HOUSE_DOOR_OUT_RIGHT",
-      [
-        "SILVER_CAVE_OUTSIDE",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "SILVER_CAVE_OUTSIDE",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   SILVER_CAVE_OUTSIDE: {
@@ -4082,21 +4462,25 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "SILVER_CAVE_POKECENTER_1F_DOOR_OUT_RIGHT",
       "SILVER_CAVE_ROOM_1_SOUTH_CAVE_OUT",
       "ROUTE_28_SOUTH_AREA",
-      [
-        "ROUTE_28_NORTH_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_28_NORTH_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   SILVER_CAVE_OUTSIDE_SURF_AREA: {
     id: "SILVER_CAVE_OUTSIDE_SURF_AREA",
     accessOptions: [
-      [
-        "SILVER_CAVE_OUTSIDE",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "SILVER_CAVE_OUTSIDE",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   SILVER_CAVE_POKECENTER_1F: {
@@ -4183,11 +4567,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_16_FUCHSIA_SPEECH_HOUSE_DOOR_OUT_LEFT",
       "ROUTE_16_FUCHSIA_SPEECH_HOUSE_DOOR_OUT_RIGHT",
-      [
-        "ROUTE_16_EAST_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_16_EAST_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ROUTE_16_EAST_AREA: {
@@ -4196,11 +4582,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_16_GATE_EAST_AREA_DOOR_OUT_UPPER",
       "ROUTE_16_GATE_EAST_AREA_DOOR_OUT_LOWER",
       "CELADON_CITY",
-      [
-        "ROUTE_16_NORTH_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_16_NORTH_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ROUTE_16_WEST_AREA: {
@@ -4237,11 +4625,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "CELADON_CAFE_DOOR_OUT_RIGHT",
       "ROUTE_7",
       "ROUTE_16_EAST_AREA",
-      [
-        "CELADON_CITY_SOUTH_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "CELADON_CITY_SOUTH_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   CELADON_CITY_SOUTH_AREA: {
@@ -4249,11 +4639,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "CELADON_GYM_DOOR_OUT_LEFT",
       "CELADON_GYM_DOOR_OUT_RIGHT",
-      [
-        "CELADON_CITY",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "CELADON_CITY",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   CELADON_DEPT_STORE_1F: {
@@ -4261,6 +4653,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "CELADON_CITY_DEPT_STORE_DOOR_IN",
       "CELADON_DEPT_STORE_2F_STAIRS_DOWN",
+      "CELADON_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "CELADON_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   CELADON_DEPT_STORE_2F: {
@@ -4268,6 +4662,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "CELADON_DEPT_STORE_3F_STAIRS_DOWN",
       "CELADON_DEPT_STORE_1F_STAIRS_UP",
+      "CELADON_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "CELADON_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   CELADON_DEPT_STORE_3F: {
@@ -4275,6 +4671,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "CELADON_DEPT_STORE_2F_STAIRS_UP",
       "CELADON_DEPT_STORE_4F_STAIRS_DOWN",
+      "CELADON_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "CELADON_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   CELADON_DEPT_STORE_4F: {
@@ -4282,6 +4680,8 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "CELADON_DEPT_STORE_5F_STAIRS_DOWN",
       "CELADON_DEPT_STORE_3F_STAIRS_UP",
+      "CELADON_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "CELADON_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   CELADON_DEPT_STORE_5F: {
@@ -4289,12 +4689,16 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "CELADON_DEPT_STORE_4F_STAIRS_UP",
       "CELADON_DEPT_STORE_6F_STAIRS_DOWN",
+      "CELADON_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "CELADON_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   CELADON_DEPT_STORE_6F: {
     id: "CELADON_DEPT_STORE_6F",
     accessOptions: [
       "CELADON_DEPT_STORE_5F_STAIRS_UP",
+      "CELADON_DEPT_STORE_ELEVATOR_DOOR_OUT_LEFT",
+      "CELADON_DEPT_STORE_ELEVATOR_DOOR_OUT_RIGHT",
     ],
   },
   CELADON_DEPT_STORE_ELEVATOR: {
@@ -4416,10 +4820,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_16_WEST_AREA_GATE_DOOR_IN_UPPER",
       "ROUTE_16_WEST_AREA_GATE_DOOR_IN_LOWER",
-      [
-        "ROUTE_16_GATE_EAST_AREA",
-        "BICYCLE",
-      ],
+      {
+        area: "ROUTE_16_GATE_EAST_AREA",
+        requirements: [
+          "BICYCLE",
+        ],
+      },
     ],
   },
   ROUTE_16_GATE_EAST_AREA: {
@@ -4444,10 +4850,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_17_GATE_DOOR_IN_UPPER",
       "ROUTE_17_GATE_DOOR_IN_LOWER",
-      [
-        "ROUTE_17_ROUTE_18_GATE_EAST_AREA",
-        "BICYCLE",
-      ],
+      {
+        area: "ROUTE_17_ROUTE_18_GATE_EAST_AREA",
+        requirements: [
+          "BICYCLE",
+        ],
+      },
     ],
   },
   ROUTE_17_ROUTE_18_GATE_EAST_AREA: {
@@ -4470,11 +4878,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_40_SURF_AREA: {
     id: "ROUTE_40_SURF_AREA",
     accessOptions: [
-      [
-        "ROUTE_40",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_40",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_41_OUTER_AREA: {
@@ -4482,26 +4892,34 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_40_SURF_AREA",
       "CIANWOOD_CITY_SURF_AREA",
-      [
-        "ROUTE_41_NW_ISLAND_SURF_AREA",
-        "GLACIERBADGE",
-        "HM06",
-      ],
-      [
-        "ROUTE_41_NE_ISLAND_SURF_AREA",
-        "GLACIERBADGE",
-        "HM06",
-      ],
-      [
-        "ROUTE_41_SW_ISLAND_SURF_AREA",
-        "GLACIERBADGE",
-        "HM06",
-      ],
-      [
-        "ROUTE_41_SE_ISLAND_SURF_AREA",
-        "GLACIERBADGE",
-        "HM06",
-      ],
+      {
+        area: "ROUTE_41_NW_ISLAND_SURF_AREA",
+        requirements: [
+          "GLACIERBADGE",
+          "HM06",
+        ],
+      },
+      {
+        area: "ROUTE_41_NE_ISLAND_SURF_AREA",
+        requirements: [
+          "GLACIERBADGE",
+          "HM06",
+        ],
+      },
+      {
+        area: "ROUTE_41_SW_ISLAND_SURF_AREA",
+        requirements: [
+          "GLACIERBADGE",
+          "HM06",
+        ],
+      },
+      {
+        area: "ROUTE_41_SE_ISLAND_SURF_AREA",
+        requirements: [
+          "GLACIERBADGE",
+          "HM06",
+        ],
+      },
     ],
   },
   ROUTE_41_NW_ISLAND_AREA: {
@@ -4521,7 +4939,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_41_SW_ISLAND_AREA: {
     id: "ROUTE_41_SW_ISLAND_AREA",
     accessOptions: [
-      "WHIRL_ISLAND_SW_ENTRANCE_AREA_CAVE_OUT",
+      "WHIRL_ISLAND_SW_ENTRANCE_WEST_AREA_CAVE_OUT",
       "ROUTE_41_SW_ISLAND_SURF_AREA",
     ],
   },
@@ -4535,61 +4953,77 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_41_NW_ISLAND_SURF_AREA: {
     id: "ROUTE_41_NW_ISLAND_SURF_AREA",
     accessOptions: [
-      [
-        "ROUTE_41_NW_ISLAND_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "ROUTE_41_OUTER_AREA",
-        "GLACIERBADGE",
-        "HM06",
-      ],
+      {
+        area: "ROUTE_41_NW_ISLAND_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "ROUTE_41_OUTER_AREA",
+        requirements: [
+          "GLACIERBADGE",
+          "HM06",
+        ],
+      },
     ],
   },
   ROUTE_41_NE_ISLAND_SURF_AREA: {
     id: "ROUTE_41_NE_ISLAND_SURF_AREA",
     accessOptions: [
-      [
-        "ROUTE_41_NE_ISLAND_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "ROUTE_41_OUTER_AREA",
-        "GLACIERBADGE",
-        "HM06",
-      ],
+      {
+        area: "ROUTE_41_NE_ISLAND_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "ROUTE_41_OUTER_AREA",
+        requirements: [
+          "GLACIERBADGE",
+          "HM06",
+        ],
+      },
     ],
   },
   ROUTE_41_SW_ISLAND_SURF_AREA: {
     id: "ROUTE_41_SW_ISLAND_SURF_AREA",
     accessOptions: [
-      [
-        "ROUTE_41_SW_ISLAND_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "ROUTE_41_OUTER_AREA",
-        "GLACIERBADGE",
-        "HM06",
-      ],
+      {
+        area: "ROUTE_41_SW_ISLAND_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "ROUTE_41_OUTER_AREA",
+        requirements: [
+          "GLACIERBADGE",
+          "HM06",
+        ],
+      },
     ],
   },
   ROUTE_41_SE_ISLAND_SURF_AREA: {
     id: "ROUTE_41_SE_ISLAND_SURF_AREA",
     accessOptions: [
-      [
-        "ROUTE_41_SE_ISLAND_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "ROUTE_41_OUTER_AREA",
-        "GLACIERBADGE",
-        "HM06",
-      ],
+      {
+        area: "ROUTE_41_SE_ISLAND_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "ROUTE_41_OUTER_AREA",
+        requirements: [
+          "GLACIERBADGE",
+          "HM06",
+        ],
+      },
     ],
   },
   CIANWOOD_CITY: {
@@ -4616,11 +5050,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "CIANWOOD_CITY_SURF_AREA",
     accessOptions: [
       "ROUTE_41_OUTER_AREA",
-      [
-        "CIANWOOD_CITY",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "CIANWOOD_CITY",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   MANIAS_HOUSE: {
@@ -4638,11 +5074,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   CIANWOOD_GYM_STRENGTH_AREA: {
     id: "CIANWOOD_GYM_STRENGTH_AREA",
     accessOptions: [
-      [
-        "CIANWOOD_GYM",
-        "PLAINBADGE",
-        "HM04",
-      ],
+      {
+        area: "CIANWOOD_GYM",
+        requirements: [
+          "PLAINBADGE",
+          "HM04",
+        ],
+      },
     ],
   },
   CIANWOOD_POKECENTER_1F: {
@@ -4730,11 +5168,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "PEWTER_CITY",
       "VIRIDIAN_CITY",
-      [
-        "ROUTE_2_DIGLETTS_CAVE_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_2_DIGLETTS_CAVE_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ROUTE_2_DIGLETTS_CAVE_AREA: {
@@ -4743,16 +5183,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_2_NUGGET_HOUSE_DOOR_OUT_LEFT",
       "ROUTE_2_NUGGET_HOUSE_DOOR_OUT_RIGHT",
       "DIGLETTS_CAVE_ROUTE_2_ENTRANCE_AREA_CAVE_OUT",
-      [
-        "ROUTE_2_FOREST_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
-      [
-        "ROUTE_2_CENTRAL_EAST_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_2_FOREST_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
+      {
+        area: "ROUTE_2_CENTRAL_EAST_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ROUTE_2_SE_AREA: {
@@ -4760,11 +5204,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "ROUTE_2_GATE_SOUTH_DOOR_OUT_LEFT",
       "ROUTE_2_GATE_SOUTH_DOOR_OUT_RIGHT",
-      [
-        "ROUTE_2_FOREST_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_2_FOREST_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ROUTE_2_CENTRAL_EAST_AREA: {
@@ -4773,11 +5219,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_2_GATE_NORTH_DOOR_OUT_LEFT",
       "ROUTE_2_GATE_NORTH_DOOR_OUT_RIGHT",
       "ROUTE_2_GATE_NORTH_DOOR_OUT_RIGHT",
-      [
-        "ROUTE_2_DIGLETTS_CAVE_AREA",
-        "HIVEBADGE",
-        "HM01",
-      ],
+      {
+        area: "ROUTE_2_DIGLETTS_CAVE_AREA",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
     ],
   },
   ROUTE_22: {
@@ -4809,16 +5257,20 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   VIRIDIAN_CITY_ISOLATED_AREA: {
     id: "VIRIDIAN_CITY_ISOLATED_AREA",
     accessOptions: [
-      [
-        "VIRIDIAN_CITY",
-        "HIVEBADGE",
-        "HM01",
-      ],
-      [
-        "VIRIDIAN_CITY",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "VIRIDIAN_CITY",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
+      {
+        area: "VIRIDIAN_CITY",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   VIRIDIAN_GYM: {
@@ -4880,27 +5332,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "VICTORY_ROAD_GATE_EAST_AREA",
     accessOptions: [
       "ROUTE_22_GATE_DOOR_IN",
-      [
-        "VICTORY_ROAD_GATE_NORTH_AREA",
-        "VERMILION_CITY",
-        "POKEGEAR",
-        "RADIO_CARD",
-        "EXPN_CARD",
-      ],
-      [
-        "VICTORY_ROAD_GATE_NORTH_AREA",
-        "VERMILION_CITY_SNORLAX_AREA",
-        "POKEGEAR",
-        "RADIO_CARD",
-        "EXPN_CARD",
-      ],
-      [
-        "VICTORY_ROAD_GATE_NORTH_AREA",
-        "ROUTE_11",
-        "POKEGEAR",
-        "RADIO_CARD",
-        "EXPN_CARD",
-      ],
+      {
+        area: "VICTORY_ROAD_GATE_NORTH_AREA",
+        requirements: [
+          "VERMILION_CITY_WOKE_SNORLAX",
+        ],
+      },
     ],
   },
   VICTORY_ROAD_GATE_SOUTH_AREA: {
@@ -4914,47 +5351,36 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "VICTORY_ROAD_GATE_NORTH_AREA",
     accessOptions: [
       "VICTORY_ROAD_1F_CAVE_OUT",
-      [
-        "VICTORY_ROAD_GATE_SOUTH_AREA",
-        8,
-      ],
-      [
-        "VICTORY_ROAD_GATE_WEST_AREA",
-        "OAKS_LAB",
-        16,
-      ],
-      [
-        "VICTORY_ROAD_GATE_EAST_AREA",
-        "VERMILION_CITY",
-        "POKEGEAR",
-        "RADIO_CARD",
-        "EXPN_CARD",
-      ],
-      [
-        "VICTORY_ROAD_GATE_EAST_AREA",
-        "VERMILION_CITY_SNORLAX_AREA",
-        "POKEGEAR",
-        "RADIO_CARD",
-        "EXPN_CARD",
-      ],
-      [
-        "VICTORY_ROAD_GATE_EAST_AREA",
-        "ROUTE_11",
-        "POKEGEAR",
-        "RADIO_CARD",
-        "EXPN_CARD",
-      ],
+      {
+        area: "VICTORY_ROAD_GATE_SOUTH_AREA",
+        requirements: [
+          8,
+        ],
+      },
+      {
+        area: "VICTORY_ROAD_GATE_WEST_AREA",
+        requirements: [
+          "OAKS_LAB_GOT_OAKS_APPROVAL",
+        ],
+      },
+      {
+        area: "VICTORY_ROAD_GATE_EAST_AREA",
+        requirements: [
+          "VERMILION_CITY_WOKE_SNORLAX",
+        ],
+      },
     ],
   },
   VICTORY_ROAD_GATE_WEST_AREA: {
     id: "VICTORY_ROAD_GATE_WEST_AREA",
     accessOptions: [
       "ROUTE_28_SOUTH_AREA_GATE_DOOR_IN",
-      [
-        "VICTORY_ROAD_GATE_NORTH_AREA",
-        "OAKS_LAB",
-        16,
-      ],
+      {
+        area: "VICTORY_ROAD_GATE_NORTH_AREA",
+        requirements: [
+          "OAKS_LAB_GOT_OAKS_APPROVAL",
+        ],
+      },
     ],
   },
   ROUTE_26: {
@@ -4990,11 +5416,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "ROUTE_27_WEST_SURF_AREA",
     accessOptions: [
       "NEW_BARK_TOWN_SURF_AREA",
-      [
-        "ROUTE_27_WEST_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_27_WEST_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_27_EAST_AREA: {
@@ -5007,26 +5435,32 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   ROUTE_27_EAST_SURF_AREA: {
     id: "ROUTE_27_EAST_SURF_AREA",
     accessOptions: [
-      [
-        "ROUTE_27_EAST_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
-      [
-        "ROUTE_27_CENTRAL_AREA",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "ROUTE_27_EAST_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
+      {
+        area: "ROUTE_27_CENTRAL_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ROUTE_27_WHIRLPOOL_AREA: {
     id: "ROUTE_27_WHIRLPOOL_AREA",
     accessOptions: [
-      [
-        "ROUTE_27_EAST_SURF_AREA",
-        "GLACIERBADGE",
-        "HM06",
-      ],
+      {
+        area: "ROUTE_27_EAST_SURF_AREA",
+        requirements: [
+          "GLACIERBADGE",
+          "HM06",
+        ],
+      },
     ],
   },
   ROUTE_29: {
@@ -5035,10 +5469,12 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_29_ROUTE_46_GATE_SOUTH_DOOR_OUT_LEFT",
       "ROUTE_29_ROUTE_46_GATE_SOUTH_DOOR_OUT_RIGHT",
       "CHERRYGROVE_CITY",
-      [
-        "NEW_BARK_TOWN",
-        "ELMS_LAB",
-      ],
+      {
+        area: "NEW_BARK_TOWN",
+        requirements: [
+          "ELMS_LAB_GOT_STARTER",
+        ],
+      },
     ],
   },
   NEW_BARK_TOWN: {
@@ -5060,11 +5496,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "NEW_BARK_TOWN_SURF_AREA",
     accessOptions: [
       "ROUTE_27_WEST_SURF_AREA",
-      [
-        "NEW_BARK_TOWN",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "NEW_BARK_TOWN",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   ELMS_LAB: {
@@ -5274,12 +5712,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     id: "SAFFRON_MAGNET_TRAIN_STATION",
     accessOptions: [
       "SAFFRON_CITY_TRAIN_STATION_DOOR_IN",
-      [
-        "GOLDENROD_MAGNET_TRAIN_STATION",
-        "PASS",
-        "POWER_PLANT",
-        "MACHINE_PART",
-      ],
+      {
+        area: "GOLDENROD_MAGNET_TRAIN_STATION",
+        requirements: [
+          "PASS",
+          "POWER_PLANT_RESTORED_POWER",
+        ],
+      },
     ],
   },
   SILPH_CO_1F: {
@@ -5330,32 +5769,38 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "MR_POKEMONS_HOUSE_DOOR_OUT_LEFT",
       "MR_POKEMONS_HOUSE_DOOR_OUT_RIGHT",
       "CHERRYGROVE_CITY",
-      [
-        "ROUTE_30_VIOLET_SIDE",
-        "HIVEBADGE",
-        "HM01",
-      ],
-      [
-        "ROUTE_30_VIOLET_SIDE",
-        "ELMS_LAB",
-        "MYSTERY_EGG",
-      ],
+      {
+        area: "ROUTE_30_VIOLET_SIDE",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
+      {
+        area: "ROUTE_30_VIOLET_SIDE",
+        requirements: [
+          "ELMS_LAB_GAVE_MYSTERY_EGG",
+        ],
+      },
     ],
   },
   ROUTE_30_VIOLET_SIDE: {
     id: "ROUTE_30_VIOLET_SIDE",
     accessOptions: [
       "ROUTE_31",
-      [
-        "ROUTE_30_CHERRYGROVE_SIDE",
-        "HIVEBADGE",
-        "HM01",
-      ],
-      [
-        "ROUTE_30_CHERRYGROVE_SIDE",
-        "ELMS_LAB",
-        "MYSTERY_EGG",
-      ],
+      {
+        area: "ROUTE_30_CHERRYGROVE_SIDE",
+        requirements: [
+          "HIVEBADGE",
+          "HM01",
+        ],
+      },
+      {
+        area: "ROUTE_30_CHERRYGROVE_SIDE",
+        requirements: [
+          "ELMS_LAB_GAVE_MYSTERY_EGG",
+        ],
+      },
     ],
   },
   ROUTE_31: {
@@ -5387,11 +5832,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
   CHERRYGROVE_CITY_SURF_AREA: {
     id: "CHERRYGROVE_CITY_SURF_AREA",
     accessOptions: [
-      [
-        "CHERRYGROVE_CITY",
-        "FOGBADGE",
-        "HM03",
-      ],
+      {
+        area: "CHERRYGROVE_CITY",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   CHERRYGROVE_MART: {
