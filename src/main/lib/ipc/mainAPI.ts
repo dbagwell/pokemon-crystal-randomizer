@@ -1,8 +1,10 @@
+import { generateAPOptions } from "@lib/generator/apOptionsGenerator"
 import { generate } from "@lib/generator/generator"
 import { rendererAPIResponseListeners } from "@lib/ipc/rendererAPIUtils"
 import { getPreference, setPreference } from "@lib/userData/preferences"
 import { getPlayerOptions, getSavedSettings, getSavedSettingsNames, getSettingsForPresetId, removeSavedSettings, saveSettings, setPlayerOptions, setPreviousSettings } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
+import type { APOptions } from "@shared/appData/apOptions"
 import { type NameListId, nameListIds, nameLists } from "@shared/appData/nameListIds"
 import { type PlayerOptions, type Settings } from "@shared/appData/settingsFromViewModel"
 import type { MainAPIInterface } from "@shared/types/ipc/mainAPIInterface"
@@ -34,6 +36,7 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
     customPresetNames: string[]
     logPreference: boolean
     createPatchPreference: boolean
+    apOptions: APOptions
   }>> => {
     const lastPrestId = getPreference("lastPresetId")
     
@@ -46,6 +49,7 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
         customPresetNames: getSavedSettingsNames(),
         logPreference: getPreference("logPreference"),
         createPatchPreference: getPreference("createPatch"),
+        apOptions: getPreference("apOptions"),
       },
     }
   }
@@ -160,6 +164,49 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
       
       return {
         message: "Settings exported!",
+      }
+    } catch (error: any) {
+      console.log(error.stack)
+      throw new RelayedError(`${error}`)
+    }
+  }
+  
+  readonly exportAPOptions = async (
+    apOptions: APOptions,
+    settings: Settings,
+    playerOptions: PlayerOptions,
+  ): Promise<VoidAPIResponse> => {
+    try {
+      setPreference("apOptions", apOptions)
+      
+      const filePath = dialog.showSaveDialogSync({
+        title: "Save Exported Archipelago Player Options to:",
+        defaultPath: undefined,
+        filters: [
+          {
+            name: "YAML",
+            extensions: [
+              "yaml",
+              "yml",
+            ],
+          },
+        ],
+        buttonLabel: "Export",
+        properties: [
+          "showOverwriteConfirmation",
+        ],
+      })
+        
+      if (isNullish(filePath)) {
+        throw new Error("A save location must be specified.")
+      }
+      
+      const exportedOptions = `${yaml.stringify(generateAPOptions(apOptions, settings, playerOptions))}`
+      
+      fs.writeFileSync(filePath, exportedOptions)
+      
+      return {
+        message: "Archipelago Player Options Exported!",
       }
     } catch (error: any) {
       console.log(error.stack)

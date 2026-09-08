@@ -1,5 +1,6 @@
 import { userDataPath } from "@lib/userData/userData"
-import { isBoolean, isNullish, isNumber, isString } from "@shared/utils"
+import type { APOptions } from "@shared/appData/apOptions"
+import { isBoolean, isNullish, isNumber, isObject, isString } from "@shared/utils"
 import { getYAML } from "@yamlUtils/yamlUtils"
 import fs from "fs"
 import path from "path"
@@ -14,6 +15,7 @@ export type UserPreferences = {
   ignoredUpdateVersions: string[]
   generatorWindowPosition: [number, number] | undefined
   generatorWindowSize: [number, number]
+  apOptions?: APOptions
 }
 
 const getPreferences = (): UserPreferences => {
@@ -41,9 +43,10 @@ const getPreferences = (): UserPreferences => {
       ...get("lastPresetId", (value) => { return isString(value) }),
       ...get("logPreference", (value) => { return isBoolean(value) }),
       ...get("createPatch", (value) => { return isBoolean(value) }),
-      ...get("ignoredUpdateVersions", (value) => { return Array.isArray(value) && value.reduce((result, value) => { return result && isString(value) }, true) }),
-      ...get("generatorWindowPosition", (value) => { return isNullish(value) || Array.isArray(value) && value.reduce((result, value) => { return result && isNumber(value) }, true) }),
-      ...get("generatorWindowSize", (value) => { return Array.isArray(value) && value.reduce((result, value) => { return result && isNumber(value) }, true) }),
+      ...get("ignoredUpdateVersions", (value) => { return Array.isArray(value) && value.reduce((result: boolean, value) => { return result && isString(value) }, true) }),
+      ...get("generatorWindowPosition", (value) => { return isNullish(value) || Array.isArray(value) && value.reduce((result: boolean, value) => { return result && isNumber(value) }, true) }),
+      ...get("generatorWindowSize", (value) => { return Array.isArray(value) && value.reduce((result: boolean, value) => { return result && isNumber(value) }, true) }),
+      ...get("apOptions", (value) => { return isNullish(value) || isObject(value) && isString(value.slotName) && isNumber(value.progressionBalancing) }),
     }
   } catch {
     return defaultPreferences

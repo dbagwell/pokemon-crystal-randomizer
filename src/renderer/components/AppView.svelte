@@ -120,6 +120,12 @@
               restoreOnBlur={true}
               title="Choose Preset"
             />
+            <Button
+              style="text"
+              isDisabled={currentPreset.id !== "CUSTOM"}
+              onClick={createNewPresetButtonClicked}
+              title="Create New Preset"
+            />
           </Stack>
           <Stack
             alignment="start"
@@ -139,9 +145,8 @@
             />
             <Button
               style="text"
-              isDisabled={currentPreset.id !== "CUSTOM"}
-              onClick={createNewPresetButtonClicked}
-              title="Create New Preset"
+              onClick={exportArchipelagoButtonClicked}
+              title="Export Archipelago"
             />
           </Stack>
           <div style:flex-grow="2"></div>
@@ -196,7 +201,15 @@
   />
 {/snippet}
 
+{#snippet apOptionsView(inputAccessor: { getInput?: () => APOptions })}
+  <APOptionsView
+    initialAPOptions={apOptions}
+    inputAccessor={inputAccessor}
+  />
+{/snippet}
+
 <script lang="ts">
+  import APOptionsView from "@components/APOptionsView.svelte"
   import Button from "@components/buttons/Button.svelte"
   import DialogContainer, { showDialog, showErrorDialog, showSuccessDialog } from "@components/dialogs/DialogContainer.svelte"
   import AutocompleteTextField, { optionFrom } from "@components/inputs/AutocompleteTextField.svelte"
@@ -208,6 +221,7 @@
   import ProgressIndicator, { hideProgressIndicator, showProgressIndicator } from "@components/utility/ProgressIndicator.svelte"
   import Tooltip from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
+  import type { APOptions } from "@shared/appData/apOptions"
   import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
   import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
   import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
@@ -226,6 +240,7 @@
     customPresetNames: string[]
     logPreference: boolean
     createPatchPreference: boolean
+    initialAPOptions: APOptions
   }
   
   /* eslint-disable prefer-const */
@@ -237,6 +252,7 @@
     customPresetNames,
     logPreference,
     createPatchPreference,
+    initialAPOptions,
   }: Props = $props()
   /* eslint-enable prefer-const */
   
@@ -245,6 +261,8 @@
   let settingsViewModel = $state(defaultSettingsViewModel())
   // svelte-ignore state_referenced_locally
   let playerOptions = $state(initialPlayerOptions)
+  // svelte-ignore state_referenced_locally
+  let apOptions = $state(initialAPOptions)
   let generateLogToggleViewModel = $state(createSimpleToggleViewModel({
     id: "CREATE_LOG" as const,
     name: "Generate Log File",
@@ -428,6 +446,37 @@
     }
   }
   
+  const exportArchipelagoButtonClicked = () => {
+    showDialog({
+      title: "Export Archipelago Player Options",
+      message: "Export the currently selected settings and player options as a 'Player .yaml' file that can be used to generate an Archipelago game using the Pokemon Krystal apworld.",
+      extraContent: apOptionsView,
+      submitButtonLabel: "Export",
+      hasCancelButton: true,
+      onSubmit: async (updatedAPOptions) => {
+        apOptions = updatedAPOptions
+        validateCurrentSettings(async (settings) => {
+          try {
+            const playerOptionsViewModel = defaultPlayerOptionsViewModel()
+            applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
+            
+            showProgressIndicator()
+            const response = await window.mainAPI.exportAPOptions(
+              $state.snapshot(apOptions),
+              settings,
+              playerOptionsFromViewModel(playerOptionsViewModel),
+            )
+            showSuccessDialog(response.message)
+          } catch (error) {
+            showErrorDialog(error)
+          } finally {
+            hideProgressIndicator()
+          }
+        })
+      },
+    })
+  }
+  
   const playerOptionsButtonClicked = () => {
     showDialog({
       title: "Player Options",
@@ -490,6 +539,10 @@
   }
   
   const generateROMButtonClicked = async () => {
+    validateCurrentSettings(generateROM)
+  }
+  
+  const validateCurrentSettings = (completion: (settings: Settings) => Promise<void>) => {
     const settings = currentSettingsSnapshot()
     
     let recommendation = ""
@@ -516,11 +569,11 @@
         submitButtonLabel: "Continue Anyways",
         hasCancelButton: true,
         onSubmit: () => {
-          generateROM(settings)
+          completion(settings)
         },
       })
     } else {
-      generateROM(settings)
+      completion(settings)
     }
   }
   

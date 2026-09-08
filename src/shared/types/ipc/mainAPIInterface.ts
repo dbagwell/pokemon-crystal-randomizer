@@ -1,3 +1,4 @@
+import type { APOptions } from "@shared/appData/apOptions"
 import type { NameListId } from "@shared/appData/nameListIds"
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
 
@@ -15,6 +16,7 @@ export interface MainAPIInterface {
     customPresetNames: string[]
     logPreference: boolean
     createPatchPreference: boolean
+    apOptions: APOptions
   }>>
   
   saveSettings(settings: Settings, name: string): Promise<VoidAPIResponse>
@@ -35,6 +37,12 @@ export interface MainAPIInterface {
   ): Promise<VoidAPIResponse>
   
   exportSettings(settings: Settings): Promise<VoidAPIResponse>
+  
+  exportAPOptions(
+    apOptions: APOptions,
+    settings: Settings,
+    playerOptions: PlayerOptions,
+  ): Promise<VoidAPIResponse>
   
   importCustomNames(): Promise<APIResponse<Partial<Record<NameListId, string>>>>
   
