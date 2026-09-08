@@ -1,6 +1,6 @@
 import type { ItemCategory } from "@shared/types/gameData/itemCategory"
 import type { ItemCategoryId } from "@shared/types/gameDataIds/itemCategories"
-import { badgeItemIds, ballItemIds, hmItemIds, type ItemId, keyItemIds, menuItemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
+import { apItemIds, badgeItemIds, ballItemIds, hmItemIds, type ItemId, keyItemIds, menuItemIds, regularItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 
 export const itemCategoriesMap = {
   MENU_ITEMS: {
@@ -51,5 +51,12 @@ export const itemCategoriesMap = {
     slotSize: 99,
     maxSlots: 12,
     itemIds: ballItemIds,
+  },
+  AP_ITEMS: {
+    id: "AP_ITEMS",
+    name: "AP Items",
+    slotSize: 0,
+    maxSlots: 0,
+    itemIds: apItemIds,
   },
 } as const satisfies IdMap<ItemCategoryId, ItemCategory<ItemCategoryId, ItemId, number>>

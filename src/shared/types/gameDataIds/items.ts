@@ -269,6 +269,12 @@ export const ballItemIds = [
   "PARK_BALL",
 ] as const
 
+export const apItemIds = [
+  "AP_PROGRESSION_ITEM",
+  "AP_USEFUL_ITEM",
+  "AP_FILLER_ITEM",
+] as const
+
 export const menuItemIds = [
   ...pokedexPartItemIds,
   ...pokegearPartItemIds,
@@ -295,6 +301,7 @@ export const itemIds = [
   ...menuItemIds,
   ...badgeItemIds,
   ...bagItemIds,
+  ...apItemIds,
 ] as const
 
 export type PokedexPartItemId = typeof pokedexPartItemIds[number]
@@ -306,6 +313,7 @@ export type HMItemId = typeof hmItemIds[number]
 export type TMItemId = typeof tmItemIds[number]
 export type RegularItemId = typeof regularItemIds[number]
 export type BallItemId = typeof ballItemIds[number]
+export type APItemID = typeof apItemIds[number]
 export type MenuItemId = typeof menuItemIds[number]
 export type BadgeItemId = typeof badgeItemIds[number]
 export type HoldableItemId = typeof holdableItemIds[number]
