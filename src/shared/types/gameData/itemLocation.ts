@@ -22,3 +22,12 @@ export type ItemLocation = {
   accessRequirements?: AccessRequirement[]
   romOffsets: [number, number][]
 }
+
+export type GeneralItemLocation = {
+  type: "ITEM_LOCATION" | "MART" | "SPECIAL_SHOP"
+  id: string
+  groupId: ItemLocationGroupId
+  shuffleGroupIndex: number
+  accessOptions: AccessRequirement[][]
+  itemId: ItemId | undefined
+}

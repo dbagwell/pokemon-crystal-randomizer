@@ -1,6 +1,6 @@
 import type { Encounter } from "@shared/types/gameData/encounter"
 import type { Item } from "@shared/types/gameData/item"
-import type { ItemLocation } from "@shared/types/gameData/itemLocation"
+import type { GeneralItemLocation, ItemLocation } from "@shared/types/gameData/itemLocation"
 import type { LogicalAccessArea } from "@shared/types/gameData/logicalAccessArea"
 import type { LogicalEvent } from "@shared/types/gameData/logicalEvent"
 import type { MapObjectEvent } from "@shared/types/gameData/mapObjectEvent"
@@ -75,6 +75,7 @@ export type GameData = {
   events: IdMap<LogicalEventId, LogicalEvent>
   numberOfBadgesForOak: number
   items: IdMap<ItemId, Item>
+  allItemLocations?: GeneralItemLocation[]
 }
 
 export type PlayerSpecificGameData = {

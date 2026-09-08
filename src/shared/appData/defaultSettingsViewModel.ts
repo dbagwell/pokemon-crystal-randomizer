@@ -2469,7 +2469,9 @@ type SelectorsMapFromItemCategoriesMap = {
 
 type SelectorsFromItemCategoriesMap = SelectorsMapFromItemCategoriesMap[keyof SelectorsMapFromItemCategoriesMap][]
 const createSelectorsFromItemCategories = (): SelectorsFromItemCategoriesMap => {
-  return Object.values(itemCategoriesMap).map((category) => {
+  return Object.values(itemCategoriesMap).filter((category) => {
+    return category.maxSlots > 0
+  }).map((category) => {
     return createSelectorFromItemCategory(category) as ReturnType<typeof createSelectorFromItemCategory>
   }) as SelectorsFromItemCategoriesMap
 }

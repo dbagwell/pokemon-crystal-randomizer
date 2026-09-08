@@ -2,11 +2,10 @@ import { accessRulsetsMap } from "@shared/appData/accessRulesets"
 import type { Settings } from "@shared/appData/settingsFromViewModel"
 import type { ROMInfo } from "@shared/romUtils/romInfo"
 import type { GameData } from "@shared/types/gameData/gameData"
-import type { ItemLocation } from "@shared/types/gameData/itemLocation"
+import type { GeneralItemLocation, ItemLocation } from "@shared/types/gameData/itemLocation"
 import type { LogicalEvent } from "@shared/types/gameData/logicalEvent"
 import type { Mart, SpecialShop } from "@shared/types/gameData/mart"
 import { type AccessRequirement, type Warp } from "@shared/types/gameData/warp"
-import type { ItemLocationGroupId } from "@shared/types/gameDataIds/itemLocationGroups"
 import { isItemLocationId, type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { type BadgeItemId, badgeItemIds, ballItemIds, type HoldableItemId, holdableItemIds, isItemId, type ItemId, type KeyItemId, keyItemIds, type MenuItemId, menuItemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { isLogicalAccessAreaId, type LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
@@ -127,15 +126,6 @@ export const updateItems = (
   }
 }
 
-type GeneralItemLocation = {
-  type: "ITEM_LOCATION" | "MART" | "SPECIAL_SHOP"
-  id: string
-  groupId: ItemLocationGroupId
-  shuffleGroupIndex: number
-  accessOptions: AccessRequirement[][]
-  itemId: ItemId | undefined
-}
-
 const getLocationIdInfo = (locationId: string) => {
   try {
     return JSON.parse(locationId)
@@ -170,6 +160,7 @@ export const shuffleItems = (
   })
   
   let allItemLocations = generalItemLocations(romInfo.gameData, settings)
+  romInfo.gameData.allItemLocations = allItemLocations
   const locationsToShuffle: GeneralItemLocation[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   const startingAccessibleItems = startingItemIds(settings).map((itemId) => {
@@ -720,6 +711,15 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
           accessOptions: convertedAccessOptions(object.accessOptions),
         }
       }) as GeneralItemLocation[]
+    } else if (object.type === "EVENT" && object.id === "SILVER_CAVE_ROOM_3_DEFEATED_RED") {
+      // Required for AP, will be ignored by the local shuffle algorithm
+      return [
+        {
+          ...object,
+          groupId: "EVENT",
+          accessOptions: convertedAccessOptions(object.accessOptions),
+        },
+      ] as any as GeneralItemLocation[]
     } else {
       return []
     }
@@ -1463,6 +1463,12 @@ export const updateAccessLogic = (
         "OAKS_LAB_GOT_OAKS_APPROVAL",
       ],
     })
+    
+    if (settings.EARLY_MOUNT_SILVER.SETTINGS.REQUIRE_TALKING_TO_OAK_FOR_RED) {
+      romInfo.gameData.events.SILVER_CAVE_ROOM_3_DEFEATED_RED.accessRequirements = [
+        "OAKS_LAB_GOT_OAKS_APPROVAL",
+      ]
+    }
   } else if (settings.RANDOMIZE_NUMBER_OF_BADGES_FOR_OAK.VALUE) {
     romInfo.gameData.events.OAKS_LAB_GOT_OAKS_APPROVAL.accessRequirements = [romInfo.gameData.numberOfBadgesForOak]
   }
