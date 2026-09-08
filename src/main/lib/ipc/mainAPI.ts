@@ -120,6 +120,7 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
           shouldCreateROM: true,
           shouldCreateLog: shouldGenerateLog,
           shouldCreatePatch: createPatch,
+          shouldCreateGameData: false,
         },
         forceOverwrite: false,
         throwErrorOnWriteFailure: false,

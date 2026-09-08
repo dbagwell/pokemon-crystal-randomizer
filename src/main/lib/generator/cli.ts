@@ -5,6 +5,7 @@ import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared
 import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
 import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
 import { playerOptionsFromViewModel, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
+import type { GameData } from "@shared/types/gameData/gameData"
 import { isNotNullish, isNullish } from "@shared/utils"
 import { getYAML } from "@yamlUtils/yamlUtils"
 import { app } from "electron"
@@ -22,9 +23,12 @@ export const generateFromCLI = async (args: string[]) => {
   const shouldGenerateROM = getBooleanArg("rom")
   const shouldGenerateLog = getBooleanArg("log")
   const shouldGeneratePatch = getBooleanArg("patch")
+  const shouldGenerateGameData = getBooleanArg("gameData")
   const presetId = getStringArg("preset")
   const settingsFilePath = getStringArg("settings")
   const seed = getStringArg("seed")
+  const gameDataFilePath = getStringArg("inputGameData")
+  const playerOptionsFilePath = getStringArg("playerOptions")
   const vanillaROMPath = getStringArg("inputROM")
   const outputDir = getStringArg("outputDir")
   const name = getStringArg("name")
@@ -32,8 +36,8 @@ export const generateFromCLI = async (args: string[]) => {
   
   let inputROMData: Buffer | undefined
   
-  if (!(shouldGenerateROM || shouldGenerateLog || shouldGeneratePatch)) {
-    console.error("Must specify at least one of '--rom', '--log', or '--patch' to generate.")
+  if (!(shouldGenerateROM || shouldGenerateLog || shouldGeneratePatch || shouldGenerateGameData)) {
+    console.error("Must specify at least one of '--rom', '--log', '--patch' or '--gameData' to generate.")
     return
   }
   
@@ -79,12 +83,35 @@ export const generateFromCLI = async (args: string[]) => {
     }
   }
   
+  let gameData: GameData | undefined
+  
+  if (isNotNullish(gameDataFilePath)) {
+    try {
+      gameData = getYAML([gameDataFilePath])
+    } catch (error) {
+      console.error(`Cannot find specified '--inputGameData'.\n\n${error}`)
+      return
+    }
+  }
+  
+  let playerOptions: unknown | undefined
+  
+  if (isNotNullish(playerOptionsFilePath)) {
+    try {
+      playerOptions = getYAML([playerOptionsFilePath])
+    } catch (error) {
+      console.error(`Cannot find specified '--playerOptions'.\n\n${error}`)
+      return
+    }
+  } else {
+    playerOptions = getPlayerOptions()
+  }
+  
   const warnings: string[] = []
   const settingsViewModel = defaultSettingsViewModel()
   applySettingsToViewModel(settings, settingsViewModel, warnings)
   const validatedSettings = settingsFromViewModel(settingsViewModel)
   
-  const playerOptions = getPlayerOptions()
   const playerOptionsViewModel = defaultPlayerOptionsViewModel()
   applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, warnings)
   const validatedPlayerOptions = playerOptionsFromViewModel(playerOptionsViewModel)
@@ -101,9 +128,11 @@ export const generateFromCLI = async (args: string[]) => {
         settings: validatedSettings,
         playerOptions: validatedPlayerOptions,
         inputROM: inputROMData,
+        gameData: gameData,
         shouldCreateROM: shouldGenerateROM,
         shouldCreateLog: shouldGenerateLog,
         shouldCreatePatch: shouldGeneratePatch,
+        shouldCreateGameData: shouldGenerateGameData,
       },
       outputDirPath: outputDir,
       defaultFileName: name,

@@ -71,12 +71,15 @@ export const generate = (params: GenerateParams) => {
   const isDefaultSettings = settingsString === JSON.stringify(settingsFromViewModel(defaultSettingsViewModel()))
   const romInfo = defaultROMInfo()
   
-  const result: GenerateResult = {
-    checkValue: isDefaultSettings ? "00000000" : hash(`${params.appVersion}${seed}${settingsString}`).slice(0, 8).toUpperCase(),
+  if (isNotNullish(params.gameData)) {
+    romInfo.gameData = params.gameData
+  } else if (!isDefaultSettings) {
+    updateGameData(params.settings, romInfo, random)
   }
   
-  if (!isDefaultSettings) {
-    updateGameData(params.settings, romInfo, random)
+  const result: GenerateResult = {
+    checkValue: isDefaultSettings ? "00000000" : hash(`${params.appVersion}${seed}${settingsString}`).slice(0, 8).toUpperCase(),
+    gameData: romInfo.gameData,
   }
   
   if (params.shouldCreateROM || params.shouldCreatePatch) {
