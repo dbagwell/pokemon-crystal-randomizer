@@ -2194,12 +2194,12 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "GOT_CARD_KEY",
     numericId: 928,
   },
-  ELMS_AIDE_HAS_POTION: {
-    id: "ELMS_AIDE_HAS_POTION",
+  GOT_POTION_FROM_ELMS_AIDE: {
+    id: "GOT_POTION_FROM_ELMS_AIDE",
     numericId: 929,
   },
-  ELMS_AIDE_HAS_POKE_BALLS: {
-    id: "ELMS_AIDE_HAS_POKE_BALLS",
+  GOT_POKE_BALLS_FROM_ELMS_AIDE: {
+    id: "GOT_POKE_BALLS_FROM_ELMS_AIDE",
     numericId: 930,
   },
   GOT_AZALEA_GS_BALL: {
@@ -2225,6 +2225,14 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
   RECEIVED_GS_BALL: {
     id: "RECEIVED_GS_BALL",
     numericId: 936,
+  },
+  GOT_EXP_SHARE: {
+    id: "GOT_EXP_SHARE",
+    numericId: 937,
+  },
+  BEAT_RED: {
+    id: "BEAT_RED",
+    numericId: 938,
   },
   BEAT_SWIMMERF_ELAINE: {
     id: "BEAT_SWIMMERF_ELAINE",

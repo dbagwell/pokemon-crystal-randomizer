@@ -31,7 +31,7 @@ values:
   checkGotBluesItem: "08 4B 6A 33 $gotEarthbadgeEventFlagId 03 4B 6A"
   fruitTreeSoundEffectScript: "86 88 45 03 3F 40"
   elmMysteryEggCheck: "21 45 09 A2 4D 31 24 00 03 E5 4B"
-  elmAfterTurningInMysteryEgg: "14 06 33 $elmsAideHasPokeBallsEventFlagId 03 E0 4B"
+  elmAfterTurningInMysteryEgg: "14 06 03 E0 4B"
   elmAfterGivingMasterBall: "4C 31 5D 54 49 03 E0 4B"
   elmAfterGivingSSTicket: "08 EE 4B 33 24 00 4C 6F 5E 54 49 03 E0 4B"
   maybeGiveMapCard: "6B 47 31 $gotMapCardEventFlagId 09 @$continueGuideGentScript 9E $mapCardItemId 01 08 @$continueGuideGentScript 33 $gotMapCardEventFlagId $continueGuideGentScript"
@@ -39,14 +39,16 @@ values:
   maybeGiveMysteryEggAndPokedex: "31 $gotMysteryEggEventFlagId 09 @$maybeGivePokedex 9E $mysteryEggItemId 01 08 @$maybeGivePokedex 33 $gotMysteryEggEventFlagId $maybeGivePokedex"
   maybeGivePokedex: "31 $gotPokedexEventFlagId 09 @$continueMrPokemonScript 9E $pokedexItemId 01 08 @$continueMrPokemonScript 33 $gotPokedexEventFlagId $continueMrPokemonScript"
   continueMrPokemonScript: "31 1F 00 03 A1 6E"
+  setExpShareEvent: "33 $gotExpShareEventFlagId 03 AA 6E"
   maybeSetSSTicketEvent: "08 39 4E 33 24 00 03 39 4E"
-  setPotionEvent: "33 1A 00 33 $elmsAideHasPotionEventFlagId 91"
-  maybeClearPotionEvent: "08 @$continuePotionScript 32 $elmsAideHasPotionEventFlagId $continuePotionScript"
+  maybeSetPotionEvent: "08 @$continuePotionScript 33 $gotPotionFromElmsAideEventFlagId $continuePotionScript"
   continuePotionScript: "4C 65 5F 03 A8 4E"
-  maybeDoPokeballsScript: "31 $elmsAideHasPokeBallsEventFlagId 09 CB 4E 14 02 91"
-  maybeDoPotionScript: "31 $elmsAideHasPotionEventFlagId 09 9D 4E 03 CB 4E"
-  maybeGivePotionAndPokeBalls: "31 $elmsAideHasPotionEventFlagId 08 @$maybeGivePokeBalls 9E $potionItemId 01 08 @$maybeGivePokeBalls 32 $elmsAideHasPotionEventFlagId $maybeGivePokeBalls"
-  maybeGivePokeBalls: "31 $elmsAideHasPokeBallsEventFlagId 08 @$continueElmsAideScript 9E $pokeBallsItemId $elmsAideNumberOfItems 08 @$continueElmsAideScript 32 $elmsAideHasPokeBallsEventFlagId $continueElmsAideScript"
+  maybeDoPokeballsScript: "31 1F 00 08 @$skipGivingPokeballs 31 $gotPokeBallsFromElmsAideEventFlagId 08 CB 4E $skipGivingPokeballs"
+  skipGivingPokeballs: "14 02 91"
+  maybeDoPotionScript: "31 1A 00 08 @$skipGivingPotion 31 $gotPotionFromElmsAideEventFlagId 08 9D 4E $skipGivingPotion"
+  skipGivingPotion: "03 CB 4E"
+  maybeGivePotionAndPokeBalls: "31 1A 00 08 @$maybeGivePokeBalls 31 $gotPotionFromElmsAideEventFlagId 09 @$maybeGivePokeBalls 9E $potionItemId 01 08 @$maybeGivePokeBalls 33 $gotPotionFromElmsAideEventFlagId $maybeGivePokeBalls"
+  maybeGivePokeBalls: "31 1F 00 08 @$continueElmsAideScript 31 $gotPokeBallsFromElmsAideEventFlagId 09 @$continueElmsAideScript 9E $pokeBallsItemId $elmsAideNumberOfItems 08 @$continueElmsAideScript 33 $gotPokeBallsFromElmsAideEventFlagId $continueElmsAideScript"
   continueElmsAideScript: "31 2D 00 03 EB 4E"
   maybeSetOldRodEvent: "08 73 5B 33 17 00 91"
   maybeSetAzaleaGSBallEvent: "08 @$continueKurtScript 33 $gotAzaleaGSBallEventFlagId 33 A4 07 32 3E 07 $continueKurtScript"
@@ -336,24 +338,15 @@ changes:
   - bank: 26
     address: 0x5B70
   value: "03 @$maybeSetOldRodEvent"
-- description: "Sets a flag to indicate that the aide has a potion to give"
-  locations:
-  - bank: 30
-  value: "$setPotionEvent"
-- description: "Sets a flag to indicate that the aide has a potion to give"
-  locations:
-  - bank: 30
-    address: 0x4D5A
-  value: "00 @$setPotionEvent"
 - description: "Sets a flag if the aide fails to give his item during the cutscene"
   locations:
   - bank: 30
-  value: "$maybeClearPotionEvent"
+  value: "$maybeSetPotionEvent"
 - description: "Sets a flag if the aide fails to give his item during the cutscene"
   locations:
   - bank: 30
     address: 0x4EA5
-  value: "03 @$maybeClearPotionEvent"
+  value: "03 @$maybeSetPotionEvent"
 - description: "Calls the script for the aide to give pokeballs he gives his potion if the appropriate flag is set"
   locations:
   - bank: 30
@@ -659,6 +652,15 @@ changes:
   - bank: 101
     address: 0x6EC1
   value: "@$maybeGiveMysteryEggAndPokedex"
+- description: "Sets an event when you get the item for turning in the red scale"
+  locations:
+  - bank: 101
+  value: "$setExpShareEvent"
+- description: "Sets an event when you get the item for turning in the red scale"
+  locations:
+  - bank: 101
+    address: 0x6EC1
+  value: "@$setExpShareEvent"
 - description: "Makes the ruins of alph reasearcher give one of the unused items instead of the unowndex."
   locations:
   - bank: 22
@@ -765,7 +767,7 @@ changes:
   locations:
   - bank: 30
     address: 0x4ED0
-  value: "9E $pokeBallsItemId $elmsAideNumberOfItems 08 D9 4E 32 $elmsAideHasPokeBallsEventFlagId 4C 9A 60 55 18"
+  value: "9E $pokeBallsItemId $elmsAideNumberOfItems 08 D9 4E 33 $gotPokeBallsFromElmsAideEventFlagId 4C 9A 60 55 18"
 - description: "Update wait for the sound effect after picking up an item from a fruit tree."
   locations:
   - bank: 17
