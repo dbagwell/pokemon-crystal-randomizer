@@ -1111,6 +1111,9 @@ const createPatches = (
           }
         }),
       },
+      {
+        numberOfMarts: hexStringFrom([martIds.length]),
+      },
     )
 
     romInfo.patchHunks = [...romInfo.patchHunks, ...martsPatch.hunks]
@@ -1139,7 +1142,7 @@ const createPatches = (
   if (shouldApplyShopItemChanges) {
     romInfo.patchHunks.push({
       offset: romOffsetFromBankAddress(31, 0x415D),
-      values: [martIds.length],
+      values: [martIds.length + 1],
     })
   }
   
