@@ -457,14 +457,10 @@
         apOptions = updatedAPOptions
         validateCurrentSettings(async (settings) => {
           try {
-            const playerOptionsViewModel = defaultPlayerOptionsViewModel()
-            applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
-            
             showProgressIndicator()
             const response = await window.mainAPI.exportAPOptions(
               $state.snapshot(apOptions),
               settings,
-              playerOptionsFromViewModel(playerOptionsViewModel),
             )
             showSuccessDialog(response.message)
           } catch (error) {

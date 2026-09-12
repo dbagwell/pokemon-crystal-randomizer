@@ -175,7 +175,6 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
   readonly exportAPOptions = async (
     apOptions: APOptions,
     settings: Settings,
-    playerOptions: PlayerOptions,
   ): Promise<VoidAPIResponse> => {
     try {
       setPreference("apOptions", apOptions)
@@ -202,7 +201,7 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
         throw new Error("A save location must be specified.")
       }
       
-      const exportedOptions = `${yaml.stringify(generateAPOptions(apOptions, settings, playerOptions))}`
+      const exportedOptions = `${yaml.stringify(generateAPOptions(apOptions, settings))}`
       
       fs.writeFileSync(filePath, exportedOptions)
       

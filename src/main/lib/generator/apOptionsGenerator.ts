@@ -1,7 +1,7 @@
 import type { APOptions } from "@shared/appData/apOptions"
-import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
+import type { Settings } from "@shared/appData/settingsFromViewModel"
 
-export const generateAPOptions = (apOptions: APOptions, settings: Settings, playerOptions: PlayerOptions) => {
+export const generateAPOptions = (apOptions: APOptions, settings: Settings) => {
   const gameName = "Pokemon Krystal"
   return {
     name: apOptions.slotName,
@@ -15,7 +15,6 @@ export const generateAPOptions = (apOptions: APOptions, settings: Settings, play
     [gameName]: {
       progression_balancing: apOptions.progressionBalancing,
       settings: settings,
-      player_options: playerOptions,
     },
   }
 }

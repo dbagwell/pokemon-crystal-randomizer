@@ -41,7 +41,6 @@ export interface MainAPIInterface {
   exportAPOptions(
     apOptions: APOptions,
     settings: Settings,
-    playerOptions: PlayerOptions,
   ): Promise<VoidAPIResponse>
   
   importCustomNames(): Promise<APIResponse<Partial<Record<NameListId, string>>>>
