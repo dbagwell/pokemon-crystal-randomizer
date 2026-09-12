@@ -4,6 +4,11 @@ values:
   checkValueTextItem: "82 95 9C $checkValue 50"
   showRandomizerInfo: "FA CD CF A7 20 14 21 B9 C5 11 @$versionNumberTextItem CD 78 10 21 E1 C5 11 @$checkValueTextItem CD 78 10 18 12 21 7D C5 11 @$versionNumberTextItem CD 78 10 21 A5 C5 11 @$checkValueTextItem CD 78 10 CD E4 5D C9 $versionNumberTextItem $checkValueTextItem"
 changes:
+  - description: "Changes the title of the ROM to KOVOLTA_PCR"
+    locations:
+      - bank: 0
+        address: 0x0134
+    value: "4B 4F 56 4F 4C 54 41 5F 50 43 52"
   - description: "Adds a method to show the randomizer version and a ROM check value on the main menu."
     locations:
       - bank: 18
