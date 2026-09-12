@@ -12,6 +12,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       107,
       0x4304,
     ]],
+    eventFlagId: "ROUTE_2_ELIXER",
   },
   ROUTE_2_DIGLETTS_CAVE_AREA_ITEM_BALL: {
     id: "ROUTE_2_DIGLETTS_CAVE_AREA_ITEM_BALL",
@@ -23,6 +24,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       107,
       0x4302,
     ]],
+    eventFlagId: "ROUTE_2_CARBOS",
   },
   ROUTE_2_FOREST_AREA_ITEM_BALL_BY_VIRIDIAN_ENTRANCE: {
     id: "ROUTE_2_FOREST_AREA_ITEM_BALL_BY_VIRIDIAN_ENTRANCE",
@@ -34,6 +36,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       107,
       0x42FE,
     ]],
+    eventFlagId: "ROUTE_2_DIRE_HIT",
   },
   ROUTE_2_FOREST_AREA_ITEM_BALL_BY_PEWTER_ENTRANCE: {
     id: "ROUTE_2_FOREST_AREA_ITEM_BALL_BY_PEWTER_ENTRANCE",
@@ -45,6 +48,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       107,
       0x4300,
     ]],
+    eventFlagId: "ROUTE_2_MAX_POTION",
   },
   ROUTE_4_WEST_AREA_ITEM_BALL: {
     id: "ROUTE_4_WEST_AREA_ITEM_BALL",
@@ -56,6 +60,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       107,
       0x620F,
     ]],
+    eventFlagId: "ROUTE_4_HP_UP",
   },
   ROUTE_12_CUT_AREA_ITEM_BALL: {
     id: "ROUTE_12_CUT_AREA_ITEM_BALL",
@@ -67,6 +72,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       105,
       0x700B,
     ]],
+    eventFlagId: "ROUTE_12_CALCIUM",
   },
   ROUTE_12_SURF_CUT_AREA_ITEM_BALL: {
     id: "ROUTE_12_SURF_CUT_AREA_ITEM_BALL",
@@ -78,6 +84,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       105,
       0x700D,
     ]],
+    eventFlagId: "ROUTE_12_NUGGET",
   },
   ROUTE_15_CUT_AREA_ITEM_BALL: {
     id: "ROUTE_15_CUT_AREA_ITEM_BALL",
@@ -89,6 +96,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       106,
       0x65E4,
     ]],
+    eventFlagId: "ROUTE_15_PP_UP",
   },
   ROUTE_25_CUT_AREA_ITEM_BALL: {
     id: "ROUTE_25_CUT_AREA_ITEM_BALL",
@@ -100,6 +108,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       103,
       0x6FE3,
     ]],
+    eventFlagId: "ROUTE_25_PROTEIN",
   },
   ROUTE_26_ITEM_BALL: {
     id: "ROUTE_26_ITEM_BALL",
@@ -111,6 +120,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       105,
       0x4EC4,
     ]],
+    eventFlagId: "ROUTE_26_MAX_ELIXER",
   },
   ROUTE_27_WEST_SURF_AREA_ITEM_BALL: {
     id: "ROUTE_27_WEST_SURF_AREA_ITEM_BALL",
@@ -122,6 +132,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       104,
       0x4A64,
     ]],
+    eventFlagId: "ROUTE_27_RARE_CANDY",
   },
   ROUTE_29_ITEM_BALL: {
     id: "ROUTE_29_ITEM_BALL",
@@ -133,6 +144,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       104,
       0x508B,
     ]],
+    eventFlagId: "ROUTE_29_POTION",
   },
   ROUTE_30_CHERRYGROVE_SIDE_ITEM_BALL: {
     id: "ROUTE_30_CHERRYGROVE_SIDE_ITEM_BALL",
@@ -144,6 +156,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       104,
       0x57F5,
     ]],
+    eventFlagId: "ROUTE_30_ANTIDOTE",
   },
   ROUTE_31_ITEM_BALL_BY_DARK_CAVE: {
     id: "ROUTE_31_ITEM_BALL_BY_DARK_CAVE",
@@ -155,6 +168,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       105,
       0x55FB,
     ]],
+    eventFlagId: "ROUTE_31_POTION",
   },
   ROUTE_31_ITEM_BALL_BY_TRAINER: {
     id: "ROUTE_31_ITEM_BALL_BY_TRAINER",
@@ -166,6 +180,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       105,
       0x55FD,
     ]],
+    eventFlagId: "ROUTE_31_POKE_BALL",
   },
   ROUTE_32_SOUTH_AREA_ITEM_BALL_IN_NORTH_GRASS: {
     id: "ROUTE_32_SOUTH_AREA_ITEM_BALL_IN_NORTH_GRASS",
@@ -177,6 +192,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       100,
       0x4775,
     ]],
+    eventFlagId: "ROUTE_32_REPEL",
   },
   ROUTE_32_SOUTH_AREA_ITEM_BALL_IN_SOUTH_GRASS: {
     id: "ROUTE_32_SOUTH_AREA_ITEM_BALL_IN_SOUTH_GRASS",
@@ -188,6 +204,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       100,
       0x4773,
     ]],
+    eventFlagId: "ROUTE_32_GREAT_BALL",
   },
   ROUTE_34_SURF_AREA_ITEM_BALL: {
     id: "ROUTE_34_SURF_AREA_ITEM_BALL",
@@ -199,6 +216,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       30,
       0x432B,
     ]],
+    eventFlagId: "ROUTE_34_NUGGET",
   },
   ROUTE_42_MIDDLE_AREA_ITEM_BALL: {
     id: "ROUTE_42_MIDDLE_AREA_ITEM_BALL",
@@ -210,6 +228,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       106,
       0x534B,
     ]],
+    eventFlagId: "ROUTE_42_SUPER_POTION",
   },
   ROUTE_42_ECRUTEAK_SIDE_ITEM_BALL: {
     id: "ROUTE_42_ECRUTEAK_SIDE_ITEM_BALL",
@@ -221,6 +240,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       106,
       0x5349,
     ]],
+    eventFlagId: "ROUTE_42_ULTRA_BALL",
   },
   ROUTE_43_ITEM_BALL: {
     id: "ROUTE_43_ITEM_BALL",
@@ -232,6 +252,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       103,
       0x5268,
     ]],
+    eventFlagId: "ROUTE_43_MAX_ETHER",
   },
   ROUTE_44_ITEM_BALL_BY_ICE_PATH: {
     id: "ROUTE_44_ITEM_BALL_BY_ICE_PATH",
@@ -243,6 +264,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       103,
       0x5A44,
     ]],
+    eventFlagId: "ROUTE_44_ULTRA_BALL",
   },
   ROUTE_44_SURF_AREA_ITEM_BALL: {
     id: "ROUTE_44_SURF_AREA_ITEM_BALL",
@@ -254,6 +276,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       103,
       0x5A42,
     ]],
+    eventFlagId: "ROUTE_44_MAX_REVIVE",
   },
   ROUTE_44_ITEM_BALL_BY_MAHOGANY: {
     id: "ROUTE_44_ITEM_BALL_BY_MAHOGANY",
@@ -265,6 +288,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       103,
       0x5A46,
     ]],
+    eventFlagId: "ROUTE_44_MAX_REPEL",
   },
   ROUTE_45_ITEM_BALL_1: {
     id: "ROUTE_45_ITEM_BALL_1",
@@ -276,6 +300,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       103,
       0x629A,
     ]],
+    eventFlagId: "ROUTE_45_ELIXER",
   },
   ROUTE_45_ITEM_BALL_2: {
     id: "ROUTE_45_ITEM_BALL_2",
@@ -287,6 +312,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       103,
       0x629C,
     ]],
+    eventFlagId: "ROUTE_45_MAX_POTION",
   },
   ROUTE_45_ITEM_BALL_3: {
     id: "ROUTE_45_ITEM_BALL_3",
@@ -298,6 +324,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       103,
       0x6296,
     ]],
+    eventFlagId: "ROUTE_45_NUGGET",
   },
   ROUTE_45_ITEM_BALL_4: {
     id: "ROUTE_45_ITEM_BALL_4",
@@ -309,6 +336,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       103,
       0x6298,
     ]],
+    eventFlagId: "ROUTE_45_REVIVE",
   },
   ROUTE_46_NORTH_AREA_DARK_CAVE_SIDE_ITEM_BALL: {
     id: "ROUTE_46_NORTH_AREA_DARK_CAVE_SIDE_ITEM_BALL",
@@ -320,6 +348,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       106,
       0x578D,
     ]],
+    eventFlagId: "ROUTE_46_X_SPEED",
   },
   DARK_CAVE_VIOLET_ENTRANCE_WEST_AREA_ITEM_BALL: {
     id: "DARK_CAVE_VIOLET_ENTRANCE_WEST_AREA_ITEM_BALL",
@@ -331,6 +360,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x468E,
     ]],
+    eventFlagId: "DARK_CAVE_VIOLET_ENTRANCE_POTION",
   },
   DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_1: {
     id: "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_1",
@@ -342,6 +372,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4692,
     ]],
+    eventFlagId: "DARK_CAVE_VIOLET_ENTRANCE_HYPER_POTION",
   },
   DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_2: {
     id: "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_2",
@@ -353,6 +384,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4690,
     ]],
+    eventFlagId: "DARK_CAVE_VIOLET_ENTRANCE_FULL_HEAL",
   },
   DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_3: {
     id: "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_3",
@@ -364,6 +396,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4694,
     ]],
+    eventFlagId: "DARK_CAVE_VIOLET_ENTRANCE_DIRE_HIT",
   },
   DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA_ITEM_BALL_ON_PLATEAU: {
     id: "DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA_ITEM_BALL_ON_PLATEAU",
@@ -375,6 +408,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x473B,
     ]],
+    eventFlagId: "DARK_CAVE_BLACKTHORN_ENTRANCE_REVIVE",
   },
   VIOLET_CITY_SURF_AREA_EAST_ITEM_BALL: {
     id: "VIOLET_CITY_SURF_AREA_EAST_ITEM_BALL",
@@ -386,6 +420,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       106,
       0x4423,
     ]],
+    eventFlagId: "VIOLET_CITY_RARE_CANDY",
   },
   VIOLET_CITY_SURF_AREA_WEST_ITEM_BALL: {
     id: "VIOLET_CITY_SURF_AREA_WEST_ITEM_BALL",
@@ -397,6 +432,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       106,
       0x4421,
     ]],
+    eventFlagId: "VIOLET_CITY_PP_UP",
   },
   SPROUT_TOWER_1F_NORTH_AREA_ITEM_BALL: {
     id: "SPROUT_TOWER_1F_NORTH_AREA_ITEM_BALL",
@@ -408,6 +444,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x451E,
     ]],
+    eventFlagId: "SPROUT_TOWER_1F_PARLYZ_HEAL",
   },
   SPROUT_TOWER_2F_SW_AREA_ITEM_BALL: {
     id: "SPROUT_TOWER_2F_SW_AREA_ITEM_BALL",
@@ -419,6 +456,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x47A7,
     ]],
+    eventFlagId: "SPROUT_TOWER_2F_X_ACCURACY",
   },
   SPROUT_TOWER_3F_SW_ITEM_BALL: {
     id: "SPROUT_TOWER_3F_SW_ITEM_BALL",
@@ -430,6 +468,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x4A19,
     ]],
+    eventFlagId: "SPROUT_TOWER_3F_POTION",
   },
   SPROUT_TOWER_3F_NE_ITEM_BALL: {
     id: "SPROUT_TOWER_3F_NE_ITEM_BALL",
@@ -441,6 +480,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x4A1B,
     ]],
+    eventFlagId: "SPROUT_TOWER_3F_ESCAPE_ROPE",
   },
   RUINS_OF_ALPH_KABUTO_ITEM_ROOM_NE_ITEM_BALL: {
     id: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_NE_ITEM_BALL",
@@ -452,6 +492,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x59A8,
     ]],
+    eventFlagId: "PICKED_UP_ENERGYPOWDER_FROM_KABUTO_ITEM_ROOM",
   },
   RUINS_OF_ALPH_KABUTO_ITEM_ROOM_NW_ITEM_BALL: {
     id: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_NW_ITEM_BALL",
@@ -463,6 +504,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x59A6,
     ]],
+    eventFlagId: "PICKED_UP_HEAL_POWDER_FROM_KABUTO_ITEM_ROOM",
   },
   RUINS_OF_ALPH_KABUTO_ITEM_ROOM_SE_ITEM_BALL: {
     id: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_SE_ITEM_BALL",
@@ -474,6 +516,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x59A4,
     ]],
+    eventFlagId: "PICKED_UP_PSNCUREBERRY_FROM_KABUTO_ITEM_ROOM",
   },
   RUINS_OF_ALPH_KABUTO_ITEM_ROOM_SW_ITEM_BALL: {
     id: "RUINS_OF_ALPH_KABUTO_ITEM_ROOM_SW_ITEM_BALL",
@@ -485,6 +528,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x59A2,
     ]],
+    eventFlagId: "PICKED_UP_BERRY_FROM_KABUTO_ITEM_ROOM",
   },
   RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_NE_ITEM_BALL: {
     id: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_NE_ITEM_BALL",
@@ -496,6 +540,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5ABC,
     ]],
+    eventFlagId: "PICKED_UP_ENERGY_ROOT_FROM_AERODACTYL_ITEM_ROOM",
   },
   RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_NW_ITEM_BALL: {
     id: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_NW_ITEM_BALL",
@@ -507,6 +552,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5ABA,
     ]],
+    eventFlagId: "PICKED_UP_HEAL_POWDER_FROM_AERODACTYL_ITEM_ROOM",
   },
   RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_SE_ITEM_BALL: {
     id: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_SE_ITEM_BALL",
@@ -518,6 +564,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5AB8,
     ]],
+    eventFlagId: "PICKED_UP_MOON_STONE_FROM_AERODACTYL_ITEM_ROOM",
   },
   RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_SW_ITEM_BALL: {
     id: "RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM_SW_ITEM_BALL",
@@ -529,6 +576,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5AB6,
     ]],
+    eventFlagId: "PICKED_UP_GOLD_BERRY_FROM_AERODACTYL_ITEM_ROOM",
   },
   RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_NE_ITEM_BALL: {
     id: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_NE_ITEM_BALL",
@@ -540,6 +588,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5A32,
     ]],
+    eventFlagId: "PICKED_UP_STAR_PIECE_FROM_OMANYTE_ITEM_ROOM",
   },
   RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_NW_ITEM_BALL: {
     id: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_NW_ITEM_BALL",
@@ -551,6 +600,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5A30,
     ]],
+    eventFlagId: "PICKED_UP_STARDUST_FROM_OMANYTE_ITEM_ROOM",
   },
   RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_SE_ITEM_BALL: {
     id: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_SE_ITEM_BALL",
@@ -562,6 +612,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5A2E,
     ]],
+    eventFlagId: "PICKED_UP_MYSTIC_WATER_FROM_OMANYTE_ITEM_ROOM",
   },
   RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_SW_ITEM_BALL: {
     id: "RUINS_OF_ALPH_OMANYTE_ITEM_ROOM_SW_ITEM_BALL",
@@ -573,6 +624,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5A2C,
     ]],
+    eventFlagId: "PICKED_UP_MYSTERYBERRY_FROM_OMANYTE_ITEM_ROOM",
   },
   RUINS_OF_ALPH_HO_OH_ITEM_ROOM_NE_ITEM_BALL: {
     id: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_NE_ITEM_BALL",
@@ -584,6 +636,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x591E,
     ]],
+    eventFlagId: "PICKED_UP_CHARCOAL_FROM_HO_OH_ITEM_ROOM",
   },
   RUINS_OF_ALPH_HO_OH_ITEM_ROOM_NW_ITEM_BALL: {
     id: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_NW_ITEM_BALL",
@@ -595,6 +648,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x591C,
     ]],
+    eventFlagId: "PICKED_UP_REVIVAL_HERB_FROM_HO_OH_ITEM_ROOM",
   },
   RUINS_OF_ALPH_HO_OH_ITEM_ROOM_SE_ITEM_BALL: {
     id: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_SE_ITEM_BALL",
@@ -606,6 +660,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x591A,
     ]],
+    eventFlagId: "PICKED_UP_MYSTERYBERRY_FROM_HO_OH_ITEM_ROOM",
   },
   RUINS_OF_ALPH_HO_OH_ITEM_ROOM_SW_ITEM_BALL: {
     id: "RUINS_OF_ALPH_HO_OH_ITEM_ROOM_SW_ITEM_BALL",
@@ -617,6 +672,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5918,
     ]],
+    eventFlagId: "PICKED_UP_GOLD_BERRY_FROM_HO_OH_ITEM_ROOM",
   },
   UNION_CAVE_1F_ITEM_BALL_1: {
     id: "UNION_CAVE_1F_ITEM_BALL_1",
@@ -628,6 +684,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5C02,
     ]],
+    eventFlagId: "UNION_CAVE_1F_X_ATTACK",
   },
   UNION_CAVE_1F_ITEM_BALL_2: {
     id: "UNION_CAVE_1F_ITEM_BALL_2",
@@ -639,6 +696,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5C04,
     ]],
+    eventFlagId: "UNION_CAVE_1F_POTION",
   },
   UNION_CAVE_1F_ITEM_BALL_3: {
     id: "UNION_CAVE_1F_ITEM_BALL_3",
@@ -650,6 +708,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5C00,
     ]],
+    eventFlagId: "UNION_CAVE_1F_GREAT_BALL",
   },
   UNION_CAVE_1F_ITEM_BALL_4: {
     id: "UNION_CAVE_1F_ITEM_BALL_4",
@@ -661,6 +720,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x5C06,
     ]],
+    eventFlagId: "UNION_CAVE_1F_AWAKENING",
   },
   UNION_CAVE_B1F_MIDDLE_AREA_EAST_ITEM_BALL: {
     id: "UNION_CAVE_B1F_MIDDLE_AREA_EAST_ITEM_BALL",
@@ -672,6 +732,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x6018,
     ]],
+    eventFlagId: "UNION_CAVE_B1F_X_DEFEND",
   },
   UNION_CAVE_B2F_SURF_AREA_ITEM_BALL_IN_NE_CORNER: {
     id: "UNION_CAVE_B2F_SURF_AREA_ITEM_BALL_IN_NE_CORNER",
@@ -683,6 +744,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x636A,
     ]],
+    eventFlagId: "UNION_CAVE_B2F_ELIXER",
   },
   UNION_CAVE_B2F_SURF_AREA_ITEM_BALL_ON_PLATEAU: {
     id: "UNION_CAVE_B2F_SURF_AREA_ITEM_BALL_ON_PLATEAU",
@@ -694,6 +756,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x636C,
     ]],
+    eventFlagId: "UNION_CAVE_B2F_HYPER_POTION",
   },
   SLOWPOKE_WELL_B1F_EAST_AREA_ITEM_BALL: {
     id: "SLOWPOKE_WELL_B1F_EAST_AREA_ITEM_BALL",
@@ -705,6 +768,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x66A3,
     ]],
+    eventFlagId: "SLOWPOKE_WELL_B1F_SUPER_POTION",
   },
   ILEX_FOREST_SOUTH_AREA_ITEM_BALL: {
     id: "ILEX_FOREST_SOUTH_AREA_ITEM_BALL",
@@ -716,6 +780,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       27,
       0x6E10,
     ]],
+    eventFlagId: "ILEX_FOREST_REVIVE",
   },
   ILEX_FOREST_NORTH_AREA_ITEM_BALL_1: {
     id: "ILEX_FOREST_NORTH_AREA_ITEM_BALL_1",
@@ -727,6 +792,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       27,
       0x6E12,
     ]],
+    eventFlagId: "ILEX_FOREST_X_ATTACK",
   },
   ILEX_FOREST_NORTH_AREA_ITEM_BALL_2: {
     id: "ILEX_FOREST_NORTH_AREA_ITEM_BALL_2",
@@ -738,6 +804,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       27,
       0x6E14,
     ]],
+    eventFlagId: "ILEX_FOREST_ANTIDOTE",
   },
   ILEX_FOREST_NORTH_AREA_ITEM_BALL_3: {
     id: "ILEX_FOREST_NORTH_AREA_ITEM_BALL_3",
@@ -749,6 +816,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       27,
       0x6E16,
     ]],
+    eventFlagId: "ILEX_FOREST_ETHER",
   },
   NATIONAL_PARK_EAST_ITEM_BALL: {
     id: "NATIONAL_PARK_EAST_ITEM_BALL",
@@ -766,6 +834,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
         0x4945,
       ],
     ],
+    eventFlagId: "NATIONAL_PARK_PARLYZ_HEAL",
   },
   BURNED_TOWER_1F_ROCK_SMASH_AREA_ITEM_BALL: {
     id: "BURNED_TOWER_1F_ROCK_SMASH_AREA_ITEM_BALL",
@@ -777,6 +846,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x5CCB,
     ]],
+    eventFlagId: "BURNED_TOWER_1F_HP_UP",
   },
   TIN_TOWER_3F_ITEM_BALL: {
     id: "TIN_TOWER_3F_ITEM_BALL",
@@ -788,6 +858,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x5A37,
     ]],
+    eventFlagId: "TIN_TOWER_3F_FULL_HEAL",
   },
   TIN_TOWER_4F_SE_ITEM_BALL: {
     id: "TIN_TOWER_4F_SE_ITEM_BALL",
@@ -799,6 +870,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x5A5A,
     ]],
+    eventFlagId: "TIN_TOWER_4F_PP_UP",
   },
   TIN_TOWER_4F_SW_ITEM_BALL: {
     id: "TIN_TOWER_4F_SW_ITEM_BALL",
@@ -810,6 +882,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x5A5C,
     ]],
+    eventFlagId: "TIN_TOWER_4F_ESCAPE_ROPE",
   },
   TIN_TOWER_4F_CENTRAL_ITEM_BALL: {
     id: "TIN_TOWER_4F_CENTRAL_ITEM_BALL",
@@ -821,6 +894,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x5A58,
     ]],
+    eventFlagId: "TIN_TOWER_4F_ULTRA_BALL",
   },
   TIN_TOWER_5F_NORTH_AREA_ITEM_BALL: {
     id: "TIN_TOWER_5F_NORTH_AREA_ITEM_BALL",
@@ -832,6 +906,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x5AA9,
     ]],
+    eventFlagId: "TIN_TOWER_5F_RARE_CANDY",
   },
   TIN_TOWER_6F_ITEM_BALL: {
     id: "TIN_TOWER_6F_ITEM_BALL",
@@ -843,6 +918,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x5AE4,
     ]],
+    eventFlagId: "TIN_TOWER_6F_MAX_POTION",
   },
   TIN_TOWER_7F_OUTER_AREA_ITEM_BALL: {
     id: "TIN_TOWER_7F_OUTER_AREA_ITEM_BALL",
@@ -854,6 +930,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x5B05,
     ]],
+    eventFlagId: "TIN_TOWER_7F_MAX_REVIVE",
   },
   TIN_TOWER_8F_NORTH_AREA_ITEM_BALL: {
     id: "TIN_TOWER_8F_NORTH_AREA_ITEM_BALL",
@@ -865,6 +942,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x5B39,
     ]],
+    eventFlagId: "TIN_TOWER_8F_FULL_RESTORE",
   },
   TIN_TOWER_8F_MIDDLE_AREA_ITEM_BALL: {
     id: "TIN_TOWER_8F_MIDDLE_AREA_ITEM_BALL",
@@ -876,6 +954,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x5B37,
     ]],
+    eventFlagId: "TIN_TOWER_8F_MAX_ELIXER",
   },
   TIN_TOWER_8F_SOUTH_AREA_ITEM_BALL: {
     id: "TIN_TOWER_8F_SOUTH_AREA_ITEM_BALL",
@@ -887,6 +966,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x5B35,
     ]],
+    eventFlagId: "TIN_TOWER_8F_NUGGET",
   },
   TIN_TOWER_9F_NORTH_AREA_ITEM_BALL: {
     id: "TIN_TOWER_9F_NORTH_AREA_ITEM_BALL",
@@ -898,6 +978,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       97,
       0x5B88,
     ]],
+    eventFlagId: "TIN_TOWER_9F_HP_UP",
   },
   OLIVINE_LIGHTHOUSE_3F_INNER_AREA_ITEM_BALL: {
     id: "OLIVINE_LIGHTHOUSE_3F_INNER_AREA_ITEM_BALL",
@@ -909,6 +990,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       22,
       0x7279,
     ]],
+    eventFlagId: "OLIVINE_LIGHTHOUSE_3F_ETHER",
   },
   OLIVINE_LIGHTHOUSE_5F_OUTER_AREA_ITEM_BALL_BY_HOLE: {
     id: "OLIVINE_LIGHTHOUSE_5F_OUTER_AREA_ITEM_BALL_BY_HOLE",
@@ -920,6 +1002,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       24,
       0x49AA,
     ]],
+    eventFlagId: "OLIVINE_LIGHTHOUSE_5F_RARE_CANDY",
   },
   OLIVINE_LIGHTHOUSE_5F_INNER_AREA_ITEM_BALL: {
     id: "OLIVINE_LIGHTHOUSE_5F_INNER_AREA_ITEM_BALL",
@@ -931,6 +1014,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       24,
       0x49AC,
     ]],
+    eventFlagId: "OLIVINE_LIGHTHOUSE_5F_SUPER_REPEL",
   },
   OLIVINE_LIGHTHOUSE_6F_ITEM_BALL: {
     id: "OLIVINE_LIGHTHOUSE_6F_ITEM_BALL",
@@ -942,6 +1026,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       24,
       0x4C66,
     ]],
+    eventFlagId: "OLIVINE_LIGHTHOUSE_6F_SUPER_POTION",
   },
   WHIRL_ISLAND_NE_BOTTOM_LEDGE_AREA_ITEM_BALL: {
     id: "WHIRL_ISLAND_NE_BOTTOM_LEDGE_AREA_ITEM_BALL",
@@ -953,6 +1038,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4396,
     ]],
+    eventFlagId: "WHIRL_ISLAND_NE_ULTRA_BALL",
   },
   WHIRL_ISLAND_SW_ENTRANCE_EAST_AREA_ITEM_BALL: {
     id: "WHIRL_ISLAND_SW_ENTRANCE_EAST_AREA_ITEM_BALL",
@@ -964,6 +1050,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x43BC,
     ]],
+    eventFlagId: "WHIRL_ISLAND_SW_ULTRA_BALL",
   },
   WHIRL_ISLAND_B1F_NORTH_AREA_ITEM_BALL_IN_MIDDLE_OF_LEDGES: {
     id: "WHIRL_ISLAND_B1F_NORTH_AREA_ITEM_BALL_IN_MIDDLE_OF_LEDGES",
@@ -975,6 +1062,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4416,
     ]],
+    eventFlagId: "WHIRL_ISLAND_B1F_NUGGET",
   },
   WHIRL_ISLAND_B1F_NORTH_AREA_ITEM_BALL_BY_NW_LADDER: {
     id: "WHIRL_ISLAND_B1F_NORTH_AREA_ITEM_BALL_BY_NW_LADDER",
@@ -986,6 +1074,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4410,
     ]],
+    eventFlagId: "WHIRL_ISLAND_B1F_FULL_RESTORE",
   },
   WHIRL_ISLAND_B1F_NORTH_AREA_ITEM_BALL_BY_LADDER_TO_B2F_ISOLATED_AREA: {
     id: "WHIRL_ISLAND_B1F_NORTH_AREA_ITEM_BALL_BY_LADDER_TO_B2F_ISOLATED_AREA",
@@ -997,6 +1086,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4412,
     ]],
+    eventFlagId: "WHIRL_ISLAND_B1F_CARBOS",
   },
   WHIRL_ISLAND_B1F_SW_AREA_ITEM_BALL: {
     id: "WHIRL_ISLAND_B1F_SW_AREA_ITEM_BALL",
@@ -1008,6 +1098,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4418,
     ]],
+    eventFlagId: "WHIRL_ISLAND_B1F_ESCAPE_ROPE",
   },
   WHIRL_ISLAND_B1F_SE_AREA_ITEM_BALL: {
     id: "WHIRL_ISLAND_B1F_SE_AREA_ITEM_BALL",
@@ -1019,6 +1110,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4414,
     ]],
+    eventFlagId: "WHIRL_ISLAND_B1F_CALCIUM",
   },
   WHIRL_ISLAND_B2F_ABOVE_WATERFALL_AREA_ITEM_BALL: {
     id: "WHIRL_ISLAND_B2F_ABOVE_WATERFALL_AREA_ITEM_BALL",
@@ -1030,6 +1122,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x44BA,
     ]],
+    eventFlagId: "WHIRL_ISLAND_B2F_MAX_REVIVE",
   },
   WHIRL_ISLAND_B2F_ISOLATED_AREA_EAST_ITEM_BALL: {
     id: "WHIRL_ISLAND_B2F_ISOLATED_AREA_EAST_ITEM_BALL",
@@ -1041,6 +1134,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x44B8,
     ]],
+    eventFlagId: "WHIRL_ISLAND_B2F_FULL_RESTORE",
   },
   WHIRL_ISLAND_B2F_ISOLATED_AREA_WEST_ITEM_BALL: {
     id: "WHIRL_ISLAND_B2F_ISOLATED_AREA_WEST_ITEM_BALL",
@@ -1052,6 +1146,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x44BC,
     ]],
+    eventFlagId: "WHIRL_ISLAND_B2F_MAX_ELIXER",
   },
   MOUNT_MORTAR_FRONT_EAST_LADDER_AREA_ITEM_BALL: {
     id: "MOUNT_MORTAR_FRONT_EAST_LADDER_AREA_ITEM_BALL",
@@ -1063,6 +1158,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x5DF8,
     ]],
+    eventFlagId: "MOUNT_MORTAR_FRONT_REVIVE",
   },
   MOUNT_MORTAR_FRONT_WEST_LADDER_AREA_ITEM_BALL: {
     id: "MOUNT_MORTAR_FRONT_WEST_LADDER_AREA_ITEM_BALL",
@@ -1074,6 +1170,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x5DF6,
     ]],
+    eventFlagId: "MOUNT_MORTAR_FRONT_ETHER",
   },
   MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_1: {
     id: "MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_1",
@@ -1085,6 +1182,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x5E80,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_1F_HYPER_POTION",
   },
   MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_2: {
     id: "MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_2",
@@ -1096,6 +1194,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x5E88,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_1F_ULTRA_BALL",
   },
   MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_3: {
     id: "MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_3",
@@ -1107,6 +1206,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x5E84,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_1F_NUGGET",
   },
   MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_4: {
     id: "MOUNT_MORTAR_BACK_1F_MIDDLE_AREA_ITEM_BALL_4",
@@ -1118,6 +1218,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x5E7C,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_1F_ESCAPE_ROPE",
   },
   MOUNT_MORTAR_BACK_1F_NORTH_AREA_ITEM_BALL_ON_PLATEAU: {
     id: "MOUNT_MORTAR_BACK_1F_NORTH_AREA_ITEM_BALL_ON_PLATEAU",
@@ -1129,6 +1230,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x5E86,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_1F_IRON",
   },
   MOUNT_MORTAR_BACK_1F_NORTH_AREA_ITEM_BALL_SOUTH_OF_PLATEAU: {
     id: "MOUNT_MORTAR_BACK_1F_NORTH_AREA_ITEM_BALL_SOUTH_OF_PLATEAU",
@@ -1140,6 +1242,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x5E82,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_1F_MAX_POTION",
   },
   MOUNT_MORTAR_BACK_1F_NORTH_AREA_ITEM_BALL_NORTH_OF_PLATEAU: {
     id: "MOUNT_MORTAR_BACK_1F_NORTH_AREA_ITEM_BALL_NORTH_OF_PLATEAU",
@@ -1151,6 +1254,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x5E7E,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_1F_MAX_REVIVE",
   },
   MOUNT_MORTAR_BACK_2F_SURF_AREA_NW_ITEM_BALL: {
     id: "MOUNT_MORTAR_BACK_2F_SURF_AREA_NW_ITEM_BALL",
@@ -1162,6 +1266,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x60E6,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_2F_ELIXER",
   },
   MOUNT_MORTAR_BACK_2F_SURF_AREA_SE_ITEM_BALL: {
     id: "MOUNT_MORTAR_BACK_2F_SURF_AREA_SE_ITEM_BALL",
@@ -1173,6 +1278,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x60DE,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_2F_MAX_POTION",
   },
   MOUNT_MORTAR_BACK_2F_SURF_AREA_SW_ITEM_BALL: {
     id: "MOUNT_MORTAR_BACK_2F_SURF_AREA_SW_ITEM_BALL",
@@ -1184,6 +1290,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x60E0,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_2F_RARE_CANDY",
   },
   MOUNT_MORTAR_BACK_2F_NORTH_AREA_ITEM_BALL_ON_EAST_PLATEAU: {
     id: "MOUNT_MORTAR_BACK_2F_NORTH_AREA_ITEM_BALL_ON_EAST_PLATEAU",
@@ -1195,6 +1302,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x60E8,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_2F_ESCAPE_ROPE",
   },
   MOUNT_MORTAR_BACK_2F_NORTH_AREA_ITEM_BALL_ON_WEST_PLATEAU: {
     id: "MOUNT_MORTAR_BACK_2F_NORTH_AREA_ITEM_BALL_ON_WEST_PLATEAU",
@@ -1206,6 +1314,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x60E4,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_2F_DRAGON_SCALE",
   },
   MOUNT_MORTAR_B1F_SURF_AREA_ITEM_BALL_1: {
     id: "MOUNT_MORTAR_B1F_SURF_AREA_ITEM_BALL_1",
@@ -1217,6 +1326,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x6244,
     ]],
+    eventFlagId: "MOUNT_MORTAR_B1F_FULL_RESTORE",
   },
   MOUNT_MORTAR_B1F_SURF_AREA_ITEM_BALL_2: {
     id: "MOUNT_MORTAR_B1F_SURF_AREA_ITEM_BALL_2",
@@ -1228,6 +1338,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x6240,
     ]],
+    eventFlagId: "MOUNT_MORTAR_B1F_HYPER_POTION",
   },
   MOUNT_MORTAR_B1F_SURF_AREA_ITEM_BALL_3: {
     id: "MOUNT_MORTAR_B1F_SURF_AREA_ITEM_BALL_3",
@@ -1239,6 +1350,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x6246,
     ]],
+    eventFlagId: "MOUNT_MORTAR_B1F_MAX_ETHER",
   },
   MOUNT_MORTAR_B1F_SURF_AREA_ITEM_BALL_4: {
     id: "MOUNT_MORTAR_B1F_SURF_AREA_ITEM_BALL_4",
@@ -1250,6 +1362,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x6248,
     ]],
+    eventFlagId: "MOUNT_MORTAR_B1F_PP_UP",
   },
   MOUNT_MORTAR_B1F_SURF_AREA_ITEM_BALL_5: {
     id: "MOUNT_MORTAR_B1F_SURF_AREA_ITEM_BALL_5",
@@ -1261,6 +1374,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x6242,
     ]],
+    eventFlagId: "MOUNT_MORTAR_B1F_CARBOS",
   },
   LAKE_OF_RAGE_CUT_AREA_ITEM_BALL_SOUTH_OF_HOUSE: {
     id: "LAKE_OF_RAGE_CUT_AREA_ITEM_BALL_SOUTH_OF_HOUSE",
@@ -1272,6 +1386,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       28,
       0x4148,
     ]],
+    eventFlagId: "LAKE_OF_RAGE_ELIXER",
   },
   GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_NW_ITEM_BALL: {
     id: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_NW_ITEM_BALL",
@@ -1286,6 +1401,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x57C7,
     ]],
+    eventFlagId: "GOLDENROD_DEPT_STORE_B1F_BURN_HEAL",
   },
   GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SW_ITEM_BALL: {
     id: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SW_ITEM_BALL",
@@ -1300,6 +1416,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x57C3,
     ]],
+    eventFlagId: "GOLDENROD_DEPT_STORE_B1F_ETHER",
   },
   GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SE_ITEM_BALL: {
     id: "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SE_ITEM_BALL",
@@ -1314,6 +1431,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x57C9,
     ]],
+    eventFlagId: "GOLDENROD_DEPT_STORE_B1F_ULTRA_BALL",
   },
   GOLDENROD_DEPT_STORE_B1F_STAIRS_AREA_ITEM_BALL: {
     id: "GOLDENROD_DEPT_STORE_B1F_STAIRS_AREA_ITEM_BALL",
@@ -1325,6 +1443,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x57C5,
     ]],
+    eventFlagId: "GOLDENROD_DEPT_STORE_B1F_AMULET_COIN",
   },
   GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_RIGHT_ITEM_BALL: {
     id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_RIGHT_ITEM_BALL",
@@ -1336,6 +1455,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x4E7F,
     ]],
+    eventFlagId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_FULL_HEAL",
   },
   GOLDENROD_UNDERGROUND_SWITCH_ROOM_BOTTOM_LEFT_ITEM_BALL: {
     id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_BOTTOM_LEFT_ITEM_BALL",
@@ -1347,6 +1467,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x4E7D,
     ]],
+    eventFlagId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_SMOKE_BALL",
   },
   GOLDENROD_UNDERGROUND_WAREHOUSE_ITEM_BALL_1: {
     id: "GOLDENROD_UNDERGROUND_WAREHOUSE_ITEM_BALL_1",
@@ -1358,6 +1479,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x59E8,
     ]],
+    eventFlagId: "GOLDENROD_UNDERGROUND_WAREHOUSE_ULTRA_BALL",
   },
   GOLDENROD_UNDERGROUND_WAREHOUSE_ITEM_BALL_2: {
     id: "GOLDENROD_UNDERGROUND_WAREHOUSE_ITEM_BALL_2",
@@ -1369,6 +1491,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x59E4,
     ]],
+    eventFlagId: "GOLDENROD_UNDERGROUND_WAREHOUSE_MAX_ETHER",
   },
   RADIO_TOWER_5F_EAST_AREA_ITEM_BALL: {
     id: "RADIO_TOWER_5F_EAST_AREA_ITEM_BALL",
@@ -1380,6 +1503,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       24,
       0x40FE,
     ]],
+    eventFlagId: "RADIO_TOWER_5F_ULTRA_BALL",
   },
   TEAM_ROCKET_BASE_B1F_ITEM_BALL_BY_MIDDLE_STATUE: {
     id: "TEAM_ROCKET_BASE_B1F_ITEM_BALL_BY_MIDDLE_STATUE",
@@ -1391,6 +1515,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       27,
       0x4AC4,
     ]],
+    eventFlagId: "TEAM_ROCKET_BASE_B1F_HYPER_POTION",
   },
   TEAM_ROCKET_BASE_B1F_ITEM_BALL_BY_COMPUTER: {
     id: "TEAM_ROCKET_BASE_B1F_ITEM_BALL_BY_COMPUTER",
@@ -1402,6 +1527,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       27,
       0x4AC8,
     ]],
+    eventFlagId: "TEAM_ROCKET_BASE_B1F_GUARD_SPEC",
   },
   TEAM_ROCKET_BASE_B1F_ITEM_BALL_BETWEEN_SOUTH_STATUES: {
     id: "TEAM_ROCKET_BASE_B1F_ITEM_BALL_BETWEEN_SOUTH_STATUES",
@@ -1413,6 +1539,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       27,
       0x4AC6,
     ]],
+    eventFlagId: "TEAM_ROCKET_BASE_B1F_NUGGET",
   },
   TEAM_ROCKET_BASE_B3F_SE_AREA_LEFT_ITEM_BALL_BY_PLANTS: {
     id: "TEAM_ROCKET_BASE_B3F_SE_AREA_LEFT_ITEM_BALL_BY_PLANTS",
@@ -1424,6 +1551,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       27,
       0x6120,
     ]],
+    eventFlagId: "TEAM_ROCKET_BASE_B3F_PROTEIN",
   },
   TEAM_ROCKET_BASE_B3F_SE_AREA_RIGHT_ITEM_BALL_BY_PLANTS: {
     id: "TEAM_ROCKET_BASE_B3F_SE_AREA_RIGHT_ITEM_BALL_BY_PLANTS",
@@ -1435,6 +1563,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       27,
       0x6122,
     ]],
+    eventFlagId: "TEAM_ROCKET_BASE_B3F_X_SPECIAL",
   },
   TEAM_ROCKET_BASE_B3F_SE_AREA_NORTH_ITEM_BALL: {
     id: "TEAM_ROCKET_BASE_B3F_SE_AREA_NORTH_ITEM_BALL",
@@ -1446,6 +1575,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       27,
       0x6126,
     ]],
+    eventFlagId: "TEAM_ROCKET_BASE_B3F_ICE_HEAL",
   },
   TEAM_ROCKET_BASE_B3F_SE_AREA_ITEM_BALL_BETWEEN_STAIRS: {
     id: "TEAM_ROCKET_BASE_B3F_SE_AREA_ITEM_BALL_BETWEEN_STAIRS",
@@ -1457,6 +1587,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       27,
       0x6124,
     ]],
+    eventFlagId: "TEAM_ROCKET_BASE_B3F_FULL_HEAL",
   },
   TEAM_ROCKET_BASE_B3F_NW_AREA_ITEM_BALL: {
     id: "TEAM_ROCKET_BASE_B3F_NW_AREA_ITEM_BALL",
@@ -1468,6 +1599,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       27,
       0x6128,
     ]],
+    eventFlagId: "TEAM_ROCKET_BASE_B3F_ULTRA_BALL",
   },
   ICE_PATH_1F_BLACKTHORN_SIDE_ITEM_BALL_ON_PLATEAU: {
     id: "ICE_PATH_1F_BLACKTHORN_SIDE_ITEM_BALL_ON_PLATEAU",
@@ -1479,6 +1611,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x6476,
     ]],
+    eventFlagId: "ICE_PATH_1F_PROTEIN",
   },
   ICE_PATH_1F_BLACKTHORN_SIDE_ITEM_BALL_BY_ICE: {
     id: "ICE_PATH_1F_BLACKTHORN_SIDE_ITEM_BALL_BY_ICE",
@@ -1490,6 +1623,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x6474,
     ]],
+    eventFlagId: "ICE_PATH_1F_PP_UP",
   },
   ICE_PATH_B1F_BLACKTHORN_SIDE_ITEM_BALL: {
     id: "ICE_PATH_B1F_BLACKTHORN_SIDE_ITEM_BALL",
@@ -1501,6 +1635,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x650D,
     ]],
+    eventFlagId: "ICE_PATH_B1F_IRON",
   },
   ICE_PATH_B2F_MAHOGANY_SIDE_OUTER_AREA_ITEM_BALL: {
     id: "ICE_PATH_B2F_MAHOGANY_SIDE_OUTER_AREA_ITEM_BALL",
@@ -1512,6 +1647,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x65A8,
     ]],
+    eventFlagId: "ICE_PATH_B2F_MAHOGANY_SIDE_MAX_POTION",
   },
   ICE_PATH_B2F_MAHOGANY_SIDE_CENTRAL_AREA_ITEM_BALL: {
     id: "ICE_PATH_B2F_MAHOGANY_SIDE_CENTRAL_AREA_ITEM_BALL",
@@ -1523,6 +1659,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x65A6,
     ]],
+    eventFlagId: "ICE_PATH_B2F_MAHOGANY_SIDE_FULL_HEAL",
   },
   ICE_PATH_B3F_ITEM_BALL: {
     id: "ICE_PATH_B3F_ITEM_BALL",
@@ -1534,6 +1671,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       31,
       0x666F,
     ]],
+    eventFlagId: "ICE_PATH_B3F_NEVERMELTICE",
   },
   DRAGONS_DEN_B1F_NORTH_AREA_ITEM_BALL: {
     id: "DRAGONS_DEN_B1F_NORTH_AREA_ITEM_BALL",
@@ -1545,6 +1683,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x49A1,
     ]],
+    eventFlagId: "DRAGONS_DEN_B1F_CALCIUM",
   },
   DRAGONS_DEN_B1F_NORTH_SURF_AREA_ITEM_BALL: {
     id: "DRAGONS_DEN_B1F_NORTH_SURF_AREA_ITEM_BALL",
@@ -1556,6 +1695,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x49A3,
     ]],
+    eventFlagId: "DRAGONS_DEN_B1F_MAX_ELIXER",
   },
   DRAGONS_DEN_B1F_SOUTH_SURF_AREA_ITEM_BALL: {
     id: "DRAGONS_DEN_B1F_SOUTH_SURF_AREA_ITEM_BALL",
@@ -1567,6 +1707,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x495B,
     ]],
+    eventFlagId: "DRAGONS_DEN_B1F_DRAGON_FANG",
   },
   TOHJO_FALLS_WEST_SURF_AREA_ITEM_BALL: {
     id: "TOHJO_FALLS_WEST_SURF_AREA_ITEM_BALL",
@@ -1578,6 +1719,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x5B02,
     ]],
+    eventFlagId: "TOHJO_FALLS_MOON_STONE",
   },
   VICTORY_ROAD_1F_RIGHT_ITEM_BALL: {
     id: "VICTORY_ROAD_1F_RIGHT_ITEM_BALL",
@@ -1589,6 +1731,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       29,
       0x452F,
     ]],
+    eventFlagId: "VICTORY_ROAD_FULL_HEAL",
   },
   VICTORY_ROAD_1F_LEFT_ITEM_BALL: {
     id: "VICTORY_ROAD_1F_LEFT_ITEM_BALL",
@@ -1600,6 +1743,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       29,
       0x452B,
     ]],
+    eventFlagId: "VICTORY_ROAD_MAX_REVIVE",
   },
   VICTORY_ROAD_2F_NE_AREA_ITEM_BALL: {
     id: "VICTORY_ROAD_2F_NE_AREA_ITEM_BALL",
@@ -1611,6 +1755,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       29,
       0x452D,
     ]],
+    eventFlagId: "VICTORY_ROAD_FULL_RESTORE",
   },
   VICTORY_ROAD_2F_SOUTH_AREA_ITEM_BALL: {
     id: "VICTORY_ROAD_2F_SOUTH_AREA_ITEM_BALL",
@@ -1622,6 +1767,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       29,
       0x4531,
     ]],
+    eventFlagId: "VICTORY_ROAD_HP_UP",
   },
   FIGHTING_DOJO_ITEM_BALL: {
     id: "FIGHTING_DOJO_ITEM_BALL",
@@ -1633,6 +1779,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       98,
       0x5B6A,
     ]],
+    eventFlagId: "PICKED_UP_FOCUS_BAND",
   },
   ROCK_TUNNEL_1F_LAVENDER_SIDE_ITEM_BALL_WEST_OF_PLATEAU: {
     id: "ROCK_TUNNEL_1F_LAVENDER_SIDE_ITEM_BALL_WEST_OF_PLATEAU",
@@ -1644,6 +1791,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       29,
       0x43B5,
     ]],
+    eventFlagId: "ROCK_TUNNEL_1F_ELIXER",
   },
   ROCK_TUNNEL_B1F_NW_AREA_NORTH_ITEM_BALL: {
     id: "ROCK_TUNNEL_B1F_NW_AREA_NORTH_ITEM_BALL",
@@ -1655,6 +1803,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       29,
       0x440D,
     ]],
+    eventFlagId: "ROCK_TUNNEL_B1F_REVIVE",
   },
   ROCK_TUNNEL_B1F_NW_AREA_SOUTH_ITEM_BALL: {
     id: "ROCK_TUNNEL_B1F_NW_AREA_SOUTH_ITEM_BALL",
@@ -1666,6 +1815,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       29,
       0x440B,
     ]],
+    eventFlagId: "ROCK_TUNNEL_B1F_PP_UP",
   },
   ROCK_TUNNEL_B1F_SE_AREA_ITEM_BALL: {
     id: "ROCK_TUNNEL_B1F_SE_AREA_ITEM_BALL",
@@ -1677,6 +1827,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       29,
       0x4409,
     ]],
+    eventFlagId: "ROCK_TUNNEL_B1F_IRON",
   },
   SILVER_CAVE_ROOM_1_NORTH_ITEM_BALL: {
     id: "SILVER_CAVE_ROOM_1_NORTH_ITEM_BALL",
@@ -1688,6 +1839,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4554,
     ]],
+    eventFlagId: "SILVER_CAVE_ROOM_1_MAX_ELIXER",
   },
   SILVER_CAVE_ROOM_1_CENTRAL_ITEM_BALL: {
     id: "SILVER_CAVE_ROOM_1_CENTRAL_ITEM_BALL",
@@ -1699,6 +1851,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x455A,
     ]],
+    eventFlagId: "SILVER_CAVE_ROOM_1_ULTRA_BALL",
   },
   SILVER_CAVE_ROOM_1_SE_ITEM_BALL: {
     id: "SILVER_CAVE_ROOM_1_SE_ITEM_BALL",
@@ -1710,6 +1863,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4556,
     ]],
+    eventFlagId: "SILVER_CAVE_ROOM_1_PROTEIN",
   },
   SILVER_CAVE_ROOM_1_SW_ITEM_BALL: {
     id: "SILVER_CAVE_ROOM_1_SW_ITEM_BALL",
@@ -1721,6 +1875,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4558,
     ]],
+    eventFlagId: "SILVER_CAVE_ROOM_1_ESCAPE_ROPE",
   },
   SILVER_CAVE_ROOM_2_ABOVE_NE_WATERFALL_AREA_ITEM_BALL: {
     id: "SILVER_CAVE_ROOM_2_ABOVE_NE_WATERFALL_AREA_ITEM_BALL",
@@ -1732,6 +1887,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x45B2,
     ]],
+    eventFlagId: "SILVER_CAVE_ROOM_2_CALCIUM",
   },
   SILVER_CAVE_ROOM_2_ABOVE_SW_WATERFALL_SURF_AREA_ITEM_BALL: {
     id: "SILVER_CAVE_ROOM_2_ABOVE_SW_WATERFALL_SURF_AREA_ITEM_BALL",
@@ -1743,6 +1899,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x45B6,
     ]],
+    eventFlagId: "SILVER_CAVE_ROOM_2_PP_UP",
   },
   SILVER_CAVE_ROOM_2_MAIN_AREA_ITEM_BALL: {
     id: "SILVER_CAVE_ROOM_2_MAIN_AREA_ITEM_BALL",
@@ -1754,6 +1911,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x45B4,
     ]],
+    eventFlagId: "SILVER_CAVE_ROOM_2_ULTRA_BALL",
   },
   SILVER_CAVE_ITEM_ROOMS_NE_AREA_ITEM_BALL: {
     id: "SILVER_CAVE_ITEM_ROOMS_NE_AREA_ITEM_BALL",
@@ -1765,6 +1923,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x4660,
     ]],
+    eventFlagId: "SILVER_CAVE_ITEM_ROOMS_FULL_RESTORE",
   },
   SILVER_CAVE_ITEM_ROOMS_SW_AREA_ITEM_BALL: {
     id: "SILVER_CAVE_ITEM_ROOMS_SW_AREA_ITEM_BALL",
@@ -1776,6 +1935,7 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
       99,
       0x465E,
     ]],
+    eventFlagId: "SILVER_CAVE_ITEM_ROOMS_MAX_REVIVE",
   },
 }
 
@@ -1790,6 +1950,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       104,
       0x4A62,
     ]],
+    eventFlagId: "ROUTE_27_TM_SOLARBEAM",
   },
   ROUTE_35_ITEM_BALL: {
     id: "ROUTE_35_ITEM_BALL",
@@ -1801,6 +1962,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       103,
       0x4A7C,
     ]],
+    eventFlagId: "ROUTE_35_TM_ROLLOUT",
   },
   DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA_ITEM_BALL_BY_LEDGE: {
     id: "DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA_ITEM_BALL_BY_LEDGE",
@@ -1812,6 +1974,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       99,
       0x473D,
     ]],
+    eventFlagId: "DARK_CAVE_BLACKTHORN_ENTRANCE_TM_SNORE",
   },
   UNION_CAVE_B1F_MIDDLE_AREA_WEST_ITEM_BALL: {
     id: "UNION_CAVE_B1F_MIDDLE_AREA_WEST_ITEM_BALL",
@@ -1823,6 +1986,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       22,
       0x6016,
     ]],
+    eventFlagId: "UNION_CAVE_B1F_TM_SWIFT",
   },
   SLOWPOKE_WELL_B2F_SURF_AREA_ITEM_BALL: {
     id: "SLOWPOKE_WELL_B2F_SURF_AREA_ITEM_BALL",
@@ -1834,6 +1998,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       22,
       0x6D28,
     ]],
+    eventFlagId: "SLOWPOKE_WELL_B2F_TM_RAIN_DANCE",
   },
   NATIONAL_PARK_WEST_ITEM_BALL: {
     id: "NATIONAL_PARK_WEST_ITEM_BALL",
@@ -1850,6 +2015,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
         0x4947,
       ],
     ],
+    eventFlagId: "NATIONAL_PARK_TM_DIG",
   },
   BURNED_TOWER_B1F_STRENGTH_AREA_ITEM_BALL: {
     id: "BURNED_TOWER_B1F_STRENGTH_AREA_ITEM_BALL",
@@ -1861,6 +2027,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       97,
       0x6231,
     ]],
+    eventFlagId: "BURNED_TOWER_B1F_TM_ENDURE",
   },
   OLIVINE_LIGHTHOUSE_5F_OUTER_AREA_ITEM_BALL_BY_STAIRS: {
     id: "OLIVINE_LIGHTHOUSE_5F_OUTER_AREA_ITEM_BALL_BY_STAIRS",
@@ -1872,6 +2039,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       24,
       0x49AE,
     ]],
+    eventFlagId: "OLIVINE_LIGHTHOUSE_5F_TM_SWAGGER",
   },
   MOUNT_MORTAR_BACK_2F_SURF_AREA_CENTRAL_ITEM_BALL: {
     id: "MOUNT_MORTAR_BACK_2F_SURF_AREA_CENTRAL_ITEM_BALL",
@@ -1883,6 +2051,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       31,
       0x60E2,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_2F_TM_DEFENSE_CURL",
   },
   LAKE_OF_RAGE_CUT_AREA_ITEM_BALL_EAST_OF_HOUSE: {
     id: "LAKE_OF_RAGE_CUT_AREA_ITEM_BALL_EAST_OF_HOUSE",
@@ -1894,6 +2063,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       28,
       0x414A,
     ]],
+    eventFlagId: "LAKE_OF_RAGE_TM_DETECT",
   },
   GOLDENROD_UNDERGROUND_WAREHOUSE_ITEM_BALL_3: {
     id: "GOLDENROD_UNDERGROUND_WAREHOUSE_ITEM_BALL_3",
@@ -1905,6 +2075,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       31,
       0x59E6,
     ]],
+    eventFlagId: "GOLDENROD_UNDERGROUND_WAREHOUSE_TM_SLEEP_TALK",
   },
   TEAM_ROCKET_BASE_B2F_WEST_AREA_ITEM_BALL: {
     id: "TEAM_ROCKET_BASE_B2F_WEST_AREA_ITEM_BALL",
@@ -1916,6 +2087,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       27,
       0x520D,
     ]],
+    eventFlagId: "TEAM_ROCKET_BASE_B2F_TM_THIEF",
   },
   ICE_PATH_B2F_BLACKTHORN_SIDE_ITEM_BALL: {
     id: "ICE_PATH_B2F_BLACKTHORN_SIDE_ITEM_BALL",
@@ -1927,6 +2099,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       31,
       0x6646,
     ]],
+    eventFlagId: "ICE_PATH_B2F_BLACKTHORN_SIDE_TM_REST",
   },
   VICTORY_ROAD_2F_NW_AREA_ITEM_BALL: {
     id: "VICTORY_ROAD_2F_NW_AREA_ITEM_BALL",
@@ -1938,6 +2111,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       29,
       0x4529,
     ]],
+    eventFlagId: "VICTORY_ROAD_TM_EARTHQUAKE",
   },
   ROCK_TUNNEL_1F_LAVENDER_SIDE_ITEM_BALL_ON_PLATEAU: {
     id: "ROCK_TUNNEL_1F_LAVENDER_SIDE_ITEM_BALL_ON_PLATEAU",
@@ -1949,6 +2123,7 @@ export const tmItemBallLocationsMap: IdMap<TMItemBallLocationId, ItemLocation> =
       29,
       0x43B7,
     ]],
+    eventFlagId: "ROCK_TUNNEL_1F_TM_STEEL_WING",
   },
 }
 
@@ -1963,6 +2138,7 @@ export const hmItemBallLocationsMap: IdMap<HMItemBallLocationId, ItemLocation> =
       31,
       0x6472,
     ]],
+    eventFlagId: "GOT_HM07_WATERFALL",
   },
 }
 
@@ -1977,6 +2153,7 @@ export const keyItemItemBallLocationsMap: IdMap<KeyItemItemBallLocationId, ItemL
       31,
       0x4306,
     ]],
+    eventFlagId: "GOLDENROD_UNDERGROUND_COIN_CASE",
   },
 }
 
@@ -1991,6 +2168,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       107,
       0x4310,
     ]],
+    eventFlagId: "ROUTE_2_HIDDEN_FULL_RESTORE",
   },
   ROUTE_2_FOREST_AREA_HIDDEN_ITEM_IN_SE_CORNER: {
     id: "ROUTE_2_FOREST_AREA_HIDDEN_ITEM_IN_SE_CORNER",
@@ -2002,6 +2180,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       107,
       0x4313,
     ]],
+    eventFlagId: "ROUTE_2_HIDDEN_REVIVE",
   },
   ROUTE_2_FOREST_AREA_HIDDEN_ITEM_IN_CENTER: {
     id: "ROUTE_2_FOREST_AREA_HIDDEN_ITEM_IN_CENTER",
@@ -2013,6 +2192,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       107,
       0x430A,
     ]],
+    eventFlagId: "ROUTE_2_HIDDEN_MAX_ETHER",
   },
   ROUTE_2_FOREST_AREA_HIDDEN_ITEM_BY_PEWTER_ENTRANCE: {
     id: "ROUTE_2_FOREST_AREA_HIDDEN_ITEM_BY_PEWTER_ENTRANCE",
@@ -2024,6 +2204,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       107,
       0x430D,
     ]],
+    eventFlagId: "ROUTE_2_HIDDEN_FULL_HEAL",
   },
   ROUTE_4_WEST_AREA_HIDDEN_ITEM: {
     id: "ROUTE_4_WEST_AREA_HIDDEN_ITEM",
@@ -2035,6 +2216,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       107,
       0x6213,
     ]],
+    eventFlagId: "ROUTE_4_HIDDEN_ULTRA_BALL",
   },
   ROUTE_9_HIDDEN_ITEM: {
     id: "ROUTE_9_HIDDEN_ITEM",
@@ -2046,6 +2228,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       106,
       0x6FA4,
     ]],
+    eventFlagId: "ROUTE_9_HIDDEN_ETHER",
   },
   ROUTE_11_HIDDEN_ITEM: {
     id: "ROUTE_11_HIDDEN_ITEM",
@@ -2057,6 +2240,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       26,
       0x4059,
     ]],
+    eventFlagId: "ROUTE_11_HIDDEN_REVIVE",
   },
   ROUTE_12_SURF_AREA_HIDDEN_ITEM: {
     id: "ROUTE_12_SURF_AREA_HIDDEN_ITEM",
@@ -2068,6 +2252,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       105,
       0x7011,
     ]],
+    eventFlagId: "ROUTE_12_HIDDEN_ELIXER",
   },
   ROUTE_13_HIDDEN_ITEM: {
     id: "ROUTE_13_HIDDEN_ITEM",
@@ -2079,6 +2264,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       104,
       0x64A1,
     ]],
+    eventFlagId: "ROUTE_13_HIDDEN_CALCIUM",
   },
   ROUTE_17_HIDDEN_ITEM_IN_WATER: {
     id: "ROUTE_17_HIDDEN_ITEM_IN_WATER",
@@ -2090,6 +2276,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       107,
       0x5104,
     ]],
+    eventFlagId: "ROUTE_17_HIDDEN_MAX_ETHER",
   },
   ROUTE_17_HIDDEN_ITEM_ON_FENCE: {
     id: "ROUTE_17_HIDDEN_ITEM_ON_FENCE",
@@ -2101,6 +2288,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       107,
       0x5107,
     ]],
+    eventFlagId: "ROUTE_17_HIDDEN_MAX_ELIXER",
   },
   ROUTE_25_HIDDEN_ITEM: {
     id: "ROUTE_25_HIDDEN_ITEM",
@@ -2112,6 +2300,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       103,
       0x6FE7,
     ]],
+    eventFlagId: "ROUTE_25_HIDDEN_POTION",
   },
   ROUTE_28_NORTH_AREA_HIDDEN_ITEM: {
     id: "ROUTE_28_NORTH_AREA_HIDDEN_ITEM",
@@ -2123,6 +2312,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       105,
       0x5412,
     ]],
+    eventFlagId: "ROUTE_28_HIDDEN_RARE_CANDY",
   },
   ROUTE_30_CHERRYGROVE_SIDE_HIDDEN_ITEM: {
     id: "ROUTE_30_CHERRYGROVE_SIDE_HIDDEN_ITEM",
@@ -2134,6 +2324,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       104,
       0x57FD,
     ]],
+    eventFlagId: "ROUTE_30_HIDDEN_POTION",
   },
   ROUTE_32_SOUTH_AREA_HIDDEN_ITEM_NORTH_OF_PIER: {
     id: "ROUTE_32_SOUTH_AREA_HIDDEN_ITEM_NORTH_OF_PIER",
@@ -2145,6 +2336,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       100,
       0x4788,
     ]],
+    eventFlagId: "ROUTE_32_HIDDEN_SUPER_POTION",
   },
   ROUTE_32_SOUTH_AREA_HIDDEN_ITEM_BEHIND_POKECENTER: {
     id: "ROUTE_32_SOUTH_AREA_HIDDEN_ITEM_BEHIND_POKECENTER",
@@ -2156,6 +2348,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       100,
       0x4785,
     ]],
+    eventFlagId: "ROUTE_32_HIDDEN_GREAT_BALL",
   },
   ROUTE_34_SURF_AREA_HIDDEN_ITEM: {
     id: "ROUTE_34_SURF_AREA_HIDDEN_ITEM",
@@ -2167,6 +2360,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       30,
       0x432F,
     ]],
+    eventFlagId: "ROUTE_34_HIDDEN_RARE_CANDY",
   },
   ROUTE_34_DAY_CARE_AREA_HIDDEN_ITEM: {
     id: "ROUTE_34_DAY_CARE_AREA_HIDDEN_ITEM",
@@ -2178,6 +2372,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       30,
       0x4332,
     ]],
+    eventFlagId: "ROUTE_34_HIDDEN_SUPER_POTION",
   },
   ROUTE_37_HIDDEN_ITEM: {
     id: "ROUTE_37_HIDDEN_ITEM",
@@ -2189,6 +2384,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       106,
       0x4E11,
     ]],
+    eventFlagId: "ROUTE_37_HIDDEN_ETHER",
   },
   ROUTE_39_HIDDEN_ITEM: {
     id: "ROUTE_39_HIDDEN_ITEM",
@@ -2200,6 +2396,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       105,
       0x5BF8,
     ]],
+    eventFlagId: "ROUTE_39_HIDDEN_NUGGET",
   },
   ROUTE_40_HIDDEN_ITEM_UNDER_ROCK_SMASH_ROCK: {
     id: "ROUTE_40_HIDDEN_ITEM_UNDER_ROCK_SMASH_ROCK",
@@ -2214,6 +2411,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       105,
       0x621B,
     ]],
+    eventFlagId: "ROUTE_40_HIDDEN_HYPER_POTION",
   },
   ROUTE_41_SW_ISLAND_SURF_AREA_HIDDEN_ITEM: {
     id: "ROUTE_41_SW_ISLAND_SURF_AREA_HIDDEN_ITEM",
@@ -2225,6 +2423,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       105,
       0x690E,
     ]],
+    eventFlagId: "ROUTE_41_HIDDEN_MAX_ETHER",
   },
   ROUTE_42_SURF_AREA_HIDDEN_ITEM: {
     id: "ROUTE_42_SURF_AREA_HIDDEN_ITEM",
@@ -2236,6 +2435,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       106,
       0x5355,
     ]],
+    eventFlagId: "ROUTE_42_HIDDEN_MAX_POTION",
   },
   ROUTE_44_SURF_AREA_HIDDEN_ITEM: {
     id: "ROUTE_44_SURF_AREA_HIDDEN_ITEM",
@@ -2247,6 +2447,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       103,
       0x5A4A,
     ]],
+    eventFlagId: "ROUTE_44_HIDDEN_ELIXER",
   },
   ROUTE_45_SURF_AREA_HIDDEN_ITEM: {
     id: "ROUTE_45_SURF_AREA_HIDDEN_ITEM",
@@ -2258,6 +2459,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       103,
       0x62A0,
     ]],
+    eventFlagId: "ROUTE_45_HIDDEN_PP_UP",
   },
   DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_HIDDEN_ITEM: {
     id: "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_HIDDEN_ITEM",
@@ -2269,6 +2471,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x469B,
     ]],
+    eventFlagId: "DARK_CAVE_VIOLET_ENTRANCE_HIDDEN_ELIXER",
   },
   VIOLET_CITY_CUT_AREA_HIDDEN_ITEM: {
     id: "VIOLET_CITY_CUT_AREA_HIDDEN_ITEM",
@@ -2280,6 +2483,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       106,
       0x4429,
     ]],
+    eventFlagId: "VIOLET_CITY_HIDDEN_HYPER_POTION",
   },
   AZALEA_TOWN_HIDDEN_ITEM: {
     id: "AZALEA_TOWN_HIDDEN_ITEM",
@@ -2291,6 +2495,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       102,
       0x4133,
     ]],
+    eventFlagId: "AZALEA_TOWN_HIDDEN_FULL_HEAL",
   },
   ILEX_FOREST_NORTH_AREA_HIDDEN_ITEM_BY_SIGN: {
     id: "ILEX_FOREST_NORTH_AREA_HIDDEN_ITEM_BY_SIGN",
@@ -2302,6 +2507,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       27,
       0x6E20,
     ]],
+    eventFlagId: "ILEX_FOREST_HIDDEN_FULL_HEAL",
   },
   ILEX_FOREST_NORTH_AREA_HIDDEN_ITEM_BY_HEADBUTT_GUY: {
     id: "ILEX_FOREST_NORTH_AREA_HIDDEN_ITEM_BY_HEADBUTT_GUY",
@@ -2313,6 +2519,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       27,
       0x6E1D,
     ]],
+    eventFlagId: "ILEX_FOREST_HIDDEN_SUPER_POTION",
   },
   ILEX_FOREST_NORTH_AREA_HIDDEN_ITEM_BY_EXIT: {
     id: "ILEX_FOREST_NORTH_AREA_HIDDEN_ITEM_BY_EXIT",
@@ -2324,6 +2531,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       27,
       0x6E1A,
     ]],
+    eventFlagId: "ILEX_FOREST_HIDDEN_ETHER",
   },
   GOLDENROD_UNDERGROUND_HIDDEN_ITEM_BY_BARGAIN_SHOP: {
     id: "GOLDENROD_UNDERGROUND_HIDDEN_ITEM_BY_BARGAIN_SHOP",
@@ -2335,6 +2543,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       31,
       0x430D,
     ]],
+    eventFlagId: "GOLDENROD_UNDERGROUND_HIDDEN_PARLYZ_HEAL",
   },
   GOLDENROD_UNDERGROUND_HIDDEN_ITEM_BY_HERB_SHOP: {
     id: "GOLDENROD_UNDERGROUND_HIDDEN_ITEM_BY_HERB_SHOP",
@@ -2346,6 +2555,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       31,
       0x4310,
     ]],
+    eventFlagId: "GOLDENROD_UNDERGROUND_HIDDEN_SUPER_POTION",
   },
   GOLDENROD_UNDERGROUND_HIDDEN_ITEM_BY_DOOR: {
     id: "GOLDENROD_UNDERGROUND_HIDDEN_ITEM_BY_DOOR",
@@ -2357,6 +2567,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       31,
       0x4313,
     ]],
+    eventFlagId: "GOLDENROD_UNDERGROUND_HIDDEN_ANTIDOTE",
   },
   GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_LEFT_HIDDEN_ITEM: {
     id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_LEFT_HIDDEN_ITEM",
@@ -2368,6 +2579,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       31,
       0x4E86,
     ]],
+    eventFlagId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_HIDDEN_REVIVE",
   },
   GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_MIDDLE_HIDDEN_ITEM: {
     id: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_MIDDLE_HIDDEN_ITEM",
@@ -2379,6 +2591,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       31,
       0x4E83,
     ]],
+    eventFlagId: "GOLDENROD_UNDERGROUND_SWITCH_ROOM_HIDDEN_MAX_POTION",
   },
   NATIONAL_PARK_HIDDEN_ITEM: {
     id: "NATIONAL_PARK_HIDDEN_ITEM",
@@ -2395,6 +2608,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
         0x494B,
       ],
     ],
+    eventFlagId: "NATIONAL_PARK_HIDDEN_FULL_HEAL",
   },
   ECRUTEAK_CITY_HIDDEN_ITEM: {
     id: "ECRUTEAK_CITY_HIDDEN_ITEM",
@@ -2406,6 +2620,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       105,
       0x4057,
     ]],
+    eventFlagId: "ECRUTEAK_CITY_HIDDEN_HYPER_POTION",
   },
   BURNED_TOWER_1F_HIDDEN_ITEM_BY_ENTRANCE: {
     id: "BURNED_TOWER_1F_HIDDEN_ITEM_BY_ENTRANCE",
@@ -2417,6 +2632,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       97,
       0x5CCA,
     ]],
+    eventFlagId: "BURNED_TOWER_1F_HIDDEN_ULTRA_BALL",
   },
   BURNED_TOWER_1F_HIDDEN_ITEM_BY_HOLE: {
     id: "BURNED_TOWER_1F_HIDDEN_ITEM_BY_HOLE",
@@ -2428,6 +2644,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       97,
       0x5CC7,
     ]],
+    eventFlagId: "BURNED_TOWER_1F_HIDDEN_ETHER",
   },
   TIN_TOWER_4F_HIDDEN_ITEM: {
     id: "TIN_TOWER_4F_HIDDEN_ITEM",
@@ -2439,6 +2656,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       97,
       0x5A60,
     ]],
+    eventFlagId: "TIN_TOWER_4F_HIDDEN_MAX_POTION",
   },
   TIN_TOWER_5F_SE_AREA_HIDDEN_ITEM: {
     id: "TIN_TOWER_5F_SE_AREA_HIDDEN_ITEM",
@@ -2450,6 +2668,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       97,
       0x5AAD,
     ]],
+    eventFlagId: "TIN_TOWER_5F_HIDDEN_FULL_RESTORE",
   },
   TIN_TOWER_5F_SW_AREA_HIDDEN_ITEM: {
     id: "TIN_TOWER_5F_SW_AREA_HIDDEN_ITEM",
@@ -2461,6 +2680,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       97,
       0x5AB0,
     ]],
+    eventFlagId: "TIN_TOWER_5F_HIDDEN_CARBOS",
   },
   OLIVINE_LIGHTHOUSE_5F_OUTER_AREA_HIDDEN_ITEM: {
     id: "OLIVINE_LIGHTHOUSE_5F_OUTER_AREA_HIDDEN_ITEM",
@@ -2472,6 +2692,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       24,
       0x49B2,
     ]],
+    eventFlagId: "OLIVINE_LIGHTHOUSE_5F_HIDDEN_HYPER_POTION",
   },
   WHIRL_ISLAND_B1F_NORTH_AREA_EAST_HIDDEN_ITEM: {
     id: "WHIRL_ISLAND_B1F_NORTH_AREA_EAST_HIDDEN_ITEM",
@@ -2483,6 +2704,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x441F,
     ]],
+    eventFlagId: "WHIRL_ISLAND_B1F_HIDDEN_RARE_CANDY",
   },
   WHIRL_ISLAND_B1F_NORTH_AREA_WEST_HIDDEN_ITEM: {
     id: "WHIRL_ISLAND_B1F_NORTH_AREA_WEST_HIDDEN_ITEM",
@@ -2494,6 +2716,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x4425,
     ]],
+    eventFlagId: "WHIRL_ISLAND_B1F_HIDDEN_FULL_RESTORE",
   },
   WHIRL_ISLAND_B1F_SE_AREA_HIDDEN_ITEM: {
     id: "WHIRL_ISLAND_B1F_SE_AREA_HIDDEN_ITEM",
@@ -2505,6 +2728,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x4422,
     ]],
+    eventFlagId: "WHIRL_ISLAND_B1F_HIDDEN_ULTRA_BALL",
   },
   CIANWOOD_CITY_HIDDEN_ITEM_UNDER_NORTH_ROCK_SMASH_ROCK: {
     id: "CIANWOOD_CITY_HIDDEN_ITEM_UNDER_NORTH_ROCK_SMASH_ROCK",
@@ -2519,6 +2743,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       104,
       0x40D6,
     ]],
+    eventFlagId: "CIANWOOD_CITY_HIDDEN_REVIVE",
   },
   CIANWOOD_CITY_HIDDEN_ITEM_UNDER_SOUTH_ROCK_SMASH_ROCK: {
     id: "CIANWOOD_CITY_HIDDEN_ITEM_UNDER_SOUTH_ROCK_SMASH_ROCK",
@@ -2533,6 +2758,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       104,
       0x40D9,
     ]],
+    eventFlagId: "CIANWOOD_CITY_HIDDEN_MAX_ETHER",
   },
   MOUNT_MORTAR_FRONT_MAHOGANY_SIDE_HIDDEN_ITEM: {
     id: "MOUNT_MORTAR_FRONT_MAHOGANY_SIDE_HIDDEN_ITEM",
@@ -2544,6 +2770,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       31,
       0x5DFC,
     ]],
+    eventFlagId: "MOUNT_MORTAR_FRONT_HIDDEN_HYPER_POTION",
   },
   MOUNT_MORTAR_BACK_1F_NORTH_AREA_HIDDEN_ITEM: {
     id: "MOUNT_MORTAR_BACK_1F_NORTH_AREA_HIDDEN_ITEM",
@@ -2555,6 +2782,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       31,
       0x5E8C,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_1F_HIDDEN_MAX_REPEL",
   },
   MOUNT_MORTAR_BACK_2F_NORTH_AREA_HIDDEN_ITEM: {
     id: "MOUNT_MORTAR_BACK_2F_NORTH_AREA_HIDDEN_ITEM",
@@ -2566,6 +2794,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       31,
       0x60EC,
     ]],
+    eventFlagId: "MOUNT_MORTAR_BACK_2F_HIDDEN_FULL_RESTORE",
   },
   MOUNT_MORTAR_B1F_NW_AREA_HIDDEN_ITEM: {
     id: "MOUNT_MORTAR_B1F_NW_AREA_HIDDEN_ITEM",
@@ -2577,6 +2806,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       31,
       0x624C,
     ]],
+    eventFlagId: "MOUNT_MORTAR_B1F_HIDDEN_MAX_REVIVE",
   },
   LAKE_OF_RAGE_MAIN_AREA_HIDDEN_ITEM_BY_LEDGES: {
     id: "LAKE_OF_RAGE_MAIN_AREA_HIDDEN_ITEM_BY_LEDGES",
@@ -2588,6 +2818,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       28,
       0x414E,
     ]],
+    eventFlagId: "LAKE_OF_RAGE_HIDDEN_FULL_RESTORE",
   },
   LAKE_OF_RAGE_CUT_AREA_HIDDEN_ITEM: {
     id: "LAKE_OF_RAGE_CUT_AREA_HIDDEN_ITEM",
@@ -2599,6 +2830,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       28,
       0x4151,
     ]],
+    eventFlagId: "LAKE_OF_RAGE_HIDDEN_RARE_CANDY",
   },
   LAKE_OF_RAGE_MAIN_AREA_HIDDEN_ITEM_BY_WATER: {
     id: "LAKE_OF_RAGE_MAIN_AREA_HIDDEN_ITEM_BY_WATER",
@@ -2610,6 +2842,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       28,
       0x4154,
     ]],
+    eventFlagId: "LAKE_OF_RAGE_HIDDEN_MAX_POTION",
   },
   TEAM_ROCKET_BASE_B1F_HIDDEN_ITEM: {
     id: "TEAM_ROCKET_BASE_B1F_HIDDEN_ITEM",
@@ -2621,6 +2854,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       27,
       0x4ACC,
     ]],
+    eventFlagId: "TEAM_ROCKET_BASE_B1F_HIDDEN_REVIVE",
   },
   TEAM_ROCKET_BASE_B2F_NORTH_AREA_HIDDEN_ITEM: {
     id: "TEAM_ROCKET_BASE_B2F_NORTH_AREA_HIDDEN_ITEM",
@@ -2632,6 +2866,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       27,
       0x5211,
     ]],
+    eventFlagId: "TEAM_ROCKET_BASE_B2F_HIDDEN_FULL_HEAL",
   },
   ICE_PATH_B2F_MAHOGANY_SIDE_OUTER_AREA_HIDDEN_ITEM: {
     id: "ICE_PATH_B2F_MAHOGANY_SIDE_OUTER_AREA_HIDDEN_ITEM",
@@ -2643,6 +2878,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       31,
       0x65AC,
     ]],
+    eventFlagId: "ICE_PATH_B2F_MAHOGANY_SIDE_HIDDEN_CARBOS",
   },
   ICE_PATH_B2F_BLACKTHORN_SIDE_HIDDEN_ITEM: {
     id: "ICE_PATH_B2F_BLACKTHORN_SIDE_HIDDEN_ITEM",
@@ -2654,6 +2890,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       31,
       0x664A,
     ]],
+    eventFlagId: "ICE_PATH_B2F_BLACKTHORN_SIDE_HIDDEN_ICE_HEAL",
   },
   ICE_PATH_B1F_BLACKTHORN_SIDE_HIDDEN_ITEM: {
     id: "ICE_PATH_B1F_BLACKTHORN_SIDE_HIDDEN_ITEM",
@@ -2665,6 +2902,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       31,
       0x6511,
     ]],
+    eventFlagId: "ICE_PATH_B1F_HIDDEN_MAX_POTION",
   },
   DRAGONS_DEN_B1F_NORTH_SURF_AREA_HIDDEN_ITEM: {
     id: "DRAGONS_DEN_B1F_NORTH_SURF_AREA_HIDDEN_ITEM",
@@ -2676,17 +2914,19 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x49AA,
     ]],
+    eventFlagId: "DRAGONS_DEN_B1F_HIDDEN_MAX_POTION",
   },
   DRAGONS_DEN_B1F_SOUTH_SURF_AREA_SE_HIDDEN_ITEM: {
     id: "DRAGONS_DEN_B1F_SOUTH_SURF_AREA_SE_HIDDEN_ITEM",
     type: "HIDDEN_ITEM",
     groupId: "REGULAR_HIDDEN_ITEMS",
-    itemId: "ELIXER",
+    itemId: "MAX_ELIXER",
     areaId: "DRAGONS_DEN_B1F_SOUTH_SURF_AREA",
     romOffsets: [[
       99,
       0x49AD,
     ]],
+    eventFlagId: "DRAGONS_DEN_B1F_HIDDEN_MAX_ELIXER",
   },
   DRAGONS_DEN_B1F_SOUTH_SURF_AREA_NE_HIDDEN_ITEM: {
     id: "DRAGONS_DEN_B1F_SOUTH_SURF_AREA_NE_HIDDEN_ITEM",
@@ -2698,6 +2938,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x49A7,
     ]],
+    eventFlagId: "DRAGONS_DEN_B1F_HIDDEN_REVIVE",
   },
   OLIVINE_PORT_SOUTH_SURF_AREA_HIDDEN_ITEM: {
     id: "OLIVINE_PORT_SOUTH_SURF_AREA_HIDDEN_ITEM",
@@ -2709,6 +2950,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       29,
       0x4A2F,
     ]],
+    eventFlagId: "OLIVINE_PORT_HIDDEN_PROTEIN",
   },
   VERMILION_PORT_SOUTH_SURF_AREA_HIDDEN_ITEM: {
     id: "VERMILION_PORT_SOUTH_SURF_AREA_HIDDEN_ITEM",
@@ -2720,6 +2962,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       29,
       0x4EF0,
     ]],
+    eventFlagId: "VERMILION_PORT_HIDDEN_IRON",
   },
   VERMILION_CITY_HIDDEN_ITEM: {
     id: "VERMILION_CITY_HIDDEN_ITEM",
@@ -2731,6 +2974,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       106,
       0x6A14,
     ]],
+    eventFlagId: "VERMILION_CITY_HIDDEN_FULL_HEAL",
   },
   DIGLETTS_CAVE_HIDDEN_ITEM: {
     id: "DIGLETTS_CAVE_HIDDEN_ITEM",
@@ -2742,6 +2986,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       29,
       0x4007,
     ]],
+    eventFlagId: "DIGLETTS_CAVE_HIDDEN_MAX_REVIVE",
   },
   UNDERGROUND_PATH_NORTH_HIDDEN_ITEM: {
     id: "UNDERGROUND_PATH_NORTH_HIDDEN_ITEM",
@@ -2753,6 +2998,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       29,
       0x4395,
     ]],
+    eventFlagId: "UNDERGROUND_PATH_HIDDEN_FULL_RESTORE",
   },
   UNDERGROUND_PATH_SOUTH_HIDDEN_ITEM: {
     id: "UNDERGROUND_PATH_SOUTH_HIDDEN_ITEM",
@@ -2764,6 +3010,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       29,
       0x4398,
     ]],
+    eventFlagId: "UNDERGROUND_PATH_HIDDEN_X_SPECIAL",
   },
   CERULEAN_CITY_SURF_AREA_HIDDEN_ITEM: {
     id: "CERULEAN_CITY_SURF_AREA_HIDDEN_ITEM",
@@ -2775,6 +3022,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       97,
       0x40BB,
     ]],
+    eventFlagId: "FOUND_BERSERK_GENE_IN_CERULEAN_CITY",
   },
   CELADON_CITY_HIDDEN_ITEM: {
     id: "CELADON_CITY_HIDDEN_ITEM",
@@ -2786,6 +3034,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       106,
       0x5F7C,
     ]],
+    eventFlagId: "CELADON_CITY_HIDDEN_PP_UP",
   },
   CELADON_CAFE_HIDDEN_ITEM: {
     id: "CELADON_CAFE_HIDDEN_ITEM",
@@ -2807,6 +3056,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
         0x70CF,
       ],
     ],
+    eventFlagId: "FOUND_LEFTOVERS_IN_CELADON_CAFE",
   },
   ROCK_TUNNEL_1F_LAVENDER_SIDE_HIDDEN_ITEM: {
     id: "ROCK_TUNNEL_1F_LAVENDER_SIDE_HIDDEN_ITEM",
@@ -2818,6 +3068,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       29,
       0x43BE,
     ]],
+    eventFlagId: "ROCK_TUNNEL_1F_HIDDEN_X_DEFEND",
   },
   ROCK_TUNNEL_1F_CERULEAN_SIDE_HIDDEN_ITEM: {
     id: "ROCK_TUNNEL_1F_CERULEAN_SIDE_HIDDEN_ITEM",
@@ -2829,6 +3080,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       29,
       0x43BB,
     ]],
+    eventFlagId: "ROCK_TUNNEL_1F_HIDDEN_X_ACCURACY",
   },
   ROCK_TUNNEL_B1F_NW_AREA_HIDDEN_ITEM: {
     id: "ROCK_TUNNEL_B1F_NW_AREA_HIDDEN_ITEM",
@@ -2840,6 +3092,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       29,
       0x4411,
     ]],
+    eventFlagId: "ROCK_TUNNEL_B1F_HIDDEN_MAX_POTION",
   },
   MOUNT_MOON_SQUARE_HIDDEN_ITEM_UNDER_ROCK_SMASH_ROCK: {
     id: "MOUNT_MOON_SQUARE_HIDDEN_ITEM_UNDER_ROCK_SMASH_ROCK",
@@ -2854,6 +3107,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       29,
       0x711A,
     ]],
+    eventFlagId: "MOUNT_MOON_SQUARE_HIDDEN_MOON_STONE",
   },
   CINNABAR_ISLAND_HIDDEN_ITEM: {
     id: "CINNABAR_ISLAND_HIDDEN_ITEM",
@@ -2865,6 +3119,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       107,
       0x49CF,
     ]],
+    eventFlagId: "CINNABAR_ISLAND_HIDDEN_RARE_CANDY",
   },
   VICTORY_ROAD_1F_HIDDEN_ITEM: {
     id: "VICTORY_ROAD_1F_HIDDEN_ITEM",
@@ -2876,6 +3131,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       29,
       0x4538,
     ]],
+    eventFlagId: "VICTORY_ROAD_HIDDEN_FULL_HEAL",
   },
   VICTORY_ROAD_2F_NW_AREA_HIDDEN_ITEM: {
     id: "VICTORY_ROAD_2F_NW_AREA_HIDDEN_ITEM",
@@ -2887,6 +3143,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       29,
       0x4535,
     ]],
+    eventFlagId: "VICTORY_ROAD_HIDDEN_MAX_POTION",
   },
   SILVER_CAVE_OUTSIDE_SURF_AREA_HIDDEN_ITEM: {
     id: "SILVER_CAVE_OUTSIDE_SURF_AREA_HIDDEN_ITEM",
@@ -2898,6 +3155,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       108,
       0x6053,
     ]],
+    eventFlagId: "SILVER_CAVE_OUTSIDE_HIDDEN_FULL_RESTORE",
   },
   SILVER_CAVE_ROOM_1_SOUTH_HIDDEN_ITEM: {
     id: "SILVER_CAVE_ROOM_1_SOUTH_HIDDEN_ITEM",
@@ -2909,6 +3167,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x4561,
     ]],
+    eventFlagId: "SILVER_CAVE_ROOM_1_HIDDEN_ULTRA_BALL",
   },
   SILVER_CAVE_ROOM_1_NORTH_HIDDEN_ITEM: {
     id: "SILVER_CAVE_ROOM_1_NORTH_HIDDEN_ITEM",
@@ -2920,6 +3179,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x455E,
     ]],
+    eventFlagId: "SILVER_CAVE_ROOM_1_HIDDEN_DIRE_HIT",
   },
   SILVER_CAVE_ROOM_2_MAIN_AREA_HIDDEN_ITEM: {
     id: "SILVER_CAVE_ROOM_2_MAIN_AREA_HIDDEN_ITEM",
@@ -2931,6 +3191,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x45BA,
     ]],
+    eventFlagId: "SILVER_CAVE_ROOM_2_HIDDEN_MAX_POTION",
   },
 }
 
@@ -2948,6 +3209,7 @@ export const keyItemHiddenItemLocationsMap: IdMap<KeyItemHiddenItemLocationId, I
       98,
       0x44B8,
     ]],
+    eventFlagId: "FOUND_MACHINE_PART_IN_CERULEAN_GYM",
   },
 }
 
@@ -2964,6 +3226,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x4581,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_1_FRUIT_TREE",
   },
   ROUTE_2_FOREST_AREA_FRUIT_TREE: {
     id: "ROUTE_2_FOREST_AREA_FRUIT_TREE",
@@ -2977,6 +3240,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x4306,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_2_FOREST_AREA_FRUIT_TREE",
   },
   ROUTE_8_FRUIT_TREE: {
     id: "ROUTE_8_FRUIT_TREE",
@@ -2990,6 +3254,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x406C,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_8_FRUIT_TREE",
   },
   ROUTE_11_FRUIT_TREE: {
     id: "ROUTE_11_FRUIT_TREE",
@@ -3003,6 +3268,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x4055,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_11_FRUIT_TREE",
   },
   ROUTE_26_FRUIT_TREE: {
     id: "ROUTE_26_FRUIT_TREE",
@@ -3016,6 +3282,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x4EC2,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_26_FRUIT_TREE",
   },
   ROUTE_29_FRUIT_TREE: {
     id: "ROUTE_29_FRUIT_TREE",
@@ -3029,6 +3296,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x5089,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_29_FRUIT_TREE",
   },
   ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE: {
     id: "ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE",
@@ -3042,6 +3310,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x57F7,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_30_CHERRYGROVE_SIDE_SOUTH_FRUIT_TREE",
   },
   ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE: {
     id: "ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE",
@@ -3055,6 +3324,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x57F9,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_30_CHERRYGROVE_SIDE_NORTH_FRUIT_TREE",
   },
   ROUTE_31_FRUIT_TREE: {
     id: "ROUTE_31_FRUIT_TREE",
@@ -3068,6 +3338,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x55F9,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_31_FRUIT_TREE",
   },
   ROUTE_33_FRUIT_TREE: {
     id: "ROUTE_33_FRUIT_TREE",
@@ -3081,6 +3352,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x40EA,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_33_FRUIT_TREE",
   },
   ROUTE_35_SURF_AREA_FRUIT_TREE: {
     id: "ROUTE_35_SURF_AREA_FRUIT_TREE",
@@ -3094,6 +3366,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x4A7E,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_35_SURF_AREA_FRUIT_TREE",
   },
   ROUTE_36_WEST_AREA_FRUIT_TREE: {
     id: "ROUTE_36_WEST_AREA_FRUIT_TREE",
@@ -3107,6 +3380,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x4247,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_36_WEST_AREA_FRUIT_TREE",
   },
   ROUTE_37_LEFT_FRUIT_TREE: {
     id: "ROUTE_37_LEFT_FRUIT_TREE",
@@ -3120,6 +3394,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x4E09,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_37_LEFT_FRUIT_TREE",
   },
   ROUTE_37_MIDDLE_FRUIT_TREE: {
     id: "ROUTE_37_MIDDLE_FRUIT_TREE",
@@ -3133,6 +3408,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x4E0D,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_37_MIDDLE_FRUIT_TREE",
   },
   ROUTE_37_RIGHT_FRUIT_TREE: {
     id: "ROUTE_37_RIGHT_FRUIT_TREE",
@@ -3146,6 +3422,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x4E0B,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_37_RIGHT_FRUIT_TREE",
   },
   ROUTE_38_FRUIT_TREE: {
     id: "ROUTE_38_FRUIT_TREE",
@@ -3159,6 +3436,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x5F33,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_38_FRUIT_TREE",
   },
   ROUTE_39_FRUIT_TREE: {
     id: "ROUTE_39_FRUIT_TREE",
@@ -3172,6 +3450,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x5BF4,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_39_FRUIT_TREE",
   },
   ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE: {
     id: "ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE",
@@ -3185,6 +3464,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x534D,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_42_MIDDLE_CUT_AREA_LEFT_FRUIT_TREE",
   },
   ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE: {
     id: "ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE",
@@ -3198,6 +3478,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x534F,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_42_MIDDLE_CUT_AREA_MIDDLE_FRUIT_TREE",
   },
   ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE: {
     id: "ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE",
@@ -3211,6 +3492,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x5351,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_42_MIDDLE_CUT_AREA_RIGHT_FRUIT_TREE",
   },
   ROUTE_43_SURF_CUT_AREA_FRUIT_TREE: {
     id: "ROUTE_43_SURF_CUT_AREA_FRUIT_TREE",
@@ -3224,6 +3506,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x5266,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_43_SURF_CUT_AREA_FRUIT_TREE",
   },
   ROUTE_44_FRUIT_TREE: {
     id: "ROUTE_44_FRUIT_TREE",
@@ -3237,6 +3520,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x5A40,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_44_FRUIT_TREE",
   },
   ROUTE_45_FRUIT_TREE: {
     id: "ROUTE_45_FRUIT_TREE",
@@ -3250,6 +3534,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x6294,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_45_FRUIT_TREE",
   },
   ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE: {
     id: "ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE",
@@ -3263,6 +3548,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x578F,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_46_NORTH_AREA_LEFT_FRUIT_TREE",
   },
   ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE: {
     id: "ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE",
@@ -3276,6 +3562,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x5791,
       ],
     ],
+    eventFlagId: "GOT_ROUTE_46_NORTH_AREA_RIGHT_FRUIT_TREE",
   },
   PEWTER_CITY_LEFT_FRUIT_TREE: {
     id: "PEWTER_CITY_LEFT_FRUIT_TREE",
@@ -3289,6 +3576,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x4040,
       ],
     ],
+    eventFlagId: "GOT_PEWTER_CITY_LEFT_FRUIT_TREE",
   },
   PEWTER_CITY_RIGHT_FRUIT_TREE: {
     id: "PEWTER_CITY_RIGHT_FRUIT_TREE",
@@ -3302,6 +3590,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x403E,
       ],
     ],
+    eventFlagId: "GOT_PEWTER_CITY_RIGHT_FRUIT_TREE",
   },
   FUCHSIA_CITY_CUT_AREA_FRUIT_TREE: {
     id: "FUCHSIA_CITY_CUT_AREA_FRUIT_TREE",
@@ -3315,6 +3604,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x4B43,
       ],
     ],
+    eventFlagId: "GOT_FUCHSIA_CITY_CUT_AREA_FRUIT_TREE",
   },
   VIOLET_CITY_FRUIT_TREE: {
     id: "VIOLET_CITY_FRUIT_TREE",
@@ -3328,6 +3618,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x4425,
       ],
     ],
+    eventFlagId: "GOT_VIOLET_CITY_FRUIT_TREE",
   },
   AZALEA_TOWN_FRUIT_TREE: {
     id: "AZALEA_TOWN_FRUIT_TREE",
@@ -3341,6 +3632,7 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
         0x412F,
       ],
     ],
+    eventFlagId: "GOT_AZALEA_TOWN_FRUIT_TREE",
   },
 }
 
@@ -3357,6 +3649,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x6D18,
       ],
     ],
+    eventFlagId: "GOT_KINGS_ROCK_IN_SLOWPOKE_WELL",
   },
   OLIVINE_LIGHTHOUSE_2F_HUEYS_GIFT: {
     id: "OLIVINE_LIGHTHOUSE_2F_HUEYS_GIFT",
@@ -3380,6 +3673,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x7045,
       ],
     ],
+    eventFlagId: "GOT_PROTEIN_FROM_HUEY",
   },
   NATIONAL_PARK_BENCH_LADYS_GIFT: {
     id: "NATIONAL_PARK_BENCH_LADYS_GIFT",
@@ -3393,6 +3687,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x4015,
       ],
     ],
+    eventFlagId: "GOT_QUICK_CLAW",
   },
   NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL: {
     id: "NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL",
@@ -3410,6 +3705,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x417B,
       ],
     ],
+    eventFlagId: "GOT_NUGGET_FROM_BEVERLY",
   },
   RADIO_TOWER_4F_EAST_AREA_DJ_MARYS_GIFT: {
     id: "RADIO_TOWER_4F_EAST_AREA_DJ_MARYS_GIFT",
@@ -3426,6 +3722,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x6B9E,
       ],
     ],
+    eventFlagId: "GOT_PINK_BOW_FROM_MARY",
   },
   GOLDENROD_POKECENTER_1F_LADYS_GIFT_FOR_EON_MAIL: {
     id: "GOLDENROD_POKECENTER_1F_LADYS_GIFT_FOR_EON_MAIL",
@@ -3442,6 +3739,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5040,
       ],
     ],
+    eventFlagId: "GOT_REVIVE_FROM_POKEFAN",
   },
   ROUTE_35_GOLDENROD_GATE_RANDYS_GIFT: {
     id: "ROUTE_35_GOLDENROD_GATE_RANDYS_GIFT",
@@ -3458,6 +3756,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5D8A,
       ],
     ],
+    eventFlagId: "GOT_HP_UP_FROM_RANDY",
   },
   ROUTE_36_NATIONAL_PARK_GATE_CONTEST_1ST_PLACE_PRIZE: {
     id: "ROUTE_36_NATIONAL_PARK_GATE_CONTEST_1ST_PLACE_PRIZE",
@@ -3475,6 +3774,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x432A,
       ],
     ],
+    eventFlagId: "GOT_FIRST_PLACE_PRIZE",
   },
   ROUTE_36_NATIONAL_PARK_GATE_CONTEST_2ND_PLACE_PRIZE: {
     id: "ROUTE_36_NATIONAL_PARK_GATE_CONTEST_2ND_PLACE_PRIZE",
@@ -3492,6 +3792,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x433B,
       ],
     ],
+    eventFlagId: "GOT_SECOND_PLACE_PRIZE",
   },
   ROUTE_36_NATIONAL_PARK_GATE_CONTEST_3RD_PLACE_PRIZE: {
     id: "ROUTE_36_NATIONAL_PARK_GATE_CONTEST_3RD_PLACE_PRIZE",
@@ -3509,6 +3810,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x434C,
       ],
     ],
+    eventFlagId: "GOT_THIRD_PLACE_PRIZE",
   },
   ROUTE_36_NATIONAL_PARK_GATE_CONTEST_CONSOLATION_PRIZE: {
     id: "ROUTE_36_NATIONAL_PARK_GATE_CONTEST_CONSOLATION_PRIZE",
@@ -3526,6 +3828,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x42A4,
       ],
     ],
+    eventFlagId: "GOT_CONSOLATION_PRIZE",
   },
   LAKE_OF_RAGE_CUT_AREA_WESLEYS_GIFT: {
     id: "LAKE_OF_RAGE_CUT_AREA_WESLEYS_GIFT",
@@ -3539,6 +3842,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x412E,
       ],
     ],
+    eventFlagId: "GOT_BLACKBELT_FROM_WESLEY",
   },
   FAST_SHIP_CABINS_SE_GENTLEMANS_GIFT: {
     id: "FAST_SHIP_CABINS_SE_GENTLEMANS_GIFT",
@@ -3559,6 +3863,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5F5D,
       ],
     ],
+    eventFlagId: "GOT_METAL_COAT_FROM_GRANDPA_ON_SS_AQUA",
   },
   ROUTE_34_MAIN_AREA_GINAS_GIFT: {
     id: "ROUTE_34_MAIN_AREA_GINAS_GIFT",
@@ -3576,6 +3881,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x4217,
       ],
     ],
+    eventFlagId: "GINA_GAVE_LEAF_STONE",
   },
   ROUTE_34_SURF_AREA_KATES_GIFT: {
     id: "ROUTE_34_SURF_AREA_KATES_GIFT",
@@ -3589,6 +3895,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x4311,
       ],
     ],
+    eventFlagId: "GOT_SOFT_SAND_FROM_KATE",
   },
   ELMS_LAB_ELMS_GIFT_FOR_TOGEPI: {
     id: "ELMS_LAB_ELMS_GIFT_FOR_TOGEPI",
@@ -3607,6 +3914,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x4E08,
       ],
     ],
+    eventFlagId: "GOT_EVERSTONE_FROM_ELM",
   },
   ELMS_LAB_ELMS_GIFT_FOR_RISINGBADGE: {
     id: "ELMS_LAB_ELMS_GIFT_FOR_RISINGBADGE",
@@ -3624,6 +3932,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x4E21,
       ],
     ],
+    eventFlagId: "GOT_MASTER_BALL_FROM_ELM",
   },
   ELMS_LAB_AIDES_FREE_GIFT: {
     id: "ELMS_LAB_AIDES_FREE_GIFT",
@@ -3640,6 +3949,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x4EA3,
       ],
     ],
+    eventFlagId: "GOT_POTION_FROM_ELMS_AIDE",
   },
   ELMS_LAB_AIDES_GIFT_FOR_MYSTERY_EGG: {
     id: "ELMS_LAB_AIDES_GIFT_FOR_MYSTERY_EGG",
@@ -3651,6 +3961,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
       "ELMS_LAB_GAVE_MYSTERY_EGG",
     ],
     romOffsets: [],
+    eventFlagId: "GOT_POKE_BALLS_FROM_ELMS_AIDE",
   },
   ROUTE_2_NUGGET_HOUSE_MANS_GIFT: {
     id: "ROUTE_2_NUGGET_HOUSE_MANS_GIFT",
@@ -3664,6 +3975,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x7854,
       ],
     ],
+    eventFlagId: "GOT_NUGGET_FROM_GUY",
   },
   BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG: {
     id: "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG",
@@ -3680,6 +3992,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5645,
       ],
     ],
+    eventFlagId: "GOT_EVERSTONE_FROM_BILLS_GRANDPA",
   },
   BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH: {
     id: "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH",
@@ -3696,6 +4009,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x565C,
       ],
     ],
+    eventFlagId: "GOT_LEAF_STONE_FROM_BILLS_GRANDPA",
   },
   BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU: {
     id: "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU",
@@ -3712,6 +4026,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5673,
       ],
     ],
+    eventFlagId: "GOT_WATER_STONE_FROM_BILLS_GRANDPA",
   },
   BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE: {
     id: "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE",
@@ -3728,6 +4043,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x568A,
       ],
     ],
+    eventFlagId: "GOT_FIRE_STONE_FROM_BILLS_GRANDPA",
   },
   BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_PICHU: {
     id: "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_PICHU",
@@ -3744,6 +4060,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x569B,
       ],
     ],
+    eventFlagId: "GOT_THUNDERSTONE_FROM_BILLS_GRANDPA",
   },
   SILPH_CO_1F_GUARDS_GIFT: {
     id: "SILPH_CO_1F_GUARDS_GIFT",
@@ -3757,6 +4074,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x6BF5,
       ],
     ],
+    eventFlagId: "GOT_UP_GRADE",
   },
   ROUTE_5_CLEANSE_TAG_HOUSE_LADYS_GIFT: {
     id: "ROUTE_5_CLEANSE_TAG_HOUSE_LADYS_GIFT",
@@ -3770,6 +4088,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x7641,
       ],
     ],
+    eventFlagId: "GOT_CLEANSE_TAG",
   },
   DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA_MANS_GIFT: {
     id: "DARK_CAVE_BLACKTHORN_ENTRANCE_SURF_AREA_MANS_GIFT",
@@ -3783,6 +4102,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x472D,
       ],
     ],
+    eventFlagId: "GOT_BLACKGLASSES_IN_DARK_CAVE",
   },
   CHARCOAL_KILN_APPRENTICES_GIFT: {
     id: "CHARCOAL_KILN_APPRENTICES_GIFT",
@@ -3799,6 +4119,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5D53,
       ],
     ],
+    eventFlagId: "GOT_CHARCOAL_IN_CHARCOAL_KILN",
   },
   KURTS_HOUSE_KURTS_GIFT: {
     id: "KURTS_HOUSE_KURTS_GIFT",
@@ -3815,6 +4136,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x61C4,
       ],
     ],
+    eventFlagId: "KURT_GAVE_YOU_LURE_BALL",
   },
   ROUTE_32_NORTH_AREA_MANS_GIFT: {
     id: "ROUTE_32_NORTH_AREA_MANS_GIFT",
@@ -3833,6 +4155,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x4494,
       ],
     ],
+    eventFlagId: "GOT_MIRACLE_SEED_IN_ROUTE_32",
   },
   ROUTE_32_SOUTH_AREA_FRIEDAS_GIFT: {
     id: "ROUTE_32_SOUTH_AREA_FRIEDAS_GIFT",
@@ -3846,6 +4169,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x4759,
       ],
     ],
+    eventFlagId: "GOT_POISON_BARB_FROM_FRIEDA",
   },
   POKEMON_FAN_CLUB_CHAIRMANS_GIFT: {
     id: "POKEMON_FAN_CLUB_CHAIRMANS_GIFT",
@@ -3859,6 +4183,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5807,
       ],
     ],
+    eventFlagId: "LISTENED_TO_FAN_CLUB_PRESIDENT",
   },
   ROUTE_36_WEST_AREA_ALANS_GIFT: {
     id: "ROUTE_36_WEST_AREA_ALANS_GIFT",
@@ -3875,6 +4200,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x41B8,
       ],
     ],
+    eventFlagId: "ALAN_GAVE_FIRE_STONE",
   },
   ROUTE_36_EAST_AREA_ARTHURS_GIFT: {
     id: "ROUTE_36_EAST_AREA_ARTHURS_GIFT",
@@ -3888,6 +4214,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x4221,
       ],
     ],
+    eventFlagId: "GOT_HARD_STONE_FROM_ARTHUR",
   },
   ROUTE_30_BERRY_HOUSE_MANS_GIFT: {
     id: "ROUTE_30_BERRY_HOUSE_MANS_GIFT",
@@ -3901,6 +4228,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x6D71,
       ],
     ],
+    eventFlagId: "GOT_BERRY_FROM_ROUTE_30_HOUSE",
   },
   MR_POKEMONS_HOUSE_MR_POKEMONS_GIFT_FOR_RED_SCALE: {
     id: "MR_POKEMONS_HOUSE_MR_POKEMONS_GIFT_FOR_RED_SCALE",
@@ -3917,6 +4245,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x6EB8,
       ],
     ],
+    eventFlagId: "GOT_EXP_SHARE",
   },
   LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP: {
     id: "LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP",
@@ -3934,6 +4263,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x6703,
       ],
     ],
+    eventFlagId: "GOT_ELIXER_FOR_MAGIKARP",
   },
   CHERRYGROVE_CITY_SURF_AREA_MYSTIC_WATER_GUYS_GIFT: {
     id: "CHERRYGROVE_CITY_SURF_AREA_MYSTIC_WATER_GUYS_GIFT",
@@ -3947,6 +4277,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x417B,
       ],
     ],
+    eventFlagId: "GOT_MYSTIC_WATER_IN_CHERRYGROVE",
   },
   ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY: {
     id: "ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY",
@@ -3964,6 +4295,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5222,
       ],
     ],
+    eventFlagId: "TIFFANY_GAVE_PINK_BOW",
   },
   ROUTE_44_VANCES_GIFT: {
     id: "ROUTE_44_VANCES_GIFT",
@@ -3986,6 +4318,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x58D1,
       ],
     ],
+    eventFlagId: "GOT_CARBOS_FROM_VANCE",
   },
   ROUTE_44_WILTONS_GIFT_1: {
     id: "ROUTE_44_WILTONS_GIFT_1",
@@ -4002,6 +4335,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x59CA,
       ],
     ],
+    eventFlagId: "GOT_ULTRA_BALL_FROM_WILTON",
   },
   ROUTE_44_WILTONS_GIFT_2: {
     id: "ROUTE_44_WILTONS_GIFT_2",
@@ -4018,6 +4352,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x59D3,
       ],
     ],
+    eventFlagId: "GOT_GREAT_BALL_FROM_WILTON",
   },
   ROUTE_44_WILTONS_GIFT_3: {
     id: "ROUTE_44_WILTONS_GIFT_3",
@@ -4034,6 +4369,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x59DC,
       ],
     ],
+    eventFlagId: "GOT_POKE_BALL_FROM_WILTON",
   },
   ROUTE_45_KENJIS_GIFT: {
     id: "ROUTE_45_KENJIS_GIFT",
@@ -4050,6 +4386,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x60FE,
       ],
     ],
+    eventFlagId: "GOT_PP_UP_FROM_KENJI",
   },
   ROUTE_45_PARRYS_GIFT: {
     id: "ROUTE_45_PARRYS_GIFT",
@@ -4072,6 +4409,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x621F,
       ],
     ],
+    eventFlagId: "GOT_IRON_FROM_PARRY",
   },
   ROUTE_25_KEVINS_GIFT: {
     id: "ROUTE_25_KEVINS_GIFT",
@@ -4085,6 +4423,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x6FBF,
       ],
     ],
+    eventFlagId: "CLEARED_NUGGET_BRIDGE",
   },
   ROUTE_27_WHIRLPOOL_AREA_JOSES_GIFT: {
     id: "ROUTE_27_WHIRLPOOL_AREA_JOSES_GIFT",
@@ -4101,6 +4440,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x4949,
       ],
     ],
+    eventFlagId: "GOT_STAR_PIECE_FROM_JOSE",
   },
   ROUTE_29_TUSCANYS_GIFT: {
     id: "ROUTE_29_TUSCANYS_GIFT",
@@ -4117,6 +4457,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5069,
       ],
     ],
+    eventFlagId: "GOT_PINK_BOW_FROM_TUSCANY",
   },
   ROUTE_30_CHERRYGROVE_SIDE_JOEYS_GIFT: {
     id: "ROUTE_30_CHERRYGROVE_SIDE_JOEYS_GIFT",
@@ -4142,6 +4483,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5775,
       ],
     ],
+    eventFlagId: "GOT_HP_UP_FROM_JOEY",
   },
   ROUTE_38_DANAS_GIFT: {
     id: "ROUTE_38_DANAS_GIFT",
@@ -4158,6 +4500,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5DFA,
       ],
     ],
+    eventFlagId: "DANA_GAVE_THUNDERSTONE",
   },
   BLACKTHORN_CITY_SANTOSS_GIFT: {
     id: "BLACKTHORN_CITY_SANTOSS_GIFT",
@@ -4171,6 +4514,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x474B,
       ],
     ],
+    eventFlagId: "GOT_SPELL_TAG_FROM_SANTOS",
   },
   ROUTE_31_WADES_GIFT_1: {
     id: "ROUTE_31_WADES_GIFT_1",
@@ -4187,6 +4531,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5523,
       ],
     ],
+    eventFlagId: "GOT_BERRY_FROM_WADE",
   },
   ROUTE_31_WADES_GIFT_2: {
     id: "ROUTE_31_WADES_GIFT_2",
@@ -4203,6 +4548,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x552C,
       ],
     ],
+    eventFlagId: "GOT_PSNCUREBERRY_FROM_WADE",
   },
   ROUTE_31_WADES_GIFT_3: {
     id: "ROUTE_31_WADES_GIFT_3",
@@ -4219,6 +4565,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5535,
       ],
     ],
+    eventFlagId: "GOT_PRZCUREBERRY_FROM_WADE",
   },
   ROUTE_31_WADES_GIFT_4: {
     id: "ROUTE_31_WADES_GIFT_4",
@@ -4235,6 +4582,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x553E,
       ],
     ],
+    eventFlagId: "GOT_BITTER_BERRY_FROM_WADE",
   },
   ROUTE_39_DEREKS_GIFT_FOR_PIKACHU: {
     id: "ROUTE_39_DEREKS_GIFT_FOR_PIKACHU",
@@ -4252,6 +4600,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5B4E,
       ],
     ],
+    eventFlagId: "GOT_NUGGET_FROM_DEREK",
   },
   ROUTE_40_MONICAS_GIFT: {
     id: "ROUTE_40_MONICAS_GIFT",
@@ -4265,6 +4614,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x61F9,
       ],
     ],
+    eventFlagId: "GOT_SHARP_BEAK_FROM_MONICA",
   },
   ROUTE_37_SUNNYS_GIFT: {
     id: "ROUTE_37_SUNNYS_GIFT",
@@ -4278,6 +4628,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x4DEC,
       ],
     ],
+    eventFlagId: "GOT_MAGNET_FROM_SUNNY",
   },
   ROUTE_42_MAHOGANY_SIDE_TULLYS_GIFT: {
     id: "ROUTE_42_MAHOGANY_SIDE_TULLYS_GIFT",
@@ -4294,6 +4645,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x52E0,
       ],
     ],
+    eventFlagId: "TULLY_GAVE_WATER_STONE",
   },
   ROUTE_46_NORTH_AREA_ERINS_GIFT: {
     id: "ROUTE_46_NORTH_AREA_ERINS_GIFT",
@@ -4316,6 +4668,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x5741,
       ],
     ],
+    eventFlagId: "GOT_CALCIUM_FROM_ERIN",
   },
   VERMILION_CITY_BADGE_GUYS_GIFT: {
     id: "VERMILION_CITY_BADGE_GUYS_GIFT",
@@ -4332,6 +4685,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
         0x69EF,
       ],
     ],
+    eventFlagId: "GOT_HP_UP_FROM_VERMILION_GUY",
   },
   GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT: {
     id: "GOLDENROD_DEPT_STORE_5F_MYSTERY_GIFT_GIRLS_GIFT",
@@ -4343,6 +4697,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
       "INACCESSIBLE",
     ],
     romOffsets: [],
+    eventFlagId: "GOT_EON_MAIL",
   },
 }
 
@@ -4359,6 +4714,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x4069,
       ],
     ],
+    eventFlagId: "GOT_TM45_ATTRACT",
   },
   GOLDENROD_DEPT_STORE_5F_RECEPTIONISTS_GIFT_1: {
     id: "GOLDENROD_DEPT_STORE_5F_RECEPTIONISTS_GIFT_1",
@@ -4372,6 +4728,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x60F3,
       ],
     ],
+    eventFlagId: "GOT_RETURN",
   },
   GOLDENROD_DEPT_STORE_5F_RECEPTIONISTS_GIFT_2: {
     id: "GOLDENROD_DEPT_STORE_5F_RECEPTIONISTS_GIFT_2",
@@ -4385,6 +4742,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x6108,
       ],
     ],
+    eventFlagId: "GOT_FRUSTRATION",
   },
   RADIO_TOWER_3F_WEST_AREA_LADYS_GIFT: {
     id: "RADIO_TOWER_3F_WEST_AREA_LADYS_GIFT",
@@ -4401,6 +4759,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x658F,
       ],
     ],
+    eventFlagId: "GOT_SUNNY_DAY_FROM_RADIO_TOWER",
   },
   ROUTE_34_ILEX_FOREST_GATE_LADYS_GIFT: {
     id: "ROUTE_34_ILEX_FOREST_GATE_LADYS_GIFT",
@@ -4417,6 +4776,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x6D76,
       ],
     ],
+    eventFlagId: "GOT_TM12_SWEET_SCENT",
   },
   VIOLET_GYM_FALKNERS_GIFT: {
     id: "VIOLET_GYM_FALKNERS_GIFT",
@@ -4430,6 +4790,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x4404,
       ],
     ],
+    eventFlagId: "GOT_TM31_MUD_SLAP",
   },
   ILEX_FOREST_NORTH_AREA_HEADBUTT_GUYS_GIFT: {
     id: "ILEX_FOREST_NORTH_AREA_HEADBUTT_GUYS_GIFT",
@@ -4443,6 +4804,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x6DEB,
       ],
     ],
+    eventFlagId: "GOT_TM02_HEADBUTT",
   },
   CELADON_MANSION_ROOF_HOUSE_MANS_GIFT: {
     id: "CELADON_MANSION_ROOF_HOUSE_MANS_GIFT",
@@ -4456,6 +4818,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x5B19,
       ],
     ],
+    eventFlagId: "GOT_TM03_CURSE",
   },
   CELADON_GYM_ERIKAS_GIFT: {
     id: "CELADON_GYM_ERIKAS_GIFT",
@@ -4469,6 +4832,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x6AA6,
       ],
     ],
+    eventFlagId: "GOT_TM19_GIGA_DRAIN",
   },
   ROUTE_27_SANDSTORM_HOUSE_LADYS_GIFT: {
     id: "ROUTE_27_SANDSTORM_HOUSE_LADYS_GIFT",
@@ -4482,6 +4846,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x73AF,
       ],
     ],
+    eventFlagId: "GOT_TM37_SANDSTORM",
   },
   ECRUTEAK_GYM_MORTYS_GIFT: {
     id: "ECRUTEAK_GYM_MORTYS_GIFT",
@@ -4495,6 +4860,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x5DA3,
       ],
     ],
+    eventFlagId: "GOT_TM30_SHADOW_BALL",
   },
   OLIVINE_GYM_JASMINES_GIFT: {
     id: "OLIVINE_GYM_JASMINES_GIFT",
@@ -4511,6 +4877,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x4164,
       ],
     ],
+    eventFlagId: "GOT_TM23_IRON_TAIL",
   },
   ROUTE_39_FARMHOUSE_LADYS_GIFT: {
     id: "ROUTE_39_FARMHOUSE_LADYS_GIFT",
@@ -4527,6 +4894,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x4F27,
       ],
     ],
+    eventFlagId: "GOT_TM13_SNORE_FROM_MOOMOO_FARM",
   },
   CIANWOOD_GYM_STRENGTH_AREA_CHUCKS_GIFT: {
     id: "CIANWOOD_GYM_STRENGTH_AREA_CHUCKS_GIFT",
@@ -4540,6 +4908,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x566D,
       ],
     ],
+    eventFlagId: "GOT_TM01_DYNAMICPUNCH",
   },
   POWER_PLANT_MANAGERS_GIFT: {
     id: "POWER_PLANT_MANAGERS_GIFT",
@@ -4556,6 +4925,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x4EB7,
       ],
     ],
+    eventFlagId: "GOT_TM07_ZAP_CANNON",
   },
   MR_PSYCHICS_HOUSE_MR_PSYCHICS_GIFT: {
     id: "MR_PSYCHICS_HOUSE_MR_PSYCHICS_GIFT",
@@ -4569,6 +4939,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x6787,
       ],
     ],
+    eventFlagId: "GOT_TM29_PSYCHIC",
   },
   AZALEA_GYM_BUGSYS_GIFT: {
     id: "AZALEA_GYM_BUGSYS_GIFT",
@@ -4582,6 +4953,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x6C5F,
       ],
     ],
+    eventFlagId: "GOT_TM49_FURY_CUTTER",
   },
   ROUTE_32_CUT_AREA_ROAR_GUYS_GIFT: {
     id: "ROUTE_32_CUT_AREA_ROAR_GUYS_GIFT",
@@ -4595,6 +4967,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x44DB,
       ],
     ],
+    eventFlagId: "GOT_TM05_ROAR",
   },
   ROUTE_36_EAST_AREA_ROCK_SMASH_GUYS_GIFT: {
     id: "ROUTE_36_EAST_AREA_ROCK_SMASH_GUYS_GIFT",
@@ -4611,6 +4984,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x40D2,
       ],
     ],
+    eventFlagId: "GOT_TM08_ROCK_SMASH",
   },
   FUCHSIA_GYM_JANINES_GIFT: {
     id: "FUCHSIA_GYM_JANINES_GIFT",
@@ -4624,6 +4998,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x5E0D,
       ],
     ],
+    eventFlagId: "GOT_TM06_TOXIC",
   },
   MAHOGANY_GYM_PRYCES_GIFT: {
     id: "MAHOGANY_GYM_PRYCES_GIFT",
@@ -4637,6 +5012,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x5AE2,
       ],
     ],
+    eventFlagId: "GOT_TM16_ICY_WIND",
   },
   LAKE_OF_RAGE_HIDDEN_POWER_HOUSE_MANS_GIFT: {
     id: "LAKE_OF_RAGE_HIDDEN_POWER_HOUSE_MANS_GIFT",
@@ -4650,6 +5026,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x6534,
       ],
     ],
+    eventFlagId: "GOT_TM10_HIDDEN_POWER",
   },
   ROUTE_43_GATE_GUARDS_GIFT: {
     id: "ROUTE_43_GATE_GUARDS_GIFT",
@@ -4666,6 +5043,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x6C92,
       ],
     ],
+    eventFlagId: "GOT_TM36_SLUDGE_BOMB",
   },
   ROUTE_31_MANS_GIFT_FOR_RANDYS_MAIL: {
     id: "ROUTE_31_MANS_GIFT_FOR_RANDYS_MAIL",
@@ -4682,6 +5060,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x55A7,
       ],
     ],
+    eventFlagId: "GOT_TM50_NIGHTMARE",
   },
   VIRIDIAN_CITY_ISOLATED_AREA_DREAM_EATER_GUYS_GIFT: {
     id: "VIRIDIAN_CITY_ISOLATED_AREA_DREAM_EATER_GUYS_GIFT",
@@ -4695,6 +5074,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x5A82,
       ],
     ],
+    eventFlagId: "GOT_TM42_DREAM_EATER",
   },
   ROUTE_28_STEEL_WING_HOUSE_LADYS_GIFT: {
     id: "ROUTE_28_STEEL_WING_HOUSE_LADYS_GIFT",
@@ -4708,6 +5088,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
         0x6665,
       ],
     ],
+    eventFlagId: "GOT_TM47_STEEL_WING",
   },
   DRAGONS_DEN_B1F_SOUTH_AREA_CLAIRS_GIFT: {
     id: "DRAGONS_DEN_B1F_SOUTH_AREA_CLAIRS_GIFT",
@@ -4719,6 +5100,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
       "DRAGON_SHRINE_PASSED_TEST",
     ],
     romOffsets: [],
+    eventFlagId: "GOT_TM24_DRAGONBREATH",
   },
 }
 
@@ -4736,6 +5118,7 @@ export const hmGiftLocationsMap: IdMap<HMGiftLocationId, ItemLocation> = {
       27,
       0x6DBB,
     ]],
+    eventFlagId: "GOT_HM01_CUT",
   },
   CIANWOOD_CITY_CHUCKS_WIFES_GIFT: {
     id: "CIANWOOD_CITY_CHUCKS_WIFES_GIFT",
@@ -4750,6 +5133,7 @@ export const hmGiftLocationsMap: IdMap<HMGiftLocationId, ItemLocation> = {
       104,
       0x40A1,
     ]],
+    eventFlagId: "GOT_HM02_FLY",
   },
   DANCE_THEATER_MANS_GIFT: {
     id: "DANCE_THEATER_MANS_GIFT",
@@ -4761,6 +5145,7 @@ export const hmGiftLocationsMap: IdMap<HMGiftLocationId, ItemLocation> = {
       38,
       0x550A,
     ]],
+    eventFlagId: "GOT_HM03_SURF",
   },
   OLIVINE_CAFE_SAILORS_GIFT: {
     id: "OLIVINE_CAFE_SAILORS_GIFT",
@@ -4772,6 +5157,7 @@ export const hmGiftLocationsMap: IdMap<HMGiftLocationId, ItemLocation> = {
       39,
       0x48CE,
     ]],
+    eventFlagId: "GOT_HM04_STRENGTH",
   },
   SPROUT_TOWER_3F_SAGE_LIS_GIFT: {
     id: "SPROUT_TOWER_3F_SAGE_LIS_GIFT",
@@ -4783,6 +5169,7 @@ export const hmGiftLocationsMap: IdMap<HMGiftLocationId, ItemLocation> = {
       97,
       0x49C3,
     ]],
+    eventFlagId: "GOT_HM05_FLASH",
   },
   TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT: {
     id: "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_LANCES_GIFT",
@@ -4794,6 +5181,7 @@ export const hmGiftLocationsMap: IdMap<HMGiftLocationId, ItemLocation> = {
       27,
       0x5197,
     ]],
+    eventFlagId: "GOT_HM06_WHIRLPOOL",
   },
 }
 
@@ -4812,6 +5200,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       30,
       0x4E34,
     ]],
+    eventFlagId: "GOT_SS_TICKET_FROM_ELM",
   },
   MR_POKEMONS_HOUSE_MR_POKEMONS_FREE_GIFT: {
     id: "MR_POKEMONS_HOUSE_MR_POKEMONS_FREE_GIFT",
@@ -4823,6 +5212,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       101,
       0x6E6D,
     ]],
+    eventFlagId: "GOT_MYSTERY_EGG",
   },
   ROUTE_32_POKECENTER_1F_MANS_GIFT: {
     id: "ROUTE_32_POKECENTER_1F_MANS_GIFT",
@@ -4834,6 +5224,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       26,
       0x5B69,
     ]],
+    eventFlagId: "GOT_OLD_ROD",
   },
   AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL: {
     id: "AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL",
@@ -4848,6 +5239,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       102,
       0x40FA,
     ]],
+    eventFlagId: "GOT_AZALEA_GS_BALL",
   },
   GOLDENROD_BIKE_SHOP_OWNERS_GIFT: {
     id: "GOLDENROD_BIKE_SHOP_OWNERS_GIFT",
@@ -4859,6 +5251,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       21,
       0x4764,
     ]],
+    eventFlagId: "GOT_BICYCLE",
   },
   RADIO_TOWER_2F_BUENAS_GIFT: {
     id: "RADIO_TOWER_2F_BUENAS_GIFT",
@@ -4870,6 +5263,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
     ],
     romOffsets: [],
+    eventFlagId: "MET_BUENA",
   },
   GOLDENROD_FLOWER_SHOP_OWNERS_GIFT: {
     id: "GOLDENROD_FLOWER_SHOP_OWNERS_GIFT",
@@ -4885,6 +5279,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       21,
       0x5382,
     ]],
+    eventFlagId: "GOT_SQUIRTBOTTLE",
   },
   RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT: {
     id: "RADIO_TOWER_5F_WEST_AREA_ROCKET_EXECUTIVES_GIFT",
@@ -4896,6 +5291,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       24,
       0x403D,
     ]],
+    eventFlagId: "GOT_BASEMENT_KEY",
   },
   GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT: {
     id: "GOLDENROD_UNDERGROUND_WAREHOUSE_RADIO_DIRECTORS_GIFT",
@@ -4910,6 +5306,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       31,
       0x59CC,
     ]],
+    eventFlagId: "GOT_CARD_KEY",
   },
   RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT: {
     id: "RADIO_TOWER_5F_EAST_AREA_DIRECTORS_GIFT",
@@ -4921,6 +5318,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       24,
       0x40DB,
     ]],
+    eventFlagId: "GOT_CLEAR_BELL",
   },
   GOLDENROD_POKECENTER_1F_LINK_RECEPTIONISTS_GIFT: {
     id: "GOLDENROD_POKECENTER_1F_LINK_RECEPTIONISTS_GIFT",
@@ -4941,6 +5339,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
         0x5004,
       ],
     ],
+    eventFlagId: "GOT_GS_BALL_FROM_POKECOM_CENTER",
   },
   ECRUTEAK_ITEMFINDER_HOUSE_MANS_GIFT: {
     id: "ECRUTEAK_ITEMFINDER_HOUSE_MANS_GIFT",
@@ -4952,6 +5351,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       38,
       0x660F,
     ]],
+    eventFlagId: "GOT_ITEMFINDER",
   },
   TIN_TOWER_1F_NORTH_SAGES_GIFT: {
     id: "TIN_TOWER_1F_NORTH_SAGES_GIFT",
@@ -4966,6 +5366,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       "RAIKOU",
     ],
     romOffsets: [],
+    eventFlagId: "GOT_RAINBOW_WING",
   },
   OLIVINE_GOOD_ROD_HOUSE_MANS_GIFT: {
     id: "OLIVINE_GOOD_ROD_HOUSE_MANS_GIFT",
@@ -4977,6 +5378,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       39,
       0x472F,
     ]],
+    eventFlagId: "GOT_GOOD_ROD",
   },
   CIANWOOD_PHARMACY_OWNERS_GIFT: {
     id: "CIANWOOD_PHARMACY_OWNERS_GIFT",
@@ -4991,6 +5393,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       39,
       0x5FB1,
     ]],
+    eventFlagId: "GOT_SECRETPOTION_FROM_PHARMACY",
   },
   LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT: {
     id: "LAKE_OF_RAGE_SURF_AREA_SHINYS_GIFT",
@@ -4999,6 +5402,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     itemId: "RED_SCALE",
     areaId: "LAKE_OF_RAGE_SURF_AREA",
     romOffsets: [],
+    eventFlagId: "BEAT_RED_GYARADOS",
   },
   POKEMON_FAN_CLUB_MEMBERS_GIFT: {
     id: "POKEMON_FAN_CLUB_MEMBERS_GIFT",
@@ -5013,6 +5417,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       100,
       0x584A,
     ]],
+    eventFlagId: "GOT_LOST_ITEM_FROM_FAN_CLUB",
   },
   COPYCATS_HOUSE_2F_COPYCATS_GIFT: {
     id: "COPYCATS_HOUSE_2F_COPYCATS_GIFT",
@@ -5027,6 +5432,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       98,
       0x6F61,
     ]],
+    eventFlagId: "GOT_PASS_FROM_COPYCAT",
   },
   ROUTE_12_SUPER_ROD_HOUSE_MANS_GIFT: {
     id: "ROUTE_12_SUPER_ROD_HOUSE_MANS_GIFT",
@@ -5038,6 +5444,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       31,
       0x7498,
     ]],
+    eventFlagId: "GOT_SUPER_ROD",
   },
   PEWTER_CITY_OLD_MANS_GIFT: {
     id: "PEWTER_CITY_OLD_MANS_GIFT",
@@ -5049,6 +5456,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
       99,
       0x401C,
     ]],
+    eventFlagId: "GOT_SILVER_WING",
   },
 }
 
@@ -5060,6 +5468,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
     itemId: "POKEGEAR",
     areaId: "PLAYERS_HOUSE_1F",
     romOffsets: [],
+    eventFlagId: "GOT_POKEGEAR",
   },
   CHERRYGROVE_CITY_GUIDE_GENTS_GIFT: {
     id: "CHERRYGROVE_CITY_GUIDE_GENTS_GIFT",
@@ -5071,6 +5480,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
       103,
       0x4070,
     ]],
+    eventFlagId: "GOT_MAP_CARD",
   },
   MR_POKEMONS_HOUSE_OAKS_GIFT: {
     id: "MR_POKEMONS_HOUSE_OAKS_GIFT",
@@ -5082,6 +5492,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
       101,
       0x6ED9,
     ]],
+    eventFlagId: "GOT_POKEDEX",
   },
   RUINS_OF_ALPH_OUTSIDE_MAIN_AREA_RESEARCHERS_GIFT: {
     id: "RUINS_OF_ALPH_OUTSIDE_MAIN_AREA_RESEARCHERS_GIFT",
@@ -5094,6 +5505,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
       "UNOWN",
     ],
     romOffsets: [],
+    eventFlagId: "GOT_UNOWN_DEX",
   },
   RADIO_TOWER_1F_QUIZ_PRIZE: {
     id: "RADIO_TOWER_1F_QUIZ_PRIZE",
@@ -5108,6 +5520,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
       23,
       0x4E20,
     ]],
+    eventFlagId: "GOT_RADIO_CARD",
   },
   LAV_RADIO_TOWER_1F_DIRECTORS_GIFT: {
     id: "LAV_RADIO_TOWER_1F_DIRECTORS_GIFT",
@@ -5122,6 +5535,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
       31,
       0x6E85,
     ]],
+    eventFlagId: "GOT_EXPN_CARD",
   },
 }
 
@@ -5136,6 +5550,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       26,
       0x43F1,
     ]],
+    eventFlagId: "GOT_ZEPHYRBADGE",
   },
   AZALEA_GYM_BADGE: {
     id: "AZALEA_GYM_BADGE",
@@ -5147,6 +5562,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       99,
       0x6C4C,
     ]],
+    eventFlagId: "GOT_HIVEBADGE",
   },
   GOLDENROD_GYM_BADGE: {
     id: "GOLDENROD_GYM_BADGE",
@@ -5158,6 +5574,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       21,
       0x404F,
     ]],
+    eventFlagId: "GOT_PLAINBADGE",
   },
   ECRUTEAK_GYM_BADGE: {
     id: "ECRUTEAK_GYM_BADGE",
@@ -5169,6 +5586,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       38,
       0x5D90,
     ]],
+    eventFlagId: "GOT_FOGBADGE",
   },
   CIANWOOD_GYM_BADGE: {
     id: "CIANWOOD_GYM_BADGE",
@@ -5180,6 +5598,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       39,
       0x565A,
     ]],
+    eventFlagId: "GOT_STORMBADGE",
   },
   OLIVINE_GYM_BADGE: {
     id: "OLIVINE_GYM_BADGE",
@@ -5194,6 +5613,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       39,
       0x4151,
     ]],
+    eventFlagId: "GOT_MINERALBADGE",
   },
   MAHOGANY_GYM_BADGE: {
     id: "MAHOGANY_GYM_BADGE",
@@ -5205,6 +5625,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       102,
       0x5ACF,
     ]],
+    eventFlagId: "GOT_GLACIERBADGE",
   },
   DRAGON_SHRINE_BADGE: {
     id: "DRAGON_SHRINE_BADGE",
@@ -5216,6 +5637,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       99,
       0x5162,
     ]],
+    eventFlagId: "GOT_RISINGBADGE",
   },
   PEWTER_GYM_BADGE: {
     id: "PEWTER_GYM_BADGE",
@@ -5227,6 +5649,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       104,
       0x6887,
     ]],
+    eventFlagId: "GOT_BOULDERBADGE",
   },
   CERULEAN_GYM_BADGE: {
     id: "CERULEAN_GYM_BADGE",
@@ -5241,6 +5664,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       98,
       0x445B,
     ]],
+    eventFlagId: "GOT_CASCADEBADGE",
   },
   VERMILION_GYM_BADGE: {
     id: "VERMILION_GYM_BADGE",
@@ -5252,6 +5676,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       100,
       0x60CE,
     ]],
+    eventFlagId: "GOT_THUNDERBADGE",
   },
   CELADON_GYM_BADGE: {
     id: "CELADON_GYM_BADGE",
@@ -5263,6 +5688,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       28,
       0x6A96,
     ]],
+    eventFlagId: "GOT_RAINBOWBADGE",
   },
   FUCHSIA_GYM_BADGE: {
     id: "FUCHSIA_GYM_BADGE",
@@ -5274,6 +5700,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       101,
       0x5DF8,
     ]],
+    eventFlagId: "GOT_SOULBADGE",
   },
   SAFFRON_GYM_BADGE: {
     id: "SAFFRON_GYM_BADGE",
@@ -5285,6 +5712,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       98,
       0x5C5A,
     ]],
+    eventFlagId: "GOT_MARSHBADGE",
   },
   SEAFOAM_GYM_BADGE: {
     id: "SEAFOAM_GYM_BADGE",
@@ -5296,6 +5724,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       106,
       0x7520,
     ]],
+    eventFlagId: "GOT_VOLCANOBADGE",
   },
   VIRIDIAN_GYM_BADGE: {
     id: "VIRIDIAN_GYM_BADGE",
@@ -5310,6 +5739,7 @@ export const badgeLocationsMap: IdMap<BadgeLocationId, ItemLocation> = {
       38,
       0x6A46,
     ]],
+    eventFlagId: "GOT_EARTHBADGE",
   },
 }
 

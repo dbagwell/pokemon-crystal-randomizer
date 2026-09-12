@@ -1,4 +1,5 @@
 import type { AccessRequirement } from "@shared/types/gameData/warp"
+import type { EventFlagId } from "@shared/types/gameDataIds/eventFlags"
 import type { ItemLocationGroupId } from "@shared/types/gameDataIds/itemLocationGroups"
 import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
 import type { ItemId } from "@shared/types/gameDataIds/items"
@@ -21,6 +22,7 @@ export type ItemLocation = {
   areaId: LogicalAccessAreaId
   accessRequirements?: AccessRequirement[]
   romOffsets: [number, number][]
+  eventFlagId: EventFlagId
 }
 
 export type GeneralItemLocation = {
