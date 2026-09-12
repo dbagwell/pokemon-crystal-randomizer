@@ -10,7 +10,7 @@ import { isNotNullish, isNullish, isObject, isSemanticVersion, isSemanticVersion
 import { app, dialog, shell } from "electron"
 import fs from "fs"
 
-export const handlePCRPFile = async (filePath: string) => {
+export const handlePCRPFile = async (filePath: string, outputFilePath: string | undefined = undefined) => {
   try {
     const patchData = fs.readFileSync(filePath)
     const vanillaROMData = await getVanillaROM(false)
@@ -130,9 +130,9 @@ export const handlePCRPFile = async (filePath: string) => {
     
     const fileInfo = attemptWriteROMFile({
       fileData: patchResult.rom,
-      defaultFilePathWithoutExtension: patchResult.patchInfo!.checkValue,
-      forcePromptForLocation: true,
-      forceOverwrite: false,
+      defaultFilePathWithoutExtension: isNotNullish(outputFilePath) ? outputFilePath.replace(/.gbc$/, "") : patchResult.patchInfo!.checkValue,
+      forcePromptForLocation: isNullish(outputFilePath),
+      forceOverwrite: isNotNullish(outputFilePath),
       throwErrorOnWriteFailure: false,
     })
     
@@ -145,7 +145,9 @@ export const handlePCRPFile = async (filePath: string) => {
       })
     }
     
-    shell.openPath(fileInfo.fullOutputFilePath)
+    if (isNullish(outputFilePath)) {
+      shell.openPath(fileInfo.fullOutputFilePath)
+    }
   } catch (error) {
     throw new Error(`Error patching ROM:\n\n${error}`, { cause: error })
   }
