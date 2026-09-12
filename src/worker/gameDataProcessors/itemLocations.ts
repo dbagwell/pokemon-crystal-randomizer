@@ -431,6 +431,7 @@ export const shuffleItems = (
       }
       
       location.itemId = selectedItemInfo.itemId
+      location.allowsAPShuffle = location.shuffleGroupIndex === 0
       
       if (areAreCurrentAssignmentsValid({
         allItemLocations: allItemLocations,
@@ -461,6 +462,7 @@ export const shuffleItems = (
     }).itemId
     
     location.itemId = selectedItemId
+    location.allowsAPShuffle = location.shuffleGroupIndex === 0
         
     const selectedItemIndex = itemsToShuffle.findIndex((itemInfo) => {
       return itemInfo.itemId === selectedItemId && itemInfo.shuffleGroupIndex === location.shuffleGroupIndex
@@ -579,6 +581,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
             ...object.accessRequirements ?? [],
           ]),
         ],
+        allowsAPShuffle: false,
       }
     })
   }
