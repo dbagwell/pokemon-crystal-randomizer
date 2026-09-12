@@ -11,6 +11,7 @@ values:
   handleRegularItemScript: "1F FF 01 08 @$finishRegularItemScript 0E 11 @$clearRegularItemQueue $finishRegularItemScript"
   finishRegularItemScript: "91 $clearRegularItemQueue"
   clearRegularItemQueue: "AF EA 3A DC C9"
+  checkAPItemDescriptions: "FA 60 CF FE C3 CA 73 49 FE DC CA 73 49 C3 58 49"
 changes:
 - description: "Adds code."
   locations:
@@ -40,4 +41,13 @@ changes:
   - bank: 0
     address: 0x346D
   value: "00 00 00 00"
+- description: "Adds code."
+  locations:
+  - bank: 114
+  value: "$checkAPItemDescriptions"
+- description: "Calls code."
+  locations:
+  - bank: 114
+    address: 0x4955
+  value: "C3 @$checkAPItemDescriptions"
   
