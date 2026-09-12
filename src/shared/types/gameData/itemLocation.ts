@@ -30,4 +30,5 @@ export type GeneralItemLocation = {
   shuffleGroupIndex: number
   accessOptions: AccessRequirement[][]
   itemId: ItemId | undefined
+  allowsAPShuffle: boolean
 }
