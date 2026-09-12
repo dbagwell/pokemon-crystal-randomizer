@@ -551,13 +551,13 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
           "POKEGEAR",
           "RADIO_CARD",
           "EXPN_CARD",
-          ...areAllPokemonSearchable ? [
+          ...areAllPokemonSearchable ? [] : [
             "TM02",
             "TM08",
             "OLD_ROD",
             "GOOD_ROD",
             "SUPER_ROD",
-          ] as const : [],
+          ] as const,
         ] as const
       } else {
         return [
