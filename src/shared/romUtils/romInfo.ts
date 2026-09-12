@@ -156,7 +156,7 @@ export const defaultROMInfo = (): ROMInfo => {
       { offset: romOffsetFromBankAddress(124, 0x49D8), size: 0x3628 },
       { offset: romOffsetFromBankAddress(125, 0x636A), size: 0x1C96 },
       { offset: romOffsetFromBankAddress(126, 0x78A8), size: 0x0758 },
-      { offset: romOffsetFromBankAddress(127, 0x4000), size: 0x3DE0 },
+      { offset: romOffsetFromBankAddress(127, 0x4010), size: 0x3DD0 },
     ],
     patchHunks: [],
     gameData: {

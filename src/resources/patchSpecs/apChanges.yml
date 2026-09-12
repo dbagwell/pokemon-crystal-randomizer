@@ -1,0 +1,43 @@
+description: "Adds code to facilitate giving the player items sent from AP (this uses unused WRAM bank 1 addresses 0xDC3A - 0xDC3F and 0x1D00) and sets an event when red is defeated"
+values:
+  setBeatRedFlag: "48 00 33 $beatRedEventFlagId A2"
+  checkForNewItems: "FA 3D DC A7 28 0F FA 00 DD EA DD C2 3E 11 21 @$handleSpecialItemScript CD 1F 26 C9 FA 3A DC A7 28 0B EA DD C2 3E 11 21 @$handleRegularItemScript CD 1F 26 C9 $handleSpecialItemScript $handleRegularItemScript"
+  handleSpecialItemScript: "09 @$giveSpecialItemVerbose 0E 11 @$loadSpecialItemId 1F FF 01 03 @$checkSpecialItemResult $giveSpecialItemVerbose"
+  giveSpecialItemVerbose: "47 0E 11 @$loadSpecialItemId 9E FF 01 49 $checkSpecialItemResult"
+  checkSpecialItemResult: "08 @$finishSpecialItemScript 0E 11 @$clearSpecialItemQueue $finishSpecialItemScript"
+  finishSpecialItemScript: "91 $loadSpecialItemId $clearSpecialItemQueue"
+  loadSpecialItemId: "FA 3D DC EA DD C2 C9"
+  clearSpecialItemQueue: "AF EA 3D DC C9"
+  handleRegularItemScript: "1F FF 01 08 @$finishRegularItemScript 0E 11 @$clearRegularItemQueue $finishRegularItemScript"
+  finishRegularItemScript: "91 $clearRegularItemQueue"
+  clearRegularItemQueue: "AF EA 3A DC C9"
+changes:
+- description: "Adds code."
+  locations:
+  - bank: 99
+  value: "$setBeatRedFlag"
+- description: "Calls code."
+  locations:
+  - bank: 99
+    address: 0x4633
+  value: "03 @$setBeatRedFlag"
+- description: "Adds code."
+  locations:
+  - bank: 17
+  value: "$checkForNewItems"
+- description: "Swizzles call to function in player event loop."
+  locations:
+  - bank: 37
+    address: 0x6842
+  value: "D8 68"
+- description: "Calls swizzled function then calls our own event checker."
+  locations:
+  - bank: 37
+    address: 0x68D8
+  value: "CD 74 69 D8 3E 11 21 @$checkForNewItems CF C9"
+- description: "Skips calling the special function to calculate the tm hm item names since it's redundant and cause some of the ap items to appear as tms."
+  locations:
+  - bank: 0
+    address: 0x346D
+  value: "00 00 00 00"
+  

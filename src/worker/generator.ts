@@ -84,7 +84,7 @@ export const generate = (params: GenerateParams) => {
   
   if (params.shouldCreateROM || params.shouldCreatePatch) {
     if (!isDefaultSettings) {
-      createPatches(params.settings, romInfo)
+      createPatches(params.settings, romInfo, params.shouldAddAPChanges, seed)
     }
     
     createBasePatch({
@@ -205,6 +205,8 @@ const updateGameData = (
 const createPatches = (
   settings: Settings,
   romInfo: ROMInfo,
+  shouldAddAPChanges: boolean,
+  seed: string,
 ) => {
   // Intro Pokemon
   
@@ -663,7 +665,8 @@ const createPatches = (
                       : item.type === "POKEDEX_PART" ? 5
                         : item.type === "POKEGEAR_PART" ? 6
                           : item.type === "JOHTO_BADGE" ? 7
-                            : 8,
+                            : item.type === "KANTO_BADGE" ? 8
+                              : 9, // AP_ITEM
               itemMenuActionsMap[item.fieldMenuAction] << 4 | itemMenuActionsMap[item.battleMenuAction],
             ]
           } else {
@@ -2548,6 +2551,24 @@ const createPatches = (
   
   if (settings.ADD_DV_TOGGLE_TO_STATS) {
     romInfo.patchHunks.push(...Patch.fromYAML(romInfo, "viewableDVs.yml").hunks)
+  }
+  
+  // AP Changes
+  
+  if (shouldAddAPChanges) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "apChanges.yml",
+      {},
+      {
+        beatRedEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.BEAT_RED.numericId, 2)),
+      },
+    ).hunks)
+    
+    romInfo.patchHunks.push({
+      offset: romOffsetFromBankAddress(127, 0x4000),
+      values: Array.from(Buffer.from(seed.substring(0, 16), "ascii")),
+    })
   }
 }
 

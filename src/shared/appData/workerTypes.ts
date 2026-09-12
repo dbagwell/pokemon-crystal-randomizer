@@ -8,6 +8,7 @@ export type GenerateParams = {
   playerOptions: PlayerOptions
   inputROM: Uint8Array
   gameData?: GameData
+  shouldAddAPChanges: boolean
   shouldCreateROM: boolean
   shouldCreateLog: boolean
   shouldCreatePatch: boolean

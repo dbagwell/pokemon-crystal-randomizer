@@ -28,6 +28,7 @@ export const generateFromCLI = async (args: string[]) => {
   const settingsFilePath = getStringArg("settings")
   const seed = getStringArg("seed")
   const gameDataFilePath = getStringArg("inputGameData")
+  const shouldAddAPChanges = getBooleanArg("ap")
   const playerOptionsFilePath = getStringArg("playerOptions")
   const vanillaROMPath = getStringArg("inputROM")
   const outputDir = getStringArg("outputDir")
@@ -129,6 +130,7 @@ export const generateFromCLI = async (args: string[]) => {
         playerOptions: validatedPlayerOptions,
         inputROM: inputROMData,
         gameData: gameData,
+        shouldAddAPChanges: shouldAddAPChanges,
         shouldCreateROM: shouldGenerateROM,
         shouldCreateLog: shouldGenerateLog,
         shouldCreatePatch: shouldGeneratePatch,

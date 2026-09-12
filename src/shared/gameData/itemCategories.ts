@@ -55,7 +55,7 @@ export const itemCategoriesMap = {
   AP_ITEMS: {
     id: "AP_ITEMS",
     name: "AP Items",
-    slotSize: 0,
+    slotSize: 1,
     maxSlots: 0,
     itemIds: apItemIds,
   },

@@ -117,6 +117,7 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
           settings: settings,
           playerOptions: playerOptions,
           inputROM: vanillaROM,
+          shouldAddAPChanges: false,
           shouldCreateROM: true,
           shouldCreateLog: shouldGenerateLog,
           shouldCreatePatch: createPatch,
