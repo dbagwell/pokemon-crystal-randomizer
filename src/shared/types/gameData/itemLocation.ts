@@ -33,4 +33,6 @@ export type GeneralItemLocation = {
   accessOptions: AccessRequirement[][]
   itemId: ItemId | undefined
   allowsAPShuffle: boolean
+  isConsumableProgression: boolean
+  preventsProgression: boolean
 }

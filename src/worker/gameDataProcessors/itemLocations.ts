@@ -166,7 +166,7 @@ export const shuffleItems = (
   const startingAccessibleItems = startingItemIds(settings).map((itemId) => {
     return {
       itemId: itemId,
-      isFromMart: false,
+      isFromRenewableShop: false,
     }
   })
   
@@ -244,15 +244,16 @@ export const shuffleItems = (
   itemsToShuffle.filter((itemInfo) => {
     return progressionItemIds.has(itemInfo.itemId)
   }).reduce((result, itemInfo) => {
+    const itemIsConsumable = (holdableItemIds as readonly ItemId[]).includes(itemInfo.itemId)
     if (
       shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC
-      && holdableItemIds.includes(itemInfo.itemId as HoldableItemId)
+      && itemIsConsumable
       && itemInfo.shuffleGroupIndex !== shopsShuffleGroupIndex
     ) {
       return result
     }
     
-    if (!result.some((resultItemInfo) => { return resultItemInfo.itemId === itemInfo.itemId })) {
+    if (!itemIsConsumable || !result.some((resultItemInfo) => { return resultItemInfo.itemId === itemInfo.itemId })) {
       result.push(itemInfo)
     }
     
@@ -265,11 +266,13 @@ export const shuffleItems = (
     }
   })
   
-  remainingConsumableProgressionItems.forEach((itemInfo) => {
-    removeFirstElementFromArrayWhere(itemsToShuffle, (itemToSuffleInfo) => {
-      return itemToSuffleInfo.itemId === itemInfo.itemId && itemToSuffleInfo.shuffleGroupIndex === itemInfo.shuffleGroupIndex
+  if (shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC) {
+    remainingConsumableProgressionItems.forEach((itemInfo) => {
+      removeFirstElementFromArrayWhere(itemsToShuffle, (itemToShuffleInfo) => {
+        return itemToShuffleInfo.itemId === itemInfo.itemId && itemToShuffleInfo.shuffleGroupIndex === itemInfo.shuffleGroupIndex
+      })
     })
-  })
+  }
   
   remainingKeyProgressionItems.forEach((itemInfo) => {
     removeFirstElementFromArrayWhere(itemsToShuffle, (itemToSuffleInfo) => {
@@ -323,6 +326,7 @@ export const shuffleItems = (
         
         if (remainingConsumableProgressionItems.some(condition)) {
           removeFirstElementFromArrayWhere(remainingConsumableProgressionItems, condition)
+          location.isConsumableProgression = true
         } else {
           removeFirstElementFromArrayWhere(itemsToShuffle, condition)
         }
@@ -349,10 +353,15 @@ export const shuffleItems = (
     }
   }
   
+  progressBannedShopLocations.forEach((location) => {
+    location.preventsProgression = true
+  })
+  
   while (remainingKeyProgressionItems.length > 0) {
     const itemsArray = remainingConsumableProgressionItems.length > 0 ? remainingConsumableProgressionItems : remainingKeyProgressionItems
     
     const selectedItemInfo = random.element({ array: itemsArray })
+    const isSelectedItemConsumable = (holdableItemIds as readonly ItemId[]).includes(selectedItemInfo.itemId)
     
     const selectedItemIndex = itemsArray.findIndex((itemInfo) => {
       return itemInfo.itemId === selectedItemInfo.itemId && itemInfo.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
@@ -407,17 +416,22 @@ export const shuffleItems = (
               ...allRemainingProgressionItems.map((item) => {
                 return {
                   itemId: item.itemId,
-                  isFromMart: true, // Might not always be correct, but is always correct when it matters.
+                  isFromRenewableShop: true, // Might not always be correct, but is always correct when it matters.
                 }
               }),
             ],
             allItemLocations: allItemLocations,
             allowNormalConsumables: !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
+            settings: settings,
           }).filter((location) => {
             return isNullish(location.itemId)
             && !invalidLocations.includes(location.id)
             && location.shuffleGroupIndex === selectedItemInfo.shuffleGroupIndex
-            && (!(holdableItemIds as readonly ItemId[]).includes(selectedItemInfo.itemId) || !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC || location.type === "MART")
+            && (
+              !isSelectedItemConsumable
+              || !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC
+              || isLocationRenewableShop(location, settings)
+            )
             && (
               location.type === "ITEM_LOCATION"
               || !shuffleItemsSettings.PREVENT_SHOP_ITEMS.includes(selectedItemInfo.itemId) && !progressBannedShopLocations.some((bannedShopLocation) => {
@@ -431,7 +445,6 @@ export const shuffleItems = (
       }
       
       location.itemId = selectedItemInfo.itemId
-      location.allowsAPShuffle = location.shuffleGroupIndex === 0
       
       if (areAreCurrentAssignmentsValid({
         allItemLocations: allItemLocations,
@@ -439,7 +452,10 @@ export const shuffleItems = (
         allowNormalConsumables: !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
         unplacedItems: allRemainingProgressionItems,
         progressionItemIds: progressionItemIds,
+        settings: settings,
       })) {
+        location.allowsAPShuffle = location.shuffleGroupIndex === 0 && !isSelectedItemConsumable
+        location.isConsumableProgression = isSelectedItemConsumable
         foundLocation = true
       } else {
         location.itemId = undefined
@@ -497,15 +513,25 @@ export const shuffleItems = (
   }
 }
 
+const isLocationRenewableShop = (location: GeneralItemLocation, settings: Settings) => {
+  return location.type === "MART"
+    || location.type === "SPECIAL_SHOP"
+    && !(location.id.includes("GOLDENROD_GAME_CORNER_ITEM_SHOP") && settings.LIMIT_GAME_CORNER_ITEM_STOCK)
+    && !(location.id.includes("CELADON_GAME_CORNER_ITEM_SHOP") && settings.LIMIT_GAME_CORNER_ITEM_STOCK)
+    && !(location.id.includes("RADIO_TOWER_2F_BLUE_CARD_SHOP") && settings.LIMIT_BLUE_CARD_REWARDS_STOCK)
+}
+
 const getAccessibleLocations = (params: {
   accessibleItems: AccessibleItem[]
   allItemLocations: GeneralItemLocation[]
   allowNormalConsumables: boolean
+  settings: Settings
 }) => {
   const {
     accessibleItems: [...accessibleItems],
     allItemLocations,
     allowNormalConsumables,
+    settings,
   } = params
   
   const accessibleItemLocations: GeneralItemLocation[] = []
@@ -515,6 +541,7 @@ const getAccessibleLocations = (params: {
     accessibleItemLocations: accessibleItemLocations,
     allItemLocations: allItemLocations,
     allowNormalConsumables: allowNormalConsumables,
+    settings: settings,
   })
   
   return accessibleItemLocations
@@ -582,6 +609,8 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
           ]),
         ],
         allowsAPShuffle: false,
+        isConsumableProgression: false,
+        preventsProgression: false,
       }
     })
   }
@@ -735,6 +764,7 @@ const areAreCurrentAssignmentsValid = (params: {
   allowNormalConsumables: boolean
   unplacedItems: { itemId: ItemId, shuffleGroupIndex: number }[]
   progressionItemIds: Set<ItemId>
+  settings: Settings
 }): boolean => {
   const {
     allItemLocations: inputAllItemLocations,
@@ -742,6 +772,7 @@ const areAreCurrentAssignmentsValid = (params: {
     allowNormalConsumables,
     unplacedItems: [...unplacedItems],
     progressionItemIds,
+    settings,
   } = params
   
   const allItemLocations = JSON.parse(JSON.stringify(inputAllItemLocations)) as GeneralItemLocation[]
@@ -754,6 +785,7 @@ const areAreCurrentAssignmentsValid = (params: {
     allItemLocations: allItemLocations,
     allowNormalConsumables: allowNormalConsumables,
     updateAccessOptions: true,
+    settings: settings,
   })
   
   updateAccessRequirementsUsingPlacedItems({
@@ -772,7 +804,7 @@ const areAreCurrentAssignmentsValid = (params: {
     }, new Set<number>())
     
     const accessibleMartLocation = allowNormalConsumables ? accessibleItemLocations.find((location) => {
-      return location.type === "MART"
+      return isLocationRenewableShop(location, settings)
     }) : undefined // Because this is only used later if `allowNormalConsumables` is true we skip this search to save time if it's false
     
     const validItems = unplacedItems.reduce((result, item) => {
@@ -901,9 +933,9 @@ const areAreCurrentAssignmentsValid = (params: {
     })
     
     const bestLocation = (holdableItemIds as readonly ItemId[]).includes(nextItem.itemId) && !allowNormalConsumables ? validLocations.find((location) => {
-      return location.type === "MART"
+      return isLocationRenewableShop(location, settings)
     }) ?? validLocations[0] : validLocations.find((location) => {
-      return location.type !== "MART"
+      return !isLocationRenewableShop(location, settings)
     }) ?? validLocations[0]
     
     if (isNullish(bestLocation)) {
@@ -914,7 +946,7 @@ const areAreCurrentAssignmentsValid = (params: {
     
     accessibleItems.push({
       itemId: nextItem.itemId,
-      isFromMart: bestLocation.type === "MART",
+      isFromRenewableShop: isLocationRenewableShop(bestLocation, settings),
     })
     
     updateAccessibleItemsAndLocations({
@@ -923,6 +955,7 @@ const areAreCurrentAssignmentsValid = (params: {
       allItemLocations: allItemLocations,
       allowNormalConsumables: allowNormalConsumables,
       updateAccessOptions: true,
+      settings: settings,
     })
     
     const index = unplacedItems.findIndex((unplacedItem) => {
@@ -935,7 +968,7 @@ const areAreCurrentAssignmentsValid = (params: {
   return true
 }
 
-type AccessibleItem = { itemId: ItemId, isFromMart: boolean }
+type AccessibleItem = { itemId: ItemId, isFromRenewableShop: boolean }
 
 const updateAccessRequirementsUsingPlacedItems = (params: {
   accessibleItemLocations: GeneralItemLocation[]
@@ -1009,6 +1042,7 @@ const updateAccessibleItemsAndLocations = (params: {
   allItemLocations: GeneralItemLocation[]
   allowNormalConsumables: boolean
   updateAccessOptions?: boolean
+  settings: Settings
 }) => {
   const {
     accessibleItems,
@@ -1016,6 +1050,7 @@ const updateAccessibleItemsAndLocations = (params: {
     allItemLocations,
     allowNormalConsumables,
     updateAccessOptions,
+    settings,
   } = params
   
   let didUpdate = true
@@ -1044,10 +1079,10 @@ const updateAccessibleItemsAndLocations = (params: {
       if (remainingAccessOptions.some((option) => { return option.length === 0 })) {
         didUpdate = true
         accessibleItemLocations.push(location)
-        if (isNotNullish(location.itemId) && (location.type === "MART" || !(holdableItemIds as readonly string[]).includes(location.itemId) || allowNormalConsumables)) {
+        if (isNotNullish(location.itemId) && (isLocationRenewableShop(location, settings) || !(holdableItemIds as readonly string[]).includes(location.itemId) || allowNormalConsumables)) {
           accessibleItems.push({
             itemId: location.itemId,
-            isFromMart: location.type === "MART",
+            isFromRenewableShop: isLocationRenewableShop(location, settings),
           })
         }
       }
@@ -1066,7 +1101,7 @@ const isAccessRequirementSatisfied = (params: {
   
   if (isObject(requirement)) {
     return accessibleItems.some((item) => {
-      return item.isFromMart && item.itemId !== "GS_BALL"
+      return item.isFromRenewableShop && item.itemId !== "GS_BALL"
     }) || accessibleItems.filter((item) => {
       return item.itemId === requirement.item
     }).length >= requirement.number
