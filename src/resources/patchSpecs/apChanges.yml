@@ -1,7 +1,7 @@
 description: "Adds code to facilitate giving the player items sent from AP (this uses unused WRAM bank 1 addresses 0xDC3A - 0xDC3F and 0x1D00) and sets an event when red is defeated"
 values:
   setBeatRedFlag: "48 00 33 $beatRedEventFlagId A2"
-  checkForNewItems: "FA 3D DC A7 28 0F FA 00 DD EA DD C2 3E 11 21 @$handleSpecialItemScript CD 1F 26 C9 FA 3A DC A7 28 0B EA DD C2 3E 11 21 @$handleRegularItemScript CD 1F 26 C9 $handleSpecialItemScript $handleRegularItemScript"
+  checkForNewItems: "FA 3D DC A7 28 0F FA 00 DD EA DD C2 3E 11 21 @$handleSpecialItemScript CD 1F 26 C9 FA 92 D8 FE 14 20 02 AF C9 FA 3A DC A7 28 0B EA DD C2 3E 11 21 @$handleRegularItemScript CD 1F 26 C9 $handleSpecialItemScript $handleRegularItemScript"
   handleSpecialItemScript: "09 @$giveSpecialItemVerbose 0E 11 @$loadSpecialItemId 1F FF 01 03 @$checkSpecialItemResult $giveSpecialItemVerbose"
   giveSpecialItemVerbose: "47 0E 11 @$loadSpecialItemId 9E FF 01 49 $checkSpecialItemResult"
   checkSpecialItemResult: "08 @$finishSpecialItemScript 0E 11 @$clearSpecialItemQueue $finishSpecialItemScript"
