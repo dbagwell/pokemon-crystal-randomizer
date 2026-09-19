@@ -15582,7 +15582,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "ROUTE_37_SUNNY_OF_SUNDAY",
   },
   {
-    id: "ROUTE_37_MIDDLE_FRUIT_TREE",
+    id: "ROUTE_37_RIGHT_FRUIT_TREE",
     romOffset: [
       106,
       20978,
@@ -15603,7 +15603,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     scriptPointer: 19979,
   },
   {
-    id: "ROUTE_37_RIGHT_FRUIT_TREE",
+    id: "ROUTE_37_MIDDLE_FRUIT_TREE",
     romOffset: [
       106,
       20991,
