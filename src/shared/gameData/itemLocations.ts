@@ -338,8 +338,8 @@ export const regularItemBallLocationsMap: IdMap<RegularItemBallLocationId, ItemL
     ]],
     eventFlagId: "ROUTE_45_REVIVE",
   },
-  ROUTE_46_NORTH_AREA_DARK_CAVE_SIDE_ITEM_BALL: {
-    id: "ROUTE_46_NORTH_AREA_DARK_CAVE_SIDE_ITEM_BALL",
+  ROUTE_46_NORTH_AREA_ITEM_BALL: {
+    id: "ROUTE_46_NORTH_AREA_ITEM_BALL",
     type: "ITEM_BALL",
     groupId: "REGULAR_ITEM_BALLS",
     itemId: "X_SPEED",
