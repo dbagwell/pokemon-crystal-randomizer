@@ -1188,7 +1188,7 @@ export const defaultSettingsViewModel = () => {
                 id: "IMPROVED_CONSUMABLE_ACCESS_LOGIC" as const,
                 name: "Improved Consumable Access Logic",
                 description: "If shop items are being shuffled, at least one of each consumable item that is required for some sort of progression will be available in a renewable shop.\n"
-                  + "Also, consumable items that are not obtained from renewable shops will be considered inaccessible by the rules used to shuffle the items.",
+                  + "Also, consumable items that are not obtained from renewable shops will be considered inaccessible by the rules used to shuffle the items (even if shop items are not being shuffled).",
               }),
               createSimpleMultiSelectorViewModel({
                 id: "GUARANTEED_SHOP_ITEMS" as const,
@@ -1233,7 +1233,7 @@ export const defaultSettingsViewModel = () => {
                     createSimpleMultiSelectorViewModel({
                       id: "ITEMS" as const,
                       name: "Items",
-                      description: "The items that will be prevented from being place in the selected locations.",
+                      description: "The items that will be prevented from being placed in the selected locations.",
                       options: itemIds.map((itemId) => {
                         return createSimpleSelectorOption({
                           id: itemId,
