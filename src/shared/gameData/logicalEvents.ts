@@ -430,7 +430,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
   },
   SILVER_CAVE_ROOM_3_DEFEATED_RED: {
     id: "SILVER_CAVE_ROOM_3_DEFEATED_RED",
-    eventFlagId: "RED_IN_MT_SILVER", // TODO: Make proper event flag for this
+    eventFlagId: "BEAT_RED",
     areaId: "SILVER_CAVE_ROOM_3",
   },
 }
