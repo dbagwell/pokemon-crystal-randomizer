@@ -3684,7 +3684,7 @@ export const itemsMap: IdMap<ItemId, Item> = {
     numericId: 0xC3,
     inGameName: "USEFUL ITEM",
     name: "Useful AP Item",
-    price: 1000,
+    price: 750,
     holdEffectId: "NONE",
     associatedValue: 0,
     isRegisterable: false,
