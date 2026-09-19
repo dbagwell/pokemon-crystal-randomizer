@@ -5314,6 +5314,9 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     groupId: "KEY_ITEMS",
     itemId: "CLEAR_BELL",
     areaId: "RADIO_TOWER_5F_EAST_AREA",
+    accessRequirements: [
+      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+    ],
     romOffsets: [[
       24,
       0x40DB,
