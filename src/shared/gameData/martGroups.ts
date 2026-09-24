@@ -137,8 +137,8 @@ export const martGroupsMap: IdMap<MartGroupId, MartGroup> = {
     primaryMartId: "SAFFRON_MART_SHOP",
     name: "Saffron Mart - Shop",
   },
-  MT_MOON_GIFT_SHOP_SHOP: {
-    id: "MT_MOON_GIFT_SHOP_SHOP",
+  MOUNT_MOON_GIFT_SHOP_SHOP: {
+    id: "MOUNT_MOON_GIFT_SHOP_SHOP",
     primaryMartId: "MOUNT_MOON_GIFT_SHOP_SHOP",
     name: "Mount Moon Gift Shop - Shop",
   },

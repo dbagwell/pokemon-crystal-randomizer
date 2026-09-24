@@ -450,7 +450,7 @@ export const martsMap: IdMap<MartId, Mart> = {
   },
   MOUNT_MOON_GIFT_SHOP_SHOP: {
     id: "MOUNT_MOON_GIFT_SHOP_SHOP",
-    groupId: "MT_MOON_GIFT_SHOP_SHOP",
+    groupId: "MOUNT_MOON_GIFT_SHOP_SHOP",
     areaId: "MOUNT_MOON_GIFT_SHOP",
     items: [
       "POKE_DOLL",

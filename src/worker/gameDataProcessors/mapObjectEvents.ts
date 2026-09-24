@@ -148,9 +148,9 @@ export const updateMapObjectEvents = (
     })!.scriptPointer = 0x48F4
   }
   
-  if (settings.REMOVE_MT_MOON_SHOP_TIME_REQUIREMENT) {
+  if (settings.REMOVE_MOUNT_MOON_SHOP_TIME_REQUIREMENT) {
     romInfo.gameData.mapObjectEvents.find((object) => {
-      return object.id === "MORNING_MT_MOON_SHOP_OWNER"
+      return object.id === "MORNING_MOUNT_MOON_SHOP_OWNER"
     })!.time = [18, 10]
   }
 }

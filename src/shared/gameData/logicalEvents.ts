@@ -422,7 +422,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
   },
   OAKS_LAB_GOT_OAKS_APPROVAL: {
     id: "OAKS_LAB_GOT_OAKS_APPROVAL",
-    eventFlagId: "OPENED_MT_SILVER",
+    eventFlagId: "OPENED_MOUNT_SILVER",
     areaId: "OAKS_LAB",
     accessRequirements: [
       16,

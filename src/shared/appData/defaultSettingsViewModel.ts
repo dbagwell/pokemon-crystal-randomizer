@@ -1630,7 +1630,7 @@ export const defaultSettingsViewModel = () => {
             ],
           }),
           createSimpleToggleViewModel({
-            id: "REMOVE_MT_MOON_SHOP_TIME_REQUIREMENT" as const,
+            id: "REMOVE_MOUNT_MOON_SHOP_TIME_REQUIREMENT" as const,
             name: "Remove Mt. Moon Shop Time Requirement",
             description: "Makes it so the vendor in Mt. Moon is alway in their house.",
           }),

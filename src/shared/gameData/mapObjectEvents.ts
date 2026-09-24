@@ -8931,7 +8931,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "SCRIPT",
     sightRange: 0,
     scriptPointer: 17923,
-    flagId: "RED_IN_MT_SILVER",
+    flagId: "RED_IN_MOUNT_SILVER",
   },
   {
     romOffset: [
@@ -9537,7 +9537,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "SCRIPT",
     sightRange: 0,
     scriptPointer: 9967,
-    flagId: "MT_MOON_RIVAL",
+    flagId: "MOUNT_MOON_RIVAL",
   },
   {
     romOffset: [
@@ -21656,7 +21656,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "SCRIPT",
     sightRange: 0,
     scriptPointer: 9967,
-    flagId: "MT_MOON_SQUARE_CLEFAIRY",
+    flagId: "MOUNT_MOON_SQUARE_CLEFAIRY",
   },
   {
     romOffset: [
@@ -21677,7 +21677,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "SCRIPT",
     sightRange: 0,
     scriptPointer: 9967,
-    flagId: "MT_MOON_SQUARE_CLEFAIRY",
+    flagId: "MOUNT_MOON_SQUARE_CLEFAIRY",
   },
   {
     romOffset: [
@@ -21698,10 +21698,10 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "SCRIPT",
     sightRange: 0,
     scriptPointer: 28958,
-    flagId: "MT_MOON_SQUARE_ROCK",
+    flagId: "MOUNT_MOON_SQUARE_ROCK",
   },
   {
-    id: "MORNING_MT_MOON_SHOP_OWNER",
+    id: "MORNING_MOUNT_MOON_SHOP_OWNER",
     romOffset: [
       29,
       29175,
@@ -27857,7 +27857,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     typeId: "SCRIPT",
     sightRange: 0,
     scriptPointer: 31265,
-    flagId: "OPENED_MT_SILVER",
+    flagId: "OPENED_MOUNT_SILVER",
   },
   {
     romOffset: [

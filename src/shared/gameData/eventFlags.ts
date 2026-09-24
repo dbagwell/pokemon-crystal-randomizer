@@ -1654,8 +1654,8 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "FOUGHT_LUGIA",
     numericId: 792,
   },
-  BEAT_RIVAL_IN_MT_MOON: {
-    id: "BEAT_RIVAL_IN_MT_MOON",
+  BEAT_RIVAL_IN_MOUNT_MOON: {
+    id: "BEAT_RIVAL_IN_MOUNT_MOON",
     numericId: 793,
   },
   MET_BILLS_GRANDPA: {
@@ -5242,8 +5242,8 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "RUINS_OF_ALPH_KABUTO_CHAMBER_RECEPTIONIST",
     numericId: 1870,
   },
-  OPENED_MT_SILVER: {
-    id: "OPENED_MT_SILVER",
+  OPENED_MOUNT_SILVER: {
+    id: "OPENED_MOUNT_SILVER",
     numericId: 1871,
   },
   FOUGHT_SNORLAX: {
@@ -5318,8 +5318,8 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "TEAM_ROCKET_DISBANDED",
     numericId: 1889,
   },
-  RED_IN_MT_SILVER: {
-    id: "RED_IN_MT_SILVER",
+  RED_IN_MOUNT_SILVER: {
+    id: "RED_IN_MOUNT_SILVER",
     numericId: 1890,
   },
   GOLDENROD_DEPT_STORE_5F_HAPPINESS_EVENT_LADY: {
@@ -5406,16 +5406,16 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "SEAFOAM_GYM_GYM_GUIDE",
     numericId: 1911,
   },
-  MT_MOON_SQUARE_ROCK: {
-    id: "MT_MOON_SQUARE_ROCK",
+  MOUNT_MOON_SQUARE_ROCK: {
+    id: "MOUNT_MOON_SQUARE_ROCK",
     numericId: 1912,
   },
-  MT_MOON_SQUARE_CLEFAIRY: {
-    id: "MT_MOON_SQUARE_CLEFAIRY",
+  MOUNT_MOON_SQUARE_CLEFAIRY: {
+    id: "MOUNT_MOON_SQUARE_CLEFAIRY",
     numericId: 1913,
   },
-  MT_MOON_RIVAL: {
-    id: "MT_MOON_RIVAL",
+  MOUNT_MOON_RIVAL: {
+    id: "MOUNT_MOON_RIVAL",
     numericId: 1914,
   },
   INDIGO_PLATEAU_POKECENTER_RIVAL: {
