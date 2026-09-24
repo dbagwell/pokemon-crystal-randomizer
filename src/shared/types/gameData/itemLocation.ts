@@ -16,6 +16,7 @@ export type ItemLocationType = typeof itemLocationTypes[number]
 
 export type ItemLocation = {
   id: ItemLocationId
+  name: string
   type: ItemLocationType
   groupId: ItemLocationGroupId
   itemId: ItemId

@@ -14,6 +14,7 @@ export type Mart = {
 
 export type SpecialShop = {
   id: SpecialShopId
+  name: string
   areaId: LogicalAccessAreaId
   items: { itemId: ItemId, price: number }[]
   accessRequirements?: AccessRequirement[]

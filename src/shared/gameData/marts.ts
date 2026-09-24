@@ -531,6 +531,7 @@ export const martsMap: IdMap<MartId, Mart> = {
 export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
   GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES: {
     id: "GOLDENROD_DEPT_STORE_6F_VENDING_MACHINES",
+    name: "Goldenrod Dept. Store - 6F - Vending Machines",
     areaId: "GOLDENROD_DEPT_STORE_6F",
     items: [
       {
@@ -549,6 +550,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
   },
   CELADON_DEPT_STORE_6F_VENDING_MACHINES: {
     id: "CELADON_DEPT_STORE_6F_VENDING_MACHINES",
+    name: "Celadon Dept. Store - 6F - Vending Machines",
     areaId: "CELADON_DEPT_STORE_6F",
     items: [
       {
@@ -567,6 +569,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
   },
   GOLDENROD_UNDERGROUND_BARGAIN_SHOP: {
     id: "GOLDENROD_UNDERGROUND_BARGAIN_SHOP",
+    name: "Goldenrod Underground - Bargain Shop",
     areaId: "GOLDENROD_UNDERGROUND",
     items: [
       {
@@ -593,6 +596,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
   },
   GOLDENROD_DEPT_STORE_ROOF_SHOP_1: {
     id: "GOLDENROD_DEPT_STORE_ROOF_SHOP_1",
+    name: "Goldenrod Dept. Store Roof - Shop 1",
     areaId: "GOLDENROD_DEPT_STORE_ROOF",
     items: [
       {
@@ -623,6 +627,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
   },
   GOLDENROD_DEPT_STORE_ROOF_SHOP_2: {
     id: "GOLDENROD_DEPT_STORE_ROOF_SHOP_2",
+    name: "Goldenrod Dept. Store Roof - Shop 2",
     areaId: "GOLDENROD_DEPT_STORE_ROOF",
     items: [
       {
@@ -654,6 +659,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
   },
   ROUTE_39_FARMHOUSE_SHOP: {
     id: "ROUTE_39_FARMHOUSE_SHOP",
+    name: "Route 39 - Farmhouse - Shop",
     areaId: "ROUTE_39_FARMHOUSE",
     items: [
       {
@@ -667,6 +673,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
   },
   MAHOGANY_TOWN_STREET_VENDOR: {
     id: "MAHOGANY_TOWN_STREET_VENDOR",
+    name: "Mahogany Town - Street Vendor",
     areaId: "MAHOGANY_TOWN",
     items: [
       {
@@ -677,6 +684,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
   },
   GOLDENROD_GAME_CORNER_ITEM_SHOP: {
     id: "GOLDENROD_GAME_CORNER_ITEM_SHOP",
+    name: "Goldenrod Game Corner - Item Shop",
     areaId: "GOLDENROD_GAME_CORNER",
     items: [
       {
@@ -698,6 +706,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
   },
   CELADON_GAME_CORNER_ITEM_SHOP: {
     id: "CELADON_GAME_CORNER_ITEM_SHOP",
+    name: "Celadon Game Corner - Item Shop",
     areaId: "CELADON_GAME_CORNER_PRIZE_ROOM",
     items: [
       {
@@ -719,6 +728,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
   },
   RADIO_TOWER_2F_BLUE_CARD_SHOP: {
     id: "RADIO_TOWER_2F_BLUE_CARD_SHOP",
+    name: "Radio Tower - 2F - Blue Card Shop",
     areaId: "RADIO_TOWER_2F",
     items: [
       {
