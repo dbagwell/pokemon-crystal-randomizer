@@ -5,7 +5,7 @@ import type { GameData } from "@shared/types/gameData/gameData"
 import type { GeneralItemLocation, ItemLocation } from "@shared/types/gameData/itemLocation"
 import type { LogicalEvent } from "@shared/types/gameData/logicalEvent"
 import type { Mart, SpecialShop } from "@shared/types/gameData/mart"
-import { type AccessRequirement, type Warp } from "@shared/types/gameData/warp"
+import { type AccessRequirement, type IndividualAccessRequirement, type Warp } from "@shared/types/gameData/warp"
 import { isItemLocationId, type ItemLocationId, itemLocationIds, regularHiddenItemLocationIds, regularItemBallLocationIds, tmItemBallLocationIds } from "@shared/types/gameDataIds/itemLocations"
 import { type BadgeItemId, badgeItemIds, ballItemIds, type HoldableItemId, holdableItemIds, isItemId, type ItemId, type KeyItemId, keyItemIds, type MenuItemId, menuItemIds, regularItemIds, repelItemIds, simpleHealingItemIds, tmItemIds } from "@shared/types/gameDataIds/items"
 import { isLogicalAccessAreaId, type LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
@@ -14,7 +14,7 @@ import { isMartGroupId, martGroupIds } from "@shared/types/gameDataIds/martGroup
 import { isMartId, isSpecialShopId, type MartId, type SpecialShopId } from "@shared/types/gameDataIds/marts"
 import { isPokemonId } from "@shared/types/gameDataIds/pokemon"
 import { isWarpId, type WarpId } from "@shared/types/gameDataIds/warps"
-import { getAllCombinations, isNotNullish, isNullish, isNumber, isObject, isString, removeFirstElementFromArrayWhere, removeSupersets } from "@shared/utils"
+import { compact, getAllCombinations, isNotNullish, isNullish, isNumber, isObject, isString, removeFirstElementFromArrayWhere, removeSupersets } from "@shared/utils"
 import type { Random } from "@worker/random"
 
 export const updateItems = (
@@ -219,14 +219,16 @@ export const shuffleItems = (
   const progressionItemIds = allItemLocations.reduce((result, location) => {
     location.accessOptions.forEach((option) => {
       option.forEach((requirement) => {
-        if (isNumber(requirement)) {
+        const resolvedRequirement = Array.isArray(requirement) ? requirement[0] : requirement
+        
+        if (isNumber(resolvedRequirement)) {
           badgeItemIds.forEach((badge) => {
             result.add(badge)
           })
-        } else if (isObject(requirement)) {
-          result.add(requirement.item)
+        } else if (isObject(resolvedRequirement)) {
+          result.add(resolvedRequirement.item)
         } else {
-          result.add(requirement as ItemId)
+          result.add(resolvedRequirement as ItemId)
         }
       })
     })
@@ -550,13 +552,16 @@ const getAccessibleLocations = (params: {
 const generalItemLocations = (gameData: GameData, settings: Settings): GeneralItemLocation[] => {
   const convertAccessRequirements = (requirements: (AccessRequirement | LogicalAccessAreaId | WarpId)[]) => {
     return requirements.flatMap((requirement) => {
-      if (isPokemonId(requirement)) {
+      const isOptional = Array.isArray(requirement)
+      const resolvedRequirement = isOptional ? requirement[0] : requirement
+      
+      if (isPokemonId(resolvedRequirement)) {
         const encounterSettings = settings.RANDOMIZE_RANDOM_ENCOUNTERS
         const availability = encounterSettings.SETTINGS.AVAILABILITY
         const areAllPokemonSearchable = encounterSettings.VALUE && (availability === "SEARCHABLE" || availability === "REGIONAL")
         // This currently checks accessiblity of all the items required (with vanilla warps) to see all the random encounter slots (except mount silver)
         // It will need to be updated once we shuffle warps, also if we want to add an option to just check if specific pokemon are accessible
-        return [
+        const result = [
           7,
           "HIVEBADGE",
           "FOGBADGE",
@@ -586,6 +591,14 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
             "SUPER_ROD",
           ] as const,
         ] as const
+        
+        if (isOptional) {
+          return result.map((requirement) => {
+            return [requirement] as [IndividualAccessRequirement]
+          })
+        } else {
+          return result
+        }
       } else {
         return [
           requirement,
@@ -659,7 +672,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
         if (option.includes(match)) {
           objectWasModified = true
           
-          if (filteredReplacements.length === 0 && option.some((requirement) => { return requirement === match })) {
+          if (filteredReplacements.length === 0) {
             return []
           } else {
             return getAllCombinations([
@@ -667,6 +680,48 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
               [
                 option.filter((requirement) => {
                   return requirement !== match
+                }),
+              ].filter((requirements) => {
+                return requirements.length > 0
+              }),
+            ])
+          }
+        } else {
+          return [
+            option,
+          ]
+        }
+      })
+      
+      object.accessOptions = object.accessOptions.flatMap((option) => {
+        const hasOptionalMatch = option.some((requirement) => {
+          return requirement.includes("[") && requirement.includes(match)
+        })
+        
+        if (hasOptionalMatch) {
+          objectWasModified = true
+          
+          if (filteredReplacements.length === 0) {
+            return []
+          } else {
+            return getAllCombinations([
+              filteredReplacements.map((replacementGroup) => {
+                return replacementGroup.map((replacement) => {
+                  try {
+                    const parsed = JSON.parse(replacement)
+                    if (!Array.isArray(parsed)) {
+                      return JSON.stringify([parsed])
+                    } else {
+                      return replacement
+                    }
+                  } catch {
+                    return JSON.stringify([replacement])
+                  }
+                })
+              }),
+              [
+                option.filter((requirement) => {
+                  return !(requirement.includes("[") && requirement.includes(match))
                 }),
               ].filter((requirements) => {
                 return requirements.length > 0
@@ -695,15 +750,20 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
     updateStringRequirementWith(object.id, object.accessOptions)
   })
   
-  const convertedAccessOptions = (options: string[][]) => {
+  const convertedAccessOptions = (options: string[][], keepOptionals: boolean = false) => {
     return options.map((option) => {
-      return option.map((requirement) => {
+      return compact(option.map((requirement) => {
         try {
-          return JSON.parse(requirement)
+          const parsed = JSON.parse(requirement)
+          if (Array.isArray(parsed)) {
+            return keepOptionals ? parsed[0] : undefined
+          } else {
+            return parsed
+          }
         } catch {
           return requirement
         }
-      })
+      }))
     })
   }
   
@@ -714,7 +774,8 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
           ...object,
           groupId: gameData.itemLocations[object.id as ItemLocationId].groupId,
           itemId: gameData.itemLocations[object.id as ItemLocationId].itemId,
-          accessOptions: convertedAccessOptions(object.accessOptions),
+          strictAccessOptions: convertedAccessOptions(object.accessOptions),
+          accessOptions: convertedAccessOptions(object.accessOptions, true),
         },
       ] as GeneralItemLocation[]
     } else if (object.type === "MART") {
@@ -727,7 +788,8 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
           }),
           groupId: "SHOPS",
           itemId: itemId,
-          accessOptions: convertedAccessOptions(object.accessOptions),
+          strictAccessOptions: convertedAccessOptions(object.accessOptions),
+          accessOptions: convertedAccessOptions(object.accessOptions, true),
         }
       }) as GeneralItemLocation[]
     } else if (object.type === "SPECIAL_SHOP") {
@@ -740,7 +802,8 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
           }),
           groupId: "SHOPS",
           itemId: itemInfo.itemId,
-          accessOptions: convertedAccessOptions(object.accessOptions),
+          strictAccessOptions: convertedAccessOptions(object.accessOptions),
+          accessOptions: convertedAccessOptions(object.accessOptions, true),
         }
       }) as GeneralItemLocation[]
     } else if (object.type === "EVENT" && object.id === "SILVER_CAVE_ROOM_3_DEFEATED_RED") {
@@ -749,7 +812,8 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
         {
           ...object,
           groupId: "EVENT",
-          accessOptions: convertedAccessOptions(object.accessOptions),
+          strictAccessOptions: convertedAccessOptions(object.accessOptions),
+          accessOptions: convertedAccessOptions(object.accessOptions, true),
         },
       ] as any as GeneralItemLocation[]
     } else {
@@ -1091,7 +1155,7 @@ const updateAccessibleItemsAndLocations = (params: {
 }
   
 const isAccessRequirementSatisfied = (params: {
-  requirement: AccessRequirement
+  requirement: IndividualAccessRequirement
   accessibleItems: AccessibleItem[]
 }): boolean => {
   const {
@@ -1598,17 +1662,21 @@ export const updateAccessLogic = (
   ]
   
   accessModifiers.forEach((modifier) => {
+    const addedRequirements = modifier.ADDED_REQUIREMENTS.map((requirement) => {
+      return [requirement] as [IndividualAccessRequirement]
+    })
+    
     if ("LOCATIONS" in modifier) {
       modifier.LOCATIONS.forEach((id) => {
         if (isItemLocationId(id)) {
           romInfo.gameData.itemLocations[id].accessRequirements = [
             ...romInfo.gameData.itemLocations[id].accessRequirements ?? [],
-            ...modifier.ADDED_REQUIREMENTS,
+            ...addedRequirements,
           ]
         } else if (isWarpId(id)) {
           romInfo.gameData.warps[id].accessRequirements = [
             ...romInfo.gameData.warps[id].accessRequirements ?? [],
-            ...modifier.ADDED_REQUIREMENTS,
+            ...addedRequirements,
           ]
         } else if (isMartGroupId(id)) {
           Object.values(romInfo.gameData.marts).filter((mart) => {
@@ -1616,18 +1684,18 @@ export const updateAccessLogic = (
           }).forEach((mart) => {
             mart.accessRequirements = [
               ...mart.accessRequirements ?? [],
-              ...modifier.ADDED_REQUIREMENTS,
+              ...addedRequirements,
             ]
           })
         } else if (isSpecialShopId(id)) {
           romInfo.gameData.specialShops[id].accessRequirements = [
             ...romInfo.gameData.specialShops[id].accessRequirements ?? [],
-            ...modifier.ADDED_REQUIREMENTS,
+            ...addedRequirements,
           ]
         } else {
           romInfo.gameData.events[id].accessRequirements = [
             ...romInfo.gameData.events[id].accessRequirements ?? [],
-            ...modifier.ADDED_REQUIREMENTS,
+            ...addedRequirements,
           ]
         }
       })
@@ -1636,12 +1704,12 @@ export const updateAccessLogic = (
         if (isLogicalAccessAreaId(option) && option === modifier.FROM_AREA) {
           return {
             area: option,
-            requirements: modifier.ADDED_REQUIREMENTS,
+            requirements: addedRequirements,
           }
         } else if (!Array.isArray(option) && isObject(option) && option.area === modifier.FROM_AREA) {
           option.requirements = [
             ...option.requirements,
-            ...modifier.ADDED_REQUIREMENTS,
+            ...addedRequirements,
           ]
           
           return option

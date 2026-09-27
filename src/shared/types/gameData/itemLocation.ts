@@ -1,4 +1,4 @@
-import type { AccessRequirement } from "@shared/types/gameData/warp"
+import type { AccessRequirement, IndividualAccessRequirement } from "@shared/types/gameData/warp"
 import type { EventFlagId } from "@shared/types/gameDataIds/eventFlags"
 import type { ItemLocationGroupId } from "@shared/types/gameDataIds/itemLocationGroups"
 import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
@@ -31,7 +31,8 @@ export type GeneralItemLocation = {
   id: string
   groupId: ItemLocationGroupId
   shuffleGroupIndex: number
-  accessOptions: AccessRequirement[][]
+  strictAccessOptions: IndividualAccessRequirement[][]
+  accessOptions: IndividualAccessRequirement[][]
   itemId: ItemId | undefined
   allowsAPShuffle: boolean
   isConsumableProgression: boolean

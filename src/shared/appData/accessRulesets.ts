@@ -9,7 +9,7 @@ import { noVanillaBasement } from "@shared/appData/accessRulesets/noEarlyBasemen
 import { noEarlySabrina } from "@shared/appData/accessRulesets/noEarlySabrina"
 import { pokedexAndSweetScentForPokemon } from "@shared/appData/accessRulesets/pokedexAndSweetScentForPokemon"
 import { xItemsForHardFights } from "@shared/appData/accessRulesets/xItemsForHardFights"
-import type { AccessRequirement } from "@shared/types/gameData/warp"
+import type { IndividualAccessRequirement } from "@shared/types/gameData/warp"
 import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
 import type { LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
 import type { LogicalEventId } from "@shared/types/gameDataIds/logicalEvents"
@@ -19,14 +19,14 @@ import type { WarpId } from "@shared/types/gameDataIds/warps"
 
 export type AccessModifier = {
   LOCATIONS: (WarpId | ItemLocationId | MartGroupId | SpecialShopId | LogicalEventId)[]
-  ADDED_REQUIREMENTS: AccessRequirement[]
+  ADDED_REQUIREMENTS: IndividualAccessRequirement[]
 }
 
 export type AreaTransitionAccessModifier = {
   TO_AREA: LogicalAccessAreaId
   FROM_AREA: LogicalAccessAreaId
   IS_MUTUAL: boolean
-  ADDED_REQUIREMENTS: AccessRequirement[]
+  ADDED_REQUIREMENTS: IndividualAccessRequirement[]
 }
 
 export const accessRulesetIds = [

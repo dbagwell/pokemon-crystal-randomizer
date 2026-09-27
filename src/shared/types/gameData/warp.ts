@@ -1,11 +1,9 @@
 import type { GameMapId } from "@shared/types/gameDataIds/gameMaps"
-import { itemLocationIds } from "@shared/types/gameDataIds/itemLocations"
-import { type HoldableItemId, type ItemId, itemIds } from "@shared/types/gameDataIds/items"
-import { type LogicalAccessAreaId, logicalAccessAreaIds } from "@shared/types/gameDataIds/logicalAccessAreaIds"
+import { type HoldableItemId, type ItemId } from "@shared/types/gameDataIds/items"
+import { type LogicalAccessAreaId } from "@shared/types/gameDataIds/logicalAccessAreaIds"
 import type { LogicalEventId } from "@shared/types/gameDataIds/logicalEvents"
-import { type PokemonId, pokemonIds } from "@shared/types/gameDataIds/pokemon"
-import { type WarpId, warpIds } from "@shared/types/gameDataIds/warps"
-import { isNumber } from "@shared/utils"
+import { type PokemonId } from "@shared/types/gameDataIds/pokemon"
+import { type WarpId } from "@shared/types/gameDataIds/warps"
 
 export type Warp = {
   id: WarpId
@@ -22,23 +20,15 @@ export type Warp = {
   linkedWarpId?: WarpId
 }
   
-export type AccessRequirement =
+export type IndividualAccessRequirement =
   | LogicalEventId
   | PokemonId
   | ItemId
   | { item: HoldableItemId | "GS_BALL", number: number }
   | number
   | "INACCESSIBLE"
-  
-export const isAccessRequirement = (value: any): value is AccessRequirement => {
-  return logicalAccessAreaIds.includes(value)
-    || warpIds.includes(value)
-    || itemLocationIds.includes(value)
-    || pokemonIds.includes(value)
-    || itemIds.includes(value)
-    || isNumber(value)
-    || value === "INACCESSIBLE"
-}
+
+export type AccessRequirement = IndividualAccessRequirement | [IndividualAccessRequirement]
 
 export const warpTypes = [
   "DOOR",
