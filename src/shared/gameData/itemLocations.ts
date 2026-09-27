@@ -4041,7 +4041,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
   },
   ROUTE_35_GOLDENROD_GATE_RANDYS_GIFT: {
     id: "ROUTE_35_GOLDENROD_GATE_RANDYS_GIFT",
-    name: "Route 35 / Goldenrod Gate - Randy's Gift",
+    name: "Route 35 - Goldenrod Gate - Randy's Gift",
     type: "GIFT",
     groupId: "REGULAR_GIFTS",
     itemId: "HP_UP",
@@ -4059,7 +4059,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
   },
   ROUTE_36_NATIONAL_PARK_GATE_CONTEST_1ST_PLACE_PRIZE: {
     id: "ROUTE_36_NATIONAL_PARK_GATE_CONTEST_1ST_PLACE_PRIZE",
-    name: "Route 36 / National Park Gate - Contest 1st Place Prize",
+    name: "Route 36 - National Park Gate - Contest 1st Place Prize",
     type: "GIFT",
     groupId: "REGULAR_GIFTS",
     itemId: "SUN_STONE",
@@ -4078,7 +4078,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
   },
   ROUTE_36_NATIONAL_PARK_GATE_CONTEST_2ND_PLACE_PRIZE: {
     id: "ROUTE_36_NATIONAL_PARK_GATE_CONTEST_2ND_PLACE_PRIZE",
-    name: "Route 36 / National Park Gate - Contest 2nd Place Prize",
+    name: "Route 36 - National Park Gate - Contest 2nd Place Prize",
     type: "GIFT",
     groupId: "REGULAR_GIFTS",
     itemId: "EVERSTONE",
@@ -4097,7 +4097,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
   },
   ROUTE_36_NATIONAL_PARK_GATE_CONTEST_3RD_PLACE_PRIZE: {
     id: "ROUTE_36_NATIONAL_PARK_GATE_CONTEST_3RD_PLACE_PRIZE",
-    name: "Route 36 / National Park Gate - Contest 3rd Place Prize",
+    name: "Route 36 - National Park Gate - Contest 3rd Place Prize",
     type: "GIFT",
     groupId: "REGULAR_GIFTS",
     itemId: "GOLD_BERRY",
@@ -4116,7 +4116,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
   },
   ROUTE_36_NATIONAL_PARK_GATE_CONTEST_CONSOLATION_PRIZE: {
     id: "ROUTE_36_NATIONAL_PARK_GATE_CONTEST_CONSOLATION_PRIZE",
-    name: "Route 36 / National Park Gate - Contest Consolation Prize",
+    name: "Route 36 - National Park Gate - Contest Consolation Prize",
     type: "GIFT",
     groupId: "REGULAR_GIFTS",
     itemId: "BERRY",
@@ -5122,7 +5122,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
   },
   ROUTE_34_ILEX_FOREST_GATE_LADYS_GIFT: {
     id: "ROUTE_34_ILEX_FOREST_GATE_LADYS_GIFT",
-    name: "Route 34 / Ilex Forest Gate - Lady's Gift",
+    name: "Route 34 - Ilex Forest Gate - Lady's Gift",
     type: "GIFT",
     groupId: "TM_GIFTS",
     itemId: "TM12",
