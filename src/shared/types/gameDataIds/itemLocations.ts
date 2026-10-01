@@ -312,7 +312,7 @@ export const fruitTreeLocationIds = [
 ] as const
 
 export const regularGiftLocationIds = [
-  "SLOWPOKE_WELL_B2F_MANS_GIFT",
+  "SLOWPOKE_WELL_B2F_SURF_AREA_MANS_GIFT",
   "OLIVINE_LIGHTHOUSE_2F_HUEYS_GIFT",
   "NATIONAL_PARK_BENCH_LADYS_GIFT",
   "NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL",

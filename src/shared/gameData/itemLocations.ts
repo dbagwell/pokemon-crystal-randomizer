@@ -3929,8 +3929,8 @@ export const fruitTreeLocationsMap: IdMap<FruitTreeLocationId, ItemLocation> = {
 }
 
 export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation> = {
-  SLOWPOKE_WELL_B2F_MANS_GIFT: {
-    id: "SLOWPOKE_WELL_B2F_MANS_GIFT",
+  SLOWPOKE_WELL_B2F_SURF_AREA_MANS_GIFT: {
+    id: "SLOWPOKE_WELL_B2F_SURF_AREA_MANS_GIFT",
     name: "Slowpoke Well - B2F - Man's Gift",
     type: "GIFT",
     groupId: "REGULAR_GIFTS",
