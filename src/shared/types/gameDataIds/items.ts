@@ -1,6 +1,6 @@
 export const pokedexPartItemIds = [
   "POKEDEX",
-  "UNONWNDEX",
+  "UNOWNDEX",
 ] as const
 
 export const pokegearPartItemIds = [

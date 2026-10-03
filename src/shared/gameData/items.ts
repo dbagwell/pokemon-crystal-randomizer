@@ -17,8 +17,8 @@ export const itemsMap: IdMap<ItemId, Item> = {
     fieldMenuAction: "NONE",
     battleMenuAction: "NONE",
   },
-  UNONWNDEX: {
-    id: "UNONWNDEX",
+  UNOWNDEX: {
+    id: "UNOWNDEX",
     type: "POKEDEX_PART",
     category: "MENU_ITEMS",
     numericId: 0x2D,
