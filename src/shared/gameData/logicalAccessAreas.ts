@@ -3204,25 +3204,25 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       {
         area: "GOLDENROD_CITY_EAST_AREA",
         requirements: [
-          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+          ["RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS"],
         ],
       },
       {
         area: "GOLDENROD_CITY_SW_AREA",
         requirements: [
-          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+          ["RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS"],
         ],
       },
       {
         area: "GOLDENROD_CITY_FLOWER_SHOP_AREA",
         requirements: [
-          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+          ["RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS"],
         ],
       },
       {
         area: "GOLDENROD_CITY_NE_HOUSE_AREA",
         requirements: [
-          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+          ["RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS"],
         ],
       },
       {
@@ -3265,7 +3265,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       {
         area: "GOLDENROD_CITY_MAIN_AREA",
         requirements: [
-          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+          ["RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS"],
         ],
       },
     ],
@@ -3282,7 +3282,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       {
         area: "GOLDENROD_CITY_MAIN_AREA",
         requirements: [
-          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+          ["RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS"],
         ],
       },
     ],
@@ -3295,7 +3295,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       {
         area: "GOLDENROD_CITY_MAIN_AREA",
         requirements: [
-          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+          ["RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS"],
         ],
       },
     ],
@@ -3308,7 +3308,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       {
         area: "GOLDENROD_CITY_MAIN_AREA",
         requirements: [
-          "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+          ["RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS"],
         ],
       },
     ],

@@ -3952,7 +3952,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "PROTEIN",
     areaId: "OLIVINE_LIGHTHOUSE_2F",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
       "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
       "HALL_OF_FAME_ENTERED",
       "POWER_PLANT_RESTORED_POWER",
@@ -3992,8 +3992,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "NUGGET",
     areaId: "NATIONAL_PARK",
     accessRequirements: [
-      "POKEGEAR",
       "MARILL",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4178,8 +4178,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "LEAF_STONE",
     areaId: "ROUTE_34_MAIN_AREA",
     accessRequirements: [
-      "POKEGEAR",
-      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+      ["POKEGEAR"],
+      ["RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS"],
     ],
     romOffsets: [
       [
@@ -4518,7 +4518,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "FIRE_STONE",
     areaId: "ROUTE_36_WEST_AREA",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4618,8 +4618,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "PINK_BOW",
     areaId: "ROUTE_43",
     accessRequirements: [
-      "POKEGEAR",
       "CLEFAIRY",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4637,7 +4637,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "CARBOS",
     areaId: "ROUTE_44",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
       "HALL_OF_FAME_ENTERED",
       "POWER_PLANT_RESTORED_POWER",
     ],
@@ -4661,7 +4661,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "ULTRA_BALL",
     areaId: "ROUTE_44",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4679,7 +4679,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "GREAT_BALL",
     areaId: "ROUTE_44",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4697,7 +4697,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "POKE_BALL",
     areaId: "ROUTE_44",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4715,7 +4715,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "PP_UP",
     areaId: "ROUTE_45",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4733,7 +4733,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "IRON",
     areaId: "ROUTE_45",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
       "HALL_OF_FAME_ENTERED",
       "POWER_PLANT_RESTORED_POWER",
     ],
@@ -4772,7 +4772,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "STAR_PIECE",
     areaId: "ROUTE_27_WHIRLPOOL_AREA",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4808,7 +4808,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "HP_UP",
     areaId: "ROUTE_30_CHERRYGROVE_SIDE",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
       "HALL_OF_FAME_ENTERED",
       "GOLDENROD_CITY_GOT_FLYPOINT",
       "OLIVINE_CITY_GOT_FLYPOINT",
@@ -4835,7 +4835,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "THUNDERSTONE",
     areaId: "ROUTE_38",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4868,7 +4868,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "BERRY",
     areaId: "ROUTE_31",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4886,7 +4886,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "PSNCUREBERRY",
     areaId: "ROUTE_31",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4904,7 +4904,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "PRZCUREBERRY",
     areaId: "ROUTE_31",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4922,7 +4922,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "BITTER_BERRY",
     areaId: "ROUTE_31",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4940,8 +4940,8 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "NUGGET",
     areaId: "ROUTE_39",
     accessRequirements: [
-      "POKEGEAR",
       "PIKACHU",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -4989,7 +4989,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "WATER_STONE",
     areaId: "ROUTE_42_MAHOGANY_SIDE",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
     romOffsets: [
       [
@@ -5007,7 +5007,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "CALCIUM",
     areaId: "ROUTE_46_NORTH_AREA",
     accessRequirements: [
-      "POKEGEAR",
+      ["POKEGEAR"],
       "HALL_OF_FAME_ENTERED",
       "POWER_PLANT_RESTORED_POWER",
     ],
@@ -5654,7 +5654,7 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     itemId: "BLUE_CARD",
     areaId: "RADIO_TOWER_2F",
     accessRequirements: [
-      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+      ["RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS"],
     ],
     romOffsets: [],
     eventFlagId: "MET_BUENA",
@@ -5913,7 +5913,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
     name: "Ruins Of Alph - Outside Main Area - Researcher's Gift",
     type: "GIFT",
     groupId: "MENU_ITEMS",
-    itemId: "UNONWNDEX",
+    itemId: "UNOWNDEX",
     areaId: "RUINS_OF_ALPH_OUTSIDE_MAIN_AREA",
     accessRequirements: [
       "RUINS_OF_ALPH_SOLVED_PUZZLE",
@@ -5930,7 +5930,7 @@ export const menuItemGiftLocationsMap: IdMap<MenuItemGiftLocationId, ItemLocatio
     itemId: "RADIO_CARD",
     areaId: "RADIO_TOWER_1F",
     accessRequirements: [
-      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+      ["RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS"],
     ],
     romOffsets: [[
       23,

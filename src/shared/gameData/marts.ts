@@ -770,7 +770,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
     ],
     accessRequirements: [
       "BLUE_CARD",
-      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
+      ["RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS"],
     ],
   },
 }

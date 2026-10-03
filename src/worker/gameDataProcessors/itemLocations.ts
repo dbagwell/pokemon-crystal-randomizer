@@ -592,13 +592,10 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
           ] as const,
         ] as const
         
-        if (isOptional) {
-          return result.map((requirement) => {
-            return [requirement] as [IndividualAccessRequirement]
-          })
-        } else {
-          return result
-        }
+        // These requirements to satisfy pokemon requirements are always optional.
+        return result.map((requirement) => {
+          return [requirement] as [IndividualAccessRequirement]
+        })
       } else {
         return [
           requirement,
@@ -752,7 +749,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
   
   const convertedAccessOptions = (options: string[][], keepOptionals: boolean = false) => {
     return options.map((option) => {
-      return compact(option.map((requirement) => {
+      return Array.from(new Set(compact(option.map((requirement) => {
         try {
           const parsed = JSON.parse(requirement)
           if (Array.isArray(parsed)) {
@@ -763,7 +760,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
         } catch {
           return requirement
         }
-      }))
+      }))))
     })
   }
   
@@ -1219,29 +1216,29 @@ export const updateAccessLogic = (
     ids.forEach((id) => {
       if (isItemLocationId(id)) {
         romInfo.gameData.itemLocations[id].accessRequirements = romInfo.gameData.itemLocations[id].accessRequirements?.filter((existingRequirement) => {
-          return !requirements.includes(existingRequirement)
+          return !requirements.includes(existingRequirement) && (!Array.isArray(existingRequirement) || !requirements.includes(existingRequirement[0]))
         })
       } else if (isWarpId(id)) {
         romInfo.gameData.warps[id].accessRequirements = romInfo.gameData.warps[id].accessRequirements?.filter((existingRequirement) => {
-          return !requirements.includes(existingRequirement)
+          return !requirements.includes(existingRequirement) && (!Array.isArray(existingRequirement) || !requirements.includes(existingRequirement[0]))
         })
       } else if (isMartId(id)) {
         romInfo.gameData.marts[id].accessRequirements = romInfo.gameData.marts[id].accessRequirements?.filter((existingRequirement) => {
-          return !requirements.includes(existingRequirement)
+          return !requirements.includes(existingRequirement) && (!Array.isArray(existingRequirement) || !requirements.includes(existingRequirement[0]))
         })
       } else if (isSpecialShopId(id)) {
         romInfo.gameData.specialShops[id].accessRequirements = romInfo.gameData.specialShops[id].accessRequirements?.filter((existingRequirement) => {
-          return !requirements.includes(existingRequirement)
+          return !requirements.includes(existingRequirement) && (!Array.isArray(existingRequirement) || !requirements.includes(existingRequirement[0]))
         })
       } else if (isLogicalEventId(id)) {
         romInfo.gameData.events[id].accessRequirements = romInfo.gameData.events[id].accessRequirements?.filter((existingRequirement) => {
-          return !requirements.includes(existingRequirement)
+          return !requirements.includes(existingRequirement) && (!Array.isArray(existingRequirement) || !requirements.includes(existingRequirement[0]))
         })
       } else {
         romInfo.gameData.areas[id].accessOptions.forEach((option) => {
           if (!Array.isArray(option) && isObject(option) && (isNullish(fromAreas) || fromAreas.includes(option.area))) {
             option.requirements = option.requirements.filter((existingRequirement) => {
-              return !requirements.includes(existingRequirement)
+              return !requirements.includes(existingRequirement) && (!Array.isArray(existingRequirement) || !requirements.includes(existingRequirement[0]))
             })
           }
         })
@@ -1525,7 +1522,7 @@ export const updateAccessLogic = (
   
   if (settings.CHANGE_PHONE_CALL_TRAINER_BEHAVIOUR.includes("SKIP_TO_STRONGEST_AVAILABLE_REMATCH")) {
     const powerPlantRequirements: AccessRequirement[] = [
-      "POKEGEAR",
+      ["POKEGEAR"],
       "POWER_PLANT_RESTORED_POWER",
     ]
     
@@ -1534,7 +1531,7 @@ export const updateAccessLogic = (
     romInfo.gameData.itemLocations.ROUTE_45_PARRYS_GIFT.accessRequirements = [...powerPlantRequirements]
     romInfo.gameData.itemLocations.ROUTE_46_NORTH_AREA_ERINS_GIFT.accessRequirements = [...powerPlantRequirements]
     romInfo.gameData.itemLocations.ROUTE_30_CHERRYGROVE_SIDE_JOEYS_GIFT.accessRequirements = [
-      "POKEGEAR",
+      ["POKEGEAR"],
       "HALL_OF_FAME_ENTERED",
     ]
   }
@@ -1626,14 +1623,10 @@ export const updateAccessLogic = (
   }
   
   if (settings.SKIP_KURT_FOR_ILEX_SHRINE && !settings.KEEP_GS_BALL_AFTER_CELEBI_EVENT) {
-    const index = romInfo.gameData.itemLocations.AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL.accessRequirements!.findIndex((requirement) => {
-      return requirement === "GS_BALL"
-    })!
-    
-    romInfo.gameData.itemLocations.AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL.accessRequirements![index] = {
+    romInfo.gameData.itemLocations.AZALEA_TOWN_KURTS_GIFT_FOR_GS_BALL.accessRequirements!.push([{
       item: "GS_BALL",
       number: 2,
-    }
+    }])
   }
   
   if (
@@ -1646,10 +1639,10 @@ export const updateAccessLogic = (
     || settings.ENABLE_GS_BALL_EVENT
   ) {
     romInfo.gameData.events.ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT.accessRequirements = [
-      {
+      [{
         item: "GS_BALL",
         number: 2,
-      },
+      }],
     ]
   }
   
