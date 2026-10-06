@@ -11359,7 +11359,7 @@ export const warpsMap: IdMap<WarpId, Warp> = {
     id: "ROUTE_32_SOUTH_AREA_CAVE_IN",
     mapId: "ROUTE_32",
     index: 4,
-    areaId: "ROUTE_32_NORTH_AREA",
+    areaId: "ROUTE_32_SOUTH_AREA",
     type: "CAVE",
     polarity: "IN",
     direction: "UP",
