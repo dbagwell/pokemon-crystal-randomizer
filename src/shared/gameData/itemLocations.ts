@@ -4212,7 +4212,6 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "EVERSTONE",
     areaId: "ELMS_LAB",
     accessRequirements: [
-      "ELMS_LAB_GOT_STARTER",
       "VIOLET_POKECENTER_1F_GOT_MYSTERY_EGG",
       "TOGEPI",
     ],
@@ -4232,7 +4231,6 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     itemId: "MASTER_BALL",
     areaId: "ELMS_LAB",
     accessRequirements: [
-      "ELMS_LAB_GOT_STARTER",
       "RISINGBADGE",
     ],
     romOffsets: [
@@ -4250,9 +4248,6 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     groupId: "REGULAR_GIFTS",
     itemId: "POTION",
     areaId: "ELMS_LAB",
-    accessRequirements: [
-      "ELMS_LAB_GOT_STARTER",
-    ],
     romOffsets: [
       [
         30,
@@ -5582,7 +5577,6 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     itemId: "S_S_TICKET",
     areaId: "ELMS_LAB",
     accessRequirements: [
-      "ELMS_LAB_GOT_STARTER",
       "HALL_OF_FAME_ENTERED",
     ],
     romOffsets: [[

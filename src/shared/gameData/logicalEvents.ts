@@ -2,17 +2,11 @@ import type { LogicalEvent } from "@shared/types/gameData/logicalEvent"
 import type { LogicalEventId } from "@shared/types/gameDataIds/logicalEvents"
 
 export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
-  ELMS_LAB_GOT_STARTER: {
-    id: "ELMS_LAB_GOT_STARTER",
-    eventFlagId: "GOT_A_POKEMON_FROM_ELM",
-    areaId: "ELMS_LAB",
-  },
   ELMS_LAB_GAVE_MYSTERY_EGG: {
     id: "ELMS_LAB_GAVE_MYSTERY_EGG",
     eventFlagId: "GAVE_MYSTERY_EGG_TO_ELM",
     areaId: "ELMS_LAB",
     accessRequirements: [
-      "ELMS_LAB_GOT_STARTER",
       "MYSTERY_EGG",
     ],
   },

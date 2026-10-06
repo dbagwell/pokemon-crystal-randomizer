@@ -2922,7 +2922,6 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_32_POKECENTER_1F_DOOR_OUT_LEFT",
       "ROUTE_32_POKECENTER_1F_DOOR_OUT_RIGHT",
       "UNION_CAVE_1F_NORTH_CAVE_OUT",
-      "ROUTE_32_CUT_AREA",
       {
         area: "ROUTE_32_NORTH_AREA",
         requirements: [
@@ -5469,12 +5468,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "ROUTE_29_ROUTE_46_GATE_SOUTH_DOOR_OUT_LEFT",
       "ROUTE_29_ROUTE_46_GATE_SOUTH_DOOR_OUT_RIGHT",
       "CHERRYGROVE_CITY",
-      {
-        area: "NEW_BARK_TOWN",
-        requirements: [
-          "ELMS_LAB_GOT_STARTER",
-        ],
-      },
+      "NEW_BARK_TOWN",
     ],
   },
   NEW_BARK_TOWN: {
