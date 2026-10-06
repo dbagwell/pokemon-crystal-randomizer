@@ -422,6 +422,7 @@ export const shuffleItems = (
                 }
               }),
             ],
+            accessibleEvents: [],
             allItemLocations: allItemLocations,
             allowNormalConsumables: !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
             settings: settings,
@@ -525,12 +526,14 @@ const isLocationRenewableShop = (location: GeneralItemLocation, settings: Settin
 
 const getAccessibleLocations = (params: {
   accessibleItems: AccessibleItem[]
+  accessibleEvents: LogicalEventId[]
   allItemLocations: GeneralItemLocation[]
   allowNormalConsumables: boolean
   settings: Settings
 }) => {
   const {
     accessibleItems: [...accessibleItems],
+    accessibleEvents: [...accessibleEvents],
     allItemLocations,
     allowNormalConsumables,
     settings,
@@ -540,6 +543,7 @@ const getAccessibleLocations = (params: {
   
   updateAccessibleItemsAndLocations({
     accessibleItems: accessibleItems,
+    accessibleEvents: accessibleEvents,
     accessibleItemLocations: accessibleItemLocations,
     allItemLocations: allItemLocations,
     allowNormalConsumables: allowNormalConsumables,
@@ -744,7 +748,9 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
   }
 
   accessInfoObjects.forEach((object) => {
-    updateStringRequirementWith(object.id, object.accessOptions)
+    if (object.type !== "EVENT") {
+      updateStringRequirementWith(object.id, object.accessOptions)
+    }
   })
   
   const convertedAccessOptions = (options: string[][], keepOptionals: boolean = false) => {
@@ -803,8 +809,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
           accessOptions: convertedAccessOptions(object.accessOptions, true),
         }
       }) as GeneralItemLocation[]
-    } else if (object.type === "EVENT" && object.id === "SILVER_CAVE_ROOM_3_DEFEATED_RED") {
-      // Required for AP, will be ignored by the local shuffle algorithm
+    } else if (object.type === "EVENT") {
       return [
         {
           ...object,
@@ -838,10 +843,12 @@ const areAreCurrentAssignmentsValid = (params: {
   
   const allItemLocations = JSON.parse(JSON.stringify(inputAllItemLocations)) as GeneralItemLocation[]
   const accessibleItems = [...startingItems] as AccessibleItem[]
+  const accessibleEvents = [] as LogicalEventId[]
   const accessibleItemLocations = [] as GeneralItemLocation[]
   
   updateAccessibleItemsAndLocations({
     accessibleItems: accessibleItems,
+    accessibleEvents: accessibleEvents,
     accessibleItemLocations: accessibleItemLocations,
     allItemLocations: allItemLocations,
     allowNormalConsumables: allowNormalConsumables,
@@ -946,7 +953,7 @@ const areAreCurrentAssignmentsValid = (params: {
             if ((badgeItemIds as readonly ItemId[]).includes(requirement)) {
               numberOfBadgeItemRequirements++
             }
-          } else if (requirement === "INACCESSIBLE") {
+          } else if (isLogicalEventId(requirement) || requirement === "INACCESSIBLE") {
             selectedItemFromRequirements = undefined
             break
           } else {
@@ -1012,6 +1019,7 @@ const areAreCurrentAssignmentsValid = (params: {
     
     updateAccessibleItemsAndLocations({
       accessibleItems: accessibleItems,
+      accessibleEvents: accessibleEvents,
       accessibleItemLocations: accessibleItemLocations,
       allItemLocations: allItemLocations,
       allowNormalConsumables: allowNormalConsumables,
@@ -1099,6 +1107,7 @@ const updateAccessRequirementsUsingPlacedItems = (params: {
 
 const updateAccessibleItemsAndLocations = (params: {
   accessibleItems: AccessibleItem[]
+  accessibleEvents: LogicalEventId[]
   accessibleItemLocations: GeneralItemLocation[]
   allItemLocations: GeneralItemLocation[]
   allowNormalConsumables: boolean
@@ -1107,6 +1116,7 @@ const updateAccessibleItemsAndLocations = (params: {
 }) => {
   const {
     accessibleItems,
+    accessibleEvents,
     accessibleItemLocations,
     allItemLocations,
     allowNormalConsumables,
@@ -1129,6 +1139,7 @@ const updateAccessibleItemsAndLocations = (params: {
           return !isAccessRequirementSatisfied({
             requirement: requirement,
             accessibleItems: accessibleItems,
+            accessibleEvents: accessibleEvents,
           })
         })
       }))
@@ -1140,7 +1151,9 @@ const updateAccessibleItemsAndLocations = (params: {
       if (remainingAccessOptions.some((option) => { return option.length === 0 })) {
         didUpdate = true
         accessibleItemLocations.push(location)
-        if (isNotNullish(location.itemId) && (isLocationRenewableShop(location, settings) || !(holdableItemIds as readonly string[]).includes(location.itemId) || allowNormalConsumables)) {
+        if (location.type === "EVENT") {
+          accessibleEvents.push(location.id as LogicalEventId)
+        } else if (isNotNullish(location.itemId) && (isLocationRenewableShop(location, settings) || !(holdableItemIds as readonly string[]).includes(location.itemId) || allowNormalConsumables)) {
           accessibleItems.push({
             itemId: location.itemId,
             isFromRenewableShop: isLocationRenewableShop(location, settings),
@@ -1154,10 +1167,12 @@ const updateAccessibleItemsAndLocations = (params: {
 const isAccessRequirementSatisfied = (params: {
   requirement: IndividualAccessRequirement
   accessibleItems: AccessibleItem[]
+  accessibleEvents: LogicalEventId[]
 }): boolean => {
   const {
     requirement,
     accessibleItems,
+    accessibleEvents,
   } = params
   
   if (isObject(requirement)) {
@@ -1175,6 +1190,8 @@ const isAccessRequirementSatisfied = (params: {
     return accessibleItems.some((item) => {
       return item.itemId === requirement
     })
+  } else if (isLogicalEventId(requirement)) {
+    return accessibleEvents.includes(requirement)
   } else {
     return false
   }
