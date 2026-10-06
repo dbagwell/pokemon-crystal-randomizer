@@ -1655,6 +1655,13 @@ export const updateAccessLogic = (
     || settings.START_WITH_ITEMS.VALUE && settings.START_WITH_ITEMS.SETTINGS.KEY_ITEMS.includes("GS_BALL")
     || settings.ENABLE_GS_BALL_EVENT
   ) {
+    romInfo.gameData.itemLocations.ROUTE_34_ILEX_FOREST_GATE_LADYS_GIFT.accessRequirements = [
+      [{
+        item: "GS_BALL",
+        number: 2,
+      }],
+    ]
+    
     romInfo.gameData.events.ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT.accessRequirements = [
       [{
         item: "GS_BALL",

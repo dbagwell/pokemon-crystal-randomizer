@@ -27,7 +27,7 @@ export type ItemLocation = {
 }
 
 export type GeneralItemLocation = {
-  type: "ITEM_LOCATION" | "MART" | "SPECIAL_SHOP"
+  type: "ITEM_LOCATION" | "MART" | "SPECIAL_SHOP" | "EVENT"
   id: string
   groupId: ItemLocationGroupId
   shuffleGroupIndex: number

@@ -5122,9 +5122,6 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
     groupId: "TM_GIFTS",
     itemId: "TM12",
     areaId: "ROUTE_34_ILEX_FOREST_GATE",
-    accessRequirements: [
-      "ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT",
-    ],
     romOffsets: [
       [
         24,
@@ -5345,7 +5342,7 @@ export const tmGiftLocationsMap: IdMap<TMGiftLocationId, ItemLocation> = {
     itemId: "TM08",
     areaId: "ROUTE_36_EAST_AREA",
     accessRequirements: [
-      "ROUTE_36_EAST_AREA_GOT_ROCK_SMASH_GUYS_GIFT",
+      "SQUIRTBOTTLE",
     ],
     romOffsets: [
       [
@@ -5706,9 +5703,6 @@ export const keyItemGiftLocationsMap: IdMap<KeyItemGiftLocationId, ItemLocation>
     groupId: "KEY_ITEMS",
     itemId: "CLEAR_BELL",
     areaId: "RADIO_TOWER_5F_EAST_AREA",
-    accessRequirements: [
-      "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
-    ],
     romOffsets: [[
       24,
       0x40DB,
