@@ -695,11 +695,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
       })
       
       object.accessOptions = object.accessOptions.flatMap((option) => {
-        const hasOptionalMatch = option.some((requirement) => {
-          return requirement.includes("[") && requirement.includes(match)
-        })
-        
-        if (hasOptionalMatch) {
+        if (option.includes(`["${match}"]`)) {
           objectWasModified = true
           
           if (filteredReplacements.length === 0) {
