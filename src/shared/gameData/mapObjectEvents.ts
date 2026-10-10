@@ -17335,6 +17335,7 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "RADIO_TOWER_ROCKET_TAKEOVER",
   },
   {
+    id: "GOLDENROD_SE_AREA_ROCKET_GRUNT",
     romOffset: [
       102,
       21229,
@@ -17378,7 +17379,6 @@ export const mapObjectEvents: MapObjectEvent[] = [
     flagId: "RADIO_TOWER_ROCKET_TAKEOVER",
   },
   {
-    id: "GOLDENROD_SE_AREA_ROCKET_GRUNT",
     romOffset: [
       102,
       21255,
