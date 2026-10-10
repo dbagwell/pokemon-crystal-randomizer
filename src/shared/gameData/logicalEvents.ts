@@ -172,6 +172,14 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     eventFlagId: "BEAT_RED_GYARADOS",
     areaId: "LAKE_OF_RAGE_SURF_AREA",
   },
+  LAKE_OF_RAGE_MAIN_AREA_TALKED_TO_LANCE: {
+    id: "LAKE_OF_RAGE_MAIN_AREA_TALKED_TO_LANCE",
+    eventFlagId: "DECIDED_TO_HELP_LANCE",
+    areaId: "LAKE_OF_RAGE_MAIN_AREA",
+    accessRequirements: [
+      "LAKE_OF_RAGE_SURF_AREA_FOUGHT_SHINY",
+    ],
+  },
   TEAM_ROCKET_BASE_B3F_SE_AREA_GOT_FEMALE_GRUNTS_PASSWORD: {
     id: "TEAM_ROCKET_BASE_B3F_SE_AREA_GOT_FEMALE_GRUNTS_PASSWORD",
     eventFlagId: "LEARNED_SLOWPOKETAIL",
