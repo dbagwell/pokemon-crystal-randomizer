@@ -182,7 +182,7 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
       
       const filePath = dialog.showSaveDialogSync({
         title: "Save Exported Archipelago Player Options to:",
-        defaultPath: undefined,
+        defaultPath: `${apOptions.slotName}.yaml`,
         filters: [
           {
             name: "YAML",
