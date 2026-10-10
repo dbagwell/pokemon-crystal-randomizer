@@ -2425,6 +2425,7 @@ const createPatches = (
       { offset: romOffsetFromBankAddress(103, 0x517F), values: [0x18] },
       { offset: romOffsetFromBankAddress(103, 0x5833), values: [0x18] },
       { offset: romOffsetFromBankAddress(103, 0x5931), values: [0x18] },
+      { offset: romOffsetFromBankAddress(103, 0x60b0), values: [0x18] },
       { offset: romOffsetFromBankAddress(103, 0x6181), values: [0x18] },
       { offset: romOffsetFromBankAddress(104, 0x48C2), values: [0x18] },
       { offset: romOffsetFromBankAddress(104, 0x56A9), values: [0x18] },
