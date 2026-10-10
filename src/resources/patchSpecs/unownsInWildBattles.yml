@@ -21,3 +21,8 @@ changes:
   - bank: 37
     address: 0x7420
   value: "CD @$setBattleType"
+- description: "Fixes issue where unown letters wouldn't get registered in the unown dex properly if the unown was caught in the contest."
+  locations:
+  - bank: 3
+    address: 0x5A53
+  value: "01 15 00 09 00 00 00 00 00 00 00 00 00"
