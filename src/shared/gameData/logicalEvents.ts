@@ -342,50 +342,6 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
       "CERULEAN_GYM_CONFRONTED_ROCKET",
     ],
   },
-  BILLS_HOUSE_SHOWED_LICKITUNG: {
-    id: "BILLS_HOUSE_SHOWED_LICKITUNG",
-    eventFlagId: "SHOWED_LICKITUNG_TO_BILLS_GRANDPA",
-    areaId: "BILLS_HOUSE",
-    accessRequirements: [
-      "LICKITUNG",
-    ],
-  },
-  BILLS_HOUSE_SHOWED_ODDISH: {
-    id: "BILLS_HOUSE_SHOWED_ODDISH",
-    eventFlagId: "SHOWED_ODDISH_TO_BILLS_GRANDPA",
-    areaId: "BILLS_HOUSE",
-    accessRequirements: [
-      "BILLS_HOUSE_SHOWED_LICKITUNG",
-      "ODDISH",
-    ],
-  },
-  BILLS_HOUSE_SHOWED_STARYU: {
-    id: "BILLS_HOUSE_SHOWED_STARYU",
-    eventFlagId: "SHOWED_STARYU_TO_BILLS_GRANDPA",
-    areaId: "BILLS_HOUSE",
-    accessRequirements: [
-      "BILLS_HOUSE_SHOWED_ODDISH",
-      "STARYU",
-    ],
-  },
-  BILLS_HOUSE_SHOWED_GROWLITHE: {
-    id: "BILLS_HOUSE_SHOWED_GROWLITHE",
-    eventFlagId: "SHOWED_GROWLITHE_VULPIX_TO_BILLS_GRANDPA",
-    areaId: "BILLS_HOUSE",
-    accessRequirements: [
-      "BILLS_HOUSE_SHOWED_STARYU",
-      "GROWLITHE",
-    ],
-  },
-  BILLS_HOUSE_SHOWED_PICHU: {
-    id: "BILLS_HOUSE_SHOWED_PICHU",
-    eventFlagId: "SHOWED_PICHU_TO_BILLS_GRANDPA",
-    areaId: "BILLS_HOUSE",
-    accessRequirements: [
-      "BILLS_HOUSE_SHOWED_GROWLITHE",
-      "PICHU",
-    ],
-  },
   POWER_PLANT_RESTORED_POWER: {
     id: "POWER_PLANT_RESTORED_POWER",
     eventFlagId: "RESTORED_POWER_TO_KANTO",

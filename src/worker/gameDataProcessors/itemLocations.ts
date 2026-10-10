@@ -1609,11 +1609,11 @@ export const updateAccessLogic = (
         "ROUTE_39_DEREKS_GIFT_FOR_PIKACHU",
         "ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY",
         "LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP",
-        "BILLS_HOUSE_SHOWED_LICKITUNG",
-        "BILLS_HOUSE_SHOWED_ODDISH",
-        "BILLS_HOUSE_SHOWED_STARYU",
-        "BILLS_HOUSE_SHOWED_GROWLITHE",
-        "BILLS_HOUSE_SHOWED_PICHU",
+        "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG",
+        "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH",
+        "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU",
+        "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE",
+        "BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_PICHU",
       ],
       requirements: [
         "MARILL",
@@ -1632,11 +1632,11 @@ export const updateAccessLogic = (
     romInfo.gameData.itemLocations.ROUTE_39_DEREKS_GIFT_FOR_PIKACHU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.PIKACHU)
     romInfo.gameData.itemLocations.ROUTE_43_TIFFANYS_GIFT_FOR_CLEFAIRY.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.CLEFAIRY)
     romInfo.gameData.itemLocations.LAKE_OF_RAGE_MAGIKARP_HOUSE_MANS_GIFT_FOR_MAGIKARP.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.MAGIKARP)
-    romInfo.gameData.events.BILLS_HOUSE_SHOWED_LICKITUNG.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.LICKITUNG)
-    romInfo.gameData.events.BILLS_HOUSE_SHOWED_ODDISH.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.ODDISH)
-    romInfo.gameData.events.BILLS_HOUSE_SHOWED_STARYU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.STARYU)
-    romInfo.gameData.events.BILLS_HOUSE_SHOWED_GROWLITHE.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.GROWLITHE)
-    romInfo.gameData.events.BILLS_HOUSE_SHOWED_PICHU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.PICHU)
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_LICKITUNG.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.LICKITUNG)
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_ODDISH.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.ODDISH)
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_STARYU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.STARYU)
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_GROWLITHE.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.GROWLITHE)
+    romInfo.gameData.itemLocations.BILLS_HOUSE_BILLS_GRANDPAS_GIFT_FOR_PICHU.accessRequirements?.push(romInfo.gameData.showAndTellPokemon.PICHU)
   }
   
   if (settings.SKIP_KURT_FOR_ILEX_SHRINE && !settings.KEEP_GS_BALL_AFTER_CELEBI_EVENT) {
