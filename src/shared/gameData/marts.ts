@@ -622,7 +622,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
     ],
     accessRequirements: [
       "ROUTE_34_DEFEATED_TODD",
-      "POKEGEAR",
+      ["POKEGEAR"],
     ],
   },
   GOLDENROD_DEPT_STORE_ROOF_SHOP_2: {
@@ -653,7 +653,7 @@ export const specialShopsMap: IdMap<SpecialShopId, SpecialShop> = {
     ],
     accessRequirements: [
       "ROUTE_34_DEFEATED_TODD",
-      "POKEGEAR",
+      ["POKEGEAR"],
       "HALL_OF_FAME_ENTERED",
     ],
   },
