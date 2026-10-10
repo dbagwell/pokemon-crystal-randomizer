@@ -3166,7 +3166,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x49A7,
     ]],
-    eventFlagId: "DRAGONS_DEN_B1F_HIDDEN_MAX_ELIXER",
+    eventFlagId: "DRAGONS_DEN_B1F_HIDDEN_REVIVE",
   },
   DRAGONS_DEN_B1F_SOUTH_SURF_AREA_NE_HIDDEN_ITEM: {
     id: "DRAGONS_DEN_B1F_SOUTH_SURF_AREA_NE_HIDDEN_ITEM",
@@ -3179,7 +3179,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x49AD,
     ]],
-    eventFlagId: "DRAGONS_DEN_B1F_HIDDEN_REVIVE",
+    eventFlagId: "DRAGONS_DEN_B1F_HIDDEN_MAX_ELIXER",
   },
   OLIVINE_PORT_SOUTH_SURF_AREA_HIDDEN_ITEM: {
     id: "OLIVINE_PORT_SOUTH_SURF_AREA_HIDDEN_ITEM",
@@ -3426,7 +3426,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x455E,
     ]],
-    eventFlagId: "SILVER_CAVE_ROOM_1_HIDDEN_ULTRA_BALL",
+    eventFlagId: "SILVER_CAVE_ROOM_1_HIDDEN_DIRE_HIT",
   },
   SILVER_CAVE_ROOM_1_NORTH_HIDDEN_ITEM: {
     id: "SILVER_CAVE_ROOM_1_NORTH_HIDDEN_ITEM",
@@ -3439,7 +3439,7 @@ export const regularHiddenItemLocationsMap: IdMap<RegularHiddenItemLocationId, I
       99,
       0x4561,
     ]],
-    eventFlagId: "SILVER_CAVE_ROOM_1_HIDDEN_DIRE_HIT",
+    eventFlagId: "SILVER_CAVE_ROOM_1_HIDDEN_ULTRA_BALL",
   },
   SILVER_CAVE_ROOM_2_MAIN_AREA_HIDDEN_ITEM: {
     id: "SILVER_CAVE_ROOM_2_MAIN_AREA_HIDDEN_ITEM",
