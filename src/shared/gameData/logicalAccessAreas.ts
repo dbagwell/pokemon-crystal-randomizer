@@ -584,6 +584,13 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "RUINS_OF_ALPH_AERODACTYL_CHAMBER_BOTTOM_CAVE_OUT_LEFT",
       "RUINS_OF_ALPH_AERODACTYL_CHAMBER_BOTTOM_CAVE_OUT_RIGHT",
       "RUINS_OF_ALPH_OUTSIDE_MIDDLE_LEDGE_AREA",
+      {
+        area: "RUINS_OF_ALPH_OUTSIDE_MAIN_AREA",
+        requirements: [
+          "FOGBADGE",
+          "HM03",
+        ],
+      },
     ],
   },
   RUINS_OF_ALPH_OUTSIDE_TOP_LEDGE_AREA: {
