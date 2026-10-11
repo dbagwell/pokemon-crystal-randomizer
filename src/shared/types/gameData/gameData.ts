@@ -76,6 +76,7 @@ export type GameData = {
   numberOfBadgesForOak: number
   items: IdMap<ItemId, Item>
   allItemLocations?: GeneralItemLocation[]
+  regularInventoryAddress: number
 }
 
 export type PlayerSpecificGameData = {

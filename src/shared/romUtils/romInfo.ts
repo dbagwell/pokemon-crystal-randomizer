@@ -213,6 +213,7 @@ export const defaultROMInfo = (): ROMInfo => {
       events: JSON.parse(JSON.stringify(logicalEventsMap)),
       numberOfBadgesForOak: 16,
       items: JSON.parse(JSON.stringify(itemsMap)),
+      regularInventoryAddress: 0xD892,
     },
   }
 }

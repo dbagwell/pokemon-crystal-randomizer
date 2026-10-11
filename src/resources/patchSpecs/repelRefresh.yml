@@ -1,7 +1,7 @@
 description: "Shows a prompt to use another repel when one runs out. Uses Unused WRAM Address 0xDC39 in WRAM Bank 1."
 values:
   saveRepel: "FA 06 D1 EA 39 DC C3 89 77"
-  checkRepel: "21 92 D8 CD 79 2F 3E 04 21 19 76 30 05 3E 04 21 @$useAnotherRepelScript1 CD 1F 26 37 C9"
+  checkRepel: "21 $regularInventoryAddress CD 79 2F 3E 04 21 19 76 30 05 3E 04 21 @$useAnotherRepelScript1 CD 1F 26 37 C9"
   checkRepelFarCall: "3E 03 21 @$checkRepel CF C9"
   useAnotherRepelScript1: "47 19 39 DC 41 00 00 4C @$useAnotherRepelText 4E 08 @$useAnotherRepelScript2 0E 00 3F 2F $useAnotherRepelScript2 $useAnotherRepelText"
   useAnotherRepelScript2: "49 91"

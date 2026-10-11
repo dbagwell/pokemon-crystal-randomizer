@@ -200,6 +200,10 @@ const updateGameData = (
   updateAccessLogic(settings, romInfo) // Must be after updateShowAndTellPokemon
   shuffleItems(settings, romInfo, random) // Must be after updateItems, updateMarts and updateAccessLogic
   updatePrices(settings, romInfo, random) // Must be after updateMarts, updateItems, and shuffleItems
+  
+  if (settings.INCREASE_PACK_SIZE) {
+    romInfo.gameData.regularInventoryAddress = 0xD8F1
+  }
 }
 
 const createPatches = (
@@ -868,7 +872,10 @@ const createPatches = (
             return {
               path: "giveItem.yml",
               extraIncludes: {},
-              extraValues: value,
+              extraValues: {
+                ...value,
+                regularInventoryAddress: hexStringFrom(bytesFrom(romInfo.gameData.regularInventoryAddress, 2)),
+              },
             }
           }),
         },
@@ -961,6 +968,7 @@ const createPatches = (
       "progressiveRods.yml",
       {},
       {
+        regularInventoryAddress: hexStringFrom(bytesFrom(romInfo.gameData.regularInventoryAddress, 2)),
         goldenrodGameCornerItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER_ITEM_SHOP.items[0].itemId].numericId]),
         goldenrodGameCornerItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER_ITEM_SHOP.items[1].itemId].numericId]),
         goldenrodGameCornerItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER_ITEM_SHOP.items[2].itemId].numericId]),
@@ -1010,6 +1018,10 @@ const createPatches = (
       ...Patch.fromYAML(
         romInfo,
         "repelRefresh.yml",
+        {},
+        {
+          regularInventoryAddress: hexStringFrom(bytesFrom(romInfo.gameData.regularInventoryAddress, 2)),
+        },
       ).hunks,
     ]
   }
@@ -2554,6 +2566,12 @@ const createPatches = (
     romInfo.patchHunks.push(...Patch.fromYAML(romInfo, "viewableDVs.yml").hunks)
   }
   
+  // Pack Size
+  
+  if (settings.INCREASE_PACK_SIZE) {
+    romInfo.patchHunks.push(...Patch.fromYAML(romInfo, "increasePackSize.yml").hunks)
+  }
+  
   // AP Changes
   
   if (shouldAddAPChanges) {
@@ -2562,6 +2580,7 @@ const createPatches = (
       "apChanges.yml",
       {},
       {
+        regularInventoryAddress: hexStringFrom(bytesFrom(romInfo.gameData.regularInventoryAddress, 2)),
         beatRedEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.BEAT_RED.numericId, 2)),
       },
     ).hunks)

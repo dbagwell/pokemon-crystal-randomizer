@@ -1566,6 +1566,12 @@ export const defaultSettingsViewModel = () => {
             name: "Single Use Fruit Trees",
             description: "Makes it so fruit trees disappear forever after their item has been received.",
           }),
+          createSimpleToggleViewModel({
+            id: "INCREASE_PACK_SIZE" as const,
+            name: "Increase Pack Size",
+            description: "Increases the space in the regular items pocket so it can hold 50 kinds of items instead of just 20.\n\n"
+              + "Consequently decreases the space in the PC item storage so that it can only store 20 kinds of items.",
+          }),
         ] as const,
       }), // END ITEM_PROPERTIES
       createTabViewModel({
