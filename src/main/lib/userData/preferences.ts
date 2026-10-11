@@ -46,7 +46,7 @@ const getPreferences = (): UserPreferences => {
       ...get("ignoredUpdateVersions", (value) => { return Array.isArray(value) && value.reduce((result: boolean, value) => { return result && isString(value) }, true) }),
       ...get("generatorWindowPosition", (value) => { return isNullish(value) || Array.isArray(value) && value.reduce((result: boolean, value) => { return result && isNumber(value) }, true) }),
       ...get("generatorWindowSize", (value) => { return Array.isArray(value) && value.reduce((result: boolean, value) => { return result && isNumber(value) }, true) }),
-      ...get("apOptions", (value) => { return isNullish(value) || isObject(value) && isString(value.slotName) && isNumber(value.progressionBalancing) }),
+      ...get("apOptions", (value) => { return isNullish(value) || isObject(value) }),
     }
   } catch {
     return defaultPreferences

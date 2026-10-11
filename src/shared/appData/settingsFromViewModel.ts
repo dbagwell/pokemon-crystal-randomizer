@@ -41,10 +41,10 @@ const settingsFromTabViewModel = <ViewModelType extends TabViewModel>(viewModel:
   return settingsFromArrayOfToggleViewModels(viewModel.viewModels) as SettingsFromTabViewModel<ViewModelType>
 }
 
-type SettingsFromArrayOfToggleViewModels<ArrayType extends InputViewModel[]> = {
+export type SettingsFromArrayOfToggleViewModels<ArrayType extends InputViewModel[]> = {
   [ViewModelType in ArrayType[number] as ViewModelType["id"]]: SettingsFromInputViewModel<ViewModelType>
 }
-const settingsFromArrayOfToggleViewModels = <ArrayType extends InputViewModel[]>(viewModels: ArrayType): SettingsFromArrayOfToggleViewModels<ArrayType> => {
+export const settingsFromArrayOfToggleViewModels = <ArrayType extends InputViewModel[]>(viewModels: ArrayType): SettingsFromArrayOfToggleViewModels<ArrayType> => {
   return reduceArrayIntoRecord(viewModels, (result, viewModel) => {
     result[viewModel.id] = settingsFromInputViewModel(viewModel) as SettingsFromInputViewModel<ArrayType[number]>
   }) as SettingsFromArrayOfToggleViewModels<ArrayType>

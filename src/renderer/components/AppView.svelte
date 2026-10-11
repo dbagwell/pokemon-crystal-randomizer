@@ -222,7 +222,7 @@
   import Tooltip from "@components/utility/Tooltip.svelte"
   import { colors } from "@scripts/colors"
   import type { APOptions } from "@shared/appData/apOptions"
-  import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
+  import { applyOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
   import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
   import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
   import { type Preset, presetsMap } from "@shared/appData/presets"
@@ -449,7 +449,7 @@
   const exportArchipelagoButtonClicked = () => {
     showDialog({
       title: "Export Archipelago Player Options",
-      message: "Export the currently selected settings and player options as a 'Player .yaml' file that can be used to generate an Archipelago game using the Pokemon Krystal apworld.",
+      message: "Export the currently selected settings and player options as a 'Player yaml' file that can be used to generate an Archipelago game using the Pokemon Krystal apworld.",
       extraContent: apOptionsView,
       submitButtonLabel: "Export",
       hasCancelButton: true,
@@ -575,7 +575,7 @@
   
   const generateROM = async (settings: Settings) => {
     const playerOptionsViewModel = defaultPlayerOptionsViewModel()
-    applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
+    applyOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
     
     try {
       showProgressIndicator()

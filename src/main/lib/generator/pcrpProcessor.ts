@@ -3,7 +3,7 @@ import { performJob } from "@lib/generator/worker"
 import { getPlayerOptions, listenForPlayerOptions } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import { forceCloseWindow, showWindow } from "@lib/utils/windowManager"
-import { applyPlayerOptionsToViewModel } from "@shared/appData/applySettingsToViewModel"
+import { applyOptionsToViewModel } from "@shared/appData/applySettingsToViewModel"
 import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
 import { type PlayerOptions, playerOptionsFromViewModel, type Settings } from "@shared/appData/settingsFromViewModel"
 import { isNotNullish, isNullish, isObject, isSemanticVersion, isSemanticVersionLower } from "@shared/utils"
@@ -111,7 +111,7 @@ export const handlePCRPFile = async (filePath: string, outputFilePath: string | 
         await closeWindow()
       }
     
-      applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
+      applyOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
       validatedPlayerOptions = playerOptionsFromViewModel(playerOptionsViewModel)
     
       const applyPlayerOptionsResult = await performJob({

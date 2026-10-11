@@ -1,4 +1,168 @@
-export type APOptions = {
-  slotName: string
-  progressionBalancing: number
+import type { SettingsFromArrayOfToggleViewModels } from "@shared/appData/settingsFromViewModel"
+import { itemsMap } from "@shared/gameData/items"
+import { type HoldableItemId, holdableItemIds } from "@shared/types/gameDataIds/items"
+import { createConfigurableSelectorOption, createConfigurableToggleViewModel, createIntegerInputViewModel, createSimpleMultiSelectorViewModel, createSimpleSelectorOption, createSingleSelectorViewModel, createTextInputViewModel } from "@shared/types/viewModels"
+
+export type APOptions = SettingsFromArrayOfToggleViewModels<ReturnType<typeof defaultAPOptionsViewModel>["viewModels"]>
+
+export const defaultAPOptionsViewModel = () => {
+  return {
+    viewModels: [
+      createTextInputViewModel({
+        id: "SLOT_NAME" as const,
+        name: "Slot Name",
+        description: "The name the archipelago server will use to refer to you.",
+        maxCharacters: 16,
+        isRequired: true,
+        value: "Player",
+      }),
+      createIntegerInputViewModel({
+        id: "PROGRESSION_BALANCING" as const,
+        name: "Progression Balancing",
+        description: "Tries to ensure that you always have access to at least X% of the precentage of item locations that the player with access to the most item locations has.\n\n"
+          + "A higher number can move more of your progression items to locations that are accessible earlier.",
+        min: 0,
+        max: 100,
+        isRequired: true,
+        value: 50,
+      }),
+      createConfigurableToggleViewModel({
+        id: "AUTO_SELL_ITEMS" as const,
+        name: "Auto Sell Received Items",
+        description: "When the selected item types are recieved from the server, automatically convert them into money instead of adding the item to the inventory.",
+        viewModels: [
+          createSingleSelectorViewModel({
+            id: "ITEM_SET" as const,
+            name: "Item Set",
+            selectedOptionId: "DEFAULT",
+            options: [
+              createSimpleSelectorOption({
+                id: "DEFAULT" as const,
+                name: "Default",
+                description: defaultAutoSellItemIds.map((itemId) => {
+                  return itemsMap[itemId].name
+                }).join("\n"),
+              }),
+              createConfigurableSelectorOption({
+                id: "CUSTOM" as const,
+                name: "Custom",
+                viewModels: [
+                  createSimpleMultiSelectorViewModel({
+                    id: "ITEMS" as const,
+                    name: "Items",
+                    options: holdableItemIds.map((itemId) => {
+                      return createSimpleSelectorOption({
+                        id: itemId,
+                        name: itemsMap[itemId].name,
+                      })
+                    }),
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      }),
+    ],
+  }
 }
+
+export const defaultAutoSellItemIds: HoldableItemId[] = [
+  "ANTIDOTE",
+  "AWAKENING",
+  "BERRY_JUICE",
+  "BERRY",
+  "BERSERK_GENE",
+  "BIG_MUSHROOM",
+  "BIG_PEARL",
+  "BITTER_BERRY",
+  "BLACKBELT",
+  "BLACKGLASSES",
+  "BLK_APRICORN",
+  "BLU_APRICORN",
+  "BLUESKY_MAIL",
+  "BRICK_PIECE",
+  "BRIGHTPOWDER",
+  "BURN_HEAL",
+  "BURNT_BERRY",
+  "CALCIUM",
+  "CARBOS",
+  "CHARCOAL",
+  "CLEANSE_TAG",
+  "DIRE_HIT",
+  "DRAGON_FANG",
+  "DRAGON_SCALE",
+  "ENERGY_ROOT",
+  "ENERGYPOWDER",
+  "ETHER",
+  "EVERSTONE",
+  "EXP_SHARE",
+  "FLOWER_MAIL",
+  "FOCUS_BAND",
+  "FRESH_WATER",
+  "GOLD_BERRY",
+  "GOLD_LEAF",
+  "GORGEOUS_BOX",
+  "GRN_APRICORN",
+  "HARD_STONE",
+  "HEAL_POWDER",
+  "HP_UP",
+  "ICE_BERRY",
+  "ICE_HEAL",
+  "IRON",
+  "LEMONADE",
+  "LIGHT_BALL",
+  "LITEBLUEMAIL",
+  "LOVELY_MAIL",
+  "LUCKY_PUNCH",
+  "MAGNET",
+  "METAL_COAT",
+  "METAL_POWDER",
+  "MINT_BERRY",
+  "MIRACLE_SEED",
+  "MIRACLEBERRY",
+  "MIRAGE_MAIL",
+  "MOOMOO_MILK",
+  "MOON_STONE",
+  "MORPH_MAIL",
+  "MUSIC_MAIL",
+  "MYSTERYBERRY",
+  "MYSTIC_WATER",
+  "NEVERMELTICE",
+  "NORMAL_BOX",
+  "NUGGET",
+  "PARLYZ_HEAL",
+  "PEARL",
+  "PINK_BOW",
+  "PNK_APRICORN",
+  "POISON_BARB",
+  "POKE_DOLL",
+  "POLKADOT_BOW",
+  "PORTRAITMAIL",
+  "POTION",
+  "PROTEIN",
+  "PRZCUREBERRY",
+  "PSNCUREBERRY",
+  "QUICK_CLAW",
+  "RAGECANDYBAR",
+  "RED_APRICORN",
+  "SCOPE_LENS",
+  "SHARP_BEAK",
+  "SILVER_LEAF",
+  "SILVERPOWDER",
+  "SLOWPOKETAIL",
+  "SMOKE_BALL",
+  "SODA_POP",
+  "SOFT_SAND",
+  "SPELL_TAG",
+  "STAR_PIECE",
+  "STARDUST",
+  "STICK",
+  "SURF_MAIL",
+  "THICK_CLUB",
+  "TINYMUSHROOM",
+  "TWISTEDSPOON",
+  "UP_GRADE",
+  "WHT_APRICORN",
+  "YLW_APRICORN",
+]

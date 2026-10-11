@@ -66,7 +66,7 @@
 </div>
 
 <script
-  generics="ValueType extends number | string, TypeType extends ValueType extends number ? 'number' : 'text'"
+  generics="ValueType extends number | string, TypeType extends ValueType extends number ? 'number' : 'text' /* eslint-disable-line quotes */"
   lang="ts"
 >
 

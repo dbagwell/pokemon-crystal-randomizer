@@ -1,7 +1,7 @@
 import { generate } from "@lib/generator/generator"
 import { getPlayerOptions, getSettingsForPresetId } from "@lib/userData/userData"
 import { getVanillaROM, getVanillaROMData, hasVanillaROM } from "@lib/userData/vanillaROM"
-import { applyPlayerOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
+import { applyOptionsToViewModel, applySettingsToViewModel } from "@shared/appData/applySettingsToViewModel"
 import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
 import { defaultSettingsViewModel } from "@shared/appData/defaultSettingsViewModel"
 import { playerOptionsFromViewModel, type Settings, settingsFromViewModel } from "@shared/appData/settingsFromViewModel"
@@ -114,7 +114,7 @@ export const generateFromCLI = async (args: string[]) => {
   const validatedSettings = settingsFromViewModel(settingsViewModel)
   
   const playerOptionsViewModel = defaultPlayerOptionsViewModel()
-  applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, warnings)
+  applyOptionsToViewModel(playerOptions, playerOptionsViewModel, warnings)
   const validatedPlayerOptions = playerOptionsFromViewModel(playerOptionsViewModel)
   
   warnings.forEach((warning) => {

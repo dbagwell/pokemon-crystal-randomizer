@@ -15,7 +15,7 @@
   import { showDialog, showErrorDialog } from "@components/dialogs/DialogContainer.svelte"
   import Stack from "@components/layout/Stack.svelte"
   import SettingsInputView from "@components/settingsInputViews/SettingsInputView.svelte"
-  import { applyPlayerOptionsToViewModel } from "@shared/appData/applySettingsToViewModel"
+  import { applyOptionsToViewModel } from "@shared/appData/applySettingsToViewModel"
   import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
   import { type PlayerOptions, playerOptionsFromViewModel } from "@shared/appData/settingsFromViewModel"
   import { onMount } from "svelte"
@@ -51,7 +51,7 @@
     try {
       const warnings: string[] = []
       const newViewModel = playerOptionsViewModel
-      applyPlayerOptionsToViewModel(initialPlayerOptions, newViewModel, warnings)
+      applyOptionsToViewModel(initialPlayerOptions, newViewModel, warnings)
       playerOptionsViewModel = newViewModel
       
       if (warnings.length > 0) {
@@ -77,7 +77,7 @@
       playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.TRAINER_NAMES = namesLists.TRAINER_NAMES
       playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.TWINS_TRAINER_NAMES = namesLists.TWINS_TRAINER_NAMES
       playerOptions.CHANGE_NAMES.SETTINGS.METHOD.SETTINGS.CUSTOM_LIST.POKEMON_NICKNAMES = namesLists.POKEMON_NICKNAMES
-      applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
+      applyOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
       
       break
     }
