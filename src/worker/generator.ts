@@ -1847,6 +1847,7 @@ const createPatches = (
       "improvedPokemonRequests.yml",
       {},
       {
+        gotTogepiInfoFromElmEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_TOGEPI_INFO_FROM_ELM.numericId, 2)),
         togepiId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.TOGEPI].numericId]),
         marillId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.MARILL].numericId]),
         pikachuId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.PIKACHU].numericId]),

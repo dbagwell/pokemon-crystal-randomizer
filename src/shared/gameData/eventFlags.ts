@@ -2234,6 +2234,10 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "BEAT_RED",
     numericId: 938,
   },
+  GOT_TOGEPI_INFO_FROM_ELM: {
+    id: "GOT_TOGEPI_INFO_FROM_ELM",
+    numericId: 939,
+  },
   BEAT_SWIMMERF_ELAINE: {
     id: "BEAT_SWIMMERF_ELAINE",
     numericId: 1000,
