@@ -712,7 +712,7 @@ const createPatches = (
       }),
     ]
     
-    if (settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
+    if (settings.SHUFFLE_ITEMS.VALUE && settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
       romInfo.patchHunks.push(...Patch.fromYAML(
         romInfo,
         "martsPreventDuplicateKeyItems.yml",
@@ -722,6 +722,11 @@ const createPatches = (
           gotMartItemsEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_MART_ITEMS.numericId, 2)),
         },
       ).hunks)
+      
+      romInfo.patchHunks.push({
+        offset: romOffsetFromBankAddress(27, 0x436C),
+        values: [0x18, 0x18, 0x18],
+      })
     }
     
     if (settings.SKIP_KURT_FOR_ILEX_SHRINE) {
