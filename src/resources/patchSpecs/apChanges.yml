@@ -12,6 +12,13 @@ values:
   finishRegularItemScript: "91 $clearRegularItemQueue"
   clearRegularItemQueue: "AF EA 3A DC C9"
   checkAPItemDescriptions: "FA 60 CF FE C3 CA 73 49 FE DC CA 73 49 C3 58 49"
+  setGoldenrodVendingMachineAsViewed: "15 [1]{$numberOfMarts + 2} 1A 39 D0 4C CB 64 91"
+  setCeladonVendingMachineAsViewed: "15 [1]{$numberOfMarts + 3} 1A 39 D0 4C 50 52 91"
+  setGoldenrodGameCornerShopAsViewed: "15 [1]{$numberOfMarts + 4} 1A 39 D0 4C 8B 6E 91"
+  setCeladonGameCornerShopAsViewed: "15 [1]{$numberOfMarts + 5} 1A 39 D0 4C 74 69 91"
+  setBlueCardShopAsViewed: "15 [1]{$numberOfMarts + 6} 1A 39 D0 4C 92 63 91"
+  setFarmhouseShopAsViewed: "15 [1]{$numberOfMarts + 7} 1A 39 D0 4C E1 4F 91"
+  setMahoganyStreetVendorAsViewed: "15 [1]{$numberOfMarts + 8} 1A 39 D0 4C B0 40 91"
 changes:
 - description: "Adds code."
   locations:
@@ -55,4 +62,67 @@ changes:
   - bank: 4
     address: 0x53DE
   value: "00 00 00"
+- description: "Adds Code."
+  locations:
+  - bank: 21
+  value: "$setGoldenrodVendingMachineAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 21
+    address: 0x63F6
+  value: "00 @$setGoldenrodVendingMachineAsViewed"
+- description: "Adds Code."
+  locations:
+  - bank: 28
+  value: "$setCeladonVendingMachineAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 28
+    address: 0x5181
+  value: "00 @$setCeladonVendingMachineAsViewed"
+- description: "Adds Code."
+  locations:
+  - bank: 21
+  value: "$setGoldenrodGameCornerShopAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 21
+    address: 0x6C33
+  value: "00 @$setGoldenrodGameCornerShopAsViewed"
+- description: "Adds Code."
+  locations:
+  - bank: 28
+  value: "$setCeladonGameCornerShopAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 28
+    address: 0x66FA
+  value: "00 @$setCeladonGameCornerShopAsViewed"
+- description: "Adds Code."
+  locations:
+  - bank: 23
+  value: "$setBlueCardShopAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 23
+    address: 0x5906
+  value: "00 @$setBlueCardShopAsViewed"
+- description: "Adds Code."
+  locations:
+  - bank: 39
+  value: "$setFarmhouseShopAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 39
+    address: 0x4ECA
+  value: "00 @$setFarmhouseShopAsViewed"
+- description: "Adds Code."
+  locations:
+  - bank: 100
+  value: "$setMahoganyStreetVendorAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 100
+    address: 0x4041
+  value: "00 @$setMahoganyStreetVendorAsViewed"
   

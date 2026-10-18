@@ -2583,6 +2583,7 @@ const createPatches = (
       {
         regularInventoryAddress: hexStringFrom(bytesFrom(romInfo.gameData.regularInventoryAddress, 2)),
         beatRedEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.BEAT_RED.numericId, 2)),
+        numberOfMarts: hexStringFrom([martIds.length]),
       },
     ).hunks)
     
