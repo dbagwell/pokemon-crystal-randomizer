@@ -625,6 +625,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
         allowsAPShuffle: false,
         isConsumableProgression: false,
         preventsProgression: false,
+        shouldBeReduced: type !== "EVENT" || !(object as LogicalEvent).isTrackedByPopTracker,
       }
     })
   }
@@ -653,6 +654,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
             ])
           }
         }),
+        shouldBeReduced: true,
       }
     }).toSorted((a, b) => {
       return a.accessOptions.length - b.accessOptions.length
@@ -744,7 +746,7 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
   }
 
   accessInfoObjects.forEach((object) => {
-    if (object.type !== "EVENT") {
+    if (object.shouldBeReduced) {
       updateStringRequirementWith(object.id, object.accessOptions)
     }
   })

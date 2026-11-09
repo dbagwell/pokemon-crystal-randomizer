@@ -6,6 +6,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "ELMS_LAB_GAVE_MYSTERY_EGG",
     eventFlagId: "GAVE_MYSTERY_EGG_TO_ELM",
     areaId: "ELMS_LAB",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "MYSTERY_EGG",
     ],
@@ -14,11 +15,13 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "VIOLET_GYM_DEFEATED_FALKNER",
     eventFlagId: "BEAT_FALKNER",
     areaId: "VIOLET_GYM",
+    isTrackedByPopTracker: true,
   },
   VIOLET_POKECENTER_1F_GOT_MYSTERY_EGG: {
     id: "VIOLET_POKECENTER_1F_GOT_MYSTERY_EGG",
     eventFlagId: "GOT_TOGEPI_EGG_FROM_ELMS_AIDE",
     areaId: "VIOLET_POKECENTER_1F",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "VIOLET_GYM_DEFEATED_FALKNER",
     ],
@@ -27,11 +30,13 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "RUINS_OF_ALPH_SOLVED_PUZZLE",
     eventFlagId: "MADE_UNOWN_APPEAR_IN_RUINS",
     areaId: "RUINS_OF_ALPH_PUZZLES_GROUP",
+    isTrackedByPopTracker: false,
   },
   RUINS_OF_ALPH_RESEARCH_CENTER_GOT_UNOWN_INFO: {
     id: "RUINS_OF_ALPH_RESEARCH_CENTER_GOT_UNOWN_INFO",
     eventFlagId: "GOT_UNOWN_DEX", // TODO: MAKE ACTUAL EVENT AND UPDATE PATCH TO SET IT
     areaId: "RUINS_OF_ALPH_RESEARCH_CENTER",
+    isTrackedByPopTracker: false,
     accessRequirements: [
       "RUINS_OF_ALPH_SOLVED_PUZZLE",
     ],
@@ -40,16 +45,19 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "KURTS_HOUSE_TALKED_TO_KURT",
     eventFlagId: "AZALEA_TOWN_SLOWPOKETAIL_ROCKET",
     areaId: "KURTS_HOUSE",
+    isTrackedByPopTracker: true,
   },
   SLOWPOKE_WELL_B1F_EAST_AREA_DEFEATED_ROCKETS: {
     id: "SLOWPOKE_WELL_B1F_EAST_AREA_DEFEATED_ROCKETS",
     eventFlagId: "CLEARED_SLOWPOKE_WELL",
     areaId: "SLOWPOKE_WELL_B1F_EAST_AREA",
+    isTrackedByPopTracker: true,
   },
   KURTS_HOUSE_GAVE_GS_BALL: {
     id: "KURTS_HOUSE_GAVE_GS_BALL",
     eventFlagId: "GAVE_GS_BALL_TO_KURT",
     areaId: "KURTS_HOUSE",
+    isTrackedByPopTracker: false,
     accessRequirements: [
       "SLOWPOKE_WELL_B1F_EAST_AREA_DEFEATED_ROCKETS",
       "GS_BALL",
@@ -59,6 +67,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "ILEX_FOREST_SOUTH_AREA_TALKED_TO_CHARCOAL_BOSS",
     eventFlagId: "GOT_HM01_CUT",
     areaId: "ILEX_FOREST_SOUTH_AREA",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "SLOWPOKE_WELL_B1F_EAST_AREA_DEFEATED_ROCKETS",
     ],
@@ -67,32 +76,38 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "ILEX_FOREST_NORTH_AREA_GOT_HEADBUTT_GUYS_GIFT",
     eventFlagId: "GOT_TM02_HEADBUTT",
     areaId: "ILEX_FOREST_NORTH_AREA",
+    isTrackedByPopTracker: true,
   },
   ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT: {
     id: "ROUTE_34_ILEX_FOREST_GATE_GOT_LADYS_GIFT",
     eventFlagId: "GOT_TM12_SWEET_SCENT",
     areaId: "ROUTE_34_ILEX_FOREST_GATE",
+    isTrackedByPopTracker: true,
   },
   ROUTE_34_DEFEATED_TODD: {
     id: "ROUTE_34_DEFEATED_TODD",
     eventFlagId: "BEAT_CAMPER_TODD",
     areaId: "ROUTE_34_MAIN_AREA",
+    isTrackedByPopTracker: false,
   },
   GOLDENROD_CITY_GOT_FLYPOINT: {
     id: "GOLDENROD_CITY_GOT_FLYPOINT",
     engineFlagId: "GOLDENROD_FLYPOINT",
     areaId: "GOLDENROD_CITY_FLYPOINT_GROUP",
+    isTrackedByPopTracker: false,
   },
   GOLDENROD_DEPT_STORE_B1F_VISITED: {
     id: "GOLDENROD_DEPT_STORE_B1F_VISITED",
     eventFlagId: "GOLDENROD_UNDERGROUND_WAREHOUSE_BLOCKED_OFF",
     inverseFlag: true,
     areaId: "GOLDENROD_DEPT_STORE_B1F_GROUP",
+    isTrackedByPopTracker: false,
   },
   GOLDENROD_DEPT_STORE_ELEVATOR_USED_ELEVATOR: {
     id: "GOLDENROD_DEPT_STORE_ELEVATOR_USED_ELEVATOR",
     eventFlagId: "GOLDENROD_DEPT_STORE_B1F_LAYOUT_1",
     areaId: "GOLDENROD_DEPT_STORE_ELEVATOR",
+    isTrackedByPopTracker: false,
     accessRequirements: [
       "GOLDENROD_DEPT_STORE_B1F_VISITED",
     ],
@@ -101,11 +116,13 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "ROUTE_35_GOLDENROD_GATE_GOT_KENYA",
     eventFlagId: "GOT_KENYA",
     areaId: "ROUTE_35_GOLDENROD_GATE",
+    isTrackedByPopTracker: true,
   },
   ROUTE_36_WEST_AREA_TALKED_TO_FLORIA: {
     id: "ROUTE_36_WEST_AREA_TALKED_TO_FLORIA",
     eventFlagId: "MET_FLORIA",
     areaId: "ROUTE_36_WEST_AREA",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "GOLDENROD_CITY_GOT_FLYPOINT",
     ],
@@ -114,6 +131,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "ROUTE_36_EAST_AREA_GOT_ROCK_SMASH_GUYS_GIFT",
     eventFlagId: "GOT_TM08_ROCK_SMASH",
     areaId: "ROUTE_36_EAST_AREA",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "SQUIRTBOTTLE",
     ],
@@ -122,6 +140,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "ROUTE_31_GAVE_MAIL",
     eventFlagId: "GAVE_KENYA",
     areaId: "ROUTE_31",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "ROUTE_35_GOLDENROD_GATE_GOT_KENYA",
     ],
@@ -130,16 +149,19 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "BURNED_TOWER_B1F_AWOKE_LEGENDARY_BEASTS",
     eventFlagId: "RELEASED_THE_BEASTS",
     areaId: "BURNED_TOWER_B1F",
+    isTrackedByPopTracker: true,
   },
   ECRUTEAK_GYM_DEFEATED_MORTY: {
     id: "ECRUTEAK_GYM_DEFEATED_MORTY",
     eventFlagId: "BEAT_MORTY",
     areaId: "ECRUTEAK_GYM",
+    isTrackedByPopTracker: true,
   },
   ROUTE_39_BARN_HEALED_MILTANK: {
     id: "ROUTE_39_BARN_HEALED_MILTANK",
     eventFlagId: "HEALED_MOOMOO",
     areaId: "ROUTE_39_BARN",
+    isTrackedByPopTracker: false,
     accessRequirements: [
       { item: "BERRY", number: 7 },
     ],
@@ -148,21 +170,25 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "OLIVINE_CITY_GOT_FLYPOINT",
     engineFlagId: "OLIVINE_FLYPOINT",
     areaId: "OLIVINE_CITY_FLYPOINT_GROUP",
+    isTrackedByPopTracker: false,
   },
   OLIVINE_LIGHTHOUSE_6F_TALKED_TO_JASMINE: {
     id: "OLIVINE_LIGHTHOUSE_6F_TALKED_TO_JASMINE",
     eventFlagId: "JASMINE_EXPLAINED_AMPHYS_SICKNESS",
     areaId: "OLIVINE_LIGHTHOUSE_6F",
+    isTrackedByPopTracker: true,
   },
   CIANWOOD_GYM_STRENGTH_AREA_DEFEATED_CHUCK: {
     id: "CIANWOOD_GYM_STRENGTH_AREA_DEFEATED_CHUCK",
     eventFlagId: "BEAT_CHUCK",
     areaId: "CIANWOOD_GYM_STRENGTH_AREA",
+    isTrackedByPopTracker: true,
   },
   OLIVINE_LIGHTHOUSE_6F_HEALED_AMPHY: {
     id: "OLIVINE_LIGHTHOUSE_6F_HEALED_AMPHY",
     eventFlagId: "JASMINE_RETURNED_TO_GYM",
     areaId: "OLIVINE_LIGHTHOUSE_6F",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "SECRETPOTION",
     ],
@@ -171,11 +197,13 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "LAKE_OF_RAGE_SURF_AREA_FOUGHT_SHINY",
     eventFlagId: "BEAT_RED_GYARADOS",
     areaId: "LAKE_OF_RAGE_SURF_AREA",
+    isTrackedByPopTracker: true,
   },
   LAKE_OF_RAGE_MAIN_AREA_TALKED_TO_LANCE: {
     id: "LAKE_OF_RAGE_MAIN_AREA_TALKED_TO_LANCE",
     eventFlagId: "DECIDED_TO_HELP_LANCE",
     areaId: "LAKE_OF_RAGE_MAIN_AREA",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "LAKE_OF_RAGE_SURF_AREA_FOUGHT_SHINY",
     ],
@@ -184,26 +212,31 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "TEAM_ROCKET_BASE_B3F_SE_AREA_GOT_FEMALE_GRUNTS_PASSWORD",
     eventFlagId: "LEARNED_SLOWPOKETAIL",
     areaId: "TEAM_ROCKET_BASE_B3F_SE_AREA",
+    isTrackedByPopTracker: true,
   },
   TEAM_ROCKET_BASE_B3F_SE_AREA_GOT_SW_GRUNTS_PASSWORD: {
     id: "TEAM_ROCKET_BASE_B3F_SE_AREA_GOT_SW_GRUNTS_PASSWORD",
     eventFlagId: "LEARNED_RATICATE_TAIL",
     areaId: "TEAM_ROCKET_BASE_B3F_SE_AREA",
+    isTrackedByPopTracker: true,
   },
   TEAM_ROCKET_BASE_B3F_ADMIN_AREA_GOT_MURKROWS_PASSWORD: {
     id: "TEAM_ROCKET_BASE_B3F_ADMIN_AREA_GOT_MURKROWS_PASSWORD",
     eventFlagId: "LEARNED_HAIL_GIOVANNI",
     areaId: "TEAM_ROCKET_BASE_B3F_ADMIN_AREA",
+    isTrackedByPopTracker: true,
   },
   TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_DISABLED_TRANSMITTER: {
     id: "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA_DISABLED_TRANSMITTER",
     eventFlagId: "CLEARED_ROCKET_HIDEOUT",
     areaId: "TEAM_ROCKET_BASE_B2F_CENTRAL_AREA",
+    isTrackedByPopTracker: true,
   },
   GOLDENROD_UNDERGROUND_WAREHOUSE_TALKED_TO_DIRECTOR: {
     id: "GOLDENROD_UNDERGROUND_WAREHOUSE_TALKED_TO_DIRECTOR",
     eventFlagId: "GOT_CARD_KEY",
     areaId: "GOLDENROD_UNDERGROUND_WAREHOUSE",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       7,
     ],
@@ -212,16 +245,19 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "RADIO_TOWER_5F_EAST_AREA_DEFEATED_ROCKETS",
     eventFlagId: "CLEARED_RADIO_TOWER",
     areaId: "RADIO_TOWER_5F_EAST_AREA",
+    isTrackedByPopTracker: true,
   },
   TIN_TOWER_ROOF_FOUGHT_HO_OH: {
     id: "TIN_TOWER_ROOF_FOUGHT_HO_OH",
     eventFlagId: "FOUGHT_HO_OH",
     areaId: "TIN_TOWER_ROOF",
+    isTrackedByPopTracker: true,
   },
   ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_NE_BOULDER: {
     id: "ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_NE_BOULDER",
     eventFlagId: "BOULDER_IN_ICE_PATH_1",
     areaId: "ICE_PATH_B1F_MAHOGANY_SIDE",
+    isTrackedByPopTracker: false,
     accessRequirements: [
       "PLAINBADGE",
       "HM04",
@@ -231,6 +267,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_SE_BOULDER",
     eventFlagId: "BOULDER_IN_ICE_PATH_4",
     areaId: "ICE_PATH_B1F_MAHOGANY_SIDE",
+    isTrackedByPopTracker: false,
     accessRequirements: [
       "PLAINBADGE",
       "HM04",
@@ -240,6 +277,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_SW_BOULDER",
     eventFlagId: "BOULDER_IN_ICE_PATH_3",
     areaId: "ICE_PATH_B1F_MAHOGANY_SIDE",
+    isTrackedByPopTracker: false,
     accessRequirements: [
       "PLAINBADGE",
       "HM04",
@@ -249,6 +287,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "ICE_PATH_B1F_MAHOGANY_SIDE_DROPPED_NW_BOULDER",
     eventFlagId: "BOULDER_IN_ICE_PATH_2",
     areaId: "ICE_PATH_B1F_MAHOGANY_SIDE",
+    isTrackedByPopTracker: false,
     accessRequirements: [
       "PLAINBADGE",
       "HM04",
@@ -258,6 +297,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "BLACKTHORN_GYM_2F_FRONT_AREA_DROPPED_SE_BOULDER",
     eventFlagId: "BOULDER_IN_BLACKTHORN_GYM_3",
     areaId: "BLACKTHORN_GYM_2F_FRONT_AREA",
+    isTrackedByPopTracker: false,
     accessRequirements: [
       "PLAINBADGE",
       "HM04",
@@ -267,6 +307,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "BLACKTHORN_GYM_2F_FRONT_AREA_DROPPED_NE_BOULDER",
     eventFlagId: "BOULDER_IN_BLACKTHORN_GYM_1",
     areaId: "BLACKTHORN_GYM_2F_FRONT_AREA",
+    isTrackedByPopTracker: false,
     accessRequirements: [
       "PLAINBADGE",
       "HM04",
@@ -276,22 +317,26 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "BLACKTHORN_GYM_1F_BACK_AREA_DEFEATED_CLAIR",
     eventFlagId: "BEAT_CLAIR",
     areaId: "BLACKTHORN_GYM_1F_BACK_AREA",
+    isTrackedByPopTracker: true,
   },
   DRAGON_SHRINE_PASSED_TEST: {
     id: "DRAGON_SHRINE_PASSED_TEST",
     eventFlagId: "GOT_RISINGBADGE",
     areaId: "DRAGON_SHRINE",
+    isTrackedByPopTracker: true,
   },
   HALL_OF_FAME_ENTERED: {
     id: "HALL_OF_FAME_ENTERED",
     eventFlagId: "BEAT_ELITE_FOUR",
     areaId: "HALL_OF_FAME",
+    isTrackedByPopTracker: true,
   },
   OLIVINE_PORT_NORTH_AREA_BOARDED_SHIP: {
     id: "OLIVINE_PORT_NORTH_AREA_BOARDED_SHIP",
     eventFlagId: "FAST_SHIP_DESTINATION_OLIVINE", // TODO: For Tracking proper purposes we may need to make a new event for this
     inverseFlag: true,
     areaId: "OLIVINE_PORT_NORTH_AREA",
+    isTrackedByPopTracker: false,
     accessRequirements: [
       "HALL_OF_FAME_ENTERED",
       "S_S_TICKET",
@@ -301,11 +346,13 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "FAST_SHIP_B1F_EAST_AREA_TALKED_TO_SAILOR",
     eventFlagId: "FAST_SHIP_INFORMED_ABOUT_LAZY_SAILOR",
     areaId: "FAST_SHIP_B1F_EAST_AREA",
+    isTrackedByPopTracker: true,
   },
   FAST_SHIP_CABINS_NNW_FOUGHT_SAILOR: {
     id: "FAST_SHIP_CABINS_NNW_FOUGHT_SAILOR",
     eventFlagId: "FAST_SHIP_LAZY_SAILOR",
     areaId: "FAST_SHIP_CABINS_NNW",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "FAST_SHIP_B1F_EAST_AREA_TALKED_TO_SAILOR",
     ],
@@ -314,11 +361,13 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "FAST_SHIP_CABINS_CAPTAINS_CABIN_TALKED_TO_GIRL",
     eventFlagId: "FAST_SHIP_FOUND_GIRL",
     areaId: "FAST_SHIP_CABINS_CAPTAINS_CABIN",
+    isTrackedByPopTracker: true,
   },
   VERMILION_PORT_NORTH_AREA_BOARDED_SHIP: {
     id: "VERMILION_PORT_NORTH_AREA_BOARDED_SHIP",
     eventFlagId: "FAST_SHIP_DESTINATION_OLIVINE",
     areaId: "VERMILION_PORT_NORTH_AREA",
+    isTrackedByPopTracker: false,
     accessRequirements: [
       "S_S_TICKET",
     ],
@@ -327,16 +376,19 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "FAST_SHIP_CABINS_NW_SLEPT",
     eventFlagId: "FAST_SHIP_HAS_ARRIVED", // TODO: For proper tracking purposes, this needs to be a different event that is not also set the first time you take the boat
     areaId: "FAST_SHIP_CABINS_NW",
+    isTrackedByPopTracker: false,
   },
   POWER_PLANT_TALKED_TO_MANAGER: {
     id: "POWER_PLANT_TALKED_TO_MANAGER",
     eventFlagId: "MET_MANAGER_AT_POWER_PLANT",
     areaId: "POWER_PLANT",
+    isTrackedByPopTracker: true,
   },
   CERULEAN_GYM_CONFRONTED_ROCKET: {
     id: "CERULEAN_GYM_CONFRONTED_ROCKET",
     eventFlagId: "MET_ROCKET_GRUNT_AT_CERULEAN_GYM",
     areaId: "CERULEAN_GYM",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "POWER_PLANT_TALKED_TO_MANAGER",
     ],
@@ -346,6 +398,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     eventFlagId: "TRAINERS_IN_CERULEAN_GYM",
     inverseFlag: true,
     areaId: "ROUTE_25",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "CERULEAN_GYM_CONFRONTED_ROCKET",
     ],
@@ -354,6 +407,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "POWER_PLANT_RESTORED_POWER",
     eventFlagId: "RESTORED_POWER_TO_KANTO",
     areaId: "POWER_PLANT",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "MACHINE_PART",
     ],
@@ -362,6 +416,7 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "VERMILION_CITY_WOKE_SNORLAX",
     eventFlagId: "FOUGHT_SNORLAX",
     areaId: "VERMILION_CITY_SNORLAX_GROUP",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       "POKEGEAR",
       "RADIO_CARD",
@@ -372,16 +427,19 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "CINNABAR_ISLAND_TALKED_TO_BLUE",
     eventFlagId: "BLUE_IN_CINNABAR",
     areaId: "CINNABAR_ISLAND",
+    isTrackedByPopTracker: true,
   },
   ROUTE_20_VISITED: {
     id: "ROUTE_20_VISITED",
     eventFlagId: "CINNABAR_ROCKS_CLEARED",
     areaId: "ROUTE_20",
+    isTrackedByPopTracker: false,
   },
   OAKS_LAB_GOT_OAKS_APPROVAL: {
     id: "OAKS_LAB_GOT_OAKS_APPROVAL",
     eventFlagId: "OPENED_MOUNT_SILVER",
     areaId: "OAKS_LAB",
+    isTrackedByPopTracker: true,
     accessRequirements: [
       16,
     ],
@@ -390,5 +448,6 @@ export const logicalEventsMap: IdMap<LogicalEventId, LogicalEvent> = {
     id: "SILVER_CAVE_ROOM_3_DEFEATED_RED",
     eventFlagId: "BEAT_RED",
     areaId: "SILVER_CAVE_ROOM_3",
+    isTrackedByPopTracker: true,
   },
 }

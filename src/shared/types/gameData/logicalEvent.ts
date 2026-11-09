@@ -6,6 +6,7 @@ import type { LogicalEventId } from "@shared/types/gameDataIds/logicalEvents"
 export type LogicalEvent = {
   id: LogicalEventId
   areaId: LogicalAccessAreaId
+  isTrackedByPopTracker: boolean
   accessRequirements?: AccessRequirement[]
 } & ({
   eventFlagId: EventFlagId
