@@ -4154,10 +4154,7 @@ export const regularGiftLocationsMap: IdMap<RegularGiftLocationId, ItemLocation>
     type: "GIFT",
     groupId: "REGULAR_GIFTS",
     itemId: "METAL_COAT",
-    areaId: "FAST_SHIP_CABINS_SE",
-    accessRequirements: [
-      "FAST_SHIP_CABINS_CAPTAINS_CABIN_TALKED_TO_GIRL",
-    ],
+    areaId: "FAST_SHIP_CABINS_CAPTAINS_CABIN",
     romOffsets: [
       [
         29,
