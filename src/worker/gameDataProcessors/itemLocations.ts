@@ -862,7 +862,7 @@ const areAreCurrentAssignmentsValid = (params: {
   
   while (unplacedItems.length > 0) {
     const validShuffleGroups = accessibleItemLocations.reduce((result, location) => {
-      if (isNullish(location.itemId)) {
+      if (isNullish(location.itemId) && location.type !== "EVENT") {
         result.add(location.shuffleGroupIndex)
       }
       
@@ -889,6 +889,15 @@ const areAreCurrentAssignmentsValid = (params: {
       const location = allItemLocations[i]
       
       if (isNotNullish(location.itemId) || isNullish(location.accessOptions) || location.accessOptions.some((option) => { return option.length === 0 })) {
+        continue
+      }
+      
+      if (location.type === "EVENT" && allItemLocations.filter((otherLocation) => {
+        // TODO: This isn't comprehensive it should recurse over event requirements looking for a non event location that has no item
+        return otherLocation.type !== "EVENT" && isNullish(otherLocation.itemId) && validShuffleGroups.has(otherLocation.shuffleGroupIndex) && otherLocation.accessOptions.some((option) => {
+          return option.includes(location.id as IndividualAccessRequirement)
+        })
+      }).length === 0) {
         continue
       }
       
