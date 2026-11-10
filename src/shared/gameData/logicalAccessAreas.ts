@@ -3944,7 +3944,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
       "FAST_SHIP_CABINS_SSE_DOOR_OUT_RIGHT",
       "FAST_SHIP_CABINS_SE_DOOR_OUT_LEFT",
       "FAST_SHIP_CABINS_SE_DOOR_OUT_RIGHT",
-      "FAST_SHIP_B1F_WEST_AREA_STAIRS_DOWN",
+      "FAST_SHIP_B1F_EAST_AREA_STAIRS_UP",
     ],
   },
   FAST_SHIP_1F_ISOLATED_AREA: {
@@ -3952,7 +3952,7 @@ export const logicalAccessAreasMap: IdMap<LogicalAccessAreaId, LogicalAccessArea
     accessOptions: [
       "FAST_SHIP_CABINS_CAPTAINS_CABIN_DOOR_OUT_LEFT",
       "FAST_SHIP_CABINS_CAPTAINS_CABIN_DOOR_OUT_RIGHT",
-      "FAST_SHIP_B1F_EAST_AREA_STAIRS_DOWN",
+      "FAST_SHIP_B1F_WEST_AREA_STAIRS_UP",
     ],
   },
   FAST_SHIP_CABINS_NNW: {
