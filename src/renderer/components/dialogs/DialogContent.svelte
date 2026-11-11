@@ -30,7 +30,7 @@
         >
         
           {#if isNotNullish(message)}
-            {#each message.split("\n") as paragraph}
+            {#each message.split("\n") as paragraph (paragraph)}
               <div use:textStyle={"content"}>{paragraph}</div>
             {/each}
           {/if}

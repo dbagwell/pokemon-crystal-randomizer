@@ -1,3 +1,5 @@
+import { isNotNullish } from "@shared/utils"
+
 const grayF0 = "#F0F0F0"
 const grayEE = "#EEEEEE"
 const grayDD = "#DDDDDD"
@@ -49,7 +51,7 @@ export const darkThemeColors = {
 export let colors = darkThemeColors
 
 export const updateColors = () => {
-  if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+  if (isNotNullish(window.matchMedia) && window.matchMedia("(prefers-color-scheme: light)").matches) {
     colors = lightThemeColors
   } else {
     colors = darkThemeColors

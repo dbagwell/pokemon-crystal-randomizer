@@ -4,7 +4,7 @@
   distribution="fill"
   minSpacing={10}
 >
-  {#each text.split("\n") as paragraph}
+  {#each text.split("\n") as paragraph (paragraph)}
     <div use:textStyle={"content"}>
       {paragraph}
     </div>

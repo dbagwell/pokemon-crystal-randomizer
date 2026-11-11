@@ -9,7 +9,7 @@ export const isSemanticVersion = (value: any): value is string => {
   
   return !value.split(".").map((part) => {
     return parseInt(part)
-  }).find((part) => {
+  }).some((part) => {
     return Number.isNaN(part)
   })
 }

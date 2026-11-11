@@ -65,7 +65,7 @@
 
   const textFieldBlurHandler = () => {
     requestAnimationFrame(() => {
-      if (isNullish(textFields.find((textField) => { return textField.getIsFocused() }))) {
+      if (!textFields.some((textField) => { return textField.getIsFocused() === true })) {
         let error: string | null = null
     
         values.forEach((value) => {

@@ -20,13 +20,10 @@ export type EvolutionMethod = {
   conditionId: StatEvolutionConidtionId,
 }
 
-const happinessEvolutionConidtionIds = [
-  "NONE",
-  "DAY",
-  "NIGHT",
-] as const
-
-type HappinessEvolutionConidtionId = typeof happinessEvolutionConidtionIds[number]
+type HappinessEvolutionConidtionId =
+  | "NONE"
+  | "DAY"
+  | "NIGHT"
 
 type HappinessEvolutionConidtion = {
   id: HappinessEvolutionConidtionId,
@@ -48,13 +45,10 @@ export const happinessEvolutionConidtionsMap: IdMap<HappinessEvolutionConidtionI
   },
 }
 
-const statEvolutionConidtionIds = [
-  "ATTACK_GREATER_THAN_DEFENCE",
-  "ATTACK_LESS_THAN_DEFENCE",
-  "ATTACK_EQUAL_DEFENCE",
-] as const
-
-type StatEvolutionConidtionId = typeof statEvolutionConidtionIds[number]
+type StatEvolutionConidtionId =
+  | "ATTACK_GREATER_THAN_DEFENCE"
+  | "ATTACK_LESS_THAN_DEFENCE"
+  | "ATTACK_EQUAL_DEFENCE"
 
 type StatEvolutionConidtion = {
   id: StatEvolutionConidtionId,

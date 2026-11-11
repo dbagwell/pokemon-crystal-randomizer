@@ -105,8 +105,8 @@
   /* eslint-enable prefer-const */
   
   let isFocused = $state(false)
-  export const getIsFocused = () => {
-    return isFocused
+  export const getIsFocused = (): true => {
+    return true
   }
   
   export const getElement = () => {

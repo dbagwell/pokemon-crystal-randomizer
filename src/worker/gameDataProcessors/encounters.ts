@@ -61,7 +61,7 @@ export const updateRandomEncounters = (
     }
       
     if (wildEcountersSettings.AVAILABILITY === "SEARCHABLE" || wildEcountersSettings.AVAILABILITY === "REGIONAL") {
-      if (encounter.type === "LAND" && !encounter.isSwarm || encounter.type === "WATER") {
+      if (encounter.type === "LAND" && !(encounter.isSwarm ?? false) || encounter.type === "WATER") {
         const index = wildEcountersSettings.AVAILABILITY === "REGIONAL" && gameMapsMap[encounter.mapId].encounterRegion === "KANTO" ? 1 : 0
           
         if (shouldBeFullyEvolved(encounter)) {

@@ -1,7 +1,7 @@
 import { defineConfig } from "vite"
 
 export default ({ root, outdir, publicDir, copyPublicDir, rolldownOptions, plugins }) => {
-  const pluginsArray = plugins ? plugins : []
+  const pluginsArray = plugins !== null && plugins !== undefined ? plugins : []
   return defineConfig(({ mode }) => {
     const isDev = mode === "development"
     return {
