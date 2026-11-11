@@ -161,7 +161,7 @@ export const shuffleItems = (
   
   const resolvedGeneralItemLocations = generalItemLocations(romInfo.gameData, settings)
   romInfo.gameData.allItemLocations = resolvedGeneralItemLocations.withEvents
-  let allItemLocations = resolvedGeneralItemLocations.withoutEvents
+  const actualAllItemLocations = resolvedGeneralItemLocations.withoutEvents
   const locationsToShuffle: GeneralItemLocation[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   const startingAccessibleItems = startingItemIds(settings).map((itemId) => {
@@ -171,7 +171,7 @@ export const shuffleItems = (
     }
   })
   
-  allItemLocations.forEach((location, index) => {
+  actualAllItemLocations.forEach((location) => {
     const locationIdInfo = getLocationIdInfo(location.id)
     
     if (
@@ -182,8 +182,6 @@ export const shuffleItems = (
       location.shuffleGroupIndex = shuffleItemsSettings.GROUPS.findIndex((group) => {
         return group.includes(location.groupId ?? "SHOPS")
       }) ?? -1
-      
-      romInfo.gameData.allItemLocations![index].shuffleGroupIndex = location.shuffleGroupIndex
     }
     
     if (location.shuffleGroupIndex !== -1) {
@@ -219,7 +217,7 @@ export const shuffleItems = (
     })
   }
   
-  const progressionItemIds = allItemLocations.reduce((result, location) => {
+  const progressionItemIds = actualAllItemLocations.reduce((result, location) => {
     location.accessOptions.forEach((option) => {
       option.forEach((requirement) => {
         const resolvedRequirement = Array.isArray(requirement) ? requirement[0] : requirement
@@ -239,7 +237,7 @@ export const shuffleItems = (
     return result
   }, new Set<ItemId>())
   
-  allItemLocations = allItemLocations.filter((location) => {
+  const allItemLocations = actualAllItemLocations.filter((location) => {
     return isNullish(location.itemId) || progressionItemIds.has(location.itemId)
   })
   
@@ -516,6 +514,13 @@ export const shuffleItems = (
       ...romInfo.gameData.specialShops.GOLDENROD_DEPT_STORE_ROOF_SHOP_2.items,
     ]
   }
+  
+  actualAllItemLocations.forEach((location, index) => {
+    romInfo.gameData.allItemLocations![index].shuffleGroupIndex = location.shuffleGroupIndex
+    romInfo.gameData.allItemLocations![index].itemId = location.itemId
+    romInfo.gameData.allItemLocations![index].allowsAPShuffle = location.allowsAPShuffle
+    romInfo.gameData.allItemLocations![index].isConsumableProgression = location.isConsumableProgression
+  })
 }
 
 const isLocationRenewableShop = (location: GeneralItemLocation, settings: Settings) => {
