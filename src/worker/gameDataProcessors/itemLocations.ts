@@ -171,7 +171,7 @@ export const shuffleItems = (
     }
   })
   
-  allItemLocations.forEach((location) => {
+  allItemLocations.forEach((location, index) => {
     const locationIdInfo = getLocationIdInfo(location.id)
     
     if (
@@ -182,6 +182,8 @@ export const shuffleItems = (
       location.shuffleGroupIndex = shuffleItemsSettings.GROUPS.findIndex((group) => {
         return group.includes(location.groupId ?? "SHOPS")
       }) ?? -1
+      
+      romInfo.gameData.allItemLocations![index].shuffleGroupIndex = location.shuffleGroupIndex
     }
     
     if (location.shuffleGroupIndex !== -1) {
