@@ -159,8 +159,9 @@ export const shuffleItems = (
     return group.includes("SHOPS")
   })
   
-  let allItemLocations = generalItemLocations(romInfo.gameData, settings)
-  romInfo.gameData.allItemLocations = allItemLocations
+  const resolvedGeneralItemLocations = generalItemLocations(romInfo.gameData, settings)
+  romInfo.gameData.allItemLocations = resolvedGeneralItemLocations.withEvents
+  let allItemLocations = resolvedGeneralItemLocations.withoutEvents
   const locationsToShuffle: GeneralItemLocation[] = []
   const itemsToShuffle: { itemId: ItemId, shuffleGroupIndex: number }[] = []
   const startingAccessibleItems = startingItemIds(settings).map((itemId) => {
@@ -422,7 +423,6 @@ export const shuffleItems = (
                 }
               }),
             ],
-            accessibleEvents: [],
             allItemLocations: allItemLocations,
             allowNormalConsumables: !shuffleItemsSettings.IMPROVED_CONSUMABLE_ACCESS_LOGIC,
             settings: settings,
@@ -526,14 +526,12 @@ const isLocationRenewableShop = (location: GeneralItemLocation, settings: Settin
 
 const getAccessibleLocations = (params: {
   accessibleItems: AccessibleItem[]
-  accessibleEvents: LogicalEventId[]
   allItemLocations: GeneralItemLocation[]
   allowNormalConsumables: boolean
   settings: Settings
 }) => {
   const {
     accessibleItems: [...accessibleItems],
-    accessibleEvents: [...accessibleEvents],
     allItemLocations,
     allowNormalConsumables,
     settings,
@@ -543,7 +541,6 @@ const getAccessibleLocations = (params: {
   
   updateAccessibleItemsAndLocations({
     accessibleItems: accessibleItems,
-    accessibleEvents: accessibleEvents,
     accessibleItemLocations: accessibleItemLocations,
     allItemLocations: allItemLocations,
     allowNormalConsumables: allowNormalConsumables,
@@ -553,7 +550,7 @@ const getAccessibleLocations = (params: {
   return accessibleItemLocations
 }
 
-const generalItemLocations = (gameData: GameData, settings: Settings): GeneralItemLocation[] => {
+const generalItemLocations = (gameData: GameData, settings: Settings): { withEvents: GeneralItemLocation[], withoutEvents: GeneralItemLocation[] } => {
   const convertAccessRequirements = (requirements: (AccessRequirement | LogicalAccessAreaId | WarpId)[]) => {
     return requirements.flatMap((requirement) => {
       const isOptional = Array.isArray(requirement)
@@ -661,8 +658,8 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
     }),
   ]
 
-  const updateStringRequirementWith = (match: string, replacements: string[][]) => {
-    accessInfoObjects.forEach((object) => {
+  const updateStringRequirementWith = (match: string, replacements: string[][], allObjects: typeof accessInfoObjects) => {
+    allObjects.forEach((object) => {
       let objectWasModified = false
           
       const filteredReplacements = replacements.filter((requirements) => {
@@ -747,7 +744,14 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
 
   accessInfoObjects.forEach((object) => {
     if (object.shouldBeReduced) {
-      updateStringRequirementWith(object.id, object.accessOptions)
+      updateStringRequirementWith(object.id, object.accessOptions, accessInfoObjects)
+    }
+  })
+  
+  const fullyReducedObjects = JSON.parse(JSON.stringify(accessInfoObjects)) as typeof accessInfoObjects
+  fullyReducedObjects.forEach((object) => {
+    if (!object.shouldBeReduced) {
+      updateStringRequirementWith(object.id, object.accessOptions, fullyReducedObjects)
     }
   })
   
@@ -768,58 +772,65 @@ const generalItemLocations = (gameData: GameData, settings: Settings): GeneralIt
     })
   }
   
-  return accessInfoObjects.flatMap((object) => {
-    if (object.type === "ITEM_LOCATION") {
-      return [
-        {
-          ...object,
-          groupId: gameData.itemLocations[object.id as ItemLocationId].groupId,
-          itemId: gameData.itemLocations[object.id as ItemLocationId].itemId,
-          strictAccessOptions: convertedAccessOptions(object.accessOptions),
-          accessOptions: convertedAccessOptions(object.accessOptions, true),
-        },
-      ] as GeneralItemLocation[]
-    } else if (object.type === "MART") {
-      return gameData.marts[object.id as MartId].items.map((itemId, index) => {
-        return {
-          ...object,
-          id: JSON.stringify({
-            groupId: gameData.marts[object.id as MartId].groupId,
-            itemIndex: index,
-          }),
-          groupId: "SHOPS",
-          itemId: itemId,
-          strictAccessOptions: convertedAccessOptions(object.accessOptions),
-          accessOptions: convertedAccessOptions(object.accessOptions, true),
-        }
-      }) as GeneralItemLocation[]
-    } else if (object.type === "SPECIAL_SHOP") {
-      return gameData.specialShops[object.id as SpecialShopId].items.map((itemInfo, index) => {
-        return {
-          ...object,
-          id: JSON.stringify({
-            shopId: object.id,
-            itemIndex: index,
-          }),
-          groupId: "SHOPS",
-          itemId: itemInfo.itemId,
-          strictAccessOptions: convertedAccessOptions(object.accessOptions),
-          accessOptions: convertedAccessOptions(object.accessOptions, true),
-        }
-      }) as GeneralItemLocation[]
-    } else if (object.type === "EVENT") {
-      return [
-        {
-          ...object,
-          groupId: "EVENT",
-          strictAccessOptions: convertedAccessOptions(object.accessOptions),
-          accessOptions: convertedAccessOptions(object.accessOptions, true),
-        },
-      ] as any as GeneralItemLocation[]
-    } else {
-      return []
-    }
-  })
+  const transformObjects = (objects: typeof accessInfoObjects, includeEvents: boolean) => {
+    return objects.flatMap((object) => {
+      if (object.type === "ITEM_LOCATION") {
+        return [
+          {
+            ...object,
+            groupId: gameData.itemLocations[object.id as ItemLocationId].groupId,
+            itemId: gameData.itemLocations[object.id as ItemLocationId].itemId,
+            strictAccessOptions: convertedAccessOptions(object.accessOptions),
+            accessOptions: convertedAccessOptions(object.accessOptions, true),
+          },
+        ] as GeneralItemLocation[]
+      } else if (object.type === "MART") {
+        return gameData.marts[object.id as MartId].items.map((itemId, index) => {
+          return {
+            ...object,
+            id: JSON.stringify({
+              groupId: gameData.marts[object.id as MartId].groupId,
+              itemIndex: index,
+            }),
+            groupId: "SHOPS",
+            itemId: itemId,
+            strictAccessOptions: convertedAccessOptions(object.accessOptions),
+            accessOptions: convertedAccessOptions(object.accessOptions, true),
+          }
+        }) as GeneralItemLocation[]
+      } else if (object.type === "SPECIAL_SHOP") {
+        return gameData.specialShops[object.id as SpecialShopId].items.map((itemInfo, index) => {
+          return {
+            ...object,
+            id: JSON.stringify({
+              shopId: object.id,
+              itemIndex: index,
+            }),
+            groupId: "SHOPS",
+            itemId: itemInfo.itemId,
+            strictAccessOptions: convertedAccessOptions(object.accessOptions),
+            accessOptions: convertedAccessOptions(object.accessOptions, true),
+          }
+        }) as GeneralItemLocation[]
+      } else if (includeEvents && object.type === "EVENT") {
+        return [
+          {
+            ...object,
+            groupId: "EVENT",
+            strictAccessOptions: convertedAccessOptions(object.accessOptions),
+            accessOptions: convertedAccessOptions(object.accessOptions, true),
+          },
+        ] as any as GeneralItemLocation[]
+      } else {
+        return []
+      }
+    })
+  }
+  
+  return {
+    withEvents: transformObjects(accessInfoObjects, true),
+    withoutEvents: transformObjects(fullyReducedObjects, false),
+  }
 }
 
 const areAreCurrentAssignmentsValid = (params: {
@@ -841,12 +852,10 @@ const areAreCurrentAssignmentsValid = (params: {
   
   const allItemLocations = JSON.parse(JSON.stringify(inputAllItemLocations)) as GeneralItemLocation[]
   const accessibleItems = [...startingItems] as AccessibleItem[]
-  const accessibleEvents = [] as LogicalEventId[]
   const accessibleItemLocations = [] as GeneralItemLocation[]
   
   updateAccessibleItemsAndLocations({
     accessibleItems: accessibleItems,
-    accessibleEvents: accessibleEvents,
     accessibleItemLocations: accessibleItemLocations,
     allItemLocations: allItemLocations,
     allowNormalConsumables: allowNormalConsumables,
@@ -862,7 +871,7 @@ const areAreCurrentAssignmentsValid = (params: {
   
   while (unplacedItems.length > 0) {
     const validShuffleGroups = accessibleItemLocations.reduce((result, location) => {
-      if (isNullish(location.itemId) && location.type !== "EVENT") {
+      if (isNullish(location.itemId)) {
         result.add(location.shuffleGroupIndex)
       }
       
@@ -889,15 +898,6 @@ const areAreCurrentAssignmentsValid = (params: {
       const location = allItemLocations[i]
       
       if (isNotNullish(location.itemId) || isNullish(location.accessOptions) || location.accessOptions.some((option) => { return option.length === 0 })) {
-        continue
-      }
-      
-      if (location.type === "EVENT" && allItemLocations.filter((otherLocation) => {
-        // TODO: This isn't comprehensive it should recurse over event requirements looking for a non event location that has no item
-        return otherLocation.type !== "EVENT" && isNullish(otherLocation.itemId) && validShuffleGroups.has(otherLocation.shuffleGroupIndex) && otherLocation.accessOptions.some((option) => {
-          return option.includes(location.id as IndividualAccessRequirement)
-        })
-      }).length === 0) {
         continue
       }
       
@@ -1026,7 +1026,6 @@ const areAreCurrentAssignmentsValid = (params: {
     
     updateAccessibleItemsAndLocations({
       accessibleItems: accessibleItems,
-      accessibleEvents: accessibleEvents,
       accessibleItemLocations: accessibleItemLocations,
       allItemLocations: allItemLocations,
       allowNormalConsumables: allowNormalConsumables,
@@ -1114,7 +1113,6 @@ const updateAccessRequirementsUsingPlacedItems = (params: {
 
 const updateAccessibleItemsAndLocations = (params: {
   accessibleItems: AccessibleItem[]
-  accessibleEvents: LogicalEventId[]
   accessibleItemLocations: GeneralItemLocation[]
   allItemLocations: GeneralItemLocation[]
   allowNormalConsumables: boolean
@@ -1123,7 +1121,6 @@ const updateAccessibleItemsAndLocations = (params: {
 }) => {
   const {
     accessibleItems,
-    accessibleEvents,
     accessibleItemLocations,
     allItemLocations,
     allowNormalConsumables,
@@ -1146,7 +1143,6 @@ const updateAccessibleItemsAndLocations = (params: {
           return !isAccessRequirementSatisfied({
             requirement: requirement,
             accessibleItems: accessibleItems,
-            accessibleEvents: accessibleEvents,
           })
         })
       }))
@@ -1158,9 +1154,7 @@ const updateAccessibleItemsAndLocations = (params: {
       if (remainingAccessOptions.some((option) => { return option.length === 0 })) {
         didUpdate = true
         accessibleItemLocations.push(location)
-        if (location.type === "EVENT") {
-          accessibleEvents.push(location.id as LogicalEventId)
-        } else if (isNotNullish(location.itemId) && (isLocationRenewableShop(location, settings) || !(holdableItemIds as readonly string[]).includes(location.itemId) || allowNormalConsumables)) {
+        if (isNotNullish(location.itemId) && (isLocationRenewableShop(location, settings) || !(holdableItemIds as readonly string[]).includes(location.itemId) || allowNormalConsumables)) {
           accessibleItems.push({
             itemId: location.itemId,
             isFromRenewableShop: isLocationRenewableShop(location, settings),
@@ -1174,12 +1168,10 @@ const updateAccessibleItemsAndLocations = (params: {
 const isAccessRequirementSatisfied = (params: {
   requirement: IndividualAccessRequirement
   accessibleItems: AccessibleItem[]
-  accessibleEvents: LogicalEventId[]
 }): boolean => {
   const {
     requirement,
     accessibleItems,
-    accessibleEvents,
   } = params
   
   if (isObject(requirement)) {
@@ -1197,8 +1189,6 @@ const isAccessRequirementSatisfied = (params: {
     return accessibleItems.some((item) => {
       return item.itemId === requirement
     })
-  } else if (isLogicalEventId(requirement)) {
-    return accessibleEvents.includes(requirement)
   } else {
     return false
   }
