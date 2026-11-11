@@ -461,6 +461,7 @@
             const response = await window.mainAPI.exportAPOptions(
               $state.snapshot(apOptions),
               settings,
+              currentPreset.id,
             )
             showSuccessDialog(response.message)
           } catch (error) {

@@ -176,8 +176,11 @@ export class MainAPI implements ElectronMainApi<MainAPI>, MainAPIInterface {
   readonly exportAPOptions = async (
     apOptions: APOptions,
     settings: Settings,
+    presetId: string,
   ): Promise<VoidAPIResponse> => {
     try {
+      setPreviousSettings(settings)
+      setPreference("lastPresetId", presetId)
       setPreference("apOptions", apOptions)
       
       const filePath = dialog.showSaveDialogSync({
