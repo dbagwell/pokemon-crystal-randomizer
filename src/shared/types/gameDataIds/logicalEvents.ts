@@ -1,4 +1,3 @@
-
 export const logicalEventIds = [
   "ELMS_LAB_GAVE_MYSTERY_EGG",
   "VIOLET_GYM_DEFEATED_FALKNER",

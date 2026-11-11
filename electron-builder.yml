@@ -14,14 +14,12 @@ mac:
   - target: zip
     arch:
     - x64
-    - universal
     - arm64
 win:
   artifactName: Pokemon-Crystal-Randomizer-Installer-${version}-windows-${arch}.${ext}
   target:
   - target: nsis
     arch:
-    - ia32
     - x64
     - arm64
 linux:
@@ -31,7 +29,6 @@ linux:
     arch:
     - x64
     - arm64
-    - armv7l
 nsis:
   buildUniversalInstaller: false
   oneClick: false
