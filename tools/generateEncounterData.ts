@@ -4,6 +4,7 @@ import type { FishingRodId } from "@shared/types/gameDataIds/fishingRods"
 import { type GameMapId } from "@shared/types/gameDataIds/gameMaps"
 import { type PokemonId } from "@shared/types/gameDataIds/pokemon"
 import type { TreeGroupId } from "@shared/types/gameDataIds/treeGroups"
+import { isNullish } from "@shared/utils"
 import fs from "fs"
 import path from "path"
 
@@ -136,7 +137,7 @@ const encounters: Encounter[] = []
     groupMatches[2].split("\n").map((line) => {
       return line.match(/db\s*(\S*),\s*(\S*),\s*(\S*)/)
     }).forEach((encounterMatches, index) => {
-      if (!encounterMatches) {
+      if (isNullish(encounterMatches)) {
         return
       }
       

@@ -1,6 +1,7 @@
 description: "Changes the data for the marts items."
 values:
-  martData: "@#marts.$data #marts.$data"
+  martData: "@#marts.$data @$mockRooftopShopData #marts.$data $mockRooftopShopData"
+  mockRooftopShopData: "0A 00 00 00 00 00 00 00 00 00 00 FF"
 changes:
 - description: "Changes the data for the marts items."
   locations:
@@ -11,13 +12,16 @@ changes:
   - bank: 5
     address: 0x5B3D
   value: "@$martData"
-- description: "Skip code checking number of marts."
+- description: "Update the number of marts when check if mart index is valid"
   locations:
   - bank: 5
-    address: 0x5B32
-    maxSize: 10
-    freeUnused: true
-  value: "18 08"
+    address: 0x5B33
+  value: "$numberOfMarts"
+- description: "Don't try to load a default mart if mart index is not valid"
+  locations:
+  - bank: 5
+    address: 0x5B36
+  value: "C9"
 freeSpaces:
   - bank: 5
     address: 0x60A9

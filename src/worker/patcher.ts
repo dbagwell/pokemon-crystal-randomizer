@@ -31,7 +31,7 @@ export const patch = (params: PatchParams) => {
       }
     } while ((byte & 0b10000000) === 0)
     
-    if (signed) {
+    if (signed ?? false) {
       return ((value & 0b1) === 1 ? -1 : 1) * (value >> 1)
     } else {
       return value

@@ -54,16 +54,20 @@
       return
     }
     
+    const padding = 15
     const position = await computePosition(anchorElement, tooltipContainer, {
       placement: "right",
       middleware: [
-        offset({ mainAxis: 15 }),
-        flip(),
-        shift(),
+        offset({ mainAxis: padding }),
+        flip({ padding: padding }),
+        shift({ padding: padding }),
         size({
           apply({ availableWidth, availableHeight, elements }) {
             elements.floating.style.maxWidth = `${Math.min(availableWidth, 300)}px`
-            elements.floating.style.maxHeight = `${availableHeight - 15}px`
+            elements.floating.style.maxHeight = `${availableHeight - padding * 2}px`
+            if (elements.floating.scrollHeight > availableHeight - padding * 2) {
+              elements.floating.style.height = `${availableHeight - padding * 2}px`
+            }
           },
         }),
         arrow({ element: arrowElement }),

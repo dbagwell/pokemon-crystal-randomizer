@@ -1,4 +1,5 @@
-import type { AccessRequirement } from "@shared/types/gameData/warp"
+import type { AccessRequirement, IndividualAccessRequirement } from "@shared/types/gameData/warp"
+import type { EventFlagId } from "@shared/types/gameDataIds/eventFlags"
 import type { ItemLocationGroupId } from "@shared/types/gameDataIds/itemLocationGroups"
 import type { ItemLocationId } from "@shared/types/gameDataIds/itemLocations"
 import type { ItemId } from "@shared/types/gameDataIds/items"
@@ -15,10 +16,25 @@ export type ItemLocationType = typeof itemLocationTypes[number]
 
 export type ItemLocation = {
   id: ItemLocationId
+  name: string
   type: ItemLocationType
   groupId: ItemLocationGroupId
   itemId: ItemId
   areaId: LogicalAccessAreaId
   accessRequirements?: AccessRequirement[]
   romOffsets: [number, number][]
+  eventFlagId: EventFlagId
+}
+
+export type GeneralItemLocation = {
+  type: "ITEM_LOCATION" | "MART" | "SPECIAL_SHOP" | "EVENT"
+  id: string
+  groupId: ItemLocationGroupId
+  shuffleGroupIndex: number
+  strictAccessOptions: IndividualAccessRequirement[][]
+  accessOptions: IndividualAccessRequirement[][]
+  itemId: ItemId | undefined
+  allowsAPShuffle: boolean
+  isConsumableProgression: boolean
+  preventsProgression: boolean
 }

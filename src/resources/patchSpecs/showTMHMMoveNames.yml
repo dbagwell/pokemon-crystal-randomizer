@@ -6,7 +6,7 @@ values:
   fruitTreeCode: "0E 04 @$sharedCode 4C BA 40 91"
   trashCanCode: "0E 04 @$sharedCode 4C E7 72 91"
   verboseCode: "CD C8 76 11 B0 D0 3E 04 21 @$appendTMHMMoveName CF C9"
-  appendTMHMMoveName: "FA 65 D2 FE BF D8 D5 4F 3E 03 21 07 54 CF 79 EA 65 D2 3E 0F CD 83 2D FA 65 D2 EA 65 D2 CD F8 34 E1 36 7F 23 11 73 D0 C3 D9 30"
+  appendTMHMMoveName: "FA 65 D2 FE C3 C8 FE DC C8 FE BF D8 D5 4F 3E 03 21 07 54 CF 79 EA 65 D2 3E 0F CD 83 2D FA 65 D2 EA 65 D2 CD F8 34 E1 36 7F 23 11 73 D0 C3 D9 30"
 changes:
 - description: "Adds code"
   locations:

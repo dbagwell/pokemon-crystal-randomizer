@@ -4,7 +4,7 @@ import type { FishingGroupId } from "@shared/types/gameDataIds/fishingGroups"
 import type { GameMapGroupId } from "@shared/types/gameDataIds/gameMapGroups"
 import type { GameMapId } from "@shared/types/gameDataIds/gameMaps"
 import type { TreeGroupId } from "@shared/types/gameDataIds/treeGroups"
-import { isNotNullish } from "@shared/utils"
+import { isNotNullish, isNullish } from "@shared/utils"
 import fs from "fs"
 import path from "path"
 
@@ -121,7 +121,7 @@ mapGroupMatches.forEach((matches, index) => {
       landEncounterRates: landEncounterRates,
       waterEncounterRate: waterEncounterRate,
       swarmEncounterRates: swarmEncounterRates,
-      fishingGroup: !waterEncounterRate || fishingGroup === "NONE" ? undefined : fishingGroup === "QWILFISH_NO_SWARM" ? "QWILFISH" : fishingGroup as FishingGroupId,
+      fishingGroup: isNullish(waterEncounterRate) || fishingGroup === "NONE" ? undefined : fishingGroup === "QWILFISH_NO_SWARM" ? "QWILFISH" : fishingGroup as FishingGroupId,
       treeGroup: treeMapsWithoutTrees.includes(mapId) || treeGroup === "ROCK" ? undefined : treeGroup === "CITY" || treeGroup === "CANYON" ? "CANYON" : treeGroup as TreeGroupId,
     }
   })

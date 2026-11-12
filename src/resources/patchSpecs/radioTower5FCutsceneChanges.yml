@@ -23,7 +23,7 @@ changes:
     address: 0x4040
   - bank: 24
     address: 0x40E2
-  value: "18 18"
+  value: "86 86"
 - description: "Change the scene that will trigger the rocket boss cutscene."
   locations:
   - bank: 24

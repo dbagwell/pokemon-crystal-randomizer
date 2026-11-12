@@ -8,7 +8,7 @@ type RendererAPIDictionary<Key extends number | "generatorWindow"> = { [K in Key
 export const rendererAPIS: RendererAPIDictionary<number | "generatorWindow"> = {}
 export const rendererAPIResponseListeners: Dictionary<(result: any) => void> = {}
 
-export const bindRendererAPI = async (window: BrowserWindow, isGeneratorWindow?: boolean) => {
+export const bindRendererAPI = async (window: BrowserWindow, isGeneratorWindow: boolean) => {
   rendererAPIS[isGeneratorWindow ? "generatorWindow" : window.id] = await bindWindowApi<RendererAPIInterface>(window, "RendererAPI")
 }
 

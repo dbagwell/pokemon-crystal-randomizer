@@ -39,6 +39,7 @@ const init = async () => {
         customPresetNames: initialAppData.customPresetNames,
         logPreference: initialAppData.logPreference,
         createPatchPreference: initialAppData.createPatchPreference,
+        initialAPOptions: initialAppData.apOptions,
       },
     })
       

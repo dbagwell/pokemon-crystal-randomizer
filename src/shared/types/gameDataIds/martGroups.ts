@@ -26,13 +26,13 @@ export const martGroupIds = [
   "CELADON_DEPT_STORE_5F_SHOP_2",
   "FUCHSIA_MART_SHOP",
   "SAFFRON_MART_SHOP",
-  "MT_MOON_GIFT_SHOP_SHOP",
+  "MOUNT_MOON_GIFT_SHOP_SHOP",
   "INDIGO_PLATEAU_POKECENTER_1F_SHOP",
   "GOLDENROD_UNDERGROUND_HERB_SHOP",
 ] as const
 
 export type MartGroupId = typeof martGroupIds[number]
 
-export const isMartGroupId = (value: string): value is MartGroupId => {
+export const isMartGroupId = (value: any): value is MartGroupId => {
   return (martGroupIds as readonly string[]).includes(value)
 }

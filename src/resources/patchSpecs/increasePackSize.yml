@@ -1,0 +1,118 @@
+description: "Swaps the regular inventory with the pc inventory"
+changes:
+- description: "Updates references to the regular inventory"
+  locations:
+  - bank: 1
+    address: 0x5C12
+  - bank: 3
+    address: 0x431A
+  - bank: 3
+    address: 0x43BB
+  - bank: 3
+    address: 0x527D
+  - bank: 3
+    address: 0x5287
+  - bank: 3
+    address: 0x6BFC
+  - bank: 3
+    address: 0x7796
+  - bank: 4
+    address: 0x438B
+  - bank: 4
+    address: 0x4A5C
+  - bank: 4
+    address: 0x4A74
+  - bank: 4
+    address: 0x6318
+  - bank: 4
+    address: 0x69D6
+  - bank: 4
+    address: 0x6CE5
+  - bank: 4
+    address: 0x6CF0
+  - bank: 4
+    address: 0x735D
+  - bank: 5
+    address: 0x581D
+  - bank: 5
+    address: 0x5954
+  - bank: 5
+    address: 0x5D3F
+  - bank: 5
+    address: 0x5F49
+  - bank: 9
+    address: 0x4C7D
+  - bank: 17
+    address: 0x4891
+  - bank: 18
+    address: 0x693C
+  - bank: 20
+    address: 0x4DEB
+  - bank: 34
+    address: 0x413B
+  - bank: 34
+    address: 0x4164
+  - bank: 34
+    address: 0x4204
+  - bank: 34
+    address: 0x4213
+  - bank: 34
+    address: 0x4237
+  - bank: 34
+    address: 0x6E04
+  - bank: 34
+    address: 0x7031
+  - bank: 37
+    address: 0x6FA6
+  - bank: 37
+    address: 0x77DE
+  - bank: 37
+    address: 0x7806
+  - bank: 37
+    address: 0x781D
+  - bank: 92
+    address: 0x46FD
+  - bank: 92
+    address: 0x4946
+  - bank: 92
+    address: 0x4992
+  - bank: 95
+    address: 0x611D
+  - bank: 95
+    address: 0x6181
+  value: "F1"
+- description: "Updates references to the pc inventory"
+  locations:
+  - bank: 95
+    address: 0x618B
+  - bank: 63
+    address: 0x50E5
+  - bank: 18
+    address: 0x692E
+  - bank: 5
+    address: 0x5A15
+  - bank: 5
+    address: 0x5831
+  - bank: 5
+    address: 0x586E
+  - bank: 5
+    address: 0x5940
+  - bank: 3
+    address: 0x5292
+  - bank: 1
+    address: 0x5C24
+  value: "92"
+- description: "Updates the regular inventory size"
+  locations:
+  - bank: 3
+    address: 0x5284
+  - bank: 92
+    address: 0x4701
+  - bank: 92
+    address: 0x4704
+  value: "32"
+- description: "Updates the pc inventory size"
+  locations:
+  - bank: 3
+    address: 0x528F
+  value: "14"

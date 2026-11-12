@@ -22,7 +22,7 @@ export default defineConfig([
       },
       parser: tsParser,
       parserOptions: {
-        project: true,
+        projectService: true,
         extraFileExtensions: [".svelte", ".json"],
       },
     },
@@ -182,6 +182,7 @@ export default defineConfig([
   {
     ...htmlEslint.configs["flat/recommended"],
     files: ["**/*.html"],
+    extends: [typescriptEslint.configs.disableTypeChecked],
     languageOptions: {
       parser: htmlParser,
     },

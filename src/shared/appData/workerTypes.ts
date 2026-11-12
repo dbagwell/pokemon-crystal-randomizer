@@ -1,4 +1,5 @@
 import type { PlayerOptions, Settings } from "@shared/appData/settingsFromViewModel"
+import type { GameData } from "@shared/types/gameData/gameData"
 
 export type GenerateParams = {
   appVersion: string
@@ -6,9 +7,12 @@ export type GenerateParams = {
   settings: Settings
   playerOptions: PlayerOptions
   inputROM: Uint8Array
+  gameData?: GameData
+  shouldAddAPChanges: boolean
   shouldCreateROM: boolean
   shouldCreateLog: boolean
   shouldCreatePatch: boolean
+  shouldCreateGameData: boolean
 }
 
 export type GenerateResult = {
@@ -17,6 +21,7 @@ export type GenerateResult = {
   log?: string
   namesLog?: string
   patch?: Uint8Array
+  gameData: GameData
 }
 
 export type PatchParams = {

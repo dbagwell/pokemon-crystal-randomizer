@@ -1,9 +1,11 @@
 import { performJob } from "@lib/generator/worker"
 import { attemptWriteFile, getFilePathFromUserInput } from "@lib/utils/dialogUtils"
 import type { GenerateParams } from "@shared/appData/workerTypes"
+import type { GameData } from "@shared/types/gameData/gameData"
 import { isNotNullish, isNullish } from "@utils"
 import fs from "fs"
 import path from "path"
+import yaml from "yaml"
 
 export const generate = async (params: {
   generateParams: GenerateParams
@@ -72,6 +74,19 @@ export const generate = async (params: {
     
     attemptWritePatchFile({
       patchFileData: generateResult.patch,
+      defaultFilePathWithoutExtension: defaultFilePathWithoutExtension,
+      forceOverwrite: forceOverwrite,
+      throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+    })
+  }
+  
+  if (generateParams.shouldCreateGameData) {
+    if (isNullish(generateResult.gameData)) {
+      throw new Error("Worker failed to return game data when requested.")
+    }
+    
+    attemptWriteGameDataFile({
+      gameData: generateResult.gameData,
       defaultFilePathWithoutExtension: defaultFilePathWithoutExtension,
       forceOverwrite: forceOverwrite,
       throwErrorOnWriteFailure: throwErrorOnWriteFailure,
@@ -192,6 +207,29 @@ export const attemptWritePatchFile = (params: {
     fileType: "pcrp",
     defaultFilePath: `${defaultFilePathWithoutExtension}.pcrp`,
     data: patchFileData,
+    forceOverwrite: forceOverwrite,
+    throwErrorOnWriteFailure: throwErrorOnWriteFailure,
+  })
+}
+
+export const attemptWriteGameDataFile = (params: {
+  gameData: GameData,
+  defaultFilePathWithoutExtension: string
+  forceOverwrite: boolean
+  throwErrorOnWriteFailure: boolean
+}) => {
+  const {
+    gameData,
+    defaultFilePathWithoutExtension,
+    forceOverwrite,
+    throwErrorOnWriteFailure,
+  } = params
+            
+  attemptWriteFile({
+    dialogTitle: "Save Game Data to:",
+    fileType: "yaml",
+    defaultFilePath: `${defaultFilePathWithoutExtension}.data.yml`,
+    data: yaml.stringify(gameData),
     forceOverwrite: forceOverwrite,
     throwErrorOnWriteFailure: throwErrorOnWriteFailure,
   })

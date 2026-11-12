@@ -1,13 +1,12 @@
 import { colors } from "@scripts/colors"
 
-const textStyles = [
-  "title",
-  "content",
-  "item",
-  "error",
-] as const
+type TextStyle =
+  | "title"
+  | "content"
+  | "item"
+  | "error"
 
-export const textStyle = (element: HTMLElement, style: typeof textStyles[number]) => {
+export const textStyle = (element: HTMLElement, style: TextStyle) => {
   switch (style) {
   case "title": {
     element.style.color = colors.text

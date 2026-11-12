@@ -3,14 +3,14 @@ import { performJob } from "@lib/generator/worker"
 import { getPlayerOptions, listenForPlayerOptions } from "@lib/userData/userData"
 import { getVanillaROM } from "@lib/userData/vanillaROM"
 import { forceCloseWindow, showWindow } from "@lib/utils/windowManager"
-import { applyPlayerOptionsToViewModel } from "@shared/appData/applySettingsToViewModel"
+import { applyOptionsToViewModel } from "@shared/appData/applySettingsToViewModel"
 import { defaultPlayerOptionsViewModel } from "@shared/appData/defaultPlayerOptionsViewModel"
 import { type PlayerOptions, playerOptionsFromViewModel, type Settings } from "@shared/appData/settingsFromViewModel"
 import { isNotNullish, isNullish, isObject, isSemanticVersion, isSemanticVersionLower } from "@shared/utils"
 import { app, dialog, shell } from "electron"
 import fs from "fs"
 
-export const handlePCRPFile = async (filePath: string) => {
+export const handlePCRPFile = async (filePath: string, outputFilePath: string | undefined = undefined) => {
   try {
     const patchData = fs.readFileSync(filePath)
     const vanillaROMData = await getVanillaROM(false)
@@ -111,7 +111,7 @@ export const handlePCRPFile = async (filePath: string) => {
         await closeWindow()
       }
     
-      applyPlayerOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
+      applyOptionsToViewModel(playerOptions, playerOptionsViewModel, [])
       validatedPlayerOptions = playerOptionsFromViewModel(playerOptionsViewModel)
     
       const applyPlayerOptionsResult = await performJob({
@@ -130,9 +130,9 @@ export const handlePCRPFile = async (filePath: string) => {
     
     const fileInfo = attemptWriteROMFile({
       fileData: patchResult.rom,
-      defaultFilePathWithoutExtension: patchResult.patchInfo!.checkValue,
-      forcePromptForLocation: true,
-      forceOverwrite: false,
+      defaultFilePathWithoutExtension: isNotNullish(outputFilePath) ? outputFilePath.replace(/.gbc$/, "") : patchResult.patchInfo!.checkValue,
+      forcePromptForLocation: isNullish(outputFilePath),
+      forceOverwrite: isNotNullish(outputFilePath),
       throwErrorOnWriteFailure: false,
     })
     
@@ -145,7 +145,9 @@ export const handlePCRPFile = async (filePath: string) => {
       })
     }
     
-    shell.openPath(fileInfo.fullOutputFilePath)
+    if (isNullish(outputFilePath)) {
+      shell.openPath(fileInfo.fullOutputFilePath)
+    }
   } catch (error) {
     throw new Error(`Error patching ROM:\n\n${error}`, { cause: error })
   }

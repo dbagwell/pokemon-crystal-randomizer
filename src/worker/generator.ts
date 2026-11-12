@@ -71,17 +71,20 @@ export const generate = (params: GenerateParams) => {
   const isDefaultSettings = settingsString === JSON.stringify(settingsFromViewModel(defaultSettingsViewModel()))
   const romInfo = defaultROMInfo()
   
-  const result: GenerateResult = {
-    checkValue: isDefaultSettings ? "00000000" : hash(`${params.appVersion}${seed}${settingsString}`).slice(0, 8).toUpperCase(),
+  if (isNotNullish(params.gameData)) {
+    romInfo.gameData = params.gameData
+  } else if (!isDefaultSettings) {
+    updateGameData(params.settings, romInfo, random)
   }
   
-  if (!isDefaultSettings) {
-    updateGameData(params.settings, romInfo, random)
+  const result: GenerateResult = {
+    checkValue: isDefaultSettings ? "00000000" : hash(`${params.appVersion}${seed}${settingsString}`).slice(0, 8).toUpperCase(),
+    gameData: romInfo.gameData,
   }
   
   if (params.shouldCreateROM || params.shouldCreatePatch) {
     if (!isDefaultSettings) {
-      createPatches(params.settings, romInfo)
+      createPatches(params.settings, romInfo, params.shouldAddAPChanges, seed)
     }
     
     createBasePatch({
@@ -197,11 +200,17 @@ const updateGameData = (
   updateAccessLogic(settings, romInfo) // Must be after updateShowAndTellPokemon
   shuffleItems(settings, romInfo, random) // Must be after updateItems, updateMarts and updateAccessLogic
   updatePrices(settings, romInfo, random) // Must be after updateMarts, updateItems, and shuffleItems
+  
+  if (settings.INCREASE_PACK_SIZE) {
+    romInfo.gameData.regularInventoryAddress = 0xD8F1
+  }
 }
 
 const createPatches = (
   settings: Settings,
   romInfo: ROMInfo,
+  shouldAddAPChanges: boolean,
+  seed: string,
 ) => {
   // Intro Pokemon
   
@@ -627,8 +636,9 @@ const createPatches = (
           gotMapCardEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_MAP_CARD.numericId, 2)),
           gotPokedexEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_POKEDEX.numericId, 2)),
           gotMysteryEggEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_MYSTERY_EGG.numericId, 2)),
-          elmsAideHasPotionEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.ELMS_AIDE_HAS_POTION.numericId, 2)),
-          elmsAideHasPokeBallsEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.ELMS_AIDE_HAS_POKE_BALLS.numericId, 2)),
+          gotExpShareEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_EXP_SHARE.numericId, 2)),
+          gotPotionFromElmsAideEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_POTION_FROM_ELMS_AIDE.numericId, 2)),
+          gotPokeBallsFromElmsAideEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_POKE_BALLS_FROM_ELMS_AIDE.numericId, 2)),
           gotBasementKeyEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_BASEMENT_KEY.numericId, 2)),
           gotCardKeyEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_CARD_KEY.numericId, 2)),
           beatRedGyaradosEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.BEAT_RED_GYARADOS.numericId, 2)),
@@ -659,7 +669,8 @@ const createPatches = (
                       : item.type === "POKEDEX_PART" ? 5
                         : item.type === "POKEGEAR_PART" ? 6
                           : item.type === "JOHTO_BADGE" ? 7
-                            : 8,
+                            : item.type === "KANTO_BADGE" ? 8
+                              : 9, // AP_ITEM
               itemMenuActionsMap[item.fieldMenuAction] << 4 | itemMenuActionsMap[item.battleMenuAction],
             ]
           } else {
@@ -701,7 +712,7 @@ const createPatches = (
       }),
     ]
     
-    if (settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
+    if (settings.SHUFFLE_ITEMS.VALUE && settings.SHUFFLE_ITEMS.SETTINGS.GROUPS.flat().includes("SHOPS")) {
       romInfo.patchHunks.push(...Patch.fromYAML(
         romInfo,
         "martsPreventDuplicateKeyItems.yml",
@@ -711,6 +722,11 @@ const createPatches = (
           gotMartItemsEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_MART_ITEMS.numericId, 2)),
         },
       ).hunks)
+      
+      romInfo.patchHunks.push({
+        offset: romOffsetFromBankAddress(27, 0x436C),
+        values: [0x18, 0x18, 0x18],
+      })
     }
     
     if (settings.SKIP_KURT_FOR_ILEX_SHRINE) {
@@ -861,7 +877,10 @@ const createPatches = (
             return {
               path: "giveItem.yml",
               extraIncludes: {},
-              extraValues: value,
+              extraValues: {
+                ...value,
+                regularInventoryAddress: hexStringFrom(bytesFrom(romInfo.gameData.regularInventoryAddress, 2)),
+              },
             }
           }),
         },
@@ -954,6 +973,7 @@ const createPatches = (
       "progressiveRods.yml",
       {},
       {
+        regularInventoryAddress: hexStringFrom(bytesFrom(romInfo.gameData.regularInventoryAddress, 2)),
         goldenrodGameCornerItem1Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER_ITEM_SHOP.items[0].itemId].numericId]),
         goldenrodGameCornerItem2Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER_ITEM_SHOP.items[1].itemId].numericId]),
         goldenrodGameCornerItem3Id: hexStringFrom([romInfo.gameData.items[romInfo.gameData.specialShops.GOLDENROD_GAME_CORNER_ITEM_SHOP.items[2].itemId].numericId]),
@@ -1003,6 +1023,10 @@ const createPatches = (
       ...Patch.fromYAML(
         romInfo,
         "repelRefresh.yml",
+        {},
+        {
+          regularInventoryAddress: hexStringFrom(bytesFrom(romInfo.gameData.regularInventoryAddress, 2)),
+        },
       ).hunks,
     ]
   }
@@ -1107,6 +1131,9 @@ const createPatches = (
           }
         }),
       },
+      {
+        numberOfMarts: hexStringFrom([martIds.length]),
+      },
     )
 
     romInfo.patchHunks = [...romInfo.patchHunks, ...martsPatch.hunks]
@@ -1135,7 +1162,7 @@ const createPatches = (
   if (shouldApplyShopItemChanges) {
     romInfo.patchHunks.push({
       offset: romOffsetFromBankAddress(31, 0x415D),
-      values: [martIds.length],
+      values: [martIds.length + 1],
     })
   }
   
@@ -1825,6 +1852,7 @@ const createPatches = (
       "improvedPokemonRequests.yml",
       {},
       {
+        gotTogepiInfoFromElmEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.GOT_TOGEPI_INFO_FROM_ELM.numericId, 2)),
         togepiId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.TOGEPI].numericId]),
         marillId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.MARILL].numericId]),
         pikachuId: hexStringFrom([pokemonMap[romInfo.gameData.showAndTellPokemon.PIKACHU].numericId]),
@@ -2415,6 +2443,7 @@ const createPatches = (
       { offset: romOffsetFromBankAddress(103, 0x517F), values: [0x18] },
       { offset: romOffsetFromBankAddress(103, 0x5833), values: [0x18] },
       { offset: romOffsetFromBankAddress(103, 0x5931), values: [0x18] },
+      { offset: romOffsetFromBankAddress(103, 0x60b0), values: [0x18] },
       { offset: romOffsetFromBankAddress(103, 0x6181), values: [0x18] },
       { offset: romOffsetFromBankAddress(104, 0x48C2), values: [0x18] },
       { offset: romOffsetFromBankAddress(104, 0x56A9), values: [0x18] },
@@ -2541,6 +2570,32 @@ const createPatches = (
   
   if (settings.ADD_DV_TOGGLE_TO_STATS) {
     romInfo.patchHunks.push(...Patch.fromYAML(romInfo, "viewableDVs.yml").hunks)
+  }
+  
+  // Pack Size
+  
+  if (settings.INCREASE_PACK_SIZE) {
+    romInfo.patchHunks.push(...Patch.fromYAML(romInfo, "increasePackSize.yml").hunks)
+  }
+  
+  // AP Changes
+  
+  if (shouldAddAPChanges) {
+    romInfo.patchHunks.push(...Patch.fromYAML(
+      romInfo,
+      "apChanges.yml",
+      {},
+      {
+        regularInventoryAddress: hexStringFrom(bytesFrom(romInfo.gameData.regularInventoryAddress, 2)),
+        beatRedEventFlagId: hexStringFrom(bytesFrom(eventFlagsMap.BEAT_RED.numericId, 2)),
+        numberOfMarts: hexStringFrom([martIds.length]),
+      },
+    ).hunks)
+    
+    romInfo.patchHunks.push({
+      offset: romOffsetFromBankAddress(127, 0x4000),
+      values: Array.from(Buffer.from(seed.substring(0, 16), "ascii")),
+    })
   }
 }
 

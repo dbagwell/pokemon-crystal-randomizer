@@ -114,10 +114,10 @@ const checkForUpdates = async () => {
   }
 }
 
-const handlePCRPFile = async (filePath: string) => {
+const handlePCRPFile = async (filePath: string, outputFilePath: string | undefined = undefined) => {
   try {
     isProcessingPCRP = true
-    await processPCRPFile(filePath)
+    await processPCRPFile(filePath, outputFilePath)
   } catch (error: any) {
     dialog.showErrorBox(
       "Error",
@@ -139,7 +139,9 @@ app.on("ready", async () => {
       await generateFromCLI(process.argv)
       app.quit()
     } else if (process.argv.some((arg) => { return arg.endsWith(".pcrp") })) {
-      await handlePCRPFile(process.argv.find((arg) => { return arg.endsWith(".pcrp") })!)
+      const index = process.argv.findIndex((arg) => { return arg.endsWith(".pcrp") })!
+      const outputFilePath = process.argv[index + 1]
+      await handlePCRPFile(process.argv[index], outputFilePath === "" ? undefined : outputFilePath)
       app.quit()
     } else {
       await showGeneratorWindow()

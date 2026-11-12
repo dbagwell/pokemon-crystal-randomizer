@@ -2,6 +2,7 @@ import { encounters } from "@shared/gameData/encounters"
 import { itemLocationsMap } from "@shared/gameData/itemLocations"
 import { itemsMap } from "@shared/gameData/items"
 import { logicalAccessAreasMap } from "@shared/gameData/logicalAccessAreas"
+import { logicalEventsMap } from "@shared/gameData/logicalEvents"
 import { mapObjectEvents } from "@shared/gameData/mapObjectEvents"
 import { martGroupsMap } from "@shared/gameData/martGroups"
 import { martsMap, specialShopsMap } from "@shared/gameData/marts"
@@ -155,7 +156,7 @@ export const defaultROMInfo = (): ROMInfo => {
       { offset: romOffsetFromBankAddress(124, 0x49D8), size: 0x3628 },
       { offset: romOffsetFromBankAddress(125, 0x636A), size: 0x1C96 },
       { offset: romOffsetFromBankAddress(126, 0x78A8), size: 0x0758 },
-      { offset: romOffsetFromBankAddress(127, 0x4000), size: 0x3DE0 },
+      { offset: romOffsetFromBankAddress(127, 0x4010), size: 0x3DD0 },
     ],
     patchHunks: [],
     gameData: {
@@ -209,8 +210,10 @@ export const defaultROMInfo = (): ROMInfo => {
       itemLocations: JSON.parse(JSON.stringify(itemLocationsMap)),
       warps: JSON.parse(JSON.stringify(warpsMap)),
       areas: JSON.parse(JSON.stringify(logicalAccessAreasMap)),
+      events: JSON.parse(JSON.stringify(logicalEventsMap)),
       numberOfBadgesForOak: 16,
       items: JSON.parse(JSON.stringify(itemsMap)),
+      regularInventoryAddress: 0xD892,
     },
   }
 }

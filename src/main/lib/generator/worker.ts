@@ -9,7 +9,7 @@ export const performJob = async <Params extends WorkerParams>(params: Params): P
     : never
 > => {
   return new Promise((resolve, reject) => {
-    const worker = new Worker(path.resolve(__dirname, "worker.js"), { workerData: params })
+    const worker = new Worker(path.resolve(__dirname, "worker.cjs"), { workerData: params })
     worker.on("message", resolve)
     worker.on("error", reject)
     worker.on("exit", (code) => {

@@ -1654,8 +1654,8 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "FOUGHT_LUGIA",
     numericId: 792,
   },
-  BEAT_RIVAL_IN_MT_MOON: {
-    id: "BEAT_RIVAL_IN_MT_MOON",
+  BEAT_RIVAL_IN_MOUNT_MOON: {
+    id: "BEAT_RIVAL_IN_MOUNT_MOON",
     numericId: 793,
   },
   MET_BILLS_GRANDPA: {
@@ -2194,12 +2194,12 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "GOT_CARD_KEY",
     numericId: 928,
   },
-  ELMS_AIDE_HAS_POTION: {
-    id: "ELMS_AIDE_HAS_POTION",
+  GOT_POTION_FROM_ELMS_AIDE: {
+    id: "GOT_POTION_FROM_ELMS_AIDE",
     numericId: 929,
   },
-  ELMS_AIDE_HAS_POKE_BALLS: {
-    id: "ELMS_AIDE_HAS_POKE_BALLS",
+  GOT_POKE_BALLS_FROM_ELMS_AIDE: {
+    id: "GOT_POKE_BALLS_FROM_ELMS_AIDE",
     numericId: 930,
   },
   GOT_AZALEA_GS_BALL: {
@@ -2225,6 +2225,18 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
   RECEIVED_GS_BALL: {
     id: "RECEIVED_GS_BALL",
     numericId: 936,
+  },
+  GOT_EXP_SHARE: {
+    id: "GOT_EXP_SHARE",
+    numericId: 937,
+  },
+  BEAT_RED: {
+    id: "BEAT_RED",
+    numericId: 938,
+  },
+  GOT_TOGEPI_INFO_FROM_ELM: {
+    id: "GOT_TOGEPI_INFO_FROM_ELM",
+    numericId: 939,
   },
   BEAT_SWIMMERF_ELAINE: {
     id: "BEAT_SWIMMERF_ELAINE",
@@ -5234,8 +5246,8 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "RUINS_OF_ALPH_KABUTO_CHAMBER_RECEPTIONIST",
     numericId: 1870,
   },
-  OPENED_MT_SILVER: {
-    id: "OPENED_MT_SILVER",
+  OPENED_MOUNT_SILVER: {
+    id: "OPENED_MOUNT_SILVER",
     numericId: 1871,
   },
   FOUGHT_SNORLAX: {
@@ -5310,8 +5322,8 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "TEAM_ROCKET_DISBANDED",
     numericId: 1889,
   },
-  RED_IN_MT_SILVER: {
-    id: "RED_IN_MT_SILVER",
+  RED_IN_MOUNT_SILVER: {
+    id: "RED_IN_MOUNT_SILVER",
     numericId: 1890,
   },
   GOLDENROD_DEPT_STORE_5F_HAPPINESS_EVENT_LADY: {
@@ -5398,16 +5410,16 @@ export const eventFlagsMap: IdMap<EventFlagId, EventFlag> = {
     id: "SEAFOAM_GYM_GYM_GUIDE",
     numericId: 1911,
   },
-  MT_MOON_SQUARE_ROCK: {
-    id: "MT_MOON_SQUARE_ROCK",
+  MOUNT_MOON_SQUARE_ROCK: {
+    id: "MOUNT_MOON_SQUARE_ROCK",
     numericId: 1912,
   },
-  MT_MOON_SQUARE_CLEFAIRY: {
-    id: "MT_MOON_SQUARE_CLEFAIRY",
+  MOUNT_MOON_SQUARE_CLEFAIRY: {
+    id: "MOUNT_MOON_SQUARE_CLEFAIRY",
     numericId: 1913,
   },
-  MT_MOON_RIVAL: {
-    id: "MT_MOON_RIVAL",
+  MOUNT_MOON_RIVAL: {
+    id: "MOUNT_MOON_RIVAL",
     numericId: 1914,
   },
   INDIGO_PLATEAU_POKECENTER_RIVAL: {

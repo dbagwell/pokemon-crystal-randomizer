@@ -54,7 +54,7 @@ export class PatchInfo {
     
     const yaml = getYAML(searchPaths(filePath))
     
-    while (yaml.extends) {
+    while (isNotNullish(yaml.extends)) {
       const extended = getYAML(searchPaths(yaml.extends))
       yaml.extends = extended.extends
       yaml.includes = { ...extended.includes, ...yaml.includes }
@@ -253,7 +253,7 @@ export class PatchInfo {
             const values = include.map((item) => {
               const dataFormat = item.dataFormatFromReference(referencePath.slice(1), 0, token)
               
-              if (dataFormat.values.find((value) => { return !isNumber(value) })) {
+              if (dataFormat.values.some((value) => { return !isNumber(value) })) {
                 throw new Error(`Sum token with include path '${this.includePath}' is attempting to sum references that do not resolve to a number.`)
               }
               

@@ -25,13 +25,10 @@
             const baseMacURL = `${baseURL}/Pokemon-Crystal-Randomizer-${version}-macOS`
             const baseLinuxURL = `${baseURL}/Pokemon-Crystal-Randomizer-${version}-linux`
             
-            document.getElementById("windows_ia32").href = `${baseWindowsURL}-ia32.exe`
             document.getElementById("windows_x64").href = `${baseWindowsURL}-x64.exe`
             document.getElementById("windows_arm64").href = `${baseWindowsURL}-arm64.exe`
-            document.getElementById("mac_universal").href = `${baseMacURL}-universal.zip`
             document.getElementById("mac_x64").href = `${baseMacURL}-x64.zip`
             document.getElementById("mac_arm64").href = `${baseMacURL}-arm64.zip`
-            document.getElementById("linux_armv7l").href = `${baseLinuxURL}-armv7l.AppImage`
             document.getElementById("linux_x86_64").href = `${baseLinuxURL}-x86_64.AppImage`
             document.getElementById("linux_arm64").href = `${baseLinuxURL}-arm64.AppImage`
           } catch (error) {
@@ -112,10 +109,6 @@
       <div class="osContainer">
         <h2>Windows</h2>
         <div>
-          <a id="windows_ia32">32-bit App</a>
-        </div>
-        <br>
-        <div>
           <a id="windows_x64">64-bit App (for x86 based systems)</a>
         </div>
         <br>
@@ -127,10 +120,6 @@
       <div class="osContainer">
         <h2>macOS</h2>
         <div>
-          <a id="mac_universal">32-bit App</a>
-        </div>
-        <br>
-        <div>
           <a id="mac_x64">64-bit App (for Intel based systems)</a>
         </div>
         <br>
@@ -141,10 +130,6 @@
       </div>
       <div class="osContainer">
         <h2>Linux</h2>
-        <div>
-          <a id="linux_armv7l">32-bit App</a>
-        </div>
-        <br>
         <div>
           <a id="linux_x86_64">64-bit App (for x86 based systems)</a>
         </div>

@@ -39,7 +39,7 @@ export class Random {
     const index = this.int(0, params.array.length - 1)
     const element = params.array[index]
     
-    if (!params.allowUndefined && isNullish(element)) {
+    if (!(params.allowUndefined ?? false) && isNullish(element)) {
       if (isNullish(params.errorInfo)) {
         // If we didn't find a random element but we haven't passed in info for the error, we're using this wrong
         throw new Error("Attempted to get random element from empty array.")
@@ -52,7 +52,7 @@ export class Random {
       }
     }
     
-    if (params.array.length > 0 && params.remove) {
+    if (params.array.length > 0 && (params.remove ?? false)) {
       params.array.splice(index, 1)
     }
     

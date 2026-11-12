@@ -6,6 +6,7 @@ export const itemCategoryIds = [
   "TMS",
   "REGULAR_ITEMS",
   "BALLS",
+  "AP_ITEMS",
 ] as const
 
 export type ItemCategoryId = typeof itemCategoryIds[number]

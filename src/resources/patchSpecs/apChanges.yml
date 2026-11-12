@@ -1,0 +1,128 @@
+description: "Adds code to facilitate giving the player items sent from AP (this uses unused WRAM bank 1 addresses 0xDC3A - 0xDC3F and 0x1D00) and sets an event when red is defeated"
+values:
+  setBeatRedFlag: "48 00 33 $beatRedEventFlagId A2"
+  checkForNewItems: "FA 3D DC A7 28 0F FA 00 DD EA DD C2 3E 11 21 @$handleSpecialItemScript CD 1F 26 C9 FA $regularInventoryAddress FE 14 20 02 AF C9 FA 3A DC A7 28 0B EA DD C2 3E 11 21 @$handleRegularItemScript CD 1F 26 C9 $handleSpecialItemScript $handleRegularItemScript"
+  handleSpecialItemScript: "09 @$giveSpecialItemVerbose 0E 11 @$loadSpecialItemId 1F FF 01 03 @$checkSpecialItemResult $giveSpecialItemVerbose"
+  giveSpecialItemVerbose: "47 0E 11 @$loadSpecialItemId 9E FF 01 49 $checkSpecialItemResult"
+  checkSpecialItemResult: "08 @$finishSpecialItemScript 0E 11 @$clearSpecialItemQueue $finishSpecialItemScript"
+  finishSpecialItemScript: "91 $loadSpecialItemId $clearSpecialItemQueue"
+  loadSpecialItemId: "FA 3D DC EA DD C2 C9"
+  clearSpecialItemQueue: "AF EA 3D DC C9"
+  handleRegularItemScript: "1F FF 01 08 @$finishRegularItemScript 0E 11 @$clearRegularItemQueue $finishRegularItemScript"
+  finishRegularItemScript: "91 $clearRegularItemQueue"
+  clearRegularItemQueue: "AF EA 3A DC C9"
+  checkAPItemDescriptions: "FA 60 CF FE C3 CA 73 49 FE DC CA 73 49 C3 58 49"
+  setGoldenrodVendingMachineAsViewed: "15 [1]{$numberOfMarts + 2} 1A 39 D0 4C CB 64 91"
+  setCeladonVendingMachineAsViewed: "15 [1]{$numberOfMarts + 3} 1A 39 D0 4C 50 52 91"
+  setGoldenrodGameCornerShopAsViewed: "15 [1]{$numberOfMarts + 4} 1A 39 D0 4C 8B 6E 91"
+  setCeladonGameCornerShopAsViewed: "15 [1]{$numberOfMarts + 5} 1A 39 D0 4C 74 69 91"
+  setBlueCardShopAsViewed: "15 [1]{$numberOfMarts + 6} 1A 39 D0 4C 92 63 91"
+  setFarmhouseShopAsViewed: "15 [1]{$numberOfMarts + 7} 1A 39 D0 4C E1 4F 91"
+  setMahoganyStreetVendorAsViewed: "15 [1]{$numberOfMarts + 8} 1A 39 D0 4C B0 40 91"
+changes:
+- description: "Adds code."
+  locations:
+  - bank: 99
+  value: "$setBeatRedFlag"
+- description: "Calls code."
+  locations:
+  - bank: 99
+    address: 0x4633
+  value: "03 @$setBeatRedFlag"
+- description: "Adds code."
+  locations:
+  - bank: 17
+  value: "$checkForNewItems"
+- description: "Swizzles call to function in player event loop."
+  locations:
+  - bank: 37
+    address: 0x6842
+  value: "D8 68"
+- description: "Calls swizzled function then calls our own event checker."
+  locations:
+  - bank: 37
+    address: 0x68D8
+  value: "CD 74 69 D8 3E 11 21 @$checkForNewItems CF C9"
+- description: "Skips calling the special function to calculate the tm hm item names since it's redundant and cause some of the ap items to appear as tms."
+  locations:
+  - bank: 0
+    address: 0x346D
+  value: "00 00 00 00"
+- description: "Adds code."
+  locations:
+  - bank: 114
+  value: "$checkAPItemDescriptions"
+- description: "Calls code."
+  locations:
+  - bank: 114
+    address: 0x4955
+  value: "C3 @$checkAPItemDescriptions"
+- description: "Removes code that sets unused wram value that is now used by this."
+  locations:
+  - bank: 4
+    address: 0x53DE
+  value: "00 00 00"
+- description: "Adds Code."
+  locations:
+  - bank: 21
+  value: "$setGoldenrodVendingMachineAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 21
+    address: 0x63F6
+  value: "00 @$setGoldenrodVendingMachineAsViewed"
+- description: "Adds Code."
+  locations:
+  - bank: 28
+  value: "$setCeladonVendingMachineAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 28
+    address: 0x5181
+  value: "00 @$setCeladonVendingMachineAsViewed"
+- description: "Adds Code."
+  locations:
+  - bank: 21
+  value: "$setGoldenrodGameCornerShopAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 21
+    address: 0x6C33
+  value: "00 @$setGoldenrodGameCornerShopAsViewed"
+- description: "Adds Code."
+  locations:
+  - bank: 28
+  value: "$setCeladonGameCornerShopAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 28
+    address: 0x66FA
+  value: "00 @$setCeladonGameCornerShopAsViewed"
+- description: "Adds Code."
+  locations:
+  - bank: 23
+  value: "$setBlueCardShopAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 23
+    address: 0x5906
+  value: "00 @$setBlueCardShopAsViewed"
+- description: "Adds Code."
+  locations:
+  - bank: 39
+  value: "$setFarmhouseShopAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 39
+    address: 0x4ECA
+  value: "00 @$setFarmhouseShopAsViewed"
+- description: "Adds Code."
+  locations:
+  - bank: 100
+  value: "$setMahoganyStreetVendorAsViewed"
+- description: "Calls Code."
+  locations:
+  - bank: 100
+    address: 0x4041
+  value: "00 @$setMahoganyStreetVendorAsViewed"
+  

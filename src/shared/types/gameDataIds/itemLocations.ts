@@ -27,7 +27,7 @@ export const regularItemBallLocationIds = [
   "ROUTE_45_ITEM_BALL_2",
   "ROUTE_45_ITEM_BALL_3",
   "ROUTE_45_ITEM_BALL_4",
-  "ROUTE_46_NORTH_AREA_DARK_CAVE_SIDE_ITEM_BALL",
+  "ROUTE_46_NORTH_AREA_ITEM_BALL",
   "DARK_CAVE_VIOLET_ENTRANCE_WEST_AREA_ITEM_BALL",
   "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_1",
   "DARK_CAVE_VIOLET_ENTRANCE_ROCK_SMASH_AREA_ITEM_BALL_2",
@@ -114,9 +114,9 @@ export const regularItemBallLocationIds = [
   "MOUNT_MORTAR_B1F_SURF_AREA_ITEM_BALL_4",
   "MOUNT_MORTAR_B1F_SURF_AREA_ITEM_BALL_5",
   "LAKE_OF_RAGE_CUT_AREA_ITEM_BALL_SOUTH_OF_HOUSE",
-  "GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_NW_ITEM_BALL",
-  "GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_SW_ITEM_BALL",
-  "GOLDENROD_DEPT_STORE_B1F_STORAGE_AREA_SE_ITEM_BALL",
+  "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_NW_ITEM_BALL",
+  "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SW_ITEM_BALL",
+  "GOLDENROD_DEPT_STORE_B1F_ELEVATOR_AREA_SE_ITEM_BALL",
   "GOLDENROD_DEPT_STORE_B1F_STAIRS_AREA_ITEM_BALL",
   "GOLDENROD_UNDERGROUND_SWITCH_ROOM_TOP_RIGHT_ITEM_BALL",
   "GOLDENROD_UNDERGROUND_SWITCH_ROOM_BOTTOM_LEFT_ITEM_BALL",
@@ -312,7 +312,7 @@ export const fruitTreeLocationIds = [
 ] as const
 
 export const regularGiftLocationIds = [
-  "SLOWPOKE_WELL_B2F_MANS_GIFT",
+  "SLOWPOKE_WELL_B2F_SURF_AREA_MANS_GIFT",
   "OLIVINE_LIGHTHOUSE_2F_HUEYS_GIFT",
   "NATIONAL_PARK_BENCH_LADYS_GIFT",
   "NATIONAL_PARK_BEVERLYS_GIFT_FOR_MARILL",
@@ -513,6 +513,6 @@ export type HiddenItemLocationId = typeof hiddenItemLocationIds[number]
 export type GiftLocationId = typeof giftLocationIds[number]
 export type ItemLocationId = typeof itemLocationIds[number]
 
-export const isItemLocationId = (value: string): value is ItemLocationId => {
+export const isItemLocationId = (value: any): value is ItemLocationId => {
   return (itemLocationIds as readonly string[]).includes(value)
 }
