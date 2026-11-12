@@ -64,6 +64,14 @@ The app can also be used to generate ROMs, logs and patches without having to us
 - At least one of the `--rom`, `--log` and `--patch` options must be specified.
 - Only one of `--preset` and `--settings` can be used at a time, if neither are specified, `VANILLA` preset will be used.
 
+### Multiworld Integration
+
+See the [Pokemon Krystal APWorld](https://github.com/dbagwell/pokemon-krystal-apworld) for info on how to generate multiworld games using Archipelago.
+
+### Item Tracking
+
+See the [Pokemon Krystal Tracker](https://github.com/dbagwell/pokemon-krystal-tracker) for info on how to use PopTracker to help keep track of items and item locations.
+
 ## Feature Requests and Bug Reports
 
 Please submit all feature requests and bug reports in the [issues section of this repository](https://github.com/dbagwell/pokemon-crystal-randomizer/issues) and label them with the `enhancement` and `bug` labels respectively.
