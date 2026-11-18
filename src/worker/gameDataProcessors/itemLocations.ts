@@ -217,7 +217,7 @@ export const shuffleItems = (
     })
   }
   
-  const progressionItemIds = actualAllItemLocations.reduce((result, location) => {
+  const progressionItemIds = romInfo.gameData.allItemLocations.reduce((result, location) => {
     location.accessOptions.forEach((option) => {
       option.forEach((requirement) => {
         const resolvedRequirement = Array.isArray(requirement) ? requirement[0] : requirement

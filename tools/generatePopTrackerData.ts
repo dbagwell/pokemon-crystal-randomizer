@@ -675,7 +675,7 @@ const itemLocationSections = [
         name: `${info.name} - Received Call`,
         hosted_item: `${id}_PHONE_CALL_HOSTED`,
         visibility_rules: [
-          `$shouldShowLocation|${id}_PHONE_CALL`,
+          `$shouldShowLocation|${info.locationIds[0]}`,
         ],
         access_rules: [
           `^$accessibilityLevelForLocation|${id}_PHONE_CALL`,
@@ -3828,6 +3828,7 @@ const specificLocationGroups = [
     464,
     432,
     [
+      "HUEY",
       "OLIVINE_LIGHTHOUSE_2F_HUEYS_GIFT",
       "OLIVINE_LIGHTHOUSE_3F_INNER_AREA_ITEM_BALL",
       "OLIVINE_LIGHTHOUSE_5F_INNER_AREA_ITEM_BALL",
@@ -7521,7 +7522,7 @@ const mapIds: Partial<Record<GameMapId, typeof maps[number]["name"]>> = {
   OLIVINE_LIGHTHOUSE_4F: "olivine_lighthouse",
   OLIVINE_LIGHTHOUSE_5F: "olivine_lighthouse",
   OLIVINE_LIGHTHOUSE_6F: "olivine_lighthouse",
-  MAHOGANY_MART_1F: "mahogany_town",
+  MAHOGANY_MART_1F: "team_rocket_base",
   TEAM_ROCKET_BASE_B1F: "team_rocket_base",
   TEAM_ROCKET_BASE_B2F: "team_rocket_base",
   TEAM_ROCKET_BASE_B3F: "team_rocket_base",
